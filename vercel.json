@@ -8,7 +8,7 @@
   "redirects": [
     { "source": "/", "destination": "/app.html" },
     { "source": "/login", "destination": "/login.html" },
-    "register", "destination": "/register.html" },
+    { "source": "/register", "destination": "/register.html" },
     { "source": "/forgot-password", "destination": "/forgot-password.html" },
     { "source": "/verify-device", "destination": "/verify-device.html" },
     { "source": "/app", "destination": "/app.html" },
