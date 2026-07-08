@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+    <title>Exam Mode • OAU CBE Practice</title>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <script src="/js/config.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/auth-check.js"></script>
+    
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI','Inter',system-ui,-apple-system,sans-serif}
+        :root{
+            --primary:#1e3a8a;--primary-light:#3b82f6;--accent:#10b981;--accent-2:#06b6d4;
+            --bg:#0f172a;--bg-soft:#111c33;--card:#1e293b;--card-2:#152033;
+            --border:#334155;--text:#f1f5f9;--text-secondary:#94a3b8;
+            --danger:#ef4444;--success:#10b981;--warning:#f59e0b;
+            --shadow:0 18px 40px rgba(0,0,0,.28);--brand-gradient:linear-gradient(135deg,#1e3a8a,#3b82f6)
+        }
+        body.light-mode{
+            --bg:#f4f7fb;--bg-soft:#edf3fb;--card:#ffffff;--card-2:#f8fbff;
+            --border:#d7e2ef;--text:#0f172a;--text-secondary:#526173;
+            --shadow:0 16px 36px rgba(15,23,42,.08)
+        }
+        body{background:radial-gradient(circle at top right,rgba(59,130,246,.12),transparent 25%),linear-gradient(180deg,var(--bg),#0b1324 100%);color:var(--text);min-height:100vh;padding-bottom:80px}
+        
+        .header{background:rgba(15,23,42,.95);backdrop-filter:blur(12px);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border)}
+        body.light-mode .header{background:rgba(255,255,255,.95)}
+        .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+        .logo img{width:36px;height:36px;object-fit:contain}
+        .logo-text{font-weight:700;font-size:.9rem;color:var(--text)}
+        .logo-text .sub{color:var(--primary-light)}
+        .header-actions{display:flex;align-items:center;gap:8px}
+        .icon-btn{background:rgba(59,130,246,.1);border:1px solid var(--border);color:var(--text);width:38px;height:38px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+        .icon-btn:hover{background:var(--primary-light);color:#fff}
+        .back-link{color:var(--text-secondary);text-decoration:none;font-size:.85rem;display:flex;align-items:center;gap:6px}
+        .back-link:hover{color:var(--text)}
+        
+        .container{max-width:900px;margin:0 auto;padding:16px}
+        
+        .screen{display:none;animation:fadeIn .3s ease}
+        .screen.active{display:block}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+        
+        .page-title{text-align:center;margin-bottom:20px}
+        .page-title h1{font-size:1.3rem;display:flex;align-items:center;justify-content:center;gap:10px}
+        .page-title h1 i{color:var(--primary-light)}
+        
+        .faculty-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+        @media(min-width:500px){.faculty-grid{grid-template-columns:repeat(3,1fr)}}
+        @media(min-width:768px){.faculty-grid{grid-template-columns:repeat(4,1fr)}}
+        
+        .faculty-card{background:var(--card);border:2px solid var(--border);border-radius:14px;padding:16px 12px;text-align:center;cursor:pointer;transition:all .2s}
+        .faculty-card:hover{border-color:var(--primary-light);transform:translateY(-3px);background:var(--bg-soft)}
+        .faculty-card i{font-size:1.5rem;color:var(--primary-light);margin-bottom:6px;display:block}
+        .faculty-card h3{font-size:.85rem;font-weight:600;color:var(--text)}
+        .faculty-card .count{font-size:.65rem;color:var(--text-secondary)}
+        
+        .level-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+        .level-card{background:var(--card);border:2px solid var(--border);border-radius:14px;padding:16px 10px;text-align:center;cursor:pointer;transition:all .2s}
+        .level-card:hover:not(.locked){border-color:var(--primary-light);background:var(--bg-soft)}
+        .level-card.locked{opacity:.4;cursor:not-allowed}
+        .level-card i{font-size:1.2rem;color:var(--primary-light);margin-bottom:4px;display:block}
+        .level-card h4{font-size:.8rem;color:var(--text)}
+        
+        .courses-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+        @media(min-width:500px){.courses-grid{grid-template-columns:repeat(3,1fr)}}
+        @media(min-width:768px){.courses-grid{grid-template-columns:repeat(4,1fr)}}
+        
+        .course-card{background:var(--card);border-radius:12px;padding:16px 12px;text-align:center;cursor:pointer;transition:all .2s;border:1px solid var(--border);position:relative}
+        .course-card:hover:not(.locked){border-color:var(--primary-light);transform:translateY(-3px);background:var(--bg-soft)}
+        .course-card.locked{opacity:.6;cursor:not-allowed}
+        .course-card .code{font-weight:700;font-size:.9rem;color:var(--text)}
+        .course-card .name{font-size:.6rem;color:var(--text-secondary);margin-top:2px}
+        .badge-free{position:absolute;top:6px;right:6px;background:var(--success);color:#fff;font-size:.5rem;padding:2px 8px;border-radius:12px;font-weight:600}
+        
+        .semester-label{color:var(--text-secondary);font-size:.75rem;text-transform:uppercase;letter-spacing:1px;margin:12px 0 8px;font-weight:700}
+        
+        .entry-card{background:var(--card);border-radius:16px;padding:24px 20px;text-align:center;border:2px solid var(--primary-light)}
+        .entry-card .icon{font-size:2.5rem;margin-bottom:10px}
+        .entry-card h1{font-size:1.2rem;color:var(--text)}
+        .entry-card p{color:var(--text-secondary);font-size:.8rem;margin-top:4px}
+        .stat-row{display:flex;justify-content:center;gap:10px;margin:14px 0;flex-wrap:wrap}
+        .stat-badge{background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);padding:6px 12px;border-radius:20px;color:var(--primary-light);font-size:.75rem;display:flex;align-items:center;gap:4px}
+        
+        .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border:none;border-radius:12px;font-weight:700;font-size:.85rem;cursor:pointer;transition:all .2s;font-family:inherit}
+        .btn-primary{background:var(--brand-gradient);color:#fff}
+        .btn-primary:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 25px rgba(59,130,246,.3)}
+        .btn-secondary{background:var(--border);color:var(--text)}
+        .btn-secondary:hover:not(:disabled){background:var(--bg-soft)}
+        .btn-success{background:var(--success);color:#fff}
+        .btn-success:hover:not(:disabled){transform:translateY(-2px)}
+        .btn-danger{background:var(--danger);color:#fff;padding:8px 14px;font-size:.75rem}
+        .btn-danger:hover:not(:disabled){transform:translateY(-2px)}
+        .btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
+        .btn-block{width:100%;justify-content:center}
+        
+        .back-btn{background:var(--border);color:var(--text);border:none;padding:8px 16px;border-radius:30px;cursor:pointer;font-size:.8rem;display:inline-flex;align-items:center;gap:6px;transition:all .2s;font-family:inherit;margin-bottom:12px}
+        .back-btn:hover{background:var(--bg-soft)}
+        
+        .exam-header{background:var(--card);border-radius:14px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:16px;border:1px solid var(--border)}
+        .exam-header .info h2{font-size:1rem;color:var(--text)}
+        .exam-header .info p{font-size:.7rem;color:var(--text-secondary)}
+        
+        .timer-box{background:var(--brand-gradient);color:#fff;padding:8px 16px;border-radius:40px;font-size:1.2rem;font-weight:700;font-family:'Courier New',monospace;min-width:70px;text-align:center}
+        .timer-box.warning{background:var(--warning);color:#000;animation:pulse 1s infinite}
+        .timer-box.danger{background:var(--danger);animation:pulse .5s infinite}
+        @keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+        
+        .question-card{background:var(--card);border-radius:14px;padding:18px;border:1px solid var(--border);margin-bottom:14px}
+        .q-counter{color:var(--text-secondary);font-size:.8rem;margin-bottom:10px}
+        .q-text{font-size:1rem;line-height:1.7;color:var(--text);margin-bottom:16px}
+        .options-area{display:flex;flex-direction:column;gap:8px}
+        .opt{background:var(--bg-soft);border:2px solid var(--border);border-radius:50px;padding:10px 16px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:10px;color:var(--text)}
+        .opt:hover:not(.disabled){border-color:var(--primary-light)}
+        .opt.selected{background:var(--primary-light);color:#fff;border-color:var(--primary-light)}
+        .opt .prefix{font-weight:700;width:22px;flex-shrink:0}
+        .opt.disabled{cursor:not-allowed;opacity:.6}
+        .opt.correct{border-color:var(--success);background:rgba(16,185,129,.1)}
+        .opt.correct .prefix{color:var(--success)}
+        .opt.wrong{border-color:var(--danger);background:rgba(239,68,68,.1)}
+        .opt.wrong .prefix{color:var(--danger)}
+        
+        .nav-buttons{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+        .nav-buttons .btn{flex:1;min-width:80px}
+        
+        .question-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;background:var(--card);border-radius:12px;padding:12px;max-height:150px;overflow-y:auto;border:1px solid var(--border)}
+        @media(min-width:500px){.question-grid{grid-template-columns:repeat(10,1fr)}}
+        
+        .grid-btn{aspect-ratio:1;background:var(--bg-soft);border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;cursor:pointer;font-size:.7rem;color:var(--text);transition:all .2s}
+        .grid-btn:hover{background:var(--primary-light);color:#fff}
+        .grid-btn.answered{background:var(--success);color:#fff}
+        .grid-btn.current{background:var(--primary-light);color:#fff;box-shadow:0 0 8px rgba(59,130,246,.4)}
+        
+        .result-card{background:var(--card);border-radius:16px;padding:24px;text-align:center;border:2px solid var(--success)}
+        .result-card .big-score{font-size:2.5rem;font-weight:800;color:var(--success)}
+        .result-card .label{color:var(--text-secondary);font-size:.85rem}
+        
+        .loading-spin{text-align:center;padding:30px;color:var(--text-secondary)}
+        .loading-spin i{font-size:2rem;animation:spin 1s linear infinite}
+        @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+        
+        .empty-state{text-align:center;padding:30px;color:var(--text-secondary)}
+        .empty-state i{font-size:2.5rem;margin-bottom:10px;opacity:.3}
+        
+        .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(15,23,42,.95);border-top:1px solid var(--border);display:flex;justify-content:center;z-index:99;backdrop-filter:blur(16px);padding:8px 0 env(safe-area-inset-bottom,8px)}
+        body.light-mode .bottom-nav{background:rgba(255,255,255,.95)}
+        .bottom-nav-inner{width:100%;max-width:500px;display:grid;grid-template-columns:repeat(5,1fr);gap:4px;padding:0 12px}
+        .nav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--text-secondary);text-decoration:none;padding:6px 4px;border-radius:12px;font-size:.65rem;font-weight:600}
+        .nav-item i{font-size:1.1rem}
+        .nav-item.active{color:#fff;background:var(--brand-gradient)}
+        .nav-item:hover:not(.active){color:var(--text)}
+        
+        @media(max-width:480px){.container{padding:12px}.faculty-grid{grid-template-columns:repeat(2,1fr)}.courses-grid{grid-template-columns:1fr 1fr}.question-grid{grid-template-columns:repeat(6,1fr)}.level-grid{grid-template-columns:repeat(2,1fr)}}
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <a href="/app" class="logo">
+        <img src="/logo.svg" alt="logo">
+        <span class="logo-text">OAU <span class="sub">CBE</span> Practice</span>
+    </a>
+    <div class="header-actions">
+        <button class="icon-btn" onclick="toggleDarkMode()" id="themeToggle"><i class="fas fa-moon"></i></button>
+        <a href="/app" class="back-link"><i class="fas fa-arrow-left"></i></a>
+    </div>
+</header>
+
+<div class="container">
+    <!-- FACULTY SCREEN -->
+    <div class="screen active" id="facultyScreen">
+        <div class="page-title"><h1><i class="fas fa-building"></i> Select Faculty</h1></div>
+        <div class="faculty-grid" id="facultyGrid">
+            <div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading...</p></div>
+        </div>
+    </div>
+
+    <!-- LEVEL SCREEN -->
+    <div class="screen" id="levelScreen">
+        <button class="back-btn" onclick="goToScreen('facultyScreen')"><i class="fas fa-arrow-left"></i> Change Faculty</button>
+        <div class="page-title"><h1 id="levelTitle">Select Level</h1></div>
+        <div class="level-grid" id="levelGrid"><div class="loading-spin"><i class="fas fa-spinner"></i></div></div>
+    </div>
+
+    <!-- COURSE SCREEN -->
+    <div class="screen" id="courseScreen">
+        <button class="back-btn" onclick="goToScreen('levelScreen')"><i class="fas fa-arrow-left"></i> Change Level</button>
+        <div class="page-title"><h1 id="coursePageTitle">Available Exams</h1></div>
+        <div id="coursesContainer"><div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading...</p></div></div>
+    </div>
+
+    <!-- ENTRY SCREEN -->
+    <div class="screen" id="entryScreen">
+        <button class="back-btn" onclick="goToScreen('courseScreen')"><i class="fas fa-arrow-left"></i> Change Course</button>
+        <div id="entryContent"></div>
+    </div>
+
+    <!-- EXAM SCREEN -->
+    <div class="screen" id="examScreen">
+        <div class="exam-header">
+            <div class="info"><h2 id="examCourseTitle">Course</h2><p id="examMeta">Questions • Time</p></div>
+            <div style="display:flex;align-items:center;gap:8px;">
+                <div class="timer-box" id="timerDisplay">--:--</div>
+                <button class="btn btn-danger" onclick="quitExam()"><i class="fas fa-times"></i> Quit</button>
+            </div>
+        </div>
+        <div class="question-card">
+            <div class="q-counter" id="qCounter">Question 1 of 0</div>
+            <div class="q-text" id="qText"></div>
+            <div class="options-area" id="optionsArea"></div>
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" id="prevBtn" onclick="prevQuestion()" disabled><i class="fas fa-chevron-left"></i> Prev</button>
+                <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">Next <i class="fas fa-chevron-right"></i></button>
+                <button class="btn btn-success" id="submitBtn" onclick="submitExam()" style="display:none"><i class="fas fa-check-circle"></i> Submit</button>
+            </div>
+        </div>
+        <div class="question-grid" id="questionGrid"></div>
+    </div>
+
+    <!-- RESULT SCREEN -->
+    <div class="screen" id="resultScreen"><div id="resultContent"></div></div>
+</div>
+
+<nav class="bottom-nav">
+    <div class="bottom-nav-inner">
+        <a href="/app" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+        <a href="/exam" class="nav-item active"><i class="fas fa-pen"></i><span>Exam</span></a>
+        <a href="/test" class="nav-item"><i class="fas fa-flask"></i><span>Test</span></a>
+        <a href="/study" class="nav-item"><i class="fas fa-book-open"></i><span>Study</span></a>
+        <a href="/profile" class="nav-item"><i class="fas fa-user"></i><span>Me</span></a>
+    </div>
+</nav>
+
+<script>
+    // ==================== STATE ====================
+    let selectedFaculty = null;
+    let selectedLevel = null;
+    let selectedCourse = null;
+    let examSession = null;
+    let isSubmitting = false;
+    let autoSaveInterval = null;
+    const FREE_COURSES = CONFIG.freeCourses || [];
+
+    // ==================== SCREEN MANAGEMENT ====================
+    function goToScreen(id) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        window.scrollTo(0, 0);
+    }
+
+    // ==================== LOAD FACULTIES ====================
+    async function loadFaculties() {
+        const grid = document.getElementById('facultyGrid');
+        try {
+            const data = await api.get('/admin/faculties');
+            const faculties = data.faculties || [];
+            if (faculties.length) {
+                grid.innerHTML = faculties.map(f => `
+                    <div class="faculty-card" onclick="selectFaculty('${f.name.replace(/'/g, "\\'")}')">
+                        <i class="fas ${CONFIG.FACULTY_ICONS?.[f.name] || 'fa-building'}"></i>
+                        <h3>${f.name}</h3>
+                        <span class="count">${f.totalCourses} courses</span>
+                    </div>
+                `).join('');
+            } else {
+                grid.innerHTML = '<div class="empty-state">No faculties available</div>';
+            }
+        } catch(e) {
+            grid.innerHTML = '<div class="empty-state">Failed to load faculties</div>';
+        }
+    }
+
+    // ==================== SELECT FACULTY ====================
+    function selectFaculty(name) {
+        selectedFaculty = name;
+        document.getElementById('levelTitle').textContent = `${name} - Select Level`;
+        goToScreen('levelScreen');
+        loadLevels();
+    }
+
+    // ==================== LOAD LEVELS ====================
+    async function loadLevels() {
+        const grid = document.getElementById('levelGrid');
+        grid.innerHTML = '<div class="loading-spin"><i class="fas fa-spinner"></i></div>';
+        try {
+            const data = await api.get('/admin/available-levels');
+            const levels = data.levels || [];
+            grid.innerHTML = ['100', '200', '300', '400', '500', '600'].map(lv => {
+                const available = levels.includes(lv);
+                return `
+                    <div class="level-card ${available ? '' : 'locked'}" 
+                         onclick="${available ? `selectLevel('${lv}')` : ''}">
+                        <i class="fas fa-layer-group"></i>
+                        <h4>${lv} Level</h4>
+                        <span class="badge" style="font-size:.6rem;padding:2px 10px;border-radius:12px;${available ? 'background:var(--success);color:#fff;' : 'background:var(--border);color:var(--text-secondary);'}">${available ? '✅ Available' : '⏳ Soon'}</span>
+                    </div>
+                `;
+            }).join('');
+        } catch(e) {
+            grid.innerHTML = '<div class="empty-state">Error loading levels</div>';
+        }
+    }
+
+    // ==================== SELECT LEVEL ====================
+    function selectLevel(level) {
+        selectedLevel = level;
+        document.getElementById('coursePageTitle').textContent = `${selectedFaculty} - ${level} Level Exams`;
+        goToScreen('courseScreen');
+        loadCourses();
+    }
+
+    // ==================== LOAD COURSES ====================
+    async function loadCourses() {
+        const container = document.getElementById('coursesContainer');
+        container.innerHTML = '<div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading...</p></div>';
+        try {
+            const data = await api.get(`/admin/faculty-courses/${encodeURIComponent(selectedFaculty)}/${selectedLevel}`);
+            let html = '';
+            const firstSem = data.firstSemester || [];
+            const secondSem = data.secondSemester || [];
+
+            if (firstSem.length) {
+                html += `<div class="semester-label"><i class="fas fa-sun"></i> First Semester</div><div class="courses-grid">`;
+                firstSem.forEach(c => html += makeCourseCard(c));
+                html += '</div>';
+            }
+            if (secondSem.length) {
+                html += `<div class="semester-label"><i class="fas fa-moon"></i> Second Semester</div><div class="courses-grid">`;
+                secondSem.forEach(c => html += makeCourseCard(c));
+                html += '</div>';
+            }
+            container.innerHTML = html || '<div class="empty-state">No courses available</div>';
+        } catch(e) {
+            container.innerHTML = '<div class="empty-state">Error loading courses</div>';
+        }
+    }
+
+    function makeCourseCard(c) {
+        const isFree = FREE_COURSES.includes(c.code);
+        const locked = !isFree;
+        return `
+            <div class="course-card ${locked ? 'locked' : ''}" onclick="${locked ? `showToast('This course requires access', 'error')` : `openEntry('${c.code}')`}">
+                ${isFree ? '<span class="badge-free">Free</span>' : ''}
+                <div class="code">${c.code}</div>
+                <div class="name">${c.name}</div>
+            </div>
+        `;
+    }
+
+    // ==================== OPEN ENTRY ====================
+    async function openEntry(code) {
+        selectedCourse = code;
+        goToScreen('entryScreen');
+        document.getElementById('entryContent').innerHTML = '<div class="loading-spin"><i class="fas fa-spinner"></i></div>';
+        try {
+            const data = await api.get(`/admin/course-detail/${encodeURIComponent(code)}`);
+            const c = data.course;
+            document.getElementById('entryContent').innerHTML = `
+                <div class="entry-card">
+                    <div class="icon">📝</div>
+                    <h1>${c.code}</h1>
+                    <p>${c.name}</p>
+                    <div class="stat-row">
+                        <span class="stat-badge">📚 ${c.examSettings.numberOfQuestions} Questions</span>
+                        <span class="stat-badge">⏱️ ${c.examSettings.timeLimit} Minutes</span>
+                        <span class="stat-badge">📦 ${c.questionCounts.exam} Available</span>
+                    </div>
+                    <button class="btn btn-primary btn-block" onclick="startExam()" ${!c.examReady ? 'disabled' : ''}>
+                        <i class="fas fa-play-circle"></i> ${c.examReady ? 'START EXAM' : 'NOT ENOUGH QUESTIONS'}
+                    </button>
+                    <p style="color:var(--text-secondary);font-size:.7rem;margin-top:6px;">${c.examReady ? '✅ Ready' : `⚠️ Need ${c.examSettings.numberOfQuestions - c.questionCounts.exam} more`}</p>
+                </div>
+            `;
+        } catch(e) {
+            document.getElementById('entryContent').innerHTML = '<div class="empty-state">Error loading course</div>';
+        }
+    }
+
+    // ==================== START EXAM ====================
+    async function startExam() {
+        const btn = document.querySelector('#entryContent .btn');
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+        btn.disabled = true;
+        try {
+            const data = await api.get(`/admin/questions/${encodeURIComponent(selectedCourse)}/exam`);
+            if (!data.questions || !data.questions.length) {
+                alert('No questions available.');
+                btn.innerHTML = '<i class="fas fa-play-circle"></i> START EXAM';
+                btn.disabled = false;
+                return;
+            }
+            const settings = data.courseSettings;
+            const questions = shuffleArray(data.questions).slice(0, settings.required);
+            const sessionId = Date.now() + '_' + Math.random().toString(36).substring(2, 8);
+
+            examSession = {
+                courseCode: selectedCourse,
+                questions: questions,
+                answers: new Array(questions.length).fill(null),
+                timeLimit: settings.timeLimit,
+                timeLeft: settings.timeLimit * 60,
+                currentIndex: 0,
+                timer: null,
+                startTime: Date.now(),
+                sessionId: sessionId
+            };
+
+            document.getElementById('examCourseTitle').textContent = `📝 ${selectedCourse}`;
+            document.getElementById('examMeta').textContent = `${questions.length} Questions • ${settings.timeLimit} min`;
+            document.getElementById('timerDisplay').textContent = `${settings.timeLimit}:00`;
+            document.getElementById('timerDisplay').className = 'timer-box';
+
+            goToScreen('examScreen');
+            renderQuestion();
+            startTimer();
+            renderGrid();
+            startAutoSave();
+        } catch(e) {
+            alert('Failed to load exam: ' + e.message);
+            btn.innerHTML = '<i class="fas fa-play-circle"></i> START EXAM';
+            btn.disabled = false;
+        }
+    }
+
+    // ==================== EXAM FUNCTIONS ====================
+    function renderQuestion() {
+        if (!examSession) return;
+        const q = examSession.questions[examSession.currentIndex];
+        const idx = examSession.currentIndex;
+        const total = examSession.questions.length;
+
+        document.getElementById('qCounter').textContent = `Question ${idx + 1} of ${total}`;
+        document.getElementById('qText').textContent = q.text;
+
+        const letters = ['A', 'B', 'C', 'D'];
+        document.getElementById('optionsArea').innerHTML = q.options.map((opt, i) => `
+            <div class="opt ${examSession.answers[idx] === i ? 'selected' : ''}" onclick="selectAnswer(${i})">
+                <span class="prefix">${letters[i]}.</span>
+                <span>${opt}</span>
+            </div>
+        `).join('');
+
+        document.getElementById('prevBtn').disabled = idx === 0;
+        const last = idx === total - 1;
+        document.getElementById('nextBtn').style.display = last ? 'none' : 'inline-flex';
+        document.getElementById('submitBtn').style.display = last ? 'block' : 'none';
+        renderGrid();
+    }
+
+    function selectAnswer(index) {
+        if (!examSession) return;
+        examSession.answers[examSession.currentIndex] = index;
+        renderQuestion();
+    }
+
+    function prevQuestion() {
+        if (examSession.currentIndex > 0) {
+            examSession.currentIndex--;
+            renderQuestion();
+        }
+    }
+
+    function nextQuestion() {
+        if (examSession.currentIndex < examSession.questions.length - 1) {
+            examSession.currentIndex++;
+            renderQuestion();
+        }
+    }
+
+    function jumpTo(index) {
+        examSession.currentIndex = index;
+        renderQuestion();
+    }
+
+    function renderGrid() {
+        document.getElementById('questionGrid').innerHTML = examSession.questions.map((_, i) => `
+            <div class="grid-btn ${examSession.answers[i] !== null ? 'answered' : ''} ${i === examSession.currentIndex ? 'current' : ''}" onclick="jumpTo(${i})">${i + 1}</div>
+        `).join('');
+    }
+
+    function startTimer() {
+        if (examSession.timer) clearInterval(examSession.timer);
+        const d = document.getElementById('timerDisplay');
+        examSession.timer = setInterval(() => {
+            examSession.timeLeft--;
+            if (examSession.timeLeft <= 0) { clearInterval(examSession.timer); submitExam(true); return; }
+            const m = Math.floor(examSession.timeLeft / 60);
+            const s = examSession.timeLeft % 60;
+            d.textContent = `${m}:${s.toString().padStart(2, '0')}`;
+            d.classList.remove('warning', 'danger');
+            if (examSession.timeLeft <= 60) d.classList.add('danger');
+            else if (examSession.timeLeft <= 300) d.classList.add('warning');
+        }, 1000);
+    }
+
+    function startAutoSave() {
+        if (autoSaveInterval) clearInterval(autoSaveInterval);
+        autoSaveInterval = setInterval(() => {
+            if (examSession) {
+                sessionStorage.setItem('activeExam', JSON.stringify({
+                    courseCode: examSession.courseCode,
+                    questions: examSession.questions,
+                    answers: examSession.answers,
+                    timeLimit: examSession.timeLimit,
+                    timeLeft: examSession.timeLeft,
+                    currentIndex: examSession.currentIndex,
+                    startTime: examSession.startTime,
+                    sessionId: examSession.sessionId
+                }));
+            }
+        }, 10000);
+    }
+
+    function shuffleArray(arr) {
+        const s = [...arr];
+        for (let i = s.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [s[i], s[j]] = [s[j], s[i]];
+        }
+        return s;
+    }
+
+    // ==================== SUBMIT EXAM ====================
+    async function submitExam(autoSubmit = false) {
+        if (isSubmitting) return;
+        if (!examSession) return;
+        if (!autoSubmit && !confirm('Submit your exam? You cannot change answers after submission.')) return;
+
+        isSubmitting = true;
+        if (examSession.timer) clearInterval(examSession.timer);
+        if (autoSaveInterval) clearInterval(autoSaveInterval);
+
+        const timeSpent = Date.now() - examSession.startTime;
+        let correct = 0;
+        examSession.questions.forEach((q, i) => {
+            if (examSession.answers[i] === q.correctOption) correct++;
+        });
+        const total = examSession.questions.length;
+        const percentage = Math.round((correct / total) * 100);
+
+        try {
+            const data = await api.post('/exams/session/submit', {
+                sessionId: examSession.sessionId,
+                courseCode: examSession.courseCode,
+                correctCount: correct,
+                totalQuestions: total,
+                percentage: percentage,
+                timeSpent: timeSpent,
+                mode: 'exam'
+            });
+
+            if (data.success) {
+                sessionStorage.removeItem('activeExam');
+                showResult(examSession.courseCode, correct, total, percentage, timeSpent);
+                examSession = null;
+            } else {
+                alert('Failed to submit exam. Please try again.');
+                isSubmitting = false;
+            }
+        } catch(e) {
+            alert('Connection error. Please try again.');
+            isSubmitting = false;
+        }
+    }
+
+    function showResult(course, correct, total, percentage, timeSpent) {
+        const minutes = Math.floor(timeSpent / 60000);
+        const seconds = Math.floor((timeSpent % 60000) / 1000);
+        document.getElementById('resultContent').innerHTML = `
+            <div class="result-card">
+                <div class="big-score">${percentage}%</div>
+                <div class="label">${correct} / ${total} Correct</div>
+                <p style="color:var(--text-secondary);margin-top:8px;">⏱️ ${minutes}m ${seconds}s</p>
+                <div style="margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+                    <button class="btn btn-primary" onclick="window.location.href='/submit'"><i class="fas fa-list"></i> Details</button>
+                    <button class="btn btn-secondary" onclick="window.location.href='/exam'"><i class="fas fa-redo"></i> Retry</button>
+                    <button class="btn btn-secondary" onclick="window.location.href='/app'"><i class="fas fa-home"></i> Dashboard</button>
+                </div>
+            </div>
+        `;
+        goToScreen('resultScreen');
+    }
+
+    function quitExam() {
+        if (!examSession) return;
+        if (confirm('Quit exam? Your progress will be lost.')) {
+            if (examSession.timer) clearInterval(examSession.timer);
+            if (autoSaveInterval) clearInterval(autoSaveInterval);
+            sessionStorage.removeItem('activeExam');
+            examSession = null;
+            window.location.reload();
+        }
+    }
+
+    // ==================== INIT ====================
+    document.addEventListener('DOMContentLoaded', function() {
+        if (!AuthService.isAuthenticated()) {
+            window.location.href = '/login';
+            return;
+        }
+        initDarkMode();
+        loadFaculties();
+    });
+</script>
+</body>
+</html>
