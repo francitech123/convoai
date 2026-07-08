@@ -7,12 +7,6 @@
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   
-  <script src="/js/config.js"></script>
-  <script src="/js/api.js"></script>
-  <script src="/js/auth.js"></script>
-  <script src="/js/utils.js"></script>
-  <script src="/js/auth-check.js"></script>
-  
   <style>
     *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI','Inter',system-ui,-apple-system,sans-serif}
     :root{
@@ -28,14 +22,25 @@
     }
     body{background:radial-gradient(circle at top right,rgba(124,58,237,.10),transparent 25%),linear-gradient(180deg,var(--bg),#0b1324 100%);color:var(--text);min-height:100vh}
     .page{max-width:1280px;margin:0 auto;padding:20px 18px 110px}
+    
+    /* LOADING OVERLAY */
+    .loading-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .6s ease,visibility .6s ease}
+    .loading-overlay.hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .loading-crest{width:140px;height:140px;animation:pulse 2s ease-in-out infinite}
+    .loading-spinner{margin-top:24px;width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--test-purple);border-radius:50%;animation:spin .8s linear infinite}
+    .loading-text{color:var(--text-secondary);margin-top:16px;font-size:.85rem;font-weight:500}
+    @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+    
     .topbar{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-top:6px}
     .brand{display:flex;align-items:center;gap:14px;min-width:0}
     .brand-logo{width:56px;height:56px;border-radius:18px;background:rgba(124,58,237,.12);display:grid;place-items:center;border:1px solid var(--border);overflow:hidden}
-    .brand-logo img{width:42px;height:42px;object-fit:contain}
+    .brand-logo svg{width:42px;height:42px;object-fit:contain}
     .brand-copy small{display:block;color:var(--test-purple-light);text-transform:uppercase;letter-spacing:.18em;font-weight:800;font-size:.72rem;margin-bottom:4px}
     .brand-copy h1{font-size:1.2rem}
     .topbar-actions{display:flex;align-items:center;gap:10px}
-    .icon-btn{position:relative;border:1px solid var(--border);background:var(--card);color:var(--text);width:46px;height:46px;border-radius:16px;cursor:pointer;box-shadow:var(--shadow)}
+    .icon-btn{position:relative;border:1px solid var(--border);background:var(--card);color:var(--text);width:46px;height:46px;border-radius:16px;cursor:pointer;box-shadow:var(--shadow);transition:all .2s}
+    .icon-btn:hover{background:var(--test-purple);color:#fff;border-color:var(--test-purple)}
     .badge{position:absolute;top:-4px;right:-4px;background:var(--danger);color:#fff;min-width:18px;height:18px;border-radius:999px;padding:0 5px;font-size:.7rem;display:none;align-items:center;justify-content:center}
     .network-strip{margin-top:16px;padding:14px 16px;border-radius:18px;background:linear-gradient(135deg,rgba(124,58,237,.18),rgba(167,139,250,.12));border:1px solid rgba(167,139,250,.18);display:flex;justify-content:space-between;gap:12px;align-items:center}
     .network-strip strong{display:block;margin-bottom:4px}.network-strip p{color:var(--text-secondary);font-size:.92rem}.network-pill{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.08);font-weight:800;font-size:.8rem}
@@ -45,12 +50,20 @@
     .hero h2{font-size:1.5rem;margin-bottom:8px}.hero p{max-width:720px;line-height:1.6;color:rgba(255,255,255,.9)}
     .hero-tag{padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.12);font-weight:800;white-space:nowrap}
     .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;position:relative;z-index:1}
-    .btn{border:none;border-radius:14px;padding:12px 14px;font-weight:800;cursor:pointer}
+    .btn{border:none;border-radius:14px;padding:12px 14px;font-weight:800;cursor:pointer;transition:all .2s;font-family:inherit}
     .btn-primary{background:#fff;color:#0f172a}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(255,255,255,.2)}
     .btn-soft{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.18)}
+    .btn-soft:hover{background:rgba(255,255,255,.2)}
     .btn-test{background:linear-gradient(135deg,var(--test-purple),var(--test-purple-light));color:#fff}
+    .btn-test:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(124,58,237,.3)}
+    .btn-success{background:var(--success);color:#fff}
+    .btn-success:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(16,185,129,.3)}
+    .btn-danger{background:var(--danger);color:#fff}
+    .btn-danger:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(239,68,68,.3)}
     .stats-grid{margin-top:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;position:relative;z-index:1}
-    .stat-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:16px}
+    .stat-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:16px;transition:all .2s}
+    .stat-card:hover{background:rgba(255,255,255,.14);transform:translateY(-2px)}
     .stat-card span{display:block;font-size:.8rem;color:rgba(255,255,255,.78);margin-bottom:6px}.stat-card strong{font-size:1.25rem}
     .faculty-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px}
     @media(max-width:768px){.faculty-grid{grid-template-columns:repeat(2,1fr)}}
@@ -76,6 +89,7 @@
     .course-card .code{font-weight:700;font-size:.9rem;color:var(--text)}
     .course-card .name{font-size:.65rem;color:var(--text-secondary);margin-top:2px}
     .course-card .badge-free{position:absolute;top:6px;right:6px;background:var(--success);color:#fff;font-size:.5rem;padding:2px 8px;border-radius:12px;font-weight:600}
+    .course-card .badge-premium{position:absolute;top:6px;right:6px;background:var(--warning);color:#000;font-size:.5rem;padding:2px 8px;border-radius:12px;font-weight:600}
     .semester-label{color:var(--text-secondary);font-size:.75rem;text-transform:uppercase;letter-spacing:1px;margin:16px 0 8px;font-weight:700}
     .section-card{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:20px;box-shadow:var(--shadow);margin-top:16px}
     .section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
@@ -90,7 +104,7 @@
     .test-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:16px}
     .test-header .info h2{font-size:1rem;color:var(--text)}
     .test-header .info p{font-size:.75rem;color:var(--text-secondary)}
-    .timer-box{background:var(--test-purple);color:#fff;padding:8px 18px;border-radius:40px;font-size:1.2rem;font-weight:700;font-family:'Courier New',monospace;min-width:70px;text-align:center}
+    .timer-box{background:var(--test-purple);color:#fff;padding:8px 18px;border-radius:40px;font-size:1.2rem;font-weight:700;font-family:'Courier New',monospace;min-width:70px;text-align:center;transition:all .3s}
     .timer-box.warning{background:var(--warning);color:#000;animation:pulse 1s infinite}
     .timer-box.danger{background:var(--danger);animation:pulse .5s infinite}
     .question-card{background:var(--card-2);border-radius:16px;padding:18px;border:1px solid var(--border);margin-top:12px}
@@ -127,9 +141,11 @@
     .bottom-nav{position:fixed;left:0;right:0;bottom:0;background:rgba(15,23,42,.95);border-top:1px solid var(--border);display:flex;justify-content:center;z-index:99;backdrop-filter:blur(16px)}
     body.light-mode .bottom-nav{background:rgba(244,247,251,.95)}
     .bottom-nav-inner{width:min(100%,1280px);display:grid;grid-template-columns:repeat(5,1fr);gap:6px;padding:10px 14px calc(10px + env(safe-area-inset-bottom))}
-    .nav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--text-secondary);text-decoration:none;padding:8px 4px;border-radius:14px;font-size:.76rem;font-weight:700}
+    .nav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--text-secondary);text-decoration:none;padding:8px 4px;border-radius:14px;font-size:.76rem;font-weight:700;transition:all .2s}
     .nav-item i{font-size:1.1rem}.nav-item.active{color:#fff;background:linear-gradient(135deg,var(--primary),var(--primary-light))}
-    .chat-fab{position:fixed;right:20px;bottom:88px;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#10b981,#059669);color:#fff;text-decoration:none;box-shadow:0 10px 24px rgba(16,185,129,.35);z-index:98}
+    .nav-item:hover:not(.active){background:rgba(124,58,237,.12);color:var(--test-purple-light)}
+    .chat-fab{position:fixed;right:20px;bottom:88px;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#10b981,#059669);color:#fff;text-decoration:none;box-shadow:0 10px 24px rgba(16,185,129,.35);z-index:98;transition:all .2s}
+    .chat-fab:hover{transform:scale(1.08);box-shadow:0 10px 32px rgba(16,185,129,.5)}
     @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
     @keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
     @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
@@ -138,15 +154,53 @@
   </style>
 </head>
 <body>
+
+<!-- LOADING OVERLAY -->
+<div class="loading-overlay" id="loadingOverlay">
+  <svg class="loading-crest" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="100" cy="100" r="90" fill="none" stroke="#7c3aed" stroke-width="3.5"/>
+    <path id="topArcLoad" d="M 30 100 A 70 70 0 0 1 170 100" fill="none"/>
+    <text font-size="17" font-weight="900" fill="#7c3aed" letter-spacing="3">
+      <textPath href="#topArcLoad" startOffset="50%" text-anchor="middle">OAU</textPath>
+    </text>
+    <path id="bottomArcLoad" d="M 30 100 A 70 70 0 0 0 170 100" fill="none"/>
+    <text font-size="7.5" font-weight="800" fill="#1e3a8a" letter-spacing="1.2">
+      <textPath href="#bottomArcLoad" startOffset="50%" text-anchor="middle">EXAM CBT PRACTICE</textPath>
+    </text>
+    <circle cx="100" cy="100" r="19" fill="#1e3a8a" stroke="#7c3aed" stroke-width="2"/>
+    <line x1="81" y1="100" x2="119" y2="100" stroke="#7c3aed" stroke-width="1.5"/>
+    <line x1="100" y1="81" x2="100" y2="119" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="100" y="104" font-size="7.5" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">OAU</text>
+  </svg>
+  <div class="loading-spinner"></div>
+  <div class="loading-text">Loading Test Mode...</div>
+</div>
+
 <main class="page">
   <header class="topbar">
     <div class="brand">
-      <div class="brand-logo"><img src="/logo.svg" alt="OAU CBE Practice"></div>
+      <div class="brand-logo">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="90" fill="none" stroke="#7c3aed" stroke-width="3.5"/>
+          <path id="topArcSmall" d="M 30 100 A 70 70 0 0 1 170 100" fill="none"/>
+          <text font-size="17" font-weight="900" fill="#7c3aed" letter-spacing="3">
+            <textPath href="#topArcSmall" startOffset="50%" text-anchor="middle">OAU</textPath>
+          </text>
+          <path id="bottomArcSmall" d="M 30 100 A 70 70 0 0 0 170 100" fill="none"/>
+          <text font-size="7.5" font-weight="800" fill="#1e3a8a" letter-spacing="1.2">
+            <textPath href="#bottomArcSmall" startOffset="50%" text-anchor="middle">EXAM CBT PRACTICE</textPath>
+          </text>
+          <circle cx="100" cy="100" r="19" fill="#1e3a8a" stroke="#7c3aed" stroke-width="2"/>
+          <line x1="81" y1="100" x2="119" y2="100" stroke="#7c3aed" stroke-width="1.5"/>
+          <line x1="100" y1="81" x2="100" y2="119" stroke="#7c3aed" stroke-width="1.5"/>
+          <text x="100" y="104" font-size="7.5" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">OAU</text>
+        </svg>
+      </div>
       <div class="brand-copy"><small>Test mode</small><h1>OAU CBE Practice</h1></div>
     </div>
     <div class="topbar-actions">
       <button class="icon-btn" id="themeToggleBtn" onclick="toggleThemeMode()" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
-      <button class="icon-btn" onclick="goNotifications()" aria-label="Notifications"><i class="fas fa-bell"></i><span class="badge" id="notifBadge">0</span></button>
+      <button class="icon-btn" onclick="location.href='/notifications'" aria-label="Notifications"><i class="fas fa-bell"></i><span class="badge" id="notifBadge">0</span></button>
     </div>
   </header>
 
@@ -167,7 +221,7 @@
       <div class="hero-tag" id="heroTag">100L • 200L</div>
     </div>
     <div class="hero-actions">
-      <button class="btn btn-primary" onclick="jumpToCourses()">Browse tests</button>
+      <button class="btn btn-primary" onclick="document.getElementById('facultyScreen').scrollIntoView({behavior:'smooth'})">Browse tests</button>
       <button class="btn btn-soft" onclick="location.href='/study'">Study first</button>
     </div>
     <div class="stats-grid">
@@ -216,9 +270,9 @@
           <h2 id="testCourseTitle">Course</h2>
           <p id="testMeta">Questions • Time</p>
         </div>
-        <div style="display:flex;align-items:center;gap:10px">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
           <div class="timer-box" id="timerDisplay">--:--</div>
-          <button class="btn btn-soft" style="padding:6px 14px;font-size:.7rem;background:rgba(239,68,68,.2);color:var(--danger)" onclick="quitTest()"><i class="fas fa-times"></i> Quit</button>
+          <button class="btn btn-danger" onclick="quitTest()" style="padding:8px 14px;font-size:.75rem"><i class="fas fa-times"></i> Quit</button>
         </div>
       </div>
 
@@ -229,7 +283,7 @@
         <div class="nav-buttons">
           <button class="btn btn-soft" id="prevBtn" onclick="prevQuestion()" disabled style="flex:1"><i class="fas fa-chevron-left"></i> Prev</button>
           <button class="btn btn-test" id="nextBtn" onclick="nextQuestion()" style="flex:1">Next <i class="fas fa-chevron-right"></i></button>
-          <button class="btn" id="submitBtn" onclick="submitTest()" style="display:none;flex:1;background:var(--success);color:#fff"><i class="fas fa-check-circle"></i> Submit</button>
+          <button class="btn btn-success" id="submitBtn" onclick="submitTest()" style="display:none;flex:1"><i class="fas fa-check-circle"></i> Submit</button>
         </div>
       </div>
 
@@ -256,29 +310,39 @@
 </nav>
 
 <script>
-const API = window.CONFIG?.API_URL || (location.hostname.includes('localhost') ? 'http://localhost:5000/api' : '/api');
-const token = localStorage.getItem('oau_token');
+// ============================================
+// API CONFIGURATION
+// ============================================
+const API_BASE = 'https://oau-exam-api.onrender.com/api';
+const TOKEN = localStorage.getItem('oau_token');
+
+if (!TOKEN) {
+  window.location.href = '/login';
+}
+
+// ============================================
+// UTILITY FUNCTIONS
+// ============================================
 const qs = id => document.getElementById(id);
-const setText = (id,v) => { const el = qs(id); if(el) el.textContent = v; };
+const setText = (id, v) => { const el = qs(id); if(el) el.textContent = v; };
 const escapeHtml = str => String(str||'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 
-// ==================== STATE ====================
-let selectedFaculty = null;
-let selectedLevel = null;
-let selectedCourse = null;
-let testSession = null;
-let isSubmitting = false;
-let autoSaveInterval = null;
-let allCourses = [];
-let notifications = [];
-const FREE_COURSES = ['CHM 102', 'MTH 102', 'GET 102', 'GST 111', 'GST 112', 'ACC 102', 'AGR 102', 'ENG 102', 'EDU 102', 'ECO 102'];
+function showLoading() { qs('loadingOverlay').classList.remove('hidden'); }
+function hideLoading() { qs('loadingOverlay').classList.add('hidden'); }
 
-// ==================== THEME ====================
+// ============================================
+// THEME
+// ============================================
 function initTheme(){
   const saved = localStorage.getItem('theme');
   const btn = qs('themeToggleBtn');
-  if(saved === 'light'){ document.body.classList.add('light-mode'); btn.innerHTML = '<i class="fas fa-sun"></i>'; }
-  else { document.body.classList.remove('light-mode'); btn.innerHTML = '<i class="fas fa-moon"></i>'; }
+  if(saved === 'light'){ 
+    document.body.classList.add('light-mode'); 
+    btn.innerHTML = '<i class="fas fa-sun"></i>'; 
+  } else { 
+    document.body.classList.remove('light-mode'); 
+    btn.innerHTML = '<i class="fas fa-moon"></i>'; 
+  }
 }
 function toggleThemeMode(){
   const isLight = document.body.classList.toggle('light-mode');
@@ -287,10 +351,43 @@ function toggleThemeMode(){
 }
 window.toggleThemeMode = toggleThemeMode;
 
-function goNotifications(){ location.href = '/notifications'; }
-window.goNotifications = goNotifications;
+// ============================================
+// NETWORK STATUS
+// ============================================
+function updateNetworkState(){
+  const online = navigator.onLine;
+  const pill = qs('networkPill');
+  const msg = qs('networkMessage');
+  if(!online){
+    pill.textContent = 'Offline';
+    pill.style.background = 'rgba(239,68,68,.14)';
+    msg.textContent = 'You are offline. Please check your connection.';
+    return;
+  }
+  pill.textContent = 'Online';
+  pill.style.background = 'rgba(16,185,129,.14)';
+  msg.textContent = 'Select a faculty, level, and course to start your practice test.';
+}
+window.addEventListener('online', updateNetworkState);
+window.addEventListener('offline', updateNetworkState);
 
-// ==================== SCREEN MANAGEMENT ====================
+// ============================================
+// STATE
+// ============================================
+let selectedFaculty = null;
+let selectedLevel = null;
+let selectedCourse = null;
+let testSession = null;
+let isSubmitting = false;
+let autoSaveInterval = null;
+let isPremium = false;
+let userStats = { testsTaken: 0, averageScore: 0 };
+
+const FREE_COURSES = ['CHM 102', 'MTH 102', 'GET 102', 'GST 111', 'GST 112', 'ACC 102', 'AGR 102', 'ENG 102', 'EDU 102', 'ECO 102'];
+
+// ============================================
+// SCREEN MANAGEMENT
+// ============================================
 function goToScreen(id){
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   qs(id).classList.add('active');
@@ -298,11 +395,36 @@ function goToScreen(id){
 }
 window.goToScreen = goToScreen;
 
-// ==================== LOAD FACULTIES ====================
+// ============================================
+// LOAD USER STATS
+// ============================================
+async function loadUserStats(){
+  try {
+    const r = await fetch(API_BASE + '/auth/me', {
+      headers: { 'Authorization': 'Bearer ' + TOKEN }
+    });
+    const d = await r.json();
+    if(d.success && d.user){
+      const user = d.user;
+      isPremium = user.isPremium || false;
+      userStats.testsTaken = user.testsTaken || 0;
+      userStats.averageScore = user.averageScore || 0;
+      setText('statTests', userStats.testsTaken);
+      setText('statAvg', userStats.averageScore + '%');
+    }
+  } catch(e){
+    console.warn('Could not load user stats:', e);
+  }
+}
+
+// ============================================
+// LOAD FACULTIES
+// ============================================
 async function loadFaculties(){
   const grid = qs('facultyGrid');
+  grid.innerHTML = '<div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading faculties...</p></div>';
   try {
-    const r = await fetch(API + '/admin/faculties');
+    const r = await fetch(API_BASE + '/admin/faculties');
     const d = await r.json();
     const faculties = d.faculties || [];
     if(faculties.length){
@@ -313,6 +435,7 @@ async function loadFaculties(){
           <span class="count">${f.totalCourses} courses</span>
         </div>
       `).join('');
+      setText('statCourses', faculties.length);
     } else {
       grid.innerHTML = '<div class="empty-state">No faculties available</div>';
     }
@@ -321,7 +444,9 @@ async function loadFaculties(){
   }
 }
 
-// ==================== SELECT FACULTY ====================
+// ============================================
+// SELECT FACULTY
+// ============================================
 function selectFaculty(name){
   selectedFaculty = name;
   qs('levelTitle').textContent = `${name} - Select Level`;
@@ -330,12 +455,14 @@ function selectFaculty(name){
 }
 window.selectFaculty = selectFaculty;
 
-// ==================== LOAD LEVELS ====================
+// ============================================
+// LOAD LEVELS
+// ============================================
 async function loadLevels(){
   const grid = qs('levelGrid');
   grid.innerHTML = '<div class="loading-spin"><i class="fas fa-spinner"></i></div>';
   try {
-    const r = await fetch(API + '/admin/available-levels');
+    const r = await fetch(API_BASE + '/admin/available-levels');
     const d = await r.json();
     const levels = d.levels || [];
     grid.innerHTML = ['100','200','300','400','500','600'].map(lv => {
@@ -356,7 +483,9 @@ async function loadLevels(){
   }
 }
 
-// ==================== SELECT LEVEL ====================
+// ============================================
+// SELECT LEVEL
+// ============================================
 function selectLevel(level){
   selectedLevel = level;
   qs('coursePageTitle').textContent = `${selectedFaculty} - ${level} Level Tests`;
@@ -365,12 +494,14 @@ function selectLevel(level){
 }
 window.selectLevel = selectLevel;
 
-// ==================== LOAD COURSES ====================
+// ============================================
+// LOAD COURSES
+// ============================================
 async function loadCourses(){
   const container = qs('coursesContainer');
-  container.innerHTML = '<div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading...</p></div>';
+  container.innerHTML = '<div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading courses...</p></div>';
   try {
-    const r = await fetch(`${API}/admin/faculty-courses/${encodeURIComponent(selectedFaculty)}/${selectedLevel}`);
+    const r = await fetch(`${API_BASE}/admin/faculty-courses/${encodeURIComponent(selectedFaculty)}/${selectedLevel}`);
     const d = await r.json();
     let html = '';
     const firstSem = d.firstSemester || [];
@@ -393,25 +524,37 @@ async function loadCourses(){
 
 function makeCourseCard(c){
   const isFree = FREE_COURSES.includes(c.code);
-  const locked = !isFree;
+  const locked = !isPremium && !isFree;
   return `
-    <div class="course-card ${locked ? 'locked' : ''}" onclick="${locked ? `alert('This course requires access.')` : `openEntry('${c.code}')`}">
-      ${isFree ? '<span class="badge-free">Free</span>' : ''}
+    <div class="course-card ${locked ? 'locked' : ''}" onclick="${locked ? `alert('This course requires Premium access.')` : `openEntry('${c.code}')`}">
+      ${isFree ? '<span class="badge-free">Free</span>' : (locked ? '<span class="badge-premium">Premium</span>' : '')}
       <div class="code">${c.code}</div>
       <div class="name">${c.name}</div>
     </div>
   `;
 }
 
-// ==================== OPEN ENTRY ====================
+// ============================================
+// OPEN ENTRY
+// ============================================
 async function openEntry(code){
   selectedCourse = code;
   goToScreen('entryScreen');
   qs('entryContent').innerHTML = '<div class="loading-spin"><i class="fas fa-spinner"></i></div>';
   try {
-    const r = await fetch(`${API}/admin/course-detail/${encodeURIComponent(code)}`);
+    const r = await fetch(`${API_BASE}/admin/course-detail/${encodeURIComponent(code)}`);
     const d = await r.json();
     const c = d.course;
+    const isFree = FREE_COURSES.includes(code);
+    const locked = !isPremium && !isFree;
+    let lockedMsg = '';
+    if(locked) {
+      lockedMsg = `<div style="background:rgba(245,158,11,.15);border:1px solid var(--warning);border-radius:12px;padding:12px;margin:12px 0;">
+        <p style="color:var(--warning);font-weight:600;"><i class="fas fa-crown"></i> Premium Course</p>
+        <p style="color:var(--text-secondary);font-size:.75rem;">Upgrade to Premium (₦2,000) to access all courses</p>
+        <a href="/payment" class="btn btn-primary" style="display:inline-block;margin-top:8px;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;padding:8px 20px;border-radius:30px;text-decoration:none;font-weight:600;font-size:.8rem;"><i class="fas fa-star"></i> Upgrade Now</a>
+      </div>`;
+    }
     qs('entryContent').innerHTML = `
       <div class="entry-card">
         <div class="icon">🧪</div>
@@ -422,7 +565,8 @@ async function openEntry(code){
           <span class="stat-badge">⏱️ ${c.testSettings.timeLimit} Minutes</span>
           <span class="stat-badge">📦 ${c.questionCounts.test} Available</span>
         </div>
-        <button class="btn btn-test" onclick="startTest()" style="width:100%;padding:14px;border:none;border-radius:14px;font-weight:700;font-size:1rem;cursor:pointer" ${!c.testReady ? 'disabled' : ''}>
+        ${lockedMsg}
+        <button class="btn btn-test" onclick="startTest()" style="width:100%;padding:14px;border:none;border-radius:14px;font-weight:700;font-size:1rem;cursor:pointer" ${(!c.testReady || locked) ? 'disabled' : ''}>
           <i class="fas fa-play-circle"></i> ${c.testReady ? 'START TEST' : 'NOT ENOUGH QUESTIONS'}
         </button>
         <p style="color:var(--text-secondary);font-size:.75rem;margin-top:8px">
@@ -436,41 +580,44 @@ async function openEntry(code){
 }
 window.openEntry = openEntry;
 
-// ==================== START TEST ====================
+// ============================================
+// START TEST
+// ============================================
 async function startTest(){
   const btn = document.querySelector('#entryContent .btn');
+  if(!btn) return;
   btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
   btn.disabled = true;
   try {
     // Get course details for time limit
-    const courseRes = await fetch(`${API}/admin/course-detail/${encodeURIComponent(selectedCourse)}`);
+    const courseRes = await fetch(`${API_BASE}/admin/course-detail/${encodeURIComponent(selectedCourse)}`);
     const courseData = await courseRes.json();
     const timeLimit = courseData.course?.testSettings?.timeLimit || 15;
     const numQuestions = courseData.course?.testSettings?.numberOfQuestions || 30;
-    
+
     // Fetch questions using rotation
-    const response = await fetch(API + '/tests/questions/rotate', {
+    const response = await fetch(API_BASE + '/tests/questions/rotate', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + TOKEN },
       body: JSON.stringify({
         courseCode: selectedCourse,
         numberOfQuestions: numQuestions,
         excludeRecentSessions: 3
       })
     });
-    
+
     const data = await response.json();
-    
+
     if(!data.success || !data.questions || !data.questions.length){
       alert('No questions available. Please try again later.');
       btn.innerHTML = '<i class="fas fa-play-circle"></i> START TEST';
       btn.disabled = false;
       return;
     }
-    
+
     const questions = data.questions;
     const sessionId = data.sessionId || (Date.now() + '_' + Math.random().toString(36).substring(2,8));
-    
+
     testSession = {
       courseCode: selectedCourse,
       questions: questions,
@@ -482,7 +629,8 @@ async function startTest(){
       startTime: Date.now(),
       sessionId: sessionId
     };
-    
+
+    setText('statQuestions', questions.length);
     qs('testCourseTitle').textContent = `🧪 ${selectedCourse}`;
     qs('testMeta').textContent = `${questions.length} Questions • ${timeLimit} min`;
     qs('timerDisplay').textContent = `${timeLimit}:00`;
@@ -492,6 +640,7 @@ async function startTest(){
     startTimer();
     renderGrid();
     startAutoSave();
+    saveTestSession();
   } catch(e){
     alert('Failed to load test: ' + e.message);
     btn.innerHTML = '<i class="fas fa-play-circle"></i> START TEST';
@@ -500,7 +649,9 @@ async function startTest(){
 }
 window.startTest = startTest;
 
-// ==================== RENDER QUESTION ====================
+// ============================================
+// RENDER QUESTION
+// ============================================
 function renderQuestion(){
   if(!testSession) return;
   const q = testSession.questions[testSession.currentIndex];
@@ -520,9 +671,12 @@ function renderQuestion(){
   qs('nextBtn').style.display = last ? 'none' : 'inline-flex';
   qs('submitBtn').style.display = last ? 'block' : 'none';
   renderGrid();
+  saveTestSession();
 }
 
-// ==================== SELECT ANSWER ====================
+// ============================================
+// SELECT ANSWER
+// ============================================
 function selectAnswer(index){
   if(!testSession) return;
   testSession.answers[testSession.currentIndex] = index;
@@ -530,7 +684,9 @@ function selectAnswer(index){
 }
 window.selectAnswer = selectAnswer;
 
-// ==================== NAVIGATION ====================
+// ============================================
+// NAVIGATION
+// ============================================
 function prevQuestion(){
   if(testSession.currentIndex > 0){
     testSession.currentIndex--;
@@ -553,7 +709,9 @@ function jumpTo(index){
 }
 window.jumpTo = jumpTo;
 
-// ==================== RENDER GRID ====================
+// ============================================
+// RENDER GRID
+// ============================================
 function renderGrid(){
   qs('questionGrid').innerHTML = testSession.questions.map((_,i) => `
     <div class="grid-btn ${testSession.answers[i] !== null ? 'answered' : ''} ${i === testSession.currentIndex ? 'current' : ''}" 
@@ -561,7 +719,9 @@ function renderGrid(){
   `).join('');
 }
 
-// ==================== TIMER ====================
+// ============================================
+// TIMER
+// ============================================
 function startTimer(){
   if(testSession.timer) clearInterval(testSession.timer);
   const d = qs('timerDisplay');
@@ -581,28 +741,37 @@ function startTimer(){
   }, 1000);
 }
 
-// ==================== AUTO SAVE ====================
-function startAutoSave(){
-  if(autoSaveInterval) clearInterval(autoSaveInterval);
-  autoSaveInterval = setInterval(() => {
-    if(testSession){
-      try {
-        sessionStorage.setItem('activeTest', JSON.stringify({
-          courseCode: testSession.courseCode,
-          questions: testSession.questions,
-          answers: testSession.answers,
-          timeLimit: testSession.timeLimit,
-          timeLeft: testSession.timeLeft,
-          currentIndex: testSession.currentIndex,
-          startTime: testSession.startTime,
-          sessionId: testSession.sessionId
-        }));
-      } catch(e){}
-    }
-  }, 10000);
+// ============================================
+// SAVE TEST SESSION
+// ============================================
+function saveTestSession(){
+  if(testSession){
+    try {
+      sessionStorage.setItem('activeTest', JSON.stringify({
+        courseCode: testSession.courseCode,
+        questions: testSession.questions,
+        answers: testSession.answers,
+        timeLimit: testSession.timeLimit,
+        timeLeft: testSession.timeLeft,
+        currentIndex: testSession.currentIndex,
+        startTime: testSession.startTime,
+        sessionId: testSession.sessionId
+      }));
+    } catch(e){}
+  }
 }
 
-// ==================== SUBMIT TEST ====================
+// ============================================
+// AUTO SAVE
+// ============================================
+function startAutoSave(){
+  if(autoSaveInterval) clearInterval(autoSaveInterval);
+  autoSaveInterval = setInterval(saveTestSession, 10000);
+}
+
+// ============================================
+// SUBMIT TEST
+// ============================================
 async function submitTest(autoSubmit = false){
   if(isSubmitting) return;
   if(!testSession) return;
@@ -618,9 +787,9 @@ async function submitTest(autoSubmit = false){
   const total = testSession.questions.length;
   const percentage = Math.round((correct / total) * 100);
   try {
-    const response = await fetch(API + '/tests/session/submit', {
+    const response = await fetch(API_BASE + '/tests/session/submit', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + TOKEN },
       body: JSON.stringify({
         sessionId: testSession.sessionId,
         courseCode: testSession.courseCode,
@@ -634,9 +803,10 @@ async function submitTest(autoSubmit = false){
     const data = await response.json();
     if(response.ok){
       sessionStorage.removeItem('activeTest');
-      showResult(testSession.courseCode, correct, total, percentage, timeSpent);
+      testSession = null;
+      showResult(selectedCourse, correct, total, percentage, timeSpent);
     } else {
-      alert('Failed to submit. Please try again.');
+      alert('Failed to submit: ' + (data.error || 'Unknown error'));
       isSubmitting = false;
     }
   } catch(e){
@@ -646,26 +816,34 @@ async function submitTest(autoSubmit = false){
 }
 window.submitTest = submitTest;
 
-// ==================== SHOW RESULT ====================
+// ============================================
+// SHOW RESULT
+// ============================================
 function showResult(course, correct, total, percentage, timeSpent){
   const minutes = Math.floor(timeSpent / 60000);
   const seconds = Math.floor((timeSpent % 60000) / 1000);
+  const passed = percentage >= 50;
   qs('resultContent').innerHTML = `
-    <div class="test-result-card">
-      <div class="big-score">${percentage}%</div>
+    <div class="test-result-card" style="${passed ? 'border-color:var(--success)' : 'border-color:var(--danger)'}">
+      <div class="big-score" style="${passed ? 'color:var(--success)' : 'color:var(--danger)'}">${percentage}%</div>
       <div class="label">${correct} / ${total} Correct</div>
       <p style="color:var(--text-secondary);margin-top:8px;">⏱️ ${minutes}m ${seconds}s</p>
+      <p style="color:${passed ? 'var(--success)' : 'var(--danger)'};font-weight:700;margin-top:4px;">
+        ${passed ? '✅ Passed!' : '❌ Failed'}
+      </p>
       <div style="margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
         <button class="btn btn-test" onclick="window.location.href='/submit'" style="border:none;padding:12px 20px;border-radius:14px;font-weight:700;cursor:pointer">View Details</button>
-        <button class="btn btn-soft" onclick="window.location.href='/test'">Try Again</button>
-        <button class="btn btn-soft" onclick="window.location.href='/app'">Dashboard</button>
+        <button class="btn btn-soft" onclick="window.location.href='/test'" style="background:var(--border);color:var(--text);border:none;padding:12px 20px;border-radius:14px;font-weight:700;cursor:pointer">Try Again</button>
+        <button class="btn btn-soft" onclick="window.location.href='/app'" style="background:var(--border);color:var(--text);border:none;padding:12px 20px;border-radius:14px;font-weight:700;cursor:pointer">Dashboard</button>
       </div>
     </div>
   `;
   goToScreen('resultScreen');
 }
 
-// ==================== QUIT TEST ====================
+// ============================================
+// QUIT TEST
+// ============================================
 function quitTest(){
   if(!testSession) return;
   if(confirm('Quit test? Your progress will be lost.')){
@@ -678,7 +856,9 @@ function quitTest(){
 }
 window.quitTest = quitTest;
 
-// ==================== SHUFFLE ====================
+// ============================================
+// SHUFFLE
+// ============================================
 function shuffleArray(arr){
   const s = [...arr];
   for(let i = s.length - 1; i > 0; i--){
@@ -688,12 +868,42 @@ function shuffleArray(arr){
   return s;
 }
 
-// ==================== INIT ====================
-document.addEventListener('DOMContentLoaded', () => {
-  initTheme();
-  loadFaculties();
-  
-  // Check for saved test
+// ============================================
+// TOAST NOTIFICATION
+// ============================================
+function showToast(msg){
+  const t = document.createElement('div');
+  t.style.cssText = 'position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--card);color:var(--text);padding:12px 20px;border-radius:14px;border:1px solid var(--border);z-index:9999;font-size:.85rem;box-shadow:var(--shadow);max-width:90%;text-align:center';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 3000);
+}
+
+// ============================================
+// LOAD NOTIFICATIONS
+// ============================================
+async function loadNotifications(){
+  try {
+    const r = await fetch(API_BASE + '/notifications', {
+      headers: { 'Authorization': 'Bearer ' + TOKEN }
+    });
+    const d = await r.json();
+    const notifications = d.notifications || [];
+    const unread = notifications.filter(n => !n.isRead).length;
+    const badge = qs('notifBadge');
+    if(unread > 0){
+      badge.style.display = 'flex';
+      badge.textContent = unread > 9 ? '9+' : unread;
+    } else {
+      badge.style.display = 'none';
+    }
+  } catch(e){}
+}
+
+// ============================================
+// RESTORE TEST SESSION
+// ============================================
+function restoreTestSession(){
   try {
     const saved = sessionStorage.getItem('activeTest');
     if(saved){
@@ -715,24 +925,47 @@ document.addEventListener('DOMContentLoaded', () => {
         const m = Math.floor(testSession.timeLeft / 60);
         const s = testSession.timeLeft % 60;
         qs('timerDisplay').textContent = `${m}:${s.toString().padStart(2,'0')}`;
+        setText('statQuestions', data.questions.length);
         goToScreen('testScreen');
         renderQuestion();
         startTimer();
         renderGrid();
         startAutoSave();
         showToast('📌 Test restored from saved session');
+        return true;
       }
     }
   } catch(e){}
-});
-
-function showToast(msg){
-  const t = document.createElement('div');
-  t.style.cssText = 'position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--card);color:var(--text);padding:12px 20px;border-radius:14px;border:1px solid var(--border);z-index:9999;font-size:.85rem;box-shadow:var(--shadow);max-width:90%;text-align:center';
-  t.textContent = msg;
-  document.body.appendChild(t);
-  setTimeout(() => t.remove(), 3000);
+  return false;
 }
+
+// ============================================
+// INIT
+// ============================================
+async function init() {
+  showLoading();
+  initTheme();
+  updateNetworkState();
+  
+  // Load user data and faculties in parallel
+  await Promise.all([
+    loadUserStats(),
+    loadFaculties(),
+    loadNotifications()
+  ]);
+  
+  // Check for saved test
+  const restored = restoreTestSession();
+  
+  // If no test restored, show faculty screen
+  if(!restored) {
+    goToScreen('facultyScreen');
+  }
+  
+  hideLoading();
+}
+
+document.addEventListener('DOMContentLoaded', init);
 </script>
 </body>
 </html>
