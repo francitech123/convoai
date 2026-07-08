@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us • OAU Exam CBT Practice</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root{--bg:#06060b;--surface:#0f0f18;--surface2:#161622;--border:#222230;--text:#f1f5f9;--text2:#94a3b8;--accent:#6366f1;--accent2:#8b5cf6;--green:#10b981;--gold:#f59e0b;--gradient:linear-gradient(135deg,#6366f1,#8b5cf6)}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.8;padding-bottom:60px}
+        .container{max-width:900px;margin:0 auto;padding:40px 24px}
+        .back-link{display:inline-flex;align-items:center;gap:6px;color:var(--accent);text-decoration:none;font-weight:600;font-size:.9rem;margin-bottom:30px}
+        .back-link:hover{color:var(--text)}
+        h1{font-size:2.2rem;font-weight:900;margin-bottom:8px;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .subtitle{color:var(--text2);font-size:1rem;margin-bottom:30px}
+        h2{font-size:1.3rem;font-weight:700;margin:30px 0 10px;padding-top:16px;border-top:1px solid var(--border)}
+        h3{font-size:1rem;font-weight:600;margin:20px 0 8px;color:var(--accent)}
+        p{color:var(--text2);margin-bottom:14px;font-size:.9rem}
+        ul,ol{padding-left:20px;margin-bottom:14px}
+        li{color:var(--text2);font-size:.9rem;margin-bottom:6px}
+        li strong{color:var(--text)}
+        
+        .hero-card{background:linear-gradient(135deg,var(--surface),var(--surface2));border:1px solid var(--border);border-radius:16px;padding:30px;margin-bottom:30px}
+        .hero-card h2{font-size:1.4rem;margin-top:0;padding-top:0;border-top:none}
+        .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:20px 0}
+        @media(max-width:600px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+        .stat-item{text-align:center;background:var(--bg);border-radius:12px;padding:20px 12px;border:1px solid var(--border)}
+        .stat-item .num{font-size:1.8rem;font-weight:800;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .stat-item .lbl{font-size:.72rem;color:var(--text2);margin-top:4px}
+        
+        .feature-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:16px 0}
+        @media(max-width:600px){.feature-grid{grid-template-columns:1fr}}
+        .feature-item{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px}
+        .feature-item i{font-size:1.3rem;color:var(--accent);margin-bottom:8px}
+        .feature-item h4{font-size:.9rem;margin-bottom:4px}
+        .feature-item p{font-size:.8rem;margin-bottom:0}
+        
+        .timeline{border-left:2px solid var(--accent);padding-left:20px;margin:20px 0}
+        .timeline-item{position:relative;padding-bottom:20px}
+        .timeline-item::before{content:'';position:absolute;left:-26px;top:5px;width:10px;height:10px;background:var(--accent);border-radius:50%}
+        .timeline-item h4{font-size:.9rem;color:var(--text)}
+        .timeline-item p{font-size:.8rem;margin-bottom:4px}
+        .timeline-date{font-size:.68rem;color:var(--accent);font-weight:600}
+        
+        .team-card{display:flex;align-items:center;gap:16px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:14px}
+        .team-avatar{width:60px;height:60px;border-radius:50%;background:var(--gradient);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.3rem;color:#fff;flex-shrink:0}
+        .team-info h4{font-size:.95rem;margin-bottom:2px}
+        .team-info p{font-size:.78rem;margin-bottom:2px;color:var(--text2)}
+        .team-info .role{color:var(--accent);font-size:.72rem;font-weight:600}
+        
+        .footer-links{display:flex;gap:20px;flex-wrap:wrap;margin-top:40px;padding-top:20px;border-top:1px solid var(--border)}
+        .footer-links a{color:var(--text2);text-decoration:none;font-size:.82rem}.footer-links a:hover{color:var(--accent)}
+        @media(max-width:600px){.container{padding:20px 16px}h1{font-size:1.5rem}}
+    </style>
+</head>
+<body>
+<div class="container">
+    <a href="/app" class="back-link"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+    <h1>About OAU Exam CBT Practice</h1>
+    <p class="subtitle">Nigeria's most comprehensive CBT practice platform for Obafemi Awolowo University students.</p>
+
+    <!-- HERO STATS -->
+    <div class="hero-card">
+        <h2>📊 Platform at a Glance</h2>
+        <div class="stats-grid">
+            <div class="stat-item"><div class="num">72+</div><div class="lbl">Courses Available</div></div>
+            <div class="stat-item"><div class="num">45k+</div><div class="lbl">Question Bank</div></div>
+            <div class="stat-item"><div class="num">14</div><div class="lbl">Faculties Covered</div></div>
+            <div class="stat-item"><div class="num">10k+</div><div class="lbl">Active Students</div></div>
+        </div>
+    </div>
+
+    <!-- OUR STORY -->
+    <h2>📖 Our Story</h2>
+    <p>OAU Exam CBT Practice was born from a simple observation: <strong>OAU students needed a better way to prepare for CBT exams.</strong> As an Electrical/Electronic Engineering student at OAU, the founder, <strong>Francis Oluwanje Bobola (FrancisTech)</strong>, experienced firsthand the challenges of finding quality practice materials for the university's computer-based tests.</p>
+    <p>What started as a personal project in 2025 has grown into a full-featured platform serving <strong>over 10,000 OAU students</strong> across all 14 faculties. The platform now houses <strong>45,000+ questions</strong>, an <strong>AI-powered tutor</strong>, a competitive <strong>leaderboard system</strong>, and a comprehensive <strong>course materials repository</strong>.</p>
+
+    <!-- MISSION -->
+    <h2>🎯 Our Mission</h2>
+    <p>To democratize access to quality exam preparation for every OAU student — regardless of their financial background. We believe that <strong>every student deserves the tools to succeed</strong>, which is why we offer a free trial and keep our paid plans affordable (starting at just ₦2,000 per semester).</p>
+
+    <!-- WHAT WE OFFER -->
+    <h2>🚀 What We Offer</h2>
+    <div class="feature-grid">
+        <div class="feature-item"><i class="fas fa-pen-fancy"></i><h4>Exam Mode</h4><p>Full CBT simulation with countdown timer, random question selection, and instant grading — identical to the real OAU exam experience.</p></div>
+        <div class="feature-item"><i class="fas fa-flask"></i><h4>Test Mode</h4><p>Self-paced practice with helpful hints and detailed explanations for every answer. Learn as you go.</p></div>
+        <div class="feature-item"><i class="fas fa-robot"></i><h4>AI Tutor (New!)</h4><p>Our intelligent AI assistant provides instant explanations, study tips, and answers to your questions 24/7. Powered by advanced language models.</p></div>
+        <div class="feature-item"><i class="fas fa-trophy"></i><h4>Leaderboard</h4><p>Compete with fellow students, track your ranking, and stay motivated with streaks and achievements.</p></div>
+        <div class="feature-item"><i class="fas fa-chart-line"></i><h4>Analytics Dashboard</h4><p>Track your progress with detailed stats — exams taken, average scores, study time, streak history, and performance trends.</p></div>
+        <div class="feature-item"><i class="fas fa-folder-open"></i><h4>Course Materials</h4><p>Access downloadable slides, past questions, textbooks, and video tutorials uploaded by administrators and fellow students.</p></div>
+        <div class="feature-item"><i class="fas fa-credit-card"></i><h4>Flexible Payment Plans</h4><p>Choose from Free Trial, Semester Plan (₦2,000), or Full Session Plan (₦3,500). Secure payment processing with instant access.</p></div>
+        <div class="feature-item"><i class="fas fa-users-cog"></i><h4>Admin & CEO Panel</h4><p>Volunteer administrators help maintain question quality. The CEO panel manages approvals, analytics, and platform governance.</p></div>
+    </div>
+
+    <!-- TECHNOLOGY -->
+    <h2>💻 Technology Stack</h2>
+    <p>The platform is built with modern, scalable technologies:</p>
+    <ul>
+        <li><strong>Frontend:</strong> HTML5, CSS3, Vanilla JavaScript — fast, lightweight, and works on all devices</li>
+        <li><strong>Backend:</strong> Node.js with Express.js — high-performance API server</li>
+        <li><strong>Database:</strong> MongoDB — flexible document database for questions, users, and analytics</li>
+        <li><strong>AI Integration:</strong> Custom AI chat system for instant tutoring and explanations</li>
+        <li><strong>Hosting:</strong> Render (backend) and Vercel (frontend) — reliable, fast, and globally distributed</li>
+        <li><strong>Payment Processing:</strong> Secure payment gateway integration for plan purchases</li>
+    </ul>
+
+    <!-- TIMELINE -->
+    <h2>📅 Platform Evolution</h2>
+    <div class="timeline">
+        <div class="timeline-item"><div class="timeline-date">Early 2025</div><h4>Concept & Development</h4><p>The idea was born. Initial development of the question bank and basic exam simulator.</p></div>
+        <div class="timeline-item"><div class="timeline-date">Mid 2025</div><h4>Beta Launch</h4><p>First version released to a small group of OAU students for testing and feedback.</p></div>
+        <div class="timeline-item"><div class="timeline-date">Late 2025</div><h4>Public Launch</h4><p>Full launch with 100 level courses across 14 faculties. Leaderboard and analytics added.</p></div>
+        <div class="timeline-item"><div class="timeline-date">Early 2026</div><h4>AI Integration</h4><p>AI Tutor launched. Course materials section added. Admin and CEO panels introduced.</p></div>
+        <div class="timeline-item"><div class="timeline-date">Mid 2026</div><h4>Payment System</h4><p>Flexible payment plans introduced. Free trial, semester, and full session options.</p></div>
+        <div class="timeline-item"><div class="timeline-date">Coming Soon</div><h4>200-500 Level Courses</h4><p>Expansion to all levels. Mobile app development underway.</p></div>
+    </div>
+
+    <!-- TEAM -->
+    <h2>👤 Meet the Founder</h2>
+    <div class="team-card">
+        <div class="team-avatar">FB</div>
+        <div class="team-info">
+            <h4>Francis Oluwanje Bobola (FrancisTech)</h4>
+            <p class="role">Founder & Lead Developer</p>
+            <p>Electrical/Electronic Engineering Student • OAU</p>
+            <p style="font-size:.8rem;margin-top:4px">Full-stack developer passionate about using technology to solve educational challenges. Built this platform from scratch to help fellow OAU students excel in their exams.</p>
+        </div>
+    </div>
+
+    <!-- PRICING PHILOSOPHY -->
+    <h2>💰 Our Pricing Philosophy</h2>
+    <p>We believe quality exam preparation should be <strong>accessible to everyone</strong>. Our pricing is designed to cover operational costs (servers, domain, AI services) while keeping it affordable for students:</p>
+    <ul>
+        <li><strong>Free Trial:</strong> Always available so you can test the platform before committing</li>
+        <li><strong>₦2,000/Semester:</strong> Less than the cost of one textbook — for unlimited access to all courses</li>
+        <li><strong>₦3,500/Full Session:</strong> Best value — covers both semesters with extra benefits</li>
+    </ul>
+    <p>We also offer a <strong>referral program</strong> where you can earn rewards by inviting friends to the platform.</p>
+
+    <!-- SECURITY -->
+    <h2>🔒 Security & Privacy</h2>
+    <p>We take your data seriously:</p>
+    <ul>
+        <li>All passwords are <strong>encrypted</strong> using industry-standard hashing</li>
+        <li>Payment information is processed through <strong>secure payment gateways</strong></li>
+        <li>Personal data is <strong>never shared</strong> with third parties</li>
+        <li>Account recovery is protected by <strong>security questions</strong></li>
+        <li>Administrators are <strong>vetted through an application process</strong></li>
+    </ul>
+
+    <!-- CONTACT -->
+    <h2>📬 Get in Touch</h2>
+    <p>Have questions, suggestions, or want to contribute? We'd love to hear from you!</p>
+    <ul>
+        <li><strong>Chat with Us:</strong> Use the Chat feature on the platform for instant communication</li>
+        <li><strong>Apply as Admin:</strong> Visit the Admin Registration page to join our team</li>
+        <li><strong>Submit Materials:</strong> Upload course materials to help other students</li>
+        <li><strong>Developer:</strong> Visit the Developer page for technical information</li>
+    </ul>
+
+    <div class="footer-links">
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="/developer">Developer</a>
+        <a href="/app">Dashboard</a>
+        <a href="/admin-register">Apply as Admin</a>
+    </div>
+</div>
+</body>
+</html>
