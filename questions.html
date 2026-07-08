@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questions • Admin Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:#f1f5f9;color:#0f172a;min-height:100vh}
+        body.authorized{display:block}
+        .app{display:flex;min-height:100vh}
+        .sidebar{width:260px;background:#0f172a;position:fixed;left:0;top:0;bottom:0;overflow-y:auto;z-index:100;transition:transform .3s}
+        .sidebar-header{padding:20px;border-bottom:1px solid #1e293b;display:flex;align-items:center;gap:10px}
+        .sidebar-header i{color:#3b82f6;font-size:1.3rem}.sidebar-header span{font-weight:800;color:#f1f5f9;font-size:1.1rem}
+        .nav-menu{list-style:none;padding:8px}
+        .nav-link{display:flex;align-items:center;gap:10px;padding:10px 14px;color:#94a3b8;text-decoration:none;border-radius:8px;font-weight:500;font-size:.85rem;transition:all .2s;cursor:pointer}
+        .nav-link:hover{background:#1e293b;color:#e2e8f0}.nav-link.active{background:#3b82f6;color:#fff}.nav-link i{width:20px;font-size:.9rem}
+        .nav-divider{height:1px;background:#1e293b;margin:12px 8px}
+        .nav-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#475569;padding:12px 14px 6px}
+        .main-content{flex:1;margin-left:260px;padding:20px 28px}
+        @media(max-width:768px){.sidebar{transform:translateX(-100%);z-index:200}.sidebar.open{transform:translateX(0)}.main-content{margin-left:0;padding:60px 16px 16px 16px}}
+        .mobile-btn{position:fixed;top:12px;left:12px;z-index:160;background:#3b82f6;color:#fff;width:40px;height:40px;border-radius:10px;display:none;align-items:center;justify-content:center;cursor:pointer;border:none;font-size:1.1rem;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+        @media(max-width:768px){.mobile-btn{display:flex}}
+        .sidebar-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:150}.sidebar-overlay.show{display:block}
+        .top-bar{background:#fff;padding:14px 20px;border-radius:14px;margin-bottom:24px;border:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}.top-bar h1{font-size:1.3rem;font-weight:700}
+        .card{background:#fff;border-radius:14px;padding:20px;border:1px solid #e2e8f0;margin-bottom:20px}
+        .card h2{font-size:1rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}.card h2 i{color:#3b82f6}
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}@media(max-width:500px){.form-row{grid-template-columns:1fr}}
+        .form-group{margin-bottom:12px}.form-group label{display:block;margin-bottom:4px;font-weight:600;font-size:.78rem;color:#475569}
+        .form-group input,.form-group select,.form-group textarea{width:100%;padding:10px 12px;border:2px solid #e2e8f0;border-radius:8px;font-size:.85rem;font-family:inherit;background:#f8fafc;transition:all .2s}
+        .form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:#3b82f6;background:#fff}
+        .form-group textarea{resize:vertical;min-height:80px}
+        .btn{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border:none;border-radius:10px;font-weight:600;font-size:.82rem;cursor:pointer;transition:all .2s;text-decoration:none}
+        .btn-primary{background:#3b82f6;color:#fff}.btn-primary:hover{background:#2563eb}
+        .btn-success{background:#10b981;color:#fff}.btn-success:hover{background:#059669}
+        .btn-danger{background:#ef4444;color:#fff;padding:6px 10px;font-size:.7rem}.btn-danger:hover{background:#dc2626}
+        .btn-outline{background:transparent;color:#3b82f6;border:2px solid #3b82f6}.btn-sm{padding:6px 12px;font-size:.72rem}.btn:disabled{opacity:.6;cursor:not-allowed}
+        .alert{padding:12px 16px;border-radius:10px;margin-bottom:16px;display:none;font-size:.82rem}
+        .alert-success{background:#d1fae5;color:#065f46;border:1px solid #a7f3d0}.alert-error{background:#fee2e2;color:#991b1b;border:1px solid #fecaca}.alert.show{display:block}
+        .course-item{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:#f8fafc;border-radius:8px;margin-bottom:4px;gap:8px;flex-wrap:wrap}
+        .badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:.65rem;font-weight:600}.badge-info{background:#dbeafe;color:#1e40af}
+        .loading{text-align:center;padding:30px;color:#94a3b8}.loading i{animation:spin 1s linear infinite}@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+        .empty-state{text-align:center;padding:30px;color:#94a3b8}
+        .bulk-preview{background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:10px;margin-top:8px;font-size:.75rem;max-height:150px;overflow-y:auto;display:none}
+        .bulk-preview.show{display:block}
+        .bulk-preview .ok{color:#065f46}.bulk-preview .err{color:#991b1b}
+    </style>
+</head>
+<body>
+    <button class="mobile-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+    <div class="app">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header"><i class="fas fa-graduation-cap"></i><span>OAU CBT Practice</span></div>
+            <div class="nav-label">Main</div>
+            <ul class="nav-menu">
+                <li><a class="nav-link" href="adminDashboard.html"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                <li><a class="nav-link active" href="questions.html"><i class="fas fa-question-circle"></i> Questions</a></li>
+                <li><a class="nav-link" href="courses.html"><i class="fas fa-book"></i> Courses</a></li>
+                <li><a class="nav-link" href="courseSettings.html"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+            <div class="nav-divider"></div>
+            <div class="nav-label">Users & Analytics</div>
+            <ul class="nav-menu">
+                <li><a class="nav-link" href="AdminPageUsers.html"><i class="fas fa-users"></i> Users</a></li>
+                <li><a class="nav-link" href="analysis.html"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                <li><a class="nav-link" href="AdminNotification.html"><i class="fas fa-bell"></i> Notifications</a></li>
+                <li><a class="nav-link" href="adminChat.html"><i class="fas fa-comments"></i> Chat</a></li>
+            </ul>
+            <div class="nav-divider"></div>
+            <ul class="nav-menu"><li><a class="nav-link" href="allCourseMaterial.html"><i class="fas fa-folder"></i> Materials</a></li></ul>
+            <div class="nav-divider"></div>
+            <ul class="nav-menu"><li><a class="nav-link" href="/app"><i class="fas fa-arrow-left"></i> Back to App</a></li><li><a class="nav-link" onclick="logout()"><i class="fas fa-lock"></i> Lock</a></li></ul>
+        </aside>
+        <main class="main-content">
+            <div class="top-bar"><h1>📝 Question Management</h1></div>
+            <div class="alert alert-success" id="successAlert"></div><div class="alert alert-error" id="errorAlert"></div>
+            
+            <!-- SINGLE QUESTION -->
+            <div class="card">
+                <h2><i class="fas fa-plus-circle"></i> Add Single Question</h2>
+                <div class="form-row"><div class="form-group"><label>Course Code</label><input type="text" id="sCourse" placeholder="e.g., CHM 102"></div><div class="form-group"><label>Mode</label><select id="sMode"><option value="exam">Exam</option><option value="test">Test</option></select></div></div>
+                <div class="form-group"><label>Question Text</label><textarea id="sText" placeholder="Enter the question..."></textarea></div>
+                <div class="form-row"><div class="form-group"><label>Option A</label><input type="text" id="sOptA"></div><div class="form-group"><label>Option B</label><input type="text" id="sOptB"></div></div>
+                <div class="form-row"><div class="form-group"><label>Option C</label><input type="text" id="sOptC"></div><div class="form-group"><label>Option D</label><input type="text" id="sOptD"></div></div>
+                <div class="form-row"><div class="form-group"><label>Correct Answer</label><select id="sCorrect"><option value="0">A</option><option value="1">B</option><option value="2">C</option><option value="3">D</option></select></div><div class="form-group"><label>Hint (for test mode)</label><input type="text" id="sHint" placeholder="Optional hint"></div></div>
+                <div class="form-group"><label>Explanation</label><input type="text" id="sExplanation" placeholder="Why is this correct?"></div>
+                <button class="btn btn-primary" id="btnSingle" onclick="addQuestion()"><i class="fas fa-save"></i> Add Question</button>
+            </div>
+            
+            <!-- BULK ADD -->
+            <div class="card">
+                <h2><i class="fas fa-layer-group"></i> Bulk Add (JSON)</h2>
+                <p style="color:#64748b;font-size:.78rem;margin-bottom:10px">
+                    Paste JSON array. Each object must have: <b>courseCode</b>, <b>mode</b> ("exam"/"test"), <b>text</b>, <b>options</b> [4 items], <b>correctOption</b> (0-3), <b>hint</b>, <b>explanation</b>
+                </p>
+                <div class="form-group"><textarea id="bulkJson" rows="8" placeholder='[{"courseCode":"CHM 102","mode":"exam","text":"What is...?","options":["A","B","C","D"],"correctOption":0,"hint":"Think...","explanation":"Because..."}]'></textarea></div>
+                <div style="display:flex;gap:8px;margin-bottom:8px">
+                    <button class="btn btn-outline btn-sm" onclick="validateBulkJson()"><i class="fas fa-check-circle"></i> Validate JSON</button>
+                    <button class="btn btn-outline btn-sm" onclick="countQuestions()"><i class="fas fa-calculator"></i> Count Questions</button>
+                </div>
+                <div class="bulk-preview" id="bulkPreview"></div>
+                <button class="btn btn-success" id="btnBulk" onclick="bulkAdd()"><i class="fas fa-upload"></i> Bulk Add Questions</button>
+                <p style="color:#64748b;font-size:.7rem;margin-top:8px" id="bulkStatus"></p>
+            </div>
+            
+            <!-- VIEW & DELETE -->
+            <div class="card">
+                <h2><i class="fas fa-search"></i> View & Delete</h2>
+                <div class="form-row"><div class="form-group"><label>Course Code</label><input type="text" id="vCourse" placeholder="CHM 102"></div><div class="form-group"><label>Mode</label><select id="vMode"><option value="exam">Exam</option><option value="test">Test</option></select></div></div>
+                <button class="btn btn-outline" id="btnView" onclick="viewQuestions()"><i class="fas fa-search"></i> View</button>
+                <div id="qList" style="margin-top:12px"><div class="empty-state">Click View to load questions</div></div>
+            </div>
+        </main>
+    </div>
+    <script>
+        const API = 'https://oau-exam-api.onrender.com/api';
+        const ADMIN_TOKEN = localStorage.getItem('admin_token') || sessionStorage.getItem('admin_token');
+        const ADMIN_EMAIL = localStorage.getItem('admin_email') || sessionStorage.getItem('admin_email');
+        if (!ADMIN_TOKEN && !ADMIN_EMAIL) { window.location.href = 'admin-login.html'; }
+        else { document.body.classList.add('authorized'); }
+        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sidebarOverlay').classList.toggle('show'); }
+        function closeSidebar() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').classList.remove('show'); }
+        function logout() { localStorage.clear(); sessionStorage.clear(); window.location.href = 'admin-login.html'; }
+        
+        async function apiCall(url, options = {}) {
+            try {
+                const headers = { 'Content-Type': 'application/json', 'x-admin-token': ADMIN_TOKEN, 'x-admin-email': ADMIN_EMAIL, ...options.headers };
+                const userToken = localStorage.getItem('oau_token');
+                if (userToken) headers['Authorization'] = 'Bearer ' + userToken;
+                const r = await fetch(url, { ...options, headers });
+                const d = await r.json(); 
+                if (!r.ok) throw new Error(d.error || 'Request failed (Status: ' + r.status + ')'); 
+                return d;
+            } catch(e) { console.error('API:', e.message); throw e; }
+        }
+        
+        function show(msg, type) { 
+            const el = document.getElementById(type + 'Alert'); 
+            el.textContent = (type==='success'?'✅ ':'❌ ') + msg; 
+            el.classList.add('show'); 
+            setTimeout(() => el.classList.remove('show'), 5000); 
+        }
+        
+        function setLoading(btn, loading) { 
+            if (loading) { btn.disabled = true; btn.dataset.original = btn.innerHTML; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ' + btn.textContent.trim(); } 
+            else { btn.disabled = false; if (btn.dataset.original) btn.innerHTML = btn.dataset.original; } 
+        }
+
+        // ==================== SINGLE QUESTION ADD ====================
+        window.addQuestion = async function() {
+            const code = document.getElementById('sCourse').value.trim();
+            const mode = document.getElementById('sMode').value;
+            const text = document.getElementById('sText').value.trim();
+            const optA = document.getElementById('sOptA').value.trim();
+            const optB = document.getElementById('sOptB').value.trim();
+            const optC = document.getElementById('sOptC').value.trim();
+            const optD = document.getElementById('sOptD').value.trim();
+            
+            if (!code || !text || !optA || !optB || !optC || !optD) { 
+                show('Fill all fields: course code, question text, and all 4 options', 'error'); 
+                return; 
+            }
+            
+            const btn = document.getElementById('btnSingle'); setLoading(btn, true);
+            try {
+                const r = await apiCall(API + '/admin/questions/' + mode, { 
+                    method: 'POST', 
+                    body: JSON.stringify({ 
+                        courseCode: code, 
+                        text: text, 
+                        options: [optA, optB, optC, optD],  // FIXED: sending actual values
+                        correctOption: parseInt(document.getElementById('sCorrect').value), 
+                        hint: document.getElementById('sHint').value.trim(), 
+                        explanation: document.getElementById('sExplanation').value.trim() 
+                    }) 
+                });
+                show(r.warning || '✅ Question added successfully!', 'success');
+                ['sText','sOptA','sOptB','sOptC','sOptD','sExplanation','sHint'].forEach(id => document.getElementById(id).value = '');
+            } catch(e) { show(e.message, 'error'); }
+            setLoading(btn, false);
+        };
+
+        // ==================== VALIDATE BULK JSON ====================
+        window.validateBulkJson = function() {
+            const raw = document.getElementById('bulkJson').value.trim();
+            if (!raw) { show('Paste JSON first', 'error'); return; }
+            const preview = document.getElementById('bulkPreview');
+            try {
+                const q = JSON.parse(raw);
+                if (!Array.isArray(q)) { preview.innerHTML = '<span class="err">❌ Must be a JSON array</span>'; preview.classList.add('show'); return; }
+                let html = `<div class="ok">✅ Valid JSON array with ${q.length} question(s)</div>`;
+                q.forEach((item, i) => {
+                    const errors = [];
+                    if (!item.courseCode) errors.push('Missing courseCode');
+                    if (!item.mode) errors.push('Missing mode');
+                    if (!item.text) errors.push('Missing text');
+                    if (!Array.isArray(item.options) || item.options.length !== 4) errors.push('Options must be array of 4');
+                    if (item.correctOption === undefined || item.correctOption < 0 || item.correctOption > 3) errors.push('correctOption must be 0-3');
+                    if (errors.length > 0) {
+                        html += `<div class="err">❌ Q${i+1}: ${errors.join(', ')}</div>`;
+                    } else {
+                        html += `<div class="ok">✅ Q${i+1}: ${item.text?.substring(0,50)}... (${item.courseCode})</div>`;
+                    }
+                });
+                preview.innerHTML = html;
+                preview.classList.add('show');
+            } catch(e) {
+                preview.innerHTML = '<span class="err">❌ Invalid JSON: ' + e.message + '</span>';
+                preview.classList.add('show');
+            }
+        };
+
+        window.countQuestions = function() {
+            const raw = document.getElementById('bulkJson').value.trim();
+            if (!raw) { show('Paste JSON first', 'error'); return; }
+            try {
+                const q = JSON.parse(raw);
+                if (!Array.isArray(q)) { show('Must be an array', 'error'); return; }
+                // Count by course and mode
+                const counts = {};
+                q.forEach(item => {
+                    const key = (item.courseCode || 'UNKNOWN') + ' (' + (item.mode || '?') + ')';
+                    counts[key] = (counts[key] || 0) + 1;
+                });
+                let msg = '📊 ' + q.length + ' total questions:\n';
+                Object.entries(counts).forEach(([k, v]) => { msg += '  • ' + k + ': ' + v + '\n'; });
+                alert(msg);
+            } catch(e) { show('Invalid JSON: ' + e.message, 'error'); }
+        };
+
+        // ==================== BULK ADD ====================
+        window.bulkAdd = async function() {
+            const raw = document.getElementById('bulkJson').value.trim();
+            if (!raw) { show('Paste JSON first', 'error'); return; }
+            
+            let questions;
+            try {
+                questions = JSON.parse(raw);
+                if (!Array.isArray(questions)) { show('Must be a JSON array', 'error'); return; }
+                if (questions.length === 0) { show('Array is empty', 'error'); return; }
+            } catch(e) { show('Invalid JSON: ' + e.message, 'error'); return; }
+            
+            if (!confirm(`Add ${questions.length} question(s)? Make sure the course exists first.`)) return;
+            
+            const btn = document.getElementById('btnBulk'); 
+            const status = document.getElementById('bulkStatus');
+            setLoading(btn, true);
+            status.textContent = '⏳ Adding questions...';
+            
+            try {
+                const d = await apiCall(API + '/admin/questions/bulk', { 
+                    method: 'POST', 
+                    body: JSON.stringify({ questions: questions }) 
+                });
+                
+                if (d.added > 0) {
+                    show(`✅ ${d.added} question(s) added successfully! ${d.failed > 0 ? '(' + d.failed + ' failed)' : ''}`, 'success');
+                    document.getElementById('bulkJson').value = '';
+                    document.getElementById('bulkPreview').classList.remove('show');
+                    status.textContent = '';
+                    
+                    // Show errors if any
+                    if (d.errors && d.errors.length > 0) {
+                        console.log('Bulk add errors:', d.errors);
+                    }
+                } else {
+                    show(`❌ Failed to add questions. Make sure the course exists first. (${d.failed} failed)`, 'error');
+                    status.textContent = '⚠️ Make sure the course code exists in the database. Add the course first via the Courses tab.';
+                }
+            } catch(e) { 
+                show('Error: ' + e.message, 'error'); 
+                status.textContent = '❌ Error occurred. Check console for details.';
+            }
+            setLoading(btn, false);
+        };
+
+        // ==================== VIEW QUESTIONS ====================
+        window.viewQuestions = async function() {
+            const code = document.getElementById('vCourse').value.trim();
+            const mode = document.getElementById('vMode').value;
+            if (!code) { show('Enter course code', 'error'); return; }
+            
+            const list = document.getElementById('qList'); 
+            list.innerHTML = '<div class="loading"><i class="fas fa-spinner"></i> Loading...</div>';
+            
+            try {
+                const encodedCode = encodeURIComponent(code);
+                const d = await apiCall(API + '/admin/questions/' + encodedCode + '/' + mode);
+                if (!d.questions?.length) { 
+                    list.innerHTML = `<div class="empty-state">No ${mode} questions found for ${code}.<br><small>Add questions via the form above or use Bulk Add.</small></div>`; 
+                    return; 
+                }
+                list.innerHTML = `<p style="color:#64748b;font-size:.8rem;margin-bottom:8px">📊 Found ${d.questions.length} question(s)</p>` +
+                d.questions.map((q,i) => `<div class="course-item"><div style="flex:1"><strong>Q${i+1}:</strong> ${q.text?.substring(0,100)}...<div style="font-size:.7rem;color:#64748b">Answer: ${String.fromCharCode(65+(q.correctOption||0))} | <span class="badge badge-info">${q.mode}</span> | ID: ${q._id?.substring(0,8)}...</div></div><button class="btn btn-danger" onclick="deleteQ('${q._id}')"><i class="fas fa-trash"></i></button></div>`).join('');
+            } catch(e) { list.innerHTML = '<div class="empty-state">Error loading: ' + e.message + '</div>'; }
+        };
+
+        window.deleteQ = async function(id) { 
+            if (!confirm('Delete this question permanently?')) return; 
+            try { await apiCall(API + '/admin/questions/' + id, { method: 'DELETE' }); show('Deleted', 'success'); viewQuestions(); } catch(e) { show(e.message, 'error'); } 
+        };
+    </script>
+</body>
+</html>

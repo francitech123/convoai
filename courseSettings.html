@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Settings • Admin Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:#f1f5f9;color:#0f172a;min-height:100vh}
+        .app{display:flex;min-height:100vh}
+        .sidebar{width:260px;background:#0f172a;position:fixed;left:0;top:0;bottom:0;overflow-y:auto;z-index:100;transition:transform .3s}
+        .sidebar-header{padding:20px;border-bottom:1px solid #1e293b;display:flex;align-items:center;gap:10px}
+        .sidebar-header i{color:#3b82f6;font-size:1.3rem}.sidebar-header span{font-weight:800;color:#f1f5f9;font-size:1.1rem}
+        .nav-menu{list-style:none;padding:8px}
+        .nav-link{display:flex;align-items:center;gap:10px;padding:10px 14px;color:#94a3b8;text-decoration:none;border-radius:8px;font-weight:500;font-size:.85rem;transition:all .2s;cursor:pointer}
+        .nav-link:hover{background:#1e293b;color:#e2e8f0}.nav-link.active{background:#3b82f6;color:#fff}.nav-link i{width:20px;font-size:.9rem}
+        .nav-divider{height:1px;background:#1e293b;margin:12px 8px}.nav-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#475569;padding:12px 14px 6px}
+        .main-content{flex:1;margin-left:260px;padding:20px 28px}
+        @media(max-width:768px){.sidebar{transform:translateX(-100%);z-index:200}.sidebar.open{transform:translateX(0)}.main-content{margin-left:0;padding:60px 16px 16px 16px}}
+        .mobile-btn{position:fixed;top:12px;left:12px;z-index:160;background:#3b82f6;color:#fff;width:40px;height:40px;border-radius:10px;display:none;align-items:center;justify-content:center;cursor:pointer;border:none;font-size:1.1rem;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+        @media(max-width:768px){.mobile-btn{display:flex}}
+        .sidebar-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:150}.sidebar-overlay.show{display:block}
+        .top-bar{background:#fff;padding:14px 20px;border-radius:14px;margin-bottom:24px;border:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}.top-bar h1{font-size:1.3rem;font-weight:700}
+        .card{background:#fff;border-radius:14px;padding:20px;border:1px solid #e2e8f0;margin-bottom:20px}
+        .card h2{font-size:1rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}.card h2 i{color:#3b82f6}
+        .card h3{font-size:.9rem;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+        .form-group{margin-bottom:12px}.form-group label{display:block;margin-bottom:4px;font-weight:600;font-size:.78rem;color:#475569}
+        .form-group input,.form-group select,.form-group textarea{width:100%;padding:10px 12px;border:2px solid #e2e8f0;border-radius:8px;font-size:.85rem;font-family:inherit;background:#f8fafc;transition:all .2s}
+        .form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:#3b82f6;background:#fff}
+        .form-group textarea{resize:vertical;min-height:80px;font-family:monospace}
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}@media(max-width:500px){.form-row{grid-template-columns:1fr}}
+        .btn{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border:none;border-radius:10px;font-weight:600;font-size:.82rem;cursor:pointer;transition:all .2s;text-decoration:none}
+        .btn-primary{background:#3b82f6;color:#fff}.btn-primary:hover{background:#2563eb}
+        .btn-success{background:#10b981;color:#fff}.btn-success:hover{background:#059669}
+        .btn-danger{background:#ef4444;color:#fff}.btn-danger:hover{background:#dc2626}
+        .btn-warning{background:#f59e0b;color:#000}.btn-warning:hover{background:#d97706}
+        .btn-outline{background:transparent;color:#3b82f6;border:2px solid #3b82f6}.btn-outline:hover{background:#eff6ff}
+        .btn:disabled{opacity:.6;cursor:not-allowed}.btn-sm{padding:6px 12px;font-size:.72rem}.btn-xs{padding:4px 8px;font-size:.65rem}
+        .alert{padding:12px 16px;border-radius:10px;margin-bottom:16px;display:none;font-size:.82rem}
+        .alert-success{background:#d1fae5;color:#065f46;border:1px solid #a7f3d0}.alert-error{background:#fee2e2;color:#991b1b;border:1px solid #fecaca}.alert.show{display:block}
+        .settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:600px){.settings-grid{grid-template-columns:1fr}}
+        .settings-box{background:#f8fafc;border:2px solid #e2e8f0;border-radius:12px;padding:16px}.settings-box h4{font-size:.85rem;margin-bottom:10px}
+        .progress-bar{width:100%;height:6px;background:#e2e8f0;border-radius:3px;overflow:hidden;margin-top:4px}.progress-fill{height:100%;border-radius:3px;transition:width .3s}.progress-fill.success{background:#10b981}.progress-fill.warning{background:#f59e0b}.progress-fill.danger{background:#ef4444}
+        .badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:.65rem;font-weight:600}.badge-success{background:#d1fae5;color:#065f46}.badge-warning{background:#fef3c7;color:#92400e}
+        .loading{text-align:center;padding:30px;color:#94a3b8}.loading i{animation:spin 1s linear infinite}@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+        .faculty-tags{display:flex;flex-wrap:wrap;gap:6px;max-height:150px;overflow-y:auto;padding:4px 0}
+        .faculty-tag{padding:6px 14px;background:#f8fafc;border:2px solid #e2e8f0;border-radius:20px;cursor:pointer;font-size:.75rem;color:#475569;transition:all .15s;user-select:none;font-weight:500}
+        .faculty-tag:hover{border-color:#3b82f6;color:#1e293b}.faculty-tag.selected{background:#eff6ff;border-color:#3b82f6;color:#2563eb;font-weight:600}.faculty-tag.selected::after{content:' ✓'}
+        .detail-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}@media(max-width:768px){.detail-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:400px){.detail-grid{grid-template-columns:1fr}}
+        .detail-item{background:#f8fafc;padding:10px;border-radius:8px}.detail-item .label{font-size:.65rem;color:#64748b;text-transform:uppercase;margin-bottom:3px}.detail-item .value{font-weight:600;font-size:.85rem;color:#0f172a}
+        .back-link{display:inline-flex;align-items:center;gap:6px;color:#3b82f6;cursor:pointer;font-weight:600;font-size:.85rem;margin-bottom:16px;background:none;border:none}.back-link:hover{text-decoration:underline}
+        .search-box{position:relative;margin-bottom:12px}.search-box input{width:100%;padding:12px 14px 12px 40px;border:2px solid #e2e8f0;border-radius:10px;font-size:.88rem;background:#f8fafc}.search-box input:focus{outline:none;border-color:#3b82f6;background:#fff}.search-box i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#94a3b8;font-size:.9rem}
+        .search-results{max-height:250px;overflow-y:auto;background:#fff;border:1px solid #e2e8f0;border-radius:10px;margin-top:4px;display:none;box-shadow:0 4px 12px rgba(0,0,0,.08)}.search-results.show{display:block}
+        .search-result-item{padding:12px 16px;cursor:pointer;font-size:.84rem;border-bottom:1px solid #f1f5f9;transition:all .15s}.search-result-item:hover{background:#eff6ff}.search-result-item strong{color:#1e293b}.search-result-item .muted{color:#94a3b8;font-size:.72rem;margin-left:6px}
+        .theme-preview-large{border-radius:14px;padding:30px 20px;text-align:center;width:100%;transition:all .3s;margin-top:8px}.theme-preview-large i{font-size:2rem;margin-bottom:8px;display:block}.theme-preview-large .code{font-weight:700;font-size:1.1rem}.theme-preview-large .name{font-size:.75rem;opacity:.85}
+        .empty-state{text-align:center;padding:40px;color:#94a3b8}.empty-state i{font-size:2.5rem;margin-bottom:12px;display:block;opacity:.5}
+        .bulk-preview{background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:10px;margin-bottom:8px;font-size:.75rem;max-height:120px;overflow-y:auto;display:none}.bulk-preview.show{display:block}.bulk-preview .ok{color:#065f46}.bulk-preview .err{color:#991b1b}
+    </style>
+</head>
+<body>
+    <button class="mobile-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+    <div class="app">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header"><i class="fas fa-graduation-cap"></i><span>OAU CBT Practice</span></div>
+            <div class="nav-label">Main</div>
+            <ul class="nav-menu">
+                <li><a class="nav-link" href="adminDashboard.html"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                <li><a class="nav-link" href="questions.html"><i class="fas fa-question-circle"></i> Questions</a></li>
+                <li><a class="nav-link" href="courses.html"><i class="fas fa-book"></i> Courses</a></li>
+                <li><a class="nav-link active" href="courseSettings.html"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+            <div class="nav-divider"></div>
+            <div class="nav-label">Users & Analytics</div>
+            <ul class="nav-menu">
+                <li><a class="nav-link" href="AdminPageUsers.html"><i class="fas fa-users"></i> Users</a></li>
+                <li><a class="nav-link" href="analysis.html"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                <li><a class="nav-link" href="AdminNotification.html"><i class="fas fa-bell"></i> Notifications</a></li>
+                <li><a class="nav-link" href="adminChat.html"><i class="fas fa-comments"></i> Chat</a></li>
+            </ul>
+            <div class="nav-divider"></div>
+            <ul class="nav-menu"><li><a class="nav-link" href="allCourseMaterial.html"><i class="fas fa-folder"></i> Materials</a></li></ul>
+            <div class="nav-divider"></div>
+            <ul class="nav-menu"><li><a class="nav-link" href="/app"><i class="fas fa-arrow-left"></i> Back to App</a></li><li><a class="nav-link" onclick="logout()"><i class="fas fa-lock"></i> Lock</a></li></ul>
+        </aside>
+        <main class="main-content">
+            <div class="top-bar"><h1>⚙️ Course Settings — Edit Everything</h1></div>
+            <div class="alert alert-success" id="successAlert">✅ Ready</div>
+            <div class="alert alert-error" id="errorAlert"></div>
+
+            <!-- SELECT COURSE -->
+            <div class="card" id="selectCard">
+                <h2><i class="fas fa-search"></i> Select Course to Edit</h2>
+                <p style="color:#64748b;font-size:.8rem;margin-bottom:12px">Search by code or name, then click to edit ALL settings for that course.</p>
+                <div class="search-box"><i class="fas fa-search"></i><input type="text" id="courseSearch" placeholder="Search CHM 101, MTH 101..." oninput="searchCourses()"></div>
+                <div class="search-results" id="searchResults"></div>
+                <div class="form-group" style="margin-top:14px"><label>Or Pick from Dropdown</label><select id="settingsCourse" onchange="onDropdownSelect()"><option value="">— Choose a course —</option></select></div>
+            </div>
+
+            <!-- SETTINGS EDITOR -->
+            <div id="courseSettingsPage" style="display:none">
+                <button class="back-link" onclick="goBackToSelect()"><i class="fas fa-arrow-left"></i> Back to Course Selection</button>
+                
+                <!-- COURSE INFO -->
+                <div class="card">
+                    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+                        <h2 id="settingsCourseTitle">⚙️ Course Settings</h2>
+                        <div style="display:flex;gap:6px">
+                            <button class="btn btn-outline btn-sm" onclick="viewCourseStats()"><i class="fas fa-chart-bar"></i> Stats</button>
+                            <button class="btn btn-danger btn-sm" onclick="resetCourseSettings()"><i class="fas fa-undo"></i> Reset</button>
+                        </div>
+                    </div>
+                    <div class="detail-grid" id="courseInfo"></div>
+                </div>
+
+                <!-- BASIC INFO -->
+                <div class="card">
+                    <h3><i class="fas fa-info-circle"></i> Basic Information</h3>
+                    <div class="form-row">
+                        <div class="form-group"><label>Course Code</label><input type="text" id="setCode" oninput="updateSettingsPreview()"></div>
+                        <div class="form-group"><label>Course Name</label><input type="text" id="setName" oninput="updateSettingsPreview()"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><label>Semester</label><select id="setSemester"><option value="first">First Semester</option><option value="second">Second Semester</option></select></div>
+                        <div class="form-group"><label>Level</label><select id="setLevel"><option value="100">100</option><option value="200">200</option><option value="300">300</option><option value="400">400</option><option value="500">500</option><option value="600">600</option></select></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><label>Mode</label><select id="setMode"><option value="both">Both (Test & Exam)</option><option value="exam">Exam Only</option><option value="test">Test Only</option></select></div>
+                        <div class="form-group"><label>Active Status</label><select id="setActive"><option value="true">✅ Active</option><option value="false">❌ Inactive</option></select></div>
+                    </div>
+                </div>
+
+                <!-- TEST & EXAM SETTINGS -->
+                <div class="card">
+                    <h3><i class="fas fa-sliders-h"></i> Test & Exam Configuration</h3>
+                    <div class="settings-grid">
+                        <div class="settings-box" style="border-color:#c4b5fd">
+                            <h4 style="color:#5b21b6"><i class="fas fa-flask"></i> Test Mode</h4>
+                            <div class="form-group"><label>Number of Questions</label><input type="number" id="setTestQ" min="1" max="100"></div>
+                            <div class="form-group"><label>Timer (minutes)</label><input type="number" id="setTestTime" min="1" max="180"></div>
+                            <div id="testProgress"></div>
+                        </div>
+                        <div class="settings-box" style="border-color:#93c5fd">
+                            <h4 style="color:#1e40af"><i class="fas fa-file-alt"></i> Exam Mode</h4>
+                            <div class="form-group"><label>Number of Questions</label><input type="number" id="setExamQ" min="1" max="150"></div>
+                            <div class="form-group"><label>Timer (minutes)</label><input type="number" id="setExamTime" min="1" max="300"></div>
+                            <div id="examProgress"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- THEME EDITOR -->
+                <div class="card">
+                    <h3><i class="fas fa-palette"></i> Card Theme & Appearance</h3>
+                    <p style="color:#64748b;font-size:.75rem;margin-bottom:12px">This controls how the course card looks on exam/test pages.</p>
+                    <div class="form-row">
+                        <div class="form-group"><label>Gradient Start</label><input type="color" id="setGradientStart" oninput="updateSettingsPreview()" style="height:40px"></div>
+                        <div class="form-group"><label>Gradient End</label><input type="color" id="setGradientEnd" oninput="updateSettingsPreview()" style="height:40px"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Icon</label>
+                            <select id="setIcon" onchange="updateSettingsPreview()">
+                                <option value="fa-file-alt">📄 Document</option><option value="fa-flask">🧪 Flask</option><option value="fa-calculator">🔢 Calculator</option>
+                                <option value="fa-atom">⚛️ Atom</option><option value="fa-dna">🧬 DNA</option><option value="fa-book-open">📖 Book</option>
+                                <option value="fa-brain">🧠 Brain</option><option value="fa-heart-pulse">💓 Heart</option>
+                                <option value="fa-stethoscope">🩺 Medical</option><option value="fa-tooth">🦷 Tooth</option>
+                                <option value="fa-gavel">🔨 Gavel</option><option value="fa-scale-balanced">⚖️ Scale</option>
+                                <option value="fa-building">🏢 Building</option><option value="fa-briefcase">💼 Business</option>
+                                <option value="fa-chart-line">📈 Chart</option><option value="fa-users">👥 People</option>
+                                <option value="fa-laptop-code">💻 Computing</option><option value="fa-capsules">💊 Pharmacy</option>
+                                <option value="fa-language">🗣️ Language</option><option value="fa-seedling">🌱 Agriculture</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label>Text Color</label><select id="setTextColor" onchange="updateSettingsPreview()"><option value="#ffffff">White</option><option value="#000000">Black</option></select></div>
+                    </div>
+                    <div style="text-align:center;margin-top:8px">
+                        <p style="font-size:.7rem;color:#64748b;margin-bottom:6px">📱 Live Preview</p>
+                        <div id="themeSettingsPreview" class="theme-preview-large" style="background:linear-gradient(135deg,#1e3a8a,#3b82f6);color:#fff">
+                            <i class="fas fa-file-alt"></i><span class="code">CHM 101</span><span class="name">Course Name</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FACULTIES -->
+                <div class="card">
+                    <h3><i class="fas fa-building"></i> Faculties</h3>
+                    <p style="color:#64748b;font-size:.75rem;margin-bottom:8px">Click to select multiple faculties that offer this course.</p>
+                    <div class="faculty-tags" id="settingsFacultyTags"></div>
+                </div>
+
+                <!-- BULK ADD QUESTIONS -->
+                <div class="card" style="border:2px solid #86efac">
+                    <h3><i class="fas fa-code"></i> Add Questions to This Course (JSON)</h3>
+                    <p style="color:#64748b;font-size:.75rem;margin-bottom:10px">Paste JSON array to add questions directly to <strong id="bulkCourseName">this course</strong>.</p>
+                    <div class="form-group"><textarea id="settingsBulkJson" rows="5" placeholder='[{"mode":"exam","text":"What is...?","options":["A","B","C","D"],"correctOption":0,"hint":"Think...","explanation":"Because..."}]'></textarea></div>
+                    <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap">
+                        <button class="btn btn-outline btn-xs" onclick="validateSettingsBulk()"><i class="fas fa-check-circle"></i> Validate</button>
+                        <button class="btn btn-outline btn-xs" onclick="countSettingsQuestions()"><i class="fas fa-calculator"></i> Count</button>
+                    </div>
+                    <div class="bulk-preview" id="settingsBulkPreview"></div>
+                    <button class="btn btn-success btn-sm" id="btnBulkAddSettings" onclick="bulkAddToCourse()"><i class="fas fa-upload"></i> Add Questions to This Course</button>
+                    <p style="font-size:.7rem;color:#64748b;margin-top:6px" id="bulkAddStatus"></p>
+                </div>
+
+                <!-- SAVE BUTTON -->
+                <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
+                    <button class="btn btn-success" id="btnSaveAll" onclick="saveAllSettings()" style="flex:1;min-width:200px"><i class="fas fa-save"></i> Save ALL Settings</button>
+                </div>
+
+                <!-- STATS -->
+                <div id="courseStatsDisplay"></div>
+            </div>
+
+            <!-- BULK TIMER -->
+            <div class="card">
+                <h2><i class="fas fa-bolt"></i> Bulk Timer Update (All Courses)</h2>
+                <div class="form-row">
+                    <div class="form-group"><label>Mode</label><select id="bulkMode"><option value="test">Test</option><option value="exam">Exam</option></select></div>
+                    <div class="form-group"><label>Time (minutes)</label><input type="number" id="bulkTime" value="30" min="1" max="300"></div>
+                </div>
+                <div class="form-group"><label>Number of Questions</label><input type="number" id="bulkQCount" value="40" min="1" max="150"></div>
+                <button class="btn btn-primary" id="btnBulk" onclick="applyBulkTimer()"><i class="fas fa-bolt"></i> Apply to ALL Courses</button>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const API = 'https://oau-exam-api.onrender.com/api';
+        const ADMIN_TOKEN = localStorage.getItem('admin_token') || sessionStorage.getItem('admin_token');
+        const ADMIN_EMAIL = localStorage.getItem('admin_email') || sessionStorage.getItem('admin_email');
+        const ALL_FACULTIES = ['Agriculture','Arts','Law','Science','Social Sciences','Education','Pharmacy','Technology','Administration','Environmental Design and Management','Basic Medical Sciences','Clinical Sciences','Dentistry','Computing','General Studies'];
+        let currentCourseCode = '', settingsFaculties = [], allCoursesData = [];
+
+        if (!ADMIN_TOKEN && !ADMIN_EMAIL) { window.location.href = 'admin-login.html'; }
+        else { document.body.classList.add('authorized'); loadAllCourses(); }
+
+        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sidebarOverlay').classList.toggle('show'); }
+        function closeSidebar() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').classList.remove('show'); }
+        function logout() { localStorage.clear(); sessionStorage.clear(); window.location.href = 'admin-login.html'; }
+        function show(msg, type) { const el = document.getElementById(type + 'Alert'); el.textContent = (type==='success'?'✅ ':'❌ ') + msg; el.classList.add('show'); setTimeout(() => el.classList.remove('show'), 5000); }
+        function setLoading(btn, loading) { if (loading) { btn.disabled = true; btn.dataset.original = btn.innerHTML; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; } else { btn.disabled = false; if (btn.dataset.original) btn.innerHTML = btn.dataset.original; } }
+
+        async function apiCall(url, options = {}) {
+            try { const headers = { 'Content-Type': 'application/json', 'x-admin-token': ADMIN_TOKEN, 'x-admin-email': ADMIN_EMAIL, ...options.headers }; const userToken = localStorage.getItem('oau_token'); if (userToken) headers['Authorization'] = 'Bearer ' + userToken; const r = await fetch(url, { ...options, headers }); const d = await r.json(); if (!r.ok) throw new Error(d.error || 'Request failed'); return d; } catch(e) { console.error('API:', e.message); throw e; }
+        }
+
+        async function loadAllCourses() { try { const d = await apiCall(API + '/admin/courses'); allCoursesData = d.courses || []; document.getElementById('settingsCourse').innerHTML = '<option value="">— Choose —</option>' + allCoursesData.map(c => `<option value="${c.code}">${c.code} - ${c.name}</option>`).join(''); } catch(e) {} }
+
+        window.searchCourses = function() { const q = document.getElementById('courseSearch').value.toLowerCase().trim(); const r = document.getElementById('searchResults'); if (!q) { r.classList.remove('show'); return; } const f = allCoursesData.filter(c => c.code.toLowerCase().includes(q) || c.name.toLowerCase().includes(q)).slice(0, 15); r.innerHTML = f.length ? f.map(c => `<div class="search-result-item" onclick="selectSearchCourse('${c.code}')"><strong>${c.code}</strong><span class="muted">${c.name}</span></div>`).join('') : '<div style="padding:12px;color:#94a3b8;text-align:center">No results</div>'; r.classList.add('show'); };
+        window.selectSearchCourse = function(code) { document.getElementById('courseSearch').value=''; document.getElementById('searchResults').classList.remove('show'); document.getElementById('settingsCourse').value=code; loadCourseSettings(); };
+        window.onDropdownSelect = function() { const code = document.getElementById('settingsCourse').value; if (code) loadCourseSettings(); };
+
+        function renderSettingsFaculties() { document.getElementById('settingsFacultyTags').innerHTML = ALL_FACULTIES.map(f => `<span class="faculty-tag ${settingsFaculties.includes(f)?'selected':''}" onclick="toggleSettingsFaculty('${f}')">${f}</span>`).join(''); }
+        window.toggleSettingsFaculty = function(f) { const i = settingsFaculties.indexOf(f); if (i>-1) settingsFaculties.splice(i,1); else settingsFaculties.push(f); document.querySelectorAll('#settingsFacultyTags .faculty-tag').forEach(t => { if (t.textContent.replace(' ✓','')===f) t.classList.toggle('selected', i===-1); }); };
+        function updateSettingsPreview() { const p = document.getElementById('themeSettingsPreview'); p.style.background = `linear-gradient(135deg, ${document.getElementById('setGradientStart').value}, ${document.getElementById('setGradientEnd').value})`; p.style.color = document.getElementById('setTextColor').value; p.querySelector('i').className = 'fas ' + document.getElementById('setIcon').value; p.querySelector('.code').textContent = document.getElementById('setCode').value || currentCourseCode || 'CHM 101'; p.querySelector('.name').textContent = document.getElementById('setName').value || 'Course Name'; }
+        window.updateSettingsPreview = updateSettingsPreview;
+
+        window.loadCourseSettings = async function() {
+            const code = document.getElementById('settingsCourse').value; if (!code) return; currentCourseCode = code;
+            try {
+                const d = await apiCall(API + '/admin/course-settings/' + code); const c = d.course;
+                document.getElementById('setCode').value = c.code || ''; document.getElementById('setName').value = c.name || '';
+                document.getElementById('setSemester').value = c.semester || 'first'; document.getElementById('setLevel').value = c.level || '100';
+                document.getElementById('setMode').value = c.mode || 'both'; document.getElementById('setActive').value = c.isActive !== false ? 'true' : 'false';
+                document.getElementById('setTestQ').value = c.testSettings?.numberOfQuestions || 20; document.getElementById('setTestTime').value = c.testSettings?.timeLimit || 15;
+                document.getElementById('setExamQ').value = c.examSettings?.numberOfQuestions || 40; document.getElementById('setExamTime').value = c.examSettings?.timeLimit || 30;
+                const grad = c.theme?.gradient || ''; const colors = grad.match(/#[a-fA-F0-9]{6}/g);
+                document.getElementById('setGradientStart').value = colors?.[0] || '#1e3a8a'; document.getElementById('setGradientEnd').value = colors?.[1] || '#3b82f6';
+                document.getElementById('setIcon').value = c.theme?.icon || 'fa-file-alt'; document.getElementById('setTextColor').value = c.theme?.textColor || '#ffffff';
+                settingsFaculties = [...(c.faculties || [c.faculty])]; renderSettingsFaculties();
+                document.getElementById('settingsCourseTitle').textContent = `⚙️ ${c.code} - ${c.name}`;
+                document.getElementById('bulkCourseName').textContent = c.code + ' - ' + c.name;
+                document.getElementById('courseInfo').innerHTML = `<div class="detail-item"><div class="label">Code</div><div class="value">${c.code}</div></div><div class="detail-item"><div class="label">Name</div><div class="value">${c.name}</div></div><div class="detail-item"><div class="label">Faculty</div><div class="value">${c.faculty}</div></div><div class="detail-item"><div class="label">Mode</div><div class="value">${c.mode||'both'}</div></div>`;
+                document.getElementById('selectCard').style.display='none'; document.getElementById('courseSettingsPage').style.display='block';
+                updateSettingsPreview(); updateProgress(code); closeSidebar(); window.scrollTo(0,0);
+            } catch(e) { show(e.message,'error'); }
+        };
+        window.goBackToSelect = function() { document.getElementById('selectCard').style.display='block'; document.getElementById('courseSettingsPage').style.display='none'; currentCourseCode=''; loadAllCourses(); window.scrollTo(0,0); };
+        async function updateProgress(code) { try { const d=await apiCall(API+'/admin/questions/stats/'+code); ['test','exam'].forEach(m=>{const r=d.requirements[m],pct=Math.round((r.available/r.required)*100)||0;document.getElementById(m+'Progress').innerHTML=`<p style="font-size:.7rem;margin-top:6px">📦 ${r.available}/${r.required}</p><div class="progress-bar"><div class="progress-fill ${pct>=100?'success':pct>=50?'warning':'danger'}" style="width:${Math.min(pct,100)}%"></div></div><span class="badge ${r.ready?'badge-success':'badge-warning'}">${r.ready?'✅ Ready':'⚠ Need '+(r.required-r.available)+' more'}</span>`;}); } catch(e) {} }
+
+        // ==================== SAVE ALL SETTINGS ====================
+        window.saveAllSettings = async function() {
+            if (!currentCourseCode) { show('Select a course first', 'error'); return; }
+            const btn = document.getElementById('btnSaveAll'); setLoading(btn, true);
+            try {
+                const body = {
+                    code: document.getElementById('setCode').value.trim(),
+                    name: document.getElementById('setName').value.trim(),
+                    semester: document.getElementById('setSemester').value,
+                    level: document.getElementById('setLevel').value,
+                    mode: document.getElementById('setMode').value,
+                    isActive: document.getElementById('setActive').value === 'true',
+                    testSettings: { numberOfQuestions: parseInt(document.getElementById('setTestQ').value)||20, timeLimit: parseInt(document.getElementById('setTestTime').value)||15 },
+                    examSettings: { numberOfQuestions: parseInt(document.getElementById('setExamQ').value)||40, timeLimit: parseInt(document.getElementById('setExamTime').value)||30 },
+                    theme: { gradient: `linear-gradient(135deg, ${document.getElementById('setGradientStart').value}, ${document.getElementById('setGradientEnd').value})`, icon: document.getElementById('setIcon').value, textColor: document.getElementById('setTextColor').value },
+                    faculties: settingsFaculties
+                };
+                const d = await apiCall(API + '/admin/courses/' + currentCourseCode + '/settings', { method: 'PUT', body: JSON.stringify(body) });
+                show(d.message || '✅ ALL settings saved!', 'success');
+                updateProgress(currentCourseCode);
+            } catch(e) { show(e.message, 'error'); }
+            setLoading(btn, false);
+        };
+
+        window.resetCourseSettings = async function() { if (!currentCourseCode || !confirm('Reset ALL settings to defaults?')) return; try { await apiCall(API + '/admin/courses/' + currentCourseCode + '/settings', { method: 'PUT', body: JSON.stringify({ testSettings: { numberOfQuestions: 20, timeLimit: 15 }, examSettings: { numberOfQuestions: 40, timeLimit: 30 }, theme: { gradient: 'linear-gradient(135deg, #1e3a8a, #3b82f6)', icon: 'fa-file-alt', textColor: '#ffffff' } }) }); show('Reset to defaults!', 'success'); loadCourseSettings(); } catch(e) { show(e.message, 'error'); } };
+        window.viewCourseStats = async function() { if (!currentCourseCode) return; try { const d = await apiCall(API + '/admin/questions/stats/' + currentCourseCode); document.getElementById('courseStatsDisplay').innerHTML = `<div class="card" style="margin-top:12px"><h2>📊 ${d.courseCode} Stats</h2><div class="settings-grid"><div class="settings-box"><h4>🧪 Test</h4><p style="font-size:1.2rem;font-weight:700">${d.requirements.test.available}/${d.requirements.test.required}</p><p style="color:#64748b;font-size:.8rem">Timer: ${d.timers.test}</p></div><div class="settings-box"><h4>📝 Exam</h4><p style="font-size:1.2rem;font-weight:700">${d.requirements.exam.available}/${d.requirements.exam.required}</p><p style="color:#64748b;font-size:.8rem">Timer: ${d.timers.exam}</p></div></div></div>`; } catch(e) { show(e.message,'error'); } };
+        window.applyBulkTimer = async function() { if (!confirm('Apply to ALL courses?')) return; const btn = document.getElementById('btnBulk'); setLoading(btn, true); try { const d = await apiCall(API + '/admin/courses'); const codes = (d.courses || []).map(c => c.code); const r = await apiCall(API + '/admin/courses/bulk-timer', { method: 'PUT', body: JSON.stringify({ courseCodes: codes, mode: document.getElementById('bulkMode').value, timeLimit: parseInt(document.getElementById('bulkTime').value)||30, numberOfQuestions: parseInt(document.getElementById('bulkQCount').value)||40 }) }); show(r.message || 'Updated!', 'success'); } catch(e) { show(e.message, 'error'); } setLoading(btn, false); };
+
+        // ==================== BULK ADD QUESTIONS ====================
+        window.validateSettingsBulk = function() {
+            const raw = document.getElementById('settingsBulkJson').value.trim();
+            const preview = document.getElementById('settingsBulkPreview');
+            if (!raw) { preview.innerHTML = '<span class="err">❌ Paste JSON first</span>'; preview.classList.add('show'); return; }
+            try {
+                const q = JSON.parse(raw);
+                if (!Array.isArray(q)) { preview.innerHTML = '<span class="err">❌ Must be a JSON array</span>'; preview.classList.add('show'); return; }
+                let html = `<div class="ok">✅ Valid JSON — ${q.length} question(s)</div>`;
+                q.forEach((item, i) => {
+                    const errors = [];
+                    if (!item.mode) errors.push('mode');
+                    if (!item.text) errors.push('text');
+                    if (!Array.isArray(item.options) || item.options.length !== 4) errors.push('options[4]');
+                    if (item.correctOption === undefined || item.correctOption < 0 || item.correctOption > 3) errors.push('correctOption');
+                    if (errors.length) html += `<div class="err">❌ Q${i+1}: Missing ${errors.join(', ')}</div>`;
+                    else html += `<div class="ok">✅ Q${i+1}: ${item.text?.substring(0,50)}... (${item.mode})</div>`;
+                });
+                preview.innerHTML = html; preview.classList.add('show');
+            } catch(e) { preview.innerHTML = `<span class="err">❌ Invalid JSON: ${e.message}</span>`; preview.classList.add('show'); }
+        };
+
+        window.countSettingsQuestions = function() {
+            const raw = document.getElementById('settingsBulkJson').value.trim();
+            if (!raw) { show('Paste JSON first', 'error'); return; }
+            try { const q = JSON.parse(raw); if (!Array.isArray(q)) { show('Must be an array', 'error'); return; } show(`${q.length} question(s) ready for ${currentCourseCode}`, 'success'); } catch(e) { show('Invalid JSON', 'error'); }
+        };
+
+        window.bulkAddToCourse = async function() {
+            if (!currentCourseCode) { show('Select a course first', 'error'); return; }
+            const raw = document.getElementById('settingsBulkJson').value.trim();
+            if (!raw) { show('Paste JSON first', 'error'); return; }
+            let questions;
+            try { questions = JSON.parse(raw); if (!Array.isArray(questions)) { show('Must be a JSON array', 'error'); return; } } catch(e) { show('Invalid JSON: ' + e.message, 'error'); return; }
+            if (!confirm(`Add ${questions.length} question(s) to ${currentCourseCode}?`)) return;
+            questions = questions.map(q => ({ ...q, courseCode: currentCourseCode }));
+            const btn = document.getElementById('btnBulkAddSettings'); const status = document.getElementById('bulkAddStatus');
+            setLoading(btn, true); status.textContent = '⏳ Adding...';
+            try {
+                const d = await apiCall(API + '/admin/questions/bulk', { method: 'POST', body: JSON.stringify({ questions }) });
+                if (d.added > 0) { show(`✅ ${d.added} added to ${currentCourseCode}! (${d.failed||0} failed)`, 'success'); document.getElementById('settingsBulkJson').value = ''; document.getElementById('settingsBulkPreview').classList.remove('show'); status.textContent = ''; updateProgress(currentCourseCode); } else { show('❌ All failed', 'error'); status.textContent = '⚠️ Check course code.'; }
+            } catch(e) { show(e.message, 'error'); status.textContent = '❌ Error.'; }
+            setLoading(btn, false);
+        };
+
+        document.addEventListener('click', function(e) { if (!e.target.closest('.search-box')) document.getElementById('searchResults').classList.remove('show'); });
+    </script>
+</body>
+</html>

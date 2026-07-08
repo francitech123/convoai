@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users • Admin Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:#f1f5f9;color:#0f172a;min-height:100vh}
+        body.authorized{display:block}
+        .app{display:flex;min-height:100vh}
+        .sidebar{width:260px;background:#0f172a;position:fixed;left:0;top:0;bottom:0;overflow-y:auto;z-index:100;transition:transform .3s}
+        .sidebar-header{padding:20px;border-bottom:1px solid #1e293b;display:flex;align-items:center;gap:10px}
+        .sidebar-header i{color:#3b82f6;font-size:1.3rem}.sidebar-header span{font-weight:800;color:#f1f5f9;font-size:1.1rem}
+        .nav-menu{list-style:none;padding:8px}
+        .nav-link{display:flex;align-items:center;gap:10px;padding:10px 14px;color:#94a3b8;text-decoration:none;border-radius:8px;font-weight:500;font-size:.85rem;transition:all .2s;cursor:pointer}
+        .nav-link:hover{background:#1e293b;color:#e2e8f0}.nav-link.active{background:#3b82f6;color:#fff}.nav-link i{width:20px;font-size:.9rem}
+        .nav-divider{height:1px;background:#1e293b;margin:12px 8px}
+        .nav-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#475569;padding:12px 14px 6px}
+        .main-content{flex:1;margin-left:260px;padding:20px 28px}
+        @media(max-width:768px){.sidebar{transform:translateX(-100%);z-index:200}.sidebar.open{transform:translateX(0)}.main-content{margin-left:0;padding:60px 16px 16px 16px}}
+        .mobile-btn{position:fixed;top:12px;left:12px;z-index:160;background:#3b82f6;color:#fff;width:40px;height:40px;border-radius:10px;display:none;align-items:center;justify-content:center;cursor:pointer;border:none;font-size:1.1rem;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+        @media(max-width:768px){.mobile-btn{display:flex}}
+        .sidebar-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:150}.sidebar-overlay.show{display:block}
+        .top-bar{background:#fff;padding:14px 20px;border-radius:14px;margin-bottom:24px;border:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}.top-bar h1{font-size:1.3rem;font-weight:700}
+        .card{background:#fff;border-radius:14px;padding:20px;border:1px solid #e2e8f0;margin-bottom:20px}
+        .card h2{font-size:1rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}.card h2 i{color:#3b82f6}
+        .btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border:none;border-radius:8px;font-weight:600;font-size:.78rem;cursor:pointer;transition:all .2s}
+        .btn-primary{background:#3b82f6;color:#fff}.btn-primary:hover{background:#2563eb}
+        .btn-success{background:#10b981;color:#fff}.btn-success:hover{background:#059669}
+        .btn-outline{background:transparent;color:#3b82f6;border:2px solid #3b82f6}
+        .btn-sm{padding:5px 10px;font-size:.7rem}.btn-xs{padding:3px 8px;font-size:.65rem}
+        .btn:disabled{opacity:.6;cursor:not-allowed}
+        .alert{padding:12px 16px;border-radius:10px;margin-bottom:16px;display:none;font-size:.82rem}
+        .alert-success{background:#d1fae5;color:#065f46;border:1px solid #a7f3d0}.alert-error{background:#fee2e2;color:#991b1b;border:1px solid #fecaca}.alert.show{display:block}
+        .search-box{display:flex;gap:8px;margin-bottom:16px}
+        .search-box input{flex:1;padding:10px 14px;border:2px solid #e2e8f0;border-radius:10px;font-size:.85rem;background:#f8fafc}
+        .search-box input:focus{outline:none;border-color:#3b82f6}
+        .user-item{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:#f8fafc;border-radius:10px;margin-bottom:6px;gap:10px;flex-wrap:wrap;transition:all .2s}
+        .user-item:hover{background:#eff6ff}
+        .user-avatar{width:44px;height:44px;border-radius:50%;background:#3b82f6;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1rem;overflow:hidden;flex-shrink:0}
+        .user-avatar img{width:100%;height:100%;object-fit:cover}
+        .badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:.65rem;font-weight:600}
+        .badge-admin{background:#fef3c7;color:#92400e}.badge-user{background:#dbeafe;color:#1e40af}.badge-success{background:#d1fae5;color:#065f46}
+        .loading{text-align:center;padding:30px;color:#94a3b8}.loading i{animation:spin 1s linear infinite}@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+        .empty-state{text-align:center;padding:30px;color:#94a3b8}
+        .back-link{display:inline-flex;align-items:center;gap:6px;color:#3b82f6;cursor:pointer;font-weight:600;font-size:.85rem;margin-bottom:16px}
+        .detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}@media(max-width:500px){.detail-grid{grid-template-columns:1fr}}
+        .detail-item{background:#f8fafc;padding:12px;border-radius:8px}.detail-item .label{font-size:.65rem;color:#64748b;text-transform:uppercase;margin-bottom:3px}.detail-item .value{font-weight:600;font-size:.85rem}
+        .form-group{margin-bottom:12px}.form-group label{display:block;margin-bottom:4px;font-weight:600;font-size:.78rem;color:#475569}
+        .form-group input,.form-group select,.form-group textarea{width:100%;padding:10px 12px;border:2px solid #e2e8f0;border-radius:8px;font-size:.85rem;font-family:inherit;background:#f8fafc}
+        .form-group textarea{resize:vertical;min-height:60px}
+    </style>
+</head>
+<body>
+    <button class="mobile-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+    <div class="app">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header"><i class="fas fa-graduation-cap"></i><span>OAU CBT Practice</span></div>
+            <div class="nav-label">Main</div>
+            <ul class="nav-menu">
+                <li><a class="nav-link" href="adminDashboard.html"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                <li><a class="nav-link" href="questions.html"><i class="fas fa-question-circle"></i> Questions</a></li>
+                <li><a class="nav-link" href="courses.html"><i class="fas fa-book"></i> Courses</a></li>
+                <li><a class="nav-link" href="courseSettings.html"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+            <div class="nav-divider"></div>
+            <div class="nav-label">Users & Analytics</div>
+            <ul class="nav-menu">
+                <li><a class="nav-link active" href="AdminPageUsers.html"><i class="fas fa-users"></i> Users</a></li>
+                <li><a class="nav-link" href="analysis.html"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                <li><a class="nav-link" href="AdminNotification.html"><i class="fas fa-bell"></i> Notifications</a></li>
+                <li><a class="nav-link" href="adminChat.html"><i class="fas fa-comments"></i> Chat</a></li>
+            </ul>
+            <div class="nav-divider"></div>
+            <ul class="nav-menu"><li><a class="nav-link" href="allCourseMaterial.html"><i class="fas fa-folder"></i> Materials</a></li></ul>
+            <div class="nav-divider"></div>
+            <ul class="nav-menu"><li><a class="nav-link" href="/app"><i class="fas fa-arrow-left"></i> Back to App</a></li><li><a class="nav-link" onclick="logout()"><i class="fas fa-lock"></i> Lock</a></li></ul>
+        </aside>
+        <main class="main-content">
+            <div class="top-bar"><h1>👥 User Management</h1></div>
+            <div class="alert alert-success" id="successAlert"></div><div class="alert alert-error" id="errorAlert"></div>
+
+            <!-- USER LIST PAGE -->
+            <div id="userListPage">
+                <div class="card">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+                        <h2><i class="fas fa-users"></i> All Users</h2>
+                        <button class="btn btn-sm" style="background:#e2e8f0;color:#475569" id="btnRefresh" onclick="loadUsers()"><i class="fas fa-sync-alt"></i> Refresh</button>
+                    </div>
+                    <div class="search-box"><input type="text" id="userSearch" placeholder="Search by name, username, email, faculty..." oninput="searchUsers()"></div>
+                    <div id="userList"><div class="loading"><i class="fas fa-spinner"></i> Loading...</div></div>
+                </div>
+            </div>
+
+            <!-- VIEW USER DETAIL PAGE -->
+            <div id="viewUserPage" style="display:none">
+                <div class="back-link" onclick="goBackToList()"><i class="fas fa-arrow-left"></i> Back to Users</div>
+                <div class="card" id="viewUserContent"></div>
+            </div>
+
+            <!-- MANAGE USER PAGE -->
+            <div id="manageUserPage" style="display:none">
+                <div class="back-link" onclick="goBackToList()"><i class="fas fa-arrow-left"></i> Back to Users</div>
+                <div class="card">
+                    <h2 id="manageUserTitle">📨 Manage User</h2>
+                    <div id="manageUserInfo" style="margin-bottom:16px"></div>
+                    <div class="form-group"><label>Notification Title</label><input type="text" id="notifTitle" placeholder="Enter title..."></div>
+                    <div class="form-group"><label>Notification Message</label><textarea id="notifMessage" rows="3" placeholder="Enter message..."></textarea></div>
+                    <div class="form-group"><label>Type</label><select id="notifType"><option value="info">ℹ️ Info</option><option value="success">✅ Success</option><option value="warning">⚠️ Warning</option><option value="update">📢 Update</option></select></div>
+                    <button class="btn btn-primary" id="btnSendNotif" onclick="sendPrivateNotif()"><i class="fas fa-paper-plane"></i> Send Notification</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+        const API = 'https://oau-exam-api.onrender.com/api';
+        const ADMIN_TOKEN = localStorage.getItem('admin_token') || sessionStorage.getItem('admin_token');
+        const ADMIN_EMAIL = localStorage.getItem('admin_email') || sessionStorage.getItem('admin_email');
+        let allUsers = [], selectedUserId = '', selectedUserName = '';
+        if (!ADMIN_TOKEN && !ADMIN_EMAIL) { window.location.href = 'admin-login.html'; }
+        else { document.body.classList.add('authorized'); loadUsers(); }
+        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sidebarOverlay').classList.toggle('show'); }
+        function closeSidebar() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').classList.remove('show'); }
+        function logout() { localStorage.clear(); sessionStorage.clear(); window.location.href = 'admin-login.html'; }
+        async function apiCall(url, options = {}) {
+            try {
+                const headers = { 'Content-Type': 'application/json', 'x-admin-token': ADMIN_TOKEN, 'x-admin-email': ADMIN_EMAIL, ...options.headers };
+                const userToken = localStorage.getItem('oau_token');
+                if (userToken) headers['Authorization'] = 'Bearer ' + userToken;
+                const r = await fetch(url, { ...options, headers });
+                const d = await r.json(); if (!r.ok) throw new Error(d.error || 'Request failed'); return d;
+            } catch(e) { console.error('API:', e.message); throw e; }
+        }
+        function show(msg, type) { const el = document.getElementById(type + 'Alert'); el.textContent = (type==='success'?'✅ ':'❌ ') + msg; el.classList.add('show'); setTimeout(() => el.classList.remove('show'), 4000); }
+        function setLoading(btn, loading) { if (loading) { btn.disabled = true; btn.dataset.original = btn.innerHTML; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ' + btn.textContent.trim(); } else { btn.disabled = false; if (btn.dataset.original) btn.innerHTML = btn.dataset.original; } }
+
+        async function loadUsers() {
+            const btn = document.getElementById('btnRefresh'); setLoading(btn, true);
+            const list = document.getElementById('userList'); list.innerHTML = '<div class="loading"><i class="fas fa-spinner"></i> Loading...</div>';
+            try { const d = await apiCall(API + '/admin/users'); allUsers = d.users || []; renderUsers(allUsers); } catch(e) { list.innerHTML = '<div class="empty-state">Error loading users</div>'; }
+            setLoading(btn, false);
+        }
+        window.loadUsers = loadUsers;
+
+        function renderUsers(users) {
+            const list = document.getElementById('userList');
+            if (!users.length) { list.innerHTML = '<div class="empty-state">No users yet</div>'; return; }
+            list.innerHTML = users.map(u => `
+                <div class="user-item">
+                    <div style="display:flex;align-items:center;gap:12px;flex:1">
+                        <div class="user-avatar">${u.profilePicture ? `<img src="${u.profilePicture}" alt="">` : (u.fullName||'U').charAt(0)}</div>
+                        <div><strong>${u.fullName||'Unknown'}</strong> ${u.isAdmin?'<span class="badge badge-admin">Admin</span>':''}<div style="font-size:.72rem;color:#64748b">@${u.username} | ${u.faculty||'N/A'} | ${u.level||'100'}L | Exams: ${u.examsTaken||0} | 🔥 ${u.currentStreak||0}</div></div>
+                    </div>
+                    <div style="display:flex;gap:4px">
+                        <button class="btn btn-outline btn-xs" onclick="viewUser('${u._id}')"><i class="fas fa-eye"></i> View</button>
+                        <button class="btn btn-primary btn-xs" onclick="manageUser('${u._id}','${u.fullName||u.username}')"><i class="fas fa-cog"></i> Manage</button>
+                    </div>
+                </div>`).join('');
+        }
+
+        function searchUsers() { const q = document.getElementById('userSearch').value.toLowerCase(); renderUsers(q ? allUsers.filter(u => (u.fullName||'').toLowerCase().includes(q) || (u.username||'').toLowerCase().includes(q) || (u.email||'').toLowerCase().includes(q) || (u.faculty||'').toLowerCase().includes(q)) : allUsers); }
+        window.searchUsers = searchUsers;
+
+        window.viewUser = async function(id) {
+            const list = document.getElementById('viewUserContent'); list.innerHTML = '<div class="loading"><i class="fas fa-spinner"></i> Loading...</div>';
+            document.getElementById('userListPage').style.display = 'none';
+            document.getElementById('viewUserPage').style.display = 'block';
+            document.getElementById('manageUserPage').style.display = 'none';
+            try {
+                const d = await apiCall(API + '/admin/users/' + id + '/performance');
+                const u = d.user;
+                list.innerHTML = `
+                    <h2 style="display:flex;align-items:center;gap:12px"><div class="user-avatar" style="width:56px;height:56px;font-size:1.2rem">${u.profilePicture ? `<img src="${u.profilePicture}" alt="">` : (u.fullName||'U').charAt(0)}</div>${u.fullName||'Unknown'} ${u.isAdmin?'<span class="badge badge-admin">Admin</span>':''}</h2>
+                    <div class="detail-grid" style="margin-top:16px">
+                        <div class="detail-item"><div class="label">Full Name</div><div class="value">${u.fullName||'N/A'}</div></div>
+                        <div class="detail-item"><div class="label">Username</div><div class="value">@${u.username}</div></div>
+                        <div class="detail-item"><div class="label">Email</div><div class="value">${u.email||'N/A'}</div></div>
+                        <div class="detail-item"><div class="label">Faculty</div><div class="value">${u.faculty||'N/A'}</div></div>
+                        <div class="detail-item"><div class="label">Department</div><div class="value">${u.department||'N/A'}</div></div>
+                        <div class="detail-item"><div class="label">Level</div><div class="value">${u.level||'100'}L</div></div>
+                        <div class="detail-item"><div class="label">Exams Taken</div><div class="value">${u.examsTaken||0}</div></div>
+                        <div class="detail-item"><div class="label">Tests Taken</div><div class="value">${u.testsTaken||0}</div></div>
+                        <div class="detail-item"><div class="label">Streak</div><div class="value">🔥 ${u.currentStreak||0} days</div></div>
+                        <div class="detail-item"><div class="label">Study Time</div><div class="value">${Math.floor((u.totalStudyTime||0)/3600)}h ${Math.floor(((u.totalStudyTime||0)%3600)/60)}m</div></div>
+                        <div class="detail-item"><div class="label">Leaderboard</div><div class="value">#${u.leaderboardRank||'N/A'}</div></div>
+                        <div class="detail-item"><div class="label">Referrals</div><div class="value">${u.referralCount||0}</div></div>
+                        <div class="detail-item"><div class="label">Last Login</div><div class="value">${u.lastLogin?new Date(u.lastLogin).toLocaleString():'N/A'}</div></div>
+                        <div class="detail-item"><div class="label">IP Address</div><div class="value">${u.ipAddress||'N/A'}</div></div>
+                    </div>
+                    ${d.recentScores?.length ? `<h4 style="margin-top:12px">📊 Recent Scores</h4>${d.recentScores.map(s=>`<div style="font-size:.75rem;padding:6px;background:#f8fafc;border-radius:6px;margin-bottom:4px">${s.courseCode} - ${s.percentage||0}% (${s.mode}) - ${new Date(s.createdAt).toLocaleDateString()}</div>`).join('')}` : ''}
+                    <div style="margin-top:12px"><button class="btn btn-primary btn-sm" onclick="manageUser('${u._id}','${u.fullName||u.username}')">📨 Send Notification</button></div>`;
+                closeSidebar();
+            } catch(e) { list.innerHTML = '<div class="empty-state">Error loading details</div>'; }
+        };
+
+        window.manageUser = function(id, name) {
+            selectedUserId = id; selectedUserName = name;
+            document.getElementById('manageUserTitle').textContent = '📨 Send Notification';
+            document.getElementById('manageUserInfo').innerHTML = `<p style="color:#64748b"><strong>To:</strong> ${name}</p>`;
+            document.getElementById('notifTitle').value = ''; document.getElementById('notifMessage').value = '';
+            document.getElementById('userListPage').style.display = 'none';
+            document.getElementById('viewUserPage').style.display = 'none';
+            document.getElementById('manageUserPage').style.display = 'block';
+        };
+
+        window.goBackToList = function() {
+            document.getElementById('userListPage').style.display = 'block';
+            document.getElementById('viewUserPage').style.display = 'none';
+            document.getElementById('manageUserPage').style.display = 'none';
+        };
+
+        window.sendPrivateNotif = async function() {
+            const title = document.getElementById('notifTitle').value.trim();
+            const message = document.getElementById('notifMessage').value.trim();
+            if (!title || !message) { show('Fill title and message', 'error'); return; }
+            const btn = document.getElementById('btnSendNotif'); setLoading(btn, true);
+            try {
+                await apiCall(API + '/admin/notifications/private', { method: 'POST', body: JSON.stringify({ userId: selectedUserId, title, message, type: document.getElementById('notifType').value }) });
+                show('Notification sent to ' + selectedUserName + '!', 'success');
+                goBackToList();
+            } catch(e) { show(e.message, 'error'); }
+            setLoading(btn, false);
+        };
+    </script>
+</body>
+</html>

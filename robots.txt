@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Sitemap: https://oau-exam-cbt-practice.vercel.app/sitemap.xml

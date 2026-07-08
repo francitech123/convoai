@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard • Admin Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:#f1f5f9;color:#0f172a;min-height:100vh}
+        body.authorized{display:block}
+        .app{display:flex;min-height:100vh}
+        .sidebar{width:260px;background:#0f172a;position:fixed;left:0;top:0;bottom:0;overflow-y:auto;z-index:100;transition:transform .3s}
+        .sidebar-header{padding:20px;border-bottom:1px solid #1e293b;display:flex;align-items:center;gap:10px}
+        .sidebar-header i{color:#3b82f6;font-size:1.3rem}.sidebar-header span{font-weight:800;color:#f1f5f9;font-size:1.1rem}
+        .nav-menu{list-style:none;padding:8px}
+        .nav-link{display:flex;align-items:center;gap:10px;padding:10px 14px;color:#94a3b8;text-decoration:none;border-radius:8px;font-weight:500;font-size:.85rem;transition:all .2s;cursor:pointer}
+        .nav-link:hover{background:#1e293b;color:#e2e8f0}.nav-link.active{background:#3b82f6;color:#fff}.nav-link i{width:20px;font-size:.9rem}
+        .nav-divider{height:1px;background:#1e293b;margin:12px 8px}
+        .nav-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#475569;padding:12px 14px 6px}
+        .main-content{flex:1;margin-left:260px;padding:20px 28px}
+        @media(max-width:768px){.sidebar{transform:translateX(-100%);z-index:200}.sidebar.open{transform:translateX(0)}.main-content{margin-left:0;padding:60px 16px 16px 16px}}
+        .mobile-btn{position:fixed;top:12px;left:12px;z-index:160;background:#3b82f6;color:#fff;width:40px;height:40px;border-radius:10px;display:none;align-items:center;justify-content:center;cursor:pointer;border:none;font-size:1.1rem;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+        @media(max-width:768px){.mobile-btn{display:flex}}
+        .sidebar-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:150}.sidebar-overlay.show{display:block}
+        .top-bar{background:#fff;padding:14px 20px;border-radius:14px;margin-bottom:24px;border:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+        .top-bar h1{font-size:1.3rem;font-weight:700}
+        .admin-info{display:flex;align-items:center;gap:10px}
+        .admin-avatar{width:40px;height:40px;border-radius:50%;background:#3b82f6;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;overflow:hidden;flex-shrink:0}
+        .admin-avatar img{width:100%;height:100%;object-fit:cover}
+        .btn{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border:none;border-radius:10px;font-weight:600;font-size:.82rem;cursor:pointer;transition:all .2s;text-decoration:none}
+        .btn-primary{background:#3b82f6;color:#fff}.btn-primary:hover{background:#2563eb}
+        .btn-success{background:#10b981;color:#fff}.btn-success:hover{background:#059669}
+        .btn-warning{background:#f59e0b;color:#000}.btn-warning:hover{background:#d97706}
+        .btn-sm{padding:6px 12px;font-size:.72rem}.btn:disabled{opacity:.6;cursor:not-allowed}
+        .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+        @media(max-width:1024px){.stats-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:500px){.stats-grid{grid-template-columns:1fr}}
+        .stat-card{background:#fff;border-radius:14px;padding:20px;border:1px solid #e2e8f0;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:16px}
+        .stat-card:hover{border-color:#3b82f6;transform:translateY(-2px)}
+        .stat-icon{width:50px;height:50px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+        .stat-icon.blue{background:#eff6ff;color:#3b82f6}.stat-icon.green{background:#ecfdf5;color:#10b981}.stat-icon.purple{background:#f5f3ff;color:#7c3aed}.stat-icon.orange{background:#fff7ed;color:#f97316}
+        .stat-info .num{font-size:1.6rem;font-weight:800;line-height:1}.stat-info .lbl{font-size:.72rem;color:#64748b;margin-top:4px}
+        .card{background:#fff;border-radius:14px;padding:20px;border:1px solid #e2e8f0;margin-bottom:20px}
+        .card h2{font-size:1rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}.card h2 i{color:#3b82f6}
+        .course-item{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:#f8fafc;border-radius:8px;margin-bottom:4px;gap:8px;flex-wrap:wrap}
+        .badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:.65rem;font-weight:600}.badge-success{background:#d1fae5;color:#065f46}.badge-warning{background:#fef3c7;color:#92400e}
+        .alert{padding:12px 16px;border-radius:10px;margin-bottom:16px;display:none;font-size:.82rem}
+        .alert-success{background:#d1fae5;color:#065f46}.alert-error{background:#fee2e2;color:#991b1b}.alert.show{display:block}
+        .loading{text-align:center;padding:30px;color:#94a3b8}.loading i{animation:spin 1s linear infinite}@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+        .empty-state{text-align:center;padding:30px;color:#94a3b8}
+        .welcome-card{background:linear-gradient(135deg,#3b82f6,#1d4ed8);color:#fff;border-radius:14px;padding:20px 24px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+        .perf-badge{background:rgba(255,255,255,.2);padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:600}
+
+        /* CEO Message Notification */
+        .ceo-notif-banner{background:linear-gradient(135deg,#fef3c7,#fde68a);border:2px solid #f59e0b;border-radius:14px;padding:16px 20px;margin-bottom:20px;display:none;cursor:pointer;transition:all .2s;animation:pulse 2s infinite}
+        .ceo-notif-banner.show{display:flex;align-items:center;gap:12px;justify-content:space-between;flex-wrap:wrap}
+        .ceo-notif-banner:hover{box-shadow:0 0 20px rgba(245,158,11,0.3)}
+        .ceo-notif-banner .icon{font-size:1.5rem}.ceo-notif-banner .text{flex:1;min-width:150px}
+        .ceo-notif-banner .text strong{color:#92400e}.ceo-notif-banner .text p{color:#78350f;font-size:.8rem;margin-top:2px}
+        @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(245,158,11,0.4)}50%{box-shadow:0 0 0 10px rgba(245,158,11,0)}}
+
+        .back-link{display:inline-flex;align-items:center;gap:6px;color:#3b82f6;cursor:pointer;font-weight:600;font-size:.85rem;margin-bottom:16px}
+        .message-card{background:#fffbeb;border:1px solid #fcd34d;border-radius:10px;padding:14px;margin-bottom:8px}
+        .message-card .msg-header{display:flex;justify-content:space-between;font-size:.75rem;color:#92400e;margin-bottom:6px}
+        .message-card .msg-body{font-size:.85rem;color:#1e293b;line-height:1.4}
+        .message-card .msg-reply-box{background:#d1fae5;padding:10px;border-radius:8px;font-size:.8rem;margin-top:8px;border:1px solid #a7f3d0}
+        .form-group textarea{width:100%;padding:10px;border:2px solid #e2e8f0;border-radius:8px;font-family:inherit;font-size:.85rem;resize:vertical;min-height:60px}
+        .form-group textarea:focus{outline:none;border-color:#3b82f6}
+    </style>
+</head>
+<body>
+    <button class="mobile-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+    <div class="app">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header"><i class="fas fa-graduation-cap"></i><span>OAU CBT Practice</span></div>
+            <div class="nav-label">Main</div>
+            <ul class="nav-menu">
+                <li><a class="nav-link active" href="adminDashboard.html"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                <li><a class="nav-link" href="questions.html"><i class="fas fa-question-circle"></i> Questions</a></li>
+                <li><a class="nav-link" href="courses.html"><i class="fas fa-book"></i> Courses</a></li>
+                <li><a class="nav-link" href="courseSettings.html"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+            <div class="nav-divider"></div>
+            <div class="nav-label">Users & Analytics</div>
+            <ul class="nav-menu">
+                <li><a class="nav-link" href="AdminPageUsers.html"><i class="fas fa-users"></i> Users</a></li>
+                <li><a class="nav-link" href="analysis.html"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                <li><a class="nav-link" href="AdminNotification.html"><i class="fas fa-bell"></i> Notifications</a></li>
+                <li><a class="nav-link" href="adminChat.html"><i class="fas fa-comments"></i> Chat</a></li>
+            </ul>
+            <div class="nav-divider"></div>
+            <ul class="nav-menu"><li><a class="nav-link" href="allCourseMaterial.html"><i class="fas fa-folder"></i> Materials</a></li></ul>
+            <div class="nav-divider"></div>
+            <ul class="nav-menu"><li><a class="nav-link" href="/app"><i class="fas fa-arrow-left"></i> Back to App</a></li><li><a class="nav-link" onclick="logout()"><i class="fas fa-lock"></i> Lock</a></li></ul>
+        </aside>
+        <main class="main-content">
+            <div class="top-bar"><h1>📊 Admin Dashboard</h1><div class="admin-info" id="adminInfo"></div></div>
+            <div class="alert alert-success" id="successAlert"></div><div class="alert alert-error" id="errorAlert"></div>
+
+            <!-- CEO MESSAGE NOTIFICATION BANNER -->
+            <div class="ceo-notif-banner" id="ceoNotifBanner" onclick="viewCeoMessages()">
+                <div class="icon">👑</div>
+                <div class="text"><strong>Message from CEO</strong><p id="ceoNotifPreview">You have a new message from FrancisTech</p></div>
+                <i class="fas fa-chevron-right" style="color:#f59e0b"></i>
+            </div>
+
+            <!-- MAIN DASHBOARD PAGE -->
+            <div id="dashboardPage">
+                <div class="welcome-card"><div><h2>Welcome back, <span id="adminName">Admin</span> 👋</h2><p>You are logged in as <strong id="adminRole">admin</strong></p></div><div style="display:flex;gap:10px"><span class="perf-badge" id="adminPerf">⭐ 0%</span><span class="perf-badge" id="adminContrib">📦 0</span></div></div>
+                <div class="stats-grid">
+                    <div class="stat-card" onclick="location.href='AdminPageUsers.html'"><div class="stat-icon blue"><i class="fas fa-users"></i></div><div class="stat-info"><div class="num" id="statUsers">—</div><div class="lbl">Total Users</div></div></div>
+                    <div class="stat-card" onclick="location.href='questions.html'"><div class="stat-icon green"><i class="fas fa-question-circle"></i></div><div class="stat-info"><div class="num" id="statQuestions">—</div><div class="lbl">Questions</div></div></div>
+                    <div class="stat-card" onclick="location.href='courses.html'"><div class="stat-icon purple"><i class="fas fa-book"></i></div><div class="stat-info"><div class="num" id="statCourses">—</div><div class="lbl">Courses</div></div></div>
+                    <div class="stat-card" onclick="location.href='AdminNotification.html'"><div class="stat-icon orange"><i class="fas fa-bell"></i></div><div class="stat-info"><div class="num" id="statNotifs">—</div><div class="lbl">Notifications</div></div></div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card" style="border-left:4px solid #10b981"><div class="stat-info"><div class="num" id="sumReady" style="color:#10b981">—</div><div class="lbl">✅ Courses Ready</div></div></div>
+                    <div class="stat-card" style="border-left:4px solid #f59e0b"><div class="stat-info"><div class="num" id="sumNotReady" style="color:#f59e0b">—</div><div class="lbl">⚠️ Need Questions</div></div></div>
+                    <div class="stat-card" style="border-left:4px solid #3b82f6"><div class="stat-info"><div class="num" id="sumTestQ">—</div><div class="lbl">📝 Test Questions</div></div></div>
+                    <div class="stat-card" style="border-left:4px solid #7c3aed"><div class="stat-info"><div class="num" id="sumExamQ">—</div><div class="lbl">📄 Exam Questions</div></div></div>
+                </div>
+                <div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><h2><i class="fas fa-exclamation-triangle"></i> Courses Not Ready</h2><button class="btn btn-sm" style="background:#e2e8f0;color:#475569" onclick="loadAll()"><i class="fas fa-sync-alt"></i></button></div><div id="notReadyList"><div class="loading"><i class="fas fa-spinner"></i> Loading...</div></div></div>
+            </div>
+
+            <!-- CEO MESSAGES PAGE -->
+            <div id="ceoMessagesPage" style="display:none">
+                <div class="back-link" onclick="goBackToDashboard()"><i class="fas fa-arrow-left"></i> Back to Dashboard</div>
+                <div class="card"><h2><i class="fas fa-crown"></i> Messages from CEO</h2><div id="ceoMessagesList"><div class="loading"><i class="fas fa-spinner"></i> Loading...</div></div></div>
+
+                <!-- REPLY TO CEO PAGE -->
+                <div id="replyToCeoPage" style="display:none">
+                    <div class="back-link" onclick="goBackToCeoMessages()"><i class="fas fa-arrow-left"></i> Back to Messages</div>
+                    <div class="card">
+                        <h2>📨 Reply to CEO</h2>
+                        <div id="replyToCeoInfo" style="margin-bottom:16px;padding:14px;background:#f8fafc;border-radius:10px"></div>
+                        <div class="form-group"><label>Your Reply</label><textarea id="replyToCeoText" rows="3" placeholder="Type your reply to the CEO..."></textarea></div>
+                        <button class="btn btn-primary" id="btnReplyCeo" onclick="sendReplyToCeo()"><i class="fas fa-paper-plane"></i> Send Reply</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+        const API = 'https://oau-exam-api.onrender.com/api';
+        const ADMIN_TOKEN = localStorage.getItem('admin_token') || sessionStorage.getItem('admin_token');
+        const ADMIN_EMAIL = localStorage.getItem('admin_email') || sessionStorage.getItem('admin_email');
+        const ADMIN_DATA = JSON.parse(localStorage.getItem('admin_data') || sessionStorage.getItem('admin_data') || '{}');
+        let replyToMsgId = '';
+
+        if (!ADMIN_TOKEN && !ADMIN_EMAIL) { window.location.href = 'admin-login.html'; }
+        else { document.body.classList.add('authorized'); init(); }
+
+        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sidebarOverlay').classList.toggle('show'); }
+        function closeSidebar() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').classList.remove('show'); }
+        function logout() { localStorage.clear(); sessionStorage.clear(); window.location.href = 'admin-login.html'; }
+
+        async function apiCall(url, options = {}) {
+            try {
+                const headers = { 'Content-Type': 'application/json', 'x-admin-token': ADMIN_TOKEN, 'x-admin-email': ADMIN_EMAIL, ...options.headers };
+                const userToken = localStorage.getItem('oau_token');
+                if (userToken) headers['Authorization'] = 'Bearer ' + userToken;
+                const r = await fetch(url, { ...options, headers });
+                const d = await r.json(); if (!r.ok) throw new Error(d.error || 'Failed'); return d;
+            } catch(e) { console.error('API:', e.message); throw e; }
+        }
+
+        function show(msg, type) { const el = document.getElementById(type + 'Alert'); el.textContent = (type==='success'?'✅ ':'❌ ') + msg; el.classList.add('show'); setTimeout(() => el.classList.remove('show'), 4000); }
+        function setLoading(btn, loading) { if (loading) { btn.disabled = true; btn.dataset.original = btn.innerHTML; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ' + btn.textContent.trim(); } else { btn.disabled = false; if (btn.dataset.original) btn.innerHTML = btn.dataset.original; } }
+
+        function init() {
+            document.getElementById('adminName').textContent = ADMIN_DATA.name || 'Admin';
+            document.getElementById('adminRole').textContent = ADMIN_DATA.role || 'admin';
+            document.getElementById('adminPerf').textContent = '⭐ ' + (ADMIN_DATA.performanceRate || 0) + '%';
+            document.getElementById('adminContrib').textContent = '📦 ' + (ADMIN_DATA.totalContributions || 0);
+            document.getElementById('adminInfo').innerHTML = `<div class="admin-avatar">${ADMIN_DATA.profilePicture ? `<img src="${ADMIN_DATA.profilePicture}">` : (ADMIN_DATA.name||'A').charAt(0)}</div><div style="font-size:.8rem"><strong>${ADMIN_DATA.name||'Admin'}</strong><br><span style="color:#64748b">${ADMIN_DATA.email||''}</span></div>`;
+            loadAll();
+            checkCeoMessages();
+        }
+
+        async function loadAll() {
+            try {
+                const [stats, dash] = await Promise.all([apiCall(API + '/admin/stats'), apiCall(API + '/admin/dashboard')]);
+                document.getElementById('statUsers').textContent = stats.totalUsers || 0;
+                document.getElementById('statQuestions').textContent = stats.totalQuestions || 0;
+                document.getElementById('statCourses').textContent = stats.totalCourses || 0;
+                document.getElementById('statNotifs').textContent = stats.totalNotifications || 0;
+                document.getElementById('sumReady').textContent = dash.coursesReady || 0;
+                document.getElementById('sumNotReady').textContent = dash.totalNotReady || 0;
+                document.getElementById('sumTestQ').textContent = dash.totalTestQuestions || 0;
+                document.getElementById('sumExamQ').textContent = dash.totalExamQuestions || 0;
+                const list = document.getElementById('notReadyList');
+                if (!dash.coursesNotReady?.length) { list.innerHTML = '<div style="text-align:center;padding:20px;color:#10b981">🎉 All courses ready!</div>'; return; }
+                list.innerHTML = dash.coursesNotReady.map(c => `<div class="course-item"><div><strong>${c.code}</strong> - ${c.name}</div><div style="display:flex;gap:12px;font-size:.75rem"><span>🧪 ${c.test} <span class="badge ${c.testReady?'badge-success':'badge-warning'}">${c.testReady?'✓':'⚠'}</span></span><span>📝 ${c.exam} <span class="badge ${c.examReady?'badge-success':'badge-warning'}">${c.examReady?'✓':'⚠'}</span></span></div></div>`).join('');
+            } catch(e) { show(e.message, 'error'); }
+        }
+
+        // ==================== CEO MESSAGES ====================
+        async function checkCeoMessages() {
+    try {
+        const adminId = ADMIN_DATA.id;
+        if (!adminId) return;
+        const d = await apiCall(API + '/chat/ceo-messages/' + adminId);
+        if (d.unreadCount > 0) {
+            document.getElementById('ceoNotifPreview').textContent = 'You have ' + d.unreadCount + ' unread message(s) from CEO';
+            document.getElementById('ceoNotifBanner').classList.add('show');
+        }
+    } catch(e) { console.log('CEO msg check:', e); }
+}
+
+        window.viewCeoMessages = function() {
+            document.getElementById('dashboardPage').style.display = 'none';
+            document.getElementById('ceoNotifBanner').classList.remove('show');
+            document.getElementById('ceoMessagesPage').style.display = 'block';
+            loadCeoMessages();
+        };
+
+        async function loadCeoMessages() {
+            const list = document.getElementById('ceoMessagesList'); list.innerHTML = '<div class="loading"><i class="fas fa-spinner"></i> Loading...</div>';
+            try {
+                const d = await apiCall(API + '/chat/all?status=all');
+                const ceoMsgs = (d.chats || []).filter(c => c.category === 'ceo_message' || c.type === 'ceo_message' || (c.title && c.title.startsWith('👑 CEO:')));
+                if (!ceoMsgs.length) { list.innerHTML = '<div class="empty-state">No messages from CEO</div>'; return; }
+                list.innerHTML = ceoMsgs.map(m => `<div class="message-card"><div class="msg-header"><strong>👑 From: CEO (FrancisTech)</strong><span>${new Date(m.createdAt).toLocaleString()}</span></div><div class="msg-body">${m.message}</div>${m.reply ? `<div class="msg-reply-box"><strong>Your Reply:</strong> ${m.reply}</div>` : `<button class="btn btn-primary btn-sm" style="margin-top:8px" onclick="openReplyToCeo('${m._id}','${m.message.replace(/'/g,"\\'")}')"><i class="fas fa-reply"></i> Reply to CEO</button>`}</div>`).join('');
+            } catch(e) { list.innerHTML = '<div class="empty-state">Error loading messages</div>'; }
+        }
+
+        window.openReplyToCeo = function(id, msg) {
+            replyToMsgId = id;
+            document.getElementById('replyToCeoInfo').innerHTML = `<strong>CEO Message:</strong> ${msg}`;
+            document.getElementById('replyToCeoText').value = '';
+            document.getElementById('ceoMessagesList').parentElement.style.display = 'none';
+            document.getElementById('replyToCeoPage').style.display = 'block';
+        };
+
+        window.sendReplyToCeo = async function() {
+            const reply = document.getElementById('replyToCeoText').value.trim();
+            if (reply.length < 3) { show('Reply must be at least 3 characters', 'error'); return; }
+            const btn = document.getElementById('btnReplyCeo'); setLoading(btn, true);
+            try {
+                await apiCall(API + '/chat/reply/' + replyToMsgId, { method: 'PUT', body: JSON.stringify({ reply, category: 'ceo_reply' }) });
+                show('Reply sent to CEO!', 'success');
+                document.getElementById('replyToCeoPage').style.display = 'none';
+                document.getElementById('ceoMessagesList').parentElement.style.display = 'block';
+                loadCeoMessages();
+            } catch(e) { show(e.message, 'error'); }
+            setLoading(btn, false);
+        };
+
+        window.goBackToDashboard = function() { document.getElementById('ceoMessagesPage').style.display='none'; document.getElementById('dashboardPage').style.display='block'; checkCeoMessages(); };
+        window.goBackToCeoMessages = function() { document.getElementById('replyToCeoPage').style.display='none'; document.getElementById('ceoMessagesList').parentElement.style.display='block'; };
+        window.loadAll = loadAll;
+    </script>
+</body>
+</html>

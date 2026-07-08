@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Materials • Admin Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:#f1f5f9;color:#0f172a;min-height:100vh;display:none}
+        body.authorized{display:block}
+        .app{display:flex;min-height:100vh}
+        .sidebar{width:260px;background:#0f172a;position:fixed;left:0;top:0;bottom:0;overflow-y:auto;z-index:100;transition:transform .3s}
+        .sidebar-header{padding:20px;border-bottom:1px solid #1e293b;display:flex;align-items:center;gap:10px}
+        .sidebar-header i{color:#3b82f6;font-size:1.3rem}
+        .sidebar-header span{font-weight:800;color:#f1f5f9;font-size:1.1rem}
+        .nav-menu{list-style:none;padding:8px}
+        .nav-link{display:flex;align-items:center;gap:10px;padding:10px 14px;color:#94a3b8;text-decoration:none;border-radius:8px;font-weight:500;font-size:.85rem;transition:all .2s;cursor:pointer}
+        .nav-link:hover{background:#1e293b;color:#e2e8f0}
+        .nav-link.active{background:#3b82f6;color:#fff}
+        .nav-link i{width:20px;font-size:.9rem}
+        .nav-divider{height:1px;background:#1e293b;margin:12px 8px}
+        .nav-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#475569;padding:12px 14px 6px}
+        .main-content{flex:1;margin-left:260px;padding:20px 28px}
+        @media(max-width:768px){.sidebar{transform:translateX(-100%);z-index:200}.sidebar.open{transform:translateX(0)}.main-content{margin-left:0;padding:70px 16px 16px 16px}}
+        .mobile-btn{display:none;position:fixed;top:16px;left:16px;z-index:160;background:#3b82f6;color:#fff;width:40px;height:40px;border-radius:10px;align-items:center;justify-content:center;cursor:pointer;border:none;font-size:1.1rem}
+        @media(max-width:768px){.mobile-btn{display:flex}}
+        .sidebar-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:150}
+        .sidebar-overlay.show{display:block}
+        .top-bar{background:#fff;padding:14px 20px;border-radius:14px;margin-bottom:24px;border:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+        .top-bar h1{font-size:1.3rem;font-weight:700}
+        .card{background:#fff;border-radius:14px;padding:20px;border:1px solid #e2e8f0;margin-bottom:20px}
+        .card h2{font-size:1rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+        .card h2 i{color:#3b82f6}
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+        @media(max-width:500px){.form-row{grid-template-columns:1fr}}
+        .form-group{margin-bottom:12px}
+        .form-group label{display:block;margin-bottom:4px;font-weight:600;font-size:.78rem;color:#475569}
+        .form-group input,.form-group select{width:100%;padding:10px 12px;border:2px solid #e2e8f0;border-radius:8px;font-size:.85rem;font-family:inherit;background:#f8fafc;transition:all .2s}
+        .form-group input:focus,.form-group select:focus{outline:none;border-color:#3b82f6;background:#fff}
+        .btn{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border:none;border-radius:10px;font-weight:600;font-size:.82rem;cursor:pointer;transition:all .2s;text-decoration:none}
+        .btn-primary{background:#3b82f6;color:#fff}.btn-primary:hover{background:#2563eb}
+        .btn-success{background:#10b981;color:#fff}.btn-success:hover{background:#059669}
+        .btn-danger{background:#ef4444;color:#fff;padding:6px 12px;font-size:.7rem}.btn-danger:hover{background:#dc2626}
+        .btn-outline{background:transparent;color:#3b82f6;border:2px solid #3b82f6;padding:6px 12px;font-size:.7rem}
+        .btn-sm{padding:6px 12px;font-size:.72rem}
+        .btn-xs{padding:4px 8px;font-size:.65rem}
+        .alert{padding:12px 16px;border-radius:10px;margin-bottom:16px;display:none;font-size:.82rem}
+        .alert-success{background:#d1fae5;color:#065f46;border:1px solid #a7f3d0}
+        .alert-error{background:#fee2e2;color:#991b1b;border:1px solid #fecaca}
+        .alert.show{display:block}
+        .material-item{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:#f8fafc;border-radius:10px;margin-bottom:6px;gap:10px;flex-wrap:wrap}
+        .badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:.65rem;font-weight:600}
+        .badge-slides{background:#dbeafe;color:#1e40af}
+        .badge-pastquestion{background:#fef3c7;color:#92400e}
+        .badge-textbook{background:#d1fae5;color:#065f46}
+        .badge-media{background:#ede9fe;color:#6d28d9}
+        .loading{text-align:center;padding:30px;color:#94a3b8}
+        .loading i{animation:spin 1s linear infinite}
+        @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+        .empty-state{text-align:center;padding:30px;color:#94a3b8}
+        .tabs{display:flex;gap:4px;margin-bottom:16px;flex-wrap:wrap}
+        .tab-btn{padding:8px 16px;border:2px solid #e2e8f0;border-radius:8px;cursor:pointer;font-size:.8rem;font-weight:500;background:#f8fafc;transition:all .2s}
+        .tab-btn.active{background:#3b82f6;color:#fff;border-color:#3b82f6}
+        .tab-btn:hover:not(.active){background:#eff6ff}
+        .file-upload-area{border:2px dashed #cbd5e1;border-radius:12px;padding:20px;text-align:center;cursor:pointer;transition:all .2s;background:#f8fafc}
+        .file-upload-area:hover{border-color:#3b82f6;background:#eff6ff}
+        .file-upload-area i{font-size:1.5rem;color:#3b82f6;margin-bottom:6px;display:block}
+        .file-upload-area p{color:#64748b;font-size:.78rem}
+        .file-upload-area input{display:none}
+        .youtube-link-box{background:#fff7ed;border:2px solid #fdba74;border-radius:12px;padding:16px;margin-top:12px}
+        .youtube-link-box h4{color:#c2410c;margin-bottom:4px;font-size:.85rem}
+        .youtube-link-box input{width:100%;padding:10px 12px;border:2px solid #fdba74;border-radius:8px;font-size:.85rem;background:#fff;transition:all .2s}
+        .youtube-link-box input:focus{outline:none;border-color:#f97316}
+    </style>
+</head>
+<body>
+    <button class="mobile-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+    <div class="app">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header"><i class="fas fa-graduation-cap"></i><span>OAU CBT Practice</span></div>
+            <div class="nav-label">Main</div>
+            <ul class="nav-menu">
+                <li><a class="nav-link" href="adminDashboard.html"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                <li><a class="nav-link" href="questions.html"><i class="fas fa-question-circle"></i> Questions</a></li>
+                <li><a class="nav-link" href="courses.html"><i class="fas fa-book"></i> Courses</a></li>
+                <li><a class="nav-link" href="courseSettings.html"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+            <div class="nav-divider"></div>
+            <div class="nav-label">Users & Analytics</div>
+            <ul class="nav-menu">
+                <li><a class="nav-link" href="AdminPageUsers.html"><i class="fas fa-users"></i> Users</a></li>
+                <li><a class="nav-link" href="analysis.html"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                <li><a class="nav-link" href="AdminNotification.html"><i class="fas fa-bell"></i> Notifications</a></li>
+                <li><a class="nav-link" href="adminChat.html"><i class="fas fa-comments"></i> Chat</a></li>
+            </ul>
+            <div class="nav-divider"></div>
+            <ul class="nav-menu">
+                <li><a class="nav-link active" href="allCourseMaterial.html"><i class="fas fa-folder"></i> Materials</a></li>
+            </ul>
+            <div class="nav-divider"></div>
+            <ul class="nav-menu">
+                <li><a class="nav-link" href="/app"><i class="fas fa-arrow-left"></i> Back to App</a></li>
+                <li><a class="nav-link" onclick="logout()"><i class="fas fa-lock"></i> Lock</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <div class="top-bar"><h1>📁 Course Materials</h1></div>
+            <div class="alert alert-success" id="successAlert"></div>
+            <div class="alert alert-error" id="errorAlert"></div>
+
+            <!-- Upload Material -->
+            <div class="card">
+                <h2><i class="fas fa-upload"></i> Upload Course Material</h2>
+                <div class="form-row">
+                    <div class="form-group"><label>Course Code *</label><input type="text" id="matCourseCode" placeholder="e.g., CHM 101"></div>
+                    <div class="form-group"><label>Title *</label><input type="text" id="matTitle" placeholder="e.g., Week 1 Slides"></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Material Type *</label>
+                        <select id="matType">
+                            <option value="slides">📊 Slides</option>
+                            <option value="pastquestion">📝 Past Question</option>
+                            <option value="textbook">📚 Textbook</option>
+                            <option value="media">🎥 Audio/Video</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label>Faculty *</label><input type="text" id="matFaculty" placeholder="e.g., Science"></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>Level</label><select id="matLevel"><option value="100">100</option><option value="200">200</option><option value="300">300</option><option value="400">400</option><option value="500">500</option></select></div>
+                    <div class="form-group"><label>Semester</label><select id="matSemester"><option value="first">First</option><option value="second">Second</option></select></div>
+                </div>
+                
+                <!-- YouTube Link -->
+                <div class="youtube-link-box">
+                    <h4><i class="fab fa-youtube"></i> YouTube Video Link (Optional)</h4>
+                    <p style="font-size:.72rem;color:#64748b;margin-bottom:8px">Paste a YouTube URL for video/audio study materials. Leave empty if uploading a file.</p>
+                    <input type="url" id="matYoutube" placeholder="https://www.youtube.com/watch?v=...">
+                </div>
+                
+                <!-- File Upload -->
+                <div class="form-group" style="margin-top:12px">
+                    <label>Upload File (optional if YouTube link provided)</label>
+                    <div class="file-upload-area" onclick="document.getElementById('matFile').click()">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Click to select file (PDF, DOC, PPT, MP4, MP3, JPG, PNG)</p>
+                        <p id="fileNameDisplay" style="color:#3b82f6;font-weight:600;margin-top:4px"></p>
+                        <input type="file" id="matFile" accept=".pdf,.doc,.docx,.ppt,.pptx,.mp4,.mp3,.jpg,.jpeg,.png" onchange="displayFileName()">
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="uploadMaterial()"><i class="fas fa-upload"></i> Upload Material</button>
+            </div>
+
+            <!-- Browse Materials -->
+            <div class="card">
+                <h2><i class="fas fa-filter"></i> Browse Materials</h2>
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="filterMaterials('all')">📁 All</button>
+                    <button class="tab-btn" onclick="filterMaterials('slides')">📊 Slides</button>
+                    <button class="tab-btn" onclick="filterMaterials('pastquestion')">📝 Past Questions</button>
+                    <button class="tab-btn" onclick="filterMaterials('textbook')">📚 Textbooks</button>
+                    <button class="tab-btn" onclick="filterMaterials('media')">🎥 Audio/Video</button>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>Faculty Filter</label><select id="filterFaculty" onchange="loadMaterials()"><option value="">All Faculties</option></select></div>
+                    <div class="form-group"><label>Level Filter</label><select id="filterLevel" onchange="loadMaterials()"><option value="">All Levels</option><option value="100">100</option><option value="200">200</option><option value="300">300</option><option value="400">400</option><option value="500">500</option></select></div>
+                </div>
+                <div id="materialsList"><div class="loading"><i class="fas fa-spinner"></i> Loading...</div></div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const API = 'https://oau-exam-api.onrender.com/api';
+        const ADMIN_TOKEN = localStorage.getItem('admin_token');
+        const ADMIN_EMAIL = localStorage.getItem('admin_email');
+        const token = localStorage.getItem('oau_token');
+        let currentFilter = 'all';
+        let uploadedFileBase64 = '';
+
+        if (!ADMIN_TOKEN && !ADMIN_EMAIL) { window.location.href = 'admin-login.html'; }
+        else { document.body.classList.add('authorized'); init(); }
+
+        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sidebarOverlay').classList.toggle('show'); }
+        function closeSidebar() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').classList.remove('show'); }
+        function logout() { localStorage.removeItem('admin_token'); localStorage.removeItem('admin_email'); localStorage.removeItem('admin_data'); sessionStorage.clear(); window.location.href = 'admin-login.html'; }
+
+        async function apiCall(url, options = {}) {
+            try {
+                const r = await fetch(url, { ...options, headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token, 'x-admin-token': ADMIN_TOKEN, 'x-admin-email': ADMIN_EMAIL, ...options.headers } });
+                const d = await r.json();
+                if (!r.ok) throw new Error(d.error || 'Request failed');
+                return d;
+            } catch(e) { console.error('API Error:', e.message); throw e; }
+        }
+
+        function show(msg, type) {
+            const el = document.getElementById(type + 'Alert');
+            el.textContent = (type==='success'?'✅ ':'❌ ') + msg; el.classList.add('show');
+            setTimeout(() => el.classList.remove('show'), 4000);
+        }
+
+        async function init() {
+            await loadFacultyDropdown();
+            await loadMaterials();
+        }
+
+        async function loadFacultyDropdown() {
+            try {
+                const d = await apiCall(API + '/admin/faculties');
+                document.getElementById('filterFaculty').innerHTML = '<option value="">All Faculties</option>' + (d.faculties||[]).map(f => `<option value="${f.name}">${f.name}</option>`).join('');
+            } catch(e) { console.log('Faculty dropdown error:', e); }
+        }
+
+        function displayFileName() {
+            const file = document.getElementById('matFile').files[0];
+            if (file) {
+                document.getElementById('fileNameDisplay').textContent = '📎 ' + file.name;
+                const reader = new FileReader();
+                reader.onload = function(e) { uploadedFileBase64 = e.target.result; };
+                reader.readAsDataURL(file);
+            }
+        }
+        window.displayFileName = displayFileName;
+
+        window.uploadMaterial = async function() {
+            const code = document.getElementById('matCourseCode').value.trim();
+            const title = document.getElementById('matTitle').value.trim();
+            const faculty = document.getElementById('matFaculty').value.trim();
+            const youtubeLink = document.getElementById('matYoutube').value.trim();
+            
+            if (!code || !title || !faculty) { show('Fill course code, title, and faculty', 'error'); return; }
+            if (!uploadedFileBase64 && !youtubeLink) { show('Upload a file or provide a YouTube link', 'error'); return; }
+            
+            try {
+                await apiCall(API + '/admin/materials', { method: 'POST', body: JSON.stringify({
+                    courseCode: code, title, type: document.getElementById('matType').value,
+                    faculty, level: document.getElementById('matLevel').value,
+                    semester: document.getElementById('matSemester').value,
+                    fileData: uploadedFileBase64,
+                    fileName: document.getElementById('matFile').files[0]?.name || 'file',
+                    youtubeLink: youtubeLink
+                })});
+                show('Material uploaded!', 'success');
+                document.getElementById('matCourseCode').value = ''; 
+                document.getElementById('matTitle').value = '';
+                document.getElementById('matYoutube').value = ''; 
+                document.getElementById('fileNameDisplay').textContent = '';
+                uploadedFileBase64 = '';
+                document.getElementById('matFile').value = '';
+                loadMaterials();
+            } catch(e) { show(e.message, 'error'); }
+        };
+
+        async function loadMaterials() {
+            const list = document.getElementById('materialsList');
+            list.innerHTML = '<div class="loading"><i class="fas fa-spinner"></i> Loading...</div>';
+            try {
+                const faculty = document.getElementById('filterFaculty').value;
+                const level = document.getElementById('filterLevel').value;
+                let url = API + '/admin/materials?';
+                if (faculty) url += 'faculty=' + encodeURIComponent(faculty) + '&';
+                if (level) url += 'level=' + level + '&';
+                if (currentFilter !== 'all') url += 'type=' + currentFilter;
+
+                const d = await apiCall(url);
+                const materials = d.materials || [];
+                if (!materials.length) { list.innerHTML = '<div class="empty-state">No materials found</div>'; return; }
+                
+                list.innerHTML = materials.map(m => {
+                    const badgeClass = {slides:'badge-slides',pastquestion:'badge-pastquestion',textbook:'badge-textbook',media:'badge-media'}[m.type]||'badge-info';
+                    return `<div class="material-item">
+                        <div style="flex:1">
+                            <strong>${m.title}</strong>
+                            <span class="badge ${badgeClass}">${m.type}</span>
+                            <div style="font-size:.7rem;color:#64748b">${m.courseCode} | ${m.faculty} | ${m.level}L | ${m.semester} sem</div>
+                            ${m.youtubeLink ? `<div style="font-size:.7rem;margin-top:4px"><a href="${m.youtubeLink}" target="_blank" style="color:#ef4444"><i class="fab fa-youtube"></i> Watch Video</a></div>` : ''}
+                        </div>
+                        <div style="display:flex;gap:6px">
+                            ${m.fileData ? `<a href="${m.fileData}" class="btn btn-outline btn-xs" download="${m.fileName||'material'}"><i class="fas fa-download"></i></a>` : ''}
+                            ${m.youtubeLink ? `<a href="${m.youtubeLink}" target="_blank" class="btn btn-outline btn-xs" style="color:#ef4444;border-color:#ef4444"><i class="fab fa-youtube"></i></a>` : ''}
+                            <button class="btn btn-danger btn-xs" onclick="deleteMaterial('${m._id}')"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>`;
+                }).join('');
+            } catch(e) { list.innerHTML = '<div class="empty-state">Error loading materials</div>'; }
+        }
+        window.loadMaterials = loadMaterials;
+
+        window.filterMaterials = function(type) {
+            currentFilter = type;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            loadMaterials();
+        };
+
+        window.deleteMaterial = async function(id) {
+            if (!confirm('Delete this material?')) return;
+            try { await apiCall(API + '/admin/materials/' + id, { method: 'DELETE' }); show('Deleted', 'success'); loadMaterials(); } catch(e) { show(e.message, 'error'); }
+        };
+    </script>
+</body>
+</html>

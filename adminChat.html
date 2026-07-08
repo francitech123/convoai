@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Management • Admin Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:#f1f5f9;color:#0f172a;min-height:100vh}
+        body.authorized{display:block}
+        .app{display:flex;min-height:100vh}
+        .sidebar{width:260px;background:#0f172a;position:fixed;left:0;top:0;bottom:0;overflow-y:auto;z-index:100;transition:transform .3s}
+        .sidebar-header{padding:20px;border-bottom:1px solid #1e293b;display:flex;align-items:center;gap:10px}
+        .sidebar-header i{color:#3b82f6;font-size:1.3rem}.sidebar-header span{font-weight:800;color:#f1f5f9;font-size:1.1rem}
+        .nav-menu{list-style:none;padding:8px}
+        .nav-link{display:flex;align-items:center;gap:10px;padding:10px 14px;color:#94a3b8;text-decoration:none;border-radius:8px;font-weight:500;font-size:.85rem;transition:all .2s;cursor:pointer}
+        .nav-link:hover{background:#1e293b;color:#e2e8f0}.nav-link.active{background:#3b82f6;color:#fff}.nav-link i{width:20px;font-size:.9rem}
+        .nav-divider{height:1px;background:#1e293b;margin:12px 8px}
+        .nav-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#475569;padding:12px 14px 6px}
+        .main-content{flex:1;margin-left:260px;padding:20px 28px}
+        @media(max-width:768px){.sidebar{transform:translateX(-100%);z-index:200}.sidebar.open{transform:translateX(0)}.main-content{margin-left:0;padding:60px 16px 16px 16px}}
+        .mobile-btn{position:fixed;top:12px;left:12px;z-index:160;background:#3b82f6;color:#fff;width:40px;height:40px;border-radius:10px;display:none;align-items:center;justify-content:center;cursor:pointer;border:none;font-size:1.1rem;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+        @media(max-width:768px){.mobile-btn{display:flex}}
+        .sidebar-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:150}.sidebar-overlay.show{display:block}
+        .top-bar{background:#fff;padding:14px 20px;border-radius:14px;margin-bottom:24px;border:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}.top-bar h1{font-size:1.3rem;font-weight:700}
+        .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px}
+        .stat-card{background:#fff;border-radius:12px;padding:14px;text-align:center;border:1px solid #e2e8f0}
+        .stat-number{font-size:1.6rem;font-weight:800;color:#3b82f6}
+        .stat-label{font-size:.7rem;color:#64748b;margin-top:4px}
+        .card{background:#fff;border-radius:14px;padding:20px;border:1px solid #e2e8f0;margin-bottom:20px}
+        .card h2{font-size:1rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}.card h2 i{color:#3b82f6}
+        .btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border:none;border-radius:8px;font-weight:600;font-size:.8rem;cursor:pointer;transition:all .2s}
+        .btn-primary{background:#3b82f6;color:#fff}.btn-primary:hover{background:#2563eb}
+        .btn-success{background:#10b981;color:#fff}.btn-success:hover{background:#059669}
+        .btn-sm{padding:5px 10px;font-size:.7rem}.btn:disabled{opacity:.6;cursor:not-allowed}
+        .alert{padding:12px 16px;border-radius:10px;margin-bottom:16px;display:none;font-size:.82rem}
+        .alert-success{background:#d1fae5;color:#065f46;border:1px solid #a7f3d0}.alert-error{background:#fee2e2;color:#991b1b;border:1px solid #fecaca}.alert.show{display:block}
+        .filter-bar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+        .filter-btn{padding:6px 12px;border:1px solid #e2e8f0;border-radius:20px;cursor:pointer;font-size:.75rem;font-weight:500;background:#f8fafc;transition:all .2s}
+        .filter-btn.active{background:#3b82f6;color:#fff;border-color:#3b82f6}
+        .filter-btn.guest{background:#fef3c7;color:#92400e;border-color:#fde68a}
+        .filter-btn.guest.active{background:#f59e0b;color:#fff}
+        .search-box{display:flex;gap:8px;margin-bottom:16px}
+        .search-box input{flex:1;padding:8px 12px;border:1px solid #e2e8f0;border-radius:8px;font-size:.8rem}
+        .search-box input:focus{outline:none;border-color:#3b82f6}
+        .chat-item{background:#f8fafc;border-radius:10px;padding:14px;margin-bottom:8px;border-left:4px solid #e2e8f0;transition:all .2s}
+        .chat-item:hover{box-shadow:0 2px 8px rgba(0,0,0,.05)}
+        .chat-item.pending{border-left-color:#f59e0b}
+        .chat-item.replied{border-left-color:#10b981}
+        .chat-item.guest{background:#fffbeb}
+        .chat-meta{display:flex;justify-content:space-between;margin-bottom:6px;font-size:.75rem;color:#64748b;flex-wrap:wrap;gap:6px}
+        .chat-message{font-size:.85rem;margin-bottom:8px;line-height:1.5}
+        .chat-reply{background:#eff6ff;padding:10px;border-radius:8px;font-size:.8rem;margin-top:8px}
+        .badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:.65rem;font-weight:600}
+        .badge-pending{background:#fef3c7;color:#92400e}
+        .badge-replied{background:#d1fae5;color:#065f46}
+        .badge-guest{background:#fef3c7;color:#92400e}
+        .badge-registered{background:#dbeafe;color:#1e40af}
+        .guest-icon{background:#fef3c7;color:#92400e;padding:2px 6px;border-radius:10px;font-size:.6rem;margin-left:6px}
+        .form-group{margin-bottom:10px}
+        .form-group textarea{width:100%;padding:10px;border:2px solid #e2e8f0;border-radius:8px;font-family:inherit;font-size:.85rem;resize:vertical;min-height:60px}
+        .form-group textarea:focus{outline:none;border-color:#3b82f6}
+        .loading{text-align:center;padding:30px;color:#94a3b8}.loading i{animation:spin 1s linear infinite}@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+        .empty-state{text-align:center;padding:30px;color:#94a3b8}
+        .back-link{display:inline-flex;align-items:center;gap:6px;color:#3b82f6;cursor:pointer;font-weight:600;font-size:.85rem;margin-bottom:16px}
+        .auto-refresh{font-size:.7rem;color:#64748b;display:flex;align-items:center;gap:6px}
+        .refresh-btn{background:none;border:none;color:#3b82f6;cursor:pointer;font-size:.7rem}
+    </style>
+</head>
+<body>
+    <button class="mobile-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+    <div class="app">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header"><i class="fas fa-graduation-cap"></i><span>OAU CBT Practice</span></div>
+            <div class="nav-label">Main</div>
+            <ul class="nav-menu">
+                <li><a class="nav-link" href="adminDashboard.html"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                <li><a class="nav-link" href="questions.html"><i class="fas fa-question-circle"></i> Questions</a></li>
+                <li><a class="nav-link" href="courses.html"><i class="fas fa-book"></i> Courses</a></li>
+                <li><a class="nav-link" href="courseSettings.html"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+            <div class="nav-divider"></div>
+            <div class="nav-label">Users & Analytics</div>
+            <ul class="nav-menu">
+                <li><a class="nav-link" href="AdminPageUsers.html"><i class="fas fa-users"></i> Users</a></li>
+                <li><a class="nav-link" href="analysis.html"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                <li><a class="nav-link" href="AdminNotification.html"><i class="fas fa-bell"></i> Notifications</a></li>
+                <li><a class="nav-link active" href="adminChat.html"><i class="fas fa-comments"></i> Chat</a></li>
+            </ul>
+            <div class="nav-divider"></div>
+            <ul class="nav-menu"><li><a class="nav-link" href="allCourseMaterial.html"><i class="fas fa-folder"></i> Materials</a></li></ul>
+            <div class="nav-divider"></div>
+            <ul class="nav-menu"><li><a class="nav-link" href="/app"><i class="fas fa-arrow-left"></i> Back to App</a></li><li><a class="nav-link" onclick="logout()"><i class="fas fa-lock"></i> Lock</a></li></ul>
+        </aside>
+        <main class="main-content">
+            <div class="top-bar">
+                <h1>💬 Chat Management</h1>
+                <div class="auto-refresh">
+                    <i class="fas fa-sync-alt"></i> Auto-refresh every 15s
+                    <button class="refresh-btn" onclick="loadChats()"><i class="fas fa-redo"></i> Refresh</button>
+                </div>
+            </div>
+            <div class="alert alert-success" id="successAlert"></div>
+            <div class="alert alert-error" id="errorAlert"></div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid" id="statsGrid">
+                <div class="stat-card"><div class="stat-number" id="statPending">0</div><div class="stat-label">🟡 Pending</div></div>
+                <div class="stat-card"><div class="stat-number" id="statReplied">0</div><div class="stat-label">✅ Replied</div></div>
+                <div class="stat-card"><div class="stat-number" id="statGuest">0</div><div class="stat-label">👤 Guest Users</div></div>
+                <div class="stat-card"><div class="stat-number" id="statTotal">0</div><div class="stat-label">📋 Total Messages</div></div>
+            </div>
+
+            <!-- CHAT LIST PAGE -->
+            <div id="chatListPage">
+                <div class="card">
+                    <h2><i class="fas fa-comments"></i> All Messages</h2>
+                    
+                    <!-- Filter Bar -->
+                    <div class="filter-bar">
+                        <button class="filter-btn active" data-filter="all" onclick="setFilter('all')">📋 All</button>
+                        <button class="filter-btn" data-filter="pending" onclick="setFilter('pending')">🟡 Pending</button>
+                        <button class="filter-btn" data-filter="replied" onclick="setFilter('replied')">✅ Replied</button>
+                        <button class="filter-btn guest" data-filter="guest" onclick="setFilter('guest')">👤 Guest Users</button>
+                        <button class="filter-btn" data-filter="registered" onclick="setFilter('registered')">👥 Registered</button>
+                    </div>
+                    
+                    <!-- Search Box -->
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="🔍 Search by name, email, or message..." onkeyup="searchMessages()">
+                    </div>
+                    
+                    <div id="chatsList"><div class="loading"><i class="fas fa-spinner"></i> Loading...</div></div>
+                </div>
+            </div>
+
+            <!-- REPLY PAGE -->
+            <div id="replyPage" style="display:none">
+                <div class="back-link" onclick="goBackToChats()"><i class="fas fa-arrow-left"></i> Back to Messages</div>
+                <div class="card">
+                    <h2>📨 Reply to Message</h2>
+                    <div id="replyInfo" style="margin-bottom:16px;padding:14px;background:#f8fafc;border-radius:10px"></div>
+                    <div class="form-group"><label>Your Reply</label><textarea id="replyText" placeholder="Type your reply here..."></textarea></div>
+                    <button class="btn btn-primary" id="btnSendReply" onclick="sendReply()"><i class="fas fa-paper-plane"></i> Send Reply</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+        const API = 'https://oau-exam-api.onrender.com/api';
+        const ADMIN_TOKEN = localStorage.getItem('admin_token') || sessionStorage.getItem('admin_token');
+        const ADMIN_EMAIL = localStorage.getItem('admin_email') || sessionStorage.getItem('admin_email');
+        let currentFilter = 'all';
+        let currentSearchTerm = '';
+        let replyId = '';
+        let allChats = [];
+        let autoRefreshInterval = null;
+        
+        // Authentication check
+        if (!ADMIN_TOKEN && !ADMIN_EMAIL) { 
+            window.location.href = 'admin-login.html'; 
+        } else { 
+            document.body.classList.add('authorized'); 
+            loadChats(); 
+            startAutoRefresh();
+        }
+        
+        // ==================== UI FUNCTIONS ====================
+        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sidebarOverlay').classList.toggle('show'); }
+        function closeSidebar() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').classList.remove('show'); }
+        function logout() { localStorage.clear(); sessionStorage.clear(); window.location.href = 'admin-login.html'; }
+        
+        // ==================== API CALL ====================
+        async function apiCall(url, options = {}) {
+            try {
+                const headers = { 
+                    'Content-Type': 'application/json', 
+                    'x-admin-token': ADMIN_TOKEN, 
+                    'x-admin-email': ADMIN_EMAIL, 
+                    ...options.headers 
+                };
+                const r = await fetch(url, { ...options, headers });
+                const d = await r.json(); 
+                if (!r.ok) throw new Error(d.error || 'Request failed'); 
+                return d;
+            } catch(e) { 
+                console.error('API:', e.message); 
+                throw e; 
+            }
+        }
+        
+        function show(msg, type) { 
+            const el = document.getElementById(type + 'Alert'); 
+            el.textContent = (type==='success'?'✅ ':'❌ ') + msg; 
+            el.classList.add('show'); 
+            setTimeout(() => el.classList.remove('show'), 4000); 
+        }
+        
+        function setLoading(btn, loading) { 
+            if (loading) { 
+                btn.disabled = true; 
+                btn.dataset.original = btn.innerHTML; 
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ' + btn.textContent.trim(); 
+            } else { 
+                btn.disabled = false; 
+                if (btn.dataset.original) btn.innerHTML = btn.dataset.original; 
+            } 
+        }
+        
+        // ==================== FILTER FUNCTIONS ====================
+        window.setFilter = function(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`.filter-btn[data-filter="${filter}"]`).classList.add('active');
+            renderFilteredChats();
+        };
+        
+        window.searchMessages = function() {
+            currentSearchTerm = document.getElementById('searchInput').value.toLowerCase();
+            renderFilteredChats();
+        };
+        
+        function renderFilteredChats() {
+            let filtered = [...allChats];
+            
+            // Apply status filter
+            if (currentFilter === 'pending') {
+                filtered = filtered.filter(c => c.status === 'pending');
+            } else if (currentFilter === 'replied') {
+                filtered = filtered.filter(c => c.status === 'replied');
+            } else if (currentFilter === 'guest') {
+                filtered = filtered.filter(c => c.isGuest === true || c.user === null);
+            } else if (currentFilter === 'registered') {
+                filtered = filtered.filter(c => c.isGuest !== true && c.user !== null);
+            }
+            
+            // Apply search filter
+            if (currentSearchTerm) {
+                filtered = filtered.filter(c => 
+                    (c.userName && c.userName.toLowerCase().includes(currentSearchTerm)) ||
+                    (c.userEmail && c.userEmail.toLowerCase().includes(currentSearchTerm)) ||
+                    (c.message && c.message.toLowerCase().includes(currentSearchTerm)) ||
+                    (c.reply && c.reply.toLowerCase().includes(currentSearchTerm))
+                );
+            }
+            
+            renderChatList(filtered);
+        }
+        
+        // ==================== LOAD CHATS ====================
+        async function loadChats() {
+            const list = document.getElementById('chatsList'); 
+            list.innerHTML = '<div class="loading"><i class="fas fa-spinner"></i> Loading...</div>';
+            try {
+                const d = await apiCall(API + '/chat/all');
+                allChats = d.chats || [];
+                
+                // Update stats
+                const stats = d.stats || {};
+                document.getElementById('statPending').textContent = stats.pending || 0;
+                document.getElementById('statReplied').textContent = stats.replied || 0;
+                document.getElementById('statGuest').textContent = stats.guest || 0;
+                document.getElementById('statTotal').textContent = allChats.length;
+                
+                renderFilteredChats();
+            } catch(e) { 
+                list.innerHTML = '<div class="empty-state">Error loading messages</div>'; 
+            }
+        }
+        
+        function renderChatList(chats) {
+            const list = document.getElementById('chatsList');
+            if (!chats.length) { 
+                list.innerHTML = '<div class="empty-state">No messages found</div>'; 
+                return; 
+            }
+            
+            list.innerHTML = chats.map(c => {
+                const isGuest = c.isGuest === true || c.user === null;
+                const guestBadge = isGuest ? '<span class="guest-icon"><i class="fas fa-globe"></i> Guest</span>' : '<span class="badge badge-registered"><i class="fas fa-user"></i> Registered</span>';
+                
+                return `
+                    <div class="chat-item ${c.status} ${isGuest ? 'guest' : ''}">
+                        <div class="chat-meta">
+                            <div>
+                                <strong>${escapeHtml(c.userName)}</strong> ${guestBadge}
+                                ${c.userEmail ? `<span style="font-size:.65rem;color:#64748b">(${escapeHtml(c.userEmail)})</span>` : ''}
+                            </div>
+                            <div>
+                                <span class="badge badge-${c.status}">${c.status}</span>
+                                <span>${new Date(c.createdAt).toLocaleString()}</span>
+                                <span>📍 ${c.category || 'general'}</span>
+                            </div>
+                        </div>
+                        <div class="chat-message"><strong>Message:</strong> ${escapeHtml(c.message)}</div>
+                        ${c.reply ? `<div class="chat-reply"><strong>📎 Reply:</strong> ${escapeHtml(c.reply)}<br><span style="font-size:.65rem">by ${c.repliedByName || 'Admin'} on ${new Date(c.repliedAt).toLocaleString()}</span></div>` : ''}
+                        <div style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap">
+                            ${c.status === 'pending' ? `<button class="btn btn-primary btn-sm" onclick="openReply('${c._id}','${escapeHtml(c.userName)}','${escapeHtml(c.message.replace(/'/g, "\\'"))}')"><i class="fas fa-reply"></i> Reply</button>` : ''}
+                            <button class="btn btn-sm" style="background:#e2e8f0;color:#475569" onclick="markAsRead('${c._id}')"><i class="fas fa-check"></i> Mark Read</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        // ==================== MARK AS READ ====================
+        window.markAsRead = async function(id) {
+            try {
+                // Just mark as read without reply (optional feature)
+                show('Message marked as read', 'success');
+            } catch(e) { show(e.message, 'error'); }
+        };
+        
+        // ==================== OPEN REPLY MODAL ====================
+        window.openReply = function(id, name, message) {
+            replyId = id;
+            document.getElementById('replyInfo').innerHTML = `
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px">
+                    <div><strong>From:</strong> ${escapeHtml(name)}</div>
+                    <div><strong>Message:</strong></div>
+                </div>
+                <div style="background:#f1f5f9; padding:12px; border-radius:8px; margin-top:8px">${escapeHtml(message)}</div>
+            `;
+            document.getElementById('replyText').value = '';
+            document.getElementById('chatListPage').style.display = 'none';
+            document.getElementById('replyPage').style.display = 'block';
+        };
+        
+        window.goBackToChats = function() {
+            document.getElementById('chatListPage').style.display = 'block';
+            document.getElementById('replyPage').style.display = 'none';
+            loadChats();
+        };
+        
+        // ==================== SEND REPLY ====================
+        window.sendReply = async function() {
+            const reply = document.getElementById('replyText').value.trim();
+            if (reply.length < 3) { 
+                show('Reply must be at least 3 characters', 'error'); 
+                return; 
+            }
+            
+            const btn = document.getElementById('btnSendReply'); 
+            setLoading(btn, true);
+            
+            try {
+                await apiCall(API + '/chat/reply/' + replyId, { 
+                    method: 'PUT', 
+                    body: JSON.stringify({ reply }) 
+                });
+                show('Reply sent successfully!', 'success');
+                goBackToChats();
+                loadChats();
+            } catch(e) { 
+                show(e.message, 'error'); 
+            }
+            
+            setLoading(btn, false);
+        };
+        
+        // ==================== AUTO REFRESH ====================
+        function startAutoRefresh() {
+            if (autoRefreshInterval) clearInterval(autoRefreshInterval);
+            autoRefreshInterval = setInterval(() => {
+                loadChats();
+            }, 15000);
+        }
+        
+        // ==================== LOAD ON PAGE LOAD ====================
+        window.loadChats = loadChats;
+    </script>
+</body>
+</html>

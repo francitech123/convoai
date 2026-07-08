@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics • Admin Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:#f1f5f9;color:#0f172a;min-height:100vh}
+        body.authorized{display:block}
+        .app{display:flex;min-height:100vh}
+        .sidebar{width:260px;background:#0f172a;position:fixed;left:0;top:0;bottom:0;overflow-y:auto;z-index:100;transition:transform .3s}
+        .sidebar-header{padding:20px;border-bottom:1px solid #1e293b;display:flex;align-items:center;gap:10px}
+        .sidebar-header i{color:#3b82f6;font-size:1.3rem}.sidebar-header span{font-weight:800;color:#f1f5f9;font-size:1.1rem}
+        .nav-menu{list-style:none;padding:8px}
+        .nav-link{display:flex;align-items:center;gap:10px;padding:10px 14px;color:#94a3b8;text-decoration:none;border-radius:8px;font-weight:500;font-size:.85rem;transition:all .2s;cursor:pointer}
+        .nav-link:hover{background:#1e293b;color:#e2e8f0}.nav-link.active{background:#3b82f6;color:#fff}.nav-link i{width:20px;font-size:.9rem}
+        .nav-divider{height:1px;background:#1e293b;margin:12px 8px}
+        .nav-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#475569;padding:12px 14px 6px}
+        .main-content{flex:1;margin-left:260px;padding:20px 28px}
+        @media(max-width:768px){.sidebar{transform:translateX(-100%);z-index:200}.sidebar.open{transform:translateX(0)}.main-content{margin-left:0;padding:60px 16px 16px 16px}}
+        .mobile-btn{position:fixed;top:12px;left:12px;z-index:160;background:#3b82f6;color:#fff;width:40px;height:40px;border-radius:10px;display:none;align-items:center;justify-content:center;cursor:pointer;border:none;font-size:1.1rem;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+        @media(max-width:768px){.mobile-btn{display:flex}}
+        .sidebar-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:150}.sidebar-overlay.show{display:block}
+        .top-bar{background:#fff;padding:14px 20px;border-radius:14px;margin-bottom:24px;border:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}.top-bar h1{font-size:1.3rem;font-weight:700}
+        .card{background:#fff;border-radius:14px;padding:20px;border:1px solid #e2e8f0;margin-bottom:20px}
+        .card h2{font-size:1rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}.card h2 i{color:#3b82f6}
+        .btn{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border:none;border-radius:10px;font-weight:600;font-size:.82rem;cursor:pointer;transition:all .2s}
+        .btn-outline{background:transparent;color:#3b82f6;border:2px solid #3b82f6}.btn-sm{padding:6px 12px;font-size:.72rem}.btn:disabled{opacity:.6;cursor:not-allowed}
+        .alert{padding:12px 16px;border-radius:10px;margin-bottom:16px;display:none;font-size:.82rem}
+        .alert-success{background:#d1fae5;color:#065f46;border:1px solid #a7f3d0}.alert-error{background:#fee2e2;color:#991b1b;border:1px solid #fecaca}.alert.show{display:block}
+        .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px}
+        @media(max-width:768px){.stats-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:500px){.stats-grid{grid-template-columns:1fr}}
+        .stat-card{background:#fff;border-radius:14px;padding:20px;border:1px solid #e2e8f0;text-align:center}
+        .stat-card .num{font-size:2rem;font-weight:800}.stat-card .lbl{font-size:.75rem;color:#64748b;margin-top:4px}
+        .bar-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #f1f5f9}
+        .bar-label{flex:1;font-size:.8rem;font-weight:500;min-width:100px}
+        .bar-track{flex:2;height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden}
+        .bar-fill{height:100%;border-radius:4px;transition:width .5s ease;background:#3b82f6}
+        .bar-count{font-size:.75rem;color:#64748b;font-weight:600;width:40px;text-align:right}
+        .loading{text-align:center;padding:30px;color:#94a3b8}.loading i{animation:spin 1s linear infinite}@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+        .empty-state{text-align:center;padding:30px;color:#94a3b8}
+    </style>
+</head>
+<body>
+    <button class="mobile-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+    <div class="app">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header"><i class="fas fa-graduation-cap"></i><span>OAU CBT Practice</span></div>
+            <div class="nav-label">Main</div>
+            <ul class="nav-menu">
+                <li><a class="nav-link" href="adminDashboard.html"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                <li><a class="nav-link" href="questions.html"><i class="fas fa-question-circle"></i> Questions</a></li>
+                <li><a class="nav-link" href="courses.html"><i class="fas fa-book"></i> Courses</a></li>
+                <li><a class="nav-link" href="courseSettings.html"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+            <div class="nav-divider"></div>
+            <div class="nav-label">Users & Analytics</div>
+            <ul class="nav-menu">
+                <li><a class="nav-link" href="AdminPageUsers.html"><i class="fas fa-users"></i> Users</a></li>
+                <li><a class="nav-link active" href="analysis.html"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                <li><a class="nav-link" href="AdminNotification.html"><i class="fas fa-bell"></i> Notifications</a></li>
+                <li><a class="nav-link" href="adminChat.html"><i class="fas fa-comments"></i> Chat</a></li>
+            </ul>
+            <div class="nav-divider"></div>
+            <ul class="nav-menu"><li><a class="nav-link" href="allCourseMaterial.html"><i class="fas fa-folder"></i> Materials</a></li></ul>
+            <div class="nav-divider"></div>
+            <ul class="nav-menu"><li><a class="nav-link" href="/app"><i class="fas fa-arrow-left"></i> Back to App</a></li><li><a class="nav-link" onclick="logout()"><i class="fas fa-lock"></i> Lock</a></li></ul>
+        </aside>
+        <main class="main-content">
+            <div class="top-bar"><h1>📊 App Analytics</h1></div>
+            <div class="alert alert-success" id="successAlert"></div><div class="alert alert-error" id="errorAlert"></div>
+
+            <!-- OVERVIEW STATS -->
+            <div class="stats-grid" id="overviewStats">
+                <div class="stat-card"><div class="num" id="totalUsers" style="color:#3b82f6">—</div><div class="lbl">Total Users</div></div>
+                <div class="stat-card"><div class="num" id="activeUsers" style="color:#10b981">—</div><div class="lbl">Active (7 days)</div></div>
+                <div class="stat-card"><div class="num" id="totalAdmins" style="color:#f59e0b">—</div><div class="lbl">Admins</div></div>
+                <div class="stat-card"><div class="num" id="totalQuestions" style="color:#7c3aed">—</div><div class="lbl">Questions</div></div>
+                <div class="stat-card"><div class="num" id="totalCourses" style="color:#06b6d4">—</div><div class="lbl">Courses</div></div>
+                <div class="stat-card"><div class="num" id="totalMaterials" style="color:#f97316">—</div><div class="lbl">Materials</div></div>
+            </div>
+
+            <!-- USERS BY FACULTY -->
+            <div class="card">
+                <h2><i class="fas fa-building"></i> Users by Faculty</h2>
+                <div id="usersByFaculty"><div class="loading"><i class="fas fa-spinner"></i> Loading...</div></div>
+            </div>
+
+            <!-- USERS BY LEVEL -->
+            <div class="card">
+                <h2><i class="fas fa-layer-group"></i> Users by Level</h2>
+                <div id="usersByLevel"><div class="loading"><i class="fas fa-spinner"></i> Loading...</div></div>
+            </div>
+
+            <!-- TOP PERFORMERS -->
+            <div class="card">
+                <h2><i class="fas fa-trophy"></i> Top 10 Exam Takers</h2>
+                <div id="topPerformers"><div class="loading"><i class="fas fa-spinner"></i> Loading...</div></div>
+            </div>
+
+            <!-- REFRESH -->
+            <div style="text-align:center;margin-top:16px">
+                <button class="btn btn-outline btn-sm" id="btnRefresh" onclick="loadAnalytics()"><i class="fas fa-sync-alt"></i> Refresh Analytics</button>
+            </div>
+        </main>
+    </div>
+    <script>
+        const API = 'https://oau-exam-api.onrender.com/api';
+        const ADMIN_TOKEN = localStorage.getItem('admin_token') || sessionStorage.getItem('admin_token');
+        const ADMIN_EMAIL = localStorage.getItem('admin_email') || sessionStorage.getItem('admin_email');
+        if (!ADMIN_TOKEN && !ADMIN_EMAIL) { window.location.href = 'admin-login.html'; }
+        else { document.body.classList.add('authorized'); loadAnalytics(); }
+        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sidebarOverlay').classList.toggle('show'); }
+        function closeSidebar() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').classList.remove('show'); }
+        function logout() { localStorage.clear(); sessionStorage.clear(); window.location.href = 'admin-login.html'; }
+        async function apiCall(url, options = {}) {
+            try {
+                const headers = { 'Content-Type': 'application/json', 'x-admin-token': ADMIN_TOKEN, 'x-admin-email': ADMIN_EMAIL, ...options.headers };
+                const userToken = localStorage.getItem('oau_token');
+                if (userToken) headers['Authorization'] = 'Bearer ' + userToken;
+                const r = await fetch(url, { ...options, headers });
+                const d = await r.json(); if (!r.ok) throw new Error(d.error || 'Request failed'); return d;
+            } catch(e) { console.error('API:', e.message); throw e; }
+        }
+        function setLoading(btn, loading) { if (loading) { btn.disabled = true; btn.dataset.original = btn.innerHTML; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...'; } else { btn.disabled = false; if (btn.dataset.original) btn.innerHTML = btn.dataset.original; } }
+
+        async function loadAnalytics() {
+            const btn = document.getElementById('btnRefresh'); setLoading(btn, true);
+            try {
+                const d = await apiCall(API + '/admin-auth/app-analysis');
+                // Overview stats
+                document.getElementById('totalUsers').textContent = d.overview?.totalUsers || 0;
+                document.getElementById('activeUsers').textContent = d.overview?.activeUsers || 0;
+                document.getElementById('totalAdmins').textContent = d.overview?.totalAdmins || 0;
+                document.getElementById('totalQuestions').textContent = d.overview?.totalQuestions || 0;
+                document.getElementById('totalCourses').textContent = d.overview?.totalCourses || 0;
+                document.getElementById('totalMaterials').textContent = d.overview?.totalMaterials || 0;
+
+                // Users by Faculty
+                const facultyDiv = document.getElementById('usersByFaculty');
+                if (d.usersByFaculty?.length) {
+                    const maxFaculty = Math.max(...d.usersByFaculty.map(f => f.count), 1);
+                    facultyDiv.innerHTML = d.usersByFaculty.map(f => `<div class="bar-item"><div class="bar-label">${f._id || 'Unknown'}</div><div class="bar-track"><div class="bar-fill" style="width:${(f.count/maxFaculty)*100}%"></div></div><div class="bar-count">${f.count}</div></div>`).join('');
+                } else { facultyDiv.innerHTML = '<div class="empty-state">No data</div>'; }
+
+                // Users by Level
+                const levelDiv = document.getElementById('usersByLevel');
+                if (d.usersByLevel?.length) {
+                    const maxLevel = Math.max(...d.usersByLevel.map(l => l.count), 1);
+                    levelDiv.innerHTML = d.usersByLevel.map(l => `<div class="bar-item"><div class="bar-label">${l._id || 'Unknown'} Level</div><div class="bar-track"><div class="bar-fill" style="width:${(l.count/maxLevel)*100}%"></div></div><div class="bar-count">${l.count}</div></div>`).join('');
+                } else { levelDiv.innerHTML = '<div class="empty-state">No data</div>'; }
+
+                // Top Performers
+                const topDiv = document.getElementById('topPerformers');
+                if (d.topUsers?.length) {
+                    topDiv.innerHTML = d.topUsers.map((u, i) => `<div class="bar-item"><div class="bar-label">#${i+1} ${u.fullName||u.username||'Unknown'}</div><div class="bar-track"><div class="bar-fill" style="width:${((u.examsTaken||0)/Math.max(...d.topUsers.map(x=>x.examsTaken||0),1))*100}%;background:${i===0?'#f59e0b':i===1?'#94a3b8':i===2?'#b45309':'#3b82f6'}"></div></div><div class="bar-count">${u.examsTaken||0} exams</div></div>`).join('');
+                } else { topDiv.innerHTML = '<div class="empty-state">No data</div>'; }
+            } catch(e) { console.log('Analytics error:', e); }
+            setLoading(btn, false);
+        }
+        window.loadAnalytics = loadAnalytics;
+    </script>
+</body>
+</html>

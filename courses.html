@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses • Admin Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:#f1f5f9;color:#0f172a;min-height:100vh}
+        body.authorized{display:block}
+        .app{display:flex;min-height:100vh}
+        .sidebar{width:260px;background:#0f172a;position:fixed;left:0;top:0;bottom:0;overflow-y:auto;z-index:100;transition:transform .3s}
+        .sidebar-header{padding:20px;border-bottom:1px solid #1e293b;display:flex;align-items:center;gap:10px}
+        .sidebar-header i{color:#3b82f6;font-size:1.3rem}.sidebar-header span{font-weight:800;color:#f1f5f9;font-size:1.1rem}
+        .nav-menu{list-style:none;padding:8px}
+        .nav-link{display:flex;align-items:center;gap:10px;padding:10px 14px;color:#94a3b8;text-decoration:none;border-radius:8px;font-weight:500;font-size:.85rem;transition:all .2s;cursor:pointer}
+        .nav-link:hover{background:#1e293b;color:#e2e8f0}.nav-link.active{background:#3b82f6;color:#fff}.nav-link i{width:20px;font-size:.9rem}
+        .nav-divider{height:1px;background:#1e293b;margin:12px 8px}
+        .nav-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#475569;padding:12px 14px 6px}
+        .main-content{flex:1;margin-left:260px;padding:20px 28px}
+        @media(max-width:768px){.sidebar{transform:translateX(-100%);z-index:200}.sidebar.open{transform:translateX(0)}.main-content{margin-left:0;padding:60px 16px 16px 16px}}
+        .mobile-btn{position:fixed;top:12px;left:12px;z-index:160;background:#3b82f6;color:#fff;width:40px;height:40px;border-radius:10px;display:none;align-items:center;justify-content:center;cursor:pointer;border:none;font-size:1.1rem;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+        @media(max-width:768px){.mobile-btn{display:flex}}
+        .sidebar-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:150}.sidebar-overlay.show{display:block}
+        .top-bar{background:#fff;padding:14px 20px;border-radius:14px;margin-bottom:24px;border:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}.top-bar h1{font-size:1.3rem;font-weight:700}
+        .card{background:#fff;border-radius:14px;padding:20px;border:1px solid #e2e8f0;margin-bottom:20px}
+        .card h2{font-size:1rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}.card h2 i{color:#3b82f6}
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}@media(max-width:500px){.form-row{grid-template-columns:1fr}}
+        .form-group{margin-bottom:12px}.form-group label{display:block;margin-bottom:4px;font-weight:600;font-size:.78rem;color:#475569}
+        .form-group input,.form-group select,.form-group textarea{width:100%;padding:10px 12px;border:2px solid #e2e8f0;border-radius:8px;font-size:.85rem;font-family:inherit;background:#f8fafc;transition:all .2s}
+        .form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:#3b82f6;background:#fff}
+        .btn{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border:none;border-radius:10px;font-weight:600;font-size:.82rem;cursor:pointer;transition:all .2s;text-decoration:none}
+        .btn-primary{background:#3b82f6;color:#fff}.btn-primary:hover{background:#2563eb}
+        .btn-success{background:#10b981;color:#fff}.btn-success:hover{background:#059669}
+        .btn-danger{background:#ef4444;color:#fff;padding:6px 10px;font-size:.7rem}.btn-danger:hover{background:#dc2626}
+        .btn-warning{background:#f59e0b;color:#000}.btn-warning:hover{background:#d97706}
+        .btn-outline{background:transparent;color:#3b82f6;border:2px solid #3b82f6}.btn-sm{padding:6px 12px;font-size:.72rem}.btn-xs{padding:4px 8px;font-size:.65rem}
+        .alert{padding:12px 16px;border-radius:10px;margin-bottom:16px;display:none;font-size:.82rem}
+        .alert-success{background:#d1fae5;color:#065f46;border:1px solid #a7f3d0}.alert-error{background:#fee2e2;color:#991b1b;border:1px solid #fecaca}.alert.show{display:block}
+        .course-item{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:#f8fafc;border-radius:8px;margin-bottom:4px;gap:8px;flex-wrap:wrap}
+        .badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:.65rem;font-weight:600}.badge-success{background:#d1fae5;color:#065f46}.badge-warning{background:#fef3c7;color:#92400e}
+        .faculty-tags{display:flex;flex-wrap:wrap;gap:6px;max-height:120px;overflow-y:auto;padding:4px 0}
+        .faculty-tag{padding:6px 14px;background:#f8fafc;border:2px solid #e2e8f0;border-radius:20px;cursor:pointer;font-size:.75rem;color:#475569;transition:all .15s;user-select:none;font-weight:500}
+        .faculty-tag:hover{border-color:#3b82f6;color:#1e293b}.faculty-tag.selected{background:#eff6ff;border-color:#3b82f6;color:#2563eb;font-weight:600}.faculty-tag.selected::after{content:' ✓'}
+        .theme-preview{border-radius:14px;padding:20px 14px;text-align:center;min-width:100px;display:inline-block;transition:all .3s}
+        .theme-preview i{font-size:1.6rem;margin-bottom:6px;display:block}.theme-preview .code{font-weight:700;font-size:.9rem}.theme-preview .name{font-size:.65rem;opacity:.85}
+        .loading{text-align:center;padding:30px;color:#94a3b8}.loading i{animation:spin 1s linear infinite}@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+        .empty-state{text-align:center;padding:30px;color:#94a3b8}
+        .faculty-badges{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px}.faculty-badge{background:#e2e8f0;color:#475569;padding:2px 8px;border-radius:12px;font-size:.62rem}
+    </style>
+</head>
+<body>
+    <button class="mobile-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+    <div class="app">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header"><i class="fas fa-graduation-cap"></i><span>OAU CBT Practice</span></div>
+            <div class="nav-label">Main</div>
+            <ul class="nav-menu">
+                <li><a class="nav-link" href="adminDashboard.html"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                <li><a class="nav-link" href="questions.html"><i class="fas fa-question-circle"></i> Questions</a></li>
+                <li><a class="nav-link active" href="courses.html"><i class="fas fa-book"></i> Courses</a></li>
+                <li><a class="nav-link" href="courseSettings.html"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+            <div class="nav-divider"></div>
+            <div class="nav-label">Users & Analytics</div>
+            <ul class="nav-menu">
+                <li><a class="nav-link" href="AdminPageUsers.html"><i class="fas fa-users"></i> Users</a></li>
+                <li><a class="nav-link" href="analysis.html"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                <li><a class="nav-link" href="AdminNotification.html"><i class="fas fa-bell"></i> Notifications</a></li>
+                <li><a class="nav-link" href="adminChat.html"><i class="fas fa-comments"></i> Chat</a></li>
+            </ul>
+            <div class="nav-divider"></div>
+            <ul class="nav-menu"><li><a class="nav-link" href="allCourseMaterial.html"><i class="fas fa-folder"></i> Materials</a></li></ul>
+            <div class="nav-divider"></div>
+            <ul class="nav-menu"><li><a class="nav-link" href="/app"><i class="fas fa-arrow-left"></i> Back to App</a></li><li><a class="nav-link" onclick="logout()"><i class="fas fa-lock"></i> Lock</a></li></ul>
+        </aside>
+        <main class="main-content">
+            <div class="top-bar"><h1>📚 Course Management</h1><button class="btn btn-warning btn-sm" onclick="seedAllCourses()"><i class="fas fa-seedling"></i> Seed 72 Courses</button></div>
+            <div class="alert alert-success" id="successAlert"></div><div class="alert alert-error" id="errorAlert"></div>
+            <div class="card">
+                <h2><i class="fas fa-plus"></i> Add Course</h2>
+                <div class="form-row"><div class="form-group"><label>Course Code</label><input type="text" id="cCode" placeholder="e.g., CHM 101"></div><div class="form-group"><label>Course Name</label><input type="text" id="cName" placeholder="e.g., General Chemistry I" oninput="updateThemePreview()"></div></div>
+                <div class="form-group"><label><i class="fas fa-building"></i> Faculties</label><div class="faculty-tags" id="facultyTagsContainer"></div><p style="font-size:.7rem;margin-top:4px;font-weight:600" id="selectedFacultiesText">Selected: None ⚠️</p></div>
+                <div style="background:#fffbeb;border:2px solid #fcd34d;border-radius:12px;padding:16px;margin-bottom:12px">
+                    <h4 style="color:#92400e;margin-bottom:8px"><i class="fas fa-palette"></i> Theme</h4>
+                    <div class="form-row"><div class="form-group"><label>Start</label><input type="color" id="cGradientStart" value="#1e3a8a" oninput="updateThemePreview()" style="height:36px"></div><div class="form-group"><label>End</label><input type="color" id="cGradientEnd" value="#3b82f6" oninput="updateThemePreview()" style="height:36px"></div></div>
+                    <div class="form-row"><div class="form-group"><label>Icon</label><select id="cIcon" onchange="updateThemePreview()"><option value="fa-file-alt">📄 Doc</option><option value="fa-flask">🧪 Flask</option><option value="fa-calculator">🔢 Calc</option><option value="fa-atom">⚛️ Atom</option><option value="fa-dna">🧬 DNA</option><option value="fa-book-open">📖 Book</option><option value="fa-brain">🧠 Brain</option><option value="fa-laptop-code">💻 Code</option></select></div><div class="form-group"><label>Text</label><select id="cTextColor" onchange="updateThemePreview()"><option value="#ffffff">White</option><option value="#000000">Black</option></select></div></div>
+                    <div style="text-align:center"><div id="themePreview" class="theme-preview" style="background:linear-gradient(135deg,#1e3a8a,#3b82f6);color:#fff"><i class="fas fa-file-alt"></i><span class="code">CHM 101</span><span class="name">Course</span></div></div>
+                </div>
+                <div class="form-row"><div class="form-group"><label>Semester</label><select id="cSemester"><option value="first">First</option><option value="second">Second</option></select></div><div class="form-group"><label>Level</label><select id="cLevel"><option value="100">100</option><option value="200">200</option><option value="300">300</option><option value="400">400</option><option value="500">500</option></select></div></div>
+                <div style="background:#f5f3ff;border:2px solid #c4b5fd;border-radius:12px;padding:16px;margin-bottom:12px"><h4 style="color:#5b21b6"><i class="fas fa-flask"></i> Test</h4><div class="form-row"><div class="form-group"><label>Questions</label><input type="number" id="cTestQ" value="20"></div><div class="form-group"><label>Timer (min)</label><input type="number" id="cTestTime" value="15"></div></div></div>
+                <div style="background:#eff6ff;border:2px solid #93c5fd;border-radius:12px;padding:16px;margin-bottom:12px"><h4 style="color:#1e40af"><i class="fas fa-file-alt"></i> Exam</h4><div class="form-row"><div class="form-group"><label>Questions</label><input type="number" id="cExamQ" value="40"></div><div class="form-group"><label>Timer (min)</label><input type="number" id="cExamTime" value="30"></div></div></div>
+                <button class="btn btn-primary" onclick="addCourse()"><i class="fas fa-plus"></i> Add Course</button>
+            </div>
+            <div class="card">
+                <h2><i class="fas fa-list"></i> All Courses <button class="btn btn-outline btn-sm" onclick="loadCourses()" style="margin-left:12px"><i class="fas fa-sync-alt"></i></button></h2>
+                <div id="courseList"><div class="loading"><i class="fas fa-spinner"></i> Loading...</div></div>
+            </div>
+        </main>
+    </div>
+    <script>
+        const API = 'https://oau-exam-api.onrender.com/api';
+        const ADMIN_TOKEN = localStorage.getItem('admin_token') || sessionStorage.getItem('admin_token');
+        const ADMIN_EMAIL = localStorage.getItem('admin_email') || sessionStorage.getItem('admin_email');
+        let selectedFaculties = [];
+        const ALL_FACULTIES = ['Agriculture','Arts','Law','Science','Social Sciences','Education','Pharmacy','Technology','Administration','Environmental Design and Management','Basic Medical Sciences','Clinical Sciences','Dentistry','Computing','General Studies'];
+        if (!ADMIN_TOKEN && !ADMIN_EMAIL) { window.location.href = 'admin-login.html'; }
+        else { document.body.classList.add('authorized'); init(); }
+        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sidebarOverlay').classList.toggle('show'); }
+        function closeSidebar() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').classList.remove('show'); }
+        function logout() { localStorage.clear(); sessionStorage.clear(); window.location.href = 'admin-login.html'; }
+        async function apiCall(url, options = {}) {
+            try {
+                const headers = { 'Content-Type': 'application/json', 'x-admin-token': ADMIN_TOKEN, 'x-admin-email': ADMIN_EMAIL, ...options.headers };
+                const userToken = localStorage.getItem('oau_token');
+                if (userToken) headers['Authorization'] = 'Bearer ' + userToken;
+                const r = await fetch(url, { ...options, headers });
+                const d = await r.json(); if (!r.ok) throw new Error(d.error || 'Request failed'); return d;
+            } catch(e) { console.error('API:', e.message); throw e; }
+        }
+        function show(msg, type) { const el = document.getElementById(type + 'Alert'); el.textContent = (type==='success'?'✅ ':'❌ ') + msg; el.classList.add('show'); setTimeout(() => el.classList.remove('show'), 4000); }
+        function init() { renderFacultyTags(); loadCourses(); }
+        function renderFacultyTags() { document.getElementById('facultyTagsContainer').innerHTML = ALL_FACULTIES.map(f => `<span class="faculty-tag" id="ftag_${f.replace(/\s+/g,'_')}" onclick="toggleFaculty('${f}')">${f}</span>`).join(''); }
+        window.toggleFaculty = function(f) { const idx = selectedFaculties.indexOf(f); if (idx > -1) selectedFaculties.splice(idx, 1); else selectedFaculties.push(f); document.getElementById('ftag_' + f.replace(/\s+/g,'_'))?.classList.toggle('selected', idx === -1); const t = document.getElementById('selectedFacultiesText'); t.textContent = selectedFaculties.length ? 'Selected: ' + selectedFaculties.join(', ') : 'Selected: None ⚠️'; t.style.color = selectedFaculties.length ? '#059669' : '#ef4444'; };
+        function updateThemePreview() { const p = document.getElementById('themePreview'); p.style.background = `linear-gradient(135deg, ${document.getElementById('cGradientStart').value}, ${document.getElementById('cGradientEnd').value})`; p.style.color = document.getElementById('cTextColor').value; p.querySelector('i').className = 'fas ' + document.getElementById('cIcon').value; p.querySelector('.code').textContent = document.getElementById('cCode').value || 'CHM 101'; p.querySelector('.name').textContent = document.getElementById('cName').value || 'Course'; }
+        window.updateThemePreview = updateThemePreview;
+        async function loadCourses() {
+            const list = document.getElementById('courseList'); list.innerHTML = '<div class="loading"><i class="fas fa-spinner"></i> Loading...</div>';
+            try {
+                const d = await apiCall(API + '/admin/courses');
+                if (!d.courses?.length) { list.innerHTML = '<div class="empty-state">No courses</div>'; return; }
+                list.innerHTML = d.courses.map(c => `<div class="course-item"><div style="flex:1"><strong>${c.code}</strong> - ${c.name}<div class="faculty-badges">${(c.faculties||[c.faculty]).map(f=>`<span class="faculty-badge">${f}</span>`).join('')}</div><div style="font-size:.7rem;color:#64748b">🧪 ${c.questionCounts?.test||0}/${c.testSettings?.numberOfQuestions||20} <span class="badge ${(c.questionCounts?.test||0)>=(c.testSettings?.numberOfQuestions||20)?'badge-success':'badge-warning'}">${(c.questionCounts?.test||0)>=(c.testSettings?.numberOfQuestions||20)?'✓':'⚠'}</span> 📝 ${c.questionCounts?.exam||0}/${c.examSettings?.numberOfQuestions||40} <span class="badge ${(c.questionCounts?.exam||0)>=(c.examSettings?.numberOfQuestions||40)?'badge-success':'badge-warning'}">${(c.questionCounts?.exam||0)>=(c.examSettings?.numberOfQuestions||40)?'✓':'⚠'}</span></div></div><button class="btn btn-danger btn-xs" onclick="deleteCourse('${c.code}')"><i class="fas fa-trash"></i></button></div>`).join('');
+            } catch(e) { list.innerHTML = '<div class="empty-state">Error loading</div>'; }
+        }
+        window.loadCourses = loadCourses;
+        window.seedAllCourses = async function() { if (!confirm('Seed all 72 courses?')) return; try { const d = await apiCall(API + '/admin/seed-courses', { method: 'POST' }); show(d.message, 'success'); loadCourses(); } catch(e) { show(e.message, 'error'); } };
+        window.addCourse = async function() {
+            const code = document.getElementById('cCode').value.trim();
+            if (!code || !document.getElementById('cName').value.trim()) { show('Fill code and name', 'error'); return; }
+            if (!selectedFaculties.length) { show('Select at least one faculty', 'error'); return; }
+            try {
+                await apiCall(API + '/admin/courses', { method: 'POST', body: JSON.stringify({ code, name: document.getElementById('cName').value.trim(), faculties: selectedFaculties, semester: document.getElementById('cSemester').value, level: document.getElementById('cLevel').value, mode: 'both', theme: { gradient: `linear-gradient(135deg, ${document.getElementById('cGradientStart').value}, ${document.getElementById('cGradientEnd').value})`, icon: document.getElementById('cIcon').value, textColor: document.getElementById('cTextColor').value }, testNumberOfQuestions: parseInt(document.getElementById('cTestQ').value)||20, testTimeLimit: parseInt(document.getElementById('cTestTime').value)||15, examNumberOfQuestions: parseInt(document.getElementById('cExamQ').value)||40, examTimeLimit: parseInt(document.getElementById('cExamTime').value)||30 }) });
+                show('Course added!', 'success'); loadCourses();
+                document.getElementById('cCode').value=''; document.getElementById('cName').value=''; selectedFaculties=[]; document.querySelectorAll('.faculty-tag.selected').forEach(t=>t.classList.remove('selected'));
+            } catch(e) { show(e.message, 'error'); }
+        };
+        window.deleteCourse = async function(code) { if (!confirm('Delete ' + code + '?')) return; try { await apiCall(API + '/admin/courses/' + code, { method: 'DELETE' }); show('Deleted', 'success'); loadCourses(); } catch(e) { show(e.message, 'error'); } };
+    </script>
+</body>
+                                                                                                                                                                                                                                                                                                         </html>

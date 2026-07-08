@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login • OAU Exam CBT Practice</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 100%);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+        .login-card{background:#1e293b;border-radius:20px;padding:40px 30px;text-align:center;max-width:420px;width:100%;border:1px solid #334155;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+        .login-card .icon{font-size:2.5rem;color:#3b82f6;margin-bottom:12px}
+        .login-card h2{color:#f1f5f9;margin-bottom:6px;font-size:1.3rem}
+        .login-card p{color:#94a3b8;margin-bottom:22px;font-size:.85rem}
+        .form-group{margin-bottom:14px;text-align:left}
+        .form-group label{display:block;margin-bottom:5px;font-weight:600;font-size:.78rem;color:#94a3b8}
+        .form-group input{width:100%;padding:13px 14px;background:#0f172a;border:2px solid #334155;border-radius:12px;color:#f1f5f9;font-size:.9rem;font-family:inherit;transition:all .2s}
+        .form-group input:focus{outline:none;border-color:#3b82f6}
+        .login-card button{width:100%;padding:14px;background:#3b82f6;color:#fff;border:none;border-radius:12px;font-weight:600;font-size:1rem;cursor:pointer;transition:all .2s}
+        .login-card button:hover{background:#2563eb}
+        .login-card button:disabled{opacity:.5;cursor:not-allowed}
+        .error{color:#ef4444;margin-top:10px;display:none;font-size:.85rem}
+        .success{color:#10b981;margin-top:10px;display:none;font-size:.85rem}
+        .links{text-align:center;margin-top:16px}
+        .links a{color:#94a3b8;text-decoration:none;font-size:.82rem;display:block;margin:4px 0}
+        .links a:hover{color:#3b82f6}
+    </style>
+</head>
+<body>
+    <div style="max-width:420px;width:100%">
+        <div class="login-card">
+            <div class="icon"><i class="fas fa-lock"></i></div>
+            <h2>Admin Login</h2>
+            <p>Enter your registered email and admin password</p>
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" id="email" placeholder="you@example.com">
+            </div>
+            <div class="form-group">
+                <label>Admin Password</label>
+                <input type="password" id="password" placeholder="Enter admin password">
+            </div>
+            <button onclick="login()" id="loginBtn"><i class="fas fa-unlock"></i> Access Admin Panel</button>
+            <p class="error" id="error"></p>
+            <p class="success" id="success"></p>
+        </div>
+        <div class="links">
+            <a href="admin-register.html">Not an admin? Apply here →</a>
+            
+            <a href="/app" style="font-size:.78rem">← Back to App</a>
+        </div>
+    </div>
+
+    <script>
+        const API = 'https://oau-exam-api.onrender.com/api';
+
+        // Clear any old tokens
+        localStorage.removeItem('admin_token');
+        localStorage.removeItem('admin_email');
+        localStorage.removeItem('admin_data');
+
+        async function login() {
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            
+            if (!email) { showError('Enter your email address'); return; }
+            if (!password) { showError('Enter your admin password'); return; }
+            
+            const btn = document.getElementById('loginBtn');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
+            btn.disabled = true;
+            document.getElementById('error').style.display = 'none';
+            document.getElementById('success').style.display = 'none';
+            
+            try {
+                const r = await fetch(API + '/admin-auth/admin-login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email, password: password })
+                });
+                const d = await r.json();
+                
+                console.log('Login response:', d);
+                
+                if (r.ok && d.success) {
+                    // Store credentials in localStorage
+                    localStorage.setItem('admin_token', password);
+                    localStorage.setItem('admin_email', email);
+                    localStorage.setItem('admin_data', JSON.stringify(d.admin));
+                    
+                    // Also store in sessionStorage for backup
+                    sessionStorage.setItem('admin_token', password);
+                    sessionStorage.setItem('admin_email', email);
+                    sessionStorage.setItem('admin_data', JSON.stringify(d.admin));
+                    
+                    document.getElementById('success').textContent = '✅ Login successful! Redirecting...';
+                    document.getElementById('success').style.display = 'block';
+                    
+                    setTimeout(() => {
+                        window.location.href = 'adminDashboard.html';
+                    }, 500);
+                } else {
+                    showError(d.error || 'Invalid credentials. Make sure your email is approved by the CEO.');
+                    btn.innerHTML = '<i class="fas fa-unlock"></i> Access Admin Panel';
+                    btn.disabled = false;
+                }
+            } catch(e) {
+                console.error('Login error:', e);
+                showError('Connection error. Check your internet and try again.');
+                btn.innerHTML = '<i class="fas fa-unlock"></i> Access Admin Panel';
+                btn.disabled = false;
+            }
+        }
+
+        function showError(msg) {
+            document.getElementById('error').textContent = '❌ ' + msg;
+            document.getElementById('error').style.display = 'block';
+            document.getElementById('success').style.display = 'none';
+        }
+
+        document.getElementById('password').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') login();
+        });
+
+        window.login = login;
+    </script>
+</body>
+</html>

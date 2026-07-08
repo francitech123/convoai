@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for Admin • OAU Exam CBT Practice</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 100%);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+        .container{max-width:600px;width:100%}
+        .card{background:#1e293b;border-radius:20px;padding:35px 28px;border:1px solid #334155;box-shadow:0 20px 60px rgba(0,0,0,.3);margin-bottom:20px}
+        .card .icon{font-size:2.5rem;color:#3b82f6;text-align:center;margin-bottom:8px}
+        .card h2{color:#f1f5f9;text-align:center;margin-bottom:4px;font-size:1.3rem}
+        .card p{color:#94a3b8;text-align:center;margin-bottom:24px;font-size:.85rem}
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+        @media(max-width:500px){.form-row{grid-template-columns:1fr}}
+        .form-group{margin-bottom:14px}
+        .form-group label{display:block;margin-bottom:5px;font-weight:600;font-size:.78rem;color:#94a3b8}
+        .form-group input,.form-group select,.form-group textarea{width:100%;padding:11px 14px;background:#0f172a;border:2px solid #334155;border-radius:10px;color:#f1f5f9;font-size:.88rem;font-family:inherit}
+        .form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:#3b82f6}
+        .btn{width:100%;padding:14px;background:#3b82f6;color:#fff;border:none;border-radius:12px;font-weight:600;font-size:1rem;cursor:pointer;transition:all .2s}
+        .btn:hover{background:#2563eb}
+        .btn:disabled{opacity:.5;cursor:not-allowed}
+        .btn-secondary{background:#334155;margin-top:10px}
+        .alert{padding:12px 16px;border-radius:10px;margin-bottom:16px;text-align:center;font-size:.82rem;display:none}
+        .alert-success{background:rgba(16,185,129,.2);color:#10b981;border:1px solid rgba(16,185,129,.3)}
+        .alert-error{background:rgba(239,68,68,.2);color:#ef4444;border:1px solid rgba(239,68,68,.3)}
+        .quiz-question{background:#0f172a;border:1px solid #334155;border-radius:10px;padding:14px;margin-bottom:10px}
+        .quiz-question h4{color:#f1f5f9;font-size:.85rem;margin-bottom:8px}
+        .quiz-options{display:flex;flex-direction:column;gap:6px}
+        .quiz-opt{padding:8px 12px;background:#1e293b;border:2px solid #334155;border-radius:8px;cursor:pointer;color:#94a3b8;font-size:.8rem;transition:all .15s}
+        .quiz-opt:hover{border-color:#3b82f6;color:#f1f5f9}
+        .quiz-opt.selected{background:rgba(59,130,246,.2);border-color:#3b82f6;color:#3b82f6;font-weight:600}
+        .progress-steps{display:flex;justify-content:center;gap:8px;margin-bottom:20px}
+        .step{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;background:#334155;color:#94a3b8}
+        .step.active{background:#3b82f6;color:#fff}
+        .step.done{background:#10b981;color:#fff}
+        .links{text-align:center;margin-top:16px}
+        .links a{color:#94a3b8;text-decoration:none;font-size:.82rem}
+        .file-upload{border:2px dashed #334155;border-radius:10px;padding:16px;text-align:center;cursor:pointer;transition:all .2s;background:#0f172a}
+        .file-upload:hover{border-color:#3b82f6}
+        .file-upload i{font-size:1.5rem;color:#3b82f6;display:block;margin-bottom:4px}
+        .file-upload p{color:#94a3b8;font-size:.75rem}
+        .file-upload input{display:none}
+        .preview-img{max-width:100px;max-height:100px;border-radius:10px;margin-top:8px;display:none}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- STEP 1: Personal Info -->
+        <div class="card" id="step1">
+            <div class="icon"><i class="fas fa-user-shield"></i></div>
+            <h2>Apply for Admin Access</h2>
+            <p>Step 1 of 2: Personal Information</p>
+            <div class="progress-steps">
+                <div class="step active">1</div>
+                <div class="step">2</div>
+            </div>
+            <div class="alert alert-error" id="error1"></div>
+            <div class="form-row">
+                <div class="form-group"><label>Surname *</label><input type="text" id="surname" placeholder="Doe" required></div>
+                <div class="form-group"><label>First Name *</label><input type="text" id="firstName" placeholder="John" required></div>
+            </div>
+            <div class="form-row">
+                <div class="form-group"><label>Years of Tech Experience</label><input type="text" id="experience" placeholder="e.g., 5 years"></div>
+                <div class="form-group"><label>Level of Education</label><select id="education"><option value="">Select</option><option value="Secondary">Secondary</option><option value="Diploma">Diploma</option><option value="Bachelors">Bachelors</option><option value="Masters">Masters</option><option value="PhD">PhD</option></select></div>
+            </div>
+            <div class="form-row">
+                <div class="form-group"><label>Phone Number *</label><input type="tel" id="phone" placeholder="+234..." required></div>
+                <div class="form-group"><label>Email Address *</label><input type="email" id="email" placeholder="you@example.com" required></div>
+            </div>
+            <div class="form-group">
+                <label>Profile Picture</label>
+                <div class="file-upload" onclick="document.getElementById('profilePic').click()">
+                    <i class="fas fa-camera"></i>
+                    <p>Click to upload your picture</p>
+                    <input type="file" id="profilePic" accept="image/*" onchange="previewProfilePic(event)">
+                </div>
+                <img id="profilePreview" class="preview-img" alt="Preview">
+            </div>
+            <button class="btn" onclick="goToQuiz()">Continue to Quiz <i class="fas fa-arrow-right"></i></button>
+        </div>
+
+        <!-- STEP 2: Quiz -->
+        <div class="card" id="step2" style="display:none">
+            <div class="icon"><i class="fas fa-question-circle"></i></div>
+            <h2>General Knowledge Quiz</h2>
+            <p>Step 2 of 2: Answer 10 simple questions</p>
+            <div class="progress-steps">
+                <div class="step done">1</div>
+                <div class="step active">2</div>
+            </div>
+            <div class="alert alert-error" id="error2"></div>
+            <div id="quizContainer"><div style="text-align:center;color:#94a3b8;padding:20px"><i class="fas fa-spinner fa-spin"></i> Loading questions...</div></div>
+            <button class="btn" id="submitBtn" onclick="submitApplication()" disabled><i class="fas fa-paper-plane"></i> Submit Application</button>
+            <button class="btn btn-secondary" onclick="goBack()"><i class="fas fa-arrow-left"></i> Back</button>
+        </div>
+
+        <!-- STEP 3: Success -->
+        <div class="card" id="step3" style="display:none">
+            <div class="icon" style="color:#10b981"><i class="fas fa-check-circle"></i></div>
+            <h2 style="color:#10b981">Application Submitted!</h2>
+            <p style="color:#94a3b8">Keep an eye on your email inbox (and spam folder) for our response within 24 hours.</p>
+            <div class="links">
+                <a href="admin-login.html">Already approved? Login here →</a><br>
+                <a href="/app">← Back to App</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API = 'https://oau-exam-api.onrender.com/api';
+        let quizQuestions = [];
+        let quizAnswers = [];
+        let profilePicBase64 = '';
+
+        function previewProfilePic(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                profilePicBase64 = e.target.result;
+                document.getElementById('profilePreview').src = profilePicBase64;
+                document.getElementById('profilePreview').style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+        window.previewProfilePic = previewProfilePic;
+
+        async function goToQuiz() {
+            const surname = document.getElementById('surname').value.trim();
+            const firstName = document.getElementById('firstName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            if (!surname || !firstName || !email || !phone) {
+                document.getElementById('error1').textContent = '❌ Please fill all required fields (*)';
+                document.getElementById('error1').style.display = 'block';
+                return;
+            }
+            document.getElementById('step1').style.display = 'none';
+            document.getElementById('step2').style.display = 'block';
+            document.getElementById('error1').style.display = 'none';
+            try {
+                const r = await fetch(API + '/admin-auth/quiz-questions');
+                const d = await r.json();
+                quizQuestions = d.questions || [];
+                quizAnswers = new Array(quizQuestions.length).fill(null);
+                renderQuiz();
+            } catch(e) { document.getElementById('error2').textContent = '❌ Failed to load quiz'; document.getElementById('error2').style.display = 'block'; }
+        }
+        window.goToQuiz = goToQuiz;
+
+        function renderQuiz() {
+            document.getElementById('quizContainer').innerHTML = quizQuestions.map((q, i) => `
+                <div class="quiz-question">
+                    <h4>Q${i+1}: ${q.text}</h4>
+                    <div class="quiz-options">
+                        ${q.options.map((opt, j) => `
+                            <div class="quiz-opt ${quizAnswers[i]===j?'selected':''}" onclick="selectQuizAnswer(${i}, ${j})">${String.fromCharCode(65+j)}. ${opt}</div>
+                        `).join('')}
+                    </div>
+                </div>`).join('');
+            checkAllAnswered();
+        }
+
+        window.selectQuizAnswer = function(qIndex, optIndex) {
+            quizAnswers[qIndex] = optIndex;
+            renderQuiz();
+        };
+
+        function checkAllAnswered() {
+            document.getElementById('submitBtn').disabled = !quizAnswers.every(a => a !== null);
+        }
+
+        function goBack() {
+            document.getElementById('step2').style.display = 'none';
+            document.getElementById('step1').style.display = 'block';
+        }
+        window.goBack = goBack;
+
+        async function submitApplication() {
+            const btn = document.getElementById('submitBtn');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+            btn.disabled = true;
+            try {
+                const body = {
+                    surname: document.getElementById('surname').value.trim(),
+                    firstName: document.getElementById('firstName').value.trim(),
+                    yearsOfExperience: document.getElementById('experience').value.trim(),
+                    educationLevel: document.getElementById('education').value,
+                    phone: document.getElementById('phone').value.trim(),
+                    email: document.getElementById('email').value.trim(),
+                    profilePicture: profilePicBase64,
+                    quizAnswers: quizAnswers,
+                    browser: navigator.userAgent
+                };
+                const r = await fetch(API + '/admin-auth/apply', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+                const d = await r.json();
+                if (r.ok) {
+                    document.getElementById('step2').style.display = 'none';
+                    document.getElementById('step3').style.display = 'block';
+                } else {
+                    document.getElementById('error2').textContent = '❌ ' + (d.error || 'Failed');
+                    document.getElementById('error2').style.display = 'block';
+                    btn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Application';
+                    btn.disabled = false;
+                }
+            } catch(e) {
+                document.getElementById('error2').textContent = '❌ Connection error';
+                document.getElementById('error2').style.display = 'block';
+                btn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Application';
+                btn.disabled = false;
+            }
+        }
+        window.submitApplication = submitApplication;
+    </script>
+</body>
+</html>
