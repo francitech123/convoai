@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover" />
+  <title>Test Mode • OAU CBE Practice</title>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  
+  <script src="/js/config.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/auth-check.js"></script>
+  
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI','Inter',system-ui,-apple-system,sans-serif}
+    :root{
+      --primary:#1e3a8a;--primary-light:#3b82f6;--accent:#10b981;--accent-2:#06b6d4;
+      --bg:#0f172a;--bg-soft:#111c33;--card:#1e293b;--card-2:#152033;--border:#334155;
+      --text:#f1f5f9;--text-secondary:#94a3b8;--danger:#ef4444;--warning:#f59e0b;--success:#10b981;
+      --shadow:0 18px 40px rgba(0,0,0,.28);--brand-gradient:linear-gradient(135deg,#1e3a8a,#3b82f6);
+      --test-purple:#7c3aed;--test-purple-light:#a78bfa;
+    }
+    body.light-mode{
+      --bg:#f4f7fb;--bg-soft:#edf3fb;--card:#ffffff;--card-2:#f8fbff;--border:#d7e2ef;
+      --text:#0f172a;--text-secondary:#526173;--shadow:0 16px 36px rgba(15,23,42,.08)
+    }
+    body{background:radial-gradient(circle at top right,rgba(124,58,237,.10),transparent 25%),linear-gradient(180deg,var(--bg),#0b1324 100%);color:var(--text);min-height:100vh}
+    .page{max-width:1280px;margin:0 auto;padding:20px 18px 110px}
+    .topbar{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-top:6px}
+    .brand{display:flex;align-items:center;gap:14px;min-width:0}
+    .brand-logo{width:56px;height:56px;border-radius:18px;background:rgba(124,58,237,.12);display:grid;place-items:center;border:1px solid var(--border);overflow:hidden}
+    .brand-logo img{width:42px;height:42px;object-fit:contain}
+    .brand-copy small{display:block;color:var(--test-purple-light);text-transform:uppercase;letter-spacing:.18em;font-weight:800;font-size:.72rem;margin-bottom:4px}
+    .brand-copy h1{font-size:1.2rem}
+    .topbar-actions{display:flex;align-items:center;gap:10px}
+    .icon-btn{position:relative;border:1px solid var(--border);background:var(--card);color:var(--text);width:46px;height:46px;border-radius:16px;cursor:pointer;box-shadow:var(--shadow)}
+    .badge{position:absolute;top:-4px;right:-4px;background:var(--danger);color:#fff;min-width:18px;height:18px;border-radius:999px;padding:0 5px;font-size:.7rem;display:none;align-items:center;justify-content:center}
+    .network-strip{margin-top:16px;padding:14px 16px;border-radius:18px;background:linear-gradient(135deg,rgba(124,58,237,.18),rgba(167,139,250,.12));border:1px solid rgba(167,139,250,.18);display:flex;justify-content:space-between;gap:12px;align-items:center}
+    .network-strip strong{display:block;margin-bottom:4px}.network-strip p{color:var(--text-secondary);font-size:.92rem}.network-pill{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.08);font-weight:800;font-size:.8rem}
+    .hero{margin-top:18px;background:linear-gradient(135deg,rgba(124,58,237,.92),rgba(167,139,250,.55));border-radius:28px;padding:24px;border:1px solid rgba(255,255,255,.08);position:relative;overflow:hidden}
+    .hero::after{content:'';position:absolute;right:-60px;top:-40px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.16),transparent 60%)}
+    .hero-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;position:relative;z-index:1}
+    .hero h2{font-size:1.5rem;margin-bottom:8px}.hero p{max-width:720px;line-height:1.6;color:rgba(255,255,255,.9)}
+    .hero-tag{padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.12);font-weight:800;white-space:nowrap}
+    .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;position:relative;z-index:1}
+    .btn{border:none;border-radius:14px;padding:12px 14px;font-weight:800;cursor:pointer}
+    .btn-primary{background:#fff;color:#0f172a}
+    .btn-soft{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.18)}
+    .btn-test{background:linear-gradient(135deg,var(--test-purple),var(--test-purple-light));color:#fff}
+    .stats-grid{margin-top:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;position:relative;z-index:1}
+    .stat-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:16px}
+    .stat-card span{display:block;font-size:.8rem;color:rgba(255,255,255,.78);margin-bottom:6px}.stat-card strong{font-size:1.25rem}
+    .faculty-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px}
+    @media(max-width:768px){.faculty-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:480px){.faculty-grid{grid-template-columns:1fr 1fr}}
+    .faculty-card{background:var(--card);border:2px solid var(--border);border-radius:16px;padding:16px 12px;text-align:center;cursor:pointer;transition:all .2s}
+    .faculty-card:hover{border-color:var(--test-purple);transform:translateY(-3px);background:var(--card-2)}
+    .faculty-card i{font-size:1.5rem;color:var(--test-purple-light);margin-bottom:6px;display:block}
+    .faculty-card h3{font-size:.85rem;font-weight:600;color:var(--text)}
+    .faculty-card .count{font-size:.65rem;color:var(--text-secondary)}
+    .level-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+    @media(max-width:480px){.level-grid{grid-template-columns:repeat(2,1fr)}}
+    .level-card{background:var(--card);border:2px solid var(--border);border-radius:16px;padding:16px 10px;text-align:center;cursor:pointer;transition:all .2s}
+    .level-card:hover:not(.locked){border-color:var(--test-purple);background:var(--card-2)}
+    .level-card.locked{opacity:.4;cursor:not-allowed}
+    .level-card i{font-size:1.3rem;color:var(--test-purple-light);margin-bottom:4px;display:block}
+    .level-card h4{font-size:.85rem;color:var(--text)}
+    .courses-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+    @media(max-width:768px){.courses-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:480px){.courses-grid{grid-template-columns:1fr 1fr}}
+    .course-card{background:var(--card);border-radius:16px;padding:16px 12px;border:1px solid var(--border);cursor:pointer;transition:all .2s;text-align:center;position:relative}
+    .course-card:hover:not(.locked){border-color:var(--test-purple);transform:translateY(-3px);background:var(--card-2)}
+    .course-card.locked{opacity:.6;cursor:not-allowed}
+    .course-card .code{font-weight:700;font-size:.9rem;color:var(--text)}
+    .course-card .name{font-size:.65rem;color:var(--text-secondary);margin-top:2px}
+    .course-card .badge-free{position:absolute;top:6px;right:6px;background:var(--success);color:#fff;font-size:.5rem;padding:2px 8px;border-radius:12px;font-weight:600}
+    .semester-label{color:var(--text-secondary);font-size:.75rem;text-transform:uppercase;letter-spacing:1px;margin:16px 0 8px;font-weight:700}
+    .section-card{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:20px;box-shadow:var(--shadow);margin-top:16px}
+    .section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
+    .section-head h3{font-size:1.02rem}.section-head a{color:var(--test-purple-light);text-decoration:none;font-weight:700;font-size:.88rem}
+    .entry-card{background:var(--card-2);border:2px solid var(--test-purple);border-radius:24px;padding:30px 20px;text-align:center}
+    .entry-card .icon{font-size:3rem;margin-bottom:12px}
+    .entry-card h1{font-size:1.2rem;color:var(--text)}
+    .entry-card p{color:var(--text-secondary);font-size:.85rem;margin-top:4px}
+    .stat-row{display:flex;justify-content:center;gap:12px;margin:16px 0;flex-wrap:wrap}
+    .stat-badge{background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.2);padding:6px 14px;border-radius:20px;color:var(--test-purple-light);font-size:.78rem;display:flex;align-items:center;gap:5px}
+    .test-container{background:var(--card);border-radius:24px;padding:20px;border:1px solid var(--border);margin-top:12px}
+    .test-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:16px}
+    .test-header .info h2{font-size:1rem;color:var(--text)}
+    .test-header .info p{font-size:.75rem;color:var(--text-secondary)}
+    .timer-box{background:var(--test-purple);color:#fff;padding:8px 18px;border-radius:40px;font-size:1.2rem;font-weight:700;font-family:'Courier New',monospace;min-width:70px;text-align:center}
+    .timer-box.warning{background:var(--warning);color:#000;animation:pulse 1s infinite}
+    .timer-box.danger{background:var(--danger);animation:pulse .5s infinite}
+    .question-card{background:var(--card-2);border-radius:16px;padding:18px;border:1px solid var(--border);margin-top:12px}
+    .q-counter{color:var(--text-secondary);font-size:.8rem;margin-bottom:10px}
+    .q-text{font-size:1rem;line-height:1.7;color:var(--text);margin-bottom:16px}
+    .options-area{display:flex;flex-direction:column;gap:8px}
+    .opt{background:var(--bg);border:2px solid var(--border);border-radius:50px;padding:12px 18px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:12px;color:var(--text)}
+    .opt:hover:not(.disabled){border-color:var(--test-purple)}
+    .opt.selected{background:var(--test-purple);color:#fff;border-color:var(--test-purple)}
+    .opt .prefix{font-weight:700;width:24px;flex-shrink:0}
+    .opt.disabled{cursor:not-allowed;opacity:.7}
+    .opt.correct{border-color:var(--success);background:rgba(16,185,129,.1)}
+    .opt.correct .prefix{color:var(--success)}
+    .opt.wrong{border-color:var(--danger);background:rgba(239,68,68,.1)}
+    .opt.wrong .prefix{color:var(--danger)}
+    .nav-buttons{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+    .nav-buttons .btn{flex:1;justify-content:center;min-width:80px}
+    .question-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:5px;background:var(--bg);border-radius:12px;padding:12px;max-height:140px;overflow-y:auto;margin-top:12px;border:1px solid var(--border)}
+    @media(min-width:500px){.question-grid{grid-template-columns:repeat(10,1fr)}}
+    .grid-btn{aspect-ratio:1;background:var(--card);border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;cursor:pointer;font-size:.7rem;color:var(--text);transition:all .2s}
+    .grid-btn:hover{background:var(--test-purple);color:#fff}
+    .grid-btn.answered{background:var(--success);color:#fff}
+    .grid-btn.current{background:var(--test-purple);color:#fff;box-shadow:0 0 8px rgba(124,58,237,.4)}
+    .back-btn{background:var(--border);color:var(--text);border:none;padding:8px 16px;border-radius:30px;cursor:pointer;font-size:.8rem;display:inline-flex;align-items:center;gap:6px;transition:all .2s;font-family:inherit}
+    .back-btn:hover{background:var(--card-2)}
+    .screen{display:none;animation:fadeIn .3s ease}
+    .screen.active{display:block}
+    .empty-state{padding:18px;border-radius:18px;background:var(--card-2);border:1px dashed var(--border);text-align:center;color:var(--text-secondary)}
+    .loading-spin{text-align:center;padding:30px;color:var(--text-secondary)}
+    .loading-spin i{font-size:1.5rem;animation:spin 1s linear infinite}
+    .test-result-card{background:var(--card);border-radius:24px;padding:24px;text-align:center;border:2px solid var(--test-purple)}
+    .test-result-card .big-score{font-size:3rem;font-weight:800;color:var(--test-purple-light)}
+    .test-result-card .label{color:var(--text-secondary);font-size:.85rem}
+    .bottom-nav{position:fixed;left:0;right:0;bottom:0;background:rgba(15,23,42,.95);border-top:1px solid var(--border);display:flex;justify-content:center;z-index:99;backdrop-filter:blur(16px)}
+    body.light-mode .bottom-nav{background:rgba(244,247,251,.95)}
+    .bottom-nav-inner{width:min(100%,1280px);display:grid;grid-template-columns:repeat(5,1fr);gap:6px;padding:10px 14px calc(10px + env(safe-area-inset-bottom))}
+    .nav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--text-secondary);text-decoration:none;padding:8px 4px;border-radius:14px;font-size:.76rem;font-weight:700}
+    .nav-item i{font-size:1.1rem}.nav-item.active{color:#fff;background:linear-gradient(135deg,var(--primary),var(--primary-light))}
+    .chat-fab{position:fixed;right:20px;bottom:88px;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#10b981,#059669);color:#fff;text-decoration:none;box-shadow:0 10px 24px rgba(16,185,129,.35);z-index:98}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+    @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    @media(max-width:768px){.page{padding:16px 14px 108px}.hero-head{flex-direction:column}.stats-grid{grid-template-columns:repeat(2,1fr)}.faculty-grid{grid-template-columns:repeat(2,1fr)}.courses-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:480px){.faculty-grid{grid-template-columns:1fr 1fr}.level-grid{grid-template-columns:1fr 1fr}.question-grid{grid-template-columns:repeat(6,1fr)}}
+  </style>
+</head>
+<body>
+<main class="page">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-logo"><img src="/logo.svg" alt="OAU CBE Practice"></div>
+      <div class="brand-copy"><small>Test mode</small><h1>OAU CBE Practice</h1></div>
+    </div>
+    <div class="topbar-actions">
+      <button class="icon-btn" id="themeToggleBtn" onclick="toggleThemeMode()" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+      <button class="icon-btn" onclick="goNotifications()" aria-label="Notifications"><i class="fas fa-bell"></i><span class="badge" id="notifBadge">0</span></button>
+    </div>
+  </header>
+
+  <section class="network-strip">
+    <div>
+      <strong id="welcomeText">Test mode</strong>
+      <p id="networkMessage">Select a faculty, level, and course to start your practice test with rotation-based questions.</p>
+    </div>
+    <div class="network-pill" id="networkPill">Ready</div>
+  </section>
+
+  <section class="hero">
+    <div class="hero-head">
+      <div>
+        <h2 id="heroTitle">Practice Test Mode</h2>
+        <p id="heroSubtitle">Timed practice tests with rotation-based questions — no repeats. Perfect for mastering each topic.</p>
+      </div>
+      <div class="hero-tag" id="heroTag">100L • 200L</div>
+    </div>
+    <div class="hero-actions">
+      <button class="btn btn-primary" onclick="jumpToCourses()">Browse tests</button>
+      <button class="btn btn-soft" onclick="location.href='/study'">Study first</button>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card"><span>Courses</span><strong id="statCourses">—</strong></div>
+      <div class="stat-card"><span>Tests taken</span><strong id="statTests">—</strong></div>
+      <div class="stat-card"><span>Avg score</span><strong id="statAvg">—</strong></div>
+      <div class="stat-card"><span>Questions</span><strong id="statQuestions">—</strong></div>
+    </div>
+  </section>
+
+  <!-- Faculty Selection -->
+  <div class="screen active" id="facultyScreen">
+    <h3 style="margin:16px 0 8px;color:var(--text)"><i class="fas fa-building"></i> Select Faculty</h3>
+    <div id="facultyGrid" class="faculty-grid">
+      <div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading...</p></div>
+    </div>
+  </div>
+
+  <!-- Level Selection -->
+  <div class="screen" id="levelScreen">
+    <button class="back-btn" onclick="goToScreen('facultyScreen')"><i class="fas fa-arrow-left"></i> Change Faculty</button>
+    <h3 style="margin:16px 0 8px;color:var(--text)" id="levelTitle">Select Level</h3>
+    <div id="levelGrid" class="level-grid">
+      <div class="loading-spin"><i class="fas fa-spinner"></i></div>
+    </div>
+  </div>
+
+  <!-- Course Selection -->
+  <div class="screen" id="courseScreen">
+    <button class="back-btn" onclick="goToScreen('levelScreen')"><i class="fas fa-arrow-left"></i> Change Level</button>
+    <h3 style="margin:16px 0 8px;color:var(--text)" id="coursePageTitle">Available Tests</h3>
+    <div id="coursesContainer"></div>
+  </div>
+
+  <!-- Entry Screen -->
+  <div class="screen" id="entryScreen">
+    <button class="back-btn" onclick="goToScreen('courseScreen')"><i class="fas fa-arrow-left"></i> Change Course</button>
+    <div id="entryContent"></div>
+  </div>
+
+  <!-- Test Screen -->
+  <div class="screen" id="testScreen">
+    <div class="test-container">
+      <div class="test-header">
+        <div class="info">
+          <h2 id="testCourseTitle">Course</h2>
+          <p id="testMeta">Questions • Time</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div class="timer-box" id="timerDisplay">--:--</div>
+          <button class="btn btn-soft" style="padding:6px 14px;font-size:.7rem;background:rgba(239,68,68,.2);color:var(--danger)" onclick="quitTest()"><i class="fas fa-times"></i> Quit</button>
+        </div>
+      </div>
+
+      <div class="question-card">
+        <div class="q-counter" id="qCounter">Question 1 of 0</div>
+        <div class="q-text" id="qText"></div>
+        <div class="options-area" id="optionsArea"></div>
+        <div class="nav-buttons">
+          <button class="btn btn-soft" id="prevBtn" onclick="prevQuestion()" disabled style="flex:1"><i class="fas fa-chevron-left"></i> Prev</button>
+          <button class="btn btn-test" id="nextBtn" onclick="nextQuestion()" style="flex:1">Next <i class="fas fa-chevron-right"></i></button>
+          <button class="btn" id="submitBtn" onclick="submitTest()" style="display:none;flex:1;background:var(--success);color:#fff"><i class="fas fa-check-circle"></i> Submit</button>
+        </div>
+      </div>
+
+      <div class="question-grid" id="questionGrid"></div>
+    </div>
+  </div>
+
+  <!-- Result Screen -->
+  <div class="screen" id="resultScreen">
+    <div id="resultContent"></div>
+  </div>
+
+  <a href="/ai" class="chat-fab" aria-label="Open Study AI"><i class="fas fa-robot"></i></a>
+</main>
+
+<nav class="bottom-nav">
+  <div class="bottom-nav-inner">
+    <a href="/app" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="/exam" class="nav-item"><i class="fas fa-pen"></i><span>Exam</span></a>
+    <a href="/test" class="nav-item active"><i class="fas fa-flask"></i><span>Test</span></a>
+    <a href="/study" class="nav-item"><i class="fas fa-book-open"></i><span>Study</span></a>
+    <a href="/profile" class="nav-item"><i class="fas fa-user"></i><span>Me</span></a>
+  </div>
+</nav>
+
+<script>
+const API = window.CONFIG?.API_URL || (location.hostname.includes('localhost') ? 'http://localhost:5000/api' : '/api');
+const token = localStorage.getItem('oau_token');
+const qs = id => document.getElementById(id);
+const setText = (id,v) => { const el = qs(id); if(el) el.textContent = v; };
+const escapeHtml = str => String(str||'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+
+// ==================== STATE ====================
+let selectedFaculty = null;
+let selectedLevel = null;
+let selectedCourse = null;
+let testSession = null;
+let isSubmitting = false;
+let autoSaveInterval = null;
+let allCourses = [];
+let notifications = [];
+const FREE_COURSES = ['CHM 102', 'MTH 102', 'GET 102', 'GST 111', 'GST 112', 'ACC 102', 'AGR 102', 'ENG 102', 'EDU 102', 'ECO 102'];
+
+// ==================== THEME ====================
+function initTheme(){
+  const saved = localStorage.getItem('theme');
+  const btn = qs('themeToggleBtn');
+  if(saved === 'light'){ document.body.classList.add('light-mode'); btn.innerHTML = '<i class="fas fa-sun"></i>'; }
+  else { document.body.classList.remove('light-mode'); btn.innerHTML = '<i class="fas fa-moon"></i>'; }
+}
+function toggleThemeMode(){
+  const isLight = document.body.classList.toggle('light-mode');
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  qs('themeToggleBtn').innerHTML = isLight ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+}
+window.toggleThemeMode = toggleThemeMode;
+
+function goNotifications(){ location.href = '/notifications'; }
+window.goNotifications = goNotifications;
+
+// ==================== SCREEN MANAGEMENT ====================
+function goToScreen(id){
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  qs(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+window.goToScreen = goToScreen;
+
+// ==================== LOAD FACULTIES ====================
+async function loadFaculties(){
+  const grid = qs('facultyGrid');
+  try {
+    const r = await fetch(API + '/admin/faculties');
+    const d = await r.json();
+    const faculties = d.faculties || [];
+    if(faculties.length){
+      grid.innerHTML = faculties.map(f => `
+        <div class="faculty-card" onclick="selectFaculty('${f.name.replace(/'/g,"\\'")}')">
+          <i class="fas fa-building"></i>
+          <h3>${f.name}</h3>
+          <span class="count">${f.totalCourses} courses</span>
+        </div>
+      `).join('');
+    } else {
+      grid.innerHTML = '<div class="empty-state">No faculties available</div>';
+    }
+  } catch(e){
+    grid.innerHTML = '<div class="empty-state">Failed to load faculties</div>';
+  }
+}
+
+// ==================== SELECT FACULTY ====================
+function selectFaculty(name){
+  selectedFaculty = name;
+  qs('levelTitle').textContent = `${name} - Select Level`;
+  goToScreen('levelScreen');
+  loadLevels();
+}
+window.selectFaculty = selectFaculty;
+
+// ==================== LOAD LEVELS ====================
+async function loadLevels(){
+  const grid = qs('levelGrid');
+  grid.innerHTML = '<div class="loading-spin"><i class="fas fa-spinner"></i></div>';
+  try {
+    const r = await fetch(API + '/admin/available-levels');
+    const d = await r.json();
+    const levels = d.levels || [];
+    grid.innerHTML = ['100','200','300','400','500','600'].map(lv => {
+      const available = levels.includes(lv);
+      return `
+        <div class="level-card ${available ? '' : 'locked'}" 
+             onclick="${available ? `selectLevel('${lv}')` : ''}">
+          <i class="fas fa-layer-group"></i>
+          <h4>${lv} Level</h4>
+          <span style="font-size:.6rem;padding:2px 10px;border-radius:12px;${available ? 'background:var(--success);color:#fff;' : 'background:var(--border);color:var(--text-secondary);'}">
+            ${available ? '✅ Available' : '⏳ Soon'}
+          </span>
+        </div>
+      `;
+    }).join('');
+  } catch(e){
+    grid.innerHTML = '<div class="empty-state">Error loading levels</div>';
+  }
+}
+
+// ==================== SELECT LEVEL ====================
+function selectLevel(level){
+  selectedLevel = level;
+  qs('coursePageTitle').textContent = `${selectedFaculty} - ${level} Level Tests`;
+  goToScreen('courseScreen');
+  loadCourses();
+}
+window.selectLevel = selectLevel;
+
+// ==================== LOAD COURSES ====================
+async function loadCourses(){
+  const container = qs('coursesContainer');
+  container.innerHTML = '<div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading...</p></div>';
+  try {
+    const r = await fetch(`${API}/admin/faculty-courses/${encodeURIComponent(selectedFaculty)}/${selectedLevel}`);
+    const d = await r.json();
+    let html = '';
+    const firstSem = d.firstSemester || [];
+    const secondSem = d.secondSemester || [];
+    if(firstSem.length){
+      html += `<div class="semester-label"><i class="fas fa-sun"></i> First Semester</div><div class="courses-grid">`;
+      firstSem.forEach(c => html += makeCourseCard(c));
+      html += '</div>';
+    }
+    if(secondSem.length){
+      html += `<div class="semester-label"><i class="fas fa-moon"></i> Second Semester</div><div class="courses-grid">`;
+      secondSem.forEach(c => html += makeCourseCard(c));
+      html += '</div>';
+    }
+    container.innerHTML = html || '<div class="empty-state">No courses available</div>';
+  } catch(e){
+    container.innerHTML = '<div class="empty-state">Error loading courses</div>';
+  }
+}
+
+function makeCourseCard(c){
+  const isFree = FREE_COURSES.includes(c.code);
+  const locked = !isFree;
+  return `
+    <div class="course-card ${locked ? 'locked' : ''}" onclick="${locked ? `alert('This course requires access.')` : `openEntry('${c.code}')`}">
+      ${isFree ? '<span class="badge-free">Free</span>' : ''}
+      <div class="code">${c.code}</div>
+      <div class="name">${c.name}</div>
+    </div>
+  `;
+}
+
+// ==================== OPEN ENTRY ====================
+async function openEntry(code){
+  selectedCourse = code;
+  goToScreen('entryScreen');
+  qs('entryContent').innerHTML = '<div class="loading-spin"><i class="fas fa-spinner"></i></div>';
+  try {
+    const r = await fetch(`${API}/admin/course-detail/${encodeURIComponent(code)}`);
+    const d = await r.json();
+    const c = d.course;
+    qs('entryContent').innerHTML = `
+      <div class="entry-card">
+        <div class="icon">🧪</div>
+        <h1>${c.code}</h1>
+        <p>${c.name}</p>
+        <div class="stat-row">
+          <span class="stat-badge">📚 ${c.testSettings.numberOfQuestions} Questions</span>
+          <span class="stat-badge">⏱️ ${c.testSettings.timeLimit} Minutes</span>
+          <span class="stat-badge">📦 ${c.questionCounts.test} Available</span>
+        </div>
+        <button class="btn btn-test" onclick="startTest()" style="width:100%;padding:14px;border:none;border-radius:14px;font-weight:700;font-size:1rem;cursor:pointer" ${!c.testReady ? 'disabled' : ''}>
+          <i class="fas fa-play-circle"></i> ${c.testReady ? 'START TEST' : 'NOT ENOUGH QUESTIONS'}
+        </button>
+        <p style="color:var(--text-secondary);font-size:.75rem;margin-top:8px">
+          ${c.testReady ? '✅ Ready' : `⚠️ Need ${c.testSettings.numberOfQuestions - c.questionCounts.test} more questions`}
+        </p>
+      </div>
+    `;
+  } catch(e){
+    qs('entryContent').innerHTML = '<div class="empty-state">Error loading course</div>';
+  }
+}
+window.openEntry = openEntry;
+
+// ==================== START TEST ====================
+async function startTest(){
+  const btn = document.querySelector('#entryContent .btn');
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+  btn.disabled = true;
+  try {
+    // Get course details for time limit
+    const courseRes = await fetch(`${API}/admin/course-detail/${encodeURIComponent(selectedCourse)}`);
+    const courseData = await courseRes.json();
+    const timeLimit = courseData.course?.testSettings?.timeLimit || 15;
+    const numQuestions = courseData.course?.testSettings?.numberOfQuestions || 30;
+    
+    // Fetch questions using rotation
+    const response = await fetch(API + '/tests/questions/rotate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+      body: JSON.stringify({
+        courseCode: selectedCourse,
+        numberOfQuestions: numQuestions,
+        excludeRecentSessions: 3
+      })
+    });
+    
+    const data = await response.json();
+    
+    if(!data.success || !data.questions || !data.questions.length){
+      alert('No questions available. Please try again later.');
+      btn.innerHTML = '<i class="fas fa-play-circle"></i> START TEST';
+      btn.disabled = false;
+      return;
+    }
+    
+    const questions = data.questions;
+    const sessionId = data.sessionId || (Date.now() + '_' + Math.random().toString(36).substring(2,8));
+    
+    testSession = {
+      courseCode: selectedCourse,
+      questions: questions,
+      answers: new Array(questions.length).fill(null),
+      timeLimit: timeLimit,
+      timeLeft: timeLimit * 60,
+      currentIndex: 0,
+      timer: null,
+      startTime: Date.now(),
+      sessionId: sessionId
+    };
+    
+    qs('testCourseTitle').textContent = `🧪 ${selectedCourse}`;
+    qs('testMeta').textContent = `${questions.length} Questions • ${timeLimit} min`;
+    qs('timerDisplay').textContent = `${timeLimit}:00`;
+    qs('timerDisplay').className = 'timer-box';
+    goToScreen('testScreen');
+    renderQuestion();
+    startTimer();
+    renderGrid();
+    startAutoSave();
+  } catch(e){
+    alert('Failed to load test: ' + e.message);
+    btn.innerHTML = '<i class="fas fa-play-circle"></i> START TEST';
+    btn.disabled = false;
+  }
+}
+window.startTest = startTest;
+
+// ==================== RENDER QUESTION ====================
+function renderQuestion(){
+  if(!testSession) return;
+  const q = testSession.questions[testSession.currentIndex];
+  const idx = testSession.currentIndex;
+  const total = testSession.questions.length;
+  qs('qCounter').textContent = `Question ${idx+1} of ${total}`;
+  qs('qText').textContent = q.text;
+  const letters = ['A','B','C','D'];
+  qs('optionsArea').innerHTML = q.options.map((opt,i) => `
+    <div class="opt ${testSession.answers[idx] === i ? 'selected' : ''}" onclick="selectAnswer(${i})">
+      <span class="prefix">${letters[i]}.</span>
+      <span>${opt}</span>
+    </div>
+  `).join('');
+  qs('prevBtn').disabled = idx === 0;
+  const last = idx === total - 1;
+  qs('nextBtn').style.display = last ? 'none' : 'inline-flex';
+  qs('submitBtn').style.display = last ? 'block' : 'none';
+  renderGrid();
+}
+
+// ==================== SELECT ANSWER ====================
+function selectAnswer(index){
+  if(!testSession) return;
+  testSession.answers[testSession.currentIndex] = index;
+  renderQuestion();
+}
+window.selectAnswer = selectAnswer;
+
+// ==================== NAVIGATION ====================
+function prevQuestion(){
+  if(testSession.currentIndex > 0){
+    testSession.currentIndex--;
+    renderQuestion();
+  }
+}
+window.prevQuestion = prevQuestion;
+
+function nextQuestion(){
+  if(testSession.currentIndex < testSession.questions.length - 1){
+    testSession.currentIndex++;
+    renderQuestion();
+  }
+}
+window.nextQuestion = nextQuestion;
+
+function jumpTo(index){
+  testSession.currentIndex = index;
+  renderQuestion();
+}
+window.jumpTo = jumpTo;
+
+// ==================== RENDER GRID ====================
+function renderGrid(){
+  qs('questionGrid').innerHTML = testSession.questions.map((_,i) => `
+    <div class="grid-btn ${testSession.answers[i] !== null ? 'answered' : ''} ${i === testSession.currentIndex ? 'current' : ''}" 
+         onclick="jumpTo(${i})">${i+1}</div>
+  `).join('');
+}
+
+// ==================== TIMER ====================
+function startTimer(){
+  if(testSession.timer) clearInterval(testSession.timer);
+  const d = qs('timerDisplay');
+  testSession.timer = setInterval(() => {
+    testSession.timeLeft--;
+    if(testSession.timeLeft <= 0){
+      clearInterval(testSession.timer);
+      submitTest(true);
+      return;
+    }
+    const m = Math.floor(testSession.timeLeft / 60);
+    const s = testSession.timeLeft % 60;
+    d.textContent = `${m}:${s.toString().padStart(2,'0')}`;
+    d.classList.remove('warning','danger');
+    if(testSession.timeLeft <= 60) d.classList.add('danger');
+    else if(testSession.timeLeft <= 300) d.classList.add('warning');
+  }, 1000);
+}
+
+// ==================== AUTO SAVE ====================
+function startAutoSave(){
+  if(autoSaveInterval) clearInterval(autoSaveInterval);
+  autoSaveInterval = setInterval(() => {
+    if(testSession){
+      try {
+        sessionStorage.setItem('activeTest', JSON.stringify({
+          courseCode: testSession.courseCode,
+          questions: testSession.questions,
+          answers: testSession.answers,
+          timeLimit: testSession.timeLimit,
+          timeLeft: testSession.timeLeft,
+          currentIndex: testSession.currentIndex,
+          startTime: testSession.startTime,
+          sessionId: testSession.sessionId
+        }));
+      } catch(e){}
+    }
+  }, 10000);
+}
+
+// ==================== SUBMIT TEST ====================
+async function submitTest(autoSubmit = false){
+  if(isSubmitting) return;
+  if(!testSession) return;
+  if(!autoSubmit && !confirm('Submit your test? You cannot change answers after submission.')) return;
+  isSubmitting = true;
+  if(testSession.timer) clearInterval(testSession.timer);
+  if(autoSaveInterval) clearInterval(autoSaveInterval);
+  const timeSpent = Date.now() - testSession.startTime;
+  let correct = 0;
+  testSession.questions.forEach((q,i) => {
+    if(testSession.answers[i] === q.correctOption) correct++;
+  });
+  const total = testSession.questions.length;
+  const percentage = Math.round((correct / total) * 100);
+  try {
+    const response = await fetch(API + '/tests/session/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+      body: JSON.stringify({
+        sessionId: testSession.sessionId,
+        courseCode: testSession.courseCode,
+        correctCount: correct,
+        totalQuestions: total,
+        percentage: percentage,
+        timeSpent: timeSpent,
+        answers: testSession.answers
+      })
+    });
+    const data = await response.json();
+    if(response.ok){
+      sessionStorage.removeItem('activeTest');
+      showResult(testSession.courseCode, correct, total, percentage, timeSpent);
+    } else {
+      alert('Failed to submit. Please try again.');
+      isSubmitting = false;
+    }
+  } catch(e){
+    alert('Connection error. Please try again.');
+    isSubmitting = false;
+  }
+}
+window.submitTest = submitTest;
+
+// ==================== SHOW RESULT ====================
+function showResult(course, correct, total, percentage, timeSpent){
+  const minutes = Math.floor(timeSpent / 60000);
+  const seconds = Math.floor((timeSpent % 60000) / 1000);
+  qs('resultContent').innerHTML = `
+    <div class="test-result-card">
+      <div class="big-score">${percentage}%</div>
+      <div class="label">${correct} / ${total} Correct</div>
+      <p style="color:var(--text-secondary);margin-top:8px;">⏱️ ${minutes}m ${seconds}s</p>
+      <div style="margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <button class="btn btn-test" onclick="window.location.href='/submit'" style="border:none;padding:12px 20px;border-radius:14px;font-weight:700;cursor:pointer">View Details</button>
+        <button class="btn btn-soft" onclick="window.location.href='/test'">Try Again</button>
+        <button class="btn btn-soft" onclick="window.location.href='/app'">Dashboard</button>
+      </div>
+    </div>
+  `;
+  goToScreen('resultScreen');
+}
+
+// ==================== QUIT TEST ====================
+function quitTest(){
+  if(!testSession) return;
+  if(confirm('Quit test? Your progress will be lost.')){
+    if(testSession.timer) clearInterval(testSession.timer);
+    if(autoSaveInterval) clearInterval(autoSaveInterval);
+    sessionStorage.removeItem('activeTest');
+    testSession = null;
+    window.location.reload();
+  }
+}
+window.quitTest = quitTest;
+
+// ==================== SHUFFLE ====================
+function shuffleArray(arr){
+  const s = [...arr];
+  for(let i = s.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [s[i], s[j]] = [s[j], s[i]];
+  }
+  return s;
+}
+
+// ==================== INIT ====================
+document.addEventListener('DOMContentLoaded', () => {
+  initTheme();
+  loadFaculties();
+  
+  // Check for saved test
+  try {
+    const saved = sessionStorage.getItem('activeTest');
+    if(saved){
+      const data = JSON.parse(saved);
+      if(data && data.questions && data.questions.length){
+        testSession = {
+          courseCode: data.courseCode,
+          questions: data.questions,
+          answers: data.answers || new Array(data.questions.length).fill(null),
+          timeLimit: data.timeLimit,
+          timeLeft: data.timeLeft || (data.timeLimit * 60),
+          currentIndex: data.currentIndex || 0,
+          timer: null,
+          startTime: data.startTime || Date.now(),
+          sessionId: data.sessionId || 'restored'
+        };
+        qs('testCourseTitle').textContent = `🧪 ${data.courseCode}`;
+        qs('testMeta').textContent = `${data.questions.length} Questions • ${data.timeLimit} min`;
+        const m = Math.floor(testSession.timeLeft / 60);
+        const s = testSession.timeLeft % 60;
+        qs('timerDisplay').textContent = `${m}:${s.toString().padStart(2,'0')}`;
+        goToScreen('testScreen');
+        renderQuestion();
+        startTimer();
+        renderGrid();
+        startAutoSave();
+        showToast('📌 Test restored from saved session');
+      }
+    }
+  } catch(e){}
+});
+
+function showToast(msg){
+  const t = document.createElement('div');
+  t.style.cssText = 'position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--card);color:var(--text);padding:12px 20px;border-radius:14px;border:1px solid var(--border);z-index:9999;font-size:.85rem;box-shadow:var(--shadow);max-width:90%;text-align:center';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 3000);
+}
+</script>
+</body>
+</html>
