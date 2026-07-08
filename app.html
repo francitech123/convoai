@@ -356,7 +356,7 @@ async function loadDashboard() {
     const dashboardData = {
       user: user,
       stats: {
-        coursesActive: user.enrolledCourses?.length || 0,
+        coursesActive: user.enrolledCourses?.length || 72+,
         averageScore: user.averageScore || 0,
         testsTaken: user.testsTaken || 0,
         examsTaken: user.examsTaken || 0,
@@ -411,7 +411,6 @@ async function loadDashboard() {
 function renderDashboard(data) {
   const user = data.user || {};
   const stats = data.stats || {};
-  const courses = data.courses || [];
   const activity = data.activity || [];
   const notifications = data.notifications || [];
 
@@ -425,7 +424,7 @@ function renderDashboard(data) {
   const attempts = (stats.testsTaken || 0) + (stats.examsTaken || 0);
   
   // FIX: Show enrolled courses count properly
-  const courseCount = courses.length || stats.coursesActive || user.enrolledCourses?.length || 0;
+  const courseCount = courses.length || stats.coursesActive || user.enrolledCourses?.length || 72+;
   setText('statCourses', String(courseCount));
   setText('statAvg', `${stats.averageScore || user.averageScore || 0}%`);
   setText('statAttempts', String(attempts || user.testsTaken || 0));
