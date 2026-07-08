@@ -21,6 +21,16 @@
     }
     body{background:radial-gradient(circle at top right,rgba(59,130,246,.12),transparent 25%),linear-gradient(180deg,var(--bg),#0b1324 100%);color:var(--text);min-height:100vh}
     .page{max-width:1280px;margin:0 auto;padding:20px 18px 110px}
+    
+    /* LOADING OVERLAY */
+    .loading-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .6s ease,visibility .6s ease}
+    .loading-overlay.hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .loading-crest{width:140px;height:140px;animation:pulse 2s ease-in-out infinite}
+    .loading-spinner{margin-top:24px;width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--primary-light);border-radius:50%;animation:spin .8s linear infinite}
+    .loading-text{color:var(--text-secondary);margin-top:16px;font-size:.85rem;font-weight:500}
+    @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+    
     .topbar{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-top:6px}
     .brand{display:flex;align-items:center;gap:14px;min-width:0}
     .brand-logo{width:56px;height:56px;border-radius:18px;background:rgba(59,130,246,.12);display:grid;place-items:center;border:1px solid var(--border);overflow:hidden}
@@ -28,7 +38,8 @@
     .brand-copy small{display:block;color:#7dd3fc;text-transform:uppercase;letter-spacing:.18em;font-weight:800;font-size:.72rem;margin-bottom:4px}
     .brand-copy h1{font-size:1.2rem}
     .topbar-actions{display:flex;align-items:center;gap:10px}
-    .icon-btn{position:relative;border:1px solid var(--border);background:var(--card);color:var(--text);width:46px;height:46px;border-radius:16px;cursor:pointer;box-shadow:var(--shadow)}
+    .icon-btn{position:relative;border:1px solid var(--border);background:var(--card);color:var(--text);width:46px;height:46px;border-radius:16px;cursor:pointer;box-shadow:var(--shadow);transition:all .2s}
+    .icon-btn:hover{background:var(--primary-light);color:#fff;border-color:var(--primary-light)}
     .badge{position:absolute;top:-4px;right:-4px;background:var(--danger);color:#fff;min-width:18px;height:18px;border-radius:999px;padding:0 5px;font-size:.7rem;display:none;align-items:center;justify-content:center}
     .network-strip{margin-top:16px;padding:14px 16px;border-radius:18px;background:linear-gradient(135deg,rgba(59,130,246,.18),rgba(6,182,212,.12));border:1px solid rgba(125,211,252,.18);display:flex;justify-content:space-between;gap:12px;align-items:center}
     .network-strip strong{display:block;margin-bottom:4px}.network-strip p{color:var(--text-secondary);font-size:.92rem}.network-pill{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.08);font-weight:800;font-size:.8rem}
@@ -38,17 +49,20 @@
     .hero h2{font-size:1.5rem;margin-bottom:8px}.hero p{max-width:720px;line-height:1.6;color:rgba(255,255,255,.9)}
     .hero-tag{padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.12);font-weight:800;white-space:nowrap}
     .stats-grid{margin-top:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;position:relative;z-index:1}
-    .stat-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:16px}
+    .stat-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:16px;transition:all .2s;cursor:default}
+    .stat-card:hover{background:rgba(255,255,255,.14);transform:translateY(-2px)}
     .stat-card span{display:block;font-size:.8rem;color:rgba(255,255,255,.78);margin-bottom:6px}.stat-card strong{font-size:1.25rem}
     .main-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:18px;margin-top:22px}
-    .section-card{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:20px;box-shadow:var(--shadow)}
+    .section-card{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:20px;box-shadow:var(--shadow);transition:all .2s}
+    .section-card:hover{border-color:rgba(59,130,246,.3)}
     .section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
-    .section-head h3{font-size:1.02rem}.section-head a{color:#7dd3fc;text-decoration:none;font-weight:700;font-size:.88rem}
-    .btn{border:none;border-radius:14px;padding:12px 14px;font-weight:800;cursor:pointer;font-family:inherit}
+    .section-head h3{font-size:1.02rem}.section-head a{color:#7dd3fc;text-decoration:none;font-weight:700;font-size:.88rem;transition:color .2s}
+    .section-head a:hover{color:var(--primary-light)}
+    .btn{border:none;border-radius:14px;padding:12px 14px;font-weight:800;cursor:pointer;font-family:inherit;transition:all .2s}
     .btn-primary{background:var(--brand-gradient);color:#fff}
     .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(59,130,246,.35)}
     .btn-soft{background:transparent;border:1px solid var(--border);color:var(--text)}
-    .btn-soft:hover{background:var(--card-2)}
+    .btn-soft:hover{background:var(--card-2);border-color:var(--primary-light)}
     .btn-success{background:var(--success);color:#fff}
     .btn-danger{background:var(--danger);color:#fff}
     .btn-sm{padding:8px 12px;font-size:.75rem}
@@ -59,7 +73,8 @@
     .quick-link .ico{width:46px;height:46px;border-radius:16px;background:rgba(59,130,246,.12);display:grid;place-items:center;color:#7dd3fc;font-size:1.15rem}
     .quick-link span{font-size:.82rem;font-weight:700;text-align:center}
     .course-list,.activity-list,.notif-list{display:grid;gap:14px}
-    .course-item{background:var(--card-2);border:1px solid var(--border);border-radius:22px;padding:18px}
+    .course-item{background:var(--card-2);border:1px solid var(--border);border-radius:22px;padding:18px;transition:all .2s}
+    .course-item:hover{border-color:rgba(59,130,246,.3)}
     .course-top{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
     .course-item h4{font-size:1rem;margin-bottom:6px;color:var(--text)}
     .course-item p{color:var(--text-secondary);font-size:.85rem;line-height:1.5}
@@ -81,84 +96,40 @@
     .bottom-nav{position:fixed;left:0;right:0;bottom:0;background:rgba(15,23,42,.95);border-top:1px solid var(--border);display:flex;justify-content:center;z-index:99;backdrop-filter:blur(16px)}
     body.light-mode .bottom-nav{background:rgba(244,247,251,.95)}
     .bottom-nav-inner{width:min(100%,1280px);display:grid;grid-template-columns:repeat(5,1fr);gap:6px;padding:10px 14px calc(10px + env(safe-area-inset-bottom))}
-    .nav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--text-secondary);text-decoration:none;padding:8px 4px;border-radius:14px;font-size:.76rem;font-weight:700}
+    .nav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--text-secondary);text-decoration:none;padding:8px 4px;border-radius:14px;font-size:.76rem;font-weight:700;transition:all .2s}
     .nav-item i{font-size:1.1rem}.nav-item.active{color:#fff;background:linear-gradient(135deg,var(--primary),var(--primary-light))}
-    .chat-fab{position:fixed;right:20px;bottom:88px;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#10b981,#059669);color:#fff;text-decoration:none;box-shadow:0 10px 24px rgba(16,185,129,.35);z-index:98}
-    .loading-spin{text-align:center;padding:20px;color:var(--text-secondary)}
-    .loading-spin i{font-size:1.2rem;animation:spin 1s linear infinite}
-    
-    /* LOADING CARD - Full page loader */
-    .loading-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: var(--bg);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        z-index: 9999;
-        transition: opacity 0.5s ease;
-        padding: 20px;
-    }
-    .loading-overlay.hidden {
-        opacity: 0;
-        pointer-events: none;
-    }
-    .loading-spinner-ring {
-        width: 48px;
-        height: 48px;
-        border: 4px solid var(--border);
-        border-top-color: var(--primary-light);
-        border-radius: 50%;
-        animation: spin 0.8s linear infinite;
-        margin-bottom: 20px;
-    }
-    .loading-text {
-        color: var(--text-secondary);
-        font-size: 0.95rem;
-        font-weight: 500;
-    }
-    .loading-subtext {
-        color: var(--text-secondary);
-        font-size: 0.8rem;
-        margin-top: 8px;
-        opacity: 0.6;
-    }
-    
-    @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-    @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
-    
-    /* Skeleton loading styles */
-    .skeleton {
-        background: linear-gradient(90deg, var(--border) 25%, var(--card) 50%, var(--border) 75%);
-        background-size: 200% 100%;
-        animation: shimmer 1.5s infinite;
-        border-radius: 4px;
-    }
-    @keyframes shimmer {
-        0% { background-position: 200% 0; }
-        100% { background-position: -200% 0; }
-    }
-    
+    .nav-item:hover:not(.active){background:rgba(59,130,246,.12);color:var(--text)}
+    .chat-fab{position:fixed;right:20px;bottom:88px;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#10b981,#059669);color:#fff;text-decoration:none;box-shadow:0 10px 24px rgba(16,185,129,.35);z-index:98;transition:all .2s}
+    .chat-fab:hover{transform:scale(1.08);box-shadow:0 10px 32px rgba(16,185,129,.5)}
     @media(max-width:980px){.main-grid{grid-template-columns:1fr}.stats-grid{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:640px){.page{padding:16px 14px 108px}.hero-head{flex-direction:column}.quick-grid{grid-template-columns:repeat(2,1fr)}.stats-grid{grid-template-columns:repeat(2,1fr)}.brand-logo{width:44px;height:44px}.brand-logo svg{width:32px;height:32px}.brand-copy h1{font-size:1rem}}
   </style>
 </head>
 <body>
 
-<!-- ===== LOADING OVERLAY ===== -->
+<!-- ========== LOADING OVERLAY ========== -->
 <div class="loading-overlay" id="loadingOverlay">
-    <div class="loading-spinner-ring"></div>
-    <div class="loading-text">Loading your dashboard...</div>
-    <div class="loading-subtext">Please wait while we fetch your data</div>
+  <svg class="loading-crest" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="100" cy="100" r="90" fill="none" stroke="#3b82f6" stroke-width="3.5"/>
+    <path id="topArcLoad" d="M 30 100 A 70 70 0 0 1 170 100" fill="none"/>
+    <text font-size="17" font-weight="900" fill="#3b82f6" letter-spacing="3">
+      <textPath href="#topArcLoad" startOffset="50%" text-anchor="middle">OAU</textPath>
+    </text>
+    <path id="bottomArcLoad" d="M 30 100 A 70 70 0 0 0 170 100" fill="none"/>
+    <text font-size="7.5" font-weight="800" fill="#1e3a8a" letter-spacing="1.2">
+      <textPath href="#bottomArcLoad" startOffset="50%" text-anchor="middle">EXAM CBT PRACTICE</textPath>
+    </text>
+    <circle cx="100" cy="100" r="19" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
+    <line x1="81" y1="100" x2="119" y2="100" stroke="#3b82f6" stroke-width="1.5"/>
+    <line x1="100" y1="81" x2="100" y2="119" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="100" y="104" font-size="7.5" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">OAU</text>
+  </svg>
+  <div class="loading-spinner"></div>
+  <div class="loading-text">Loading your dashboard...</div>
 </div>
 
-<!-- ===== MAIN CONTENT ===== -->
-<main class="page" id="mainContent" style="display:none;">
+<!-- ========== MAIN CONTENT ========== -->
+<main class="page">
   <header class="topbar">
     <div class="brand">
       <div class="brand-logo">
@@ -285,14 +256,8 @@ const escapeHtml = str => String(str||'').replace(/[&<>"']/g, m => ({'&':'&amp;'
 // ============================================
 // LOADING OVERLAY
 // ============================================
-function showLoading() {
-    qs('loadingOverlay').classList.remove('hidden');
-    qs('mainContent').style.display = 'none';
-}
-function hideLoading() {
-    qs('loadingOverlay').classList.add('hidden');
-    qs('mainContent').style.display = 'block';
-}
+function showLoading() { qs('loadingOverlay').classList.remove('hidden'); }
+function hideLoading() { qs('loadingOverlay').classList.add('hidden'); }
 
 // ============================================
 // THEME
@@ -374,7 +339,7 @@ async function loadDashboard() {
   updateNetworkState();
 
   try {
-    // Get user data from the working endpoint
+    // Load user data from /auth/me
     const response = await fetch(API_BASE + '/auth/me', {
       headers: { 'Authorization': 'Bearer ' + TOKEN }
     });
@@ -387,31 +352,24 @@ async function loadDashboard() {
 
     const user = result.user;
     
-    // Calculate total attempts (exams + tests)
-    const totalAttempts = (user.examsTaken || 0) + (user.testsTaken || 0);
-    
-    // Get enrolled courses - try multiple possible field names
-    const enrolledCourses = user.enrolledCourses || user.courses || user.enrollments || [];
-    
-    // Build dashboard data
+    // Build dashboard data from the user object
     const dashboardData = {
       user: user,
       stats: {
-        coursesActive: enrolledCourses.length || 0,
+        coursesActive: user.enrolledCourses?.length || 0,
         averageScore: user.averageScore || 0,
         testsTaken: user.testsTaken || 0,
         examsTaken: user.examsTaken || 0,
-        totalAttempts: totalAttempts,
         currentStreak: user.currentStreak || 0
       },
-      courses: enrolledCourses,
+      courses: user.enrolledCourses || [],
       activity: (user.scores || []).slice().sort((a,b) => 
         new Date(b.date||b.createdAt||0) - new Date(a.date||a.createdAt||0)
       ).slice(0,5),
       notifications: []
     };
 
-    // Try to load notifications separately
+    // Try to load notifications
     try {
       const notifRes = await fetch(API_BASE + '/notifications', {
         headers: { 'Authorization': 'Bearer ' + TOKEN }
@@ -428,7 +386,9 @@ async function loadDashboard() {
     
     // Render the dashboard
     renderDashboard(dashboardData);
-    hideLoading();
+    
+    // Hide loading overlay (with a slight delay to ensure smooth transition)
+    setTimeout(hideLoading, 300);
 
   } catch(err) {
     console.error('Dashboard load error:', err);
@@ -439,12 +399,9 @@ async function loadDashboard() {
       const fallback = loadCache();
       if(fallback) {
         renderDashboard(fallback);
-        hideLoading();
-      } else {
-        // If no cache, show error state
-        hideLoading();
       }
     }
+    setTimeout(hideLoading, 500);
   }
 }
 
@@ -465,11 +422,11 @@ function renderDashboard(data) {
   setText('heroTitle', `${firstName}, keep your OAU practice streak alive`);
   setText('heroTag', user.level ? `${user.level}L` : '100L • 200L');
 
-  // Calculate total attempts
   const attempts = (stats.testsTaken || 0) + (stats.examsTaken || 0);
   
-  // Set stats - FIXED: coursesActive now correctly shows enrolled courses count
-  setText('statCourses', String(courses.length || stats.coursesActive || 0));
+  // FIX: Show enrolled courses count properly
+  const courseCount = courses.length || stats.coursesActive || user.enrolledCourses?.length || 0;
+  setText('statCourses', String(courseCount));
   setText('statAvg', `${stats.averageScore || user.averageScore || 0}%`);
   setText('statAttempts', String(attempts || user.testsTaken || 0));
   const streak = stats.currentStreak ?? user.currentStreak ?? 0;
@@ -493,11 +450,14 @@ function renderDashboard(data) {
 function renderCourses(courses){
   const box = qs('courseList');
   if(!courses || !courses.length){
-    box.innerHTML = '<div class="empty-state">No courses enrolled yet. Start by taking a test or exam!</div>';
+    box.innerHTML = `<div class="empty-state">
+      <i class="fas fa-book" style="font-size:1.5rem;display:block;margin-bottom:8px;color:var(--text-secondary)"></i>
+      No courses enrolled yet. 
+      <br><span style="font-size:.75rem;color:var(--text-secondary)">Start by taking a test or exam!</span>
+    </div>`;
     return;
   }
   box.innerHTML = courses.slice(0,6).map(course => {
-    // Handle different course data structures
     const title = course.title || course.name || course.courseTitle || course.courseCode || 'Course';
     const code = course.code || course.courseCode || '';
     const desc = course.description || `Continue practicing ${title}.`;
@@ -527,7 +487,11 @@ function renderCourses(courses){
 function renderActivity(items){
   const box = qs('activityList');
   if(!items || !items.length){ 
-    box.innerHTML = '<div class="empty-state">No recent test or exam activity yet.</div>'; 
+    box.innerHTML = `<div class="empty-state">
+      <i class="fas fa-clock" style="font-size:1.5rem;display:block;margin-bottom:8px;color:var(--text-secondary)"></i>
+      No recent activity yet.
+      <br><span style="font-size:.75rem;color:var(--text-secondary)">Take a test or exam to get started!</span>
+    </div>`;
     return; 
   }
   box.innerHTML = items.map(item => {
@@ -550,7 +514,10 @@ function renderActivity(items){
 function renderNotifications(items){
   const list = qs('notifList');
   if(!items || !items.length){ 
-    list.innerHTML = '<div class="empty-state">No notifications yet.</div>'; 
+    list.innerHTML = `<div class="empty-state">
+      <i class="fas fa-bell-slash" style="font-size:1.5rem;display:block;margin-bottom:8px;color:var(--text-secondary)"></i>
+      No notifications yet.
+    </div>`;
     return; 
   }
   list.innerHTML = items.slice(0,5).map(n => `
