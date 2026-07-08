@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+    <title>Login • OAU CBE Practice</title>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <script src="/js/config.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/auth-check.js"></script>
+    
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI','Inter',system-ui,-apple-system,sans-serif}
+        :root{
+            --primary:#1e3a8a;--primary-light:#3b82f6;--accent:#10b981;
+            --bg:#0f172a;--bg-soft:#111c33;--card:#1e293b;--card-2:#152033;
+            --border:#334155;--text:#f1f5f9;--text-secondary:#94a3b8;
+            --danger:#ef4444;--success:#10b981;--shadow:0 18px 40px rgba(0,0,0,.28);
+            --brand-gradient:linear-gradient(135deg,#1e3a8a,#3b82f6)
+        }
+        body.light-mode{
+            --bg:#f4f7fb;--bg-soft:#edf3fb;--card:#ffffff;--card-2:#f8fbff;
+            --border:#d7e2ef;--text:#0f172a;--text-secondary:#526173;
+            --shadow:0 16px 36px rgba(15,23,42,.08)
+        }
+        body{background:radial-gradient(circle at top right,rgba(59,130,246,.12),transparent 25%),linear-gradient(180deg,var(--bg),#0b1324 100%);color:var(--text);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+        .auth-wrap{width:100%;max-width:440px;margin:0 auto}
+        .auth-card{background:var(--card);border:1px solid var(--border);border-radius:32px;padding:36px 28px;box-shadow:var(--shadow)}
+        .auth-logo{text-align:center;margin-bottom:24px}
+        .auth-logo img{width:72px;height:72px;object-fit:contain}
+        .auth-logo h1{font-size:1.3rem;margin-top:8px;color:var(--text)}
+        .auth-logo p{color:var(--text-secondary);font-size:.85rem}
+        .auth-logo .subtitle{color:var(--primary-light);font-weight:700}
+        
+        .auth-tabs{display:flex;gap:8px;margin-bottom:20px;background:var(--bg-soft);border-radius:14px;padding:4px}
+        .auth-tab{flex:1;padding:10px;text-align:center;border:none;border-radius:10px;background:transparent;color:var(--text-secondary);font-weight:600;font-size:.8rem;cursor:pointer;transition:all .2s;font-family:inherit}
+        .auth-tab.active{background:var(--brand-gradient);color:#fff;box-shadow:0 4px 12px rgba(59,130,246,.3)}
+        .auth-tab:hover:not(.active){background:rgba(59,130,246,.1);color:var(--text)}
+        
+        .form-group{margin-bottom:16px}
+        .form-group label{display:block;margin-bottom:6px;font-weight:600;font-size:.78rem;color:var(--text-secondary)}
+        .form-group input{width:100%;padding:14px 16px;background:var(--bg-soft);border:2px solid var(--border);border-radius:14px;color:var(--text);font-size:.9rem;font-family:inherit;transition:all .2s}
+        .form-group input:focus{outline:none;border-color:var(--primary-light);box-shadow:0 0 0 3px rgba(59,130,246,.15)}
+        .form-group input::placeholder{color:var(--text-secondary);opacity:.5}
+        
+        .password-wrap{position:relative}
+        .password-wrap input{padding-right:48px}
+        .toggle-pwd{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text-secondary);cursor:pointer;font-size:.9rem}
+        .toggle-pwd:hover{color:var(--text)}
+        
+        .options-row{display:flex;justify-content:space-between;align-items:center;margin:8px 0 20px}
+        .options-row label{display:flex;align-items:center;gap:8px;color:var(--text-secondary);font-size:.78rem;cursor:pointer}
+        .options-row input[type="checkbox"]{width:16px;height:16px;accent-color:var(--primary-light);cursor:pointer}
+        .forgot-link{color:var(--primary-light);font-size:.78rem;text-decoration:none;font-weight:600}
+        .forgot-link:hover{text-decoration:underline}
+        
+        .btn-login{width:100%;padding:16px;background:var(--brand-gradient);color:#fff;border:none;border-radius:14px;font-weight:700;font-size:1rem;cursor:pointer;transition:all .2s;font-family:inherit}
+        .btn-login:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 25px rgba(59,130,246,.35)}
+        .btn-login:disabled{opacity:.6;cursor:not-allowed}
+        .btn-login i{margin-right:8px}
+        
+        .auth-footer{text-align:center;margin-top:20px}
+        .auth-footer a{color:var(--text-secondary);text-decoration:none;font-size:.82rem;transition:color .2s}
+        .auth-footer a:hover{color:var(--primary-light)}
+        .auth-footer .divider{width:40px;height:1px;background:var(--border);margin:12px auto}
+        
+        .alert{padding:12px 16px;border-radius:12px;margin-bottom:16px;display:none;font-size:.82rem;text-align:center}
+        .alert-error{background:rgba(239,68,68,.12);color:var(--danger);border:1px solid rgba(239,68,68,.2)}
+        .alert-success{background:rgba(16,185,129,.12);color:var(--success);border:1px solid rgba(16,185,129,.2)}
+        .alert.show{display:block}
+        
+        @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+        @media(max-width:480px){.auth-card{padding:24px 16px}}
+    </style>
+</head>
+<body>
+
+<div class="auth-wrap">
+    <div class="auth-card">
+        <div class="auth-logo">
+            <img src="/logo.svg" alt="OAU CBE Practice">
+            <h1>OAU <span class="subtitle">CBE</span> Practice</h1>
+            <p>Sign in to continue your exam preparation</p>
+        </div>
+
+        <div class="alert alert-error" id="errorAlert"></div>
+        <div class="alert alert-success" id="successAlert"></div>
+
+        <div class="auth-tabs">
+            <button class="auth-tab active" id="tabUsername" onclick="setLoginMethod('username')">
+                <i class="fas fa-user"></i> Username
+            </button>
+            <button class="auth-tab" id="tabEmail" onclick="setLoginMethod('email')">
+                <i class="fas fa-envelope"></i> Email
+            </button>
+        </div>
+
+        <form id="loginForm" onsubmit="return false">
+            <div class="form-group">
+                <label id="loginLabel"><i class="fas fa-user"></i> Username</label>
+                <input type="text" id="loginInput" placeholder="Enter your username" autocomplete="username">
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <div class="password-wrap">
+                    <input type="password" id="password" placeholder="Enter your password" autocomplete="current-password">
+                    <button type="button" class="toggle-pwd" onclick="togglePassword()">
+                        <i class="fas fa-eye" id="pwdIcon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="options-row">
+                <label>
+                    <input type="checkbox" id="rememberMe">
+                    Remember Me
+                </label>
+                <a href="/forgot-password" class="forgot-link">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="btn-login" id="loginBtn" onclick="handleLogin()">
+                <i class="fas fa-sign-in-alt"></i> Sign In
+            </button>
+        </form>
+
+        <div class="auth-footer">
+            <a href="/register">Don't have an account? <strong>Register here</strong> →</a>
+            <div class="divider"></div>
+            <a href="/" style="font-size:.7rem;opacity:.5">← Back to Home</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ==================== STATE ====================
+    let loginMethod = 'username';
+
+    // ==================== SET LOGIN METHOD ====================
+    function setLoginMethod(method) {
+        loginMethod = method;
+        document.getElementById('tabUsername').classList.toggle('active', method === 'username');
+        document.getElementById('tabEmail').classList.toggle('active', method === 'email');
+        
+        const label = document.getElementById('loginLabel');
+        const input = document.getElementById('loginInput');
+        
+        if (method === 'username') {
+            label.innerHTML = '<i class="fas fa-user"></i> Username';
+            input.placeholder = 'Enter your username';
+            input.type = 'text';
+            input.autocomplete = 'username';
+        } else {
+            label.innerHTML = '<i class="fas fa-envelope"></i> Email Address';
+            input.placeholder = 'Enter your email address';
+            input.type = 'email';
+            input.autocomplete = 'email';
+        }
+        
+        document.getElementById('errorAlert').classList.remove('show');
+        document.getElementById('successAlert').classList.remove('show');
+    }
+
+    // ==================== TOGGLE PASSWORD ====================
+    function togglePassword() {
+        const input = document.getElementById('password');
+        const icon = document.getElementById('pwdIcon');
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.className = 'fas fa-eye-slash';
+        } else {
+            input.type = 'password';
+            icon.className = 'fas fa-eye';
+        }
+    }
+
+    // ==================== SHOW ALERTS ====================
+    function showError(msg) {
+        const el = document.getElementById('errorAlert');
+        el.textContent = msg;
+        el.classList.add('show');
+        document.getElementById('successAlert').classList.remove('show');
+    }
+
+    function showSuccess(msg) {
+        const el = document.getElementById('successAlert');
+        el.textContent = msg;
+        el.classList.add('show');
+        document.getElementById('errorAlert').classList.remove('show');
+    }
+
+    function hideAlerts() {
+        document.getElementById('errorAlert').classList.remove('show');
+        document.getElementById('successAlert').classList.remove('show');
+    }
+
+    // ==================== HANDLE LOGIN ====================
+    async function handleLogin() {
+        const loginValue = document.getElementById('loginInput').value.trim();
+        const password = document.getElementById('password').value.trim();
+        const rememberMe = document.getElementById('rememberMe').checked;
+
+        if (!loginValue) {
+            showError('Please enter your ' + (loginMethod === 'username' ? 'username' : 'email address'));
+            return;
+        }
+        if (!password) {
+            showError('Please enter your password');
+            return;
+        }
+
+        const btn = document.getElementById('loginBtn');
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
+        btn.disabled = true;
+        hideAlerts();
+
+        try {
+            const loginData = { password };
+            if (loginMethod === 'username') {
+                loginData.username = loginValue;
+            } else {
+                loginData.email = loginValue;
+            }
+
+            const data = await api.post('/auth/login', loginData);
+
+            if (data.success) {
+                api.setToken(data.token);
+                localStorage.setItem('oau_user', JSON.stringify(data.user));
+
+                if (rememberMe) {
+                    localStorage.setItem('remembered_user', JSON.stringify({
+                        username: loginValue,
+                        method: loginMethod
+                    }));
+                } else {
+                    localStorage.removeItem('remembered_user');
+                }
+
+                showSuccess('✅ Login successful! Redirecting...');
+                setTimeout(() => {
+                    window.location.href = '/app';
+                }, 500);
+                return;
+            }
+
+            if (data.requiresVerification) {
+                const username = data.username || loginValue;
+                const token = data.pendingSessionToken;
+                window.location.href = `/verify-device?username=${encodeURIComponent(username)}&token=${encodeURIComponent(token)}`;
+                return;
+            }
+
+            showError(data.error || 'Invalid credentials. Please try again.');
+            btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In';
+            btn.disabled = false;
+
+        } catch(e) {
+            showError('Connection error. Please check your internet and try again.');
+            btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In';
+            btn.disabled = false;
+        }
+    }
+
+    // ==================== CHECK REMEMBERED USER ====================
+    function checkRememberedUser() {
+        try {
+            const remembered = localStorage.getItem('remembered_user');
+            if (remembered) {
+                const data = JSON.parse(remembered);
+                document.getElementById('loginInput').value = data.username || '';
+                document.getElementById('rememberMe').checked = true;
+                if (data.method) {
+                    setLoginMethod(data.method);
+                }
+            }
+        } catch(e) {}
+    }
+
+    // ==================== KEYBOARD SHORTCUTS ====================
+    document.getElementById('password').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') handleLogin();
+    });
+
+    document.getElementById('loginInput').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            document.getElementById('password').focus();
+        }
+    });
+
+    // ==================== INIT ====================
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check if already logged in
+        if (AuthService.isAuthenticated()) {
+            window.location.href = '/app';
+            return;
+        }
+        
+        // Apply dark mode from localStorage
+        initDarkMode();
+        
+        // Check for remembered user
+        checkRememberedUser();
+    });
+</script>
+</body>
+</html>
