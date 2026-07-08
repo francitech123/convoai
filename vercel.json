@@ -3,234 +3,138 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
+    { "source": "/(.*)", "destination": "/index.html" }
   ],
   "redirects": [
-    {
-      "source": "/",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/app",
-      "destination": "/app.html"
-    },
-    {
-      "source": "/login",
-      "destination": "/login.html"
-    },
-    {
-      "source": "/register",
-      "destination": "/register.html"
-    },
-    {
-      "source": "/forgot-password",
-      "destination": "/forgot-password.html"
-    },
-    {
-      "source": "/verify-device",
-      "destination": "/verify-device.html"
-    },
-    {
-      "source": "/exam",
-      "destination": "/exam.html"
-    },
-    {
-      "source": "/test",
-      "destination": "/test.html"
-    },
-    {
-      "source": "/study",
-      "destination": "/study.html"
-    },
-    {
-      "source": "/ai",
-      "destination": "/ai.html"
-    },
-    {
-      "source": "/profile",
-      "destination": "/profile.html"
-    },
-    {
-      "source": "/leaderboard",
-      "destination": "/leaderboard.html"
-    },
-    {
-      "source": "/notifications",
-      "destination": "/notifications.html"
-    },
-    {
-      "source": "/chat",
-      "destination": "/chat.html"
-    },
-    {
-      "source": "/submit",
-      "destination": "/submit.html"
-    },
-    {
-      "source": "/about",
-      "destination": "/about.html"
-    },
-    {
-      "source": "/developer",
-      "destination": "/developer.html"
-    },
-    {
-      "source": "/privacy",
-      "destination": "/privacy.html"
-    },
-    {
-      "source": "/terms",
-      "destination": "/terms.html"
-    },
-    {
-      "source": "/faq",
-      "destination": "/faq.html"
-    },
-    {
-      "source": "/contact",
-      "destination": "/contact.html"
-    },
-    {
-      "source": "/logo",
-      "destination": "/logo.html"
-    },
-    {
-      "source": "/admin",
-      "destination": "/admin-login.html"
-    },
-    {
-      "source": "/admin-login",
-      "destination": "/admin-login.html"
-    },
-    {
-      "source": "/admin-dashboard",
-      "destination": "/adminDashboard.html"
-    },
-    {
-      "source": "/admin-register",
-      "destination": "/admin-register.html"
-    },
-    {
-      "source": "/ceo-panel",
-      "destination": "/ceo-panel.html"
-    },
-    {
-      "source": "/logo.svg",
-      "destination": "/logo.svg"
-    },
-    {
-      "source": "/manifest.json",
-      "destination": "/manifest.json"
-    },
-    {
-      "source": "/sw.js",
-      "destination": "/sw.js"
-    },
-    {
-      "source": "/robots.txt",
-      "destination": "/robots.txt"
-    },
-    {
-      "source": "/sitemap.xml",
-      "destination": "/sitemap.xml"
-    },
-    {
-      "source": "/js/config.js",
-      "destination": "/js/config.js"
-    },
-    {
-      "source": "/js/api.js",
-      "destination": "/js/api.js"
-    },
-    {
-      "source": "/js/auth.js",
-      "destination": "/js/auth.js"
-    },
-    {
-      "source": "/js/auth-check.js",
-      "destination": "/js/auth-check.js"
-    },
-    {
-      "source": "/js/utils.js",
-      "destination": "/js/utils.js"
-    }
+    { "source": "/", "destination": "/app.html" },
+    { "source": "/login", "destination": "/login.html" },
+    "register", "destination": "/register.html" },
+    { "source": "/forgot-password", "destination": "/forgot-password.html" },
+    { "source": "/verify-device", "destination": "/verify-device.html" },
+    { "source": "/app", "destination": "/app.html" },
+    { "source": "/dashboard", "destination": "/app.html" },
+    { "source": "/exam", "destination": "/exam.html" },
+    { "source": "/test", "destination": "/test.html" },
+    { "source": "/study", "destination": "/study.html" },
+    { "source": "/study-manage", "destination": "/study-manage.html" },
+    { "source": "/studybulk", "destination": "/studybulk.html" },
+    { "source": "/ai", "destination": "/ai.html" },
+    { "source": "/chat", "destination": "/chat.html" },
+    { "source": "/leaderboard", "destination": "/leaderboard.html" },
+    { "source": "/notifications", "destination": "/notifications.html" },
+    { "source": "/profile", "destination": "/profile.html" },
+    { "source": "/submit", "destination": "/submit.html" },
+    { "source": "/about", "destination": "/about.html" },
+    { "source": "/developer", "destination": "/developer.html" },
+    { "source": "/privacy", "destination": "/privacy.html" },
+    { "source": "/terms", "destination": "/terms.html" },
+    { "source": "/faq", "destination": "/faq.html" },
+    { "source": "/contact", "destination": "/contact.html" },
+    { "source": "/logo", "destination": "/logo.html" },
+    { "source": "/materials-login", "destination": "/materials-login.html" },
+    { "source": "/admin", "destination": "/admin/admin-login.html" },
+    { "source": "/admin-login", "destination": "/admin/admin-login.html" },
+    { "source": "/admin-dashboard", "destination": "/admin/adminDashboard.html" },
+    { "source": "/admin-register", "destination": "/admin/admin-register.html" },
+    { "source": "/admin-register-preview", "destination": "/admin/admin-register-preview.html" },
+    { "source": "/admin-register-success", "destination": "/admin/admin-register-success.html" },
+    { "source": "/ceo-panel", "destination": "/ceo/ceo-panel.html" },
+    { "source": "/appAnalysis", "destination": "/ceo/appAnalysis.html" },
+    { "source": "/AdminPageUsers", "destination": "/admin/AdminPageUsers.html" },
+    { "source": "/AdminNotification", "destination": "/admin/AdminNotification.html" },
+    { "source": "/adminChat", "destination": "/admin/adminChat.html" },
+    { "source": "/allCourseMaterial", "destination": "/admin/allCourseMaterial.html" },
+    { "source": "/analysis", "destination": "/admin/analysis.html" },
+    { "source": "/courseSettings", "destination": "/admin/courseSettings.html" },
+    { "source": "/courses", "destination": "/admin/courses.html" },
+    { "source": "/questions", "destination": "/admin/questions.html" },
+    { "source": "/testDB", "destination": "/admin/testDB.html" },
+    { "source": "/user.payment", "destination": "/admin/user.payment.html" }
   ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        },
-        {
-          "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
-        }
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-XSS-Protection", "value": "1; mode=block" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }
       ]
     },
     {
       "source": "/manifest.json",
       "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/json"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
+        { "key": "Content-Type", "value": "application/json" }
       ]
     },
     {
       "source": "/sw.js",
       "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/javascript"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=0, must-revalidate"
-        }
+        { "key": "Content-Type", "value": "application/javascript" },
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
       ]
     },
     {
       "source": "/logo.svg",
       "headers": [
-        {
-          "key": "Content-Type",
-          "value": "image/svg+xml"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
+        { "key": "Content-Type", "value": "image/svg+xml" },
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
     },
     {
-      "source": "/js/*.js",
+      "source": "/config.js",
       "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/javascript"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
+        { "key": "Content-Type", "value": "application/javascript" },
+        { "key": "Cache-Control", "value": "public, max-age=3600" }
+      ]
+    },
+    {
+      "source": "/api.js",
+      "headers": [
+        { "key": "Content-Type", "value": "application/javascript" },
+        { "key": "Cache-Control", "value": "public, max-age=3600" }
+      ]
+    },
+    {
+      "source": "/auth.js",
+      "headers": [
+        { "key": "Content-Type", "value": "application/javascript" },
+        { "key": "Cache-Control", "value": "public, max-age=3600" }
+      ]
+    },
+    {
+      "source": "/auth-check.js",
+      "headers": [
+        { "key": "Content-Type", "value": "application/javascript" },
+        { "key": "Cache-Control", "value": "public, max-age=3600" }
+      ]
+    },
+    {
+      "source": "/utils.js",
+      "headers": [
+        { "key": "Content-Type", "value": "application/javascript" },
+        { "key": "Cache-Control", "value": "public, max-age=3600" }
+      ]
+    },
+    {
+      "source": "/robots.txt",
+      "headers": [
+        { "key": "Content-Type", "value": "text/plain" },
+        { "key": "Cache-Control", "value": "public, max-age=86400" }
+      ]
+    },
+    {
+      "source": "/sitemap.xml",
+      "headers": [
+        { "key": "Content-Type", "value": "application/xml" },
+        { "key": "Cache-Control", "value": "public, max-age=86400" }
       ]
     }
-  ]
+  ],
+  "images": {
+    "sizes": [72, 96, 128, 144, 152, 192, 384, 512],
+    "domains": [],
+    "minimumCacheTTL": 60
+  }
 }
