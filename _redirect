@@ -1,0 +1,46 @@
+# ============================================================
+# REDIRECTS - OAU CBE Practice
+# ============================================================
+
+# Auth pages
+/login          /login.html
+/register       /register.html
+/forgot-password /forgot-password.html
+/verify-device  /verify-device.html
+
+# Main app
+/               /app.html
+/app            /app.html
+/dashboard      /app.html
+
+# Features
+/exam           /exam.html
+/test           /test.html
+/study          /study.html
+/study-manage   /study-manage.html
+/studybulk      /studybulk.html
+/ai             /ai.html
+/chat           /chat.html
+/leaderboard    /leaderboard.html
+/notifications  /notifications.html
+/profile        /profile.html
+/submit         /submit.html
+
+# Info pages
+/about          /about.html
+/developer      /developer.html
+/privacy        /privacy.html
+/terms          /terms.html
+/faq            /faq.html
+/contact        /contact.html
+/logo           /logo.html
+
+# Admin
+/admin          /admin/admin-login.html
+/admin-login    /admin/admin-login.html
+/admin-dashboard /admin/adminDashboard.html
+/admin-register /admin/admin-register.html
+/ceo-panel      /ceo/ceo-panel.html
+
+# Catch all - 404
+/*              /404.html     404!
