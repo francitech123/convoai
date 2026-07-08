@@ -7,12 +7,6 @@
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   
-  <script src="/js/config.js"></script>
-  <script src="/js/api.js"></script>
-  <script src="/js/auth.js"></script>
-  <script src="/js/utils.js"></script>
-  <script src="/js/auth-check.js"></script>
-  
   <style>
     *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI','Inter',system-ui,-apple-system,sans-serif}
     :root{
@@ -30,7 +24,7 @@
     .topbar{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-top:6px}
     .brand{display:flex;align-items:center;gap:14px;min-width:0}
     .brand-logo{width:56px;height:56px;border-radius:18px;background:rgba(59,130,246,.12);display:grid;place-items:center;border:1px solid var(--border);overflow:hidden}
-    .brand-logo img{width:42px;height:42px;object-fit:contain}
+    .brand-logo svg{width:42px;height:42px;object-fit:contain}
     .brand-copy small{display:block;color:#7dd3fc;text-transform:uppercase;letter-spacing:.18em;font-weight:800;font-size:.72rem;margin-bottom:4px}
     .brand-copy h1{font-size:1.2rem}
     .topbar-actions{display:flex;align-items:center;gap:10px}
@@ -96,35 +90,51 @@
     @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
     @keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
     @media(max-width:980px){.main-grid{grid-template-columns:1fr}.stats-grid{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:640px){.page{padding:16px 14px 108px}.hero-head{flex-direction:column}.quick-grid{grid-template-columns:repeat(2,1fr)}.stats-grid{grid-template-columns:repeat(2,1fr)}.brand-logo{width:44px;height:44px}.brand-logo img{width:32px;height:32px}.brand-copy h1{font-size:1rem}}
+    @media(max-width:640px){.page{padding:16px 14px 108px}.hero-head{flex-direction:column}.quick-grid{grid-template-columns:repeat(2,1fr)}.stats-grid{grid-template-columns:repeat(2,1fr)}.brand-logo{width:44px;height:44px}.brand-logo svg{width:32px;height:32px}.brand-copy h1{font-size:1rem}}
   </style>
 </head>
 <body>
 <main class="page">
   <header class="topbar">
     <div class="brand">
-      <div class="brand-logo"><img src="/logo.svg" alt="OAU CBE Practice"></div>
+      <div class="brand-logo">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="90" fill="none" stroke="#3b82f6" stroke-width="3.5"/>
+          <path id="topArcSmall" d="M 30 100 A 70 70 0 0 1 170 100" fill="none"/>
+          <text font-size="17" font-weight="900" fill="#3b82f6" letter-spacing="3">
+            <textPath href="#topArcSmall" startOffset="50%" text-anchor="middle">OAU</textPath>
+          </text>
+          <path id="bottomArcSmall" d="M 30 100 A 70 70 0 0 0 170 100" fill="none"/>
+          <text font-size="7.5" font-weight="800" fill="#1e3a8a" letter-spacing="1.2">
+            <textPath href="#bottomArcSmall" startOffset="50%" text-anchor="middle">EXAM CBT PRACTICE</textPath>
+          </text>
+          <circle cx="100" cy="100" r="19" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
+          <line x1="81" y1="100" x2="119" y2="100" stroke="#3b82f6" stroke-width="1.5"/>
+          <line x1="100" y1="81" x2="100" y2="119" stroke="#3b82f6" stroke-width="1.5"/>
+          <text x="100" y="104" font-size="7.5" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">OAU</text>
+        </svg>
+      </div>
       <div class="brand-copy"><small>Dashboard</small><h1>OAU CBE Practice</h1></div>
     </div>
     <div class="topbar-actions">
       <button class="icon-btn" id="themeToggleBtn" onclick="toggleThemeMode()" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
-      <button class="icon-btn" onclick="goNotifications()" aria-label="Notifications"><i class="fas fa-bell"></i><span class="badge" id="notifBadge">0</span></button>
+      <button class="icon-btn" onclick="location.href='/notifications'" aria-label="Notifications"><i class="fas fa-bell"></i><span class="badge" id="notifBadge">0</span></button>
     </div>
   </header>
 
   <section class="network-strip">
     <div>
       <strong id="welcomeText">Welcome back 👋</strong>
-      <p id="networkMessage">Loading your dashboard, syncing courses, stats, and recent activity.</p>
+      <p id="networkMessage">Loading your dashboard...</p>
     </div>
-    <div class="network-pill" id="networkPill">Checking…</div>
+    <div class="network-pill" id="networkPill">Connecting…</div>
   </section>
 
   <section class="hero">
     <div class="hero-head">
       <div>
         <h2 id="heroTitle">Your OAU study dashboard</h2>
-        <p id="heroSubtitle">Track exams, tests, course progress, study materials, and AI help from one place.</p>
+        <p id="heroSubtitle">Track exams, tests, course progress, and more from one place.</p>
       </div>
       <div class="hero-tag" id="heroTag">100L • 200L</div>
     </div>
@@ -195,22 +205,32 @@
 </nav>
 
 <script>
-const API = window.CONFIG?.API_URL || (location.hostname.includes('localhost') ? 'http://localhost:5000/api' : '/api');
-const token = localStorage.getItem('oau_token');
+// ============================================
+// API CONFIGURATION - MATCHES WORKING VERSION
+// ============================================
+const API_BASE = 'https://oau-exam-api.onrender.com/api';
+const TOKEN = localStorage.getItem('oau_token');
+
+// ============================================
+// UTILITY FUNCTIONS
+// ============================================
 const qs = id => document.getElementById(id);
-const setText = (id,v) => { const el = qs(id); if(el) el.textContent = v; };
+const setText = (id, v) => { const el = qs(id); if(el) el.textContent = v; };
 const escapeHtml = str => String(str||'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 
-// ==================== STATE ====================
-let dashboardState = { user: null, stats: null, notifications: [], courses: [], activity: [] };
-let headerNotifications = [];
-
-// ==================== THEME ====================
+// ============================================
+// THEME
+// ============================================
 function initTheme(){
   const saved = localStorage.getItem('theme');
   const btn = qs('themeToggleBtn');
-  if(saved === 'light'){ document.body.classList.add('light-mode'); btn.innerHTML = '<i class="fas fa-sun"></i>'; }
-  else { document.body.classList.remove('light-mode'); btn.innerHTML = '<i class="fas fa-moon"></i>'; }
+  if(saved === 'light'){ 
+    document.body.classList.add('light-mode'); 
+    btn.innerHTML = '<i class="fas fa-sun"></i>'; 
+  } else { 
+    document.body.classList.remove('light-mode'); 
+    btn.innerHTML = '<i class="fas fa-moon"></i>'; 
+  }
 }
 function toggleThemeMode(){
   const isLight = document.body.classList.toggle('light-mode');
@@ -219,10 +239,9 @@ function toggleThemeMode(){
 }
 window.toggleThemeMode = toggleThemeMode;
 
-function goNotifications(){ location.href = '/notifications'; }
-window.goNotifications = goNotifications;
-
-// ==================== NETWORK STATUS ====================
+// ============================================
+// NETWORK STATUS
+// ============================================
 function updateNetworkState(){
   const online = navigator.onLine;
   const pill = qs('networkPill');
@@ -230,70 +249,134 @@ function updateNetworkState(){
   if(!online){
     pill.textContent = 'Offline';
     pill.style.background = 'rgba(239,68,68,.14)';
-    msg.textContent = 'You are offline. Cached dashboard data is being shown. We will sync automatically when your connection returns.';
+    msg.textContent = 'You are offline. Cached data is being shown.';
     return;
   }
-  const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-  const slow = conn && (conn.saveData || /2g/.test(conn.effectiveType || ''));
-  pill.textContent = slow ? 'Slow network' : 'Online';
-  pill.style.background = slow ? 'rgba(245,158,11,.14)' : 'rgba(16,185,129,.14)';
-  msg.textContent = slow ? 'Connection is slow. Using cached content first while fresh data loads in the background.' : 'Dashboard is connected. Pulling fresh courses, stats, activity, and notifications.';
+  pill.textContent = 'Online';
+  pill.style.background = 'rgba(16,185,129,.14)';
+  msg.textContent = 'Dashboard connected.';
 }
 window.addEventListener('online', updateNetworkState);
 window.addEventListener('offline', updateNetworkState);
 
-// ==================== CACHE ====================
-function saveCache(){
+// ============================================
+// CACHE
+// ============================================
+function saveCache(data){
   localStorage.setItem('oau_dashboard_cache', JSON.stringify({
     savedAt: Date.now(),
-    state: dashboardState
+    data: data
   }));
 }
 function loadCache(){
   try {
     const raw = localStorage.getItem('oau_dashboard_cache');
-    if(!raw) return false;
+    if(!raw) return null;
     const cached = JSON.parse(raw);
-    if(!cached || !cached.state) return false;
-    dashboardState = cached.state;
-    renderDashboard();
-    return true;
-  } catch(e){ return false; }
+    return cached.data || null;
+  } catch(e){ return null; }
 }
 
-// ==================== NORMALIZE DATA ====================
-const normalizeUser = d => d.user || d.profile || d.data || d;
-const normalizeStats = d => d.stats || d.data || d;
-const normalizeNotifications = d => d.notifications || d.data || [];
+// ============================================
+// MAIN DASHBOARD LOAD - FIXED FOR CORRECT API
+// ============================================
+async function loadDashboard() {
+  if(!TOKEN){ 
+    location.href = '/login'; 
+    return; 
+  }
 
-function normalizeCourses(stats, user){
-  if(Array.isArray(stats?.courses) && stats.courses.length) return stats.courses;
-  if(Array.isArray(user?.courses) && user.courses.length) return user.courses;
-  if(Array.isArray(user?.enrolledCourses) && user.enrolledCourses.length) return user.enrolledCourses;
-  return [];
+  // Try cache first for immediate display
+  const cached = loadCache();
+  if(cached) {
+    renderDashboard(cached);
+  }
+
+  updateNetworkState();
+
+  try {
+    // Use the working endpoint from app (4).html
+    const response = await fetch(API_BASE + '/auth/me', {
+      headers: { 'Authorization': 'Bearer ' + TOKEN }
+    });
+    
+    const result = await response.json();
+    
+    if(!result.success || !result.user) {
+      throw new Error('Failed to load user data');
+    }
+
+    const user = result.user;
+    
+    // Build dashboard data from the user object
+    const dashboardData = {
+      user: user,
+      stats: {
+        coursesActive: user.enrolledCourses?.length || 0,
+        averageScore: user.averageScore || 0,
+        testsTaken: user.testsTaken || 0,
+        examsTaken: user.examsTaken || 0,
+        currentStreak: user.currentStreak || 0
+      },
+      courses: user.enrolledCourses || [],
+      activity: (user.scores || []).slice().sort((a,b) => 
+        new Date(b.date||b.createdAt||0) - new Date(a.date||a.createdAt||0)
+      ).slice(0,5),
+      notifications: []
+    };
+
+    // Try to load notifications separately
+    try {
+      const notifRes = await fetch(API_BASE + '/notifications', {
+        headers: { 'Authorization': 'Bearer ' + TOKEN }
+      });
+      const notifData = await notifRes.json();
+      dashboardData.notifications = notifData.notifications || [];
+    } catch(e) {
+      console.warn('Could not load notifications:', e);
+      dashboardData.notifications = [];
+    }
+
+    // Save to cache
+    saveCache(dashboardData);
+    
+    // Render the dashboard
+    renderDashboard(dashboardData);
+
+  } catch(err) {
+    console.error('Dashboard load error:', err);
+    qs('networkMessage').textContent = 'Error loading dashboard: ' + (err.message || 'Unknown error');
+    
+    // Try to use cached data if available and not already rendered
+    if(!cached) {
+      const fallback = loadCache();
+      if(fallback) {
+        renderDashboard(fallback);
+      }
+    }
+  }
 }
 
-function normalizeActivity(user){
-  const scores = Array.isArray(user?.scores) ? user.scores : [];
-  return scores.slice().sort((a,b) => new Date(b.date||b.createdAt||0) - new Date(a.date||a.createdAt||0)).slice(0,5);
-}
+// ============================================
+// RENDER FUNCTIONS
+// ============================================
+function renderDashboard(data) {
+  const user = data.user || {};
+  const stats = data.stats || {};
+  const courses = data.courses || [];
+  const activity = data.activity || [];
+  const notifications = data.notifications || [];
 
-// ==================== RENDER DASHBOARD ====================
-function renderDashboard(){
-  const user = dashboardState.user || {};
-  const stats = dashboardState.stats || {};
-  const notifications = dashboardState.notifications || [];
-  const courses = dashboardState.courses || [];
-  const activity = dashboardState.activity || [];
-
-  const name = user.firstName || user.name || user.username || 'Student';
-  setText('welcomeText', `Welcome back, ${name} 👋`);
-  setText('heroTitle', `${name}, keep your OAU practice streak alive`);
+  const name = user.fullName || user.firstName || user.username || 'Student';
+  const firstName = name.split(' ')[0] || 'Student';
+  
+  setText('welcomeText', `Welcome back, ${firstName} 👋`);
+  setText('heroTitle', `${firstName}, keep your OAU practice streak alive`);
   setText('heroTag', user.level ? `${user.level}L` : '100L • 200L');
 
   const attempts = (stats.testsTaken || 0) + (stats.examsTaken || 0);
   setText('statCourses', String(courses.length || stats.coursesActive || 0));
-  setText('statAvg', `${stats.averageScore ?? user.averageScore ?? 0}%`);
+  setText('statAvg', `${stats.averageScore || user.averageScore || 0}%`);
   setText('statAttempts', String(attempts || user.testsTaken || 0));
   const streak = stats.currentStreak ?? user.currentStreak ?? 0;
   setText('statStreak', `${streak} day${streak === 1 ? '' : 's'}`);
@@ -302,17 +385,21 @@ function renderDashboard(){
   renderActivity(activity);
   renderNotifications(notifications);
 
+  // Update notification badge
   const unread = notifications.filter(n => !n.isRead).length;
   const badge = qs('notifBadge');
-  if(unread > 0){ badge.style.display = 'flex'; badge.textContent = unread > 9 ? '9+' : unread; }
-  else { badge.style.display = 'none'; }
+  if(unread > 0){ 
+    badge.style.display = 'flex'; 
+    badge.textContent = unread > 9 ? '9+' : unread; 
+  } else { 
+    badge.style.display = 'none'; 
+  }
 }
 
-// ==================== RENDER COURSES ====================
 function renderCourses(courses){
   const box = qs('courseList');
-  if(!courses.length){
-    box.innerHTML = '<div class="empty-state">No course list was returned from the dashboard endpoints yet. Once your course endpoints are connected, your live courses will render here automatically.</div>';
+  if(!courses || !courses.length){
+    box.innerHTML = '<div class="empty-state">No courses enrolled yet. Start by taking a test or exam!</div>';
     return;
   }
   box.innerHTML = courses.slice(0,6).map(course => {
@@ -334,18 +421,20 @@ function renderCourses(courses){
           <div class="bar"><div class="fill" style="width:${progress}%"></div></div>
         </div>
         <div class="course-actions">
-          <button class="btn btn-primary btn-sm" onclick="goCourse('${code || title}')">Continue</button>
-          <button class="btn btn-soft btn-sm" onclick="goPractice('${code || title}')">Practice</button>
+          <button class="btn btn-primary btn-sm" onclick="location.href='/study?course=${encodeURIComponent(code || title)}'">Continue</button>
+          <button class="btn btn-soft btn-sm" onclick="location.href='/test?course=${encodeURIComponent(code || title)}'">Practice</button>
         </div>
       </article>
     `;
   }).join('');
 }
 
-// ==================== RENDER ACTIVITY ====================
 function renderActivity(items){
   const box = qs('activityList');
-  if(!items.length){ box.innerHTML = '<div class="empty-state">No recent test or exam activity yet.</div>'; return; }
+  if(!items || !items.length){ 
+    box.innerHTML = '<div class="empty-state">No recent test or exam activity yet.</div>'; 
+    return; 
+  }
   box.innerHTML = items.map(item => {
     const course = item.courseCode || item.course || 'Course';
     const mode = item.mode ? item.mode.toUpperCase() : 'PRACTICE';
@@ -363,11 +452,12 @@ function renderActivity(items){
   }).join('');
 }
 
-// ==================== RENDER NOTIFICATIONS ====================
 function renderNotifications(items){
   const list = qs('notifList');
-  headerNotifications = items;
-  if(!items.length){ list.innerHTML = '<div class="empty-state">No notifications yet.</div>'; return; }
+  if(!items || !items.length){ 
+    list.innerHTML = '<div class="empty-state">No notifications yet.</div>'; 
+    return; 
+  }
   list.innerHTML = items.slice(0,5).map(n => `
     <div class="notif-item">
       <div>
@@ -379,40 +469,9 @@ function renderNotifications(items){
   `).join('');
 }
 
-// ==================== NAVIGATION ====================
-function goCourse(code){ location.href = '/study?course=' + encodeURIComponent(code); }
-function goPractice(code){ location.href = '/test?course=' + encodeURIComponent(code); }
-window.goCourse = goCourse;
-window.goPractice = goPractice;
-
-// ==================== LOAD DASHBOARD ====================
-async function loadDashboard(){
-  if(!token){ location.href = '/login'; return; }
-  const cacheLoaded = loadCache();
-  updateNetworkState();
-  try {
-    const [profileRes, statsRes, notifRes] = await Promise.allSettled([
-      api.get('/users/profile'),
-      api.get('/users/stats'),
-      api.get('/notifications')
-    ]);
-    if(profileRes.status === 'fulfilled') dashboardState.user = normalizeUser(profileRes.value);
-    if(statsRes.status === 'fulfilled') dashboardState.stats = normalizeStats(statsRes.value);
-    if(notifRes.status === 'fulfilled') dashboardState.notifications = normalizeNotifications(notifRes.value);
-    dashboardState.courses = normalizeCourses(dashboardState.stats, dashboardState.user);
-    dashboardState.activity = normalizeActivity(dashboardState.user);
-    renderDashboard();
-    saveCache();
-  } catch(err){
-    console.error(err);
-    if(!cacheLoaded){
-      setText('networkMessage', err.message || 'Failed to load dashboard data.');
-      renderDashboard();
-    }
-  }
-}
-
-// ==================== INIT ====================
+// ============================================
+// INIT
+// ============================================
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   loadDashboard();
