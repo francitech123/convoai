@@ -122,40 +122,12 @@
       "destination": "/logo.svg"
     },
     {
-      "source": "/manifest.json",
-      "destination": "/manifest.json"
-    },
-    {
       "source": "/sw.js",
       "destination": "/sw.js"
     },
     {
-      "source": "/robots.txt",
-      "destination": "/robots.txt"
-    },
-    {
       "source": "/sitemap.xml",
       "destination": "/sitemap.xml"
-    },
-    {
-      "source": "/js/config.js",
-      "destination": "/js/config.js"
-    },
-    {
-      "source": "/js/api.js",
-      "destination": "/js/api.js"
-    },
-    {
-      "source": "/js/auth.js",
-      "destination": "/js/auth.js"
-    },
-    {
-      "source": "/js/auth-check.js",
-      "destination": "/js/auth-check.js"
-    },
-    {
-      "source": "/js/utils.js",
-      "destination": "/js/utils.js"
     },
     {
       "source": "/(.*)",
@@ -192,13 +164,8 @@
         { "key": "Content-Type", "value": "image/svg+xml" },
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
-    },
-    {
-      "source": "/js/*.js",
-      "headers": [
-        { "key": "Content-Type", "value": "application/javascript" },
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-      ]
+    }
+     ]
     }
   ]
 }
