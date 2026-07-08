@@ -2,343 +2,83 @@
   "version": 2,
   "cleanUrls": true,
   "trailingSlash": false,
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
+  "builds": [
+    { "src": "**/*.html", "use": "@vercel/static" },
+    { "src": "**/*.js", "use": "@vercel/static" },
+    { "src": "**/*.css", "use": "@vercel/static" },
+    { "src": "**/*.txt", "use": "@vercel/static" },
+    { "src": "**/*.xml", "use": "@vercel/static" },
+    { "src": "**/*.json", "use": "@vercel/static" },
+    { "src": "**/*.svg", "use": "@vercel/static" }
   ],
-  "redirects": [
-    {
-      "source": "/",
-      "destination": "/app.html"
-    },
-    {
-      "source": "/index",
-      "destination": "/app.html"
-    },
-    {
-      "source": "/index.html",
-      "destination": "/app.html"
-    },
-    {
-      "source": "/login",
-      "destination": "/login.html"
-    },
-    {
-      "source": "/register",
-      "destination": "/register.html"
-    },
-    {
-      "source": "/forgot-password",
-      "destination": "/forgot-password.html"
-    },
-    {
-      "source": "/verify-device",
-      "destination": "/verify-device.html"
-    },
-    {
-      "source": "/logout",
-      "destination": "/login.html"
-    },
-    {
-      "source": "/app",
-      "destination": "/app.html"
-    },
-    {
-      "source": "/dashboard",
-      "destination": "/app.html"
-    },
-    {
-      "source": "/home",
-      "destination": "/app.html"
-    },
-    {
-      "source": "/exam",
-      "destination": "/exam.html"
-    },
-    {
-      "source": "/test",
-      "destination": "/test.html"
-    },
-    {
-      "source": "/study",
-      "destination": "/study.html"
-    },
-    {
-      "source": "/study-manage",
-      "destination": "/study-manage.html"
-    },
-    {
-      "source": "/studybulk",
-      "destination": "/studybulk.html"
-    },
-    {
-      "source": "/ai",
-      "destination": "/ai.html"
-    },
-    {
-      "source": "/chat",
-      "destination": "/chat.html"
-    },
-    {
-      "source": "/leaderboard",
-      "destination": "/leaderboard.html"
-    },
-    {
-      "source": "/notifications",
-      "destination": "/notifications.html"
-    },
-    {
-      "source": "/profile",
-      "destination": "/profile.html"
-    },
-    {
-      "source": "/submit",
-      "destination": "/submit.html"
-    },
-    {
-      "source": "/results",
-      "destination": "/submit.html"
-    },
-    {
-      "source": "/about",
-      "destination": "/about.html"
-    },
-    {
-      "source": "/developer",
-      "destination": "/developer.html"
-    },
-    {
-      "source": "/privacy",
-      "destination": "/privacy.html"
-    },
-    {
-      "source": "/terms",
-      "destination": "/terms.html"
-    },
-    {
-      "source": "/faq",
-      "destination": "/faq.html"
-    },
-    {
-      "source": "/contact",
-      "destination": "/contact.html"
-    },
-    {
-      "source": "/logo",
-      "destination": "/logo.html"
-    },
-    {
-      "source": "/admin",
-      "destination": "/admin-login.html"
-    },
-    {
-      "source": "/admin-login",
-      "destination": "/admin-login.html"
-    },
-    {
-      "source": "/admin-dashboard",
-      "destination": "/adminDashboard.html"
-    },
-    {
-      "source": "/admin-register",
-      "destination": "/admin-register.html"
-    },
-    {
-      "source": "/admin-register-preview",
-      "destination": "/admin-register-preview.html"
-    },
-    {
-      "source": "/admin-register-success",
-      "destination": "/admin-register-success.html"
-    },
-    {
-      "source": "/ceo-panel",
-      "destination": "/ceo-panel.html"
-    },
-    {
-      "source": "/appAnalysis",
-      "destination": "/appAnalysis.html"
-    },
-    {
-      "source": "/AdminPageUsers",
-      "destination": "/AdminPageUsers.html"
-    },
-    {
-      "source": "/AdminNotification",
-      "destination": "/AdminNotification.html"
-    },
-    {
-      "source": "/adminChat",
-      "destination": "/adminChat.html"
-    },
-    {
-      "source": "/allCourseMaterial",
-      "destination": "/allCourseMaterial.html"
-    },
-    {
-      "source": "/analysis",
-      "destination": "/analysis.html"
-    },
-    {
-      "source": "/courseSettings",
-      "destination": "/courseSettings.html"
-    },
-    {
-      "source": "/courses",
-      "destination": "/courses.html"
-    },
-    {
-      "source": "/questions",
-      "destination": "/questions.html"
-    },
-    {
-      "source": "/testDB",
-      "destination": "/testDB.html"
-    },
-    {
-      "source": "/user.payment",
-      "destination": "/user.payment.html"
-    },
-    {
-      "source": "/materials-login",
-      "destination": "/materials-login.html"
-    },
-    {
-      "source": "/logo.svg",
-      "destination": "/logo.svg"
-    },
-    {
-      "source": "/favicon.ico",
-      "destination": "/favicon.ico"
-    },
-    {
-      "source": "/manifest.json",
-      "destination": "/manifest.json"
-    },
-    {
-      "source": "/sw.js",
-      "destination": "/sw.js"
-    },
-    {
-      "source": "/robots.txt",
-      "destination": "/robots.txt"
-    },
-    {
-      "source": "/sitemap.xml",
-      "destination": "/sitemap.xml"
-    },
-    {
-      "source": "/js/config.js",
-      "destination": "/js/config.js"
-    },
-    {
-      "source": "/js/api.js",
-      "destination": "/js/api.js"
-    },
-    {
-      "source": "/js/auth.js",
-      "destination": "/js/auth.js"
-    },
-    {
-      "source": "/js/auth-check.js",
-      "destination": "/js/auth-check.js"
-    },
-    {
-      "source": "/js/utils.js",
-      "destination": "/js/utils.js"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/404.html"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        },
-        {
-          "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
-        },
-        {
-          "key": "Permissions-Policy",
-          "value": "geolocation=(), microphone=(), camera=()"
-        }
-      ]
-    },
-    {
-      "source": "/manifest.json",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/json"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/sw.js",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/javascript"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=0, must-revalidate"
-        }
-      ]
-    },
-    {
-      "source": "/logo.svg",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "image/svg+xml"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/js/*.js",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/javascript"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/favicon.ico",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    }
+  "routes": [
+    { "src": "/js/(.*)", "dest": "/js/$1" },
+    { "src": "/css/(.*)", "dest": "/css/$1" },
+    { "src": "/assets/(.*)", "dest": "/assets/$1" },
+    { "src": "/manifest.json", "dest": "/manifest.json" },
+    { "src": "/sw.js", "dest": "/sw.js" },
+    { "src": "/robots.txt", "dest": "/robots.txt" },
+    { "src": "/sitemap_index.xml", "dest": "/sitemap_index.xml" },
+    { "src": "/sitemap.xml", "dest": "/sitemap.xml" },
+    { "src": "/logo.svg", "dest": "/logo.svg" },
+    { "src": "/favicon.ico", "dest": "/favicon.ico" },
+    { "src": "/login", "dest": "/login.html" },
+    { "src": "/register", "dest": "/register.html" },
+    { "src": "/app", "dest": "/app.html" },
+    { "src": "/exam", "dest": "/exam.html" },
+    { "src": "/test", "dest": "/test.html" },
+    { "src": "/study", "dest": "/study.html" },
+    { "src": "/study-manage", "dest": "/study-manage.html" },
+    { "src": "/studybulk", "dest": "/studybulk.html" },
+    { "src": "/ai", "dest": "/ai.html" },
+    { "src": "/verify-device", "dest": "/verify-device.html" },
+    { "src": "/profile", "dest": "/profile.html" },
+    { "src": "/submit", "dest": "/submit.html" },
+    { "src": "/results", "dest": "/submit.html" },
+    { "src": "/leaderboard", "dest": "/leaderboard.html" },
+    { "src": "/notifications", "dest": "/notifications.html" },
+    { "src": "/about", "dest": "/about.html" },
+    { "src": "/developer", "dest": "/developer.html" },
+    { "src": "/privacy", "dest": "/privacy.html" },
+    { "src": "/terms", "dest": "/terms.html" },
+    { "src": "/chat", "dest": "/chat.html" },
+    { "src": "/forgot-password", "dest": "/forgot-password.html" },
+    { "src": "/payment", "dest": "/payment.html" },
+    { "src": "/payment-success", "dest": "/payment-success.html" },
+    { "src": "/faq", "dest": "/faq.html" },
+    { "src": "/contact", "dest": "/contact.html" },
+    { "src": "/logo", "dest": "/logo.html" },
+    { "src": "/admin-login", "dest": "/admin-login.html" },
+    { "src": "/admin-register", "dest": "/admin-register.html" },
+    { "src": "/admin-register-preview", "dest": "/admin-register-preview.html" },
+    { "src": "/admin-register-success", "dest": "/admin-register-success.html" },
+    { "src": "/adminDashboard", "dest": "/adminDashboard.html" },
+    { "src": "/admin-dashboard", "dest": "/adminDashboard.html" },
+    { "src": "/admin-questions", "dest": "/questions.html" },
+    { "src": "/admin-courses", "dest": "/courses.html" },
+    { "src": "/admin-settings", "dest": "/courseSettings.html" },
+    { "src": "/admin-users", "dest": "/AdminPageUsers.html" },
+    { "src": "/admin-analysis", "dest": "/analysis.html" },
+    { "src": "/admin-notifications", "dest": "/AdminNotification.html" },
+    { "src": "/admin-materials", "dest": "/allCourseMaterial.html" },
+    { "src": "/admin-chat", "dest": "/adminChat.html" },
+    { "src": "/ceo-panel", "dest": "/ceo-panel.html" },
+    { "src": "/appAnalysis", "dest": "/appAnalysis.html" },
+    { "src": "/ceo.login.francistech", "dest": "/ceo.login.francistech.html" },
+    { "src": "/ceo.dashboard.francistech", "dest": "/ceo.dashboard.francistech.html" },
+    { "src": "/ceo.application.francistech", "dest": "/ceo.application.francistech.html" },
+    { "src": "/ceo.manage.francistech", "dest": "/ceo.manage.francistech.html" },
+    { "src": "/ceo.questions.francistech", "dest": "/ceo.questions.francistech.html" },
+    { "src": "/ceo.courses.francistech", "dest": "/ceo.courses.francistech.html" },
+    { "src": "/ceo.settings.francistech", "dest": "/ceo.settings.francistech.html" },
+    { "src": "/ceo.users.francistech", "dest": "/ceo.users.francistech.html" },
+    { "src": "/ceo.analytics.francistech", "dest": "/ceo.analytics.francistech.html" },
+    { "src": "/ceo.notifications.francistech", "dest": "/ceo.notifications.francistech.html" },
+    { "src": "/ceo.chat.francistech", "dest": "/ceo.chat.francistech.html" },
+    { "src": "/ceo.materials.francistech", "dest": "/ceo.materials.francistech.html" },
+    { "src": "/materials-login", "dest": "/materials-login.html" },
+    { "src": "/", "dest": "/index.html" },
+    { "src": "/404", "dest": "/404.html", "status": 404 },
+    { "src": "/(.*)", "dest": "/404.html", "status": 404 }
   ]
+}
