@@ -1,0 +1,73 @@
+# ============================================================
+# ROBOTS.TXT - OAU CBE Practice
+# ============================================================
+
+User-agent: *
+Allow: /
+
+# ============================================================
+# DISALLOW ADMIN PAGES (Private)
+# ============================================================
+Disallow: /admin/
+Disallow: /admin-login.html
+Disallow: /adminDashboard.html
+Disallow: /ceo-panel.html
+Disallow: /ceo.login.francistech.html
+
+# ============================================================
+# DISALLOW PRIVATE USER PAGES
+# ============================================================
+Disallow: /app.html
+Disallow: /profile.html
+Disallow: /notifications.html
+Disallow: /chat.html
+Disallow: /submit.html
+
+# ============================================================
+# DISALLOW API ENDPOINTS
+# ============================================================
+Disallow: /api/
+
+# ============================================================
+# SITEMAP
+# ============================================================
+Sitemap: https://oau-cbe-practice.vercel.app/sitemap.xml
+
+# ============================================================
+# CRAWL DELAY (Be kind to the server)
+# ============================================================
+Crawl-delay: 5
+
+# ============================================================
+# USER-AGENT SPECIFIC RULES
+# ============================================================
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /app.html
+Disallow: /profile.html
+Allow: /exam
+Allow: /test
+Allow: /study
+Allow: /leaderboard
+Allow: /about
+Allow: /developer
+Allow: /privacy
+Allow: /terms
+Allow: /faq
+Allow: /contact
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /app.html
+Disallow: /profile.html
+
+User-agent: Twitterbot
+Allow: /
+Allow: /about
+Allow: /developer
+Disallow: /admin/
+Disallow: /api/
