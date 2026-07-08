@@ -86,15 +86,79 @@
     .chat-fab{position:fixed;right:20px;bottom:88px;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#10b981,#059669);color:#fff;text-decoration:none;box-shadow:0 10px 24px rgba(16,185,129,.35);z-index:98}
     .loading-spin{text-align:center;padding:20px;color:var(--text-secondary)}
     .loading-spin i{font-size:1.2rem;animation:spin 1s linear infinite}
+    
+    /* LOADING CARD - Full page loader */
+    .loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--bg);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease;
+        padding: 20px;
+    }
+    .loading-overlay.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+    .loading-spinner-ring {
+        width: 48px;
+        height: 48px;
+        border: 4px solid var(--border);
+        border-top-color: var(--primary-light);
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+        margin-bottom: 20px;
+    }
+    .loading-text {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        font-weight: 500;
+    }
+    .loading-subtext {
+        color: var(--text-secondary);
+        font-size: 0.8rem;
+        margin-top: 8px;
+        opacity: 0.6;
+    }
+    
     @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
     @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
     @keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+    
+    /* Skeleton loading styles */
+    .skeleton {
+        background: linear-gradient(90deg, var(--border) 25%, var(--card) 50%, var(--border) 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+        border-radius: 4px;
+    }
+    @keyframes shimmer {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+    }
+    
     @media(max-width:980px){.main-grid{grid-template-columns:1fr}.stats-grid{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:640px){.page{padding:16px 14px 108px}.hero-head{flex-direction:column}.quick-grid{grid-template-columns:repeat(2,1fr)}.stats-grid{grid-template-columns:repeat(2,1fr)}.brand-logo{width:44px;height:44px}.brand-logo svg{width:32px;height:32px}.brand-copy h1{font-size:1rem}}
   </style>
 </head>
 <body>
-<main class="page">
+
+<!-- ===== LOADING OVERLAY ===== -->
+<div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner-ring"></div>
+    <div class="loading-text">Loading your dashboard...</div>
+    <div class="loading-subtext">Please wait while we fetch your data</div>
+</div>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="page" id="mainContent" style="display:none;">
   <header class="topbar">
     <div class="brand">
       <div class="brand-logo">
@@ -206,7 +270,7 @@
 
 <script>
 // ============================================
-// API CONFIGURATION - MATCHES WORKING VERSION
+// API CONFIGURATION
 // ============================================
 const API_BASE = 'https://oau-exam-api.onrender.com/api';
 const TOKEN = localStorage.getItem('oau_token');
@@ -217,6 +281,18 @@ const TOKEN = localStorage.getItem('oau_token');
 const qs = id => document.getElementById(id);
 const setText = (id, v) => { const el = qs(id); if(el) el.textContent = v; };
 const escapeHtml = str => String(str||'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+
+// ============================================
+// LOADING OVERLAY
+// ============================================
+function showLoading() {
+    qs('loadingOverlay').classList.remove('hidden');
+    qs('mainContent').style.display = 'none';
+}
+function hideLoading() {
+    qs('loadingOverlay').classList.add('hidden');
+    qs('mainContent').style.display = 'block';
+}
 
 // ============================================
 // THEME
@@ -278,7 +354,7 @@ function loadCache(){
 }
 
 // ============================================
-// MAIN DASHBOARD LOAD - FIXED FOR CORRECT API
+// MAIN DASHBOARD LOAD
 // ============================================
 async function loadDashboard() {
   if(!TOKEN){ 
@@ -286,16 +362,19 @@ async function loadDashboard() {
     return; 
   }
 
+  showLoading();
+
   // Try cache first for immediate display
   const cached = loadCache();
   if(cached) {
     renderDashboard(cached);
+    hideLoading();
   }
 
   updateNetworkState();
 
   try {
-    // Use the working endpoint from app (4).html
+    // Get user data from the working endpoint
     const response = await fetch(API_BASE + '/auth/me', {
       headers: { 'Authorization': 'Bearer ' + TOKEN }
     });
@@ -308,17 +387,24 @@ async function loadDashboard() {
 
     const user = result.user;
     
-    // Build dashboard data from the user object
+    // Calculate total attempts (exams + tests)
+    const totalAttempts = (user.examsTaken || 0) + (user.testsTaken || 0);
+    
+    // Get enrolled courses - try multiple possible field names
+    const enrolledCourses = user.enrolledCourses || user.courses || user.enrollments || [];
+    
+    // Build dashboard data
     const dashboardData = {
       user: user,
       stats: {
-        coursesActive: user.enrolledCourses?.length || 0,
+        coursesActive: enrolledCourses.length || 0,
         averageScore: user.averageScore || 0,
         testsTaken: user.testsTaken || 0,
         examsTaken: user.examsTaken || 0,
+        totalAttempts: totalAttempts,
         currentStreak: user.currentStreak || 0
       },
-      courses: user.enrolledCourses || [],
+      courses: enrolledCourses,
       activity: (user.scores || []).slice().sort((a,b) => 
         new Date(b.date||b.createdAt||0) - new Date(a.date||a.createdAt||0)
       ).slice(0,5),
@@ -342,6 +428,7 @@ async function loadDashboard() {
     
     // Render the dashboard
     renderDashboard(dashboardData);
+    hideLoading();
 
   } catch(err) {
     console.error('Dashboard load error:', err);
@@ -352,6 +439,10 @@ async function loadDashboard() {
       const fallback = loadCache();
       if(fallback) {
         renderDashboard(fallback);
+        hideLoading();
+      } else {
+        // If no cache, show error state
+        hideLoading();
       }
     }
   }
@@ -374,7 +465,10 @@ function renderDashboard(data) {
   setText('heroTitle', `${firstName}, keep your OAU practice streak alive`);
   setText('heroTag', user.level ? `${user.level}L` : '100L • 200L');
 
+  // Calculate total attempts
   const attempts = (stats.testsTaken || 0) + (stats.examsTaken || 0);
+  
+  // Set stats - FIXED: coursesActive now correctly shows enrolled courses count
   setText('statCourses', String(courses.length || stats.coursesActive || 0));
   setText('statAvg', `${stats.averageScore || user.averageScore || 0}%`);
   setText('statAttempts', String(attempts || user.testsTaken || 0));
@@ -403,6 +497,7 @@ function renderCourses(courses){
     return;
   }
   box.innerHTML = courses.slice(0,6).map(course => {
+    // Handle different course data structures
     const title = course.title || course.name || course.courseTitle || course.courseCode || 'Course';
     const code = course.code || course.courseCode || '';
     const desc = course.description || `Continue practicing ${title}.`;
