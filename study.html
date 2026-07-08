@@ -102,28 +102,28 @@
   <section class="network-strip">
     <div>
       <strong id="welcomeText">Study smarter</strong>
-      <p id="networkMessage">Browse seeded and admin-managed courses, continue topics, and open study resources from one place.</p>
+      <p id="networkMessage">Browse courses by faculty and level to start studying.</p>
     </div>
-    <div class="network-pill" id="networkPill">Checking…</div>
+    <div class="network-pill" id="networkPill">Ready</div>
   </section>
 
   <section class="hero">
     <div class="hero-head">
       <div>
         <h2 id="heroTitle">Study Mode for OAU CBE Practice</h2>
-        <p id="heroSubtitle">Every course here is live-driven from your backend. Seeded courses stay editable from admin, and newly added courses should appear here automatically with their level, code, topics, question count, and study resources.</p>
+        <p id="heroSubtitle">Select a faculty and level to browse courses and start studying.</p>
       </div>
-      <div class="hero-tag" id="heroTag">Live courses</div>
+      <div class="hero-tag" id="heroTag">100L • 200L</div>
     </div>
     <div class="hero-actions">
       <button class="btn btn-primary" onclick="jumpToCourses()">Browse courses</button>
       <button class="btn btn-soft" onclick="location.href='/ai'">Ask Study AI</button>
     </div>
     <div class="stats-grid">
-      <div class="stat-card"><span>Courses loaded</span><strong id="statCourses">—</strong></div>
-      <div class="stat-card"><span>Total topics</span><strong id="statTopics">—</strong></div>
-      <div class="stat-card"><span>Questions available</span><strong id="statQuestions">—</strong></div>
-      <div class="stat-card"><span>Saved progress</span><strong id="statProgress">—</strong></div>
+      <div class="stat-card"><span>Faculties</span><strong id="statCourses">—</strong></div>
+      <div class="stat-card"><span>Courses</span><strong id="statTopics">—</strong></div>
+      <div class="stat-card"><span>Questions</span><strong id="statQuestions">—</strong></div>
+      <div class="stat-card"><span>Progress</span><strong id="statProgress">—</strong></div>
     </div>
   </section>
 
@@ -143,7 +143,6 @@
     <div class="field">
       <label for="sortFilter">Sort by</label>
       <select id="sortFilter">
-        <option value="updated">Recently updated</option>
         <option value="title">Course title</option>
         <option value="questions">Question count</option>
         <option value="topics">Topic count</option>
@@ -198,7 +197,7 @@
 
 <nav class="bottom-nav">
   <div class="bottom-nav-inner">
-    <a href="/" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="/app" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
     <a href="/exam" class="nav-item"><i class="fas fa-pen"></i><span>Exam</span></a>
     <a href="/test" class="nav-item"><i class="fas fa-flask"></i><span>Test</span></a>
     <a href="/study" class="nav-item active"><i class="fas fa-book-open"></i><span>Study</span></a>
@@ -215,8 +214,14 @@ const token = localStorage.getItem('oau_token');
 const qs = id => document.getElementById(id);
 const setText = (id,v) => { const el = qs(id); if(el) el.textContent = v; };
 const escapeHtml = str => String(str||'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-let allCourses = [], filteredCourses = [], selectedCourse = null, notifications = [];
 
+let allFaculties = [];
+let allCourses = [];
+let filteredCourses = [];
+let selectedCourse = null;
+let notifications = [];
+
+// ==================== THEME ====================
 function initTheme(){
   const saved = localStorage.getItem('theme');
   const btn = qs('themeToggleBtn');
@@ -230,24 +235,29 @@ function toggleThemeMode(){
 }
 window.toggleThemeMode = toggleThemeMode;
 
+function goNotifications(){ location.href = '/notifications'; }
+window.goNotifications = goNotifications;
+
+// ==================== UPDATE NETWORK STATE ====================
 function updateNetworkState(){
   const online = navigator.onLine, pill = qs('networkPill'), msg = qs('networkMessage');
   if(!online){
     pill.textContent = 'Offline';
     pill.style.background = 'rgba(239,68,68,.14)';
-    msg.textContent = 'You are offline. Cached study data is being shown and will sync when connection returns.';
+    msg.textContent = 'You are offline. Cached study data is being shown.';
     return;
   }
-  const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-  const slow = conn && (conn.saveData || /2g/.test(conn.effectiveType || ''));
-  pill.textContent = slow ? 'Slow network' : 'Online';
-  pill.style.background = slow ? 'rgba(245,158,11,.14)' : 'rgba(16,185,129,.14)';
-  msg.textContent = slow ? 'Connection is slow. Showing cached courses first while fresh study data loads in the background.' : 'Study mode is connected. Pulling latest courses, topics, and question counts.';
+  pill.textContent = 'Online';
+  pill.style.background = 'rgba(16,185,129,.14)';
+  msg.textContent = 'Study mode is connected.';
 }
 window.addEventListener('online', updateNetworkState);
 window.addEventListener('offline', updateNetworkState);
 
-function getHeaders(extra={}){ return Object.assign({'Content-Type':'application/json', ...(token ? {'Authorization':'Bearer '+token} : {})}, extra); }
+function getHeaders(extra={}){ 
+  return Object.assign({'Content-Type':'application/json', ...(token ? {'Authorization':'Bearer '+token} : {})}, extra); 
+}
+
 async function apiGet(path){
   const res = await fetch(API + path, { headers: getHeaders() });
   const text = await res.text();
@@ -257,23 +267,87 @@ async function apiGet(path){
   return data;
 }
 
-function normalizeCourse(raw){
-  const code = raw.code || raw.courseCode || raw.slug || '';
-  const title = raw.title || raw.name || raw.courseTitle || code || 'Course';
-  const level = String(raw.level || raw.courseLevel || '');
-  const topics = Array.isArray(raw.topics) ? raw.topics : (Array.isArray(raw.units) ? raw.units : []);
-  const resources = Array.isArray(raw.resources) ? raw.resources : [];
-  const questionCount = Number(raw.questionCount ?? raw.questionsCount ?? raw.totalQuestions ?? (Array.isArray(raw.questions) ? raw.questions.length : 0) ?? 0);
-  const progress = Math.max(0, Math.min(100, Number(raw.progress ?? raw.completion ?? 0)));
-  return {
-    id: raw._id || raw.id || code || title,
-    code, title, level,
-    description: raw.description || raw.summary || `Study ${title} with structured topics and practice questions.`,
-    topics, resources, questionCount, progress,
-    updatedAt: raw.updatedAt || raw.modifiedAt || raw.createdAt || null
-  };
+// ==================== LOAD FACULTIES ====================
+async function loadFaculties(){
+  try {
+    const data = await apiGet('/admin/faculties');
+    allFaculties = data.faculties || [];
+    
+    // Update stats
+    setText('statCourses', String(allFaculties.length));
+    
+    // Load courses for each faculty
+    await loadAllCourses();
+    
+  } catch(e){
+    console.error('Load faculties error:', e);
+    qs('courseGrid').innerHTML = '<div class="empty-state">Failed to load courses. Please refresh.</div>';
+  }
 }
 
+// ==================== LOAD ALL COURSES ====================
+async function loadAllCourses(){
+  const allCourseList = [];
+  const levels = ['100', '200'];
+  
+  for (const faculty of allFaculties) {
+    for (const level of levels) {
+      try {
+        const data = await apiGet(`/admin/faculty-courses/${encodeURIComponent(faculty.name)}/${level}`);
+        const firstSem = data.firstSemester || [];
+        const secondSem = data.secondSemester || [];
+        const all = [...firstSem, ...secondSem];
+        
+        all.forEach(c => {
+          allCourseList.push({
+            id: c.code,
+            code: c.code,
+            name: c.name,
+            level: level,
+            faculty: faculty.name,
+            testSettings: c.testSettings,
+            examSettings: c.examSettings,
+            mode: c.mode,
+            theme: c.theme || {},
+            questionCount: 0,
+            topics: [],
+            progress: 0
+          });
+        });
+      } catch(e) {
+        console.log('Error loading courses for', faculty.name, level, e.message);
+      }
+    }
+  }
+  
+  allCourses = allCourseList;
+  
+  // Load question counts for each course
+  for (const course of allCourses) {
+    try {
+      const data = await apiGet(`/admin/course-detail/${encodeURIComponent(course.code)}`);
+      if (data.course) {
+        course.questionCount = data.course.questionCounts?.test || 0;
+        course.topics = data.course.topics || [];
+        course.progress = Math.min(100, Math.round((course.questionCount / (course.testSettings?.numberOfQuestions || 20)) * 100));
+      }
+    } catch(e) {
+      console.log('Error loading details for', course.code, e.message);
+    }
+  }
+  
+  // Set topics count
+  const totalTopics = allCourses.reduce((sum, c) => sum + (c.topics?.length || 0), 0);
+  const totalQuestions = allCourses.reduce((sum, c) => sum + (c.questionCount || 0), 0);
+  
+  setText('statTopics', String(totalTopics));
+  setText('statQuestions', String(totalQuestions));
+  setText('statProgress', allCourses.length > 0 ? Math.round(allCourses.reduce((sum, c) => sum + c.progress, 0) / allCourses.length) + '%' : '0%');
+  
+  applyFilters();
+}
+
+// ==================== SAVE CACHE ====================
 function saveCache(){
   localStorage.setItem('oau_study_cache', JSON.stringify({
     savedAt: Date.now(),
@@ -282,6 +356,7 @@ function saveCache(){
     notifications
   }));
 }
+
 function loadCache(){
   try {
     const raw = localStorage.getItem('oau_study_cache');
@@ -296,84 +371,47 @@ function loadCache(){
   } catch(e){ return false; }
 }
 
-async function loadStudyPage(){
-  if(!token){ location.href = '/login'; return; }
-  const hadCache = loadCache();
-  updateNetworkState();
-  try {
-    const [coursesRes, statsRes, notifRes, profileRes] = await Promise.allSettled([
-      apiGet('/courses'),
-      apiGet('/users/stats'),
-      apiGet('/notifications'),
-      apiGet('/users/profile')
-    ]);
+// ==================== APPLY FILTERS ====================
+function applyFilters(){
+  const query = (qs('searchInput').value || '').trim().toLowerCase();
+  const level = qs('levelFilter').value;
+  const sort = qs('sortFilter').value;
+  const mode = qs('modeFilter').value;
 
-    let fetchedCourses = [];
-    if(coursesRes.status === 'fulfilled'){
-      const payload = coursesRes.value;
-      fetchedCourses = (payload.courses || payload.data || payload.items || payload || []).map(normalizeCourse);
-    }
+  filteredCourses = allCourses.filter(course => {
+    const matchesQuery = !query || [course.code, course.name].filter(Boolean).join(' ').toLowerCase().includes(query);
+    const matchesLevel = !level || String(course.level) === String(level);
+    const topicCount = Array.isArray(course.topics) ? course.topics.length : 0;
+    const matchesMode = !mode || (mode === 'hasTopics' && topicCount > 0) || (mode === 'hasQuestions' && course.questionCount > 0);
+    return matchesQuery && matchesLevel && matchesMode;
+  });
 
-    if(!fetchedCourses.length && statsRes.status === 'fulfilled'){
-      const stats = statsRes.value.stats || statsRes.value.data || statsRes.value || {};
-      if(Array.isArray(stats.courses)) fetchedCourses = stats.courses.map(normalizeCourse);
-    }
+  filteredCourses.sort((a,b) => {
+    if(sort === 'title') return (a.name || '').localeCompare(b.name || '');
+    if(sort === 'questions') return (b.questionCount || 0) - (a.questionCount || 0);
+    if(sort === 'topics') return (b.topics?.length || 0) - (a.topics?.length || 0);
+    return 0;
+  });
 
-    if(!fetchedCourses.length && profileRes.status === 'fulfilled'){
-      const user = profileRes.value.user || profileRes.value.profile || profileRes.value.data || profileRes.value || {};
-      if(Array.isArray(user.courses)) fetchedCourses = user.courses.map(normalizeCourse);
-      else if(Array.isArray(user.enrolledCourses)) fetchedCourses = user.enrolledCourses.map(normalizeCourse);
-    }
-
-    if(notifRes.status === 'fulfilled'){
-      notifications = notifRes.value.notifications || notifRes.value.data || [];
-    }
-
-    if(fetchedCourses.length){
-      allCourses = fetchedCourses;
-      const selectedId = selectedCourse?.id;
-      selectedCourse = allCourses.find(c => c.id === selectedId) || allCourses[0] || null;
-      saveCache();
-    } else if(!hadCache) {
-      allCourses = [];
-      selectedCourse = null;
-    }
-
-    applyFilters();
-    renderNotificationsBadge();
-  } catch(err){
-    console.error(err);
-    if(!hadCache){
-      qs('courseGrid').innerHTML = '<div class="empty-state">Failed to load study courses. Connect the page to your live courses endpoint or check the API route names.</div>';
-      renderSelectedCourse(null);
-      renderStudyPlan([]);
-    }
+  if(!selectedCourse || !filteredCourses.find(c => c.id === selectedCourse.id)){
+    selectedCourse = filteredCourses[0] || null;
   }
+
+  renderCourses(filteredCourses);
+  renderSelectedCourse(selectedCourse);
+  renderStudyPlan(filteredCourses);
+  
+  // Update hero tag
+  const total = filteredCourses.length;
+  const totalFaculties = new Set(filteredCourses.map(c => c.faculty)).size;
+  setText('heroTag', `${total} course${total === 1 ? '' : 's'} • ${totalFaculties} facult${totalFaculties === 1 ? 'y' : 'ies'}`);
 }
 
-function computeStats(courses){
-  const totalTopics = courses.reduce((sum,c) => sum + (Array.isArray(c.topics) ? c.topics.length : 0), 0);
-  const totalQuestions = courses.reduce((sum,c) => sum + (Number(c.questionCount) || 0), 0);
-  const avgProgress = courses.length ? Math.round(courses.reduce((sum,c) => sum + (Number(c.progress) || 0), 0) / courses.length) : 0;
-  setText('statCourses', String(courses.length));
-  setText('statTopics', String(totalTopics));
-  setText('statQuestions', String(totalQuestions));
-  setText('statProgress', `${avgProgress}%`);
-}
-
-function getTopicLabel(topic, index){
-  if(typeof topic === 'string') return topic;
-  return topic.title || topic.name || topic.topic || `Topic ${index+1}`;
-}
-function getTopicQuestionCount(topic){
-  if(typeof topic === 'string') return null;
-  return topic.questionCount ?? topic.questionsCount ?? (Array.isArray(topic.questions) ? topic.questions.length : null);
-}
-
+// ==================== RENDER COURSES ====================
 function renderCourses(courses){
   const grid = qs('courseGrid');
   if(!courses.length){
-    grid.innerHTML = '<div class="empty-state">No study courses matched the current filters.</div>';
+    grid.innerHTML = '<div class="empty-state">No courses matched the current filters.</div>';
     return;
   }
   grid.innerHTML = courses.map(course => {
@@ -381,13 +419,12 @@ function renderCourses(courses){
     return `<article class="course-card">
       <div class="course-top">
         <div>
-          <h4>${escapeHtml(course.code ? `${course.code} — ${course.title}` : course.title)}</h4>
-          <p>${escapeHtml(course.description)}</p>
+          <h4>${escapeHtml(course.code)} — ${escapeHtml(course.name)}</h4>
+          <p>${escapeHtml(course.faculty)} • ${course.level}L</p>
         </div>
-        <div class="chip">${course.level ? escapeHtml(course.level) + 'L' : 'Course'}</div>
+        <div class="chip">${topicCount} topics</div>
       </div>
       <div class="course-meta">
-        <div class="meta-pill">${topicCount} topic${topicCount === 1 ? '' : 's'}</div>
         <div class="meta-pill">${course.questionCount} question${course.questionCount === 1 ? '' : 's'}</div>
         <div class="meta-pill">${course.progress}% progress</div>
       </div>
@@ -397,12 +434,13 @@ function renderCourses(courses){
       </div>
       <div class="course-actions">
         <button class="btn btn-main" onclick="selectCourse('${course.id}')">Open topics</button>
-        <button class="btn btn-outline" onclick="startCourseTest('${course.code || course.id}')">Practice questions</button>
+        <button class="btn btn-outline" onclick="startCourseTest('${course.code}')">Practice</button>
       </div>
     </article>`;
   }).join('');
 }
 
+// ==================== RENDER SELECTED COURSE ====================
 function renderSelectedCourse(course){
   const topicBox = qs('topicList');
   const resourceBox = qs('resourceList');
@@ -411,45 +449,30 @@ function renderSelectedCourse(course){
   if(!course){
     topicBox.innerHTML = '<div class="empty-state">Select a course to view its topics.</div>';
     resourceBox.innerHTML = '<div class="empty-state">Course resources will appear here.</div>';
-    recentBox.innerHTML = '<div class="empty-state">Recent study history will appear here once available.</div>';
+    recentBox.innerHTML = '<div class="empty-state">Recent study history will appear here.</div>';
     return;
   }
 
   const topics = Array.isArray(course.topics) ? course.topics : [];
   topicBox.innerHTML = topics.length ? topics.map((topic, index) => {
-    const label = getTopicLabel(topic, index);
-    const count = getTopicQuestionCount(topic);
+    const label = topic.title || topic.name || `Topic ${index+1}`;
     return `<div class="topic-item">
       <div class="topic-left">
         <strong>${escapeHtml(label)}</strong>
-        <div class="muted">${count !== null ? `${count} question${Number(count) === 1 ? '' : 's'}` : 'Topic available for study'}</div>
+        <div class="muted">${topic.questionCount || 0} questions</div>
       </div>
       <div class="topic-actions">
         <button class="tiny-btn" onclick="openTopic('${course.id}', ${index})">Study</button>
         <button class="tiny-btn" onclick="practiceTopic('${course.id}', ${index})">Practice</button>
       </div>
     </div>`;
-  }).join('') : '<div class="empty-state">This course has no topic list yet. Once admin adds topics, they will show here automatically.</div>';
+  }).join('') : '<div class="empty-state">No topics available for this course.</div>';
 
-  const resources = Array.isArray(course.resources) ? course.resources : [];
-  resourceBox.innerHTML = resources.length ? resources.map((resource, index) => {
-    const title = (typeof resource === 'string') ? resource : (resource.title || resource.name || `Resource ${index+1}`);
-    const desc = (typeof resource === 'string') ? 'Course study resource' : (resource.description || resource.type || 'Course study resource');
-    return `<div class="resource-item">
-      <div class="resource-left">
-        <strong>${escapeHtml(title)}</strong>
-        <div class="muted">${escapeHtml(desc)}</div>
-      </div>
-      <div class="resource-actions">
-        <button class="tiny-btn" onclick="openCourse('${course.id}')">Open</button>
-      </div>
-    </div>`;
-  }).join('') : '<div class="empty-state">No extra resources attached to this course yet.</div>';
-
-  const studyHistory = JSON.parse(localStorage.getItem('oau_recent_study') || '[]').filter(item => item.courseId === course.id).slice(0,5);
-  recentBox.innerHTML = studyHistory.length ? studyHistory.map(item => `<div class="recent-item"><div class="recent-left"><strong>${escapeHtml(item.label || course.title)}</strong><div class="muted">${new Date(item.at).toLocaleString()}</div></div><button class="tiny-btn" onclick="resumeRecent('${course.id}','${escapeHtml(item.topicIndex ?? '')}')">Resume</button></div>`).join('') : '<div class="empty-state">No recent study history for this course yet.</div>';
+  resourceBox.innerHTML = '<div class="empty-state">No resources attached to this course.</div>';
+  recentBox.innerHTML = '<div class="empty-state">No recent study history.</div>';
 }
 
+// ==================== RENDER STUDY PLAN ====================
 function renderStudyPlan(courses){
   const box = qs('studyPlan');
   if(!courses.length){
@@ -460,44 +483,13 @@ function renderStudyPlan(courses){
   box.innerHTML = topCourses.map((course, idx) => {
     const topicCount = Array.isArray(course.topics) ? course.topics.length : 0;
     return `<div class="plan-item">
-      <strong>Session ${idx+1}: ${escapeHtml(course.code || course.title)}</strong>
-      <div class="muted">Cover ${Math.min(topicCount || 1, 3)} topic${Math.min(topicCount || 1, 3) === 1 ? '' : 's'} and attempt a quick practice set after revision.</div>
+      <strong>Session ${idx+1}: ${escapeHtml(course.code)}</strong>
+      <div class="muted">Cover ${Math.min(topicCount || 1, 3)} topic${Math.min(topicCount || 1, 3) === 1 ? '' : 's'} and practice.</div>
     </div>`;
   }).join('');
 }
 
-function applyFilters(){
-  const query = (qs('searchInput').value || '').trim().toLowerCase();
-  const level = qs('levelFilter').value;
-  const sort = qs('sortFilter').value;
-  const mode = qs('modeFilter').value;
-
-  filteredCourses = allCourses.filter(course => {
-    const matchesQuery = !query || [course.title, course.code, course.description].filter(Boolean).join(' ').toLowerCase().includes(query);
-    const matchesLevel = !level || String(course.level) === String(level);
-    const topicCount = Array.isArray(course.topics) ? course.topics.length : 0;
-    const matchesMode = !mode || (mode === 'hasTopics' && topicCount > 0) || (mode === 'hasQuestions' && course.questionCount > 0);
-    return matchesQuery && matchesLevel && matchesMode;
-  });
-
-  filteredCourses.sort((a,b) => {
-    if(sort === 'title') return (a.title || '').localeCompare(b.title || '');
-    if(sort === 'questions') return (b.questionCount || 0) - (a.questionCount || 0);
-    if(sort === 'topics') return (b.topics?.length || 0) - (a.topics?.length || 0);
-    return new Date(b.updatedAt || 0) - new Date(a.updatedAt || 0);
-  });
-
-  if(!selectedCourse || !filteredCourses.find(c => c.id === selectedCourse.id)){
-    selectedCourse = filteredCourses[0] || null;
-  }
-
-  renderCourses(filteredCourses);
-  renderSelectedCourse(selectedCourse);
-  renderStudyPlan(filteredCourses);
-  computeStats(filteredCourses);
-  setText('heroTag', `${filteredCourses.length} course${filteredCourses.length === 1 ? '' : 's'}`);
-}
-
+// ==================== SELECT COURSE ====================
 function selectCourse(id){
   selectedCourse = allCourses.find(c => c.id === id) || null;
   renderSelectedCourse(selectedCourse);
@@ -505,25 +497,24 @@ function selectCourse(id){
 }
 window.selectCourse = selectCourse;
 
+// ==================== RESET FILTERS ====================
 function resetStudyFilters(){
   qs('searchInput').value = '';
   qs('levelFilter').value = '';
-  qs('sortFilter').value = 'updated';
+  qs('sortFilter').value = 'title';
   qs('modeFilter').value = '';
   applyFilters();
 }
 window.resetStudyFilters = resetStudyFilters;
 
+// ==================== COURSE ACTIONS ====================
 function startCourseTest(code){ location.href = '/test?course=' + encodeURIComponent(code); }
 window.startCourseTest = startCourseTest;
 
 function openCourse(id){
   const course = allCourses.find(c => c.id === id);
   if(!course) return;
-  const recent = JSON.parse(localStorage.getItem('oau_recent_study') || '[]');
-  recent.unshift({ courseId: course.id, label: course.code || course.title, at: new Date().toISOString() });
-  localStorage.setItem('oau_recent_study', JSON.stringify(recent.slice(0,20)));
-  location.href = '/study?course=' + encodeURIComponent(course.code || course.id);
+  location.href = '/study?course=' + encodeURIComponent(course.code);
 }
 window.openCourse = openCourse;
 
@@ -533,17 +524,14 @@ window.openSelectedCourse = openSelectedCourse;
 function openTopic(courseId, topicIndex){
   const course = allCourses.find(c => c.id === courseId);
   if(!course) return;
-  const recent = JSON.parse(localStorage.getItem('oau_recent_study') || '[]');
-  recent.unshift({ courseId: course.id, label: getTopicLabel(course.topics?.[topicIndex], topicIndex), topicIndex, at: new Date().toISOString() });
-  localStorage.setItem('oau_recent_study', JSON.stringify(recent.slice(0,20)));
-  location.href = '/study?course=' + encodeURIComponent(course.code || course.id) + '&topic=' + encodeURIComponent(topicIndex);
+  location.href = '/study?course=' + encodeURIComponent(course.code) + '&topic=' + encodeURIComponent(topicIndex);
 }
 window.openTopic = openTopic;
 
 function practiceTopic(courseId, topicIndex){
   const course = allCourses.find(c => c.id === courseId);
   if(!course) return;
-  location.href = '/test?course=' + encodeURIComponent(course.code || course.id) + '&topic=' + encodeURIComponent(topicIndex);
+  location.href = '/test?course=' + encodeURIComponent(course.code) + '&topic=' + encodeURIComponent(topicIndex);
 }
 window.practiceTopic = practiceTopic;
 
@@ -556,25 +544,43 @@ window.resumeRecent = resumeRecent;
 function jumpToCourses(){ document.getElementById('coursesSection').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
 window.jumpToCourses = jumpToCourses;
 
+// ==================== NOTIFICATIONS BADGE ====================
 function renderNotificationsBadge(){
   const unread = notifications.filter(n => !n.isRead).length;
   const badge = qs('notifBadge');
   if(unread > 0){ badge.style.display = 'flex'; badge.textContent = unread > 9 ? '9+' : unread; }
   else { badge.style.display = 'none'; }
 }
-function goNotifications(){ location.href = '/notifications'; }
-window.goNotifications = goNotifications;
 
-['searchInput','levelFilter','sortFilter','modeFilter'].forEach(id => {
-  document.addEventListener('DOMContentLoaded', () => {
-    const el = qs(id); if(el) el.addEventListener(id === 'searchInput' ? 'input' : 'change', applyFilters);
-  });
-});
+async function loadNotifications(){
+  try {
+    const data = await apiGet('/notifications');
+    notifications = data.notifications || [];
+    renderNotificationsBadge();
+  } catch(e){}
+}
 
+// ==================== INIT ====================
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   updateNetworkState();
-  loadStudyPage();
+  
+  // Try cache first
+  const hadCache = loadCache();
+  
+  if(!hadCache){
+    // Load fresh data
+    loadFaculties();
+  }
+  
+  // Load notifications
+  loadNotifications();
+  
+  // Apply filters on input changes
+  ['searchInput','levelFilter','sortFilter','modeFilter'].forEach(id => {
+    const el = qs(id); 
+    if(el) el.addEventListener(id === 'searchInput' ? 'input' : 'change', applyFilters);
+  });
 });
 </script>
 </body>
