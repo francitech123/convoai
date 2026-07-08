@@ -128,10 +128,6 @@
     {
       "source": "/sitemap.xml",
       "destination": "/sitemap.xml"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/404.html"
     }
   ],
   "headers": [
@@ -164,5 +160,6 @@
         { "key": "Content-Type", "value": "image/svg+xml" },
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
-     },
-   ]  
+    }
+  ]
+}
