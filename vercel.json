@@ -78,7 +78,7 @@
     { "src": "/ceo.materials.francistech", "dest": "/ceo.materials.francistech.html" },
     { "src": "/materials-login", "dest": "/materials-login.html" },
     { "src": "/", "dest": "/index.html" },
-    { "src": "/404", "dest": "/404.html", "status": 404 },
-    { "src": "/(.*)", "dest": "/404.html", "status": 404 }
+    { "src": "/404", "dest": "/404.html" },
+    { "src": "/(.*)", "dest": "/404.html" }
   ]
 }
