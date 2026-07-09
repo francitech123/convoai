@@ -132,8 +132,8 @@
         <div class="auth-panel active" id="loginPanel">
             <form onsubmit="return false">
                 <div class="form-group">
-                    <label id="loginLabel"><i class="fas fa-user"></i> Username</label>
-                    <input type="text" id="loginInput" placeholder="Enter your username" autocomplete="username">
+                    <label id="loginLabel"><i class="fas fa-user"></i> Username / Email</label>
+                    <input type="text" id="loginInput" placeholder="Enter username or email" autocomplete="username">
                 </div>
 
                 <div class="form-group">
@@ -239,10 +239,6 @@
                             <option value="">Select Level</option>
                             <option value="100">100 Level</option>
                             <option value="200">200 Level</option>
-                            <option value="300">300 Level</option>
-                            <option value="400">400 Level</option>
-                            <option value="500">500 Level</option>
-                            <option value="600">600 Level</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -415,24 +411,6 @@
         document.getElementById('successAlert').classList.remove('show');
     }
 
-    // ==================== SET LOGIN METHOD ====================
-    function setLoginMethod(method) {
-        const label = document.getElementById('loginLabel');
-        const input = document.getElementById('loginInput');
-
-        if (method === 'username') {
-            label.innerHTML = '<i class="fas fa-user"></i> Username';
-            input.placeholder = 'Enter your username';
-            input.type = 'text';
-            input.autocomplete = 'username';
-        } else {
-            label.innerHTML = '<i class="fas fa-envelope"></i> Email Address';
-            input.placeholder = 'Enter your email address';
-            input.type = 'email';
-            input.autocomplete = 'email';
-        }
-    }
-
     // ==================== CHECK LOGIN STATUS ====================
     function checkAuth() {
         const token = localStorage.getItem('oau_token');
@@ -463,13 +441,8 @@
         const password = document.getElementById('loginPassword').value.trim();
         const rememberMe = document.getElementById('rememberMe').checked;
 
-        // Determine method
-        const isEmail = loginValue.includes('@');
-        const method = isEmail ? 'email' : 'username';
-        setLoginMethod(method);
-
         if (!loginValue) {
-            showError('Please enter your ' + (isEmail ? 'email address' : 'username'));
+            showError('Please enter your username or email');
             return;
         }
         if (!password) {
@@ -483,12 +456,17 @@
         hideAlerts();
 
         try {
+            // Try as email first if it contains @, otherwise as username
+            const isEmail = loginValue.includes('@');
             const loginData = { password };
+            
             if (isEmail) {
                 loginData.email = loginValue;
             } else {
                 loginData.username = loginValue;
             }
+
+            console.log('📤 Login attempt:', isEmail ? 'Email: ' + loginValue : 'Username: ' + loginValue);
 
             const response = await fetch(API_BASE + '/auth/login', {
                 method: 'POST',
@@ -505,7 +483,7 @@
                 if (rememberMe) {
                     localStorage.setItem('remembered_user', JSON.stringify({
                         username: loginValue,
-                        method: method
+                        method: isEmail ? 'email' : 'username'
                     }));
                 } else {
                     localStorage.removeItem('remembered_user');
@@ -618,9 +596,6 @@
                 const data = JSON.parse(remembered);
                 document.getElementById('loginInput').value = data.username || '';
                 document.getElementById('rememberMe').checked = true;
-                if (data.method) {
-                    setLoginMethod(data.method);
-                }
             }
         } catch(e) {}
     }
@@ -633,7 +608,6 @@
     window.handleRegister = handleRegister;
     window.checkPasswordStrength = checkPasswordStrength;
     window.checkPasswordMatch = checkPasswordMatch;
-    window.setLoginMethod = setLoginMethod;
 </script>
 </body>
 </html>
