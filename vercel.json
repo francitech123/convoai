@@ -21,7 +21,7 @@
     { "src": "/test", "dest": "/app.html" },
     { "src": "/ai", "dest": "/app.html" },
     { "src": "/profile", "dest": "/app.html" },
-    { "src": "/submit", "dest": "/app.html" },
+    { "src": "/submit", "dest": "/submit.html" },
     { "src": "/leaderboard", "dest": "/app.html" },
     { "src": "/notifications", "dest": "/app.html" },
     { "src": "/about", "dest": "/index.html" },
