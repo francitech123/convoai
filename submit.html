@@ -70,7 +70,7 @@
         /* Header */
         .topbar{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border);background:rgba(15,23,42,.95);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100}
         body.light-mode .topbar{background:rgba(255,255,255,.95)}
-        .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text)}
+        .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text);cursor:pointer}
         .brand-logo{width:40px;height:40px;border-radius:12px;background:rgba(59,130,246,.12);display:flex;align-items:center;justify-content:center;border:1px solid var(--border);overflow:hidden}
         .brand-logo svg{width:30px;height:30px}
         .brand-text{font-weight:700;font-size:1rem}
@@ -80,7 +80,7 @@
         .icon-btn:hover{background:var(--primary-light);color:#fff;border-color:var(--primary-light)}
         
         /* Container */
-        .page{max-width:900px;margin:0 auto;padding:20px 16px 110px}
+        .page{max-width:900px;margin:0 auto;padding:20px 16px 60px}
         
         /* Loading */
         .loading-spin{text-align:center;padding:60px 20px;color:var(--text-secondary)}
@@ -182,14 +182,14 @@
         ::-webkit-scrollbar-track{background:var(--bg-soft);border-radius:4px}
         ::-webkit-scrollbar-thumb{background:var(--primary-light);border-radius:4px}
         
-        @media(max-width:480px){.page{padding:12px 10px 100px}.topbar{padding:12px 14px}.brand-text{font-size:.85rem}.action-buttons .btn{min-width:120px;padding:10px 16px;font-size:.75rem}}
+        @media(max-width:480px){.page{padding:12px 10px 40px}.topbar{padding:12px 14px}.brand-text{font-size:.85rem}.action-buttons .btn{min-width:120px;padding:10px 16px;font-size:.75rem}}
     </style>
 </head>
 <body>
 
 <!-- TOPBAR -->
 <header class="topbar">
-    <a href="/app" class="brand">
+    <div class="brand" onclick="window.location.href='/app'">
         <div class="brand-logo">
             <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="100" cy="100" r="85" fill="none" stroke="#3b82f6" stroke-width="3"/>
@@ -206,10 +206,10 @@
             </svg>
         </div>
         <div class="brand-text">Results <small>OAU CBT Practice</small></div>
-    </a>
+    </div>
     <div class="topbar-actions">
         <button class="icon-btn" id="themeToggleBtn" onclick="toggleTheme()" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
-        <a href="/app" class="icon-btn" aria-label="Dashboard"><i class="fas fa-arrow-left"></i></a>
+        <button class="icon-btn" onclick="window.location.href='/app'" aria-label="Dashboard"><i class="fas fa-arrow-left"></i></button>
     </div>
 </header>
 
@@ -321,9 +321,45 @@
         return null;
     }
 
+    // ==================== FETCH FROM BACKEND ====================
+    async function fetchUserScores() {
+        try {
+            const response = await fetch(API + '/scores/my-scores', { 
+                headers: { 'Authorization': 'Bearer ' + token } 
+            });
+            if (response.ok) {
+                const data = await response.json();
+                if (data.success && data.scores && data.scores.length > 0) {
+                    return data.scores;
+                }
+            }
+            return [];
+        } catch(e) {
+            console.error('Fetch scores error:', e);
+            return [];
+        }
+    }
+
     // ==================== LOAD RESULT ====================
     async function loadResult() {
         let result = getResultData();
+
+        if (!result) {
+            const scores = await fetchUserScores();
+            if (scores && scores.length > 0) {
+                const latest = scores[0];
+                result = {
+                    course: latest.courseCode || 'Unknown',
+                    correctCount: latest.correctAnswers || latest.score || 0,
+                    totalQuestions: latest.totalQuestions || 0,
+                    percentage: latest.percentage || 0,
+                    timeSpent: latest.timeSpent || 0,
+                    mode: latest.mode || 'exam',
+                    questions: null
+                };
+                saveResultPersistent(result);
+            }
+        }
 
         if (!result) {
             try {
@@ -370,8 +406,9 @@
                     <li>📊 Track your progress over time</li>
                 </ul>
                 <div class="action-buttons">
-                    <a href="/exam" class="btn btn-primary"><i class="fas fa-pen"></i> Take Exam</a>
-                    <a href="/test" class="btn btn-test"><i class="fas fa-flask"></i> Practice Test</a>
+                    <button class="btn btn-primary" onclick="window.location.href='/app?page=exam'"><i class="fas fa-pen"></i> Take Exam</button>
+                    <button class="btn btn-test" onclick="window.location.href='/app?page=test'"><i class="fas fa-flask"></i> Practice Test</button>
+                    <button class="btn btn-outline" onclick="window.location.href='/app'"><i class="fas fa-home"></i> Dashboard</button>
                 </div>
             </div>
         `;
@@ -404,60 +441,27 @@
         else if (percentage >= 60) { encClass = 'good'; encMessage = '👍 Good effort! You\'re on the right track.'; }
         else if (percentage >= 50) { encClass = 'good'; encMessage = '📚 Nice try! Review the explanations and practice more.'; }
 
-        // Question review
         let questionsHtml = '';
         if (result.questions && result.questions.length > 0) {
-            const correctCount = result.questions.filter(q => q.userAnswer === q.correctOption).length;
-            const wrongCount = result.questions.filter(q => q.userAnswer !== null && q.userAnswer !== q.correctOption).length;
-            const unansweredCount = result.questions.filter(q => q.userAnswer === null || q.userAnswer === undefined).length;
-
+            questionsHtml = buildQuestionsHtml(result.questions);
+        } else {
             questionsHtml = `
                 <div class="review-header">
                     <h3><i class="fas fa-list-check"></i> Question Review</h3>
-                    <span class="review-summary">✅ ${correctCount} | ❌ ${wrongCount} | ⬜ ${unansweredCount}</span>
-                </div>`;
-
-            questionsHtml += result.questions.map((q, idx) => {
-                const isCorrect = q.userAnswer === q.correctOption;
-                const isUnanswered = q.userAnswer === null || q.userAnswer === undefined;
-                const userLetter = !isUnanswered ? String.fromCharCode(65 + q.userAnswer) : '—';
-                const correctLetter = String.fromCharCode(65 + q.correctOption);
-
-                let statusClass = 'wrong', statusText = '❌ Wrong';
-                if (isCorrect) { statusClass = 'correct'; statusText = '✅ Correct'; }
-                if (isUnanswered) { statusClass = 'unanswered'; statusText = '⬜ Unanswered'; }
-
-                let optionsHtml = '';
-                if (q.options && q.options.length) {
-                    optionsHtml = '<div class="options">';
-                    q.options.forEach((opt, optIdx) => {
-                        let cls = '';
-                        let icon = '';
-                        if (optIdx === q.correctOption) { cls = 'correct-answer'; icon = '✓'; }
-                        if (optIdx === q.userAnswer && optIdx !== q.correctOption) { cls = 'user-wrong'; icon = '✗'; }
-                        if (optIdx === q.userAnswer && optIdx === q.correctOption) { cls = 'correct-answer'; icon = '✓'; }
-                        optionsHtml += `<div class="option ${cls}"><span class="opt-icon">${icon}</span>${String.fromCharCode(65+optIdx)}. <span class="mathjax-process">${opt}</span></div>`;
-                    });
-                    optionsHtml += `</div>`;
-                    optionsHtml += `<div class="answer-row">Your answer: <strong class="${isCorrect ? 'correct' : isUnanswered ? 'unanswered' : 'wrong'}">${userLetter}</strong> | Correct: <strong class="correct">${correctLetter}</strong></div>`;
-                }
-
-                let explanationHtml = '';
-                if (q.explanation && q.explanation.trim()) {
-                    explanationHtml = `<div class="explanation"><i class="fas fa-info-circle"></i> <span class="mathjax-process">${q.explanation}</span></div>`;
-                }
-
-                return `<div class="question-review ${isCorrect ? 'correct' : isUnanswered ? 'unanswered' : 'wrong'}">
-                    <div class="question-header">
-                        <div class="question-text mathjax-process">${idx + 1}. ${q.text}</div>
-                        <span class="question-status ${statusClass}">${statusText}</span>
-                    </div>
-                    ${optionsHtml}
-                    ${explanationHtml}
-                </div>`;
-            }).join('');
-        } else {
-            questionsHtml = `<p style="color:var(--text-secondary);text-align:center;padding:16px;font-size:.85rem">📋 Detailed question review not available for this session.</p>`;
+                    <span class="review-summary">📋 Detailed review not available</span>
+                </div>
+                <p style="color:var(--text-secondary);text-align:center;padding:16px;font-size:.85rem">
+                    The detailed question review is only available immediately after completing your exam or test.
+                    <br><br>
+                    <a href="/app?page=exam" style="color:var(--primary-light);text-decoration:none;font-weight:600">
+                        <i class="fas fa-pen"></i> Take another exam
+                    </a>
+                    &nbsp;or&nbsp;
+                    <a href="/app?page=test" style="color:#a78bfa;text-decoration:none;font-weight:600">
+                        <i class="fas fa-flask"></i> Practice test
+                    </a>
+                </p>
+            `;
         }
 
         const html = `
@@ -485,19 +489,72 @@
             <div class="result-card">${questionsHtml}</div>
             
             <div class="action-buttons">
-                <a href="/exam" class="btn btn-primary"><i class="fas fa-pen"></i> Retake Exam</a>
-                <a href="/test" class="btn btn-test"><i class="fas fa-flask"></i> Retake Test</a>
-                <a href="/app" class="btn btn-outline"><i class="fas fa-home"></i> Dashboard</a>
+                <button class="btn btn-primary" onclick="window.location.href='/app?page=exam'"><i class="fas fa-pen"></i> Retake Exam</button>
+                <button class="btn btn-test" onclick="window.location.href='/app?page=test'"><i class="fas fa-flask"></i> Retake Test</button>
+                <button class="btn btn-outline" onclick="window.location.href='/app'"><i class="fas fa-home"></i> Dashboard</button>
             </div>
         `;
 
         document.getElementById('resultContent').innerHTML = html;
         document.getElementById('resultContent').style.display = 'block';
 
-        // Trigger MathJax
         if (window.MathJax && MathJax.typesetPromise) {
             MathJax.typesetPromise([document.getElementById('resultContent')]).catch(console.error);
         }
+    }
+
+    function buildQuestionsHtml(questions) {
+        const correctCount = questions.filter(q => q.userAnswer === q.correctOption).length;
+        const wrongCount = questions.filter(q => q.userAnswer !== null && q.userAnswer !== q.correctOption).length;
+        const unansweredCount = questions.filter(q => q.userAnswer === null || q.userAnswer === undefined).length;
+
+        let html = `
+            <div class="review-header">
+                <h3><i class="fas fa-list-check"></i> Question Review</h3>
+                <span class="review-summary">✅ ${correctCount} | ❌ ${wrongCount} | ⬜ ${unansweredCount}</span>
+            </div>`;
+
+        html += questions.map((q, idx) => {
+            const isCorrect = q.userAnswer === q.correctOption;
+            const isUnanswered = q.userAnswer === null || q.userAnswer === undefined;
+            const userLetter = !isUnanswered ? String.fromCharCode(65 + q.userAnswer) : '—';
+            const correctLetter = String.fromCharCode(65 + q.correctOption);
+
+            let statusClass = 'wrong', statusText = '❌ Wrong';
+            if (isCorrect) { statusClass = 'correct'; statusText = '✅ Correct'; }
+            if (isUnanswered) { statusClass = 'unanswered'; statusText = '⬜ Unanswered'; }
+
+            let optionsHtml = '';
+            if (q.options && q.options.length) {
+                optionsHtml = '<div class="options">';
+                q.options.forEach((opt, optIdx) => {
+                    let cls = '';
+                    let icon = '';
+                    if (optIdx === q.correctOption) { cls = 'correct-answer'; icon = '✓'; }
+                    if (optIdx === q.userAnswer && optIdx !== q.correctOption) { cls = 'user-wrong'; icon = '✗'; }
+                    if (optIdx === q.userAnswer && optIdx === q.correctOption) { cls = 'correct-answer'; icon = '✓'; }
+                    optionsHtml += `<div class="option ${cls}"><span class="opt-icon">${icon}</span>${String.fromCharCode(65+optIdx)}. <span class="mathjax-process">${opt}</span></div>`;
+                });
+                optionsHtml += `</div>`;
+                optionsHtml += `<div class="answer-row">Your answer: <strong class="${isCorrect ? 'correct' : isUnanswered ? 'unanswered' : 'wrong'}">${userLetter}</strong> | Correct: <strong class="correct">${correctLetter}</strong></div>`;
+            }
+
+            let explanationHtml = '';
+            if (q.explanation && q.explanation.trim()) {
+                explanationHtml = `<div class="explanation"><i class="fas fa-info-circle"></i> <span class="mathjax-process">${q.explanation}</span></div>`;
+            }
+
+            return `<div class="question-review ${isCorrect ? 'correct' : isUnanswered ? 'unanswered' : 'wrong'}">
+                <div class="question-header">
+                    <div class="question-text mathjax-process">${idx + 1}. ${q.text}</div>
+                    <span class="question-status ${statusClass}">${statusText}</span>
+                </div>
+                ${optionsHtml}
+                ${explanationHtml}
+            </div>`;
+        }).join('');
+
+        return html;
     }
 
     // ==================== INIT ====================
