@@ -2,7 +2,7 @@
 // SUBMIT MODULE - Results Page
 // ============================================
 
-import { apiFetch, $id, setText, escapeHtml, showToast, showLoading, hideLoading, getToken } from './utils.js';
+import { apiFetch, $id, setText, escapeHtml, showToast, showLoading, hideLoading, getToken, API_BASE } from './utils.js';
 
 const RESULT_STORAGE_KEY = 'lastExamResult';
 const RESULT_TIMESTAMP_KEY = 'lastResultTimestamp';
@@ -255,31 +255,31 @@ function displayResult(container, result) {
         <i class="fas ${isExam ? 'fa-file-alt' : 'fa-flask'}" style="color:${isExam ? 'var(--primary-light)' : '#a78bfa'}"></i>
         ${result.course || 'Results'}
       </div>
-      <div style="width:clamp(120px,20vw,150px);height:clamp(120px,20vw,150px);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 16px;font-size:clamp(2rem,3vw,2.8rem);font-weight:800;animation:popIn .5s ease .2s both;background:${percentage >= 70 ? 'rgba(16,185,129,.15)' : percentage >= 50 ? 'rgba(245,158,11,.15)' : 'rgba(239,68,68,.15)'};color:${percentage >= 70 ? 'var(--success)' : percentage >= 50 ? 'var(--warning)' : 'var(--danger)'};border:3px solid ${percentage >= 70 ? 'var(--success)' : percentage >= 50 ? 'var(--warning)' : 'var(--danger)'}">
+      <div style="width:clamp(120px,20vw,150px);height:clamp(120px,20vw,150px);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 16px;font-size:clamp(2rem,3vw,2.8rem);font-weight:800;background:${percentage >= 70 ? 'rgba(16,185,129,.15)' : percentage >= 50 ? 'rgba(245,158,11,.15)' : 'rgba(239,68,68,.15)'};color:${percentage >= 70 ? 'var(--success)' : percentage >= 50 ? 'var(--warning)' : 'var(--danger)'};border:3px solid ${percentage >= 70 ? 'var(--success)' : percentage >= 50 ? 'var(--warning)' : 'var(--danger)'}">
         ${percentage}%
         <span style="font-size:clamp(.75rem,1.2vw,.9rem);font-weight:600;margin-top:2px">Grade: ${grade}</span>
       </div>
       <div style="text-align:center;padding:16px;margin:12px 0;border-radius:12px;font-size:clamp(.8rem,1.2vw,.9rem);font-weight:500;line-height:1.5;background:${encClass === 'great' ? 'rgba(16,185,129,.1)' : encClass === 'good' ? 'rgba(245,158,11,.1)' : 'rgba(239,68,68,.1)'};color:${encClass === 'great' ? 'var(--success)' : encClass === 'good' ? 'var(--warning)' : 'var(--danger)'};border:1px solid ${encClass === 'great' ? 'rgba(16,185,129,.3)' : encClass === 'good' ? 'rgba(245,158,11,.3)' : 'rgba(239,68,68,.3)'}">${encMessage}</div>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,1.5vw,12px);margin:16px 0">
-        <div style="background:var(--bg);border-radius:12px;padding:clamp(12px,2vw,16px) 10px;text-align:center;border:1px solid var(--border);animation:slideUp .4s ease both;animation-delay:.3s">
+        <div style="background:var(--bg);border-radius:12px;padding:clamp(12px,2vw,16px) 10px;text-align:center;border:1px solid var(--border)">
           <div style="font-size:clamp(1.1rem,1.8vw,1.4rem);font-weight:800;color:var(--primary-light)">${result.correctCount || 0}/${result.totalQuestions || 0}</div>
           <div style="font-size:clamp(.62rem,1vw,.68rem);color:var(--text2);margin-top:4px">✅ Correct/Total</div>
         </div>
-        <div style="background:var(--bg);border-radius:12px;padding:clamp(12px,2vw,16px) 10px;text-align:center;border:1px solid var(--border);animation:slideUp .4s ease both;animation-delay:.4s">
+        <div style="background:var(--bg);border-radius:12px;padding:clamp(12px,2vw,16px) 10px;text-align:center;border:1px solid var(--border)">
           <div style="font-size:clamp(1.1rem,1.8vw,1.4rem);font-weight:800;color:var(--primary-light)">${timeString}</div>
           <div style="font-size:clamp(.62rem,1vw,.68rem);color:var(--text2);margin-top:4px">⏱️ Time Spent</div>
         </div>
-        <div style="background:var(--bg);border-radius:12px;padding:clamp(12px,2vw,16px) 10px;text-align:center;border:1px solid var(--border);animation:slideUp .4s ease both;animation-delay:.5s">
+        <div style="background:var(--bg);border-radius:12px;padding:clamp(12px,2vw,16px) 10px;text-align:center;border:1px solid var(--border)">
           <div style="font-size:clamp(1.1rem,1.8vw,1.4rem);font-weight:800;color:var(--primary-light)">${result.totalQuestions ? Math.round((result.correctCount / result.totalQuestions) * 100) : 0}%</div>
           <div style="font-size:clamp(.62rem,1vw,.68rem);color:var(--text2);margin-top:4px">📊 Accuracy</div>
         </div>
-        <div style="background:var(--bg);border-radius:12px;padding:clamp(12px,2vw,16px) 10px;text-align:center;border:1px solid var(--border);animation:slideUp .4s ease both;animation-delay:.6s">
+        <div style="background:var(--bg);border-radius:12px;padding:clamp(12px,2vw,16px) 10px;text-align:center;border:1px solid var(--border)">
           <div style="font-size:clamp(1.1rem,1.8vw,1.4rem);font-weight:800;color:var(--primary-light)">${isExam ? 'Exam' : 'Test'}</div>
           <div style="font-size:clamp(.62rem,1vw,.68rem);color:var(--text2);margin-top:4px">📋 Mode</div>
         </div>
       </div>
     </div>
-    <div style="background:var(--card);border-radius:20px;padding:clamp(16px,3vw,28px);margin-bottom:20px;border:1px solid var(--border);animation:fadeIn .4s ease">
+    <div style="background:var(--card);border-radius:20px;padding:clamp(16px,3vw,28px);margin-bottom:20px;border:1px solid var(--border)">
       ${questionsHtml}
     </div>
     <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:20px">
@@ -288,17 +288,6 @@ function displayResult(container, result) {
       <button class="btn btn-soft" onclick="window.showPage('dashboard')"><i class="fas fa-home"></i> Dashboard</button>
     </div>
   `;
-  
-  // Trigger animation for score circle
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes popIn {
-      0% { transform: scale(0.5); opacity: 0; }
-      70% { transform: scale(1.05); }
-      100% { transform: scale(1); opacity: 1; }
-    }
-  `;
-  container.appendChild(style);
 }
 
 // ==================== CLEAR RESULT ====================
@@ -312,6 +301,6 @@ export function clearResult() {
   if (content) showEmptyState(content);
 }
 
-// Expose to window
+// ==================== EXPOSE TO WINDOW ====================
 window.loadSubmitPage = loadSubmitPage;
 window.clearResult = clearResult;
