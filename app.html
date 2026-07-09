@@ -31,17 +31,17 @@
     .course-card .name{font-size:.65rem;color:var(--text-secondary);margin-top:2px}
     .course-card .badge-free{position:absolute;top:6px;right:6px;background:var(--success);color:#fff;font-size:.5rem;padding:2px 8px;border-radius:12px;font-weight:600}
     .course-card .badge-premium{position:absolute;top:6px;right:6px;background:var(--warning);color:#000;font-size:.5rem;padding:2px 8px;border-radius:12px;font-weight:600}
-    .semester-label{color:var(--text-secondary);font-size:.75rem;text-transform:uppercase;letter-spacing:1px;margin:16px 0 8px;font-weight:700} 
+    .semester-label{color:var(--text-secondary);font-size:.75rem;text-transform:uppercase;letter-spacing:1px;margin:16px 0 8px;font-weight:700}
     .entry-card{background:var(--card-2);border:2px solid var(--primary-light);border-radius:24px;padding:30px 20px;text-align:center}
     .entry-card .icon{font-size:3rem;margin-bottom:12px}
     .entry-card h1{font-size:1.2rem;color:var(--text)}
     .entry-card p{color:var(--text-secondary);font-size:.85rem;margin-top:4px}
     .stat-row{display:flex;justify-content:center;gap:12px;margin:16px 0;flex-wrap:wrap}
     .stat-badge{background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);padding:6px 14px;border-radius:20px;color:var(--primary-light);font-size:.78rem;display:flex;align-items:center;gap:5px}
-    .exam-container,.test-container{background:var(--card);border-radius:24px;padding:20px;border:1px solid var(--border);margin-top:12px}
-    .exam-header,.test-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:16px}
-    .exam-header .info h2,.test-header .info h2{font-size:1rem;color:var(--text)}
-    .exam-header .info p,.test-header .info p{font-size:.75rem;color:var(--text-secondary)}
+    .exam-container,.test-container,.study-quiz-container{background:var(--card);border-radius:24px;padding:20px;border:1px solid var(--border);margin-top:12px}
+    .exam-header,.test-header,.study-header-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:16px}
+    .exam-header .info h2,.test-header .info h2,.study-header-bar .info h2{font-size:1rem;color:var(--text)}
+    .exam-header .info p,.test-header .info p,.study-header-bar .info p{font-size:.75rem;color:var(--text-secondary)}
     .timer-box{background:var(--primary-light);color:#fff;padding:8px 18px;border-radius:40px;font-size:1.2rem;font-weight:700;font-family:'Courier New',monospace;min-width:70px;text-align:center;transition:all .3s}
     .timer-box.warning{background:var(--warning);color:#000;animation:pulse 1s infinite}
     .timer-box.danger{background:var(--danger);animation:pulse .5s infinite}
@@ -66,9 +66,9 @@
     .grid-btn:hover{background:var(--primary-light);color:#fff}
     .grid-btn.answered{background:var(--success);color:#fff}
     .grid-btn.current{background:var(--primary-light);color:#fff;box-shadow:0 0 8px rgba(59,130,246,.4)}
-    .exam-result-card,.test-result-card{background:var(--card);border-radius:24px;padding:24px;text-align:center;border:2px solid var(--success)}
-    .exam-result-card .big-score,.test-result-card .big-score{font-size:3rem;font-weight:800;color:var(--success)}
-    .exam-result-card .label,.test-result-card .label{color:var(--text-secondary);font-size:.85rem}
+    .exam-result-card,.test-result-card,.study-result-card{background:var(--card);border-radius:24px;padding:24px;text-align:center;border:2px solid var(--success)}
+    .exam-result-card .big-score,.test-result-card .big-score,.study-result-card .big-score{font-size:3rem;font-weight:800;color:var(--success)}
+    .exam-result-card .label,.test-result-card .label,.study-result-card .label{color:var(--text-secondary);font-size:.85rem}
     .study-header{text-align:center;padding:12px 0 16px}
     .study-header h1{font-size:1.3rem;display:flex;align-items:center;justify-content:center;gap:10px}
     .study-header h1 i{color:var(--study-green)}
@@ -127,7 +127,8 @@
     .setting-info p{font-size:.6rem;color:var(--text-secondary)}
     .refer-card{background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(239,68,68,.08));border-radius:12px;padding:12px 14px;border:2px dashed var(--warning);text-align:center}
     .refer-card h2{font-size:.9rem;margin-bottom:4px}
-    .refer-code{background:var(--bg);color:var(--warning);font-size:.85rem;font-weight:700;padding:4px 12px;border-radius:8px;display:inline-block;letter-spacing:1px;margin:4px 0;border:1px solid var(--warning);word-break:break-all}
+    .refer-code{background:var(--bg);color:var(--warning);font-size:.85rem;font-weight:700;padding:4px 12px;border-radius:8px;display:inline-block;letter-spacing:1px;margin:4px 0;border:1px solid var(--warning);word-break:break-all;cursor:pointer;user-select:all}
+    .refer-code:hover{background:var(--card-2)}
     .file-upload-area{border:2px dashed var(--border);border-radius:14px;padding:16px;text-align:center;cursor:pointer;transition:all .2s;background:var(--bg);margin-bottom:12px}
     .file-upload-area:hover{border-color:var(--primary-light);background:rgba(59,130,246,.05)}
     .file-upload-area i{font-size:1.8rem;color:var(--primary-light);margin-bottom:6px;display:block}
@@ -243,7 +244,13 @@
     .fullscreen-mode .section-card{margin-top:0!important}
     .page-content-only .hero{display:none!important}
     .page-content-only .network-strip{display:none!important}
-    .page-content-only .section-card.quick-actions{display:none!important}
+    .page-content-only .quick-actions{display:none!important}
+    .btn-loading .btn-text{display:none}
+    .btn-loading .spinner{display:inline-block}
+    .btn .spinner{display:none;width:18px;height:18px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite}
+    .quick-link .btn-loading .ico{animation:pulse 1s ease-in-out infinite}
+    .refer-code-copy{background:transparent;border:none;color:var(--text-secondary);font-size:.7rem;cursor:pointer;padding:2px 8px;border-radius:12px;transition:all .2s}
+    .refer-code-copy:hover{color:var(--success);background:rgba(16,185,129,.1)}
     .water-animation{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}
     .water-drop{position:absolute;background:rgba(59,130,246,.05);border-radius:50%;animation:ripple 4s ease-out infinite}
     .water-drop:nth-child(1){width:300px;height:300px;top:-150px;left:-100px;animation-delay:0s}
@@ -322,6 +329,14 @@
       <button class="icon-btn" onclick="toggleNotificationPopup()" aria-label="Notifications"><i class="fas fa-bell"></i><span class="badge" id="notifBadge">0</span></button>
     </div>
   </header>
+
+  <section class="network-strip">
+    <div>
+      <strong id="networkTitle">Welcome back 👋</strong>
+      <p id="networkMessage">Loading your dashboard...</p>
+    </div>
+    <div class="network-pill" id="networkPill">Connecting…</div>
+  </section>
 
   <!-- DASHBOARD SCREEN -->
   <div class="screen active" id="dashboardScreen">
@@ -541,14 +556,27 @@
     </div>
     
     <div id="studyQuizScreen" style="display:none">
-      <button class="back-btn" onclick="studyConfirmExitQuiz()"><i class="fas fa-arrow-left"></i> Exit Quiz</button>
-      <div class="study-header">
-        <h1 id="studyQuizTitle"><i class="fas fa-question-circle"></i> Practice Questions</h1>
-        <p id="studyQuizSubtitle">Answer the questions below</p>
-      </div>
-      <div class="quiz-container" id="studyQuizContainer">
-        <div class="quiz-overlay"><i class="fas fa-spinner"></i><span>Loading questions...</span></div>
-        <div class="loading-spin"><i class="fas fa-spinner fa-spin"></i> Loading questions...</div>
+      <div class="study-quiz-container">
+        <div class="study-header-bar">
+          <div class="info">
+            <h2 id="studyQuizTitle">Course</h2>
+            <p id="studyQuizSubtitle">Questions • Topic</p>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <button class="btn btn-danger" onclick="studyQuit()" style="padding:8px 14px;font-size:.75rem"><i class="fas fa-times"></i> Quit</button>
+          </div>
+        </div>
+        <div class="question-card">
+          <div class="q-counter" id="studyQCounter">Question 1 of 0</div>
+          <div class="q-text" id="studyQText"></div>
+          <div class="options-area" id="studyOptionsArea"></div>
+          <div class="nav-buttons">
+            <button class="btn btn-soft" id="studyPrevBtn" onclick="studyPrevQuestion()" disabled style="flex:1"><i class="fas fa-chevron-left"></i> Prev</button>
+            <button class="btn btn-primary" id="studyNextBtn" onclick="studyNextQuestion()" style="flex:1;background:var(--study-green);">Next <i class="fas fa-chevron-right"></i></button>
+            <button class="btn btn-success" id="studySubmitBtn" onclick="studySubmit()" style="display:none;flex:1"><i class="fas fa-check-circle"></i> Submit</button>
+          </div>
+        </div>
+        <div class="question-grid" id="studyQuestionGrid"></div>
       </div>
     </div>
   </div>
@@ -589,8 +617,8 @@
 
         <div class="refer-card">
           <h2><i class="fas fa-gift"></i> Referral Link</h2>
-          <div class="refer-code" id="referralLink">---</div>
-          <button class="btn btn-outline" onclick="copyReferral()" style="margin-top:4px;padding:6px 14px;font-size:.7rem"><i class="fas fa-copy"></i> Copy</button>
+          <div class="refer-code" id="referralLink" onclick="copyReferral()">---</div>
+          <button class="btn btn-outline" onclick="copyReferral()" style="margin-top:4px;padding:6px 14px;font-size:.7rem"><i class="fas fa-copy"></i> Copy Link</button>
           <p style="color:var(--text-secondary);font-size:.65rem;margin-top:4px"><span id="referralCount">0</span> joined</p>
         </div>
 
@@ -745,7 +773,6 @@ const setText = (id, v) => { const el = $(id); if (el) el.textContent = v; };
 const escapeHtml = str => String(str||'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 
 let isPageLoading = false;
-let loadingTimeout = null;
 
 function showLoading(text = 'Loading...') {
   $('loadingText').textContent = text;
@@ -789,12 +816,33 @@ function shuffleArray(arr) {
   return s;
 }
 
-function navigateTo(url, target = '_self') {
+function setButtonLoading(btn, loading) {
+  if (!btn) return;
+  if (loading) {
+    btn.disabled = true;
+    btn.dataset.original = btn.innerHTML;
+    btn.innerHTML = '<span class="spinner"></span><span class="btn-text">Loading...</span>';
+    btn.classList.add('btn-loading');
+  } else {
+    btn.disabled = false;
+    btn.classList.remove('btn-loading');
+    if (btn.dataset.original) {
+      btn.innerHTML = btn.dataset.original;
+    }
+  }
+}
+
+function navigateTo(url, target = '_self', element = null) {
   if (isPageLoading) return;
   if (url === '#') return;
   if (url === window.location.pathname) return;
+  
+  if (element) {
+    setButtonLoading(element, true);
+  }
+  
   isPageLoading = true;
-  showLoading('Loading...');
+  
   setTimeout(() => {
     if (target === '_self') {
       window.location.href = url;
@@ -842,8 +890,8 @@ let currentPage = 'dashboard';
 function showPage(page) {
   if (currentPage === page) return;
   if ((page === 'dashboard' || page === 'profile') && 
-      (examState?.session || testState?.session)) {
-    if (!confirm('You have an active exam/test. Are you sure you want to leave? Your progress will be lost.')) {
+      (examState?.session || testState?.session || studyState?.session)) {
+    if (!confirm('You have an active exam/test/study session. Are you sure you want to leave? Your progress will be lost.')) {
       return;
     }
   }
@@ -1258,7 +1306,7 @@ window.examOpenEntry = async function(code) {
           <span class="stat-badge">⏱️ ${c.examSettings.timeLimit} min</span>
           <span class="stat-badge">📦 ${c.questionCounts.exam} Available</span>
         </div>
-        <button class="btn btn-primary" onclick="examStart()" style="width:100%;padding:14px;background:var(--brand-gradient);color:#fff;border:none;border-radius:14px;font-weight:700;font-size:1rem;cursor:pointer" ${!c.examReady ? 'disabled' : ''}>
+        <button class="btn btn-primary" onclick="examStart(this)" style="width:100%;padding:14px;background:var(--brand-gradient);color:#fff;border:none;border-radius:14px;font-weight:700;font-size:1rem;cursor:pointer" ${!c.examReady ? 'disabled' : ''}>
           <i class="fas fa-play-circle"></i> ${c.examReady ? 'START EXAM' : 'NOT ENOUGH QUESTIONS'}
         </button>
         <p style="color:var(--text-secondary);font-size:.75rem;margin-top:8px">${c.examReady ? '✅ Ready' : `⚠️ Need ${c.examSettings.numberOfQuestions - c.questionCounts.exam} more`}</p>
@@ -1268,11 +1316,10 @@ window.examOpenEntry = async function(code) {
     container.innerHTML = '<div class="empty-state">Error loading course</div>';
   }
 };
-window.examStart = async function() {
-  const btn = document.querySelector('#examEntryContent .btn');
+window.examStart = async function(btn) {
+  if (!btn) btn = document.querySelector('#examEntryContent .btn');
   if (!btn) return;
-  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
-  btn.disabled = true;
+  setButtonLoading(btn, true);
   try {
     const courseData = await apiFetch(`/admin/course-detail/${encodeURIComponent(examState.course)}`);
     const timeLimit = courseData.course?.examSettings?.timeLimit || 30;
@@ -1289,8 +1336,7 @@ window.examStart = async function() {
     
     if (!data.success || !data.questions || !data.questions.length) {
       alert('No questions available. Please try again later.');
-      btn.innerHTML = '<i class="fas fa-play-circle"></i> START EXAM';
-      btn.disabled = false;
+      setButtonLoading(btn, false);
       return;
     }
     
@@ -1319,10 +1365,10 @@ window.examStart = async function() {
     examStartTimer();
     examRenderGrid();
     examStartAutoSave();
+    setButtonLoading(btn, false);
   } catch (e) {
     alert('Failed to load exam: ' + e.message);
-    btn.innerHTML = '<i class="fas fa-play-circle"></i> START EXAM';
-    btn.disabled = false;
+    setButtonLoading(btn, false);
   }
 };
 
@@ -1642,7 +1688,7 @@ window.testOpenEntry = async function(code) {
           <span class="stat-badge">⏱️ ${c.testSettings.timeLimit} min</span>
           <span class="stat-badge">📦 ${c.questionCounts.test} Available</span>
         </div>
-        <button class="btn btn-test" onclick="testStart()" style="width:100%;padding:14px;border:none;border-radius:14px;font-weight:700;font-size:1rem;cursor:pointer" ${!c.testReady ? 'disabled' : ''}>
+        <button class="btn btn-test" onclick="testStart(this)" style="width:100%;padding:14px;border:none;border-radius:14px;font-weight:700;font-size:1rem;cursor:pointer" ${!c.testReady ? 'disabled' : ''}>
           <i class="fas fa-play-circle"></i> ${c.testReady ? 'START TEST' : 'NOT ENOUGH QUESTIONS'}
         </button>
         <p style="color:var(--text-secondary);font-size:.75rem;margin-top:8px">${c.testReady ? '✅ Ready' : `⚠️ Need ${c.testSettings.numberOfQuestions - c.questionCounts.test} more`}</p>
@@ -1652,11 +1698,10 @@ window.testOpenEntry = async function(code) {
     container.innerHTML = '<div class="empty-state">Error loading course</div>';
   }
 };
-window.testStart = async function() {
-  const btn = document.querySelector('#testEntryContent .btn');
+window.testStart = async function(btn) {
+  if (!btn) btn = document.querySelector('#testEntryContent .btn');
   if (!btn) return;
-  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
-  btn.disabled = true;
+  setButtonLoading(btn, true);
   try {
     const courseData = await apiFetch(`/admin/course-detail/${encodeURIComponent(testState.course)}`);
     const timeLimit = courseData.course?.testSettings?.timeLimit || 15;
@@ -1671,8 +1716,7 @@ window.testStart = async function() {
     });
     if (!data.success || !data.questions || !data.questions.length) {
       alert('No questions available. Please try again later.');
-      btn.innerHTML = '<i class="fas fa-play-circle"></i> START TEST';
-      btn.disabled = false;
+      setButtonLoading(btn, false);
       return;
     }
     const questions = data.questions;
@@ -1700,10 +1744,10 @@ window.testStart = async function() {
     testStartTimer();
     testRenderGrid();
     testStartAutoSave();
+    setButtonLoading(btn, false);
   } catch (e) {
     alert('Failed to load test: ' + e.message);
-    btn.innerHTML = '<i class="fas fa-play-circle"></i> START TEST';
-    btn.disabled = false;
+    setButtonLoading(btn, false);
   }
 };
 
@@ -1861,6 +1905,9 @@ function testQuit() {
 }
 window.testQuit = testQuit;
 
+// ============================================
+// STUDY MODE - Backend Powered
+// ============================================
 const STUDY_COURSES = [
   { id: 'chm102', code: 'CHM 102', name: 'Organic Chemistry II', icon: '🧪', topics: [
     { id: 'chm102_t1', title: 'Introduction to Organic Chemistry', description: 'Historical survey, Electronic theory, Nomenclature' },
@@ -1911,7 +1958,9 @@ let studyState = {
   answered: false,
   totalQuestions: 0,
   answeredQuestions: 0,
-  isLoading: false
+  isLoading: false,
+  session: null,
+  isSubmitting: false
 };
 
 async function loadStudyData() {
@@ -1949,10 +1998,20 @@ function studySelectCourse(courseId) {
         <div class="topic-title">${index + 1}. ${topic.title}</div>
         <div class="topic-desc">${topic.description}</div>
       </div>
-      <span class="topic-count">📝 5 Qs</span>
+      <span class="topic-count" id="topicCount_${topic.id}">📝 0 Qs</span>
       <span class="topic-arrow"><i class="fas fa-chevron-right"></i></span>
     </div>
   `).join('');
+  
+  // Load question counts for each topic
+  course.topics.forEach(async (topic) => {
+    try {
+      const data = await apiFetch(`/study/questions/${topic.id}`);
+      const count = data.success ? (data.questions?.length || 0) : 0;
+      const countEl = document.getElementById(`topicCount_${topic.id}`);
+      if (countEl) countEl.textContent = `📝 ${count} Qs`;
+    } catch (e) {}
+  });
   
   $('studyCourseScreen').style.display = 'none';
   $('studyTopicsScreen').style.display = 'block';
@@ -1981,29 +2040,46 @@ async function studySelectTopic(topicId) {
   
   try {
     const data = await apiFetch(`/study/questions/${topicId}`);
+    let questions = [];
     if (data.success && data.questions && data.questions.length > 0) {
-      studyState.questions = data.questions.map(q => ({
+      questions = data.questions.map(q => ({
         ...q,
         options: q.options || ['A', 'B', 'C', 'D'],
         correctOption: q.correct || 0,
         explanation: q.explanation || 'No explanation provided.'
       }));
     } else {
-      studyState.questions = [
-        { question: `What is the main concept in ${topic.title}?`, options: ['Option A', 'Option B', 'Option C', 'Option D'], correctOption: 0, explanation: 'This is a sample explanation.' },
-        { question: 'Which of the following is correct?', options: ['Option A', 'Option B', 'Option C', 'Option D'], correctOption: 1, explanation: 'Option B is the correct answer.' },
-        { question: 'What is the best approach to study this topic?', options: ['Approach A', 'Approach B', 'Approach C', 'Approach D'], correctOption: 2, explanation: 'Approach C is recommended.' }
-      ];
+      questions = [];
     }
     
+    if (questions.length === 0) {
+      container.innerHTML = `
+        <div class="empty-state">
+          <i class="fas fa-question-circle"></i>
+          <h3>No Questions Available</h3>
+          <p>This topic doesn't have any questions yet. Check back later!</p>
+          <button class="btn btn-primary" onclick="studyGoToCourses()" style="margin-top:10px;">Back to Courses</button>
+        </div>
+      `;
+      container.classList.remove('loading');
+      return;
+    }
+    
+    studyState.questions = questions;
     studyState.currentIndex = 0;
     studyState.score = 0;
     studyState.answered = false;
-    studyState.totalQuestions = studyState.questions.length;
+    studyState.totalQuestions = questions.length;
     studyState.answeredQuestions = 0;
+    studyState.session = {
+      questions: questions,
+      answers: new Array(questions.length).fill(null),
+      currentIndex: 0,
+      timer: null
+    };
     
     $('studyQuizTitle').textContent = `${topic.title}`;
-    $('studyQuizSubtitle').textContent = `${studyState.questions.length} questions • ${course.code}`;
+    $('studyQuizSubtitle').textContent = `${questions.length} questions • ${course.code}`;
     
     $('studyTopicsScreen').style.display = 'none';
     $('studyQuizScreen').style.display = 'block';
@@ -2036,79 +2112,97 @@ function studyRenderQuestion() {
   const letters = ['A', 'B', 'C', 'D'];
   
   let dropdownOptions = studyState.questions.map((_, i) => {
-    const isAnswered = studyState.questions[i].userAnswer !== undefined && studyState.questions[i].userAnswer !== null;
+    const isAnswered = studyState.session.answers[i] !== null;
     return `<option value="${i}" ${i === studyState.currentIndex ? 'selected' : ''}>Q${i + 1} ${isAnswered ? '✅' : '⬜'}</option>`;
   }).join('');
   
   let optionsHtml = q.options.map((opt, i) => {
     let extraClass = '';
-    if (studyState.answered) {
+    const isAnswered = studyState.session.answers[studyState.currentIndex] !== null;
+    if (isAnswered) {
       if (i === q.correctOption) extraClass = 'correct';
-      if (i === q.userAnswer && i !== q.correctOption) extraClass = 'wrong';
-      if (i === q.correctOption && q.userAnswer !== q.correctOption) extraClass = 'reveal-correct';
+      if (i === studyState.session.answers[studyState.currentIndex] && i !== q.correctOption) extraClass = 'wrong';
+      if (i === q.correctOption && studyState.session.answers[studyState.currentIndex] !== q.correctOption) extraClass = 'reveal-correct';
     }
     return `
-      <div class="opt ${extraClass} ${studyState.answered ? 'disabled' : ''}" onclick="${!studyState.answered ? `studySelectOption(${i})` : ''}">
+      <div class="opt ${extraClass} ${isAnswered ? 'disabled' : ''}" onclick="${!isAnswered ? `studySelectOption(${i})` : ''}">
         <span class="prefix">${letters[i]}.</span>
         <span>${opt}</span>
       </div>
     `;
   }).join('');
   
+  const isLast = studyState.currentIndex === studyState.questions.length - 1;
+  
   container.innerHTML = `
-    <div class="quiz-header">
-      <span class="q-counter">Question ${studyState.currentIndex + 1} of ${studyState.questions.length}</span>
-      <span class="q-total">✅ ${studyState.answeredQuestions}/${studyState.totalQuestions} answered</span>
-    </div>
-    <div class="quiz-progress-bar">
-      <div class="fill" style="width: ${(studyState.answeredQuestions / studyState.totalQuestions) * 100}%"></div>
-    </div>
-    
-    <div class="question-nav-dropdown">
-      <select id="studyQuestionSelect" onchange="studyJumpToQuestion(parseInt(this.value))">
-        ${dropdownOptions}
-      </select>
-      <div class="status-indicators">
-        <span><span class="dot current"></span> Current</span>
-        <span><span class="dot answered"></span> Answered</span>
-        <span><span class="dot unanswered"></span> Unanswered</span>
+    <div class="study-quiz-container">
+      <div class="study-header-bar">
+        <div class="info">
+          <h2 id="studyQuizTitle">${studyState.currentTopic?.title || 'Practice'}</h2>
+          <p id="studyQuizSubtitle">${studyState.questions.length} questions • ${studyState.selectedCourse?.code || ''}</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <button class="btn btn-danger" onclick="studyQuit()" style="padding:8px 14px;font-size:.75rem"><i class="fas fa-times"></i> Quit</button>
+        </div>
       </div>
-    </div>
-    
-    <div class="question-text">${q.question}</div>
-    <div class="options" id="studyOptionsContainer">
-      ${optionsHtml}
-    </div>
-    <div class="explanation-box" id="studyExplanationBox">
-      <div class="result" id="studyResultText"></div>
-      <div class="label"><i class="fas fa-info-circle"></i> Explanation</div>
-      <div class="text" id="studyExplanationText"></div>
-    </div>
-    <div class="quiz-nav">
-      <button class="btn btn-secondary" onclick="studyPrevQuestion()" ${studyState.currentIndex === 0 ? 'disabled' : ''}>
-        <i class="fas fa-chevron-left"></i> Prev
-      </button>
-      <button class="btn btn-primary" onclick="studyNextQuestion()" style="background:var(--study-green);">
-        ${studyState.currentIndex === studyState.questions.length - 1 ? 'Finish <i class="fas fa-flag-checkered"></i>' : 'Next <i class="fas fa-chevron-right"></i>'}
-      </button>
+      <div class="question-card">
+        <div class="q-counter">Question ${studyState.currentIndex + 1} of ${studyState.questions.length}</div>
+        <div class="question-nav-dropdown">
+          <select id="studyQuestionSelect" onchange="studyJumpToQuestion(parseInt(this.value))">
+            ${dropdownOptions}
+          </select>
+          <div class="status-indicators">
+            <span><span class="dot current"></span> Current</span>
+            <span><span class="dot answered"></span> Answered</span>
+            <span><span class="dot unanswered"></span> Unanswered</span>
+          </div>
+        </div>
+        <div class="q-text">${q.question}</div>
+        <div class="options-area" id="studyOptionsContainer">
+          ${optionsHtml}
+        </div>
+        <div class="explanation-box" id="studyExplanationBox">
+          <div class="result" id="studyResultText"></div>
+          <div class="label"><i class="fas fa-info-circle"></i> Explanation</div>
+          <div class="text" id="studyExplanationText"></div>
+        </div>
+        <div class="nav-buttons">
+          <button class="btn btn-soft" onclick="studyPrevQuestion()" ${studyState.currentIndex === 0 ? 'disabled' : ''} style="flex:1">
+            <i class="fas fa-chevron-left"></i> Prev
+          </button>
+          <button class="btn btn-primary" onclick="studyNextQuestion()" style="flex:1;background:var(--study-green);">
+            ${isLast ? 'Finish <i class="fas fa-flag-checkered"></i>' : 'Next <i class="fas fa-chevron-right"></i>'}
+          </button>
+        </div>
+        <div class="question-grid" id="studyQuestionGrid"></div>
+      </div>
     </div>
   `;
   
-  studyState.answered = false;
+  studyRenderStudyGrid();
   const select = $('studyQuestionSelect');
   if (select) select.value = studyState.currentIndex;
 }
 
+function studyRenderStudyGrid() {
+  const grid = $('studyQuestionGrid');
+  if (!grid) return;
+  grid.innerHTML = studyState.questions.map((_, i) => `
+    <div class="grid-btn ${studyState.session.answers[i] !== null ? 'answered' : ''} ${i === studyState.currentIndex ? 'current' : ''}" 
+         onclick="studyJumpToQuestion(${i})">${i + 1}</div>
+  `).join('');
+}
+
 function studySelectOption(index) {
-  if (studyState.answered || studyState.isLoading) return;
+  if (studyState.session.answers[studyState.currentIndex] !== null || studyState.isLoading) return;
   
   const q = studyState.questions[studyState.currentIndex];
   const isCorrect = index === q.correctOption;
-  q.userAnswer = index;
-  studyState.answered = true;
+  studyState.session.answers[studyState.currentIndex] = index;
   if (isCorrect) studyState.score++;
   studyState.answeredQuestions++;
   
+  // Update options display
   const options = document.querySelectorAll('#studyOptionsContainer .opt');
   options.forEach((el, i) => {
     el.classList.add('disabled');
@@ -2117,6 +2211,7 @@ function studySelectOption(index) {
     if (i === index && isCorrect) el.classList.add('correct');
   });
   
+  // Show explanation
   const box = $('studyExplanationBox');
   const resultText = $('studyResultText');
   const explanationText = $('studyExplanationText');
@@ -2131,11 +2226,7 @@ function studySelectOption(index) {
   explanationText.textContent = q.explanation || 'No explanation provided.';
   box.classList.add('show');
   
-  const progress = document.querySelector('.quiz-progress-bar .fill');
-  if (progress) progress.style.width = `${(studyState.answeredQuestions / studyState.totalQuestions) * 100}%`;
-  const totalEl = document.querySelector('.q-total');
-  if (totalEl) totalEl.textContent = `✅ ${studyState.answeredQuestions}/${studyState.totalQuestions} answered`;
-  
+  // Update dropdown
   const select = $('studyQuestionSelect');
   if (select) {
     const opts = select.querySelectorAll('option');
@@ -2144,13 +2235,14 @@ function studySelectOption(index) {
       if (val === studyState.currentIndex) opt.textContent = `Q${val + 1} ✅`;
     });
   }
+  
+  studyRenderStudyGrid();
 }
 window.studySelectOption = studySelectOption;
 
 function studyJumpToQuestion(index) {
   if (index >= 0 && index < studyState.questions.length) {
     studyState.currentIndex = index;
-    studyState.answered = studyState.questions[index].userAnswer !== undefined && studyState.questions[index].userAnswer !== null;
     studyRenderQuestion();
   }
 }
@@ -2159,7 +2251,6 @@ window.studyJumpToQuestion = studyJumpToQuestion;
 function studyPrevQuestion() {
   if (studyState.currentIndex > 0) {
     studyState.currentIndex--;
-    studyState.answered = studyState.questions[studyState.currentIndex].userAnswer !== undefined && studyState.questions[studyState.currentIndex].userAnswer !== null;
     studyRenderQuestion();
   }
 }
@@ -2168,7 +2259,6 @@ window.studyPrevQuestion = studyPrevQuestion;
 function studyNextQuestion() {
   if (studyState.currentIndex < studyState.questions.length - 1) {
     studyState.currentIndex++;
-    studyState.answered = studyState.questions[studyState.currentIndex].userAnswer !== undefined && studyState.questions[studyState.currentIndex].userAnswer !== null;
     studyRenderQuestion();
   } else {
     studyShowQuizComplete();
@@ -2180,30 +2270,46 @@ function studyShowQuizComplete() {
   const container = $('studyQuizContainer');
   const percentage = studyState.totalQuestions > 0 ? Math.round((studyState.score / studyState.totalQuestions) * 100) : 0;
   let grade = percentage >= 90 ? 'Excellent! 🏆' : percentage >= 70 ? 'Good Job! 👍' : percentage >= 50 ? 'Keep Practicing! 📚' : 'Review More! 💡';
+  
   container.innerHTML = `
-    <div class="quiz-score">
-      <div class="score-number">${percentage}%</div>
-      <div class="score-label">${grade}</div>
-      <div class="score-detail">You got ${studyState.score} out of ${studyState.totalQuestions} questions correct</div>
-      <div style="margin-top:12px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
-        <button class="btn btn-primary" onclick="studyRetryTopic()" style="background:var(--study-green);"><i class="fas fa-redo"></i> Retry</button>
-        <button class="btn btn-secondary" onclick="studyGoToCourses()"><i class="fas fa-list"></i> Back to Courses</button>
+    <div class="study-result-card">
+      <div class="big-score">${percentage}%</div>
+      <div class="label">${grade}</div>
+      <div class="label" style="margin-top:4px;">You got ${studyState.score} out of ${studyState.totalQuestions} questions correct</div>
+      <div style="margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <button class="btn btn-primary" onclick="studyRetryTopic()" style="background:var(--study-green);border:none;padding:12px 20px;border-radius:14px;font-weight:700;cursor:pointer"><i class="fas fa-redo"></i> Retry</button>
+        <button class="btn btn-soft" onclick="studyGoToCourses()" style="border:1px solid var(--border);padding:12px 20px;border-radius:14px;font-weight:700;cursor:pointer;background:transparent;color:var(--text)">Back to Courses</button>
+        <button class="btn btn-soft" onclick="window.location.reload()" style="border:1px solid var(--border);padding:12px 20px;border-radius:14px;font-weight:700;cursor:pointer;background:transparent;color:var(--text)">Dashboard</button>
       </div>
     </div>
   `;
+  studyState.session = null;
 }
 
-function studyRetryTopic() { if (studyState.currentTopic) studySelectTopic(studyState.currentTopic.id); }
+function studyRetryTopic() {
+  if (studyState.currentTopic) {
+    studySelectTopic(studyState.currentTopic.id);
+  }
+}
 window.studyRetryTopic = studyRetryTopic;
 
-function studyConfirmExitQuiz() {
-  if (studyState.answeredQuestions > 0 && studyState.answeredQuestions < studyState.totalQuestions) {
-    if (!confirm(`You have answered ${studyState.answeredQuestions} of ${studyState.totalQuestions} questions. Are you sure you want to exit?`)) return;
+function studyQuit() {
+  if (!studyState.session) return;
+  if (confirm('Quit study session? Your progress will be lost.')) {
+    studyState.session = null;
+    window.location.reload();
   }
-  studyGoToCourses();
 }
-window.studyConfirmExitQuiz = studyConfirmExitQuiz;
+window.studyQuit = studyQuit;
 
+function studySubmit() {
+  studyShowQuizComplete();
+}
+window.studySubmit = studySubmit;
+
+// ============================================
+// PROFILE
+// ============================================
 let profileUserData = null;
 let profilePicBase64 = '';
 
@@ -2384,7 +2490,17 @@ function copyReferral() {
   const link = $('referralLink').textContent;
   if (link && link !== '---') {
     navigator.clipboard.writeText('https://oau-exam-cbt-practice.vercel.app/register?ref=' + link)
-      .then(() => profileAlert('success', 'Link copied!'));
+      .then(() => profileAlert('success', 'Link copied!'))
+      .catch(() => {
+        // Fallback: select and copy
+        const el = $('referralLink');
+        const range = document.createRange();
+        range.selectNode(el);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand('copy');
+        profileAlert('success', 'Link copied!');
+      });
   }
 }
 window.copyReferral = copyReferral;
@@ -2518,7 +2634,7 @@ async function initApp() {
   function resetInactivityTimer() {
     clearTimeout(inactivityTimer);
     inactivityTimer = setTimeout(() => {
-      if (!examState.session && !testState.session) {
+      if (!examState.session && !testState.session && !studyState.session) {
         showLoading('Session timeout. Reloading...');
         setTimeout(() => location.reload(), 1500);
       }
