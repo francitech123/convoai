@@ -8,13 +8,13 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="/styles.css">
   <style>
-    /* Additional page-specific styles that couldn't fit in master CSS */
+    /* Additional page-specific styles */
     .page-title{text-align:center;margin-bottom:24px}
     .page-title h1{font-size:clamp(1.2rem,4vw,1.8rem);display:flex;align-items:center;justify-content:center;gap:10px}
     .page-title h1 i{color:var(--primary-light)}
     
-    .level-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(8px,2vw,12px);margin-bottom:20px}
-    @media(max-width:480px){.level-grid{grid-template-columns:repeat(2,1fr)}}
+    .level-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(8px,2vw,12px);margin-bottom:20px}
+    @media(min-width:500px){.level-grid{grid-template-columns:repeat(4,1fr)}}
     .level-card{background:var(--card);border:2px solid var(--border);border-radius:14px;padding:clamp(14px,2.5vw,20px) clamp(8px,1.5vw,12px);text-align:center;cursor:pointer;transition:all .2s}
     .level-card:hover:not(.locked){border-color:var(--primary-light);background:var(--card-2)}
     .level-card.locked{opacity:.4;cursor:not-allowed}
@@ -24,9 +24,9 @@
     .level-card .badge-ok{background:var(--success);color:#fff}
     .level-card .badge-wait{background:var(--warning);color:#000}
     
-    .courses-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(8px,2vw,12px);margin-bottom:16px}
-    @media(max-width:768px){.courses-grid{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:480px){.courses-grid{grid-template-columns:1fr 1fr}}
+    .courses-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(8px,2vw,12px);margin-bottom:16px}
+    @media(min-width:500px){.courses-grid{grid-template-columns:repeat(3,1fr)}}
+    @media(min-width:768px){.courses-grid{grid-template-columns:repeat(4,1fr)}}
     .course-card{background:var(--card);border-radius:16px;padding:16px 12px;border:1px solid var(--border);cursor:pointer;transition:all .2s;text-align:center;position:relative}
     .course-card:hover:not(.locked){border-color:var(--primary-light);transform:translateY(-3px);background:var(--card-2)}
     .course-card.locked{opacity:.6;cursor:not-allowed}
@@ -106,69 +106,64 @@
     .study-topic-item:hover .topic-arrow{color:var(--study-green);transform:translateX(4px)}
     .study-topic-item .topic-count{font-size:clamp(.45rem,2.5vw,.55rem);color:var(--study-green);background:rgba(13,148,136,.1);padding:2px 10px;border-radius:20px;flex-shrink:0;margin-right:8px}
     
-    .profile-header-card{background:var(--brand-gradient);background-size:200% 200%;animation:gradientShift 4s ease infinite;border-radius:24px;padding:30px 20px;text-align:center;margin-bottom:20px;position:relative;overflow:hidden;box-shadow:var(--shadow);grid-column:1/-1}
+    .profile-header-card{background:var(--brand-gradient);background-size:200% 200%;animation:gradientShift 4s ease infinite;border-radius:24px;padding:24px 20px;text-align:center;margin-bottom:20px;position:relative;overflow:hidden;box-shadow:var(--shadow);grid-column:1/-1}
     @keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
     .profile-header-card::after{content:'';position:absolute;top:-30%;right:-20%;width:150px;height:150px;background:rgba(255,255,255,.05);border-radius:50%}
-    .avatar-wrapper{position:relative;display:inline-block;margin-bottom:12px;z-index:1}
-    .avatar-large{width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:2.5rem;overflow:hidden;border:4px solid rgba(255,255,255,.4);margin:0 auto}
+    .avatar-wrapper{position:relative;display:inline-block;margin-bottom:10px;z-index:1}
+    .avatar-large{width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:2rem;overflow:hidden;border:4px solid rgba(255,255,255,.4);margin:0 auto}
     .avatar-large img{width:100%;height:100%;object-fit:cover}
-    .profile-name{font-size:1.4rem;font-weight:700;color:#fff;z-index:1;position:relative}
-    .profile-username{color:rgba(255,255,255,.8);font-size:.85rem;z-index:1;position:relative}
-    .profile-meta{display:flex;justify-content:center;gap:16px;margin-top:10px;flex-wrap:wrap;z-index:1;position:relative}
-    .profile-meta span{background:rgba(255,255,255,.15);padding:4px 12px;border-radius:20px;font-size:.7rem;color:#fff;font-weight:500}
+    .profile-name{font-size:1.2rem;font-weight:700;color:#fff;z-index:1;position:relative}
+    .profile-username{color:rgba(255,255,255,.8);font-size:.8rem;z-index:1;position:relative}
+    .profile-meta{display:flex;justify-content:center;gap:12px;margin-top:8px;flex-wrap:wrap;z-index:1;position:relative}
+    .profile-meta span{background:rgba(255,255,255,.15);padding:3px 10px;border-radius:20px;font-size:.65rem;color:#fff;font-weight:500}
     
-    .dashboard-grid{display:grid;grid-template-columns:1fr;gap:20px}
+    .dashboard-grid{display:grid;grid-template-columns:1fr;gap:16px}
     @media(min-width:768px){.dashboard-grid{grid-template-columns:repeat(2,1fr)}}
     @media(min-width:1024px){.dashboard-grid{grid-template-columns:repeat(3,1fr)}}
     
-    .stats-mini{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px}
-    .stat-mini{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:14px 10px;text-align:center;transition:all .2s}
+    .stats-mini{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:12px}
+    .stat-mini{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:10px 8px;text-align:center;transition:all .2s}
     .stat-mini:hover{transform:translateY(-2px);border-color:var(--primary-light)}
-    .stat-mini .num{font-size:1.4rem;font-weight:800;color:var(--primary-light)}
-    .stat-mini .lbl{font-size:.65rem;color:var(--text-secondary);margin-top:3px}
+    .stat-mini .num{font-size:1.2rem;font-weight:800;color:var(--primary-light)}
+    .stat-mini .lbl{font-size:.6rem;color:var(--text-secondary);margin-top:2px}
     
-    .scores-container{max-height:300px;overflow-y:auto;margin-top:8px;border-radius:12px}
+    .scores-container{max-height:250px;overflow-y:auto;margin-top:6px;border-radius:12px}
     .scores-container::-webkit-scrollbar{width:4px}
     .scores-container::-webkit-scrollbar-track{background:var(--border);border-radius:4px}
     .scores-container::-webkit-scrollbar-thumb{background:var(--primary-light);border-radius:4px}
-    .score-item{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:var(--bg);border-radius:10px;margin-bottom:6px;font-size:.82rem;border:1px solid var(--border);color:var(--text);transition:all .2s}
+    .score-item{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:var(--bg);border-radius:8px;margin-bottom:4px;font-size:.75rem;border:1px solid var(--border);color:var(--text);transition:all .2s}
     .score-item:hover{transform:translateX(2px);border-color:var(--primary-light)}
-    .badge-exam{background:#dbeafe;color:#1e40af;padding:2px 8px;border-radius:12px;font-size:.6rem;font-weight:600}
-    .badge-test{background:#ede9fe;color:#6d28d9;padding:2px 8px;border-radius:12px;font-size:.6rem;font-weight:600}
+    .badge-exam{background:#dbeafe;color:#1e40af;padding:2px 8px;border-radius:12px;font-size:.55rem;font-weight:600}
+    .badge-test{background:#ede9fe;color:#6d28d9;padding:2px 8px;border-radius:12px;font-size:.55rem;font-weight:600}
     
-    .form-group{margin-bottom:14px}
-    .form-group label{display:block;margin-bottom:5px;font-weight:600;font-size:.78rem;color:var(--text-secondary)}
-    .form-group input,.form-group select{width:100%;padding:12px 14px;border:2px solid var(--border);border-radius:12px;font-size:.88rem;background:var(--bg);color:var(--text);transition:all .2s;font-family:inherit}
+    .form-group{margin-bottom:12px}
+    .form-group label{display:block;margin-bottom:4px;font-weight:600;font-size:.72rem;color:var(--text-secondary)}
+    .form-group input,.form-group select{width:100%;padding:10px 12px;border:2px solid var(--border);border-radius:10px;font-size:.82rem;background:var(--bg);color:var(--text);transition:all .2s;font-family:inherit}
     .form-group input:focus,.form-group select:focus{outline:none;border-color:var(--primary-light)}
     
-    .alert{padding:12px 16px;border-radius:12px;margin-bottom:14px;display:none;font-size:.82rem;font-weight:500}
+    .alert{padding:10px 14px;border-radius:10px;margin-bottom:12px;display:none;font-size:.78rem;font-weight:500}
     .alert-success{background:rgba(16,185,129,.15);color:var(--success);border:1px solid rgba(16,185,129,.3)}
     .alert-error{background:rgba(239,68,68,.15);color:var(--danger);border:1px solid rgba(239,68,68,.3)}
     .alert.show{display:block}
     
-    .toggle-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0}
-    .toggle{width:44px;height:24px;background:var(--border);border-radius:12px;cursor:pointer;position:relative;transition:all .2s}
-    .toggle.active{background:var(--primary-light)}
-    .toggle::after{content:'';position:absolute;top:2px;left:2px;width:20px;height:20px;background:#fff;border-radius:50%;transition:all .2s}
-    .toggle.active::after{left:22px}
-    
-    .settings-grid{display:flex;flex-direction:column;gap:12px}
-    .setting-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)}
+    .settings-grid{display:flex;flex-direction:column;gap:10px}
+    .setting-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)}
     .setting-item:last-child{border-bottom:none}
-    .setting-info h4{font-size:.85rem;color:var(--text);margin-bottom:2px}
-    .setting-info p{font-size:.65rem;color:var(--text-secondary)}
+    .setting-info h4{font-size:.8rem;color:var(--text);margin-bottom:1px}
+    .setting-info p{font-size:.6rem;color:var(--text-secondary)}
     
-    .refer-card{background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(239,68,68,.1));border-radius:16px;padding:20px;border:2px dashed var(--warning);text-align:center}
-    .refer-code{background:var(--bg);color:var(--warning);font-size:1rem;font-weight:700;padding:8px 16px;border-radius:10px;display:inline-block;letter-spacing:2px;margin:8px 0;border:2px solid var(--warning);word-break:break-all}
+    .refer-card{background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(239,68,68,.08));border-radius:12px;padding:12px 14px;border:2px dashed var(--warning);text-align:center}
+    .refer-card h2{font-size:.9rem;margin-bottom:4px}
+    .refer-code{background:var(--bg);color:var(--warning);font-size:.85rem;font-weight:700;padding:4px 12px;border-radius:8px;display:inline-block;letter-spacing:1px;margin:4px 0;border:1px solid var(--warning);word-break:break-all}
     
-    .file-upload-area{border:2px dashed var(--border);border-radius:16px;padding:24px;text-align:center;cursor:pointer;transition:all .2s;background:var(--bg);margin-bottom:14px}
+    .file-upload-area{border:2px dashed var(--border);border-radius:14px;padding:16px;text-align:center;cursor:pointer;transition:all .2s;background:var(--bg);margin-bottom:12px}
     .file-upload-area:hover{border-color:var(--primary-light);background:rgba(59,130,246,.05)}
-    .file-upload-area i{font-size:2rem;color:var(--primary-light);margin-bottom:8px;display:block}
-    .file-upload-area p{color:var(--text-secondary);font-size:.78rem}
+    .file-upload-area i{font-size:1.8rem;color:var(--primary-light);margin-bottom:6px;display:block}
+    .file-upload-area p{color:var(--text-secondary);font-size:.72rem}
     .file-upload-area input{display:none}
-    .preview-img{max-width:120px;max-height:120px;border-radius:12px;margin:10px auto 0;display:none;object-fit:cover}
+    .preview-img{max-width:100px;max-height:100px;border-radius:10px;margin:8px auto 0;display:none;object-fit:cover}
     
-    .back-nav{display:inline-flex;align-items:center;gap:6px;color:var(--primary-light);cursor:pointer;font-weight:600;font-size:.85rem;margin-bottom:16px;background:none;border:none}
+    .back-nav{display:inline-flex;align-items:center;gap:6px;color:var(--primary-light);cursor:pointer;font-weight:600;font-size:.8rem;margin-bottom:12px;background:none;border:none}
     .back-nav:hover{color:var(--primary);gap:10px}
     
     .page-section{display:none;animation:fadeIn .3s ease}
@@ -187,14 +182,12 @@
     .notification-item .time{font-size:.6rem;color:var(--text-secondary);margin-top:4px}
     .no-notifications{text-align:center;padding:30px;color:var(--text-secondary);font-size:.8rem}
     
-    .achievement-item{display:flex;align-items:center;gap:12px;padding:12px;background:var(--bg);border-radius:14px;margin-bottom:8px;border:1px solid var(--border);transition:all .2s}
+    .achievement-item{display:flex;align-items:center;gap:10px;padding:10px;background:var(--bg);border-radius:12px;margin-bottom:6px;border:1px solid var(--border);transition:all .2s}
     .achievement-item:hover{transform:translateX(4px);border-color:var(--warning)}
-    .achievement-icon{font-size:1.8rem;flex-shrink:0}
+    .achievement-icon{font-size:1.5rem;flex-shrink:0}
     .achievement-info{flex:1}
-    .achievement-title{font-weight:600;font-size:.85rem;color:var(--text)}
-    .achievement-desc{font-size:.7rem;color:var(--text-secondary)}
-    
-    .study-topic-item .topic-progress-badge{font-size:clamp(.45rem,2.5vw,.6rem);color:var(--text-secondary);background:var(--bg);padding:2px 8px;border-radius:20px;display:inline-block;margin-top:4px}
+    .achievement-title{font-weight:600;font-size:.8rem;color:var(--text)}
+    .achievement-desc{font-size:.65rem;color:var(--text-secondary)}
     
     .calc-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.7);z-index:300;justify-content:center;align-items:center;padding:20px}
     .calc-overlay.show{display:flex}
@@ -223,12 +216,24 @@
     .toast .toast-icon.error{color:var(--danger)}
     .toast .toast-icon.info{color:var(--primary-light)}
     
-    .restore-banner{background:rgba(34,197,94,.1);border:1px solid var(--success);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:12px;display:none;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
-    .restore-banner.show{display:flex}
-    .restore-banner p{color:var(--text-secondary);font-size:.8rem;margin:0}
+    .study-topic-item .topic-spinner{display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:1.2rem;color:var(--study-green)}
+    .study-topic-item.loading .topic-spinner{display:block}
+    .study-topic-item.loading .topic-info{opacity:.3}
+    .study-topic-item.loading .topic-arrow{opacity:.3}
     
-    .topic-item .progress-indicator{font-size:.55rem;color:var(--text-secondary);background:var(--bg);padding:2px 10px;border-radius:12px;margin-right:8px}
-    .topic-item .progress-indicator .done{color:var(--success)}
+    .study-course-card .card-spinner{display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:1.2rem;color:var(--study-green)}
+    .study-course-card.loading .card-spinner{display:block}
+    .study-course-card.loading .card-content{opacity:.3}
+    
+    .level-card .badge-ok{background:var(--success);color:#fff}
+    .level-card .badge-wait{background:var(--warning);color:#000}
+    
+    .info-banner{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:10px 16px;margin:12px 0;text-align:center}
+    .info-banner p{color:var(--success);font-size:.75rem}
+    
+    .upgrade-banner{background:linear-gradient(135deg,#f59e0b,#ef4444);border-radius:12px;padding:14px 16px;margin:12px 0;text-align:center;cursor:pointer;transition:transform .2s}
+    .upgrade-banner:hover{transform:scale(1.02)}
+    .upgrade-banner p{color:#fff;font-weight:600;font-size:.85rem}
     
     .question-nav-dropdown{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
     .question-nav-dropdown select{padding:8px 12px;background:var(--bg);border:2px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:.85rem;font-family:inherit;cursor:pointer;transition:all .2s;min-width:80px}
@@ -250,32 +255,34 @@
     .explanation-box .result{font-weight:700;font-size:clamp(.75rem,3.5vw,.85rem);margin-bottom:6px}
     .explanation-box .result.correct{color:var(--success)}
     .explanation-box .result.wrong{color:var(--danger)}
-    .explanation-box .ai-explain-btn{margin-top:10px;background:linear-gradient(135deg,#7c3aed,#a78bfa);color:#fff;border:none;padding:8px 16px;border-radius:30px;cursor:pointer;font-size:.75rem;font-weight:600;transition:all .2s;display:inline-flex;align-items:center;gap:6px;font-family:inherit}
-    .explanation-box .ai-explain-btn:hover{transform:scale(1.02);box-shadow:0 4px 15px rgba(124,58,237,.3)}
     
     .quiz-score{text-align:center;padding:16px;background:var(--bg);border-radius:14px;border:1px solid var(--border);margin-top:14px}
     .quiz-score .score-number{font-size:clamp(1.8rem,8vw,2.5rem);font-weight:800;color:var(--study-green)}
     .quiz-score .score-label{font-size:clamp(.6rem,3vw,.75rem);color:var(--text-secondary)}
     .quiz-score .score-detail{font-size:clamp(.55rem,2.5vw,.7rem);color:var(--text-secondary);margin-top:4px}
     
-    .study-topic-item .topic-spinner{display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:1.2rem;color:var(--study-green)}
-    .study-topic-item.loading .topic-spinner{display:block}
-    .study-topic-item.loading .topic-info{opacity:.3}
-    .study-topic-item.loading .topic-arrow{opacity:.3}
+    .see-more-link{text-align:center;margin-top:12px;margin-bottom:8px}
+    .see-more-link button{background:none;border:none;color:var(--primary-light);font-size:.8rem;cursor:pointer;text-decoration:underline;padding:6px 12px;font-weight:500}
     
-    .study-course-card .card-spinner{display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:1.2rem;color:var(--study-green)}
-    .study-course-card.loading .card-spinner{display:block}
-    .study-course-card.loading .card-content{opacity:.3}
+    .faculty-grid-simple{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px}
+    .faculty-tag-simple{background:var(--card-2);border:1px solid var(--border);border-radius:10px;padding:8px 6px;text-align:center;cursor:pointer;transition:all .2s;text-decoration:none;color:var(--text);font-size:.7rem;font-weight:600}
+    .faculty-tag-simple:hover{transform:translateY(-2px);border-color:var(--primary-light);background:var(--card)}
     
-    .level-card .badge-ok{background:var(--success);color:#fff}
-    .level-card .badge-wait{background:var(--warning);color:#000}
+    .leaderboard-mini{display:flex;justify-content:center;align-items:flex-end;gap:16px;padding:10px 0;flex-wrap:wrap}
+    .lb-item{display:flex;flex-direction:column;align-items:center;text-align:center;padding:10px 14px;border-radius:12px;background:var(--bg);border:1px solid var(--border);min-width:70px;transition:all .2s}
+    .lb-item:hover{transform:translateY(-4px);border-color:var(--primary-light)}
+    .lb-item .rank{font-size:1.1rem;font-weight:800;margin-bottom:2px}
+    .lb-item .rank.gold{color:#f59e0b}
+    .lb-item .rank.silver{color:#94a3b8}
+    .lb-item .rank.bronze{color:#b45309}
+    .lb-item .avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.7rem;color:#fff;margin-bottom:4px}
+    .lb-item .avatar.gold-bg{background:linear-gradient(135deg,#f59e0b,#d97706)}
+    .lb-item .avatar.silver-bg{background:linear-gradient(135deg,#94a3b8,#64748b)}
+    .lb-item .avatar.bronze-bg{background:linear-gradient(135deg,#b45309,#92400e)}
+    .lb-item .name{font-size:.65rem;font-weight:600;color:var(--text)}
+    .lb-item .score{font-size:.6rem;color:var(--accent);font-weight:700}
     
-    .info-banner{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:10px 16px;margin:12px 0;text-align:center}
-    .info-banner p{color:var(--success);font-size:.75rem}
-    
-    .upgrade-banner{background:linear-gradient(135deg,#f59e0b,#ef4444);border-radius:12px;padding:14px 16px;margin:12px 0;text-align:center;cursor:pointer;transition:transform .2s}
-    .upgrade-banner:hover{transform:scale(1.02)}
-    .upgrade-banner p{color:#fff;font-weight:600;font-size:.85rem}
+    .hidden{display:none!important}
     
     .water-animation{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}
     .water-drop{position:absolute;background:rgba(59,130,246,.05);border-radius:50%;animation:ripple 4s ease-out infinite}
@@ -297,16 +304,20 @@
     @keyframes floatMedium{0%{transform:translateX(0) translateY(0) rotate(0deg)}50%{transform:translateX(20px) translateY(-20px) rotate(10deg)}100%{transform:translateX(0) translateY(0) rotate(0deg)}}
     @keyframes floatFast{0%{transform:translateY(0) rotate(0deg) scale(1)}50%{transform:translateY(-15px) rotate(-5deg) scale(1.05)}100%{transform:translateY(0) rotate(0deg) scale(1)}}
     
-    .footer-links{display:flex;justify-content:center;gap:20px;padding:20px 0;flex-wrap:wrap;border-top:1px solid var(--border);margin-top:20px}
-    .footer-links a{color:var(--text-secondary);text-decoration:none;font-size:.78rem}
-    .copyright{text-align:center;color:var(--text-secondary);font-size:.7rem;padding-bottom:10px}
+    .fullscreen-mode .bottom-nav{display:none!important}
+    .fullscreen-mode .topbar-actions{display:none!important}
+    .fullscreen-mode .chat-fab{display:none!important}
+    .fullscreen-mode .network-strip{display:none!important}
+    .fullscreen-mode .hero{display:none!important}
+    .fullscreen-mode .page-title{display:none!important}
+    .fullscreen-mode .footer-links{display:none!important}
+    .fullscreen-mode .copyright{display:none!important}
+    .fullscreen-mode .section-card{margin-top:0!important}
   </style>
 </head>
 <body>
 
-<!-- ============================================
-     LOADING OVERLAY
-     ============================================ -->
+<!-- LOADING OVERLAY -->
 <div class="loading-overlay" id="loadingOverlay">
   <svg class="loading-crest" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
     <circle cx="100" cy="100" r="90" fill="none" stroke="#3b82f6" stroke-width="3.5"/>
@@ -327,20 +338,16 @@
   <div class="loading-text" id="loadingText">Loading your dashboard...</div>
 </div>
 
-<!-- ============================================
-     TOAST NOTIFICATION
-     ============================================ -->
+<!-- TOAST NOTIFICATION -->
 <div class="toast" id="toast">
   <span class="toast-icon" id="toastIcon"><i class="fas fa-info-circle"></i></span>
   <span id="toastMessage">Loading...</span>
 </div>
 
-<!-- ============================================
-     MAIN APP
-     ============================================ -->
+<!-- MAIN APP -->
 <div class="page" id="appContainer">
   
-  <!-- ===== TOPBAR ===== -->
+  <!-- TOPBAR -->
   <header class="topbar">
     <div class="brand">
       <div class="brand-logo">
@@ -371,57 +378,54 @@
     </div>
   </header>
 
-  <!-- ===== NETWORK STRIP ===== -->
-  <section class="network-strip">
-    <div>
-      <strong id="networkTitle">Welcome back 👋</strong>
-      <p id="networkMessage">Loading your dashboard...</p>
+  <!-- HERO CARD - Merged Welcome + Stats -->
+  <section class="hero">
+    <div class="hero-head">
+      <div>
+        <h2 id="heroTitle">Welcome back, <span id="heroName">Student</span> 👋</h2>
+        <p id="heroSubtitle">Keep your OAU practice streak alive. Track exams, tests, course progress, and more from one place.</p>
+      </div>
+      <div class="hero-tag" id="heroTag">100L • 200L</div>
     </div>
-    <div class="network-pill" id="networkPill">Connecting…</div>
+    <div class="stats-grid">
+      <div class="stat-card"><span>Courses active</span><strong id="statCourses">—</strong></div>
+      <div class="stat-card"><span>Average score</span><strong id="statAvg">—</strong></div>
+      <div class="stat-card"><span>Tests + exams</span><strong id="statAttempts">—</strong></div>
+      <div class="stat-card"><span>Current streak</span><strong id="statStreak">—</strong></div>
+    </div>
   </section>
 
-  <!-- ============================================
-       DASHBOARD SCREEN
-       ============================================ -->
+  <!-- QUICK ACTIONS -->
+  <section class="section-card">
+    <div class="section-head"><h3>Quick actions</h3><a onclick="showPage('profile')">Open profile</a></div>
+    <div class="quick-grid">
+      <div class="quick-link" onclick="navigateTo('/submit')"><div class="ico"><i class="fas fa-file-alt"></i></div><span>Results</span></div>
+      <div class="quick-link" onclick="navigateTo('/ai')"><div class="ico"><i class="fas fa-robot"></i></div><span>AI</span></div>
+      <div class="quick-link" onclick="navigateTo('/faq')"><div class="ico"><i class="fas fa-question-circle"></i></div><span>FAQ</span></div>
+      <div class="quick-link" onclick="navigateTo('/chat')"><div class="ico"><i class="fas fa-headset"></i></div><span>Support</span></div>
+    </div>
+  </section>
+
+  <!-- DASHBOARD SCREEN -->
   <div class="screen active" id="dashboardScreen">
-    <section class="hero">
-      <div class="hero-head">
-        <div>
-          <h2 id="heroTitle">Your OAU study dashboard</h2>
-          <p id="heroSubtitle">Track exams, tests, course progress, and more from one place.</p>
-        </div>
-        <div class="hero-tag" id="heroTag">100L • 200L</div>
-      </div>
-      <div class="stats-grid">
-        <div class="stat-card"><span>Courses active</span><strong id="statCourses">—</strong></div>
-        <div class="stat-card"><span>Average score</span><strong id="statAvg">—</strong></div>
-        <div class="stat-card"><span>Tests + exams</span><strong id="statAttempts">—</strong></div>
-        <div class="stat-card"><span>Current streak</span><strong id="statStreak">—</strong></div>
-      </div>
-    </section>
-
-    <section class="section-card">
-      <div class="section-head"><h3>Quick actions</h3><a onclick="showPage('profile')">Open profile</a></div>
-      <div class="quick-grid">
-        <div class="quick-link" onclick="showPage('study')"><div class="ico"><i class="fas fa-book-open"></i></div><span>Study mode</span></div>
-        <div class="quick-link" onclick="showPage('test')"><div class="ico"><i class="fas fa-flask"></i></div><span>Start test</span></div>
-        <div class="quick-link" onclick="showPage('exam')"><div class="ico"><i class="fas fa-pen"></i></div><span>Mock exam</span></div>
-        <div class="quick-link" onclick="showPage('study')"><div class="ico"><i class="fas fa-robot"></i></div><span>Study AI</span></div>
-      </div>
-    </section>
-
     <section class="main-grid">
       <div class="left-stack">
         <div class="section-card">
           <div class="section-head"><h3>📚 Available Faculties</h3><a onclick="showPage('exam')">View all courses</a></div>
-          <div class="faculty-grid" id="facultyGrid"></div>
+          <div class="faculty-grid-simple" id="facultyGrid"></div>
+        </div>
+
+        <!-- MINI LEADERBOARD -->
+        <div class="section-card">
+          <div class="section-head"><h3>🏆 Top Students</h3><a onclick="navigateTo('/leaderboard')">View full leaderboard</a></div>
+          <div id="miniLeaderboard"><div class="loading-spin"><i class="fas fa-spinner"></i></div></div>
         </div>
 
         <div class="section-card ai-box">
-          <div class="section-head" style="margin-bottom:8px"><h3>🤖 Study AI</h3><a onclick="showPage('study')">Open AI</a></div>
+          <div class="section-head" style="margin-bottom:8px"><h3>🤖 Study AI</h3><a onclick="navigateTo('/ai')">Open AI</a></div>
           <p id="aiBoxText">Ask for explanations, break down difficult questions, and revise faster with AI support built into your dashboard.</p>
           <div style="display:flex;gap:10px;flex-wrap:wrap">
-            <button class="btn btn-primary btn-sm" onclick="showPage('study')"><i class="fas fa-robot"></i> Open Study AI</button>
+            <button class="btn btn-primary btn-sm" onclick="navigateTo('/ai')"><i class="fas fa-robot"></i> Open Study AI</button>
             <button class="btn btn-soft btn-sm" onclick="showPage('study')">Open Study Mode</button>
           </div>
         </div>
@@ -462,15 +466,14 @@
     </section>
   </div>
 
-  <!-- ============================================
-       EXAM SCREEN
-       ============================================ -->
+  <!-- EXAM SCREEN -->
   <div class="screen" id="examScreen">
     <div class="page-title"><h1><i class="fas fa-pen"></i> Exam Mode</h1></div>
     
     <div id="examFacultyScreen">
-      <h3 style="margin:16px 0 8px;color:var(--text)"><i class="fas fa-building"></i> Select Faculty</h3>
-      <div id="examFacultyGrid" class="faculty-grid"><div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading...</p></div></div>
+      <h3 style="margin:16px 0 8px;color:var(--text)">Select Faculty</h3>
+      <div id="examFacultyGrid" class="faculty-grid-simple"><div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading...</p></div></div>
+      <div class="see-more-link" id="examSeeMoreLink"><button onclick="examToggleFaculties()"><i class="fas fa-chevron-down"></i> See More</button></div>
     </div>
     
     <div id="examLevelScreen" style="display:none">
@@ -516,21 +519,16 @@
         <div class="question-grid" id="examQuestionGrid"></div>
       </div>
     </div>
-    
-    <div id="examResultScreen" style="display:none">
-      <div id="examResultContent"></div>
-    </div>
   </div>
 
-  <!-- ============================================
-       TEST SCREEN
-       ============================================ -->
+  <!-- TEST SCREEN -->
   <div class="screen" id="testScreen">
     <div class="page-title"><h1><i class="fas fa-flask"></i> Test Mode</h1></div>
     
     <div id="testFacultyScreen">
-      <h3 style="margin:16px 0 8px;color:var(--text)"><i class="fas fa-building"></i> Select Faculty</h3>
-      <div id="testFacultyGrid" class="faculty-grid"><div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading...</p></div></div>
+      <h3 style="margin:16px 0 8px;color:var(--text)">Select Faculty</h3>
+      <div id="testFacultyGrid" class="faculty-grid-simple"><div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading...</p></div></div>
+      <div class="see-more-link" id="testSeeMoreLink"><button onclick="testToggleFaculties()"><i class="fas fa-chevron-down"></i> See More</button></div>
     </div>
     
     <div id="testLevelScreen" style="display:none">
@@ -576,15 +574,9 @@
         <div class="question-grid" id="testQuestionGrid"></div>
       </div>
     </div>
-    
-    <div id="testResultScreen" style="display:none">
-      <div id="testResultContent"></div>
-    </div>
   </div>
 
-  <!-- ============================================
-       STUDY SCREEN
-       ============================================ -->
+  <!-- STUDY SCREEN -->
   <div class="screen" id="studyScreen">
     <div class="study-header">
       <h1><i class="fas fa-graduation-cap"></i> Study Mode</h1>
@@ -608,13 +600,6 @@
     
     <div id="studyQuizScreen" style="display:none">
       <button class="back-btn" onclick="studyConfirmExitQuiz()"><i class="fas fa-arrow-left"></i> Exit Quiz</button>
-      <div class="restore-banner" id="studyRestoreBanner">
-        <p><i class="fas fa-history"></i> You have saved progress for this topic. Continue where you left off?</p>
-        <div style="display:flex;gap:8px;">
-          <button class="btn btn-success btn-sm" onclick="studyRestoreProgress()"><i class="fas fa-play"></i> Continue</button>
-          <button class="btn btn-danger btn-sm" onclick="studyClearProgress()"><i class="fas fa-times"></i> Start Fresh</button>
-        </div>
-      </div>
       <div class="study-header">
         <h1 id="studyQuizTitle"><i class="fas fa-question-circle"></i> Practice Questions</h1>
         <p id="studyQuizSubtitle">Answer the questions below</p>
@@ -626,9 +611,7 @@
     </div>
   </div>
 
-  <!-- ============================================
-       PROFILE SCREEN
-       ============================================ -->
+  <!-- PROFILE SCREEN -->
   <div class="screen" id="profileScreen">
     <div class="page-section active" id="profileMainPage">
       <div class="profile-header-card">
@@ -648,123 +631,133 @@
       <div class="alert alert-error" id="profileErrorAlert"></div>
 
       <div class="dashboard-grid">
-        <div class="card">
-          <h2><i class="fas fa-chart-line"></i> Quick Stats</h2>
-          <div class="stats-mini">
-            <div class="stat-mini"><div class="num" id="quickExams">0</div><div class="lbl">📝 Exams</div></div>
-            <div class="stat-mini"><div class="num" id="quickTests">0</div><div class="lbl">🧪 Tests</div></div>
-            <div class="stat-mini"><div class="num" id="quickStreak">0</div><div class="lbl">🔥 Streak</div></div>
-            <div class="stat-mini"><div class="num" id="quickAvg">0%</div><div class="lbl">📊 Avg Score</div></div>
-          </div>
-          <button class="btn btn-primary" onclick="profileShowPage('profileEditPage')"><i class="fas fa-user-edit"></i> Edit Profile</button>
-          <button class="btn btn-outline" onclick="profileShowPage('profileGoalsPage')"><i class="fas fa-bullseye"></i> Study Goals</button>
-          <button class="btn btn-outline" onclick="profileShowPage('profileSettingsPage')"><i class="fas fa-cog"></i> Settings</button>
-        </div>
-
+        <!-- Achievements Card -->
         <div class="card">
           <h2><i class="fas fa-trophy"></i> Achievements</h2>
-          <div id="achievementsList"><p style="color:var(--text-secondary);text-align:center">Loading...</p></div>
-        </div>
-
-        <div class="card">
-          <h2><i class="fas fa-chart-bar"></i> Recent Scores</h2>
-          <div class="scores-container">
-            <div id="scoresList"><p style="color:var(--text-secondary);text-align:center">Loading...</p></div>
+          <div class="scores-container" id="achievementsList">
+            <p style="color:var(--text-secondary);text-align:center">Loading...</p>
           </div>
         </div>
 
-        <div class="refer-card">
-          <h2><i class="fas fa-gift"></i> Your Referral Link</h2>
-          <div class="refer-code" id="referralLink">---</div>
-          <button class="btn btn-outline" onclick="copyReferral()" style="margin-top:8px"><i class="fas fa-copy"></i> Copy Link</button>
-          <p style="color:var(--text-secondary);font-size:.7rem;margin-top:8px"><span id="referralCount">0</span> people joined</p>
+        <!-- Recent Scores Card -->
+        <div class="card">
+          <h2><i class="fas fa-chart-bar"></i> Recent Scores</h2>
+          <div class="scores-container" id="scoresList">
+            <p style="color:var(--text-secondary);text-align:center">Loading...</p>
+          </div>
         </div>
 
+        <!-- Referral Card - Reduced size -->
+        <div class="refer-card">
+          <h2><i class="fas fa-gift"></i> Referral Link</h2>
+          <div class="refer-code" id="referralLink">---</div>
+          <button class="btn btn-outline" onclick="copyReferral()" style="margin-top:4px;padding:6px 14px;font-size:.7rem"><i class="fas fa-copy"></i> Copy</button>
+          <p style="color:var(--text-secondary);font-size:.65rem;margin-top:4px"><span id="referralCount">0</span> joined</p>
+        </div>
+
+        <!-- Settings & Account -->
         <div class="card">
-          <h2><i class="fas fa-exclamation-triangle" style="color:var(--danger)"></i> Account</h2>
-          <button class="btn btn-danger" onclick="deleteAccount()"><i class="fas fa-trash"></i> Delete My Account</button>
-          <button class="btn btn-logout" onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+          <h2><i class="fas fa-cog"></i> Settings</h2>
+          <button class="btn btn-primary" onclick="profileShowPage('profileEditPage')" style="margin-bottom:6px"><i class="fas fa-user-edit"></i> Edit Profile</button>
+          <button class="btn btn-outline" onclick="profileShowPage('profileGoalsPage')" style="margin-bottom:6px"><i class="fas fa-bullseye"></i> Study Goals</button>
+          <button class="btn btn-outline" onclick="profileShowPage('profileSettingsPage')" style="margin-bottom:6px"><i class="fas fa-cog"></i> App Settings</button>
+          <button class="btn btn-danger" onclick="deleteAccount()" style="margin-top:6px"><i class="fas fa-trash"></i> Delete Account</button>
+          <button class="btn btn-logout" onclick="logoutUser()" style="margin-top:6px"><i class="fas fa-sign-out-alt"></i> Logout</button>
         </div>
       </div>
     </div>
 
     <div class="page-section" id="profileEditPage" style="display:none">
-      <button class="back-nav" onclick="profileShowPage('profileMainPage')"><i class="fas fa-arrow-left"></i> Back to Profile</button>
+      <button class="back-nav" onclick="profileShowPage('profileMainPage')"><i class="fas fa-arrow-left"></i> Back</button>
       <div class="card">
         <h2><i class="fas fa-camera"></i> Profile Picture</h2>
         <div class="file-upload-area" onclick="document.getElementById('profilePicInput').click()">
           <i class="fas fa-cloud-upload-alt"></i>
-          <p>Click to upload a new profile picture</p>
-          <p style="font-size:.7rem;margin-top:4px">JPG, PNG or GIF (max 2MB)</p>
+          <p>Click to upload</p>
           <input type="file" id="profilePicInput" accept="image/*" onchange="previewProfilePic(event)">
         </div>
         <img id="profilePreviewImg" class="preview-img" alt="Preview">
-        <button class="btn btn-primary" id="btnUploadPic" onclick="uploadProfilePic()"><i class="fas fa-upload"></i> Upload Picture</button>
+        <button class="btn btn-primary" id="btnUploadPic" onclick="uploadProfilePic()"><i class="fas fa-upload"></i> Upload</button>
       </div>
       <div class="card">
         <h2><i class="fas fa-user-edit"></i> Edit Details</h2>
-        <div class="form-group"><label>Full Name</label><input type="text" id="editName" placeholder="Enter your full name"></div>
-        <div class="form-group"><label>Email</label><input type="email" id="editEmail" placeholder="you@example.com"></div>
-        <div class="form-group"><label>Faculty</label><input type="text" id="editFaculty" placeholder="e.g., Science"></div>
-        <div class="form-group"><label>Department</label><input type="text" id="editDepartment" placeholder="e.g., Computer Science"></div>
+        <div class="form-group"><label>Full Name</label><input type="text" id="editName"></div>
+        <div class="form-group"><label>Email</label><input type="email" id="editEmail"></div>
+        <div class="form-group"><label>Faculty</label><input type="text" id="editFaculty"></div>
+        <div class="form-group"><label>Department</label><input type="text" id="editDepartment"></div>
         <div class="form-group"><label>Level</label><select id="editLevel"><option value="100">100 Level</option><option value="200">200 Level</option><option value="300">300 Level</option><option value="400">400 Level</option><option value="500">500 Level</option><option value="600">600 Level</option></select></div>
-        <button class="btn btn-primary" onclick="updateProfile()"><i class="fas fa-save"></i> Save Changes</button>
+        <button class="btn btn-primary" onclick="updateProfile()"><i class="fas fa-save"></i> Save</button>
       </div>
     </div>
 
     <div class="page-section" id="profileGoalsPage" style="display:none">
-      <button class="back-nav" onclick="profileShowPage('profileMainPage')"><i class="fas fa-arrow-left"></i> Back to Profile</button>
+      <button class="back-nav" onclick="profileShowPage('profileMainPage')"><i class="fas fa-arrow-left"></i> Back</button>
       <div class="card">
         <h2><i class="fas fa-bullseye"></i> Study Goals</h2>
-        <div class="form-group"><label>Daily Question Target</label><input type="number" id="goalDailyQuestions" placeholder="e.g., 50" min="0"></div>
-        <div class="form-group"><label>Weekly Exam Target</label><input type="number" id="goalWeeklyExams" placeholder="e.g., 5" min="0"></div>
-        <div class="form-group"><label>Target Score (%)</label><input type="number" id="goalTargetScore" placeholder="e.g., 70" min="0" max="100"></div>
-        <button class="btn btn-primary" onclick="saveStudyGoals()"><i class="fas fa-save"></i> Save Goals</button>
+        <div class="form-group"><label>Daily Questions</label><input type="number" id="goalDailyQuestions" min="0"></div>
+        <div class="form-group"><label>Weekly Exams</label><input type="number" id="goalWeeklyExams" min="0"></div>
+        <div class="form-group"><label>Target Score (%)</label><input type="number" id="goalTargetScore" min="0" max="100"></div>
+        <button class="btn btn-primary" onclick="saveStudyGoals()"><i class="fas fa-save"></i> Save</button>
       </div>
     </div>
 
     <div class="page-section" id="profileSettingsPage" style="display:none">
-      <button class="back-nav" onclick="profileShowPage('profileMainPage')"><i class="fas fa-arrow-left"></i> Back to Profile</button>
+      <button class="back-nav" onclick="profileShowPage('profileMainPage')"><i class="fas fa-arrow-left"></i> Back</button>
       <div class="card">
-        <h2><i class="fas fa-cog"></i> App Settings</h2>
+        <h2><i class="fas fa-cog"></i> Settings</h2>
         <div class="settings-grid">
           <div class="setting-item">
-            <div class="setting-info"><h4>Dark Mode</h4><p>Switch between light and dark theme</p></div>
+            <div class="setting-info"><h4>Dark Mode</h4><p>Switch theme</p></div>
             <div class="toggle" id="darkModeToggle" onclick="toggleDarkModeSetting()"></div>
           </div>
           <div class="setting-item">
-            <div class="setting-info"><h4>Email Notifications</h4><p>Receive updates about new features</p></div>
+            <div class="setting-info"><h4>Email Notifications</h4><p>Updates about features</p></div>
             <div class="toggle" id="emailNotifToggle" onclick="toggleEmailNotifications()"></div>
           </div>
           <div class="setting-item">
-            <div class="setting-info"><h4>Push Notifications</h4><p>Get notified about exam reminders</p></div>
+            <div class="setting-info"><h4>Push Notifications</h4><p>Exam reminders</p></div>
             <div class="toggle" id="pushNotifToggle" onclick="togglePushNotifications()"></div>
           </div>
           <div class="setting-item">
-            <div class="setting-info"><h4>Study Reminder Time</h4><p>Set daily reminder to study</p></div>
+            <div class="setting-info"><h4>Study Reminder</h4><p>Daily reminder time</p></div>
             <select id="reminderTime" style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:6px 12px;color:var(--text)">
               <option value="">Off</option><option value="09:00">9:00 AM</option><option value="12:00">12:00 PM</option>
               <option value="15:00">3:00 PM</option><option value="18:00">6:00 PM</option><option value="20:00">8:00 PM</option>
             </select>
           </div>
         </div>
-        <button class="btn btn-primary" style="margin-top:16px" onclick="saveSettings()"><i class="fas fa-save"></i> Save Settings</button>
+        <button class="btn btn-primary" style="margin-top:12px" onclick="saveSettings()"><i class="fas fa-save"></i> Save Settings</button>
       </div>
     </div>
   </div>
-
-  <!-- ===== FOOTER ===== -->
-  <div class="footer-links">
-    <a href="#" onclick="showPage('dashboard')">Home</a>
-    <a href="#" onclick="showPage('profile')">Profile</a>
-    <a href="#" onclick="showPage('study')">Study</a>
-  </div>
-  <p class="copyright">&copy; 2026 OAU Exam CBT Practice</p>
 </div>
 
-<!-- ============================================
-     CALCULATOR OVERLAY
-     ============================================ -->
+<!-- CHAT FAB - goes to /ai -->
+<a href="#" class="chat-fab" onclick="navigateTo('/ai')" aria-label="Open AI"><i class="fas fa-robot"></i></a>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <div class="bottom-nav-inner">
+    <a href="#" class="nav-item active" onclick="showPage('dashboard')" data-page="dashboard"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="#" class="nav-item" onclick="showPage('exam')" data-page="exam"><i class="fas fa-pen"></i><span>Exam</span></a>
+    <a href="#" class="nav-item" onclick="showPage('test')" data-page="test"><i class="fas fa-flask"></i><span>Test</span></a>
+    <a href="#" class="nav-item" onclick="showPage('study')" data-page="study"><i class="fas fa-book-open"></i><span>Study</span></a>
+    <a href="#" class="nav-item" onclick="showPage('profile')" data-page="profile"><i class="fas fa-user"></i><span>Me</span></a>
+  </div>
+</nav>
+
+<!-- NOTIFICATION POPUP -->
+<div class="notification-popup" id="notificationPopup">
+  <div class="notification-popup-header">
+    <h4><i class="fas fa-bell"></i> Notifications</h4>
+    <button onclick="closeNotificationPopup()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="notification-list" id="notificationList">
+    <div class="no-notifications">Loading...</div>
+  </div>
+</div>
+
+<!-- CALCULATOR OVERLAY -->
 <div class="calc-overlay" id="calcOverlay" onclick="if(event.target===this)toggleCalculator()">
   <div class="calc-box">
     <input type="text" id="calcDisplay" value="0" readonly>
@@ -793,45 +786,12 @@
   </div>
 </div>
 
-<!-- ============================================
-     CHEAT WARNING
-     ============================================ -->
+<!-- CHEAT WARNING -->
 <div class="cheat-warning" id="cheatWarning">
   <div class="icon">⚠️</div>
   <h2>Warning!</h2>
   <p id="cheatMessage">Tab switch detected.</p>
   <button class="btn" onclick="document.getElementById('cheatWarning').classList.remove('show')">I understand</button>
-</div>
-
-<!-- ============================================
-     CHAT FAB
-     ============================================ -->
-<a href="#" class="chat-fab" onclick="showPage('study')" aria-label="Open Study AI"><i class="fas fa-robot"></i></a>
-
-<!-- ============================================
-     BOTTOM NAV
-     ============================================ -->
-<nav class="bottom-nav">
-  <div class="bottom-nav-inner">
-    <a href="#" class="nav-item active" onclick="showPage('dashboard')" data-page="dashboard"><i class="fas fa-home"></i><span>Home</span></a>
-    <a href="#" class="nav-item" onclick="showPage('exam')" data-page="exam"><i class="fas fa-pen"></i><span>Exam</span></a>
-    <a href="#" class="nav-item" onclick="showPage('test')" data-page="test"><i class="fas fa-flask"></i><span>Test</span></a>
-    <a href="#" class="nav-item" onclick="showPage('study')" data-page="study"><i class="fas fa-book-open"></i><span>Study</span></a>
-    <a href="#" class="nav-item" onclick="showPage('profile')" data-page="profile"><i class="fas fa-user"></i><span>Me</span></a>
-  </div>
-</nav>
-
-<!-- ============================================
-     NOTIFICATION POPUP
-     ============================================ -->
-<div class="notification-popup" id="notificationPopup">
-  <div class="notification-popup-header">
-    <h4><i class="fas fa-bell"></i> Notifications</h4>
-    <button onclick="closeNotificationPopup()"><i class="fas fa-times"></i></button>
-  </div>
-  <div class="notification-list" id="notificationList">
-    <div class="no-notifications">Loading...</div>
-  </div>
 </div>
 
 <script>
@@ -857,7 +817,7 @@ const setText = (id, v) => { const el = $(id); if (el) el.textContent = v; };
 const escapeHtml = str => String(str||'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 
 function showLoading(text = 'Loading...') {
-  $( 'loadingText').textContent = text;
+  $('loadingText').textContent = text;
   $('loadingOverlay').classList.remove('hidden');
 }
 
@@ -869,17 +829,10 @@ function showToast(message, type = 'info') {
   const toast = $('toast');
   const icon = $('toastIcon');
   const msg = $('toastMessage');
-  
   msg.textContent = message;
   icon.className = 'toast-icon ' + type;
-  
-  const icons = {
-    success: '<i class="fas fa-check-circle"></i>',
-    error: '<i class="fas fa-exclamation-circle"></i>',
-    info: '<i class="fas fa-info-circle"></i>'
-  };
+  const icons = { success: '<i class="fas fa-check-circle"></i>', error: '<i class="fas fa-exclamation-circle"></i>', info: '<i class="fas fa-info-circle"></i>' };
   icon.innerHTML = icons[type] || icons.info;
-  
   toast.classList.add('show');
   clearTimeout(window.toastTimeout);
   window.toastTimeout = setTimeout(() => toast.classList.remove('show'), 3000);
@@ -906,6 +859,29 @@ function shuffleArray(arr) {
 }
 
 // ============================================
+// NAVIGATION WITH LOADING
+// ============================================
+let navigationInProgress = false;
+
+function navigateTo(url, target = '_self') {
+  if (navigationInProgress) return;
+  if (url === '#') return;
+  if (url === window.location.pathname) return;
+  
+  navigationInProgress = true;
+  showLoading('Loading...');
+  
+  setTimeout(() => {
+    if (target === '_self') {
+      window.location.href = url;
+    } else {
+      window.open(url, target);
+    }
+  }, 400);
+}
+window.navigateTo = navigateTo;
+
+// ============================================
 // THEME MANAGEMENT
 // ============================================
 let isDarkMode = true;
@@ -929,8 +905,6 @@ function toggleThemeMode() {
   localStorage.setItem('theme', isLight ? 'light' : 'dark');
   $('themeToggleBtn').innerHTML = isLight ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
   isDarkMode = !isLight;
-  
-  // Update dark mode toggle in settings
   const darkToggle = $('darkModeToggle');
   if (darkToggle) {
     if (isLight) darkToggle.classList.add('active');
@@ -939,32 +913,8 @@ function toggleThemeMode() {
 }
 window.toggleThemeMode = toggleThemeMode;
 
-function toggleDarkModeSetting() {
-  toggleThemeMode();
-}
+function toggleDarkModeSetting() { toggleThemeMode(); }
 window.toggleDarkModeSetting = toggleDarkModeSetting;
-
-// ============================================
-// NETWORK STATUS
-// ============================================
-function updateNetworkState() {
-  const online = navigator.onLine;
-  const pill = $('networkPill');
-  const msg = $('networkMessage');
-  if (!online) {
-    pill.textContent = 'Offline';
-    pill.style.background = 'rgba(239,68,68,.14)';
-    msg.textContent = 'You are offline. Cached data is being shown.';
-    return;
-  }
-  const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-  const slow = conn && (conn.saveData || /2g/.test(conn.effectiveType || ''));
-  pill.textContent = slow ? 'Slow network' : 'Online';
-  pill.style.background = slow ? 'rgba(245,158,11,.14)' : 'rgba(16,185,129,.14)';
-  msg.textContent = slow ? 'Connection is slow. Using cached content first.' : 'Dashboard is connected.';
-}
-window.addEventListener('online', updateNetworkState);
-window.addEventListener('offline', updateNetworkState);
 
 // ============================================
 // PAGE NAVIGATION
@@ -972,35 +922,30 @@ window.addEventListener('offline', updateNetworkState);
 let currentPage = 'dashboard';
 
 function showPage(page) {
-  // Don't switch if already on that page
   if (currentPage === page) return;
   
-  // Hide all screens
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  // Check if we're in a test/exam - prevent navigation during active test
+  if ((page === 'dashboard' || page === 'profile') && 
+      (examState?.session || testState?.session)) {
+    if (!confirm('You have an active exam/test. Are you sure you want to leave? Your progress will be lost.')) {
+      return;
+    }
+  }
   
-  // Show target screen
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   const target = $(page + 'Screen');
   if (target) {
     target.classList.add('active');
     currentPage = page;
     
-    // Update page label
-    const labels = {
-      dashboard: 'Dashboard',
-      exam: 'Exam Mode',
-      test: 'Test Mode',
-      study: 'Study Mode',
-      profile: 'Profile'
-    };
+    const labels = { dashboard: 'Dashboard', exam: 'Exam Mode', test: 'Test Mode', study: 'Study Mode', profile: 'Profile' };
     setText('pageLabel', labels[page] || page);
     setText('pageTitle', 'OAU CBE Practice');
     
-    // Update bottom nav
     document.querySelectorAll('.nav-item').forEach(item => {
       item.classList.toggle('active', item.dataset.page === page);
     });
     
-    // Load page data if needed
     if (page === 'dashboard') loadDashboard();
     else if (page === 'exam') loadExamData();
     else if (page === 'test') loadTestData();
@@ -1011,6 +956,17 @@ function showPage(page) {
   }
 }
 window.showPage = showPage;
+
+// ============================================
+// FULLSCREEN MODE FOR EXAM/TEST
+// ============================================
+function enterFullscreenMode() {
+  document.body.classList.add('fullscreen-mode');
+}
+
+function exitFullscreenMode() {
+  document.body.classList.remove('fullscreen-mode');
+}
 
 // ============================================
 // NOTIFICATIONS
@@ -1030,9 +986,7 @@ async function loadNotifications() {
     } else {
       badge.style.display = 'none';
     }
-  } catch (e) {
-    console.warn('Could not load notifications:', e);
-  }
+  } catch (e) { console.warn('Could not load notifications:', e); }
 }
 
 function toggleNotificationPopup() {
@@ -1042,9 +996,7 @@ function toggleNotificationPopup() {
 }
 window.toggleNotificationPopup = toggleNotificationPopup;
 
-function closeNotificationPopup() {
-  $('notificationPopup').classList.remove('show');
-}
+function closeNotificationPopup() { $('notificationPopup').classList.remove('show'); }
 window.closeNotificationPopup = closeNotificationPopup;
 
 function renderNotificationList() {
@@ -1082,51 +1034,37 @@ function timeAgo(date) {
 // DASHBOARD
 // ============================================
 let dashboardState = { user: null, stats: null, courses: [], activity: [], notifications: [] };
-const FACULTIES = [
-  { name: 'Agriculture', icon: 'fa-seedling' },
-  { name: 'Arts', icon: 'fa-palette' },
-  { name: 'Basic Medical Sciences', icon: 'fa-heartbeat' },
-  { name: 'Clinical Sciences', icon: 'fa-stethoscope' },
-  { name: 'Dentistry', icon: 'fa-tooth' },
-  { name: 'Education', icon: 'fa-chalkboard-teacher' },
-  { name: 'Engineering', icon: 'fa-cogs' },
-  { name: 'Environmental Design', icon: 'fa-city' },
-  { name: 'Law', icon: 'fa-gavel' },
-  { name: 'Management Sciences', icon: 'fa-chart-line' },
-  { name: 'Pharmacy', icon: 'fa-prescription-bottle' },
-  { name: 'Sciences', icon: 'fa-flask' },
-  { name: 'Social Sciences', icon: 'fa-users' },
-  { name: 'Technology', icon: 'fa-microchip' }
+const DASHBOARD_FACULTIES = [
+  'Agriculture', 'Arts', 'Basic Medical Sciences', 'Clinical Sciences',
+  'Dentistry', 'Education', 'Engineering', 'Environmental Design',
+  'Law', 'Management Sciences', 'Pharmacy', 'Sciences',
+  'Social Sciences', 'Technology'
 ];
 
-function renderFaculties() {
+function renderDashboardFaculties() {
   const grid = $('facultyGrid');
   if (!grid) return;
-  grid.innerHTML = FACULTIES.map(f => `
-    <div class="faculty-tag" onclick="showPage('exam')">
-      <i class="fas ${f.icon}"></i>
-      <span>${f.name}</span>
-    </div>
+  grid.innerHTML = DASHBOARD_FACULTIES.map(f => `
+    <div class="faculty-tag-simple" onclick="showPage('exam')">${f}</div>
   `).join('');
 }
 
 async function loadDashboard() {
   try {
-    // Load user data
     const userData = await apiFetch('/auth/me');
     if (userData.success && userData.user) {
       const user = userData.user;
       dashboardState.user = user;
       
-      // Get total courses from faculties
-      let totalCourses = 0;
+      let totalCourses = 72;
       try {
         const facultiesData = await apiFetch('/admin/faculties');
         const faculties = facultiesData.faculties || [];
-        faculties.forEach(f => { totalCourses += f.totalCourses || 0; });
-      } catch (e) { totalCourses = 72; }
+        let count = 0;
+        faculties.forEach(f => { count += f.totalCourses || 0; });
+        if (count > 0) totalCourses = count;
+      } catch (e) {}
       
-      // Build stats
       const stats = {
         coursesActive: totalCourses || 0,
         averageScore: user.averageScore || 0,
@@ -1135,17 +1073,14 @@ async function loadDashboard() {
         currentStreak: user.currentStreak || 0
       };
       
-      const courses = user.enrolledCourses || [];
       const activity = (user.scores || []).slice().sort((a, b) => 
         new Date(b.date || b.createdAt || 0) - new Date(a.date || a.createdAt || 0)
       ).slice(0, 5);
       
-      // Update UI
       const name = user.fullName || user.firstName || user.username || 'Student';
       const firstName = name.split(' ')[0] || 'Student';
       
-      setText('networkTitle', `Welcome back, ${firstName} 👋`);
-      setText('heroTitle', `${firstName}, keep your OAU practice streak alive`);
+      setText('heroName', firstName);
       setText('heroTag', user.level ? `${user.level}L` : '100L • 200L');
       
       const attempts = (stats.testsTaken || 0) + (stats.examsTaken || 0);
@@ -1154,22 +1089,13 @@ async function loadDashboard() {
       setText('statAttempts', String(attempts || 0));
       setText('statStreak', `${stats.currentStreak || 0} day${stats.currentStreak === 1 ? '' : 's'}`);
       
-      // Render activity
       renderActivity(activity);
-      
-      // Render stats chart
       renderStatsChart(user.scores || []);
-      
-      // Render faculties
-      renderFaculties();
-      
-      // Update network message
-      setText('networkMessage', 'Dashboard loaded successfully.');
-      $('networkPill').textContent = 'Online';
+      renderDashboardFaculties();
+      loadMiniLeaderboard();
     }
   } catch (e) {
     console.error('Dashboard load error:', e);
-    setText('networkMessage', 'Error loading dashboard data.');
   }
 }
 
@@ -1177,10 +1103,7 @@ function renderActivity(items) {
   const box = $('activityList');
   if (!box) return;
   if (!items || !items.length) {
-    box.innerHTML = `<div class="empty-state">
-      <i class="fas fa-clock" style="font-size:1.5rem;display:block;margin-bottom:8px;color:var(--text-secondary)"></i>
-      No recent activity yet.
-    </div>`;
+    box.innerHTML = `<div class="empty-state"><i class="fas fa-clock" style="font-size:1.5rem;display:block;margin-bottom:8px;color:var(--text-secondary)"></i>No recent activity yet.</div>`;
     return;
   }
   box.innerHTML = items.map(item => {
@@ -1205,16 +1128,10 @@ function renderActivity(items) {
 
 function renderStatsChart(scores) {
   if (!scores || !scores.length) {
-    ['excellentBar','goodBar','averageBar','lowBar'].forEach(id => {
-      const el = $(id);
-      if (el) el.style.width = '0%';
-    });
-    ['excellentCount','goodCount','averageCount','lowCount'].forEach(id => {
-      setText(id, '0');
-    });
+    ['excellentBar','goodBar','averageBar','lowBar'].forEach(id => { const el = $(id); if (el) el.style.width = '0%'; });
+    ['excellentCount','goodCount','averageCount','lowCount'].forEach(id => setText(id, '0'));
     return;
   }
-
   const excellent = scores.filter(s => (s.percentage||0) >= 70).length;
   const good = scores.filter(s => (s.percentage||0) >= 60 && (s.percentage||0) < 70).length;
   const average = scores.filter(s => (s.percentage||0) >= 50 && (s.percentage||0) < 60).length;
@@ -1222,20 +1139,57 @@ function renderStatsChart(scores) {
   const maxCount = Math.max(excellent, good, average, low, 1);
 
   setText('excellentCount', excellent);
-  const eb = $('excellentBar');
-  if (eb) eb.style.width = (excellent/maxCount * 100) + '%';
-  
+  const eb = $('excellentBar'); if (eb) eb.style.width = (excellent/maxCount * 100) + '%';
   setText('goodCount', good);
-  const gb = $('goodBar');
-  if (gb) gb.style.width = (good/maxCount * 100) + '%';
-  
+  const gb = $('goodBar'); if (gb) gb.style.width = (good/maxCount * 100) + '%';
   setText('averageCount', average);
-  const ab = $('averageBar');
-  if (ab) ab.style.width = (average/maxCount * 100) + '%';
-  
+  const ab = $('averageBar'); if (ab) ab.style.width = (average/maxCount * 100) + '%';
   setText('lowCount', low);
-  const lb = $('lowBar');
-  if (lb) lb.style.width = (low/maxCount * 100) + '%';
+  const lb = $('lowBar'); if (lb) lb.style.width = (low/maxCount * 100) + '%';
+}
+
+// ============================================
+// MINI LEADERBOARD
+// ============================================
+async function loadMiniLeaderboard() {
+  const container = $('miniLeaderboard');
+  try {
+    const data = await apiFetch('/leaderboard');
+    const users = data.leaderboard || data.users || [];
+    if (!users || users.length === 0) {
+      container.innerHTML = '<div class="empty-state">No students yet. Be the first! 🏆</div>';
+      return;
+    }
+    const top3 = users.slice(0, 3);
+    const medals = ['👑', '🥈', '🥉'];
+    const rankClasses = ['gold', 'silver', 'bronze'];
+    const bgClasses = ['gold-bg', 'silver-bg', 'bronze-bg'];
+    
+    container.innerHTML = `
+      <div class="leaderboard-mini">
+        ${top3.map((u, i) => {
+          const displayName = maskName(u.fullName || u.username || 'Student');
+          const avgScore = u.averageScore || 0;
+          return `
+            <div class="lb-item">
+              <div class="rank ${rankClasses[i]}">${medals[i]}</div>
+              <div class="avatar ${bgClasses[i]}">${displayName.charAt(0).toUpperCase()}</div>
+              <div class="name">${displayName}</div>
+              <div class="score">${avgScore}%</div>
+            </div>
+          `;
+        }).join('')}
+      </div>
+    `;
+  } catch (e) {
+    container.innerHTML = '<div class="empty-state">Unable to load leaderboard</div>';
+  }
+}
+
+function maskName(name) {
+  if (!name || name.length <= 2) return name || '**';
+  if (name.length <= 3) return name + '***';
+  return name.substring(0, 3) + '***';
 }
 
 // ============================================
@@ -1248,35 +1202,55 @@ let examState = {
   session: null,
   isSubmitting: false,
   timer: null,
-  autoSaveInterval: null
+  autoSaveInterval: null,
+  faculties: [],
+  showAll: false
 };
 
 async function loadExamData() {
-  // If already loaded, don't reload
-  if (document.querySelector('#examFacultyGrid .faculty-tag')) return;
+  if (document.querySelector('#examFacultyGrid .faculty-tag-simple')) return;
   await loadExamFaculties();
 }
 
 async function loadExamFaculties() {
   const grid = $('examFacultyGrid');
-  grid.innerHTML = '<div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading faculties...</p></div>';
+  grid.innerHTML = '<div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading...</p></div>';
   try {
     const data = await apiFetch('/admin/faculties');
     const faculties = data.faculties || [];
+    examState.faculties = faculties;
     if (faculties.length) {
-      grid.innerHTML = faculties.map(f => `
-        <div class="faculty-tag" onclick="examSelectFaculty('${f.name.replace(/'/g,"\\'")}')">
-          <i class="fas fa-building"></i>
-          <span>${f.name}</span>
-        </div>
-      `).join('');
+      renderExamFaculties(false);
     } else {
       grid.innerHTML = '<div class="empty-state">No faculties available</div>';
+      $('examSeeMoreLink').style.display = 'none';
     }
   } catch (e) {
     grid.innerHTML = '<div class="empty-state">Failed to load faculties</div>';
   }
 }
+
+function renderExamFaculties(showAll) {
+  const grid = $('examFacultyGrid');
+  const faculties = examState.faculties;
+  const display = showAll ? faculties : faculties.slice(0, 4);
+  grid.innerHTML = display.map(f => `
+    <div class="faculty-tag-simple" onclick="examSelectFaculty('${f.name.replace(/'/g,"\\'")}')">${f.name}</div>
+  `).join('');
+  const link = $('examSeeMoreLink');
+  if (faculties.length > 4) {
+    link.style.display = 'block';
+    link.querySelector('button').innerHTML = showAll ? '<i class="fas fa-chevron-up"></i> See Less' : '<i class="fas fa-chevron-down"></i> See More';
+  } else {
+    link.style.display = 'none';
+  }
+  examState.showAll = showAll;
+}
+
+function examToggleFaculties() {
+  renderExamFaculties(!examState.showAll);
+}
+window.examToggleFaculties = examToggleFaculties;
 
 function examSelectFaculty(name) {
   examState.faculty = name;
@@ -1299,7 +1273,9 @@ async function loadExamLevels() {
   try {
     const data = await apiFetch('/admin/available-levels');
     const levels = data.levels || [];
-    grid.innerHTML = ['100','200','300','400','500','600'].map(lv => {
+    // Only show 100 and 200 levels
+    const availableLevels = ['100', '200'];
+    grid.innerHTML = availableLevels.map(lv => {
       const available = levels.includes(lv);
       return `
         <div class="level-card ${available ? '' : 'locked'}" 
@@ -1334,7 +1310,7 @@ window.examGoToLevel = examGoToLevel;
 
 async function loadExamCourses() {
   const container = $('examCoursesContainer');
-  container.innerHTML = '<div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading courses...</p></div>';
+  container.innerHTML = '<div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading...</p></div>';
   try {
     const data = await apiFetch(`/admin/faculty-courses/${encodeURIComponent(examState.faculty)}/${examState.level}`);
     let html = '';
@@ -1357,12 +1333,7 @@ async function loadExamCourses() {
 }
 
 function makeExamCourseCard(c) {
-  return `
-    <div class="course-card" onclick="examOpenEntry('${c.code}')">
-      <div class="code">${c.code}</div>
-      <div class="name">${c.name}</div>
-    </div>
-  `;
+  return `<div class="course-card" onclick="examOpenEntry('${c.code}')"><div class="code">${c.code}</div><div class="name">${c.name}</div></div>`;
 }
 window.examGoToCourse = function() {
   $('examEntryScreen').style.display = 'none';
@@ -1383,16 +1354,14 @@ window.examOpenEntry = async function(code) {
         <h1>${c.code}</h1>
         <p>${c.name}</p>
         <div class="stat-row">
-          <span class="stat-badge">📚 ${c.examSettings.numberOfQuestions} Questions</span>
-          <span class="stat-badge">⏱️ ${c.examSettings.timeLimit} Minutes</span>
+          <span class="stat-badge">📚 ${c.examSettings.numberOfQuestions} Qs</span>
+          <span class="stat-badge">⏱️ ${c.examSettings.timeLimit} min</span>
           <span class="stat-badge">📦 ${c.questionCounts.exam} Available</span>
         </div>
         <button class="btn btn-primary" onclick="examStart()" style="width:100%;padding:14px;background:var(--brand-gradient);color:#fff;border:none;border-radius:14px;font-weight:700;font-size:1rem;cursor:pointer" ${!c.examReady ? 'disabled' : ''}>
           <i class="fas fa-play-circle"></i> ${c.examReady ? 'START EXAM' : 'NOT ENOUGH QUESTIONS'}
         </button>
-        <p style="color:var(--text-secondary);font-size:.75rem;margin-top:8px">
-          ${c.examReady ? '✅ Ready' : `⚠️ Need ${c.examSettings.numberOfQuestions - c.questionCounts.exam} more questions`}
-        </p>
+        <p style="color:var(--text-secondary);font-size:.75rem;margin-top:8px">${c.examReady ? '✅ Ready' : `⚠️ Need ${c.examSettings.numberOfQuestions - c.questionCounts.exam} more`}</p>
       </div>
     `;
   } catch (e) {
@@ -1405,22 +1374,36 @@ window.examStart = async function() {
   btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
   btn.disabled = true;
   try {
-    const data = await apiFetch(`/admin/questions/${encodeURIComponent(examState.course)}/exam`);
-    if (!data.questions || !data.questions.length) {
-      alert('No questions available for this exam.');
+    // Get course details
+    const courseData = await apiFetch(`/admin/course-detail/${encodeURIComponent(examState.course)}`);
+    const timeLimit = courseData.course?.examSettings?.timeLimit || 30;
+    const numQuestions = courseData.course?.examSettings?.numberOfQuestions || 50;
+    
+    // Fetch questions with rotation
+    const data = await apiFetch('/exams/questions/rotate', {
+      method: 'POST',
+      body: JSON.stringify({
+        courseCode: examState.course,
+        numberOfQuestions: numQuestions,
+        excludeRecentSessions: 3
+      })
+    });
+    
+    if (!data.success || !data.questions || !data.questions.length) {
+      alert('No questions available. Please try again later.');
       btn.innerHTML = '<i class="fas fa-play-circle"></i> START EXAM';
       btn.disabled = false;
       return;
     }
-    const settings = data.courseSettings;
-    const questions = shuffleArray(data.questions).slice(0, settings.required);
-    const sessionId = Date.now() + '_' + Math.random().toString(36).substring(2, 8);
+    
+    const questions = data.questions;
+    const sessionId = data.sessionId || (Date.now() + '_' + Math.random().toString(36).substring(2, 8));
     examState.session = {
       courseCode: examState.course,
       questions: questions,
       answers: new Array(questions.length).fill(null),
-      timeLimit: settings.timeLimit,
-      timeLeft: settings.timeLimit * 60,
+      timeLimit: timeLimit,
+      timeLeft: timeLimit * 60,
       currentIndex: 0,
       timer: null,
       startTime: Date.now(),
@@ -1428,11 +1411,12 @@ window.examStart = async function() {
       mode: 'exam'
     };
     $('examCourseTitle').textContent = `📝 ${examState.course}`;
-    $('examMeta').textContent = `${questions.length} Questions • ${settings.timeLimit} min`;
-    $('examTimerDisplay').textContent = `${settings.timeLimit}:00`;
+    $('examMeta').textContent = `${questions.length} Questions • ${timeLimit} min`;
+    $('examTimerDisplay').textContent = `${timeLimit}:00`;
     $('examTimerDisplay').className = 'timer-box';
     $('examEntryScreen').style.display = 'none';
     $('examRunningScreen').style.display = 'block';
+    enterFullscreenMode();
     examRenderQuestion();
     examStartTimer();
     examRenderGrid();
@@ -1443,7 +1427,6 @@ window.examStart = async function() {
     btn.disabled = false;
   }
 };
-window.examStart = examStart;
 
 function examRenderQuestion() {
   if (!examState.session) return;
@@ -1451,7 +1434,7 @@ function examRenderQuestion() {
   const idx = examState.session.currentIndex;
   const total = examState.session.questions.length;
   $('examQCounter').textContent = `Question ${idx + 1} of ${total}`;
-  $('examQText').textContent = q.text;
+  $('examQText').textContent = q.question;
   const letters = ['A', 'B', 'C', 'D'];
   $('examOptionsArea').innerHTML = q.options.map((opt, i) => `
     <div class="opt ${examState.session.answers[idx] === i ? 'selected' : ''}" onclick="examSelectAnswer(${i})">
@@ -1549,6 +1532,11 @@ async function examSubmit() {
   examState.isSubmitting = true;
   if (examState.session.timer) clearInterval(examState.session.timer);
   if (examState.autoSaveInterval) clearInterval(examState.autoSaveInterval);
+  
+  showLoading('Submitting your exam...');
+  history.pushState(null, '', window.location.href);
+  window.onpopstate = function() { history.pushState(null, '', window.location.href); };
+  
   const timeSpent = Date.now() - examState.session.startTime;
   let correct = 0;
   examState.session.questions.forEach((q, i) => {
@@ -1557,7 +1545,7 @@ async function examSubmit() {
   const total = examState.session.questions.length;
   const percentage = Math.round((correct / total) * 100);
   try {
-    const data = await apiFetch('/exams/session/submit', {
+    await apiFetch('/exams/session/submit', {
       method: 'POST',
       body: JSON.stringify({
         sessionId: examState.session.sessionId,
@@ -1571,32 +1559,17 @@ async function examSubmit() {
     });
     sessionStorage.removeItem('activeExam');
     examState.isSubmitting = false;
-    examShowResult(examState.session.courseCode, correct, total, percentage, timeSpent);
+    exitFullscreenMode();
+    hideLoading();
+    navigateTo('/submit');
   } catch (e) {
+    hideLoading();
     alert('Failed to submit. Please try again.');
     examState.isSubmitting = false;
+    window.onpopstate = null;
   }
 }
 window.examSubmit = examSubmit;
-
-function examShowResult(course, correct, total, percentage, timeSpent) {
-  const minutes = Math.floor(timeSpent / 60000);
-  const seconds = Math.floor((timeSpent % 60000) / 1000);
-  $('examResultContent').innerHTML = `
-    <div class="exam-result-card">
-      <div class="big-score">${percentage}%</div>
-      <div class="label">${correct} / ${total} Correct</div>
-      <p style="color:var(--text-secondary);margin-top:8px;">⏱️ ${minutes}m ${seconds}s</p>
-      <div style="margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
-        <button class="btn btn-primary" onclick="showPage('dashboard')" style="background:var(--brand-gradient);color:#fff;border:none;padding:12px 20px;border-radius:14px;font-weight:700;cursor:pointer">Dashboard</button>
-        <button class="btn btn-soft" onclick="location.reload()">Try Again</button>
-      </div>
-    </div>
-  `;
-  $('examRunningScreen').style.display = 'none';
-  $('examResultScreen').style.display = 'block';
-  examState.session = null;
-}
 
 function examQuit() {
   if (!examState.session) return;
@@ -1605,6 +1578,7 @@ function examQuit() {
     if (examState.autoSaveInterval) clearInterval(examState.autoSaveInterval);
     sessionStorage.removeItem('activeExam');
     examState.session = null;
+    exitFullscreenMode();
     window.location.reload();
   }
 }
@@ -1620,34 +1594,55 @@ let testState = {
   session: null,
   isSubmitting: false,
   timer: null,
-  autoSaveInterval: null
+  autoSaveInterval: null,
+  faculties: [],
+  showAll: false
 };
 
 async function loadTestData() {
-  if (document.querySelector('#testFacultyGrid .faculty-tag')) return;
+  if (document.querySelector('#testFacultyGrid .faculty-tag-simple')) return;
   await loadTestFaculties();
 }
 
 async function loadTestFaculties() {
   const grid = $('testFacultyGrid');
-  grid.innerHTML = '<div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading faculties...</p></div>';
+  grid.innerHTML = '<div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading...</p></div>';
   try {
     const data = await apiFetch('/admin/faculties');
     const faculties = data.faculties || [];
+    testState.faculties = faculties;
     if (faculties.length) {
-      grid.innerHTML = faculties.map(f => `
-        <div class="faculty-tag" onclick="testSelectFaculty('${f.name.replace(/'/g,"\\'")}')">
-          <i class="fas fa-building"></i>
-          <span>${f.name}</span>
-        </div>
-      `).join('');
+      renderTestFaculties(false);
     } else {
       grid.innerHTML = '<div class="empty-state">No faculties available</div>';
+      $('testSeeMoreLink').style.display = 'none';
     }
   } catch (e) {
     grid.innerHTML = '<div class="empty-state">Failed to load faculties</div>';
   }
 }
+
+function renderTestFaculties(showAll) {
+  const grid = $('testFacultyGrid');
+  const faculties = testState.faculties;
+  const display = showAll ? faculties : faculties.slice(0, 4);
+  grid.innerHTML = display.map(f => `
+    <div class="faculty-tag-simple" onclick="testSelectFaculty('${f.name.replace(/'/g,"\\'")}')">${f.name}</div>
+  `).join('');
+  const link = $('testSeeMoreLink');
+  if (faculties.length > 4) {
+    link.style.display = 'block';
+    link.querySelector('button').innerHTML = showAll ? '<i class="fas fa-chevron-up"></i> See Less' : '<i class="fas fa-chevron-down"></i> See More';
+  } else {
+    link.style.display = 'none';
+  }
+  testState.showAll = showAll;
+}
+
+function testToggleFaculties() {
+  renderTestFaculties(!testState.showAll);
+}
+window.testToggleFaculties = testToggleFaculties;
 
 function testSelectFaculty(name) {
   testState.faculty = name;
@@ -1670,7 +1665,8 @@ async function loadTestLevels() {
   try {
     const data = await apiFetch('/admin/available-levels');
     const levels = data.levels || [];
-    grid.innerHTML = ['100','200','300','400','500','600'].map(lv => {
+    const availableLevels = ['100', '200'];
+    grid.innerHTML = availableLevels.map(lv => {
       const available = levels.includes(lv);
       return `
         <div class="level-card ${available ? '' : 'locked'}" 
@@ -1705,7 +1701,7 @@ window.testGoToLevel = testGoToLevel;
 
 async function loadTestCourses() {
   const container = $('testCoursesContainer');
-  container.innerHTML = '<div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading courses...</p></div>';
+  container.innerHTML = '<div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading...</p></div>';
   try {
     const data = await apiFetch(`/admin/faculty-courses/${encodeURIComponent(testState.faculty)}/${testState.level}`);
     let html = '';
@@ -1728,12 +1724,7 @@ async function loadTestCourses() {
 }
 
 function makeTestCourseCard(c) {
-  return `
-    <div class="course-card" onclick="testOpenEntry('${c.code}')">
-      <div class="code">${c.code}</div>
-      <div class="name">${c.name}</div>
-    </div>
-  `;
+  return `<div class="course-card" onclick="testOpenEntry('${c.code}')"><div class="code">${c.code}</div><div class="name">${c.name}</div></div>`;
 }
 window.testGoToCourse = function() {
   $('testEntryScreen').style.display = 'none';
@@ -1754,16 +1745,14 @@ window.testOpenEntry = async function(code) {
         <h1>${c.code}</h1>
         <p>${c.name}</p>
         <div class="stat-row">
-          <span class="stat-badge">📚 ${c.testSettings.numberOfQuestions} Questions</span>
-          <span class="stat-badge">⏱️ ${c.testSettings.timeLimit} Minutes</span>
+          <span class="stat-badge">📚 ${c.testSettings.numberOfQuestions} Qs</span>
+          <span class="stat-badge">⏱️ ${c.testSettings.timeLimit} min</span>
           <span class="stat-badge">📦 ${c.questionCounts.test} Available</span>
         </div>
         <button class="btn btn-test" onclick="testStart()" style="width:100%;padding:14px;border:none;border-radius:14px;font-weight:700;font-size:1rem;cursor:pointer" ${!c.testReady ? 'disabled' : ''}>
           <i class="fas fa-play-circle"></i> ${c.testReady ? 'START TEST' : 'NOT ENOUGH QUESTIONS'}
         </button>
-        <p style="color:var(--text-secondary);font-size:.75rem;margin-top:8px">
-          ${c.testReady ? '✅ Ready' : `⚠️ Need ${c.testSettings.numberOfQuestions - c.questionCounts.test} more questions`}
-        </p>
+        <p style="color:var(--text-secondary);font-size:.75rem;margin-top:8px">${c.testReady ? '✅ Ready' : `⚠️ Need ${c.testSettings.numberOfQuestions - c.questionCounts.test} more`}</p>
       </div>
     `;
   } catch (e) {
@@ -1776,12 +1765,10 @@ window.testStart = async function() {
   btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
   btn.disabled = true;
   try {
-    // Get course details for time limit
     const courseData = await apiFetch(`/admin/course-detail/${encodeURIComponent(testState.course)}`);
     const timeLimit = courseData.course?.testSettings?.timeLimit || 15;
     const numQuestions = courseData.course?.testSettings?.numberOfQuestions || 30;
     
-    // Fetch questions using rotation
     const data = await apiFetch('/tests/questions/rotate', {
       method: 'POST',
       body: JSON.stringify({
@@ -1818,6 +1805,7 @@ window.testStart = async function() {
     $('testTimerDisplay').className = 'timer-box';
     $('testEntryScreen').style.display = 'none';
     $('testRunningScreen').style.display = 'block';
+    enterFullscreenMode();
     testRenderQuestion();
     testStartTimer();
     testRenderGrid();
@@ -1828,7 +1816,6 @@ window.testStart = async function() {
     btn.disabled = false;
   }
 };
-window.testStart = testStart;
 
 function testRenderQuestion() {
   if (!testState.session) return;
@@ -1836,7 +1823,7 @@ function testRenderQuestion() {
   const idx = testState.session.currentIndex;
   const total = testState.session.questions.length;
   $('testQCounter').textContent = `Question ${idx + 1} of ${total}`;
-  $('testQText').textContent = q.text;
+  $('testQText').textContent = q.question;
   const letters = ['A', 'B', 'C', 'D'];
   $('testOptionsArea').innerHTML = q.options.map((opt, i) => `
     <div class="opt ${testState.session.answers[idx] === i ? 'selected' : ''}" onclick="testSelectAnswer(${i})">
@@ -1934,6 +1921,11 @@ async function testSubmit() {
   testState.isSubmitting = true;
   if (testState.session.timer) clearInterval(testState.session.timer);
   if (testState.autoSaveInterval) clearInterval(testState.autoSaveInterval);
+  
+  showLoading('Submitting your test...');
+  history.pushState(null, '', window.location.href);
+  window.onpopstate = function() { history.pushState(null, '', window.location.href); };
+  
   const timeSpent = Date.now() - testState.session.startTime;
   let correct = 0;
   testState.session.questions.forEach((q, i) => {
@@ -1942,7 +1934,7 @@ async function testSubmit() {
   const total = testState.session.questions.length;
   const percentage = Math.round((correct / total) * 100);
   try {
-    const data = await apiFetch('/tests/session/submit', {
+    await apiFetch('/tests/session/submit', {
       method: 'POST',
       body: JSON.stringify({
         sessionId: testState.session.sessionId,
@@ -1956,32 +1948,17 @@ async function testSubmit() {
     });
     sessionStorage.removeItem('activeTest');
     testState.isSubmitting = false;
-    testShowResult(testState.session.courseCode, correct, total, percentage, timeSpent);
+    exitFullscreenMode();
+    hideLoading();
+    navigateTo('/submit');
   } catch (e) {
+    hideLoading();
     alert('Failed to submit. Please try again.');
     testState.isSubmitting = false;
+    window.onpopstate = null;
   }
 }
 window.testSubmit = testSubmit;
-
-function testShowResult(course, correct, total, percentage, timeSpent) {
-  const minutes = Math.floor(timeSpent / 60000);
-  const seconds = Math.floor((timeSpent % 60000) / 1000);
-  $('testResultContent').innerHTML = `
-    <div class="test-result-card">
-      <div class="big-score">${percentage}%</div>
-      <div class="label">${correct} / ${total} Correct</div>
-      <p style="color:var(--text-secondary);margin-top:8px;">⏱️ ${minutes}m ${seconds}s</p>
-      <div style="margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
-        <button class="btn btn-test" onclick="showPage('dashboard')" style="border:none;padding:12px 20px;border-radius:14px;font-weight:700;cursor:pointer">Dashboard</button>
-        <button class="btn btn-soft" onclick="location.reload()">Try Again</button>
-      </div>
-    </div>
-  `;
-  $('testRunningScreen').style.display = 'none';
-  $('testResultScreen').style.display = 'block';
-  testState.session = null;
-}
 
 function testQuit() {
   if (!testState.session) return;
@@ -1990,13 +1967,14 @@ function testQuit() {
     if (testState.autoSaveInterval) clearInterval(testState.autoSaveInterval);
     sessionStorage.removeItem('activeTest');
     testState.session = null;
+    exitFullscreenMode();
     window.location.reload();
   }
 }
 window.testQuit = testQuit;
 
 // ============================================
-// STUDY MODE
+// STUDY MODE - Backend Powered
 // ============================================
 let studyState = {
   courses: [],
@@ -2010,72 +1988,85 @@ let studyState = {
   answeredQuestions: 0,
   isLoading: false,
   autoSaveInterval: null,
-  savedProgress: null
+  savedProgress: null,
+  questionDropdownOpen: false
 };
-
-const STUDY_COURSES = [
-  {
-    id: 'phy102', code: 'PHY 102', name: 'General Physics II', icon: '⚡',
-    topics: [
-      { id: 'phy102_t1', title: 'Electrostatics', description: 'Electric charge, Coulomb\'s law, Electric field' },
-      { id: 'phy102_t2', title: 'DC Circuits', description: 'Ohm\'s law, Current, Voltage, Resistance' }
-    ]
-  },
-  {
-    id: 'mth102', code: 'MTH 102', name: 'Elementary Mathematics II', icon: '∫',
-    topics: [
-      { id: 'mth102_t1', title: 'Functions & Limits', description: 'Functions, Graphs, Limits, Continuity' },
-      { id: 'mth102_t2', title: 'Differentiation', description: 'Derivatives, Algebraic/Exponential differentiation' }
-    ]
-  },
-  {
-    id: 'chm102', code: 'CHM 102', name: 'Organic Chemistry II', icon: '🧪',
-    topics: [
-      { id: 'chm102_t1', title: 'Introduction to Organic Chemistry', description: 'Historical survey, Nomenclature' },
-      { id: 'chm102_t2', title: 'Advanced Carbon Forms', description: 'Fullerenes, Nanotubes' }
-    ]
-  }
-];
 
 async function loadStudyData() {
   if (document.querySelector('#studyCourseGrid .study-course-card')) return;
-  renderStudyCourses();
+  await loadStudyCourses();
+}
+
+async function loadStudyCourses() {
+  const grid = $('studyCourseGrid');
+  grid.innerHTML = '<div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading courses...</p></div>';
+  try {
+    const data = await apiFetch('/admin/faculties');
+    const faculties = data.faculties || [];
+    if (faculties.length) {
+      const courseList = [];
+      for (const f of faculties) {
+        const courses = f.courses || [];
+        courses.forEach(c => {
+          courseList.push({
+            id: c.code || c.id,
+            code: c.code || c.id,
+            name: c.name || c.title,
+            icon: '📚',
+            faculty: f.name,
+            topics: c.topics || []
+          });
+        });
+      }
+      studyState.courses = courseList.slice(0, 12);
+      renderStudyCourses();
+    } else {
+      grid.innerHTML = '<div class="empty-state">No courses available</div>';
+    }
+  } catch (e) {
+    grid.innerHTML = '<div class="empty-state">Error loading courses</div>';
+  }
 }
 
 function renderStudyCourses() {
   const grid = $('studyCourseGrid');
-  grid.innerHTML = STUDY_COURSES.map(c => `
+  grid.innerHTML = studyState.courses.map(c => `
     <div class="study-course-card" onclick="studySelectCourse('${c.id}')">
       <div class="card-spinner"><i class="fas fa-spinner fa-spin"></i></div>
       <div class="card-content">
         <span class="icon">${c.icon}</span>
         <div class="code">${c.code}</div>
         <div class="name">${c.name}</div>
-        <span class="count">${c.topics.length} Topics</span>
+        <span class="count">${c.topics?.length || 0} Topics</span>
       </div>
     </div>
   `).join('');
 }
 
 function studySelectCourse(courseId) {
-  const course = STUDY_COURSES.find(c => c.id === courseId);
+  const course = studyState.courses.find(c => c.id === courseId);
   if (!course) return;
   studyState.selectedCourse = course;
   $('studyTopicsTitle').textContent = `${course.code} - Topics`;
-  $('studyTopicsSubtitle').textContent = `${course.name} • ${course.topics.length} topics`;
+  $('studyTopicsSubtitle').textContent = `${course.name} • ${course.topics?.length || 0} topics`;
   
   const grid = $('studyTopicsGrid');
-  grid.innerHTML = course.topics.map((topic, index) => `
-    <div class="study-topic-item" onclick="studySelectTopic('${topic.id}')">
-      <div class="topic-spinner"><i class="fas fa-spinner fa-spin"></i></div>
-      <div class="topic-info">
-        <div class="topic-title">${index + 1}. ${topic.title}</div>
-        <div class="topic-desc">${topic.description}</div>
+  const topics = course.topics || [];
+  if (topics.length === 0) {
+    grid.innerHTML = '<div class="empty-state">No topics available for this course</div>';
+  } else {
+    grid.innerHTML = topics.map((topic, index) => `
+      <div class="study-topic-item" onclick="studySelectTopic('${topic.id || index}')">
+        <div class="topic-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+        <div class="topic-info">
+          <div class="topic-title">${index + 1}. ${topic.title || topic.name || 'Topic'}</div>
+          <div class="topic-desc">${topic.description || 'Click to start practicing'}</div>
+        </div>
+        <span class="topic-questions">📝 ${topic.questionCount || 0} Qs</span>
+        <span class="topic-arrow"><i class="fas fa-chevron-right"></i></span>
       </div>
-      <span class="topic-questions">📝 5 Qs</span>
-      <span class="topic-arrow"><i class="fas fa-chevron-right"></i></span>
-    </div>
-  `).join('');
+    `).join('');
+  }
   
   $('studyCourseScreen').style.display = 'none';
   $('studyTopicsScreen').style.display = 'block';
@@ -2091,37 +2082,76 @@ window.studyGoToCourses = studyGoToCourses;
 async function studySelectTopic(topicId) {
   const course = studyState.selectedCourse;
   if (!course) return;
-  const topic = course.topics.find(t => t.id === topicId);
+  const topic = course.topics?.find((t, i) => (t.id || i) === topicId) || course.topics?.[0];
   if (!topic) return;
   studyState.currentTopic = topic;
   
-  // Generate mock questions
-  const mockQuestions = [];
-  const letters = ['A', 'B', 'C', 'D'];
-  for (let i = 0; i < 5; i++) {
-    const correct = Math.floor(Math.random() * 4);
-    const options = letters.map((l, j) => `Option ${l} for question ${i + 1}`);
-    mockQuestions.push({
-      question: `Sample question ${i + 1} for ${topic.title}`,
-      options: options,
-      correctOption: correct,
-      explanation: `This is the explanation for question ${i + 1}. The correct answer is ${letters[correct]}.`
-    });
+  const container = $('studyQuizContainer');
+  container.innerHTML = `
+    <div class="quiz-overlay"><i class="fas fa-spinner"></i><span>Loading questions...</span></div>
+    <div class="loading-spin"><i class="fas fa-spinner fa-spin"></i> Loading questions...</div>
+  `;
+  container.classList.add('loading');
+  
+  try {
+    // Fetch questions from backend
+    const data = await apiFetch(`/study/questions/${topic.id || topicId}`);
+    if (data.success && data.questions && data.questions.length > 0) {
+      studyState.questions = data.questions.map(q => ({
+        ...q,
+        options: q.options || ['A', 'B', 'C', 'D'],
+        correctOption: q.correct || 0,
+        explanation: q.explanation || 'No explanation provided.'
+      }));
+    } else {
+      // Fallback mock questions if backend returns none
+      studyState.questions = [
+        { 
+          question: `What is the main concept in ${topic.title || 'this topic'}?`, 
+          options: ['Option A', 'Option B', 'Option C', 'Option D'], 
+          correctOption: 0, 
+          explanation: 'This is a sample explanation for the question.' 
+        },
+        { 
+          question: 'Which of the following is correct?', 
+          options: ['Option A', 'Option B', 'Option C', 'Option D'], 
+          correctOption: 1, 
+          explanation: 'Option B is the correct answer because...' 
+        },
+        { 
+          question: 'What is the best approach to study this topic?', 
+          options: ['Approach A', 'Approach B', 'Approach C', 'Approach D'], 
+          correctOption: 2, 
+          explanation: 'Approach C is recommended because...' 
+        }
+      ];
+    }
+    
+    studyState.currentIndex = 0;
+    studyState.score = 0;
+    studyState.answered = false;
+    studyState.totalQuestions = studyState.questions.length;
+    studyState.answeredQuestions = 0;
+    
+    $('studyQuizTitle').textContent = `${topic.title || 'Practice Questions'}`;
+    $('studyQuizSubtitle').textContent = `${studyState.questions.length} questions • ${course.code}`;
+    
+    $('studyTopicsScreen').style.display = 'none';
+    $('studyQuizScreen').style.display = 'block';
+    container.classList.remove('loading');
+    studyRenderQuestion();
+  } catch (e) {
+    console.error('Error loading questions:', e);
+    container.innerHTML = `
+      <div class="empty-state">
+        <i class="fas fa-exclamation-triangle"></i>
+        <h3>Error Loading Questions</h3>
+        <p>${e.message || 'Please try again later.'}</p>
+        <button class="btn btn-primary" onclick="studyGoToCourses()" style="margin-top:10px;">Back to Courses</button>
+      </div>
+    `;
+    container.classList.remove('loading');
   }
-  
-  studyState.questions = mockQuestions;
-  studyState.currentIndex = 0;
-  studyState.score = 0;
-  studyState.answered = false;
-  studyState.totalQuestions = mockQuestions.length;
-  studyState.answeredQuestions = 0;
-  
-  $('studyQuizTitle').textContent = `${topic.title}`;
-  $('studyQuizSubtitle').textContent = `${mockQuestions.length} questions • ${course.code}`;
-  
-  $('studyTopicsScreen').style.display = 'none';
-  $('studyQuizScreen').style.display = 'block';
-  studyRenderQuestion();
 }
 window.studySelectTopic = studySelectTopic;
 
@@ -2136,12 +2166,26 @@ function studyRenderQuestion() {
   const container = $('studyQuizContainer');
   const letters = ['A', 'B', 'C', 'D'];
   
-  let optionsHtml = q.options.map((opt, i) => `
-    <div class="option-btn" onclick="studySelectOption(${i})">
-      <span class="letter">${letters[i]}</span>
-      <span>${opt}</span>
-    </div>
-  `).join('');
+  // Build dropdown options
+  let dropdownOptions = studyState.questions.map((_, i) => {
+    const isAnswered = studyState.questions[i].userAnswer !== undefined && studyState.questions[i].userAnswer !== null;
+    return `<option value="${i}" ${i === studyState.currentIndex ? 'selected' : ''}>Q${i + 1} ${isAnswered ? '✅' : '⬜'}</option>`;
+  }).join('');
+  
+  let optionsHtml = q.options.map((opt, i) => {
+    let extraClass = '';
+    if (studyState.answered) {
+      if (i === q.correctOption) extraClass = 'correct';
+      if (i === q.userAnswer && i !== q.correctOption) extraClass = 'wrong';
+      if (i === q.correctOption && q.userAnswer !== q.correctOption) extraClass = 'reveal-correct';
+    }
+    return `
+      <div class="opt ${extraClass} ${studyState.answered ? 'disabled' : ''}" onclick="${!studyState.answered ? `studySelectOption(${i})` : ''}">
+        <span class="prefix">${letters[i]}.</span>
+        <span>${opt}</span>
+      </div>
+    `;
+  }).join('');
   
   container.innerHTML = `
     <div class="quiz-header">
@@ -2151,6 +2195,18 @@ function studyRenderQuestion() {
     <div class="quiz-progress-bar">
       <div class="fill" style="width: ${(studyState.answeredQuestions / studyState.totalQuestions) * 100}%"></div>
     </div>
+    
+    <div class="question-nav-dropdown">
+      <select id="studyQuestionSelect" onchange="studyJumpToQuestion(parseInt(this.value))">
+        ${dropdownOptions}
+      </select>
+      <div class="status-indicators">
+        <span><span class="dot current"></span> Current</span>
+        <span><span class="dot answered"></span> Answered</span>
+        <span><span class="dot unanswered"></span> Unanswered</span>
+      </div>
+    </div>
+    
     <div class="question-text">${q.question}</div>
     <div class="options" id="studyOptionsContainer">
       ${optionsHtml}
@@ -2171,6 +2227,10 @@ function studyRenderQuestion() {
   `;
   
   studyState.answered = false;
+  
+  // Update dropdown to match current
+  const select = $('studyQuestionSelect');
+  if (select) select.value = studyState.currentIndex;
 }
 
 function studySelectOption(index) {
@@ -2178,12 +2238,14 @@ function studySelectOption(index) {
   
   const q = studyState.questions[studyState.currentIndex];
   const isCorrect = index === q.correctOption;
+  q.userAnswer = index;
   studyState.answered = true;
   
   if (isCorrect) studyState.score++;
   studyState.answeredQuestions++;
   
-  const options = document.querySelectorAll('#studyOptionsContainer .option-btn');
+  // Update options display
+  const options = document.querySelectorAll('#studyOptionsContainer .opt');
   options.forEach((el, i) => {
     el.classList.add('disabled');
     if (i === q.correctOption) el.classList.add('correct');
@@ -2191,6 +2253,7 @@ function studySelectOption(index) {
     if (i === index && isCorrect) el.classList.add('correct');
   });
   
+  // Show explanation
   const box = $('studyExplanationBox');
   const resultText = $('studyResultText');
   const explanationText = $('studyExplanationText');
@@ -2204,12 +2267,46 @@ function studySelectOption(index) {
   }
   explanationText.textContent = q.explanation || 'No explanation provided.';
   box.classList.add('show');
+  
+  // Update progress
+  const progress = document.querySelector('.quiz-progress-bar .fill');
+  if (progress) {
+    progress.style.width = `${(studyState.answeredQuestions / studyState.totalQuestions) * 100}%`;
+  }
+  const totalEl = document.querySelector('.q-total');
+  if (totalEl) {
+    totalEl.textContent = `✅ ${studyState.answeredQuestions}/${studyState.totalQuestions} answered`;
+  }
+  
+  // Update dropdown
+  const select = $('studyQuestionSelect');
+  if (select) {
+    const options2 = select.querySelectorAll('option');
+    options2.forEach(opt => {
+      const val = parseInt(opt.value);
+      if (val === studyState.currentIndex) {
+        opt.textContent = `Q${val + 1} ✅`;
+      }
+    });
+  }
 }
 window.studySelectOption = studySelectOption;
+
+function studyJumpToQuestion(index) {
+  if (index >= 0 && index < studyState.questions.length) {
+    studyState.currentIndex = index;
+    studyState.answered = studyState.questions[index].userAnswer !== undefined && 
+                           studyState.questions[index].userAnswer !== null;
+    studyRenderQuestion();
+  }
+}
+window.studyJumpToQuestion = studyJumpToQuestion;
 
 function studyPrevQuestion() {
   if (studyState.currentIndex > 0) {
     studyState.currentIndex--;
+    studyState.answered = studyState.questions[studyState.currentIndex].userAnswer !== undefined && 
+                           studyState.questions[studyState.currentIndex].userAnswer !== null;
     studyRenderQuestion();
   }
 }
@@ -2218,6 +2315,8 @@ window.studyPrevQuestion = studyPrevQuestion;
 function studyNextQuestion() {
   if (studyState.currentIndex < studyState.questions.length - 1) {
     studyState.currentIndex++;
+    studyState.answered = studyState.questions[studyState.currentIndex].userAnswer !== undefined && 
+                           studyState.questions[studyState.currentIndex].userAnswer !== null;
     studyRenderQuestion();
   } else {
     studyShowQuizComplete();
@@ -2264,11 +2363,6 @@ function studyConfirmExitQuiz() {
 }
 window.studyConfirmExitQuiz = studyConfirmExitQuiz;
 
-function studyRestoreProgress() { showToast('Progress restored!', 'success'); }
-function studyClearProgress() { showToast('Progress cleared!', 'info'); }
-window.studyRestoreProgress = studyRestoreProgress;
-window.studyClearProgress = studyClearProgress;
-
 // ============================================
 // PROFILE
 // ============================================
@@ -2283,9 +2377,7 @@ async function loadProfile() {
       displayProfile(data.user);
       loadProfilePreferences(data.user.preferences);
     }
-  } catch (e) {
-    console.error('Profile load error:', e);
-  }
+  } catch (e) { console.error('Profile load error:', e); }
 }
 
 function displayProfile(u) {
@@ -2296,10 +2388,6 @@ function displayProfile(u) {
   setText('metaFaculty', '🏛️ ' + (u.faculty || 'N/A'));
   setText('metaLevel', '📚 ' + (u.level || '100') + 'L');
   setText('metaJoined', '📅 ' + new Date(u.createdAt).toLocaleDateString());
-  setText('quickExams', u.examsTaken || 0);
-  setText('quickTests', u.testsTaken || 0);
-  setText('quickStreak', u.currentStreak || 0);
-  setText('quickAvg', (u.averageScore || 0) + '%');
   $('editName').value = u.fullName || '';
   $('editEmail').value = u.email || '';
   $('editFaculty').value = u.faculty || '';
@@ -2323,7 +2411,7 @@ function displayProfile(u) {
       </div>
     `).join('');
   } else {
-    achList.innerHTML = '<p style="color:var(--text-secondary);text-align:center">🎯 No achievements yet. Take exams to earn them!</p>';
+    achList.innerHTML = '<p style="color:var(--text-secondary);text-align:center;padding:10px;">🎯 No achievements yet. Take exams to earn them!</p>';
   }
   
   const scoresList = $('scoresList');
@@ -2333,11 +2421,11 @@ function displayProfile(u) {
         <span style="font-weight:500">${s.courseCode || s.course || 'Unknown'}</span>
         <span class="badge-${s.mode}">${s.mode === 'exam' ? '📝 Exam' : '🧪 Test'}</span>
         <span style="font-weight:700;color:var(--primary-light)">${s.percentage || 0}%</span>
-        <span style="color:var(--text-secondary);font-size:.7rem">${new Date(s.date).toLocaleDateString()}</span>
+        <span style="color:var(--text-secondary);font-size:.65rem">${new Date(s.date).toLocaleDateString()}</span>
       </div>
     `).join('');
   } else {
-    scoresList.innerHTML = '<p style="color:var(--text-secondary);text-align:center">📊 No scores yet. Take an exam to see your progress!</p>';
+    scoresList.innerHTML = '<p style="color:var(--text-secondary);text-align:center;padding:10px;">📊 No scores yet. Take an exam to see your progress!</p>';
   }
   $('referralLink').textContent = u.referralLink || '---';
   setText('referralCount', u.referralCount || 0);
@@ -2566,9 +2654,7 @@ window.calcResult = calcResult;
 async function initApp() {
   showLoading('Loading your dashboard...');
   initTheme();
-  updateNetworkState();
   
-  // Load data for all pages in parallel
   await Promise.all([
     loadDashboard(),
     loadNotifications(),
@@ -2578,7 +2664,7 @@ async function initApp() {
     loadStudyData()
   ]);
   
-  // Check for saved exam session
+  // Check for saved sessions
   try {
     const savedExam = sessionStorage.getItem('activeExam');
     if (savedExam) {
@@ -2589,7 +2675,6 @@ async function initApp() {
     }
   } catch (e) {}
   
-  // Check for saved test session
   try {
     const savedTest = sessionStorage.getItem('activeTest');
     if (savedTest) {
@@ -2607,10 +2692,10 @@ async function initApp() {
   function resetInactivityTimer() {
     clearTimeout(inactivityTimer);
     inactivityTimer = setTimeout(() => {
-      showLoading('Session timeout. Reloading...');
-      setTimeout(() => {
-        location.reload();
-      }, 1500);
+      if (!examState.session && !testState.session) {
+        showLoading('Session timeout. Reloading...');
+        setTimeout(() => location.reload(), 1500);
+      }
     }, 20 * 60 * 1000);
   }
   
