@@ -378,30 +378,30 @@
 <!-- ============================================
      CALCULATOR OVERLAY
      ============================================ -->
-<div class="calc-overlay" id="calcOverlay" onclick="if(event.target===this)toggleCalculator()">
+<div class="calc-overlay" id="calcOverlay" onclick="if(event.target===this)window.toggleCalculator()">
   <div class="calc-box">
     <input type="text" id="calcDisplay" value="0" readonly>
     <div class="calc-btns">
-      <button class="calc-btn clr" onclick="calcClear()">C</button>
-      <button class="calc-btn" onclick="calcAppend('(')">(</button>
-      <button class="calc-btn" onclick="calcAppend(')')">)</button>
-      <button class="calc-btn op" onclick="calcAppend('/')">/</button>
-      <button class="calc-btn" onclick="calcAppend('7')">7</button>
-      <button class="calc-btn" onclick="calcAppend('8')">8</button>
-      <button class="calc-btn" onclick="calcAppend('9')">9</button>
-      <button class="calc-btn op" onclick="calcAppend('*')">×</button>
-      <button class="calc-btn" onclick="calcAppend('4')">4</button>
-      <button class="calc-btn" onclick="calcAppend('5')">5</button>
-      <button class="calc-btn" onclick="calcAppend('6')">6</button>
-      <button class="calc-btn op" onclick="calcAppend('-')">−</button>
-      <button class="calc-btn" onclick="calcAppend('1')">1</button>
-      <button class="calc-btn" onclick="calcAppend('2')">2</button>
-      <button class="calc-btn" onclick="calcAppend('3')">3</button>
-      <button class="calc-btn op" onclick="calcAppend('+')">+</button>
-      <button class="calc-btn" onclick="calcAppend('0')">0</button>
-      <button class="calc-btn" onclick="calcAppend('.')">.</button>
-      <button class="calc-btn" onclick="calcBackspace()">⌫</button>
-      <button class="calc-btn eq" onclick="calcResult()">=</button>
+      <button class="calc-btn clr" onclick="window.calcClear()">C</button>
+      <button class="calc-btn" onclick="window.calcAppend('(')">(</button>
+      <button class="calc-btn" onclick="window.calcAppend(')')">)</button>
+      <button class="calc-btn op" onclick="window.calcAppend('/')">/</button>
+      <button class="calc-btn" onclick="window.calcAppend('7')">7</button>
+      <button class="calc-btn" onclick="window.calcAppend('8')">8</button>
+      <button class="calc-btn" onclick="window.calcAppend('9')">9</button>
+      <button class="calc-btn op" onclick="window.calcAppend('*')">×</button>
+      <button class="calc-btn" onclick="window.calcAppend('4')">4</button>
+      <button class="calc-btn" onclick="window.calcAppend('5')">5</button>
+      <button class="calc-btn" onclick="window.calcAppend('6')">6</button>
+      <button class="calc-btn op" onclick="window.calcAppend('-')">−</button>
+      <button class="calc-btn" onclick="window.calcAppend('1')">1</button>
+      <button class="calc-btn" onclick="window.calcAppend('2')">2</button>
+      <button class="calc-btn" onclick="window.calcAppend('3')">3</button>
+      <button class="calc-btn op" onclick="window.calcAppend('+')">+</button>
+      <button class="calc-btn" onclick="window.calcAppend('0')">0</button>
+      <button class="calc-btn" onclick="window.calcAppend('.')">.</button>
+      <button class="calc-btn" onclick="window.calcBackspace()">⌫</button>
+      <button class="calc-btn eq" onclick="window.calcResult()">=</button>
     </div>
   </div>
 </div>
@@ -422,7 +422,7 @@
 <div class="notification-popup" id="notificationPopup">
   <div class="notification-popup-header">
     <h4><i class="fas fa-bell"></i> Notifications</h4>
-    <button onclick="closeNotificationPopup()"><i class="fas fa-times"></i></button>
+    <button onclick="window.closeNotificationPopup()"><i class="fas fa-times"></i></button>
   </div>
   <div class="notification-list" id="notificationList">
     <div class="no-notifications">Loading...</div>
@@ -497,7 +497,7 @@
     <section class="section-card quick-actions">
       <div class="section-head"><h3>Quick actions</h3><a onclick="window.showPage('profile')">Open profile</a></div>
       <div class="quick-grid">
-        <div class="quick-link" onclick="window.navigateTo('/submit')"><div class="ico"><i class="fas fa-file-alt"></i></div><span>Results</span></div>
+        <div class="quick-link" onclick="window.showPage('submit')"><div class="ico"><i class="fas fa-file-alt"></i></div><span>Results</span></div>
         <div class="quick-link" onclick="window.showPage('ai')"><div class="ico"><i class="fas fa-robot"></i></div><span>AI</span></div>
         <div class="quick-link" onclick="window.showPage('faq')"><div class="ico"><i class="fas fa-question-circle"></i></div><span>FAQ</span></div>
         <div class="quick-link" onclick="window.showPage('chat')"><div class="ico"><i class="fas fa-headset"></i></div><span>Support</span></div>
@@ -933,6 +933,19 @@
     </div>
   </div>
 
+  <!-- ============================================
+       SUBMIT SCREEN (Results)
+       ============================================ -->
+  <div class="screen page-content-only" id="submitScreen">
+    <div class="page-title"><h1><i class="fas fa-file-alt"></i> Results</h1></div>
+    <div id="submitContent">
+      <div class="loading-spin" id="submitLoading">
+        <i class="fas fa-spinner fa-spin"></i>
+        <p style="margin-top:12px">Loading your results...</p>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <!-- ============================================
@@ -948,7 +961,7 @@
     <a href="#" class="nav-item active" onclick="window.showPage('dashboard')" data-page="dashboard"><i class="fas fa-home"></i><span>Home</span></a>
     <a href="#" class="nav-item" onclick="window.showPage('exam')" data-page="exam"><i class="fas fa-pen"></i><span>Exam</span></a>
     <a href="#" class="nav-item" onclick="window.showPage('test')" data-page="test"><i class="fas fa-flask"></i><span>Test</span></a>
-    <a href="#" class="nav-item" onclick="window.showPage('study')" data-page="study"><i class="fas fa-book-open"></i><span>Study</span></a>
+    <a href="#" class="nav-item" onclick="window.showPage('submit')" data-page="submit"><i class="fas fa-file-alt"></i><span>Results</span></a>
     <a href="#" class="nav-item" onclick="window.showPage('profile')" data-page="profile"><i class="fas fa-user"></i><span>Me</span></a>
   </div>
 </nav>
@@ -970,18 +983,14 @@
     "/js/faq.js": "/js/faq.js",
     "/js/leaderboard.js": "/js/leaderboard.js",
     "/js/chat.js": "/js/chat.js",
+    "/js/submit.js": "/js/submit.js",
     "/js/app.js": "/js/app.js"
   }
 }
 </script>
 
 <script type="module">
-// ============================================
-// MAIN APP ENTRY POINT
-// ============================================
 import { initApp } from '/js/app.js';
-
-// Expose critical functions to window for inline onclick handlers
 import * as utils from '/js/utils.js';
 import * as notifications from '/js/notifications.js';
 import * as dashboard from '/js/dashboard.js';
@@ -993,10 +1002,11 @@ import * as ai from '/js/ai.js';
 import * as faq from '/js/faq.js';
 import * as leaderboard from '/js/leaderboard.js';
 import * as chat from '/js/chat.js';
+import * as submit from '/js/submit.js';
 import * as app from '/js/app.js';
 
 // Expose all module functions to window
-Object.assign(window, utils, notifications, dashboard, exam, test, study, profile, ai, faq, leaderboard, chat, app);
+Object.assign(window, utils, notifications, dashboard, exam, test, study, profile, ai, faq, leaderboard, chat, submit, app);
 
 // Initialize the app
 initApp();
