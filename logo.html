@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Logo Manager • OAU CBE Practice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI','Inter',system-ui,-apple-system,sans-serif}
+        :root{
+            --primary:#1e3a8a;
+            --primary-light:#3b82f6;
+            --accent:#10b981;
+            --bg:#0f172a;
+            --bg-soft:#111c33;
+            --card:#1e293b;
+            --card-2:#152033;
+            --border:#334155;
+            --text:#f1f5f9;
+            --text-secondary:#94a3b8;
+            --danger:#ef4444;
+            --success:#10b981;
+            --warning:#f59e0b;
+            --shadow:0 18px 40px rgba(0,0,0,.28);
+            --brand-gradient:linear-gradient(135deg,#1e3a8a,#3b82f6);
+            --radius:24px;
+        }
+        body.light-mode{
+            --bg:#f4f7fb;
+            --bg-soft:#edf3fb;
+            --card:#ffffff;
+            --card-2:#f8fbff;
+            --border:#d7e2ef;
+            --text:#0f172a;
+            --text-secondary:#526173;
+            --shadow:0 16px 36px rgba(15,23,42,.08)
+        }
+        body{background:radial-gradient(circle at top right,rgba(59,130,246,.08),transparent 25%),linear-gradient(180deg,var(--bg),#0b1324 100%);color:var(--text);min-height:100vh;padding:20px}
+        
+        .container{max-width:600px;margin:0 auto;padding:20px 16px 60px}
+        .back-link{display:inline-flex;align-items:center;gap:6px;color:var(--primary-light);text-decoration:none;font-weight:600;font-size:.85rem;margin-bottom:20px;transition:color .2s}
+        .back-link:hover{color:var(--text)}
+        
+        .page-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px 24px;box-shadow:var(--shadow)}
+        .page-title{text-align:center;margin-bottom:24px}
+        .page-title h1{font-size:1.4rem;display:flex;align-items:center;justify-content:center;gap:10px;color:var(--text)}
+        .page-title h1 i{color:var(--primary-light)}
+        .page-title p{color:var(--text-secondary);font-size:.85rem;margin-top:4px}
+        
+        .logo-preview{text-align:center;padding:24px;background:var(--bg-soft);border-radius:16px;border:2px dashed var(--border);margin-bottom:20px;transition:all .3s}
+        .logo-preview.has-logo{border-color:var(--primary-light);background:rgba(59,130,246,.05)}
+        .logo-preview img{max-width:200px;max-height:150px;object-fit:contain;border-radius:8px}
+        .logo-preview .placeholder{color:var(--text-secondary);font-size:.85rem}
+        .logo-preview .placeholder i{font-size:2.5rem;display:block;margin-bottom:8px;opacity:.3}
+        
+        .upload-area{border:2px dashed var(--border);border-radius:16px;padding:30px;text-align:center;cursor:pointer;transition:all .3s;background:var(--bg-soft);margin-bottom:16px}
+        .upload-area:hover{border-color:var(--primary-light);background:rgba(59,130,246,.05)}
+        .upload-area.dragover{border-color:var(--primary-light);background:rgba(59,130,246,.1)}
+        .upload-area i{font-size:2.5rem;color:var(--primary-light);margin-bottom:8px;display:block}
+        .upload-area p{color:var(--text-secondary);font-size:.85rem}
+        .upload-area .sub{font-size:.7rem;color:var(--text-secondary);margin-top:4px}
+        .upload-area input{display:none}
+        
+        .file-info{background:var(--bg-soft);border:1px solid var(--border);border-radius:12px;padding:12px 16px;margin-bottom:16px;display:none;align-items:center;gap:12px}
+        .file-info.show{display:flex}
+        .file-info .name{flex:1;font-weight:500;font-size:.85rem;color:var(--text)}
+        .file-info .size{color:var(--text-secondary);font-size:.75rem}
+        .file-info .remove{background:none;border:none;color:var(--danger);cursor:pointer;font-size:1.1rem;padding:4px}
+        
+        .btn-group{display:flex;gap:10px;flex-wrap:wrap}
+        .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border:none;border-radius:14px;font-weight:700;font-size:.85rem;cursor:pointer;transition:all .2s;font-family:inherit;justify-content:center;flex:1;min-width:120px}
+        .btn-primary{background:var(--brand-gradient);color:#fff}
+        .btn-primary:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 25px rgba(59,130,246,.35)}
+        .btn-primary:disabled{opacity:.6;cursor:not-allowed}
+        .btn-danger{background:var(--danger);color:#fff}
+        .btn-danger:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 25px rgba(239,68,68,.35)}
+        .btn-danger:disabled{opacity:.6;cursor:not-allowed}
+        .btn-outline{background:transparent;border:2px solid var(--border);color:var(--text)}
+        .btn-outline:hover:not(:disabled){background:var(--card-2);border-color:var(--primary-light)}
+        .btn-outline:disabled{opacity:.6;cursor:not-allowed}
+        .btn-success{background:var(--success);color:#fff}
+        .btn-success:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 25px rgba(16,185,129,.35)}
+        .btn-success:disabled{opacity:.6;cursor:not-allowed}
+        
+        .btn .spinner{display:none;width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite}
+        .btn.loading .spinner{display:inline-block}
+        .btn.loading .btn-text{display:none}
+        .btn.loading .btn-icon{display:none}
+        
+        @keyframes spin{to{transform:rotate(360deg)}}
+        
+        .alert{padding:12px 16px;border-radius:12px;margin-bottom:16px;display:none;font-size:.82rem;text-align:center}
+        .alert-success{background:rgba(16,185,129,.12);color:var(--success);border:1px solid rgba(16,185,129,.2)}
+        .alert-error{background:rgba(239,68,68,.12);color:var(--danger);border:1px solid rgba(239,68,68,.2)}
+        .alert.show{display:block}
+        
+        .instructions{margin-top:16px;padding:16px;background:var(--bg-soft);border-radius:12px;border:1px solid var(--border)}
+        .instructions h4{font-size:.85rem;color:var(--text);margin-bottom:8px}
+        .instructions ul{list-style:none;padding:0}
+        .instructions ul li{color:var(--text-secondary);font-size:.75rem;padding:4px 0;display:flex;align-items:center;gap:8px}
+        .instructions ul li i{color:var(--primary-light);width:16px;font-size:.7rem}
+        
+        .current-logo-info{background:var(--bg-soft);border-radius:12px;padding:12px 16px;margin-bottom:16px;border:1px solid var(--border);display:none}
+        .current-logo-info.show{display:block}
+        .current-logo-info .label{font-size:.7rem;color:var(--text-secondary);font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+        .current-logo-info .value{font-size:.8rem;color:var(--text);margin-top:2px}
+        
+        .toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 20px;box-shadow:0 8px 30px rgba(0,0,0,.4);z-index:9999;font-size:.85rem;color:var(--text);max-width:90%;opacity:0;transition:all .3s ease;pointer-events:none;display:flex;align-items:center;gap:10px}
+        .toast.show{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
+        .toast .toast-icon{font-size:1.2rem}
+        .toast .toast-icon.success{color:var(--success)}
+        .toast .toast-icon.error{color:var(--danger)}
+        .toast .toast-icon.info{color:var(--primary-light)}
+        
+        @media(max-width:480px){.container{padding:12px 10px 40px}.page-card{padding:20px 16px}.btn{min-width:100px;padding:10px 14px;font-size:.78rem}}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="/app" class="back-link"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+    
+    <div class="page-card">
+        <div class="page-title">
+            <h1><i class="fas fa-image"></i> Logo Manager</h1>
+            <p>Upload a custom logo to display across all pages</p>
+        </div>
+
+        <div class="alert alert-success" id="successAlert"></div>
+        <div class="alert alert-error" id="errorAlert"></div>
+
+        <!-- Current Logo Preview -->
+        <div class="logo-preview" id="logoPreview">
+            <div class="placeholder" id="placeholderLogo">
+                <i class="fas fa-image"></i>
+                <p>No custom logo uploaded</p>
+                <span style="font-size:.7rem;color:var(--text-secondary)">Default OAU crest is shown on pages</span>
+            </div>
+            <img id="logoImage" style="display:none" alt="Current Logo">
+        </div>
+
+        <!-- Upload Area -->
+        <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <p><strong>Click to upload</strong> or drag & drop</p>
+            <div class="sub">PNG, JPG, WebP, GIF, SVG • Max 5MB</div>
+            <input type="file" id="fileInput" accept="image/*" onchange="handleFileSelect(event)">
+        </div>
+
+        <!-- File Info -->
+        <div class="file-info" id="fileInfo">
+            <i class="fas fa-file-image" style="color:var(--primary-light);font-size:1.2rem"></i>
+            <span class="name" id="fileName">image.png</span>
+            <span class="size" id="fileSize">0 KB</span>
+            <button class="remove" onclick="clearFile()"><i class="fas fa-times"></i></button>
+        </div>
+
+        <!-- Current Logo Info -->
+        <div class="current-logo-info" id="currentLogoInfo">
+            <div class="label">Current Logo</div>
+            <div class="value" id="currentLogoText">No custom logo uploaded</div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="btn-group">
+            <button class="btn btn-primary" id="uploadBtn" onclick="uploadLogo()" disabled>
+                <span class="spinner"></span>
+                <span class="btn-icon"><i class="fas fa-upload"></i></span>
+                <span class="btn-text">Upload Logo</span>
+            </button>
+            <button class="btn btn-danger" id="deleteBtn" onclick="deleteLogo()" style="display:none">
+                <span class="spinner"></span>
+                <span class="btn-icon"><i class="fas fa-trash"></i></span>
+                <span class="btn-text">Remove Logo</span>
+            </button>
+            <button class="btn btn-outline" onclick="loadCurrentLogo()">
+                <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+        </div>
+
+        <!-- Instructions -->
+        <div class="instructions">
+            <h4><i class="fas fa-info-circle" style="color:var(--primary-light)"></i> How it works</h4>
+            <ul>
+                <li><i class="fas fa-check-circle"></i> Upload any image (PNG, JPG, WebP, GIF, SVG)</li>
+                <li><i class="fas fa-check-circle"></i> Logo appears on all pages (Login, Register, App, etc.)</li>
+                <li><i class="fas fa-check-circle"></i> Default OAU crest is shown if no custom logo</li>
+                <li><i class="fas fa-check-circle"></i> Changes reflect immediately across the app</li>
+                <li><i class="fas fa-check-circle"></i> Recommended size: 72x72px or larger (square)</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Toast Notification -->
+<div class="toast" id="toast">
+    <span class="toast-icon" id="toastIcon"><i class="fas fa-info-circle"></i></span>
+    <span id="toastMessage">Loading...</span>
+</div>
+
+<script>
+// ==================== CONFIGURATION ====================
+const API_BASE = 'https://oau-exam-api.onrender.com/api';
+const TOKEN = localStorage.getItem('oau_token');
+
+if (!TOKEN) {
+    window.location.href = '/login';
+}
+
+let selectedFile = null;
+let isUploading = false;
+let isDeleting = false;
+let currentLogoUrl = null;
+
+// ==================== DOM REFS ====================
+const $ = id => document.getElementById(id);
+const qs = (sel, ctx = document) => ctx.querySelector(sel);
+
+// ==================== TOAST ====================
+function showToast(message, type = 'info') {
+    const toast = $('toast');
+    const icon = $('toastIcon');
+    const msg = $('toastMessage');
+    
+    msg.textContent = message;
+    icon.className = 'toast-icon ' + type;
+    const icons = {
+        success: '<i class="fas fa-check-circle"></i>',
+        error: '<i class="fas fa-exclamation-circle"></i>',
+        info: '<i class="fas fa-info-circle"></i>'
+    };
+    icon.innerHTML = icons[type] || icons.info;
+    
+    toast.classList.add('show');
+    clearTimeout(window.toastTimeout);
+    window.toastTimeout = setTimeout(() => toast.classList.remove('show'), 4000);
+}
+
+// ==================== SHOW ALERTS ====================
+function showAlert(type, msg) {
+    const el = $(type + 'Alert');
+    el.textContent = msg;
+    el.classList.add('show');
+    setTimeout(() => el.classList.remove('show'), 5000);
+}
+
+function hideAlerts() {
+    $('successAlert').classList.remove('show');
+    $('errorAlert').classList.remove('show');
+}
+
+// ==================== LOAD CURRENT LOGO ====================
+async function loadCurrentLogo() {
+    try {
+        const response = await fetch(API_BASE + '/logo/get-logo');
+        const data = await response.json();
+        
+        const preview = $('logoPreview');
+        const img = $('logoImage');
+        const placeholder = $('placeholderLogo');
+        const info = $('currentLogoInfo');
+        const infoText = $('currentLogoText');
+        const deleteBtn = $('deleteBtn');
+        
+        if (data.success && data.logoUrl) {
+            currentLogoUrl = data.logoUrl;
+            img.src = data.logoUrl + '?t=' + Date.now();
+            img.style.display = 'block';
+            placeholder.style.display = 'none';
+            preview.classList.add('has-logo');
+            
+            infoText.textContent = data.logoUrl.split('/').pop() || 'Custom logo uploaded';
+            info.classList.add('show');
+            deleteBtn.style.display = 'inline-flex';
+            
+            showToast('✅ Logo loaded successfully', 'success');
+        } else {
+            currentLogoUrl = null;
+            img.style.display = 'none';
+            placeholder.style.display = 'block';
+            preview.classList.remove('has-logo');
+            
+            infoText.textContent = 'No custom logo uploaded';
+            info.classList.remove('show');
+            deleteBtn.style.display = 'none';
+        }
+    } catch (e) {
+        console.error('Load logo error:', e);
+    }
+}
+
+// ==================== HANDLE FILE SELECT ====================
+function handleFileSelect(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    
+    // Validate size (5MB)
+    if (file.size > 5 * 1024 * 1024) {
+        showAlert('error', 'File too large! Maximum 5MB allowed.');
+        clearFile();
+        return;
+    }
+    
+    // Validate type
+    const validTypes = ['image/png', 'image/jpeg', 'image/webp', 'image/gif', 'image/svg+xml'];
+    if (!validTypes.includes(file.type)) {
+        showAlert('error', 'Invalid file type. Please upload PNG, JPG, WebP, GIF, or SVG.');
+        clearFile();
+        return;
+    }
+    
+    selectedFile = file;
+    
+    // Show file info
+    const info = $('fileInfo');
+    $('fileName').textContent = file.name;
+    $('fileSize').textContent = (file.size / 1024).toFixed(1) + ' KB';
+    info.classList.add('show');
+    
+    // Enable upload button
+    $('uploadBtn').disabled = false;
+    $('uploadBtn').title = 'Upload ' + file.name;
+    
+    // Preview selected file
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const img = $('logoImage');
+        img.src = e.target.result;
+        img.style.display = 'block';
+        $('placeholderLogo').style.display = 'none';
+        $('logoPreview').classList.add('has-logo');
+    };
+    reader.readAsDataURL(file);
+    
+    hideAlerts();
+    showToast('📎 ' + file.name + ' selected', 'info');
+}
+
+// ==================== CLEAR FILE ====================
+function clearFile() {
+    selectedFile = null;
+    $('fileInfo').classList.remove('show');
+    $('uploadBtn').disabled = true;
+    $('fileInput').value = '';
+    
+    // Revert preview to current logo
+    if (currentLogoUrl) {
+        $('logoImage').src = currentLogoUrl + '?t=' + Date.now();
+        $('logoImage').style.display = 'block';
+        $('placeholderLogo').style.display = 'none';
+        $('logoPreview').classList.add('has-logo');
+    } else {
+        $('logoImage').style.display = 'none';
+        $('placeholderLogo').style.display = 'block';
+        $('logoPreview').classList.remove('has-logo');
+    }
+    
+    hideAlerts();
+}
+
+// ==================== UPLOAD LOGO ====================
+async function uploadLogo() {
+    if (!selectedFile || isUploading) return;
+    
+    isUploading = true;
+    const btn = $('uploadBtn');
+    btn.classList.add('loading');
+    btn.disabled = true;
+    hideAlerts();
+    
+    const formData = new FormData();
+    formData.append('logo', selectedFile);
+    
+    try {
+        const response = await fetch(API_BASE + '/logo/upload-logo', {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + TOKEN
+            },
+            body: formData
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            showAlert('success', '✅ Logo uploaded successfully! Refreshing...');
+            showToast('✅ Logo uploaded successfully!', 'success');
+            
+            // Clear file state
+            selectedFile = null;
+            $('fileInfo').classList.remove('show');
+            $('fileInput').value = '';
+            
+            // Reload logo
+            await loadCurrentLogo();
+            
+            // Refresh the page after a moment to show logo everywhere
+            setTimeout(() => {
+                // Trigger logo update on all pages
+                localStorage.setItem('logoUpdated', Date.now().toString());
+                window.location.reload();
+            }, 1000);
+        } else {
+            showAlert('error', '❌ ' + (data.error || 'Upload failed'));
+            showToast('Upload failed: ' + (data.error || 'Unknown error'), 'error');
+        }
+    } catch (e) {
+        console.error('Upload error:', e);
+        showAlert('error', '❌ Connection error. Please try again.');
+        showToast('Connection error. Please try again.', 'error');
+    }
+    
+    isUploading = false;
+    btn.classList.remove('loading');
+    btn.disabled = false;
+}
+
+// ==================== DELETE LOGO ====================
+async function deleteLogo() {
+    if (isDeleting) return;
+    if (!confirm('Remove the custom logo? The default OAU crest will be restored.')) return;
+    
+    isDeleting = true;
+    const btn = $('deleteBtn');
+    btn.classList.add('loading');
+    btn.disabled = true;
+    hideAlerts();
+    
+    try {
+        const response = await fetch(API_BASE + '/logo/delete-logo', {
+            method: 'DELETE',
+            headers: {
+                'Authorization': 'Bearer ' + TOKEN
+            }
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            showAlert('success', '✅ Logo removed successfully!');
+            showToast('Logo removed successfully', 'success');
+            
+            // Reload logo
+            await loadCurrentLogo();
+            
+            // Refresh to show default logo
+            setTimeout(() => {
+                localStorage.setItem('logoUpdated', Date.now().toString());
+                window.location.reload();
+            }, 1000);
+        } else {
+            showAlert('error', '❌ ' + (data.error || 'Delete failed'));
+        }
+    } catch (e) {
+        console.error('Delete error:', e);
+        showAlert('error', '❌ Connection error. Please try again.');
+    }
+    
+    isDeleting = false;
+    btn.classList.remove('loading');
+    btn.disabled = false;
+}
+
+// ==================== DRAG & DROP ====================
+function initDragDrop() {
+    const area = $('uploadArea');
+    
+    area.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        this.classList.add('dragover');
+    });
+    
+    area.addEventListener('dragleave', function(e) {
+        e.preventDefault();
+        this.classList.remove('dragover');
+    });
+    
+    area.addEventListener('drop', function(e) {
+        e.preventDefault();
+        this.classList.remove('dragover');
+        
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            const input = $('fileInput');
+            const dt = new DataTransfer();
+            dt.items.add(files[0]);
+            input.files = dt.files;
+            input.dispatchEvent(new Event('change'));
+        }
+    });
+}
+
+// ==================== THEME ====================
+function initTheme() {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') {
+        document.body.classList.add('light-mode');
+    }
+}
+initTheme();
+
+// ==================== INIT ====================
+document.addEventListener('DOMContentLoaded', function() {
+    loadCurrentLogo();
+    initDragDrop();
+    
+    // Check for logo update signal from other tabs
+    window.addEventListener('storage', function(e) {
+        if (e.key === 'logoUpdated') {
+            loadCurrentLogo();
+            showToast('🔄 Logo updated', 'info');
+        }
+    });
+    
+    // Also check on focus
+    document.addEventListener('visibilitychange', function() {
+        if (!document.hidden) {
+            // Check if logo might have changed
+            const logoUpdated = localStorage.getItem('logoUpdated');
+            if (logoUpdated) {
+                loadCurrentLogo();
+                // Clear the flag after checking
+                setTimeout(() => localStorage.removeItem('logoUpdated'), 1000);
+            }
+        }
+    });
+});
+
+// ==================== EXPOSE GLOBALLY ====================
+window.handleFileSelect = handleFileSelect;
+window.clearFile = clearFile;
+window.uploadLogo = uploadLogo;
+window.deleteLogo = deleteLogo;
+window.loadCurrentLogo = loadCurrentLogo;
+</script>
+</body>
+</html>
