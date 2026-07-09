@@ -1,306 +1,400 @@
 // ============================================
-// SUBMIT MODULE - Results Page
+// SUBMIT MODULE - Results Page with List View
 // ============================================
 
-import { apiFetch, $id, setText, escapeHtml, showToast, showLoading, hideLoading, getToken, API_BASE } from './utils.js';
+import { apiFetch, $id, setText, escapeHtml, showToast, showLoading, hideLoading, getToken, API_BASE, timeAgo } from './utils.js';
 
 const RESULT_STORAGE_KEY = 'lastExamResult';
 const RESULT_TIMESTAMP_KEY = 'lastResultTimestamp';
 
-// ==================== SAVE RESULT PERSISTENTLY ====================
-function saveResultPersistent(resultData) {
-  try {
-    localStorage.setItem(RESULT_STORAGE_KEY, JSON.stringify(resultData));
-    localStorage.setItem(RESULT_TIMESTAMP_KEY, Date.now().toString());
-  } catch(e) {
-    console.error('Failed to save result:', e);
-  }
-}
-
-// ==================== GET PERSISTENT RESULT ====================
-function getPersistentResult() {
-  try {
-    const data = localStorage.getItem(RESULT_STORAGE_KEY);
-    if (data) {
-      return JSON.parse(data);
-    }
-  } catch(e) {
-    console.error('Failed to get persistent result:', e);
-  }
-  return null;
-}
+let allResults = [];
+let expandedResultId = null;
 
 // ==================== GET RESULT DATA ====================
-function getResultData() {
-  // 1. Check sessionStorage for new result (from current session)
-  let result = sessionStorage.getItem('examResult') || sessionStorage.getItem('testResult');
-  if (result) {
+async function fetchUserResults() {
     try {
-      const parsed = JSON.parse(result);
-      saveResultPersistent(parsed);
-      sessionStorage.removeItem('examResult');
-      sessionStorage.removeItem('testResult');
-      return parsed;
-    } catch(e) {}
-  }
-  
-  // 2. Check localStorage for pending submission
-  let pending = localStorage.getItem('pendingExamSubmission') || localStorage.getItem('pendingTestSubmission');
-  if (pending) {
-    try {
-      const submission = JSON.parse(pending);
-      if (submission.data) {
-        const data = submission.data;
-        const resultData = {
-          course: data.courseCode,
-          correctCount: data.correctCount,
-          totalQuestions: data.totalQuestions,
-          percentage: data.percentage,
-          timeSpent: data.timeSpent,
-          mode: data.mode || 'exam',
-          questions: data.questions ? data.questions.map((q, i) => ({
-            text: q.text,
-            options: q.options,
-            correctOption: q.correctOption,
-            userAnswer: data.answers ? data.answers[i] : null,
-            explanation: q.explanation || ''
-          })) : null
-        };
-        saveResultPersistent(resultData);
-        localStorage.removeItem('pendingExamSubmission');
-        localStorage.removeItem('pendingTestSubmission');
-        return resultData;
-      }
-    } catch(e) {}
-  }
-  
-  // 3. Check persistent storage (last saved result)
-  const persistentResult = getPersistentResult();
-  if (persistentResult) {
-    return persistentResult;
-  }
-  
-  return null;
+        const token = getToken();
+        if (!token) return [];
+        
+        const response = await fetch(API_BASE + '/exams/history', { 
+            headers: { 'Authorization': 'Bearer ' + token } 
+        });
+        
+        if (response.ok) {
+            const data = await response.json();
+            if (data.success && data.scores) {
+                return data.scores;
+            }
+        }
+        return [];
+    } catch(e) {
+        console.error('Backend fetch error:', e);
+        return [];
+    }
 }
 
 // ==================== LOAD & DISPLAY ====================
 export async function loadSubmitPage() {
-  const loading = $id('submitLoading');
-  const content = $id('submitContent');
-  
-  if (!content) return;
-  
-  // First try to get result from storage
-  let result = getResultData();
-  
-  // If no result in storage, try backend history
-  if (!result) {
-    try {
-      const token = getToken();
-      if (!token) {
+    const loading = $id('submitLoading');
+    const content = $id('submitContent');
+    
+    if (!content) return;
+    
+    // Try to get results from API
+    let results = await fetchUserResults();
+    
+    // If no results from API, try storage
+    if (!results || results.length === 0) {
+        // Check sessionStorage
+        let result = sessionStorage.getItem('examResult') || sessionStorage.getItem('testResult');
+        if (result) {
+            try {
+                const parsed = JSON.parse(result);
+                results = [parsed];
+                sessionStorage.removeItem('examResult');
+                sessionStorage.removeItem('testResult');
+            } catch(e) {}
+        }
+        
+        // Check localStorage pending submission
+        if (!results || results.length === 0) {
+            let pending = localStorage.getItem('pendingExamSubmission') || localStorage.getItem('pendingTestSubmission');
+            if (pending) {
+                try {
+                    const submission = JSON.parse(pending);
+                    if (submission.data) {
+                        const data = submission.data;
+                        results = [{
+                            courseCode: data.courseCode,
+                            correctAnswers: data.correctCount,
+                            totalQuestions: data.totalQuestions,
+                            percentage: data.percentage,
+                            timeSpent: data.timeSpent,
+                            mode: data.mode || 'exam',
+                            date: new Date().toISOString(),
+                            questions: data.questions ? data.questions.map((q, i) => ({
+                                text: q.text,
+                                options: q.options,
+                                correctOption: q.correctOption,
+                                userAnswer: data.answers ? data.answers[i] : null,
+                                explanation: q.explanation || ''
+                            })) : null
+                        }];
+                        localStorage.removeItem('pendingExamSubmission');
+                        localStorage.removeItem('pendingTestSubmission');
+                    }
+                } catch(e) {}
+            }
+        }
+    }
+    
+    // Store all results
+    allResults = results || [];
+    
+    if (loading) loading.style.display = 'none';
+    
+    if (!allResults || allResults.length === 0) {
         showEmptyState(content);
         return;
-      }
-      
-      const response = await fetch(API_BASE + '/exams/history', { 
-        headers: { 'Authorization': 'Bearer ' + token } 
-      });
-      
-      if (response.ok) {
-        const data = await response.json();
-        if (data.success && data.scores && data.scores.length > 0) {
-          const latest = data.scores[data.scores.length - 1];
-          result = {
-            course: latest.courseCode || 'Unknown',
-            correctCount: latest.correctAnswers || latest.score || 0,
-            totalQuestions: latest.totalQuestions || 0,
-            percentage: latest.percentage || 0,
-            timeSpent: latest.timeSpent || 0,
-            mode: latest.mode || 'exam',
-            questions: null
-          };
-          saveResultPersistent(result);
-        }
-      }
-    } catch(e) {
-      console.error('Backend fetch error:', e);
     }
-  }
-  
-  // If still no result, show empty state
-  if (!result) {
-    showEmptyState(content);
-    return;
-  }
-  
-  displayResult(content, result);
+    
+    // Sort by date (newest first)
+    allResults.sort((a, b) => new Date(b.date) - new Date(a.date));
+    
+    // Display the list
+    displayResultList(content);
 }
 
 function showEmptyState(container) {
-  if (!container) return;
-  const loading = $id('submitLoading');
-  if (loading) loading.style.display = 'none';
-  
-  container.innerHTML = `
-    <div class="empty-state" style="padding:60px 20px;text-align:center">
-      <i class="fas fa-file-alt" style="font-size:3rem;display:block;margin-bottom:16px;opacity:.5"></i>
-      <h3 style="font-size:1.2rem;margin-bottom:8px;color:var(--text)">No Results Found</h3>
-      <p style="color:var(--text-secondary);margin-bottom:16px">We couldn't find any exam or test data.</p>
-      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px">
-        <button class="btn btn-primary" onclick="window.showPage('exam')"><i class="fas fa-pen"></i> Take Exam</button>
-        <button class="btn btn-test" onclick="window.showPage('test')"><i class="fas fa-flask"></i> Practice Test</button>
-        <button class="btn btn-soft" onclick="window.showPage('dashboard')"><i class="fas fa-home"></i> Dashboard</button>
-      </div>
-    </div>
-  `;
+    if (!container) return;
+    const loading = $id('submitLoading');
+    if (loading) loading.style.display = 'none';
+    
+    container.innerHTML = `
+        <div class="empty-state" style="padding:60px 20px;text-align:center">
+            <i class="fas fa-file-alt" style="font-size:3rem;display:block;margin-bottom:16px;opacity:.5"></i>
+            <h3 style="font-size:1.2rem;margin-bottom:8px;color:var(--text)">No Results Found</h3>
+            <p style="color:var(--text-secondary);margin-bottom:16px">You haven't taken any exams or tests yet.</p>
+            <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px">
+                <button class="btn btn-primary" onclick="window.showPage('exam')"><i class="fas fa-pen"></i> Take Exam</button>
+                <button class="btn btn-test" onclick="window.showPage('test')"><i class="fas fa-flask"></i> Practice Test</button>
+                <button class="btn btn-soft" onclick="window.showPage('dashboard')"><i class="fas fa-home"></i> Dashboard</button>
+            </div>
+        </div>
+    `;
 }
 
-function displayResult(container, result) {
-  const loading = $id('submitLoading');
-  if (loading) loading.style.display = 'none';
-  
-  const percentage = result.percentage || 0;
-  let scoreClass = 'low', grade = 'F';
-  if (percentage >= 90) { scoreClass = 'high'; grade = 'A+'; }
-  else if (percentage >= 80) { scoreClass = 'high'; grade = 'A'; }
-  else if (percentage >= 70) { scoreClass = 'high'; grade = 'B'; }
-  else if (percentage >= 60) { scoreClass = 'medium'; grade = 'C'; }
-  else if (percentage >= 50) { scoreClass = 'medium'; grade = 'D'; }
-  
-  const timeSpent = result.timeSpent || 0;
-  const minutes = Math.floor(timeSpent / 60000);
-  const seconds = Math.floor((timeSpent % 60000) / 1000);
-  const timeString = `${minutes}m ${seconds}s`;
-  
-  const isExam = result.mode === 'exam';
-  const modeLabel = isExam ? '📝 Exam Mode' : '🧪 Test Mode';
-  const modeClass = isExam ? 'exam' : 'test';
-  
-  let encClass = 'keep', encMessage = '💪 Keep practicing! Review the explanations and try again. Every attempt makes you better!';
-  if (percentage >= 80) { encClass = 'great'; encMessage = '🎉 Outstanding performance! You\'re a champion! Keep up the excellent work!'; }
-  else if (percentage >= 70) { encClass = 'great'; encMessage = '🌟 Great work! You\'re well prepared. A little more practice and you\'ll ace it!'; }
-  else if (percentage >= 60) { encClass = 'good'; encMessage = '👍 Good effort! You\'re on the right track. Focus on the questions you missed.'; }
-  else if (percentage >= 50) { encClass = 'good'; encMessage = '📚 Nice try! Review the explanations and practice more. You\'re getting there!'; }
-  
-  // Question review section
-  let questionsHtml = '';
-  if (result.questions && result.questions.length > 0) {
-    const correctCount = result.questions.filter(q => q.userAnswer === q.correctOption).length;
-    const wrongCount = result.questions.filter(q => q.userAnswer !== null && q.userAnswer !== q.correctOption).length;
-    const unansweredCount = result.questions.filter(q => q.userAnswer === null || q.userAnswer === undefined).length;
+function displayResultList(container) {
+    if (!container) return;
     
-    questionsHtml = `
-      <div style="display:flex;justify-content:space-between;align-items:center;margin:20px 0 12px;flex-wrap:wrap;gap:8px">
-        <h3 style="font-size:clamp(.9rem,1.3vw,1rem);color:var(--text);display:flex;align-items:center;gap:8px">
-          <i class="fas fa-list-check"></i> Question Review
-        </h3>
-        <span style="font-size:clamp(.7rem,1vw,.78rem);color:var(--text-secondary)">✅ ${correctCount} | ❌ ${wrongCount} | ⬜ ${unansweredCount}</span>
-      </div>`;
+    const results = allResults.slice(0, 10); // Show latest 10
     
-    questionsHtml += result.questions.map((q, idx) => {
-      const isCorrect = q.userAnswer === q.correctOption;
-      const isUnanswered = q.userAnswer === null || q.userAnswer === undefined;
-      const userLetter = !isUnanswered ? String.fromCharCode(65 + q.userAnswer) : 'Not answered';
-      const correctLetter = String.fromCharCode(65 + q.correctOption);
-      
-      let statusClass = 'wrong', statusText = '❌ Wrong';
-      if (isCorrect) { statusClass = 'correct'; statusText = '✅ Correct'; }
-      if (isUnanswered) { statusClass = 'unanswered'; statusText = '⬜ Unanswered'; }
-      
-      let optionsHtml = '';
-      if (q.options && q.options.length) {
-        optionsHtml = '<div style="margin-left:clamp(8px,2vw,16px)">';
-        q.options.forEach((opt, optIdx) => {
-          let optClass = '';
-          if (optIdx === q.correctOption) optClass = 'correct-answer';
-          if (optIdx === q.userAnswer && optIdx !== q.correctOption) optClass = 'user-wrong';
-          const icon = optIdx === q.correctOption ? '✓' : (optIdx === q.userAnswer && optIdx !== q.correctOption ? '✗' : '');
-          optionsHtml += `<div style="font-size:clamp(.75rem,1.1vw,.82rem);padding:5px 0;color:var(--text2);display:flex;align-items:center;gap:8px;line-height:1.5" class="${optClass}">
-            <span style="font-size:.7rem;width:16px;text-align:center;flex-shrink:0">${icon}</span>
-            ${String.fromCharCode(65+optIdx)}. ${opt}
-          </div>`;
-        });
-        optionsHtml += `</div>`;
-        optionsHtml += `<div style="font-size:.75rem;margin-top:8px;padding:8px 12px;background:var(--bg);border-radius:8px;color:var(--text2);line-height:1.5">
-          Your answer: <strong style="color:${isCorrect ? 'var(--success)' : isUnanswered ? 'var(--warning)' : 'var(--danger)'}">${userLetter}</strong> | Correct: <strong style="color:var(--success)">${correctLetter}</strong>
-        </div>`;
-      }
-      
-      let explanationHtml = '';
-      if (q.explanation && q.explanation.trim()) {
-        explanationHtml = `<div style="background:var(--bg);border-radius:10px;padding:clamp(8px,1.5vw,12px);margin-top:8px;font-size:clamp(.72rem,1vw,.78rem);color:var(--text2);border-left:3px solid var(--primary-light);line-height:1.6">
-          <i class="fas fa-info-circle" style="color:var(--primary-light);margin-right:6px"></i> ${q.explanation}
-        </div>`;
-      }
-      
-      return `<div style="background:var(--card);border-radius:16px;padding:clamp(14px,2vw,18px);margin-bottom:12px;border:1px solid var(--border);border-left:4px solid ${isCorrect ? 'var(--success)' : isUnanswered ? 'var(--warning)' : 'var(--danger)'}">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;gap:8px">
-          <div style="font-weight:600;font-size:clamp(.82rem,1.3vw,.92rem);color:var(--text);flex:1;line-height:1.6">${idx + 1}. ${q.text}</div>
-          <span style="font-size:.7rem;padding:3px 10px;border-radius:12px;font-weight:600;white-space:nowrap;flex-shrink:0;background:${isCorrect ? 'rgba(16,185,129,.15)' : isUnanswered ? 'rgba(245,158,11,.15)' : 'rgba(239,68,68,.15)'};color:${isCorrect ? 'var(--success)' : isUnanswered ? 'var(--warning)' : 'var(--danger)'}">${statusText}</span>
+    let html = `
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px">
+            <h2 style="font-size:1rem;color:var(--text);display:flex;align-items:center;gap:8px">
+                <i class="fas fa-list"></i> Recent Results
+                <span style="font-size:.7rem;color:var(--text-secondary);font-weight:400">(${allResults.length} total)</span>
+            </h2>
+            <button class="btn btn-soft btn-sm" onclick="window.clearAllResults()" style="font-size:.7rem">
+                <i class="fas fa-trash"></i> Clear All
+            </button>
         </div>
-        ${optionsHtml}
-        ${explanationHtml}
-      </div>`;
-    }).join('');
-  } else {
-    questionsHtml = `<p style="color:var(--text2);text-align:center;padding:20px">📋 Detailed question review not available for this session.</p>`;
-  }
-  
-  container.innerHTML = `
-    <div style="background:var(--card);border-radius:20px;padding:clamp(16px,3vw,28px);margin-bottom:20px;border:1px solid var(--border);animation:fadeIn .4s ease">
-      <div style="text-align:center">
-        <span style="display:inline-block;padding:6px 16px;border-radius:20px;font-size:.75rem;font-weight:600;background:${isExam ? 'rgba(59,130,246,.15)' : 'rgba(167,139,250,.15)'};color:${isExam ? 'var(--primary-light)' : '#a78bfa'}">${modeLabel}</span>
-      </div>
-      <div style="font-size:clamp(1.1rem,2vw,1.4rem);font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:10px;color:var(--text);justify-content:center">
-        <i class="fas ${isExam ? 'fa-file-alt' : 'fa-flask'}" style="color:${isExam ? 'var(--primary-light)' : '#a78bfa'}"></i>
-        ${result.course || 'Results'}
-      </div>
-      <div style="width:clamp(120px,20vw,150px);height:clamp(120px,20vw,150px);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 16px;font-size:clamp(2rem,3vw,2.8rem);font-weight:800;background:${percentage >= 70 ? 'rgba(16,185,129,.15)' : percentage >= 50 ? 'rgba(245,158,11,.15)' : 'rgba(239,68,68,.15)'};color:${percentage >= 70 ? 'var(--success)' : percentage >= 50 ? 'var(--warning)' : 'var(--danger)'};border:3px solid ${percentage >= 70 ? 'var(--success)' : percentage >= 50 ? 'var(--warning)' : 'var(--danger)'}">
-        ${percentage}%
-        <span style="font-size:clamp(.75rem,1.2vw,.9rem);font-weight:600;margin-top:2px">Grade: ${grade}</span>
-      </div>
-      <div style="text-align:center;padding:16px;margin:12px 0;border-radius:12px;font-size:clamp(.8rem,1.2vw,.9rem);font-weight:500;line-height:1.5;background:${encClass === 'great' ? 'rgba(16,185,129,.1)' : encClass === 'good' ? 'rgba(245,158,11,.1)' : 'rgba(239,68,68,.1)'};color:${encClass === 'great' ? 'var(--success)' : encClass === 'good' ? 'var(--warning)' : 'var(--danger)'};border:1px solid ${encClass === 'great' ? 'rgba(16,185,129,.3)' : encClass === 'good' ? 'rgba(245,158,11,.3)' : 'rgba(239,68,68,.3)'}">${encMessage}</div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,1.5vw,12px);margin:16px 0">
-        <div style="background:var(--bg);border-radius:12px;padding:clamp(12px,2vw,16px) 10px;text-align:center;border:1px solid var(--border)">
-          <div style="font-size:clamp(1.1rem,1.8vw,1.4rem);font-weight:800;color:var(--primary-light)">${result.correctCount || 0}/${result.totalQuestions || 0}</div>
-          <div style="font-size:clamp(.62rem,1vw,.68rem);color:var(--text2);margin-top:4px">✅ Correct/Total</div>
+        <div style="display:grid;gap:10px">
+    `;
+    
+    results.forEach((result, index) => {
+        const isExpanded = expandedResultId === index;
+        const percentage = result.percentage || 0;
+        const isExam = result.mode === 'exam';
+        const modeLabel = isExam ? '📝 Exam' : '🧪 Test';
+        const modeColor = isExam ? 'var(--primary-light)' : '#a78bfa';
+        const date = result.date ? new Date(result.date) : new Date();
+        const timeString = result.timeSpent ? `${Math.floor(result.timeSpent / 60000)}m ${Math.floor((result.timeSpent % 60000) / 1000)}s` : '—';
+        const courseName = result.courseCode || result.course || 'Unknown Course';
+        
+        let grade = 'F';
+        if (percentage >= 90) grade = 'A+';
+        else if (percentage >= 80) grade = 'A';
+        else if (percentage >= 70) grade = 'B';
+        else if (percentage >= 60) grade = 'C';
+        else if (percentage >= 50) grade = 'D';
+        
+        let scoreClass = 'low';
+        if (percentage >= 70) scoreClass = 'high';
+        else if (percentage >= 50) scoreClass = 'medium';
+        
+        let detailsHtml = '';
+        if (isExpanded) {
+            detailsHtml = buildResultDetails(result);
+        }
+        
+        html += `
+            <div style="background:var(--card);border-radius:16px;border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:all .2s" 
+                 onclick="window.toggleResultExpand(${index})">
+                <div style="padding:14px 16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+                    <div style="display:flex;align-items:center;gap:12px;flex:1;min-width:0">
+                        <div style="width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;flex-shrink:0;background:${percentage >= 70 ? 'rgba(16,185,129,.15)' : percentage >= 50 ? 'rgba(245,158,11,.15)' : 'rgba(239,68,68,.15)'};color:${percentage >= 70 ? 'var(--success)' : percentage >= 50 ? 'var(--warning)' : 'var(--danger)'}">
+                            ${percentage}%
+                        </div>
+                        <div style="flex:1;min-width:0">
+                            <div style="font-weight:600;font-size:.85rem;color:var(--text);display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+                                ${courseName}
+                                <span style="font-size:.6rem;padding:2px 8px;border-radius:12px;background:${modeColor}20;color:${modeColor}">${modeLabel}</span>
+                            </div>
+                            <div style="font-size:.65rem;color:var(--text-secondary);display:flex;gap:12px;flex-wrap:wrap;margin-top:2px">
+                                <span>${result.correctAnswers || 0}/${result.totalQuestions || 0} correct</span>
+                                <span>Grade: ${grade}</span>
+                                <span>⏱️ ${timeString}</span>
+                                <span>${timeAgo(date)}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:10px;flex-shrink:0">
+                        <span style="font-size:.6rem;padding:2px 10px;border-radius:12px;background:${scoreClass === 'high' ? 'rgba(16,185,129,.15)' : scoreClass === 'medium' ? 'rgba(245,158,11,.15)' : 'rgba(239,68,68,.15)'};color:${scoreClass === 'high' ? 'var(--success)' : scoreClass === 'medium' ? 'var(--warning)' : 'var(--danger)'}">
+                            ${scoreClass === 'high' ? '✅ Passed' : scoreClass === 'medium' ? '⚠️ Average' : '❌ Failed'}
+                        </span>
+                        <i class="fas fa-chevron-${isExpanded ? 'up' : 'down'}" style="color:var(--text-secondary);font-size:.8rem;transition:transform .2s"></i>
+                    </div>
+                </div>
+                ${detailsHtml}
+            </div>
+        `;
+    });
+    
+    html += `
         </div>
-        <div style="background:var(--bg);border-radius:12px;padding:clamp(12px,2vw,16px) 10px;text-align:center;border:1px solid var(--border)">
-          <div style="font-size:clamp(1.1rem,1.8vw,1.4rem);font-weight:800;color:var(--primary-light)">${timeString}</div>
-          <div style="font-size:clamp(.62rem,1vw,.68rem);color:var(--text2);margin-top:4px">⏱️ Time Spent</div>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px">
+            <button class="btn btn-primary" onclick="window.showPage('exam')"><i class="fas fa-pen"></i> Take Exam</button>
+            <button class="btn btn-test" onclick="window.showPage('test')"><i class="fas fa-flask"></i> Practice Test</button>
         </div>
-        <div style="background:var(--bg);border-radius:12px;padding:clamp(12px,2vw,16px) 10px;text-align:center;border:1px solid var(--border)">
-          <div style="font-size:clamp(1.1rem,1.8vw,1.4rem);font-weight:800;color:var(--primary-light)">${result.totalQuestions ? Math.round((result.correctCount / result.totalQuestions) * 100) : 0}%</div>
-          <div style="font-size:clamp(.62rem,1vw,.68rem);color:var(--text2);margin-top:4px">📊 Accuracy</div>
-        </div>
-        <div style="background:var(--bg);border-radius:12px;padding:clamp(12px,2vw,16px) 10px;text-align:center;border:1px solid var(--border)">
-          <div style="font-size:clamp(1.1rem,1.8vw,1.4rem);font-weight:800;color:var(--primary-light)">${isExam ? 'Exam' : 'Test'}</div>
-          <div style="font-size:clamp(.62rem,1vw,.68rem);color:var(--text2);margin-top:4px">📋 Mode</div>
-        </div>
-      </div>
-    </div>
-    <div style="background:var(--card);border-radius:20px;padding:clamp(16px,3vw,28px);margin-bottom:20px;border:1px solid var(--border)">
-      ${questionsHtml}
-    </div>
-    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:20px">
-      <button class="btn btn-primary" onclick="window.showPage('exam')"><i class="fas fa-pen"></i> Take Exam</button>
-      <button class="btn btn-test" onclick="window.showPage('test')"><i class="fas fa-flask"></i> Practice Test</button>
-      <button class="btn btn-soft" onclick="window.showPage('dashboard')"><i class="fas fa-home"></i> Dashboard</button>
-    </div>
-  `;
+    `;
+    
+    container.innerHTML = html;
 }
 
-// ==================== CLEAR RESULT ====================
-export function clearResult() {
-  localStorage.removeItem(RESULT_STORAGE_KEY);
-  localStorage.removeItem(RESULT_TIMESTAMP_KEY);
-  sessionStorage.removeItem('examResult');
-  sessionStorage.removeItem('testResult');
-  showToast('Results cleared', 'info');
-  const content = $id('submitContent');
-  if (content) showEmptyState(content);
+function buildResultDetails(result) {
+    const percentage = result.percentage || 0;
+    const timeSpent = result.timeSpent || 0;
+    const minutes = Math.floor(timeSpent / 60000);
+    const seconds = Math.floor((timeSpent % 60000) / 1000);
+    const timeString = `${minutes}m ${seconds}s`;
+    const courseName = result.courseCode || result.course || 'Unknown Course';
+    const isExam = result.mode === 'exam';
+    
+    let grade = 'F';
+    if (percentage >= 90) grade = 'A+';
+    else if (percentage >= 80) grade = 'A';
+    else if (percentage >= 70) grade = 'B';
+    else if (percentage >= 60) grade = 'C';
+    else if (percentage >= 50) grade = 'D';
+    
+    let encMessage = '💪 Keep practicing! Review the explanations and try again.';
+    if (percentage >= 80) encMessage = '🎉 Outstanding performance! You\'re a champion!';
+    else if (percentage >= 70) encMessage = '🌟 Great work! You\'re well prepared!';
+    else if (percentage >= 60) encMessage = '👍 Good effort! You\'re on the right track.';
+    else if (percentage >= 50) encMessage = '📚 Nice try! Review the explanations and practice more.';
+    
+    // Question review section
+    let questionsHtml = '';
+    if (result.questions && result.questions.length > 0) {
+        const correctCount = result.questions.filter(q => q.userAnswer === q.correctOption).length;
+        const wrongCount = result.questions.filter(q => q.userAnswer !== null && q.userAnswer !== q.correctOption).length;
+        const unansweredCount = result.questions.filter(q => q.userAnswer === null || q.userAnswer === undefined).length;
+        
+        questionsHtml = `
+            <div style="display:flex;justify-content:space-between;align-items:center;margin:16px 0 12px;flex-wrap:wrap;gap:8px">
+                <h4 style="font-size:.9rem;color:var(--text);display:flex;align-items:center;gap:8px">
+                    <i class="fas fa-list-check"></i> Question Review
+                </h4>
+                <span style="font-size:.7rem;color:var(--text-secondary)">✅ ${correctCount} | ❌ ${wrongCount} | ⬜ ${unansweredCount}</span>
+            </div>
+            <div style="max-height:400px;overflow-y:auto;padding-right:4px">`;
+        
+        questionsHtml += result.questions.map((q, idx) => {
+            const isCorrect = q.userAnswer === q.correctOption;
+            const isUnanswered = q.userAnswer === null || q.userAnswer === undefined;
+            const userLetter = !isUnanswered ? String.fromCharCode(65 + q.userAnswer) : '—';
+            const correctLetter = String.fromCharCode(65 + q.correctOption);
+            
+            let statusColor = isCorrect ? 'var(--success)' : isUnanswered ? 'var(--warning)' : 'var(--danger)';
+            let statusText = isCorrect ? '✅ Correct' : isUnanswered ? '⬜ Unanswered' : '❌ Wrong';
+            
+            let optionsHtml = '';
+            if (q.options && q.options.length) {
+                optionsHtml = '<div style="margin-left:12px;margin-top:4px">';
+                q.options.forEach((opt, optIdx) => {
+                    let icon = '';
+                    let style = '';
+                    if (optIdx === q.correctOption) {
+                        icon = '✓';
+                        style = 'color:var(--success);font-weight:600';
+                    }
+                    if (optIdx === q.userAnswer && optIdx !== q.correctOption) {
+                        icon = '✗';
+                        style = 'color:var(--danger);font-weight:600';
+                    }
+                    if (optIdx === q.userAnswer && optIdx === q.correctOption) {
+                        icon = '✓';
+                        style = 'color:var(--success);font-weight:600';
+                    }
+                    const letter = String.fromCharCode(65 + optIdx);
+                    optionsHtml += `<div style="font-size:.78rem;padding:3px 0;color:var(--text2);display:flex;align-items:center;gap:6px;${style}">
+                        <span style="width:18px;font-size:.65rem;text-align:center;flex-shrink:0">${icon}</span>
+                        ${letter}. ${opt}
+                    </div>`;
+                });
+                optionsHtml += `</div>`;
+                optionsHtml += `<div style="font-size:.7rem;margin-top:6px;padding:6px 10px;background:var(--bg);border-radius:6px;color:var(--text2)">
+                    Your answer: <strong style="color:${isCorrect ? 'var(--success)' : isUnanswered ? 'var(--warning)' : 'var(--danger)'}">${userLetter}</strong> | Correct: <strong style="color:var(--success)">${correctLetter}</strong>
+                </div>`;
+            }
+            
+            let explanationHtml = '';
+            if (q.explanation && q.explanation.trim()) {
+                explanationHtml = `<div style="background:var(--bg);border-radius:6px;padding:8px 10px;margin-top:6px;font-size:.72rem;color:var(--text-secondary);border-left:3px solid var(--primary-light);line-height:1.5">
+                    <i class="fas fa-info-circle" style="color:var(--primary-light);margin-right:4px"></i> ${q.explanation}
+                </div>`;
+            }
+            
+            return `<div style="background:var(--bg);border-radius:10px;padding:12px;margin-bottom:8px;border:1px solid var(--border);border-left:3px solid ${statusColor}">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+                    <div style="font-weight:500;font-size:.8rem;color:var(--text);flex:1">${idx + 1}. ${q.text}</div>
+                    <span style="font-size:.6rem;padding:2px 8px;border-radius:10px;font-weight:600;white-space:nowrap;flex-shrink:0;background:${isCorrect ? 'rgba(16,185,129,.12)' : isUnanswered ? 'rgba(245,158,11,.12)' : 'rgba(239,68,68,.12)'};color:${statusColor}">${statusText}</span>
+                </div>
+                ${optionsHtml}
+                ${explanationHtml}
+            </div>`;
+        }).join('');
+        questionsHtml += `</div>`;
+    } else {
+        questionsHtml = `<p style="color:var(--text2);text-align:center;padding:12px;font-size:.8rem">📋 Detailed question review not available for this session.</p>`;
+    }
+    
+    return `
+        <div style="padding:0 16px 16px;border-top:1px solid var(--border)">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;padding:12px 0">
+                <div style="background:var(--bg);border-radius:8px;padding:8px;text-align:center">
+                    <div style="font-size:1rem;font-weight:700;color:var(--primary-light)">${percentage}%</div>
+                    <div style="font-size:.55rem;color:var(--text-secondary)">Score</div>
+                </div>
+                <div style="background:var(--bg);border-radius:8px;padding:8px;text-align:center">
+                    <div style="font-size:1rem;font-weight:700;color:var(--primary-light)">${grade}</div>
+                    <div style="font-size:.55rem;color:var(--text-secondary)">Grade</div>
+                </div>
+                <div style="background:var(--bg);border-radius:8px;padding:8px;text-align:center">
+                    <div style="font-size:1rem;font-weight:700;color:var(--primary-light)">${result.correctAnswers || 0}/${result.totalQuestions || 0}</div>
+                    <div style="font-size:.55rem;color:var(--text-secondary)">Correct/Total</div>
+                </div>
+                <div style="background:var(--bg);border-radius:8px;padding:8px;text-align:center">
+                    <div style="font-size:1rem;font-weight:700;color:var(--primary-light)">${timeString}</div>
+                    <div style="font-size:.55rem;color:var(--text-secondary)">Time Spent</div>
+                </div>
+            </div>
+            <div style="padding:6px 10px;background:${percentage >= 70 ? 'rgba(16,185,129,.08)' : percentage >= 50 ? 'rgba(245,158,11,.08)' : 'rgba(239,68,68,.08)'};border-radius:8px;margin-bottom:8px;text-align:center;font-size:.75rem;color:${percentage >= 70 ? 'var(--success)' : percentage >= 50 ? 'var(--warning)' : 'var(--danger)'}">
+                ${encMessage}
+            </div>
+            ${questionsHtml}
+            <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+                <button class="btn btn-primary btn-sm" onclick="window.retakeResult('${courseName}')" style="font-size:.7rem">
+                    <i class="fas fa-redo"></i> Retake
+                </button>
+                <button class="btn btn-danger btn-sm" onclick="window.deleteResult(${allResults.indexOf(result)})" style="font-size:.7rem">
+                    <i class="fas fa-trash"></i> Delete
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+// ==================== TOGGLE EXPAND ====================
+export function toggleResultExpand(index) {
+    if (expandedResultId === index) {
+        expandedResultId = null;
+    } else {
+        expandedResultId = index;
+    }
+    const content = $id('submitContent');
+    if (content) displayResultList(content);
+}
+
+// ==================== DELETE RESULT ====================
+export function deleteResult(index) {
+    if (!confirm('Delete this result?')) return;
+    allResults.splice(index, 1);
+    expandedResultId = null;
+    const content = $id('submitContent');
+    if (content) {
+        if (allResults.length === 0) {
+            showEmptyState(content);
+        } else {
+            displayResultList(content);
+        }
+    }
+    showToast('Result deleted', 'info');
+}
+
+// ==================== CLEAR ALL RESULTS ====================
+export function clearAllResults() {
+    if (allResults.length === 0) return;
+    if (!confirm('Delete ALL results? This cannot be undone.')) return;
+    allResults = [];
+    expandedResultId = null;
+    const content = $id('submitContent');
+    if (content) showEmptyState(content);
+    showToast('All results cleared', 'info');
+}
+
+// ==================== RETAKE RESULT ====================
+export function retakeResult(courseName) {
+    // Navigate to exam with the course
+    window.showPage('exam');
+    showToast('Opening exam for ' + courseName, 'info');
 }
 
 // ==================== EXPOSE TO WINDOW ====================
 window.loadSubmitPage = loadSubmitPage;
-window.clearResult = clearResult;
+window.toggleResultExpand = toggleResultExpand;
+window.deleteResult = deleteResult;
+window.clearAllResults = clearAllResults;
+window.retakeResult = retakeResult;
+window.clearResult = clearAllResults;
