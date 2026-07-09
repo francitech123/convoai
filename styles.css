@@ -1038,6 +1038,13 @@ body.light-mode .bottom-nav {
 .fullscreen-mode .section-card { margin-top: 0 !important; }
 
 /* ============================================
+   PAGE CONTENT ONLY - Hides hero on non-dashboard pages
+   ============================================ */
+.page-content-only .hero { display: none !important; }
+.page-content-only .network-strip { display: none !important; }
+.page-content-only .quick-actions { display: none !important; }
+
+/* ============================================
    RESPONSIVE
    ============================================ */
 .page {
