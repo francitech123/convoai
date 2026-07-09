@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover" />
+    <title>Study Question Manager • OAU CBE Practice</title>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 16px 120px;
+        }
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .admin-header h1 {
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .admin-header h1 i {
+            color: var(--primary-light);
+        }
+        .admin-header .back-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: .9rem;
+            transition: color .2s;
+            cursor: pointer;
+        }
+        .admin-header .back-link:hover {
+            color: var(--text);
+        }
+        
+        .upload-area {
+            border: 2px dashed var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all .3s;
+            background: var(--card);
+            margin-bottom: 20px;
+        }
+        .upload-area:hover {
+            border-color: var(--primary-light);
+            background: var(--card-2);
+        }
+        .upload-area i {
+            font-size: 3rem;
+            color: var(--primary-light);
+            margin-bottom: 12px;
+            display: block;
+        }
+        .upload-area p {
+            color: var(--text-secondary);
+            font-size: .9rem;
+        }
+        .upload-area .sub {
+            font-size: .75rem;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+        .upload-area input {
+            display: none;
+        }
+        
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .stat-box {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 14px 16px;
+            text-align: center;
+        }
+        .stat-box .num {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--primary-light);
+        }
+        .stat-box .lbl {
+            font-size: .7rem;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+        
+        .preview-box {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 16px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .preview-box .preview-item {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border);
+            font-size: .85rem;
+        }
+        .preview-box .preview-item:last-child {
+            border-bottom: none;
+        }
+        .preview-box .preview-item .q-text {
+            color: var(--text);
+            font-weight: 500;
+        }
+        .preview-box .preview-item .q-options {
+            color: var(--text-secondary);
+            font-size: .75rem;
+            margin-top: 4px;
+        }
+        .preview-box .preview-item .q-correct {
+            color: var(--success);
+            font-size: .7rem;
+            font-weight: 600;
+        }
+        .preview-box .preview-item .q-index {
+            color: var(--text-secondary);
+            font-size: .7rem;
+            margin-right: 8px;
+        }
+        .preview-box .empty-preview {
+            text-align: center;
+            color: var(--text-secondary);
+            padding: 30px;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .form-group {
+            margin-bottom: 14px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 4px;
+            font-weight: 600;
+            font-size: .78rem;
+            color: var(--text-secondary);
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: .85rem;
+            background: var(--bg);
+            color: var(--text);
+            transition: all .2s;
+            font-family: inherit;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-light);
+        }
+        .form-group textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        .form-group .hint {
+            font-size: .65rem;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+        
+        .options-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        @media (max-width: 500px) {
+            .options-group {
+                grid-template-columns: 1fr;
+            }
+        }
+        .option-input {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .option-input .letter {
+            font-weight: 700;
+            color: var(--text-secondary);
+            width: 20px;
+            flex-shrink: 0;
+        }
+        .option-input input {
+            flex: 1;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+        .btn-group .btn {
+            flex: 1;
+            min-width: 120px;
+        }
+        
+        .success-msg {
+            background: rgba(16,185,129,.15);
+            border: 1px solid var(--success);
+            border-radius: 12px;
+            padding: 12px 16px;
+            color: var(--success);
+            display: none;
+            margin-bottom: 16px;
+        }
+        .success-msg.show {
+            display: block;
+        }
+        .error-msg {
+            background: rgba(239,68,68,.15);
+            border: 1px solid var(--danger);
+            border-radius: 12px;
+            padding: 12px 16px;
+            color: var(--danger);
+            display: none;
+            margin-bottom: 16px;
+        }
+        .error-msg.show {
+            display: block;
+        }
+        
+        .template-area {
+            background: var(--card-2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 16px;
+        }
+        .template-area pre {
+            color: var(--text-secondary);
+            font-size: .75rem;
+            white-space: pre-wrap;
+            word-break: break-all;
+            font-family: monospace;
+            margin: 0;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .loading-overlay-small {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 16px;
+            color: #fff;
+        }
+        .loading-overlay-small.show {
+            display: flex;
+        }
+        .loading-overlay-small i {
+            font-size: 2.5rem;
+            animation: spin 1s linear infinite;
+        }
+        
+        .topic-select {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .topic-select .topic-option {
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all .2s;
+            border: 1px solid transparent;
+        }
+        .topic-select .topic-option:hover {
+            background: var(--card-2);
+            border-color: var(--border);
+        }
+        .topic-select .topic-option.selected {
+            background: rgba(59,130,246,.12);
+            border-color: var(--primary-light);
+        }
+        .topic-select .topic-option .code {
+            font-weight: 600;
+            color: var(--text);
+        }
+        .topic-select .topic-option .name {
+            color: var(--text-secondary);
+            font-size: .75rem;
+        }
+        .topic-select .topic-option .count {
+            color: var(--primary-light);
+            font-size: .7rem;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay-small" id="loadingOverlaySmall">
+    <i class="fas fa-spinner"></i>
+    <span id="loadingSmallText">Processing...</span>
+</div>
+
+<div class="admin-container">
+    <!-- Header -->
+    <div class="admin-header">
+        <h1><i class="fas fa-question-circle"></i> Study Question Manager</h1>
+        <a class="back-link" onclick="goBack()"><i class="fas fa-arrow-left"></i> Back to App</a>
+    </div>
+
+    <!-- Alert Messages -->
+    <div class="success-msg" id="successMsg"><i class="fas fa-check-circle"></i> <span id="successText">Success!</span></div>
+    <div class="error-msg" id="errorMsg"><i class="fas fa-exclamation-circle"></i> <span id="errorText">Error!</span></div>
+
+    <!-- Stats -->
+    <div class="stats-row" id="statsRow">
+        <div class="stat-box">
+            <div class="num" id="statTotal">0</div>
+            <div class="lbl">Total Questions</div>
+        </div>
+        <div class="stat-box">
+            <div class="num" id="statTopics">0</div>
+            <div class="lbl">Topics</div>
+        </div>
+        <div class="stat-box">
+            <div class="num" id="statCourses">0</div>
+            <div class="lbl">Courses</div>
+        </div>
+        <div class="stat-box">
+            <div class="num" id="statPending">0</div>
+            <div class="lbl">Pending Upload</div>
+        </div>
+    </div>
+
+    <!-- Upload Area -->
+    <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+        <i class="fas fa-cloud-upload-alt"></i>
+        <p><strong>Click to upload JSON file</strong> or drag and drop</p>
+        <div class="sub">Supports .json files with array of questions</div>
+        <input type="file" id="fileInput" accept=".json" onchange="handleFileUpload(event)">
+    </div>
+
+    <!-- Manual Entry Form -->
+    <div class="section-card">
+        <div class="section-head">
+            <h3><i class="fas fa-plus-circle"></i> Add Single Question</h3>
+            <span style="color:var(--text-secondary);font-size:.75rem;">Manual entry</span>
+        </div>
+        
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Course Code <span style="color:var(--danger)">*</span></label>
+                <select id="courseSelect" onchange="loadTopicsForCourse()">
+                    <option value="">Select Course</option>
+                    <option value="PHY102">PHY 102</option>
+                    <option value="PHY104">PHY 104</option>
+                    <option value="MTH102">MTH 102</option>
+                    <option value="STA112">STA 112</option>
+                    <option value="CHM102">CHM 102</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Topic ID <span style="color:var(--danger)">*</span></label>
+                <input type="text" id="topicIdInput" placeholder="e.g., phy102_t1" />
+                <div class="hint">Use format: coursecode_topicnumber (e.g., phy102_t1)</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Question Text <span style="color:var(--danger)">*</span></label>
+            <textarea id="questionInput" placeholder="Enter the question text here..."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Options <span style="color:var(--danger)">*</span> (4 options required)</label>
+            <div class="options-group">
+                <div class="option-input">
+                    <span class="letter">A.</span>
+                    <input type="text" id="optA" placeholder="Option A" />
+                </div>
+                <div class="option-input">
+                    <span class="letter">B.</span>
+                    <input type="text" id="optB" placeholder="Option B" />
+                </div>
+                <div class="option-input">
+                    <span class="letter">C.</span>
+                    <input type="text" id="optC" placeholder="Option C" />
+                </div>
+                <div class="option-input">
+                    <span class="letter">D.</span>
+                    <input type="text" id="optD" placeholder="Option D" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Correct Option <span style="color:var(--danger)">*</span></label>
+                <select id="correctSelect">
+                    <option value="0">A</option>
+                    <option value="1">B</option>
+                    <option value="2">C</option>
+                    <option value="3">D</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Explanation</label>
+                <input type="text" id="explanationInput" placeholder="Brief explanation (optional)" />
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn btn-primary" onclick="addSingleQuestion()"><i class="fas fa-plus"></i> Add Question</button>
+            <button class="btn btn-soft" onclick="clearForm()"><i class="fas fa-undo"></i> Clear Form</button>
+        </div>
+    </div>
+
+    <!-- Preview & Upload -->
+    <div class="section-card" style="margin-top:20px;">
+        <div class="section-head">
+            <h3><i class="fas fa-list"></i> Questions to Upload</h3>
+            <span id="previewCount" style="color:var(--text-secondary);font-size:.75rem;">0 questions</span>
+        </div>
+        
+        <div class="preview-box" id="previewBox">
+            <div class="empty-preview">
+                <i class="fas fa-inbox" style="font-size:2rem;display:block;margin-bottom:8px;opacity:0.3;"></i>
+                <p>No questions loaded yet. Upload a JSON file or add questions manually.</p>
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn btn-success" onclick="bulkUpload()"><i class="fas fa-upload"></i> Upload All Questions</button>
+            <button class="btn btn-danger" onclick="clearAll()"><i class="fas fa-trash"></i> Clear All</button>
+        </div>
+    </div>
+
+    <!-- Template -->
+    <div class="template-area">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <strong style="font-size:.8rem;color:var(--text-secondary);">📋 JSON Template</strong>
+            <button class="btn btn-soft btn-sm" onclick="copyTemplate()"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre id="templateJson">[
+  {
+    "question": "What is the unit of electric charge?",
+    "options": ["Volt", "Ampere", "Coulomb", "Ohm"],
+    "correct": 2,
+    "explanation": "The Coulomb (C) is the SI unit of electric charge."
+  },
+  {
+    "question": "Which of the following is a scalar quantity?",
+    "options": ["Velocity", "Force", "Temperature", "Acceleration"],
+    "correct": 2,
+    "explanation": "Temperature is a scalar quantity because it has magnitude only."
+  }
+]</pre>
+    </div>
+</div>
+
+<script>
+// ============================================
+// CONFIGURATION
+// ============================================
+const API_BASE = 'https://oau-exam-api.onrender.com/api';
+const TOKEN = localStorage.getItem('oau_token');
+
+if (!TOKEN) {
+    window.location.href = '/login';
+}
+
+// ============================================
+// STATE
+// ============================================
+let pendingQuestions = [];
+let currentCourse = '';
+let currentTopic = '';
+let isUploading = false;
+
+// ============================================
+// UTILITY FUNCTIONS
+// ============================================
+function $(id) { return document.getElementById(id); }
+function setText(id, v) { const el = $(id); if (el) el.textContent = v; }
+function escapeHtml(str) { return String(str||'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+
+function showSuccess(msg) {
+    const el = $('successMsg');
+    $('successText').textContent = msg;
+    el.classList.add('show');
+    setTimeout(() => el.classList.remove('show'), 5000);
+}
+
+function showError(msg) {
+    const el = $('errorMsg');
+    $('errorText').textContent = msg;
+    el.classList.add('show');
+    setTimeout(() => el.classList.remove('show'), 5000);
+}
+
+function showLoadingSmall(text = 'Processing...') {
+    $('loadingSmallText').textContent = text;
+    $('loadingOverlaySmall').classList.add('show');
+}
+
+function hideLoadingSmall() {
+    $('loadingOverlaySmall').classList.remove('show');
+}
+
+function goBack() {
+    if (pendingQuestions.length > 0) {
+        if (!confirm('You have unsaved questions. Are you sure you want to leave?')) {
+            return;
+        }
+    }
+    window.location.href = '/app';
+}
+
+// ============================================
+// API CALLS
+// ============================================
+async function apiFetch(path, options = {}) {
+    const response = await fetch(API_BASE + path, {
+        ...options,
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + TOKEN,
+            ...(options.headers || {})
+        }
+    });
+    const data = await response.json();
+    if (!response.ok) {
+        throw new Error(data.error || 'Request failed');
+    }
+    return data;
+}
+
+// ============================================
+// LOAD STATS
+// ============================================
+async function loadStats() {
+    try {
+        const data = await apiFetch('/study/count/all');
+        if (data.success) {
+            setText('statTotal', data.total || 0);
+            setText('statTopics', data.topics || 0);
+            setText('statCourses', data.courses || 0);
+        }
+    } catch (e) {
+        console.error('Failed to load stats:', e);
+    }
+    updatePendingCount();
+}
+
+function updatePendingCount() {
+    setText('statPending', pendingQuestions.length);
+    $('previewCount').textContent = pendingQuestions.length + ' questions';
+}
+
+// ============================================
+// FILE UPLOAD
+// ============================================
+function handleFileUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            const json = JSON.parse(e.target.result);
+            if (Array.isArray(json)) {
+                // Validate each question
+                const valid = json.filter(q => 
+                    q.question && 
+                    Array.isArray(q.options) && 
+                    q.options.length === 4 &&
+                    q.correct !== undefined &&
+                    q.correct >= 0 &&
+                    q.correct <= 3
+                );
+                
+                if (valid.length === 0) {
+                    showError('No valid questions found. Check the format.');
+                    return;
+                }
+                
+                if (valid.length < json.length) {
+                    showError(`${json.length - valid.length} questions were skipped due to invalid format.`);
+                }
+                
+                pendingQuestions = pendingQuestions.concat(valid);
+                renderPreview();
+                updatePendingCount();
+                showSuccess(`Added ${valid.length} questions from file. Total: ${pendingQuestions.length}`);
+            } else {
+                showError('Invalid JSON format. Expected an array of questions.');
+            }
+        } catch (err) {
+            showError('Failed to parse JSON: ' + err.message);
+        }
+    };
+    reader.readAsText(file);
+    event.target.value = '';
+}
+
+// ============================================
+// RENDER PREVIEW
+// ============================================
+function renderPreview() {
+    const box = $('previewBox');
+    if (pendingQuestions.length === 0) {
+        box.innerHTML = `
+            <div class="empty-preview">
+                <i class="fas fa-inbox" style="font-size:2rem;display:block;margin-bottom:8px;opacity:0.3;"></i>
+                <p>No questions loaded yet. Upload a JSON file or add questions manually.</p>
+            </div>
+        `;
+        return;
+    }
+    
+    const letters = ['A', 'B', 'C', 'D'];
+    box.innerHTML = pendingQuestions.map((q, i) => `
+        <div class="preview-item">
+            <div>
+                <span class="q-index">#${i + 1}</span>
+                <span class="q-text">${escapeHtml(q.question)}</span>
+            </div>
+            <div class="q-options">
+                ${q.options.map((opt, j) => `${letters[j]}. ${escapeHtml(opt)}`).join('  |  ')}
+                <span class="q-correct"> ✓ ${letters[q.correct]}</span>
+                ${q.explanation ? `<span style="color:var(--text-secondary);font-size:.65rem;"> | 💡 ${escapeHtml(q.explanation)}</span>` : ''}
+            </div>
+        </div>
+    `).join('');
+}
+
+// ============================================
+// ADD SINGLE QUESTION
+// ============================================
+function addSingleQuestion() {
+    const course = $('courseSelect').value;
+    const topicId = $('topicIdInput').value.trim();
+    const question = $('questionInput').value.trim();
+    const optA = $('optA').value.trim();
+    const optB = $('optB').value.trim();
+    const optC = $('optC').value.trim();
+    const optD = $('optD').value.trim();
+    const correct = parseInt($('correctSelect').value);
+    const explanation = $('explanationInput').value.trim();
+    
+    // Validate
+    if (!course) {
+        showError('Please select a course.');
+        return;
+    }
+    if (!topicId) {
+        showError('Please enter a topic ID.');
+        return;
+    }
+    if (!question || question.length < 3) {
+        showError('Please enter a valid question (min 3 characters).');
+        return;
+    }
+    if (!optA || !optB || !optC || !optD) {
+        showError('All 4 options are required.');
+        return;
+    }
+    
+    const options = [optA, optB, optC, optD];
+    
+    pendingQuestions.push({
+        question,
+        options,
+        correct,
+        explanation: explanation || 'No explanation provided.'
+    });
+    
+    renderPreview();
+    updatePendingCount();
+    clearForm();
+    showSuccess(`Question added! Total: ${pendingQuestions.length}`);
+}
+
+// ============================================
+// CLEAR FORM
+// ============================================
+function clearForm() {
+    $('questionInput').value = '';
+    $('optA').value = '';
+    $('optB').value = '';
+    $('optC').value = '';
+    $('optD').value = '';
+    $('explanationInput').value = '';
+    $('correctSelect').value = '0';
+}
+
+// ============================================
+// CLEAR ALL
+// ============================================
+function clearAll() {
+    if (pendingQuestions.length === 0) return;
+    if (!confirm(`Delete all ${pendingQuestions.length} pending questions?`)) return;
+    pendingQuestions = [];
+    renderPreview();
+    updatePendingCount();
+    showSuccess('All pending questions cleared.');
+}
+
+// ============================================
+// BULK UPLOAD
+// ============================================
+async function bulkUpload() {
+    if (pendingQuestions.length === 0) {
+        showError('No questions to upload.');
+        return;
+    }
+    
+    const course = $('courseSelect').value;
+    const topicId = $('topicIdInput').value.trim();
+    
+    if (!course) {
+        showError('Please select a course for the upload.');
+        return;
+    }
+    if (!topicId) {
+        showError('Please enter a topic ID for the upload.');
+        return;
+    }
+    
+    if (isUploading) return;
+    isUploading = true;
+    
+    showLoadingSmall(`Uploading ${pendingQuestions.length} questions...`);
+    
+    try {
+        const result = await apiFetch('/study/questions/bulk', {
+            method: 'POST',
+            body: JSON.stringify({
+                courseId: course,
+                topicId: topicId,
+                questions: pendingQuestions
+            })
+        });
+        
+        hideLoadingSmall();
+        
+        if (result.success) {
+            showSuccess(`✅ ${result.stats.added} added, ${result.stats.updated} updated, ${result.stats.failed} failed`);
+            pendingQuestions = [];
+            renderPreview();
+            updatePendingCount();
+            loadStats();
+        } else {
+            showError(result.error || 'Upload failed');
+        }
+    } catch (e) {
+        hideLoadingSmall();
+        showError('Upload failed: ' + e.message);
+    }
+    
+    isUploading = false;
+}
+
+// ============================================
+// LOAD TOPICS FOR COURSE
+// ============================================
+async function loadTopicsForCourse() {
+    // This is a placeholder - in a real implementation, you'd fetch topics from the backend
+    // For now, we'll just show a hint
+    const course = $('courseSelect').value;
+    if (course) {
+        $('topicIdInput').placeholder = `e.g., ${course.toLowerCase()}_t1`;
+        $('topicIdInput').value = '';
+    }
+}
+
+// ============================================
+// COPY TEMPLATE
+// ============================================
+function copyTemplate() {
+    const template = $('templateJson').textContent;
+    navigator.clipboard.writeText(template)
+        .then(() => showSuccess('Template copied to clipboard!'))
+        .catch(() => {
+            // Fallback
+            const textarea = document.createElement('textarea');
+            textarea.value = template;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            showSuccess('Template copied!');
+        });
+}
+
+// ============================================
+// DRAG AND DROP SUPPORT
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+    const uploadArea = document.querySelector('.upload-area');
+    
+    uploadArea.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        this.style.borderColor = 'var(--primary-light)';
+        this.style.background = 'var(--card-2)';
+    });
+    
+    uploadArea.addEventListener('dragleave', function(e) {
+        e.preventDefault();
+        this.style.borderColor = '';
+        this.style.background = '';
+    });
+    
+    uploadArea.addEventListener('drop', function(e) {
+        e.preventDefault();
+        this.style.borderColor = '';
+        this.style.background = '';
+        
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            const file = files[0];
+            if (file.name.endsWith('.json')) {
+                const input = $('fileInput');
+                const dt = new DataTransfer();
+                dt.items.add(file);
+                input.files = dt.files;
+                input.dispatchEvent(new Event('change'));
+            } else {
+                showError('Please drop a JSON file.');
+            }
+        }
+    });
+});
+
+// ============================================
+// THEME
+// ============================================
+function initTheme() {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') {
+        document.body.classList.add('light-mode');
+    } else {
+        document.body.classList.remove('light-mode');
+    }
+}
+initTheme();
+
+// ============================================
+// INIT
+// ============================================
+loadStats();
+</script>
+</body>
+</html>
