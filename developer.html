@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <title>Developer • OAU Exam CBT Practice</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -11,7 +11,7 @@
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.8;padding-bottom:60px}
         .container{max-width:900px;margin:0 auto;padding:40px 24px}
-        .back-link{display:inline-flex;align-items:center;gap:6px;color:var(--accent);text-decoration:none;font-weight:600;font-size:.9rem;margin-bottom:30px}
+        .back-link{display:inline-flex;align-items:center;gap:6px;color:var(--accent);text-decoration:none;font-weight:600;font-size:.9rem;margin-bottom:30px;transition:color .2s}
         .back-link:hover{color:var(--text)}
         h1{font-size:2.2rem;font-weight:900;margin-bottom:8px;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
         .subtitle{color:var(--text2);font-size:1rem;margin-bottom:30px}
@@ -28,7 +28,7 @@
         .profile-info h2{margin:0;padding:0;border:none;font-size:1.3rem;display:block}
         .profile-info .role{color:var(--accent);font-weight:600;font-size:.82rem}
         .profile-info p{font-size:.85rem;margin:4px 0 0}
-        .social-links{display:flex;gap:10px;margin-top:10px}
+        .social-links{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
         .social-link{width:38px;height:38px;border-radius:10px;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text2);text-decoration:none;transition:all .2s;font-size:.9rem}
         .social-link:hover{border-color:var(--accent);color:var(--accent)}
         
@@ -45,34 +45,28 @@
         .stat-box .num{font-size:1.5rem;font-weight:800;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
         .stat-box .lbl{font-size:.68rem;color:var(--text2);margin-top:3px}
         
-        .code-block{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:18px;margin:14px 0;overflow-x:auto}
-        .code-block code{color:var(--green);font-size:.8rem;font-family:'Roboto Mono','Courier New',monospace;line-height:1.7}
-        .code-block .comment{color:var(--text2)}
-        .code-block .string{color:var(--gold)}
-        .code-block .keyword{color:var(--accent)}
-        
-        .endpoint-item{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:8px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-        .endpoint-method{font-size:.65rem;font-weight:700;padding:4px 10px;border-radius:6px;text-transform:uppercase}
-        .method-get{background:rgba(16,185,129,.15);color:var(--green)}
-        .method-post{background:rgba(99,102,241,.15);color:var(--accent)}
-        .method-put{background:rgba(245,158,11,.15);color:var(--gold)}
-        .method-delete{background:rgba(239,68,68,.15);color:var(--red)}
-        .endpoint-path{font-size:.82rem;font-weight:600;font-family:'Roboto Mono',monospace;flex:1;min-width:200px}
-        .endpoint-desc{font-size:.72rem;color:var(--text2);width:100%;margin-top:4px}
-        
         .highlight-box{background:rgba(99,102,241,.08);border:1px solid rgba(99,102,241,.2);border-radius:12px;padding:20px;margin:20px 0}
         .highlight-box p{color:var(--text);margin-bottom:6px;font-size:.88rem}
         
         .footer-links{display:flex;gap:20px;flex-wrap:wrap;margin-top:40px;padding-top:20px;border-top:1px solid var(--border)}
-        .footer-links a{color:var(--text2);text-decoration:none;font-size:.82rem}.footer-links a:hover{color:var(--accent)}
-        @media(max-width:600px){.container{padding:20px 16px}h1{font-size:1.5rem}}
+        .footer-links a{color:var(--text2);text-decoration:none;font-size:.82rem;transition:color .2s}
+        .footer-links a:hover{color:var(--accent)}
+        
+        .badge{display:inline-block;padding:2px 10px;border-radius:12px;font-size:.65rem;font-weight:600}
+        .badge-green{background:rgba(16,185,129,.15);color:var(--green)}
+        .badge-purple{background:rgba(99,102,241,.15);color:var(--accent)}
+        .badge-gold{background:rgba(245,158,11,.15);color:var(--gold)}
+        
+        .version-tag{display:inline-block;padding:4px 12px;border-radius:20px;font-size:.7rem;background:var(--surface2);border:1px solid var(--border);color:var(--text2);margin-top:8px}
+        
+        @media(max-width:600px){.container{padding:20px 16px}h1{font-size:1.5rem}.stat-grid{grid-template-columns:repeat(2,1fr)}}
     </style>
 </head>
 <body>
 <div class="container">
     <a href="/app" class="back-link"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
     <h1>Developer</h1>
-    <p class="subtitle">Behind the code — meet the builder and explore the technology powering OAU Exam CBT Practice.</p>
+    <p class="subtitle">Meet the builder behind OAU Exam CBT Practice</p>
 
     <!-- DEVELOPER PROFILE -->
     <div class="profile-card">
@@ -81,121 +75,70 @@
             <h2>Francis Oluwanje Bobola</h2>
             <p class="role">Founder, Lead Developer & CEO • FrancisTech</p>
             <p>Electrical/Electronic Engineering (EEE) Student • Obafemi Awolowo University (OAU) • Part 3</p>
-            <p style="font-size:.82rem;margin-top:6px">Full-stack web developer, embedded systems engineer, and tech enthusiast passionate about building solutions that make education accessible. Built this entire platform — frontend, backend, database, AI integration, payment system, and admin infrastructure — from the ground up.</p>
+            <p style="font-size:.82rem;margin-top:6px">Full-stack web developer, embedded systems engineer, and tech enthusiast passionate about building solutions that make education accessible.</p>
             <div class="social-links">
-                <a href="#" class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://github.com/francistech" target="_blank" class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
                 <a href="#" class="social-link" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                 <a href="#" class="social-link" title="Twitter/X"><i class="fab fa-x-twitter"></i></a>
-                <a href="#" class="social-link" title="Email"><i class="fas fa-envelope"></i></a>
-                <a href="#" class="social-link" title="Portfolio"><i class="fas fa-globe"></i></a>
+                <a href="mailto:francistech123@gmail.com" class="social-link" title="Email"><i class="fas fa-envelope"></i></a>
             </div>
         </div>
     </div>
 
     <!-- PLATFORM STATS -->
-    <h2><i class="fas fa-chart-bar"></i> Platform Statistics</h2>
+    <h2><i class="fas fa-chart-bar"></i> Platform Overview</h2>
     <div class="stat-grid">
         <div class="stat-box"><div class="num">72+</div><div class="lbl">Courses</div></div>
         <div class="stat-box"><div class="num">45k+</div><div class="lbl">Questions</div></div>
-        <div class="stat-box"><div class="num">10k+</div><div class="lbl">Active Users</div></div>
-        <div class="stat-box"><div class="num">99.9%</div><div class="lbl">Uptime</div></div>
-        <div class="stat-box"><div class="num">26+</div><div class="lbl">HTML Pages</div></div>
-        <div class="stat-box"><div class="num">12+</div><div class="lbl">API Routes</div></div>
-        <div class="stat-box"><div class="num">8</div><div class="lbl">Data Models</div></div>
         <div class="stat-box"><div class="num">14</div><div class="lbl">Faculties</div></div>
+        <div class="stat-box"><div class="num">99.9%</div><div class="lbl">Uptime</div></div>
     </div>
 
     <!-- TECHNOLOGY STACK -->
     <h2><i class="fas fa-microchip"></i> Technology Stack</h2>
     <div class="tech-grid">
-        <div class="tech-card"><i class="fas fa-code"></i><h4>Frontend</h4><p>HTML5, CSS3, Vanilla JavaScript — no frameworks, no dependencies, pure performance. Responsive design works on all devices from 320px to 4K screens.</p></div>
-        <div class="tech-card"><i class="fas fa-server"></i><h4>Backend</h4><p>Node.js with Express.js — lightweight, high-performance REST API server. JWT authentication, rate limiting, helmet security, CORS protection.</p></div>
-        <div class="tech-card"><i class="fas fa-database"></i><h4>Database</h4><p>MongoDB with Mongoose ODM — flexible document-based storage for questions, users, scores, courses, materials, chats, notifications, and admin data.</p></div>
-        <div class="tech-card"><i class="fas fa-robot"></i><h4>AI Integration</h4><p>Custom AI chat system for intelligent tutoring. Provides instant explanations, study tips, and answers. Built with natural language processing capabilities.</p></div>
-        <div class="tech-card"><i class="fas fa-cloud"></i><h4>Hosting & Deployment</h4><p>Render (backend API) and Vercel (frontend) — reliable cloud hosting with auto-deployment from GitHub. Global CDN for fast loading worldwide.</p></div>
-        <div class="tech-card"><i class="fas fa-shield-alt"></i><h4>Security</h4><p>Password hashing (bcryptjs), JWT tokens, helmet security headers, CORS, rate limiting, input validation, XSS protection, and secure payment processing.</p></div>
-        <div class="tech-card"><i class="fas fa-credit-card"></i><h4>Payment System</h4><p>Secure payment gateway integration supporting multiple plans (Free, Semester ₦2,000, Full Session ₦3,500). Instant activation upon successful payment.</p></div>
-        <div class="tech-card"><i class="fas fa-envelope"></i><h4>Email System</h4><p>Nodemailer integration for admin approval emails, notifications, and password recovery. Gmail SMTP with app-specific passwords.</p></div>
+        <div class="tech-card"><i class="fas fa-code"></i><h4>Frontend</h4><p>Pure HTML, CSS, and JavaScript — no frameworks, optimized for speed and mobile responsiveness.</p></div>
+        <div class="tech-card"><i class="fas fa-server"></i><h4>Backend</h4><p>Node.js with Express.js — lightweight, high-performance REST API with secure authentication.</p></div>
+        <div class="tech-card"><i class="fas fa-database"></i><h4>Database</h4><p>MongoDB with Mongoose — flexible document-based storage for all platform data.</p></div>
+        <div class="tech-card"><i class="fas fa-robot"></i><h4>AI Integration</h4><p>Custom AI chat system for intelligent tutoring, explanations, and study assistance.</p></div>
+        <div class="tech-card"><i class="fas fa-cloud"></i><h4>Hosting</h4><p>Reliable cloud hosting with auto-deployment and global CDN for fast loading.</p></div>
+        <div class="tech-card"><i class="fas fa-shield-alt"></i><h4>Security</h4><p>JWT authentication, password hashing, rate limiting, and secure payment processing.</p></div>
     </div>
 
-    <!-- DATA MODELS -->
-    <h2><i class="fas fa-cubes"></i> Data Architecture</h2>
-    <p>The platform uses 8 MongoDB collections (models):</p>
-    <ul>
-        <li><strong>Users</strong> — Student accounts with scores, achievements, streaks, preferences, study goals, and referral data</li>
-        <li><strong>Courses</strong> — Course listings with themes (gradients, icons), test/exam settings (timers, question counts), multi-faculty support</li>
-        <li><strong>Questions</strong> — 45,000+ questions with modes (exam/test), options, hints, explanations, difficulty levels</li>
-        <li><strong>Admins</strong> — Approved administrator accounts with roles, performance tracking, contribution metrics</li>
-        <li><strong>AdminApplications</strong> — Pending/reviewed admin applications with quiz scores, profile data, IP tracking</li>
-        <li><strong>Notifications</strong> — User notifications with read status, types (info/success/warning), global broadcast support</li>
-        <li><strong>Chats</strong> — User-to-admin messaging system with CEO broadcast, reply threading, status tracking</li>
-        <li><strong>CourseMaterials</strong> — Uploaded slides, past questions, textbooks, YouTube links with faculty/level/semester filtering</li>
-        <li><strong>Scores</strong> — Exam and test results with percentages, time tracking, course breakdowns</li>
-    </ul>
-
-    <!-- API ENDPOINTS -->
-    <h2><i class="fas fa-plug"></i> API Architecture</h2>
-    <p>The backend exposes REST API endpoints at <code style="background:var(--surface2);padding:2px 8px;border-radius:4px;color:var(--green);font-size:.85rem">https://oau-exam-api.onrender.com/api</code></p>
-
-    <h3>Authentication</h3>
-    <div class="endpoint-item"><span class="endpoint-method method-post">POST</span><span class="endpoint-path">/api/auth/register</span><div class="endpoint-desc">Create new student account with faculty, department, level, security question</div></div>
-    <div class="endpoint-item"><span class="endpoint-method method-post">POST</span><span class="endpoint-path">/api/auth/login</span><div class="endpoint-desc">Authenticate with username/password, returns JWT token</div></div>
-    <div class="endpoint-item"><span class="endpoint-method method-get">GET</span><span class="endpoint-path">/api/auth/me</span><div class="endpoint-desc">Get current user profile with scores, achievements, preferences</div></div>
-
-    <h3>Admin & CEO</h3>
-    <div class="endpoint-item"><span class="endpoint-method method-post">POST</span><span class="endpoint-path">/api/admin-auth/admin-login</span><div class="endpoint-desc">Admin login with email + password verification</div></div>
-    <div class="endpoint-item"><span class="endpoint-method method-post">POST</span><span class="endpoint-path">/api/admin-auth/verify-ceo</span><div class="endpoint-desc">CEO password verification against environment variable</div></div>
-    <div class="endpoint-item"><span class="endpoint-method method-get">GET</span><span class="endpoint-path">/api/admin-auth/applications</span><div class="endpoint-desc">CEO: View all pending/approved/rejected admin applications</div></div>
-    <div class="endpoint-item"><span class="endpoint-method method-put">PUT</span><span class="endpoint-path">/api/admin-auth/applications/:id</span><div class="endpoint-desc">CEO: Approve or reject admin application, auto-creates admin account</div></div>
-
-    <h3>Questions & Courses</h3>
-    <div class="endpoint-item"><span class="endpoint-method method-get">GET</span><span class="endpoint-path">/api/admin/questions/:courseCode/:mode</span><div class="endpoint-desc">Get questions for exam/test mode (public, no auth required)</div></div>
-    <div class="endpoint-item"><span class="endpoint-method method-post">POST</span><span class="endpoint-path">/api/admin/questions/bulk</span><div class="endpoint-desc">Bulk add questions in JSON format with validation</div></div>
-    <div class="endpoint-item"><span class="endpoint-method method-get">GET</span><span class="endpoint-path">/api/admin/courses</span><div class="endpoint-desc">Get all courses with question counts and settings</div></div>
-    <div class="endpoint-item"><span class="endpoint-method method-post">POST</span><span class="endpoint-path">/api/admin/courses</span><div class="endpoint-desc">Add or update course with theme, test/exam settings, faculties</div></div>
-
-    <h3>Notifications & Chat</h3>
-    <div class="endpoint-item"><span class="endpoint-method method-post">POST</span><span class="endpoint-path">/api/admin/notifications/global</span><div class="endpoint-desc">Send notification to all registered users</div></div>
-    <div class="endpoint-item"><span class="endpoint-method method-post">POST</span><span class="endpoint-path">/api/admin/notifications/private</span><div class="endpoint-desc">Send private notification to specific user</div></div>
-    <div class="endpoint-item"><span class="endpoint-method method-post">POST</span><span class="endpoint-path">/api/chat/ceo-send</span><div class="endpoint-desc">CEO sends message to specific admin</div></div>
-
-    <!-- CODE EXAMPLE -->
-    <h2><i class="fas fa-terminal"></i> API Usage Example</h2>
-    <p>Fetching questions for an exam:</p>
-    <div class="code-block"><code>
-<span class="comment">// Fetch CHM 101 exam questions</span>
-<span class="keyword">const</span> response = <span class="keyword">await</span> <span class="keyword">fetch</span>(<span class="string">'https://oau-exam-api.onrender.com/api/admin/questions/CHM%20101/exam'</span>);
-<span class="keyword">const</span> data = <span class="keyword">await</span> response.json();
-
-<span class="comment">// Response:</span>
-<span class="comment">// { success: true, questions: [...], courseSettings: { timeLimit: 30, ... } }</span>
-
-<span class="comment">// Submit exam results</span>
-<span class="keyword">await</span> <span class="keyword">fetch</span>(<span class="string">'/api/exams/session/submit'</span>, {
-  method: <span class="string">'POST'</span>,
-  headers: { <span class="string">'Content-Type'</span>: <span class="string">'application/json'</span>, <span class="string">'Authorization'</span>: <span class="string">'Bearer '</span> + token },
-  body: <span class="keyword">JSON</span>.stringify({ courseCode, correctCount, totalQuestions, timeSpent, percentage })
-});
-    </code></div>
-
-    <!-- DEPLOYMENT -->
-    <h2><i class="fas fa-rocket"></i> Deployment Pipeline</h2>
+    <!-- BUILD PHILOSOPHY -->
+    <h2><i class="fas fa-lightbulb"></i> Build Philosophy</h2>
     <div class="highlight-box">
-        <p><strong>🔄 Continuous Deployment:</strong> Both frontend and backend deploy automatically when code is pushed to GitHub.</p>
-        <p><strong>📦 Frontend (Vercel):</strong> <code style="background:var(--surface2);padding:2px 8px;border-radius:4px;color:var(--green)">oau-exam-cbt-practice.vercel.app</code> — 26+ HTML pages with clean URL routing</p>
-        <p><strong>⚙️ Backend (Render):</strong> <code style="background:var(--surface2);padding:2px 8px;border-radius:4px;color:var(--green)">oau-exam-api.onrender.com</code> — Node.js/Express with MongoDB</p>
-        <p><strong>🔑 Environment Variables:</strong> All secrets (passwords, API keys, tokens) stored in Render environment — never in code</p>
+        <p><strong>🚀 Student-First Design:</strong> Every feature is built with OAU students in mind — from exam simulation to AI tutoring.</p>
+        <p><strong>📱 Mobile-First:</strong> The platform is optimized for mobile devices, because most students access it on their phones.</p>
+        <p><strong>🔒 Privacy & Security:</strong> All user data is encrypted and protected. We never share your information with third parties.</p>
+        <p><strong>💡 Continuous Improvement:</strong> Regular updates based on student feedback and changing academic needs.</p>
     </div>
 
-    <!-- OPEN SOURCE / CONTRIBUTE -->
-    <h2><i class="fas fa-hand-holding-heart"></i> Want to Contribute?</h2>
-    <p>This platform is built and maintained by a single developer. If you're passionate about education technology and want to help improve the platform, here's how:</p>
+    <!-- CONTRIBUTE -->
+    <h2><i class="fas fa-hand-holding-heart"></i> Get Involved</h2>
+    <p>This platform is built by a single developer with a vision to make exam preparation accessible to every OAU student. Here's how you can help:</p>
     <ul>
-        <li><strong>Apply as Admin:</strong> Help manage questions, courses, and materials</li>
-        <li><strong>Submit Course Materials:</strong> Upload slides, past questions, textbooks, and videos</li>
-        <li><strong>Report Bugs:</strong> Use the Chat feature to report any issues you find</li>
-        <li><strong>Suggest Features:</strong> Have ideas? Share them through the Chat or Admin channels</li>
+        <li><strong>📝 Apply as Admin:</strong> Help manage questions, courses, and materials</li>
+        <li><strong>📚 Submit Materials:</strong> Share slides, past questions, and study resources</li>
+        <li><strong>🐛 Report Issues:</strong> Use the Chat feature to report bugs or suggest features</li>
+        <li><strong>🌟 Spread the Word:</strong> Share the platform with fellow students</li>
     </ul>
+
+    <!-- CONTACT -->
+    <h2><i class="fas fa-envelope"></i> Connect</h2>
+    <p>Have questions, suggestions, or want to contribute? Reach out through any of the following channels:</p>
+    <ul>
+        <li><strong>📧 Email:</strong> <a href="mailto:francistech123@gmail.com" style="color:var(--accent);text-decoration:none">francistech123@gmail.com</a></li>
+        <li><strong>💬 Live Chat:</strong> Use the chat feature in the app for quick responses</li>
+        <li><strong>🐙 GitHub:</strong> <a href="https://github.com/francistech" target="_blank" style="color:var(--accent);text-decoration:none">github.com/francistech</a></li>
+    </ul>
+
+    <!-- VERSION -->
+    <div style="text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid var(--border)">
+        <span class="version-tag"><i class="fas fa-code-branch"></i> v2.0.0</span>
+        <span class="version-tag" style="margin-left:8px"><i class="fas fa-heart" style="color:var(--red)"></i> Built with ❤️ for OAU</span>
+        <span class="version-tag" style="margin-left:8px"><i class="fas fa-clock"></i> Last Updated: July 2026</span>
+    </div>
 
     <div class="footer-links">
         <a href="/privacy">Privacy Policy</a>
