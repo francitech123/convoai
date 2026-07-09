@@ -1,495 +1,462 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover" />
-  <title>Results • OAU CBE Practice</title>
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-  
-  <script src="/js/config.js"></script>
-  <script src="/js/api.js"></script>
-  <script src="/js/auth.js"></script>
-  <script src="/js/utils.js"></script>
-  <script src="/js/auth-check.js"></script>
-  
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI','Inter',system-ui,-apple-system,sans-serif}
-    :root{
-      --primary:#1e3a8a;--primary-light:#3b82f6;--accent:#10b981;--accent-2:#06b6d4;
-      --bg:#0f172a;--bg-soft:#111c33;--card:#1e293b;--card-2:#152033;--border:#334155;
-      --text:#f1f5f9;--text-secondary:#94a3b8;--danger:#ef4444;--warning:#f59e0b;--success:#10b981;
-      --shadow:0 18px 40px rgba(0,0,0,.28);--brand-gradient:linear-gradient(135deg,#1e3a8a,#3b82f6)
-    }
-    body.light-mode{
-      --bg:#f4f7fb;--bg-soft:#edf3fb;--card:#ffffff;--card-2:#f8fbff;--border:#d7e2ef;
-      --text:#0f172a;--text-secondary:#526173;--shadow:0 16px 36px rgba(15,23,42,.08)
-    }
-    body{background:radial-gradient(circle at top right,rgba(59,130,246,.12),transparent 25%),linear-gradient(180deg,var(--bg),#0b1324 100%);color:var(--text);min-height:100vh}
-    .page{max-width:1280px;margin:0 auto;padding:20px 18px 110px}
-    .topbar{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-top:6px}
-    .brand{display:flex;align-items:center;gap:14px;min-width:0}
-    .brand-logo{width:56px;height:56px;border-radius:18px;background:rgba(59,130,246,.12);display:grid;place-items:center;border:1px solid var(--border);overflow:hidden}
-    .brand-logo img{width:42px;height:42px;object-fit:contain}
-    .brand-copy small{display:block;color:#7dd3fc;text-transform:uppercase;letter-spacing:.18em;font-weight:800;font-size:.72rem;margin-bottom:4px}
-    .brand-copy h1{font-size:1.2rem}
-    .topbar-actions{display:flex;align-items:center;gap:10px}
-    .icon-btn{position:relative;border:1px solid var(--border);background:var(--card);color:var(--text);width:46px;height:46px;border-radius:16px;cursor:pointer;box-shadow:var(--shadow)}
-    .badge{position:absolute;top:-4px;right:-4px;background:var(--danger);color:#fff;min-width:18px;height:18px;border-radius:999px;padding:0 5px;font-size:.7rem;display:none;align-items:center;justify-content:center}
-    .network-strip{margin-top:16px;padding:14px 16px;border-radius:18px;background:linear-gradient(135deg,rgba(59,130,246,.18),rgba(6,182,212,.12));border:1px solid rgba(125,211,252,.18);display:flex;justify-content:space-between;gap:12px;align-items:center}
-    .network-strip strong{display:block;margin-bottom:4px}.network-strip p{color:var(--text-secondary);font-size:.92rem}.network-pill{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.08);font-weight:800;font-size:.8rem}
-    .hero{margin-top:18px;background:linear-gradient(135deg,rgba(30,58,138,.92),rgba(59,130,246,.55));border-radius:28px;padding:24px;border:1px solid rgba(255,255,255,.08);position:relative;overflow:hidden}
-    .hero::after{content:'';position:absolute;right:-60px;top:-40px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.16),transparent 60%)}
-    .hero-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;position:relative;z-index:1}
-    .hero h2{font-size:1.5rem;margin-bottom:8px}.hero p{max-width:720px;line-height:1.6;color:rgba(255,255,255,.9)}
-    .hero-tag{padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.12);font-weight:800;white-space:nowrap}
-    .section-card{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:20px;box-shadow:var(--shadow);margin-bottom:16px}
-    .section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
-    .section-head h3{font-size:1.02rem}.section-head a{color:#7dd3fc;text-decoration:none;font-weight:700;font-size:.88rem}
-    .empty-state{padding:30px;border-radius:18px;background:var(--card-2);border:1px dashed var(--border);text-align:center;color:var(--text-secondary)}
-    .empty-state i{font-size:2.5rem;margin-bottom:12px;display:block;opacity:.5}
-    
-    .result-card{background:var(--card);border-radius:20px;padding:20px;border:1px solid var(--border);margin-bottom:12px;cursor:pointer;transition:all .2s}
-    .result-card:hover{transform:translateX(4px);border-color:var(--primary-light)}
-    .result-card .top-row{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px}
-    .result-card .course-code{font-weight:700;font-size:1rem;color:var(--text)}
-    .result-card .mode-badge{padding:4px 12px;border-radius:20px;font-size:.65rem;font-weight:600}
-    .result-card .mode-badge.exam{background:rgba(59,130,246,.15);color:var(--primary-light)}
-    .result-card .mode-badge.test{background:rgba(124,58,237,.15);color:#a78bfa}
-    .result-card .score-big{font-size:1.8rem;font-weight:800}
-    .result-card .score-big.pass{color:var(--success)}
-    .result-card .score-big.fail{color:var(--danger)}
-    .result-card .stats{display:flex;gap:16px;flex-wrap:wrap;color:var(--text-secondary);font-size:.78rem;margin-top:8px}
-    .result-card .stats span{display:flex;align-items:center;gap:4px}
-    .result-card .view-btn{margin-top:10px}
-    
-    .btn{border:none;border-radius:14px;padding:10px 18px;font-weight:700;cursor:pointer;font-size:.82rem;transition:all .2s;display:inline-flex;align-items:center;gap:6px}
-    .btn-primary{background:var(--brand-gradient);color:#fff}
-    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(59,130,246,.3)}
-    .btn-soft{background:var(--border);color:var(--text)}
-    .btn-soft:hover{background:var(--card-2);transform:translateY(-2px)}
-    .btn-test{background:linear-gradient(135deg,#7c3aed,#a78bfa);color:#fff}
-    .btn-test:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(124,58,237,.3)}
-    .btn-sm{padding:6px 12px;font-size:.7rem}
-    .btn-block{width:100%;justify-content:center}
-    
-    .back-btn{background:var(--border);color:var(--text);border:none;padding:8px 16px;border-radius:30px;cursor:pointer;font-size:.8rem;display:inline-flex;align-items:center;gap:6px;transition:all .2s;font-family:inherit;margin-bottom:12px}
-    .back-btn:hover{background:var(--card-2)}
-    
-    .detail-view{display:none;animation:fadeIn .3s ease}
-    .detail-view.show{display:block}
-    .list-view{display:block}
-    .list-view.hidden{display:none}
-    
-    .question-review{background:var(--bg-soft);border-radius:12px;padding:14px;margin-bottom:10px;border-left:3px solid var(--border)}
-    .question-review.correct{border-left-color:var(--success)}
-    .question-review.wrong{border-left-color:var(--danger)}
-    .question-review .q-text{font-weight:600;font-size:.85rem;color:var(--text);margin-bottom:6px}
-    .question-review .options{font-size:.8rem;color:var(--text-secondary);margin-left:12px}
-    .question-review .options .correct-opt{color:var(--success);font-weight:600}
-    .question-review .options .wrong-opt{color:var(--danger);font-weight:600}
-    .question-review .explanation{margin-top:6px;padding:8px 12px;background:var(--card);border-radius:8px;font-size:.78rem;color:var(--text-secondary);border:1px solid var(--border)}
-    .question-review .explanation i{color:var(--primary-light);margin-right:4px}
-    .question-review .answer-text{font-size:.75rem;color:var(--text-secondary);margin-top:4px}
-    .question-review .answer-text .correct{color:var(--success)}
-    .question-review .answer-text .wrong{color:var(--danger)}
-    
-    .result-tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
-    .result-tab{padding:8px 16px;border:2px solid var(--border);border-radius:14px;background:transparent;color:var(--text-secondary);font-weight:600;font-size:.8rem;cursor:pointer;transition:all .2s;font-family:inherit}
-    .result-tab.active{border-color:var(--primary-light);color:var(--primary-light);background:rgba(59,130,246,.08)}
-    .result-tab:hover:not(.active){border-color:var(--text-secondary);color:var(--text)}
-    
-    .bottom-nav{position:fixed;left:0;right:0;bottom:0;background:rgba(15,23,42,.95);border-top:1px solid var(--border);display:flex;justify-content:center;z-index:99;backdrop-filter:blur(16px)}
-    body.light-mode .bottom-nav{background:rgba(244,247,251,.95)}
-    .bottom-nav-inner{width:min(100%,1280px);display:grid;grid-template-columns:repeat(5,1fr);gap:6px;padding:10px 14px calc(10px + env(safe-area-inset-bottom))}
-    .nav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--text-secondary);text-decoration:none;padding:8px 4px;border-radius:14px;font-size:.76rem;font-weight:700}
-    .nav-item i{font-size:1.1rem}.nav-item.active{color:#fff;background:linear-gradient(135deg,var(--primary),var(--primary-light))}
-    .chat-fab{position:fixed;right:20px;bottom:88px;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#10b981,#059669);color:#fff;text-decoration:none;box-shadow:0 10px 24px rgba(16,185,129,.35);z-index:98}
-    @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-    @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-    @media(max-width:768px){.page{padding:16px 14px 108px}.hero-head{flex-direction:column}.result-card .top-row{flex-direction:column}.result-card .score-big{font-size:1.4rem}}
-    @media(max-width:480px){.result-tabs{flex-wrap:wrap}.result-tab{font-size:.7rem;padding:6px 12px}}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Results • OAU Exam CBT Practice</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- MathJax Configuration -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            options: {
+                ignoreHtmlClass: 'no-mathjax',
+                processHtmlClass: 'mathjax-process'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI','Inter',sans-serif}
+        :root{--primary:#1e3a8a;--primary-light:#3b82f6;--success:#10b981;--warning:#f59e0b;--danger:#ef4444;--bg:#0f172a;--card:#1e293b;--border:#334155;--text:#f1f5f9;--text2:#94a3b8}
+        body.light-mode{--bg:#f8fafc;--card:#ffffff;--border:#e2e8f0;--text:#0f172a;--text2:#475569}
+        body{background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:80px}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes popIn{0%{transform:scale(0.5);opacity:0}70%{transform:scale(1.05)}100%{transform:scale(1);opacity:1}}
+
+        .header{background:rgba(15,23,42,.98);backdrop-filter:blur(10px);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border)}
+        body.light-mode .header{background:rgba(255,255,255,.98)}
+        .header .logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:1.1rem;color:var(--text);text-decoration:none}
+        .header-actions{display:flex;align-items:center;gap:12px}
+        .back-link{color:var(--text2);text-decoration:none;display:flex;align-items:center;gap:6px;font-size:.9rem}
+        .back-link:hover{color:var(--text)}
+        .theme-toggle{background:rgba(59,130,246,0.15);border:1px solid var(--border);color:var(--text);width:38px;height:38px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+        .theme-toggle:hover{background:var(--primary-light);color:#fff}
+
+        .container{max-width:900px;margin:0 auto;padding:20px 20px 100px 20px;width:100%}
+        @media(min-width:768px){.container{max-width:95%}}
+        @media(min-width:1024px){.container{max-width:90%}}
+        @media(min-width:1440px){.container{max-width:85%}}
+
+        .result-card{background:var(--card);border-radius:20px;padding:clamp(16px,3vw,28px);margin-bottom:20px;border:1px solid var(--border);animation:fadeIn .4s ease}
+        .result-title{font-size:clamp(1.1rem,2vw,1.4rem);font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:10px;color:var(--text)}
+        .result-subtitle{font-size:clamp(.78rem,1.2vw,.85rem);color:var(--text2);margin-bottom:16px;text-align:center}
+
+        .score-circle{width:clamp(120px,20vw,150px);height:clamp(120px,20vw,150px);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 16px;font-size:clamp(2rem,3vw,2.8rem);font-weight:800;animation:popIn .5s ease .2s both}
+        .score-circle.high{background:rgba(16,185,129,.15);color:var(--success);border:3px solid var(--success)}
+        .score-circle.medium{background:rgba(245,158,11,.15);color:var(--warning);border:3px solid var(--warning)}
+        .score-circle.low{background:rgba(239,68,68,.15);color:var(--danger);border:3px solid var(--danger)}
+        .score-circle .grade{font-size:clamp(.75rem,1.2vw,.9rem);font-weight:600;margin-top:2px}
+
+        .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,1.5vw,12px);margin:16px 0}
+        @media(max-width:500px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+        .stat-item{background:var(--bg);border-radius:12px;padding:clamp(12px,2vw,16px) 10px;text-align:center;border:1px solid var(--border);animation:slideUp .4s ease both}
+        .stat-item:nth-child(1){animation-delay:.3s}
+        .stat-item:nth-child(2){animation-delay:.4s}
+        .stat-item:nth-child(3){animation-delay:.5s}
+        .stat-item:nth-child(4){animation-delay:.6s}
+        .stat-value{font-size:clamp(1.1rem,1.8vw,1.4rem);font-weight:800;color:var(--primary-light)}
+        .stat-label{font-size:clamp(.62rem,1vw,.68rem);color:var(--text2);margin-top:4px}
+
+        .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border:none;border-radius:14px;font-weight:600;font-size:.85rem;cursor:pointer;transition:all .2s;text-decoration:none;justify-content:center}
+        .btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff}
+        .btn-primary:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(59,130,246,.3)}
+        .btn-outline{background:transparent;color:var(--primary-light);border:2px solid var(--primary-light)}
+        .btn-outline:hover{background:rgba(59,130,246,.1);transform:translateY(-2px)}
+        .btn-test{background:linear-gradient(135deg,#7c3aed,#a78bfa);color:#fff}
+        .btn-test:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(124,58,237,.3)}
+
+        .mode-badge{display:inline-block;padding:6px 16px;border-radius:20px;font-size:.75rem;font-weight:600;margin-bottom:8px}
+        .mode-badge.exam{background:rgba(59,130,246,.15);color:var(--primary-light)}
+        .mode-badge.test{background:rgba(167,139,250,.15);color:#a78bfa}
+
+        .question-review{background:var(--card);border-radius:16px;padding:clamp(14px,2vw,18px);margin-bottom:12px;border:1px solid var(--border);transition:all .2s}
+        .question-review.correct{border-left:4px solid var(--success)}
+        .question-review.wrong{border-left:4px solid var(--danger)}
+        .question-review.unanswered{border-left:4px solid var(--warning)}
+        .question-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;gap:8px}
+        .question-text{font-weight:600;font-size:clamp(.82rem,1.3vw,.92rem);color:var(--text);flex:1;line-height:1.6}
+        .question-status{font-size:.7rem;padding:3px 10px;border-radius:12px;font-weight:600;white-space:nowrap;flex-shrink:0}
+        .question-status.correct{background:rgba(16,185,129,.15);color:var(--success)}
+        .question-status.wrong{background:rgba(239,68,68,.15);color:var(--danger)}
+        .question-status.unanswered{background:rgba(245,158,11,.15);color:var(--warning)}
+
+        .options{margin-left:clamp(8px,2vw,16px)}
+        .option{font-size:clamp(.75rem,1.1vw,.82rem);padding:5px 0;color:var(--text2);display:flex;align-items:center;gap:8px;line-height:1.5}
+        .option.correct-answer{color:var(--success);font-weight:600}
+        .option.correct-answer::before{content:'✓';font-weight:700;font-size:.7rem;flex-shrink:0;width:16px;text-align:center}
+        .option.user-wrong{color:var(--danger);font-weight:600}
+        .option.user-wrong::before{content:'✗';font-weight:700;font-size:.7rem;flex-shrink:0;width:16px;text-align:center}
+        .option-icon{font-size:.7rem;width:16px;text-align:center;flex-shrink:0}
+
+        .answer-row{font-size:.75rem;margin-top:8px;padding:8px 12px;background:var(--bg);border-radius:8px;color:var(--text2);line-height:1.5}
+        .explanation{background:var(--bg);border-radius:10px;padding:clamp(8px,1.5vw,12px);margin-top:8px;font-size:clamp(.72rem,1vw,.78rem);color:var(--text2);border-left:3px solid var(--primary-light);line-height:1.6}
+        .explanation i{color:var(--primary-light);margin-right:6px}
+
+        .encouragement{text-align:center;padding:16px;margin:12px 0;border-radius:12px;font-size:clamp(.8rem,1.2vw,.9rem);font-weight:500;line-height:1.5}
+        .encouragement.great{background:rgba(16,185,129,.1);color:var(--success);border:1px solid rgba(16,185,129,.3)}
+        .encouragement.good{background:rgba(245,158,11,.1);color:var(--warning);border:1px solid rgba(245,158,11,.3)}
+        .encouragement.keep{background:rgba(239,68,68,.1);color:var(--danger);border:1px solid rgba(239,68,68,.3)}
+
+        .review-header{display:flex;justify-content:space-between;align-items:center;margin:20px 0 12px;flex-wrap:wrap;gap:8px}
+        .review-header h3{font-size:clamp(.9rem,1.3vw,1rem);color:var(--text);display:flex;align-items:center;gap:8px}
+        .review-summary{font-size:clamp(.7rem,1vw,.78rem);color:var(--text2)}
+
+        .bottom-nav{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:rgba(15,23,42,.98);backdrop-filter:blur(12px);padding:8px 20px;border-radius:50px;display:flex;gap:8px;z-index:98;border:1px solid var(--border)}
+        body.light-mode .bottom-nav{background:rgba(255,255,255,.98)}
+        .nav-item{display:flex;flex-direction:column;align-items:center;padding:6px 12px;border-radius:30px;color:var(--text2);text-decoration:none;font-size:.65rem;transition:all .2s}
+        .nav-item i{font-size:1.1rem;margin-bottom:2px}
+        .nav-item.active{background:var(--primary);color:#fff}
+
+        .empty-state{text-align:center;padding:clamp(40px,8vw,60px) 20px}
+        .empty-state i{font-size:4rem;color:var(--text2);margin-bottom:16px;opacity:.5}
+        .empty-state h3{font-size:1.2rem;margin-bottom:8px;color:var(--text)}
+        .empty-state p{color:var(--text2);margin-bottom:20px}
+
+        .loading-spin{text-align:center;padding:60px}
+        .loading-spin i{font-size:2rem;animation:spin 1s linear infinite;color:var(--primary-light)}
+        @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+        .action-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+
+        .mathjax-process mjx-container{overflow-x:auto;overflow-y:hidden;max-width:100%}
+    </style>
 </head>
 <body>
-<main class="page">
-  <header class="topbar">
-    <div class="brand">
-      <div class="brand-logo"><img src="/logo.svg" alt="OAU CBE Practice"></div>
-      <div class="brand-copy"><small>Results</small><h1>OAU CBE Practice</h1></div>
-    </div>
-    <div class="topbar-actions">
-      <button class="icon-btn" id="themeToggleBtn" onclick="toggleThemeMode()" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
-      <button class="icon-btn" onclick="goNotifications()" aria-label="Notifications"><i class="fas fa-bell"></i><span class="badge" id="notifBadge">0</span></button>
-    </div>
-  </header>
+    <header class="header">
+        <a href="/app" class="logo"><span>🎓</span><span>OAU Exam CBT Practice</span></a>
+        <div class="header-actions">
+            <button class="theme-toggle" id="themeToggleBtn" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
+            <a href="/app" class="back-link"><i class="fas fa-arrow-left"></i> Dashboard</a>
+        </div>
+    </header>
 
-  <section class="network-strip">
-    <div>
-      <strong id="welcomeText">Your Results</strong>
-      <p id="networkMessage">View your recent exam and test performances.</p>
-    </div>
-    <div class="network-pill" id="networkPill">Ready</div>
-  </section>
-
-  <section class="hero">
-    <div class="hero-head">
-      <div>
-        <h2 id="heroTitle">Performance Summary</h2>
-        <p id="heroSubtitle">Track your progress across all exams and tests you've completed.</p>
-      </div>
-      <div class="hero-tag" id="heroTag">Last 10 results</div>
-    </div>
-  </section>
-
-  <!-- List View -->
-  <div class="list-view" id="listView">
-    <div class="result-tabs">
-      <button class="result-tab active" onclick="setFilter('all', this)">📋 All</button>
-      <button class="result-tab" onclick="setFilter('exam', this)">📝 Exams</button>
-      <button class="result-tab" onclick="setFilter('test', this)">🧪 Tests</button>
+    <div class="container" id="container">
+        <div class="loading-spin" id="loadingSpinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p style="margin-top:12px">Loading your results...</p>
+        </div>
+        <div id="resultContent" style="display:none"></div>
     </div>
 
-    <div id="resultsList">
-      <div class="empty-state">
-        <i class="fas fa-spinner fa-spin"></i>
-        <h3>Loading results...</h3>
-      </div>
-    </div>
+    <nav class="bottom-nav">
+        <a href="/app" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+        <a href="/exam" class="nav-item"><i class="fas fa-pen"></i><span>Exam</span></a>
+        <a href="/test" class="nav-item"><i class="fas fa-flask"></i><span>Test</span></a>
+        <a href="/ai" class="nav-item"><i class="fas fa-robot"></i><span>AI</span></a>
+        <a href="/profile" class="nav-item"><i class="fas fa-user"></i><span>Me</span></a>
+    </nav>
 
-    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
-      <a href="/exam" class="btn btn-primary"><i class="fas fa-pen"></i> Take Exam</a>
-      <a href="/test" class="btn btn-test"><i class="fas fa-flask"></i> Practice Test</a>
-    </div>
-  </div>
+    <script>
+        const API = 'https://oau-exam-api.onrender.com/api';
+        const token = localStorage.getItem('oau_token');
+        if (!token) { window.location.href = '/login'; }
 
-  <!-- Detail View -->
-  <div class="detail-view" id="detailView">
-    <button class="back-btn" onclick="goBackToList()"><i class="fas fa-arrow-left"></i> Back to Results</button>
-    <div id="detailContent"></div>
-  </div>
-
-  <a href="/ai" class="chat-fab" aria-label="Open Study AI"><i class="fas fa-robot"></i></a>
-</main>
-
-<nav class="bottom-nav">
-  <div class="bottom-nav-inner">
-    <a href="/app" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
-    <a href="/exam" class="nav-item"><i class="fas fa-pen"></i><span>Exam</span></a>
-    <a href="/test" class="nav-item"><i class="fas fa-flask"></i><span>Test</span></a>
-    <a href="/study" class="nav-item"><i class="fas fa-book-open"></i><span>Study</span></a>
-    <a href="/profile" class="nav-item"><i class="fas fa-user"></i><span>Me</span></a>
-  </div>
-</nav>
-
-<script>
-const API = window.CONFIG?.API_URL || (location.hostname.includes('localhost') ? 'http://localhost:5000/api' : '/api');
-const token = localStorage.getItem('oau_token');
-const qs = id => document.getElementById(id);
-const setText = (id,v) => { const el = qs(id); if(el) el.textContent = v; };
-const escapeHtml = str => String(str||'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-
-// ==================== STATE ====================
-let allResults = [];
-let currentFilter = 'all';
-let notifications = [];
-
-// ==================== THEME ====================
-function initTheme(){
-  const saved = localStorage.getItem('theme');
-  const btn = qs('themeToggleBtn');
-  if(saved === 'light'){ document.body.classList.add('light-mode'); btn.innerHTML = '<i class="fas fa-sun"></i>'; }
-  else { document.body.classList.remove('light-mode'); btn.innerHTML = '<i class="fas fa-moon"></i>'; }
-}
-function toggleThemeMode(){
-  const isLight = document.body.classList.toggle('light-mode');
-  localStorage.setItem('theme', isLight ? 'light' : 'dark');
-  qs('themeToggleBtn').innerHTML = isLight ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-}
-window.toggleThemeMode = toggleThemeMode;
-
-function goNotifications(){ location.href = '/notifications'; }
-window.goNotifications = goNotifications;
-
-// ==================== FORMAT HELPERS ====================
-function formatTime(ms){
-  const minutes = Math.floor(ms / 60000);
-  const seconds = Math.floor((ms % 60000) / 1000);
-  if(minutes > 0) return `${minutes}m ${seconds}s`;
-  return `${seconds}s`;
-}
-
-function timeAgo(date){
-  const seconds = Math.floor((new Date() - new Date(date)) / 1000);
-  if(seconds < 60) return 'Just now';
-  if(seconds < 3600) return Math.floor(seconds / 60) + 'm ago';
-  if(seconds < 86400) return Math.floor(seconds / 3600) + 'h ago';
-  return new Date(date).toLocaleDateString();
-}
-
-// ==================== LOAD RESULTS ====================
-async function loadResults(){
-  const container = qs('resultsList');
-  container.innerHTML = '<div class="empty-state"><i class="fas fa-spinner fa-spin"></i><h3>Loading results...</h3></div>';
-  
-  try {
-    // Get user stats with scores
-    const response = await fetch(API + '/users/stats', {
-      headers: { 'Authorization': 'Bearer ' + token }
-    });
-    const data = await response.json();
-    
-    let scores = data.scores || [];
-    
-    // Check sessionStorage for recent results
-    const examResult = sessionStorage.getItem('examResult');
-    const testResult = sessionStorage.getItem('testResult');
-    
-    if(examResult){
-      try {
-        const er = JSON.parse(examResult);
-        if(er.questions){
-          scores.unshift({
-            courseCode: er.course || 'Exam',
-            mode: 'exam',
-            percentage: er.percentage || 0,
-            score: er.correctCount || 0,
-            totalQuestions: er.totalQuestions || 0,
-            timeSpent: er.timeSpent || 0,
-            date: new Date().toISOString(),
-            questions: er.questions || []
-          });
+        // ==================== THEME ====================
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+                document.getElementById('themeToggleBtn').innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                document.getElementById('themeToggleBtn').innerHTML = '<i class="fas fa-moon"></i>';
+            }
         }
-      } catch(e){}
-    }
-    
-    if(testResult){
-      try {
-        const tr = JSON.parse(testResult);
-        if(tr.questions){
-          scores.unshift({
-            courseCode: tr.course || 'Test',
-            mode: 'test',
-            percentage: tr.percentage || 0,
-            score: tr.correctCount || 0,
-            totalQuestions: tr.totalQuestions || 0,
-            timeSpent: tr.timeSpent || 0,
-            date: new Date().toISOString(),
-            questions: tr.questions || []
-          });
+
+        window.toggleTheme = function() {
+            document.body.classList.toggle('light-mode');
+            const isLight = document.body.classList.contains('light-mode');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            document.getElementById('themeToggleBtn').innerHTML = isLight ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            if (token) {
+                fetch(API + '/auth/preferences', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+                    body: JSON.stringify({ darkMode: !isLight })
+                }).catch(() => {});
+            }
+        };
+
+        // ==================== STORAGE KEYS ====================
+        const RESULT_STORAGE_KEY = 'lastExamResult';
+        const RESULT_TIMESTAMP_KEY = 'lastResultTimestamp';
+
+        // ==================== SAVE RESULT PERSISTENTLY ====================
+        function saveResultPersistent(resultData) {
+            try {
+                localStorage.setItem(RESULT_STORAGE_KEY, JSON.stringify(resultData));
+                localStorage.setItem(RESULT_TIMESTAMP_KEY, Date.now().toString());
+                console.log('✅ Result saved persistently');
+            } catch(e) {
+                console.error('Failed to save result:', e);
+            }
         }
-      } catch(e){}
-    }
-    
-    // Sort by date (newest first)
-    scores.sort((a,b) => new Date(b.date) - new Date(a.date));
-    allResults = scores.slice(0, 20);
-    
-    renderResults();
-    
-  } catch(e){
-    console.error('Load results error:', e);
-    container.innerHTML = `
-      <div class="empty-state">
-        <i class="fas fa-exclamation-circle"></i>
-        <h3>Failed to load results</h3>
-        <p style="font-size:.8rem">Please try again later</p>
-        <button class="btn btn-primary btn-sm" onclick="loadResults()" style="margin-top:10px"><i class="fas fa-redo"></i> Retry</button>
-      </div>
-    `;
-  }
-}
 
-// ==================== RENDER RESULTS ====================
-function renderResults(){
-  const container = qs('resultsList');
-  let filtered = [...allResults];
-  
-  if(currentFilter === 'exam'){
-    filtered = filtered.filter(r => r.mode === 'exam');
-  } else if(currentFilter === 'test'){
-    filtered = filtered.filter(r => r.mode === 'test');
-  }
-  
-  if(filtered.length === 0){
-    container.innerHTML = `
-      <div class="empty-state">
-        <i class="fas fa-file-alt"></i>
-        <h3>No results found</h3>
-        <p style="font-size:.8rem">${allResults.length === 0 ? 'Complete an exam or test to see your results here.' : 'No results for this filter'}</p>
-        <div style="margin-top:12px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-          <a href="/exam" class="btn btn-primary btn-sm"><i class="fas fa-pen"></i> Take Exam</a>
-          <a href="/test" class="btn btn-test btn-sm"><i class="fas fa-flask"></i> Practice Test</a>
-        </div>
-      </div>
-    `;
-    return;
-  }
-  
-  container.innerHTML = filtered.map((r, index) => {
-    const isPass = r.percentage >= 50;
-    const modeLabel = r.mode === 'exam' ? '📝 Exam' : '🧪 Test';
-    const modeClass = r.mode === 'exam' ? 'exam' : 'test';
-    const timeStr = r.timeSpent ? formatTime(r.timeSpent) : '—';
-    const dateStr = r.date ? timeAgo(r.date) : '';
-    
-    return `
-      <div class="result-card" onclick="viewDetail('${index}')">
-        <div class="top-row">
-          <div>
-            <div class="course-code">${escapeHtml(r.courseCode || 'Unknown')}</div>
-            <span class="mode-badge ${modeClass}">${modeLabel}</span>
-            ${r.questions && r.questions.length > 0 ? `<span style="font-size:.6rem;color:var(--text-secondary);margin-left:6px">${r.questions.length} Qs</span>` : ''}
-          </div>
-          <div class="score-big ${isPass ? 'pass' : 'fail'}">${r.percentage || 0}%</div>
-        </div>
-        <div class="stats">
-          <span>✅ ${r.score || 0}/${r.totalQuestions || 0} correct</span>
-          <span>⏱️ ${timeStr}</span>
-          ${dateStr ? `<span>📅 ${dateStr}</span>` : ''}
-        </div>
-        <button class="btn btn-soft btn-sm view-btn" onclick="event.stopPropagation();viewDetail('${index}')">
-          <i class="fas fa-eye"></i> View Details
-        </button>
-      </div>
-    `;
-  }).join('');
-}
+        // ==================== GET PERSISTENT RESULT ====================
+        function getPersistentResult() {
+            try {
+                const data = localStorage.getItem(RESULT_STORAGE_KEY);
+                if (data) {
+                    return JSON.parse(data);
+                }
+            } catch(e) {
+                console.error('Failed to get persistent result:', e);
+            }
+            return null;
+        }
 
-// ==================== SET FILTER ====================
-function setFilter(filter, btn){
-  currentFilter = filter;
-  document.querySelectorAll('.result-tab').forEach(b => b.classList.remove('active'));
-  if(btn) btn.classList.add('active');
-  renderResults();
-}
-window.setFilter = setFilter;
+        // ==================== CLEAR PERSISTENT RESULT ====================
+        function clearPersistentResult() {
+            localStorage.removeItem(RESULT_STORAGE_KEY);
+            localStorage.removeItem(RESULT_TIMESTAMP_KEY);
+            console.log('🗑️ Persistent result cleared');
+        }
 
-// ==================== VIEW DETAIL ====================
-function viewDetail(index){
-  const result = allResults[index];
-  if(!result) return;
-  
-  const isPass = result.percentage >= 50;
-  const modeLabel = result.mode === 'exam' ? '📝 Exam' : '🧪 Test';
-  const modeClass = result.mode === 'exam' ? 'exam' : 'test';
-  const timeStr = result.timeSpent ? formatTime(result.timeSpent) : '—';
-  const dateStr = result.date ? new Date(result.date).toLocaleString() : '';
-  
-  let questionsHtml = '';
-  const letters = ['A', 'B', 'C', 'D'];
-  
-  if(result.questions && result.questions.length > 0){
-    questionsHtml = result.questions.map((q, i) => {
-      const isCorrect = q.userAnswer === q.correctOption;
-      const isUnanswered = q.userAnswer === null || q.userAnswer === undefined;
-      const statusClass = isCorrect ? 'correct' : (isUnanswered ? '' : 'wrong');
-      
-      let optionsHtml = '';
-      if(q.options && q.options.length){
-        optionsHtml = q.options.map((opt, oi) => {
-          let cls = '';
-          if(oi === q.correctOption) cls = 'correct-opt';
-          if(oi === q.userAnswer && oi !== q.correctOption) cls = 'wrong-opt';
-          const indicator = oi === q.correctOption ? ' ✓' : (oi === q.userAnswer && oi !== q.correctOption ? ' ✗' : '');
-          return `<div class="${cls}">${letters[oi]}. ${escapeHtml(opt)}${indicator}</div>`;
-        }).join('');
-      }
-      
-      const answerText = isUnanswered ? 'Not answered' : (q.userAnswer !== undefined ? letters[q.userAnswer] : '—');
-      const correctText = q.correctOption !== undefined ? letters[q.correctOption] : '—';
-      
-      return `
-        <div class="question-review ${statusClass}">
-          <div class="q-text">${i+1}. ${escapeHtml(q.text || 'Question')}</div>
-          <div class="options">${optionsHtml}</div>
-          <div class="answer-text">
-            Your answer: <strong class="${isCorrect ? 'correct' : (isUnanswered ? '' : 'wrong')}">${answerText}</strong>
-            ${!isUnanswered ? `• Correct: <strong class="correct">${correctText}</strong>` : ''}
-          </div>
-          ${q.explanation ? `
-            <div class="explanation">
-              <i class="fas fa-info-circle"></i> ${escapeHtml(q.explanation)}
-            </div>
-          ` : ''}
-        </div>
-      `;
-    }).join('');
-  } else {
-    questionsHtml = `<div class="empty-state" style="padding:20px"><i class="fas fa-info-circle"></i><p style="font-size:.8rem">Detailed question review not available for this result.</p></div>`;
-  }
-  
-  qs('detailContent').innerHTML = `
-    <div class="section-card">
-      <div class="top-row" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
-        <div>
-          <div style="font-weight:700;font-size:1.1rem;color:var(--text)">${escapeHtml(result.courseCode || 'Unknown')}</div>
-          <span class="mode-badge ${modeClass}">${modeLabel}</span>
-        </div>
-        <div class="score-big ${isPass ? 'pass' : 'fail'}">${result.percentage || 0}%</div>
-      </div>
-      <div class="stats" style="margin-top:8px">
-        <span>✅ ${result.score || 0}/${result.totalQuestions || 0} correct</span>
-        <span>⏱️ ${timeStr}</span>
-        ${dateStr ? `<span>📅 ${dateStr}</span>` : ''}
-      </div>
-    </div>
-    
-    <h3 style="margin:16px 0 12px;color:var(--text);font-size:1rem">
-      <i class="fas fa-list-check"></i> Question Review
-      <span style="font-size:.75rem;color:var(--text-secondary);font-weight:400;margin-left:8px">${result.questions ? result.questions.length : 0} questions</span>
-    </h3>
-    
-    ${questionsHtml}
-    
-    <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
-      <a href="/exam" class="btn btn-primary btn-sm"><i class="fas fa-pen"></i> Take Exam</a>
-      <a href="/test" class="btn btn-test btn-sm"><i class="fas fa-flask"></i> Practice Test</a>
-      <button class="btn btn-soft btn-sm" onclick="goBackToList()"><i class="fas fa-arrow-left"></i> Back</button>
-    </div>
-  `;
-  
-  qs('listView').classList.add('hidden');
-  qs('detailView').classList.add('show');
-  window.scrollTo(0,0);
-}
-window.viewDetail = viewDetail;
+        // ==================== GET RESULT DATA ====================
+        function getResultData() {
+            // 1. Check sessionStorage for new result (from current session)
+            let result = sessionStorage.getItem('examResult') || sessionStorage.getItem('testResult');
+            if (result) {
+                try {
+                    const parsed = JSON.parse(result);
+                    // Save to persistent storage
+                    saveResultPersistent(parsed);
+                    // Clear sessionStorage
+                    sessionStorage.removeItem('examResult');
+                    sessionStorage.removeItem('testResult');
+                    return parsed;
+                } catch(e) {}
+            }
 
-// ==================== GO BACK ====================
-function goBackToList(){
-  qs('listView').classList.remove('hidden');
-  qs('detailView').classList.remove('show');
-  renderResults();
-}
-window.goBackToList = goBackToList;
+            // 2. Check localStorage for pending submission
+            let pending = localStorage.getItem('pendingExamSubmission') || localStorage.getItem('pendingTestSubmission');
+            if (pending) {
+                try {
+                    const submission = JSON.parse(pending);
+                    if (submission.data) {
+                        const data = submission.data;
+                        const resultData = {
+                            course: data.courseCode,
+                            correctCount: data.correctCount,
+                            totalQuestions: data.totalQuestions,
+                            percentage: data.percentage,
+                            timeSpent: data.timeSpent,
+                            mode: data.mode || 'exam',
+                            questions: data.questions ? data.questions.map((q, i) => ({
+                                text: q.text,
+                                options: q.options,
+                                correctOption: q.correctOption,
+                                userAnswer: data.answers ? data.answers[i] : null,
+                                explanation: q.explanation || ''
+                            })) : null
+                        };
+                        // Save to persistent storage and clear pending
+                        saveResultPersistent(resultData);
+                        localStorage.removeItem('pendingExamSubmission');
+                        localStorage.removeItem('pendingTestSubmission');
+                        return resultData;
+                    }
+                } catch(e) {}
+            }
 
-// ==================== NOTIFICATIONS BADGE ====================
-async function loadNotificationBadge(){
-  try {
-    const r = await fetch(API + '/notifications', {
-      headers: { 'Authorization': 'Bearer ' + token }
-    });
-    const d = await r.json();
-    const unread = (d.notifications || []).filter(n => !n.isRead).length;
-    const badge = qs('notifBadge');
-    if(unread > 0){
-      badge.style.display = 'flex';
-      badge.textContent = unread > 9 ? '9+' : unread;
-    } else {
-      badge.style.display = 'none';
-    }
-  } catch(e){}
-}
+            // 3. Check persistent storage (last saved result)
+            const persistentResult = getPersistentResult();
+            if (persistentResult) {
+                return persistentResult;
+            }
 
-// ==================== INIT ====================
-document.addEventListener('DOMContentLoaded', () => {
-  initTheme();
-  loadResults();
-  loadNotificationBadge();
-  
-  // Refresh badge periodically
-  setInterval(loadNotificationBadge, 30000);
-});
-</script>
+            // 4. Last resort - check backend history
+            return null;
+        }
+
+        // ==================== LOAD & DISPLAY ====================
+        async function loadResult() {
+            // First try to get result from storage
+            let result = getResultData();
+
+            // If no result in storage, try backend history
+            if (!result) {
+                try {
+                    const response = await fetch(API + '/exams/history', { 
+                        headers: { 'Authorization': 'Bearer ' + token } 
+                    });
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data.success && data.scores && data.scores.length > 0) {
+                            const latest = data.scores[data.scores.length - 1];
+                            result = {
+                                course: latest.courseCode || 'Unknown',
+                                correctCount: latest.correctAnswers || latest.score || 0,
+                                totalQuestions: latest.totalQuestions || 0,
+                                percentage: latest.percentage || 0,
+                                timeSpent: latest.timeSpent || 0,
+                                mode: latest.mode || 'exam',
+                                questions: null
+                            };
+                            // Save to persistent storage
+                            saveResultPersistent(result);
+                        }
+                    }
+                } catch(e) {
+                    console.error('Backend fetch error:', e);
+                }
+            }
+
+            // If still no result, show empty state
+            if (!result) {
+                showEmptyState();
+                return;
+            }
+
+            displayResult(result);
+        }
+
+        function showEmptyState() {
+            document.getElementById('loadingSpinner').style.display = 'none';
+            document.getElementById('resultContent').innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-file-alt"></i>
+                    <h3>No Results Found</h3>
+                    <p>We couldn't find any exam or test data. This could be because:</p>
+                    <ul style="text-align:left;max-width:350px;margin:16px auto;color:var(--text2);font-size:.85rem;line-height:1.8">
+                        <li>• You haven't taken any exams or tests yet</li>
+                        <li>• The submission didn't complete properly</li>
+                        <li>• Your session may have expired</li>
+                    </ul>
+                    <div class="action-buttons">
+                        <a href="/exam" class="btn btn-primary"><i class="fas fa-pen"></i> Take an Exam</a>
+                        <a href="/test" class="btn btn-test"><i class="fas fa-flask"></i> Practice Test</a>
+                        <a href="/app" class="btn btn-outline"><i class="fas fa-home"></i> Dashboard</a>
+                    </div>
+                </div>
+            `;
+            document.getElementById('resultContent').style.display = 'block';
+        }
+
+        function displayResult(result) {
+            document.getElementById('loadingSpinner').style.display = 'none';
+
+            const percentage = result.percentage || 0;
+            let scoreClass = 'low', grade = 'F';
+            if (percentage >= 90) { scoreClass = 'high'; grade = 'A+'; }
+            else if (percentage >= 80) { scoreClass = 'high'; grade = 'A'; }
+            else if (percentage >= 70) { scoreClass = 'high'; grade = 'B'; }
+            else if (percentage >= 60) { scoreClass = 'medium'; grade = 'C'; }
+            else if (percentage >= 50) { scoreClass = 'medium'; grade = 'D'; }
+
+            const timeSpent = result.timeSpent || 0;
+            const minutes = Math.floor(timeSpent / 60000);
+            const seconds = Math.floor((timeSpent % 60000) / 1000);
+            const timeString = `${minutes}m ${seconds}s`;
+
+            const isExam = result.mode === 'exam';
+            const modeLabel = isExam ? '📝 Exam Mode' : '🧪 Test Mode';
+            const modeClass = isExam ? 'exam' : 'test';
+
+            let encClass = 'keep', encMessage = '💪 Keep practicing! Review the explanations and try again. Every attempt makes you better!';
+            if (percentage >= 80) { encClass = 'great'; encMessage = '🎉 Outstanding performance! You\'re a champion! Keep up the excellent work!'; }
+            else if (percentage >= 70) { encClass = 'great'; encMessage = '🌟 Great work! You\'re well prepared. A little more practice and you\'ll ace it!'; }
+            else if (percentage >= 60) { encClass = 'good'; encMessage = '👍 Good effort! You\'re on the right track. Focus on the questions you missed.'; }
+            else if (percentage >= 50) { encClass = 'good'; encMessage = '📚 Nice try! Review the explanations and practice more. You\'re getting there!'; }
+
+            // Question review section
+            let questionsHtml = '';
+            if (result.questions && result.questions.length > 0) {
+                const correctCount = result.questions.filter(q => q.userAnswer === q.correctOption).length;
+                const wrongCount = result.questions.filter(q => q.userAnswer !== null && q.userAnswer !== q.correctOption).length;
+                const unansweredCount = result.questions.filter(q => q.userAnswer === null || q.userAnswer === undefined).length;
+
+                questionsHtml = `
+                    <div class="review-header">
+                        <h3><i class="fas fa-list-check"></i> Question Review</h3>
+                        <span class="review-summary">✅ ${correctCount} | ❌ ${wrongCount} | ⬜ ${unansweredCount}</span>
+                    </div>`;
+
+                questionsHtml += result.questions.map((q, idx) => {
+                    const isCorrect = q.userAnswer === q.correctOption;
+                    const isUnanswered = q.userAnswer === null || q.userAnswer === undefined;
+                    const userLetter = !isUnanswered ? String.fromCharCode(65 + q.userAnswer) : 'Not answered';
+                    const correctLetter = String.fromCharCode(65 + q.correctOption);
+
+                    let statusClass = 'wrong', statusText = '❌ Wrong';
+                    if (isCorrect) { statusClass = 'correct'; statusText = '✅ Correct'; }
+                    if (isUnanswered) { statusClass = 'unanswered'; statusText = '⬜ Unanswered'; }
+
+                    let optionsHtml = '';
+                    if (q.options && q.options.length) {
+                        optionsHtml = '<div class="options">';
+                        q.options.forEach((opt, optIdx) => {
+                            let optClass = '';
+                            if (optIdx === q.correctOption) optClass = 'correct-answer';
+                            if (optIdx === q.userAnswer && optIdx !== q.correctOption) optClass = 'user-wrong';
+                            const icon = optIdx === q.correctOption ? '✓' : (optIdx === q.userAnswer && optIdx !== q.correctOption ? '✗' : '');
+                            optionsHtml += `<div class="option ${optClass}"><span class="option-icon">${icon}</span>${String.fromCharCode(65+optIdx)}. <span class="mathjax-process">${opt}</span></div>`;
+                        });
+                        optionsHtml += `</div>`;
+                        optionsHtml += `<div class="answer-row">Your answer: <strong style="color:${isCorrect ? 'var(--success)' : isUnanswered ? 'var(--warning)' : 'var(--danger)'}">${userLetter}</strong> | Correct: <strong style="color:var(--success)">${correctLetter}</strong></div>`;
+                    }
+
+                    let explanationHtml = '';
+                    if (q.explanation && q.explanation.trim()) {
+                        explanationHtml = `<div class="explanation"><i class="fas fa-info-circle"></i> <span class="mathjax-process">${q.explanation}</span></div>`;
+                    }
+
+                    return `<div class="question-review ${isCorrect ? 'correct' : isUnanswered ? 'unanswered' : 'wrong'}">
+                        <div class="question-header">
+                            <div class="question-text mathjax-process">${idx + 1}. ${q.text}</div>
+                            <span class="question-status ${statusClass}">${statusText}</span>
+                        </div>
+                        ${optionsHtml}
+                        ${explanationHtml}
+                    </div>`;
+                }).join('');
+            } else {
+                questionsHtml = `<p style="color:var(--text2);text-align:center;padding:20px">📋 Detailed question review not available for this session.</p>`;
+            }
+
+            const html = `
+                <div class="result-card">
+                    <div style="text-align:center"><span class="mode-badge ${modeClass}">${modeLabel}</span></div>
+                    <div class="result-title" style="justify-content:center">
+                        <i class="fas ${isExam ? 'fa-file-alt' : 'fa-flask'}" style="color:${isExam ? 'var(--primary-light)' : '#a78bfa'}"></i>
+                        ${result.course || 'Results'}
+                    </div>
+                    <div class="score-circle ${scoreClass}">${percentage}%<span class="grade">Grade: ${grade}</span></div>
+                    <div class="encouragement ${encClass}">${encMessage}</div>
+                    <div class="stats-grid">
+                        <div class="stat-item"><div class="stat-value">${result.correctCount || 0}/${result.totalQuestions || 0}</div><div class="stat-label">✅ Correct/Total</div></div>
+                        <div class="stat-item"><div class="stat-value">${timeString}</div><div class="stat-label">⏱️ Time Spent</div></div>
+                        <div class="stat-item"><div class="stat-value">${result.totalQuestions ? Math.round((result.correctCount / result.totalQuestions) * 100) : 0}%</div><div class="stat-label">📊 Accuracy</div></div>
+                        <div class="stat-item"><div class="stat-value">${isExam ? 'Exam' : 'Test'}</div><div class="stat-label">📋 Mode</div></div>
+                    </div>
+                </div>
+                <div class="result-card">${questionsHtml}</div>
+                <div class="action-buttons">
+                    <a href="/exam" class="btn btn-primary"><i class="fas fa-pen"></i> Take Exam</a>
+                    <a href="/test" class="btn btn-test"><i class="fas fa-flask"></i> Practice Test</a>
+                    <a href="/app" class="btn btn-outline"><i class="fas fa-home"></i> Dashboard</a>
+                </div>
+            `;
+
+            document.getElementById('resultContent').innerHTML = html;
+            document.getElementById('resultContent').style.display = 'block';
+
+            // Trigger MathJax to process new content
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([document.getElementById('resultContent')]).catch(console.error);
+            }
+        }
+
+        // ==================== INIT ====================
+        initTheme();
+        loadResult();
+    </script>
 </body>
 </html>
