@@ -1,5 +1,5 @@
 // ============================================
-// MAIN APP CONTROLLER - NO LOADING SCREEN
+// MAIN APP CONTROLLER
 // ============================================
 
 import { 
@@ -14,58 +14,25 @@ import { loadStudyData } from './study.js';
 import { loadProfile } from './profile.js';
 import { loadLeaderboard } from './leaderboard.js';
 import { loadSubmitPage } from './submit.js';
+import { loadResultsPage } from './results.js';
 import { initChat } from './chat.js';
 import { renderFAQs } from './faq.js';
+import { initAI, loadAIConversations } from './ai.js';
 
 let isInitialized = false;
 
-// Pre-load all data
-let preloadedData = {
-  faculties: [],
-  courses: {},
-  levels: ['100', '200'],
-  user: null,
-  stats: null
-};
-
-// ==================== PRE-LOAD ALL DATA ====================
-async function preloadAllData() {
-  try {
-    // Load faculties
-    const facultiesData = await apiFetch('/admin/faculties');
-    preloadedData.faculties = facultiesData.faculties || [];
-    
-    // Load user data
-    const userData = await apiFetch('/auth/me');
-    if (userData.success && userData.user) {
-      preloadedData.user = userData.user;
-    }
-    
-    console.log('✅ All data preloaded successfully');
-  } catch (e) {
-    console.warn('Preload error:', e);
-  }
-}
-
-// ==================== MAIN INIT FUNCTION ====================
 export async function initApp() {
   if (isInitialized) return;
   isInitialized = true;
   
-  // Check if user is logged in
   const token = getToken();
   if (!token) {
     window.location.href = '/login';
     return;
   }
   
-  // Initialize theme
   initTheme();
   
-  // Preload all data first
-  await preloadAllData();
-  
-  // Load all pages in parallel (they will use preloaded data)
   await Promise.all([
     loadDashboard(),
     loadNotifications(),
@@ -75,13 +42,14 @@ export async function initApp() {
     loadStudyData(),
     loadLeaderboard(),
     renderFAQs(),
-    loadSubmitPage()
+    loadSubmitPage(),
+    loadResultsPage(),
+    initAI(),
+    loadAIConversations()
   ]);
   
-  // Initialize chat
   initChat();
   
-  // Check for saved sessions
   try {
     const savedExam = sessionStorage.getItem('activeExam');
     if (savedExam) {
@@ -102,14 +70,12 @@ export async function initApp() {
     }
   } catch (e) {}
   
-  // Handle page load parameters
   const urlParams = new URLSearchParams(window.location.search);
   const pageParam = urlParams.get('page');
-  if (pageParam && ['dashboard', 'exam', 'test', 'study', 'profile', 'ai', 'faq', 'leaderboard', 'chat', 'submit'].includes(pageParam)) {
+  if (pageParam && ['dashboard', 'exam', 'test', 'study', 'profile', 'ai', 'faq', 'leaderboard', 'chat', 'submit', 'results'].includes(pageParam)) {
     setTimeout(() => showPage(pageParam), 100);
   }
   
-  // Handle back/forward navigation
   window.addEventListener('popstate', () => {
     document.querySelectorAll('.loading').forEach(el => {
       el.classList.remove('loading');
@@ -120,10 +86,6 @@ export async function initApp() {
   });
 }
 
-// ============================================
-// PAGE NAVIGATION
-// ============================================
-
 let currentPage = 'dashboard';
 let isPageLoading = false;
 
@@ -131,7 +93,6 @@ export function showPageWithLoading(page) {
   if (isPageLoading) return;
   if (currentPage === page) return;
   
-  // Check if we're in a test/exam
   if ((page === 'dashboard' || page === 'profile') && 
       (window.examState?.session || window.testState?.session)) {
     if (!confirm('You have an active exam/test. Are you sure you want to leave? Your progress will be lost.')) {
@@ -157,7 +118,8 @@ export function showPageWithLoading(page) {
       faq: 'FAQ',
       leaderboard: 'Leaderboard',
       chat: 'Support Chat',
-      submit: 'Results'
+      submit: 'Submit Results',
+      results: 'Your Results'
     };
     setText('pageLabel', labels[page] || page);
     setText('pageTitle', 'OAU CBE Practice');
@@ -166,7 +128,6 @@ export function showPageWithLoading(page) {
       item.classList.toggle('active', item.dataset.page === page);
     });
     
-    // Load page data if needed (some pages might need refresh)
     if (page === 'dashboard' && window.loadDashboard) {
       setTimeout(() => window.loadDashboard(), 50);
     } else if (page === 'profile' && window.loadProfile) {
@@ -175,6 +136,10 @@ export function showPageWithLoading(page) {
       setTimeout(() => window.loadLeaderboard(), 50);
     } else if (page === 'submit' && window.loadSubmitPage) {
       setTimeout(() => window.loadSubmitPage(), 50);
+    } else if (page === 'results' && window.loadResultsPage) {
+      setTimeout(() => window.loadResultsPage(), 50);
+    } else if (page === 'ai' && window.loadAIConversations) {
+      setTimeout(() => window.loadAIConversations(), 50);
     }
     
     window.scrollTo(0, 0);
@@ -185,18 +150,12 @@ export function showPageWithLoading(page) {
   }, 300);
 }
 
-// ============================================
-// EXPOSE FUNCTIONS TO WINDOW
-// ============================================
-
 window.toggleThemeMode = toggleThemeMode;
 window.showToast = showToast;
 window.initApp = initApp;
 window.API_BASE = API_BASE;
 window.showPage = showPageWithLoading;
-window.preloadedData = preloadedData;
 
-// Auto-init when DOM is ready
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initApp);
 } else {
