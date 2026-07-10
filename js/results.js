@@ -279,4 +279,92 @@ export function openResultPopup(index) {
       return `<div style="background:var(--bg);border-radius:8px;padding:10px;margin-bottom:6px;border:1px solid var(--border);border-left:3px solid ${statusColor}">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:6px">
           <div style="font-weight:500;font-size:.78rem;color:var(--text);flex:1">${idx + 1}. ${q.text}</div>
-          <span style="font-size:.55rem;padding:2px 6px;border-radius:
+          <span style="font-size:.55rem;padding:2px 6px;border-radius:8px;font-weight:600;white-space:nowrap;flex-shrink:0;background:${isCorrect ? 'rgba(16,185,129,.12)' : isUnanswered ? 'rgba(245,158,11,.12)' : 'rgba(239,68,68,.12)'};color:${statusColor}">${statusText}</span>
+        </div>
+        ${optionsHtml}
+        ${explanationHtml}
+      </div>`;
+    }).join('');
+    questionsHtml += `</div>`;
+  } else {
+    questionsHtml = `<p style="color:var(--text2);text-align:center;padding:12px;font-size:.75rem">📋 Detailed review not available.</p>`;
+  }
+  
+  overlay.innerHTML = `
+    <div style="background:var(--card);border-radius:20px;max-width:700px;width:100%;max-height:90vh;overflow-y:auto;padding:24px 20px;border:1px solid var(--border);animation:slideUp .3s ease;position:relative">
+      <button onclick="window.closeResultPopup()" style="position:absolute;top:12px;right:16px;background:none;border:none;color:var(--text-secondary);font-size:1.2rem;cursor:pointer;transition:all .2s">
+        <i class="fas fa-times"></i>
+      </button>
+      
+      <div style="text-align:center;margin-bottom:12px">
+        <span style="display:inline-block;padding:4px 14px;border-radius:20px;font-size:.7rem;font-weight:600;background:${isExam ? 'rgba(59,130,246,.15)' : 'rgba(167,139,250,.15)'};color:${modeColor}">${modeLabel}</span>
+      </div>
+      
+      <div style="font-size:1.1rem;font-weight:700;margin:8px 0 12px;text-align:center;color:var(--text)">
+        <i class="fas ${isExam ? 'fa-file-alt' : 'fa-flask'}" style="color:${modeColor};margin-right:8px"></i>
+        ${courseName}
+      </div>
+      
+      <div style="width:100px;height:100px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 12px;font-size:2rem;font-weight:800;background:${percentage >= 70 ? 'rgba(16,185,129,.15)' : percentage >= 50 ? 'rgba(245,158,11,.15)' : 'rgba(239,68,68,.15)'};color:${percentage >= 70 ? 'var(--success)' : percentage >= 50 ? 'var(--warning)' : 'var(--danger)'};border:3px solid ${percentage >= 70 ? 'var(--success)' : percentage >= 50 ? 'var(--warning)' : 'var(--danger)'}">
+        ${percentage}%
+        <span style="font-size:.65rem;font-weight:600;margin-top:2px">Grade: ${grade}</span>
+      </div>
+      
+      <div style="text-align:center;padding:8px;margin:8px 0;border-radius:8px;font-size:.8rem;font-weight:500;background:${percentage >= 70 ? 'rgba(16,185,129,.06)' : percentage >= 50 ? 'rgba(245,158,11,.06)' : 'rgba(239,68,68,.06)'};color:${percentage >= 70 ? 'var(--success)' : percentage >= 50 ? 'var(--warning)' : 'var(--danger)'}">${encMessage}</div>
+      
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:8px 0">
+        <div style="background:var(--bg);border-radius:6px;padding:8px;text-align:center;border:1px solid var(--border)">
+          <div style="font-size:.9rem;font-weight:700;color:var(--primary-light)">${result.correctAnswers || 0}/${result.totalQuestions || 0}</div>
+          <div style="font-size:.5rem;color:var(--text-secondary)">✅ Correct</div>
+        </div>
+        <div style="background:var(--bg);border-radius:6px;padding:8px;text-align:center;border:1px solid var(--border)">
+          <div style="font-size:.9rem;font-weight:700;color:var(--primary-light)">${timeString}</div>
+          <div style="font-size:.5rem;color:var(--text-secondary)">⏱️ Time</div>
+        </div>
+        <div style="background:var(--bg);border-radius:6px;padding:8px;text-align:center;border:1px solid var(--border)">
+          <div style="font-size:.9rem;font-weight:700;color:var(--primary-light)">${result.totalQuestions ? Math.round((result.correctAnswers / result.totalQuestions) * 100) : 0}%</div>
+          <div style="font-size:.5rem;color:var(--text-secondary)">📊 Accuracy</div>
+        </div>
+        <div style="background:var(--bg);border-radius:6px;padding:8px;text-align:center;border:1px solid var(--border)">
+          <div style="font-size:.9rem;font-weight:700;color:var(--primary-light)">${isExam ? 'Exam' : 'Test'}</div>
+          <div style="font-size:.5rem;color:var(--text-secondary)">📋 Mode</div>
+        </div>
+      </div>
+      
+      ${questionsHtml}
+      
+      <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px">
+        <button class="btn btn-primary btn-sm" onclick="window.closeResultPopup();window.showPage('exam')"><i class="fas fa-pen"></i> Take Exam</button>
+        <button class="btn btn-test btn-sm" onclick="window.closeResultPopup();window.showPage('test')"><i class="fas fa-flask"></i> Practice Test</button>
+        <button class="btn btn-soft btn-sm" onclick="window.closeResultPopup()"><i class="fas fa-times"></i> Close</button>
+      </div>
+    </div>
+  `;
+  
+  document.body.appendChild(overlay);
+  popupOpen = true;
+  
+  // Prevent body scroll
+  document.body.style.overflow = 'hidden';
+}
+
+export function closeResultPopup() {
+  const overlay = $id('resultPopupOverlay');
+  if (overlay) {
+    overlay.remove();
+    popupOpen = false;
+    document.body.style.overflow = '';
+  }
+}
+
+// Close popup on escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && popupOpen) {
+    closeResultPopup();
+  }
+});
+
+// ==================== EXPOSE ====================
+window.loadResultsPage = loadResultsPage;
+window.openResultPopup = openResultPopup;
+window.closeResultPopup = closeResultPopup;
