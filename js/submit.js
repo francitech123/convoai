@@ -1,14 +1,10 @@
 // ============================================
-// SUBMIT MODULE - Results Page (Inside app.html)
+// SUBMIT MODULE - Shows Latest Single Result
 // ============================================
 
 import { apiFetch, $id, setText, escapeHtml, showToast, getToken, API_BASE, timeAgo } from './utils.js';
 
-const RESULT_STORAGE_KEY = 'lastExamResult';
-const RESULT_TIMESTAMP_KEY = 'lastResultTimestamp';
-
-let allResults = [];
-let expandedResultId = null;
+let currentResult = null;
 
 // ==================== GET RESULT DATA ====================
 function getResultData() {
@@ -17,8 +13,8 @@ function getResultData() {
   if (result) {
     try {
       const parsed = JSON.parse(result);
-      localStorage.setItem(RESULT_STORAGE_KEY, JSON.stringify(parsed));
-      localStorage.setItem(RESULT_TIMESTAMP_KEY, Date.now().toString());
+      localStorage.setItem('lastExamResult', JSON.stringify(parsed));
+      localStorage.setItem('lastResultTimestamp', Date.now().toString());
       sessionStorage.removeItem('examResult');
       sessionStorage.removeItem('testResult');
       return parsed;
@@ -47,8 +43,8 @@ function getResultData() {
             explanation: q.explanation || ''
           })) : null
         };
-        localStorage.setItem(RESULT_STORAGE_KEY, JSON.stringify(resultData));
-        localStorage.setItem(RESULT_TIMESTAMP_KEY, Date.now().toString());
+        localStorage.setItem('lastExamResult', JSON.stringify(resultData));
+        localStorage.setItem('lastResultTimestamp', Date.now().toString());
         localStorage.removeItem('pendingExamSubmission');
         localStorage.removeItem('pendingTestSubmission');
         return resultData;
@@ -58,7 +54,7 @@ function getResultData() {
   
   // 3. Check persistent storage
   try {
-    const persistent = localStorage.getItem(RESULT_STORAGE_KEY);
+    const persistent = localStorage.getItem('lastExamResult');
     if (persistent) {
       return JSON.parse(persistent);
     }
@@ -67,54 +63,43 @@ function getResultData() {
   return null;
 }
 
-// ==================== FETCH FROM BACKEND ====================
-async function fetchUserScores() {
-  try {
-    const token = getToken();
-    if (!token) return [];
-    
-    const response = await fetch(API_BASE + '/scores/my-scores', { 
-      headers: { 'Authorization': 'Bearer ' + token } 
-    });
-    if (response.ok) {
-      const data = await response.json();
-      if (data.success && data.scores && data.scores.length > 0) {
-        return data.scores;
-      }
-    }
-    return [];
-  } catch(e) {
-    console.error('Fetch scores error:', e);
-    return [];
-  }
-}
-
 // ==================== LOAD SUBMIT PAGE ====================
 export async function loadSubmitPage() {
   const loading = $id('submitLoading');
   const content = $id('submitContent');
   if (!content) return;
   
-  // Try to get result from storage
+  // Show loading spinner
+  if (loading) loading.style.display = 'block';
+  
+  // Get result from storage
   let result = getResultData();
   
   // If no result, try backend
   if (!result) {
     try {
-      const scores = await fetchUserScores();
-      if (scores && scores.length > 0) {
-        const latest = scores[0];
-        result = {
-          course: latest.courseCode || 'Unknown',
-          correctCount: latest.correctAnswers || latest.score || 0,
-          totalQuestions: latest.totalQuestions || 0,
-          percentage: latest.percentage || 0,
-          timeSpent: latest.timeSpent || 0,
-          mode: latest.mode || 'exam',
-          questions: null
-        };
-        localStorage.setItem(RESULT_STORAGE_KEY, JSON.stringify(result));
-        localStorage.setItem(RESULT_TIMESTAMP_KEY, Date.now().toString());
+      const token = getToken();
+      if (token) {
+        const response = await fetch(API_BASE + '/scores/my-scores', { 
+          headers: { 'Authorization': 'Bearer ' + token } 
+        });
+        if (response.ok) {
+          const data = await response.json();
+          if (data.success && data.scores && data.scores.length > 0) {
+            const latest = data.scores[0];
+            result = {
+              course: latest.courseCode || 'Unknown',
+              correctCount: latest.correctAnswers || latest.score || 0,
+              totalQuestions: latest.totalQuestions || 0,
+              percentage: latest.percentage || 0,
+              timeSpent: latest.timeSpent || 0,
+              mode: latest.mode || 'exam',
+              questions: null
+            };
+            localStorage.setItem('lastExamResult', JSON.stringify(result));
+            localStorage.setItem('lastResultTimestamp', Date.now().toString());
+          }
+        }
       }
     } catch(e) {
       console.error('Error fetching scores:', e);
@@ -128,21 +113,18 @@ export async function loadSubmitPage() {
     return;
   }
   
-  allResults = [result];
+  currentResult = result;
   displayResult(content, result);
 }
 
 function showEmptyState(container) {
   if (!container) return;
-  const loading = $id('submitLoading');
-  if (loading) loading.style.display = 'none';
-  
   container.innerHTML = `
     <div class="empty-state" style="padding:60px 20px;text-align:center">
       <i class="fas fa-file-alt" style="font-size:3rem;display:block;margin-bottom:16px;opacity:.5"></i>
       <h3 style="font-size:1.2rem;margin-bottom:8px;color:var(--text)">No Results Found</h3>
       <p style="color:var(--text-secondary);margin-bottom:16px">You haven't taken any exams or tests yet.</p>
-      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px">
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
         <button class="btn btn-primary" onclick="window.showPage('exam')"><i class="fas fa-pen"></i> Take Exam</button>
         <button class="btn btn-test" onclick="window.showPage('test')"><i class="fas fa-flask"></i> Practice Test</button>
         <button class="btn btn-soft" onclick="window.showPage('dashboard')"><i class="fas fa-home"></i> Dashboard</button>
@@ -152,10 +134,6 @@ function showEmptyState(container) {
 }
 
 function displayResult(container, result) {
-  if (!container) return;
-  const loading = $id('submitLoading');
-  if (loading) loading.style.display = 'none';
-  
   const percentage = result.percentage || 0;
   let scoreClass = 'low', grade = 'F';
   if (percentage >= 90) { scoreClass = 'high'; grade = 'A+'; }
@@ -171,7 +149,7 @@ function displayResult(container, result) {
   
   const isExam = result.mode === 'exam';
   const modeLabel = isExam ? '📝 Exam Mode' : '🧪 Test Mode';
-  const modeClass = isExam ? '' : 'test';
+  const modeColor = isExam ? 'var(--primary-light)' : '#a78bfa';
   
   let encClass = 'keep', encMessage = '💪 Keep practicing! Review the explanations and try again.';
   if (percentage >= 80) { encClass = 'great'; encMessage = '🎉 Outstanding performance! You\'re a champion!'; }
@@ -179,7 +157,7 @@ function displayResult(container, result) {
   else if (percentage >= 60) { encClass = 'good'; encMessage = '👍 Good effort! You\'re on the right track.'; }
   else if (percentage >= 50) { encClass = 'good'; encMessage = '📚 Nice try! Review the explanations and practice more.'; }
   
-  // Question review section
+  // Build questions review
   let questionsHtml = '';
   if (result.questions && result.questions.length > 0) {
     const correctCount = result.questions.filter(q => q.userAnswer === q.correctOption).length;
@@ -187,90 +165,117 @@ function displayResult(container, result) {
     const unansweredCount = result.questions.filter(q => q.userAnswer === null || q.userAnswer === undefined).length;
     
     questionsHtml = `
-      <div class="review-header">
-        <h3><i class="fas fa-list-check"></i> Question Review</h3>
-        <span class="review-summary">✅ ${correctCount} | ❌ ${wrongCount} | ⬜ ${unansweredCount}</span>
-      </div>`;
+      <div style="display:flex;justify-content:space-between;align-items:center;margin:20px 0 12px;flex-wrap:wrap;gap:8px">
+        <h3 style="font-size:1rem;color:var(--text);display:flex;align-items:center;gap:8px">
+          <i class="fas fa-list-check"></i> Question Review
+        </h3>
+        <span style="font-size:.7rem;color:var(--text-secondary)">✅ ${correctCount} | ❌ ${wrongCount} | ⬜ ${unansweredCount}</span>
+      </div>
+      <div style="max-height:500px;overflow-y:auto;padding-right:4px">`;
     
     questionsHtml += result.questions.map((q, idx) => {
       const isCorrect = q.userAnswer === q.correctOption;
       const isUnanswered = q.userAnswer === null || q.userAnswer === undefined;
-      const userLetter = !isUnanswered ? String.fromCharCode(65 + q.userAnswer) : 'Not answered';
+      const userLetter = !isUnanswered ? String.fromCharCode(65 + q.userAnswer) : '—';
       const correctLetter = String.fromCharCode(65 + q.correctOption);
       
-      let statusClass = 'wrong', statusText = '❌ Wrong';
-      if (isCorrect) { statusClass = 'correct'; statusText = '✅ Correct'; }
-      if (isUnanswered) { statusClass = 'unanswered'; statusText = '⬜ Unanswered'; }
+      let statusColor = isCorrect ? 'var(--success)' : isUnanswered ? 'var(--warning)' : 'var(--danger)';
+      let statusText = isCorrect ? '✅ Correct' : isUnanswered ? '⬜ Unanswered' : '❌ Wrong';
       
       let optionsHtml = '';
       if (q.options && q.options.length) {
-        optionsHtml = '<div class="options">';
+        optionsHtml = '<div style="margin-left:12px;margin-top:6px">';
         q.options.forEach((opt, optIdx) => {
-          let optClass = '';
           let icon = '';
-          if (optIdx === q.correctOption) { optClass = 'correct-answer'; icon = '✓'; }
-          if (optIdx === q.userAnswer && optIdx !== q.correctOption) { optClass = 'user-wrong'; icon = '✗'; }
-          if (optIdx === q.userAnswer && optIdx === q.correctOption) { optClass = 'correct-answer'; icon = '✓'; }
-          optionsHtml += `<div class="option ${optClass}"><span class="option-icon">${icon}</span>${String.fromCharCode(65+optIdx)}. <span class="mathjax-process">${opt}</span></div>`;
+          let style = '';
+          if (optIdx === q.correctOption) {
+            icon = '✓';
+            style = 'color:var(--success);font-weight:600';
+          }
+          if (optIdx === q.userAnswer && optIdx !== q.correctOption) {
+            icon = '✗';
+            style = 'color:var(--danger);font-weight:600';
+          }
+          if (optIdx === q.userAnswer && optIdx === q.correctOption) {
+            icon = '✓';
+            style = 'color:var(--success);font-weight:600';
+          }
+          const letter = String.fromCharCode(65 + optIdx);
+          optionsHtml += `<div style="font-size:.8rem;padding:4px 0;color:var(--text2);display:flex;align-items:center;gap:6px;${style}">
+            <span style="width:18px;font-size:.65rem;text-align:center;flex-shrink:0">${icon}</span>
+            ${letter}. ${opt}
+          </div>`;
         });
         optionsHtml += `</div>`;
-        optionsHtml += `<div class="answer-row">Your answer: <strong style="color:${isCorrect ? 'var(--success)' : isUnanswered ? 'var(--warning)' : 'var(--danger)'}">${userLetter}</strong> | Correct: <strong style="color:var(--success)">${correctLetter}</strong></div>`;
+        optionsHtml += `<div style="font-size:.72rem;margin-top:6px;padding:6px 10px;background:var(--bg);border-radius:6px;color:var(--text2)">
+          Your answer: <strong style="color:${isCorrect ? 'var(--success)' : isUnanswered ? 'var(--warning)' : 'var(--danger)'}">${userLetter}</strong> | Correct: <strong style="color:var(--success)">${correctLetter}</strong>
+        </div>`;
       }
       
       let explanationHtml = '';
       if (q.explanation && q.explanation.trim()) {
-        explanationHtml = `<div class="explanation"><i class="fas fa-info-circle"></i> <span class="mathjax-process">${q.explanation}</span></div>`;
+        explanationHtml = `<div style="background:var(--bg);border-radius:6px;padding:8px 10px;margin-top:6px;font-size:.75rem;color:var(--text-secondary);border-left:3px solid var(--primary-light);line-height:1.5">
+          <i class="fas fa-info-circle" style="color:var(--primary-light);margin-right:4px"></i> ${q.explanation}
+        </div>`;
       }
       
-      return `<div class="question-review ${isCorrect ? 'correct' : isUnanswered ? 'unanswered' : 'wrong'}">
-        <div class="question-header">
-          <div class="question-text mathjax-process">${idx + 1}. ${q.text}</div>
-          <span class="question-status ${statusClass}">${statusText}</span>
+      return `<div style="background:var(--bg);border-radius:10px;padding:12px;margin-bottom:8px;border:1px solid var(--border);border-left:3px solid ${statusColor}">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+          <div style="font-weight:500;font-size:.82rem;color:var(--text);flex:1">${idx + 1}. ${q.text}</div>
+          <span style="font-size:.6rem;padding:2px 8px;border-radius:10px;font-weight:600;white-space:nowrap;flex-shrink:0;background:${isCorrect ? 'rgba(16,185,129,.12)' : isUnanswered ? 'rgba(245,158,11,.12)' : 'rgba(239,68,68,.12)'};color:${statusColor}">${statusText}</span>
         </div>
         ${optionsHtml}
         ${explanationHtml}
       </div>`;
     }).join('');
+    questionsHtml += `</div>`;
   } else {
-    questionsHtml = `<p style="color:var(--text-secondary);text-align:center;padding:16px;font-size:.85rem">📋 Detailed question review not available for this session.</p>`;
+    questionsHtml = `<p style="color:var(--text2);text-align:center;padding:20px;font-size:.85rem">📋 Detailed question review not available for this session.</p>`;
   }
   
   container.innerHTML = `
-    <div class="result-card">
-      <div class="result-header">
-        <span class="mode-badge ${modeClass}">${modeLabel}</span>
-        <h2><i class="fas ${isExam ? 'fa-file-alt' : 'fa-flask'}" style="color:${isExam ? 'var(--primary-light)' : '#a78bfa'}"></i> ${result.course || 'Results'}</h2>
+    <div style="background:var(--card);border-radius:20px;padding:clamp(16px,3vw,28px);margin-bottom:20px;border:1px solid var(--border)">
+      <div style="text-align:center">
+        <span style="display:inline-block;padding:6px 16px;border-radius:20px;font-size:.75rem;font-weight:600;background:${isExam ? 'rgba(59,130,246,.15)' : 'rgba(167,139,250,.15)'};color:${modeColor}">${modeLabel}</span>
       </div>
-      
-      <div class="score-circle ${scoreClass}">
+      <div style="font-size:clamp(1.1rem,2vw,1.4rem);font-weight:700;margin:12px 0 16px;display:flex;align-items:center;gap:10px;color:var(--text);justify-content:center">
+        <i class="fas ${isExam ? 'fa-file-alt' : 'fa-flask'}" style="color:${modeColor}"></i>
+        ${result.course || 'Results'}
+      </div>
+      <div style="width:clamp(120px,20vw,150px);height:clamp(120px,20vw,150px);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 16px;font-size:clamp(2rem,3vw,2.8rem);font-weight:800;background:${percentage >= 70 ? 'rgba(16,185,129,.15)' : percentage >= 50 ? 'rgba(245,158,11,.15)' : 'rgba(239,68,68,.15)'};color:${percentage >= 70 ? 'var(--success)' : percentage >= 50 ? 'var(--warning)' : 'var(--danger)'};border:3px solid ${percentage >= 70 ? 'var(--success)' : percentage >= 50 ? 'var(--warning)' : 'var(--danger)'}">
         ${percentage}%
-        <span class="grade">Grade: ${grade}</span>
+        <span style="font-size:clamp(.7rem,1.2vw,.85rem);font-weight:600;margin-top:2px">Grade: ${grade}</span>
       </div>
-      
-      <div class="encouragement ${encClass}">${encMessage}</div>
-      
-      <div class="stats-grid">
-        <div class="stat-item"><div class="stat-value">${result.correctCount || 0}/${result.totalQuestions || 0}</div><div class="stat-label">✅ Correct</div></div>
-        <div class="stat-item"><div class="stat-value">${timeString}</div><div class="stat-label">⏱️ Time</div></div>
-        <div class="stat-item"><div class="stat-value">${result.totalQuestions ? Math.round((result.correctCount / result.totalQuestions) * 100) : 0}%</div><div class="stat-label">📊 Accuracy</div></div>
-        <div class="stat-item"><div class="stat-value">${isExam ? 'Exam' : 'Test'}</div><div class="stat-label">📋 Mode</div></div>
+      <div style="text-align:center;padding:12px;margin:8px 0 12px;border-radius:10px;font-size:clamp(.8rem,1.2vw,.9rem);font-weight:500;line-height:1.5;background:${encClass === 'great' ? 'rgba(16,185,129,.08)' : encClass === 'good' ? 'rgba(245,158,11,.08)' : 'rgba(239,68,68,.08)'};color:${encClass === 'great' ? 'var(--success)' : encClass === 'good' ? 'var(--warning)' : 'var(--danger)'}">${encMessage}</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,1.5vw,12px);margin:12px 0">
+        <div style="background:var(--bg);border-radius:10px;padding:12px 8px;text-align:center;border:1px solid var(--border)">
+          <div style="font-size:1.1rem;font-weight:800;color:var(--primary-light)">${result.correctCount || 0}/${result.totalQuestions || 0}</div>
+          <div style="font-size:.6rem;color:var(--text-secondary);margin-top:3px">✅ Correct</div>
+        </div>
+        <div style="background:var(--bg);border-radius:10px;padding:12px 8px;text-align:center;border:1px solid var(--border)">
+          <div style="font-size:1.1rem;font-weight:800;color:var(--primary-light)">${timeString}</div>
+          <div style="font-size:.6rem;color:var(--text-secondary);margin-top:3px">⏱️ Time</div>
+        </div>
+        <div style="background:var(--bg);border-radius:10px;padding:12px 8px;text-align:center;border:1px solid var(--border)">
+          <div style="font-size:1.1rem;font-weight:800;color:var(--primary-light)">${result.totalQuestions ? Math.round((result.correctCount / result.totalQuestions) * 100) : 0}%</div>
+          <div style="font-size:.6rem;color:var(--text-secondary);margin-top:3px">📊 Accuracy</div>
+        </div>
+        <div style="background:var(--bg);border-radius:10px;padding:12px 8px;text-align:center;border:1px solid var(--border)">
+          <div style="font-size:1.1rem;font-weight:800;color:var(--primary-light)">${isExam ? 'Exam' : 'Test'}</div>
+          <div style="font-size:.6rem;color:var(--text-secondary);margin-top:3px">📋 Mode</div>
+        </div>
       </div>
     </div>
-    
-    <div class="result-card">${questionsHtml}</div>
-    
-    <div class="action-buttons">
+    <div style="background:var(--card);border-radius:20px;padding:clamp(16px,3vw,28px);margin-bottom:20px;border:1px solid var(--border)">
+      ${questionsHtml}
+    </div>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:8px">
       <button class="btn btn-primary" onclick="window.showPage('exam')"><i class="fas fa-pen"></i> Take Exam</button>
       <button class="btn btn-test" onclick="window.showPage('test')"><i class="fas fa-flask"></i> Practice Test</button>
       <button class="btn btn-soft" onclick="window.showPage('dashboard')"><i class="fas fa-home"></i> Dashboard</button>
     </div>
   `;
-  
-  // Trigger MathJax
-  if (window.MathJax && MathJax.typesetPromise) {
-    MathJax.typesetPromise([container]).catch(console.error);
-  }
 }
 
-// ==================== EXPOSE TO WINDOW ====================
+// ==================== EXPOSE ====================
 window.loadSubmitPage = loadSubmitPage;
