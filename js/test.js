@@ -1,8 +1,8 @@
 // ============================================
-// TEST MODULE
+// TEST MODULE - Preloaded Data
 // ============================================
 
-import { apiFetch, $id, setText, shuffleArray, showToast, showLoading, hideLoading, enterFullscreenMode, exitFullscreenMode } from './utils.js';
+import { apiFetch, $id, setText, shuffleArray, showToast, enterFullscreenMode, exitFullscreenMode } from './utils.js';
 
 export let testState = {
   faculty: null,
@@ -16,15 +16,24 @@ export let testState = {
   showAll: false
 };
 
+let preloadedFaculties = [];
+
+export function setPreloadedTestData(faculties) {
+  preloadedFaculties = faculties || [];
+}
+
 export async function loadTestData() {
-  if (document.querySelector('#testFacultyGrid .faculty-tag-simple')) return;
-  await loadTestFaculties();
+  if (preloadedFaculties.length > 0) {
+    testState.faculties = preloadedFaculties;
+    renderTestFaculties(false);
+  } else {
+    await loadTestFaculties();
+  }
 }
 
 export async function loadTestFaculties() {
   const grid = $id('testFacultyGrid');
   if (!grid) return;
-  grid.innerHTML = '<div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading...</p></div>';
   try {
     const data = await apiFetch('/admin/faculties');
     const faculties = data.faculties || [];
@@ -274,7 +283,7 @@ function testRenderQuestion() {
   const submitBtn = $id('testSubmitBtn');
   
   if (counter) counter.textContent = `Question ${idx + 1} of ${total}`;
-  if (text) text.textContent = q.question;
+  if (text) text.textContent = q.text;
   const letters = ['A', 'B', 'C', 'D'];
   if (options) {
     options.innerHTML = q.options.map((opt, i) => `
@@ -367,7 +376,7 @@ function testStartAutoSave() {
   }, 10000);
 }
 
-// ==================== TEST SUBMIT - FIXED ====================
+// ==================== TEST SUBMIT ====================
 export async function testSubmit() {
   if (testState.isSubmitting) return;
   if (!testState.session) return;
@@ -376,10 +385,6 @@ export async function testSubmit() {
   testState.isSubmitting = true;
   if (testState.session.timer) clearInterval(testState.session.timer);
   if (testState.autoSaveInterval) clearInterval(testState.autoSaveInterval);
-  
-  showLoading('Submitting your test...');
-  history.pushState(null, '', window.location.href);
-  window.onpopstate = function() { history.pushState(null, '', window.location.href); };
   
   const timeSpent = Date.now() - testState.session.startTime;
   let correct = 0;
@@ -390,7 +395,6 @@ export async function testSubmit() {
   const percentage = Math.round((correct / total) * 100);
   
   try {
-    // Submit to backend
     await apiFetch('/tests/session/submit', {
       method: 'POST',
       body: JSON.stringify({
@@ -404,7 +408,6 @@ export async function testSubmit() {
       })
     });
     
-    // ==================== CRITICAL FIX: Save result with questions ====================
     const resultData = {
       course: testState.session.courseCode,
       correctCount: correct,
@@ -421,27 +424,17 @@ export async function testSubmit() {
       }))
     };
     
-    console.log('📊 Saving test result:', resultData);
-    
-    // Save to sessionStorage for the submit page
     sessionStorage.setItem('testResult', JSON.stringify(resultData));
-    
-    // Also save to localStorage for persistence
     localStorage.setItem('lastExamResult', JSON.stringify(resultData));
     localStorage.setItem('lastResultTimestamp', Date.now().toString());
-    
     sessionStorage.removeItem('activeTest');
     testState.isSubmitting = false;
     exitFullscreenMode();
-    hideLoading();
-    window.location.href = '/submit';
+    window.showPage('submit');
     
   } catch (e) {
-    console.error('Test submit error:', e);
-    hideLoading();
     alert('Failed to submit. Please try again.');
     testState.isSubmitting = false;
-    window.onpopstate = null;
   }
 }
 
@@ -453,7 +446,7 @@ export function testQuit() {
     sessionStorage.removeItem('activeTest');
     testState.session = null;
     exitFullscreenMode();
-    window.location.reload();
+    window.showPage('dashboard');
   }
 }
 
