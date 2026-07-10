@@ -139,7 +139,6 @@ export async function studySelectTopic(topicId) {
         explanation: q.explanation || 'No explanation provided.'
       }));
     } else {
-      // Fallback questions if backend returns none
       studyState.questions = [
         { question: `What is the main concept in ${topic.title}?`, options: ['Option A', 'Option B', 'Option C', 'Option D'], correctOption: 0, explanation: 'This is a sample explanation.' },
         { question: 'Which of the following is correct?', options: ['Option A', 'Option B', 'Option C', 'Option D'], correctOption: 1, explanation: 'Option B is the correct answer.' },
