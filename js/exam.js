@@ -1,8 +1,8 @@
 // ============================================
-// EXAM MODULE
+// EXAM MODULE - Preloaded Data
 // ============================================
 
-import { apiFetch, $id, setText, shuffleArray, showToast, showLoading, hideLoading, enterFullscreenMode, exitFullscreenMode } from './utils.js';
+import { apiFetch, $id, setText, shuffleArray, showToast, enterFullscreenMode, exitFullscreenMode } from './utils.js';
 
 export let examState = {
   faculty: null,
@@ -13,18 +13,33 @@ export let examState = {
   timer: null,
   autoSaveInterval: null,
   faculties: [],
-  showAll: false
+  showAll: false,
+  coursesData: {}
 };
 
+// Preloaded data from app.js
+let preloadedFaculties = [];
+let preloadedCourses = {};
+
+export function setPreloadedExamData(faculties, courses) {
+  preloadedFaculties = faculties || [];
+  preloadedCourses = courses || {};
+}
+
 export async function loadExamData() {
-  if (document.querySelector('#examFacultyGrid .faculty-tag-simple')) return;
-  await loadExamFaculties();
+  // Use preloaded data
+  if (preloadedFaculties.length > 0) {
+    examState.faculties = preloadedFaculties;
+    renderExamFaculties(false);
+  } else {
+    // Fallback: load from API
+    await loadExamFaculties();
+  }
 }
 
 export async function loadExamFaculties() {
   const grid = $id('examFacultyGrid');
   if (!grid) return;
-  grid.innerHTML = '<div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading...</p></div>';
   try {
     const data = await apiFetch('/admin/faculties');
     const faculties = data.faculties || [];
@@ -274,7 +289,7 @@ function examRenderQuestion() {
   const submitBtn = $id('examSubmitBtn');
   
   if (counter) counter.textContent = `Question ${idx + 1} of ${total}`;
-  if (text) text.textContent = q.question;
+  if (text) text.textContent = q.text;
   const letters = ['A', 'B', 'C', 'D'];
   if (options) {
     options.innerHTML = q.options.map((opt, i) => `
@@ -367,7 +382,7 @@ function examStartAutoSave() {
   }, 10000);
 }
 
-// ==================== EXAM SUBMIT - FIXED ====================
+// ==================== EXAM SUBMIT ====================
 export async function examSubmit() {
   if (examState.isSubmitting) return;
   if (!examState.session) return;
@@ -376,10 +391,6 @@ export async function examSubmit() {
   examState.isSubmitting = true;
   if (examState.session.timer) clearInterval(examState.session.timer);
   if (examState.autoSaveInterval) clearInterval(examState.autoSaveInterval);
-  
-  showLoading('Submitting your exam...');
-  history.pushState(null, '', window.location.href);
-  window.onpopstate = function() { history.pushState(null, '', window.location.href); };
   
   const timeSpent = Date.now() - examState.session.startTime;
   let correct = 0;
@@ -390,7 +401,6 @@ export async function examSubmit() {
   const percentage = Math.round((correct / total) * 100);
   
   try {
-    // Submit to backend
     await apiFetch('/exams/session/submit', {
       method: 'POST',
       body: JSON.stringify({
@@ -404,7 +414,6 @@ export async function examSubmit() {
       })
     });
     
-    // ==================== CRITICAL FIX: Save result with questions ====================
     const resultData = {
       course: examState.session.courseCode,
       correctCount: correct,
@@ -421,27 +430,17 @@ export async function examSubmit() {
       }))
     };
     
-    console.log('📊 Saving exam result:', resultData);
-    
-    // Save to sessionStorage for the submit page
     sessionStorage.setItem('examResult', JSON.stringify(resultData));
-    
-    // Also save to localStorage for persistence
     localStorage.setItem('lastExamResult', JSON.stringify(resultData));
     localStorage.setItem('lastResultTimestamp', Date.now().toString());
-    
     sessionStorage.removeItem('activeExam');
     examState.isSubmitting = false;
     exitFullscreenMode();
-    hideLoading();
-    window.location.href = '/submit';
+    window.showPage('submit');
     
   } catch (e) {
-    console.error('Exam submit error:', e);
-    hideLoading();
     alert('Failed to submit. Please try again.');
     examState.isSubmitting = false;
-    window.onpopstate = null;
   }
 }
 
@@ -453,7 +452,7 @@ export function examQuit() {
     sessionStorage.removeItem('activeExam');
     examState.session = null;
     exitFullscreenMode();
-    window.location.reload();
+    window.showPage('dashboard');
   }
 }
 
