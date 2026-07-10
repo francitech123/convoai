@@ -367,10 +367,12 @@ function testStartAutoSave() {
   }, 10000);
 }
 
+// ==================== TEST SUBMIT - FIXED ====================
 export async function testSubmit() {
   if (testState.isSubmitting) return;
   if (!testState.session) return;
   if (!confirm('Submit your test? You cannot change answers after submission.')) return;
+  
   testState.isSubmitting = true;
   if (testState.session.timer) clearInterval(testState.session.timer);
   if (testState.autoSaveInterval) clearInterval(testState.autoSaveInterval);
@@ -386,7 +388,9 @@ export async function testSubmit() {
   });
   const total = testState.session.questions.length;
   const percentage = Math.round((correct / total) * 100);
+  
   try {
+    // Submit to backend
     await apiFetch('/tests/session/submit', {
       method: 'POST',
       body: JSON.stringify({
@@ -399,12 +403,41 @@ export async function testSubmit() {
         answers: testState.session.answers
       })
     });
+    
+    // ==================== CRITICAL FIX: Save result with questions ====================
+    const resultData = {
+      course: testState.session.courseCode,
+      correctCount: correct,
+      totalQuestions: total,
+      percentage: percentage,
+      timeSpent: timeSpent,
+      mode: 'test',
+      questions: testState.session.questions.map((q, i) => ({
+        text: q.text,
+        options: q.options,
+        correctOption: q.correctOption,
+        userAnswer: testState.session.answers[i],
+        explanation: q.explanation || ''
+      }))
+    };
+    
+    console.log('📊 Saving test result:', resultData);
+    
+    // Save to sessionStorage for the submit page
+    sessionStorage.setItem('testResult', JSON.stringify(resultData));
+    
+    // Also save to localStorage for persistence
+    localStorage.setItem('lastExamResult', JSON.stringify(resultData));
+    localStorage.setItem('lastResultTimestamp', Date.now().toString());
+    
     sessionStorage.removeItem('activeTest');
     testState.isSubmitting = false;
     exitFullscreenMode();
     hideLoading();
     window.location.href = '/submit';
+    
   } catch (e) {
+    console.error('Test submit error:', e);
     hideLoading();
     alert('Failed to submit. Please try again.');
     testState.isSubmitting = false;
@@ -439,5 +472,3 @@ window.testSubmit = testSubmit;
 window.testQuit = testQuit;
 window.testToggleFaculties = testToggleFaculties;
 window.testJumpTo = testJumpTo;
-                                                                                                                     
-  
