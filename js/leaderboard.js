@@ -14,7 +14,6 @@ export async function loadLeaderboard() {
     const lb = data.leaderboard || [];
     const stats = data.stats || {};
     
-    // Update stats
     const totalStudents = $id('lbTotalStudents');
     const totalExams = $id('lbTotalExams');
     const avgScore = $id('lbAvgScore');
@@ -23,10 +22,7 @@ export async function loadLeaderboard() {
     if (totalExams) totalExams.textContent = stats.totalExams || lb.reduce((s, u) => s + (u.examsTaken || 0), 0);
     if (avgScore) avgScore.textContent = (stats.averageScore || 0) + '%';
     
-    // Render top 3
     renderTopThree(lb.slice(0, 3));
-    
-    // Render full table (all users)
     renderTable(lb.slice(3));
     
   } catch (e) {
@@ -52,11 +48,9 @@ function renderTopThree(top) {
   const icons = ['👑', '🥈', '🥉'];
   const bgColors = ['#f59e0b', '#94a3b8', '#b45309'];
   
-  // Order: 2nd, 1st, 3rd for podium display
   const order = top.length >= 3 ? [top[1], top[0], top[2]] : top;
   
   container.innerHTML = order.map((u, idx) => {
-    // Find the actual index in top array
     let ri = 0;
     if (top.length >= 3) {
       if (idx === 0) ri = 1;
@@ -112,7 +106,7 @@ function renderTable(users) {
   }).join('');
 }
 
-// ==================== LOAD TOP PERFORMERS (For Dashboard Mini) ====================
+// ==================== LOAD MINI LEADERBOARD ====================
 export async function loadMiniLeaderboard(limit = 5) {
   const container = $id('miniLeaderboard');
   if (!container) return;
@@ -132,7 +126,6 @@ export async function loadMiniLeaderboard(limit = 5) {
     const rankClasses = ['gold', 'silver', 'bronze'];
     const bgClasses = ['gold-bg', 'silver-bg', 'bronze-bg'];
     
-    // Show top 3 with medals, others with numbers
     container.innerHTML = `
       <div class="leaderboard-mini">
         ${lb.slice(0, 3).map((u, i) => {
