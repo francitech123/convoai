@@ -367,10 +367,12 @@ function examStartAutoSave() {
   }, 10000);
 }
 
+// ==================== EXAM SUBMIT - FIXED ====================
 export async function examSubmit() {
   if (examState.isSubmitting) return;
   if (!examState.session) return;
   if (!confirm('Submit your exam? You cannot change answers after submission.')) return;
+  
   examState.isSubmitting = true;
   if (examState.session.timer) clearInterval(examState.session.timer);
   if (examState.autoSaveInterval) clearInterval(examState.autoSaveInterval);
@@ -386,7 +388,9 @@ export async function examSubmit() {
   });
   const total = examState.session.questions.length;
   const percentage = Math.round((correct / total) * 100);
+  
   try {
+    // Submit to backend
     await apiFetch('/exams/session/submit', {
       method: 'POST',
       body: JSON.stringify({
@@ -399,12 +403,41 @@ export async function examSubmit() {
         mode: 'exam'
       })
     });
+    
+    // ==================== CRITICAL FIX: Save result with questions ====================
+    const resultData = {
+      course: examState.session.courseCode,
+      correctCount: correct,
+      totalQuestions: total,
+      percentage: percentage,
+      timeSpent: timeSpent,
+      mode: 'exam',
+      questions: examState.session.questions.map((q, i) => ({
+        text: q.text,
+        options: q.options,
+        correctOption: q.correctOption,
+        userAnswer: examState.session.answers[i],
+        explanation: q.explanation || ''
+      }))
+    };
+    
+    console.log('📊 Saving exam result:', resultData);
+    
+    // Save to sessionStorage for the submit page
+    sessionStorage.setItem('examResult', JSON.stringify(resultData));
+    
+    // Also save to localStorage for persistence
+    localStorage.setItem('lastExamResult', JSON.stringify(resultData));
+    localStorage.setItem('lastResultTimestamp', Date.now().toString());
+    
     sessionStorage.removeItem('activeExam');
     examState.isSubmitting = false;
     exitFullscreenMode();
     hideLoading();
     window.location.href = '/submit';
+    
   } catch (e) {
+    console.error('Exam submit error:', e);
     hideLoading();
     alert('Failed to submit. Please try again.');
     examState.isSubmitting = false;
