@@ -1,8 +1,8 @@
 // ============================================
-// SUBMIT MODULE - Results Page
+// SUBMIT MODULE - Results Page (Inside app.html)
 // ============================================
 
-import { apiFetch, $id, setText, escapeHtml, showToast, showLoading, hideLoading, getToken, API_BASE, timeAgo } from './utils.js';
+import { apiFetch, $id, setText, escapeHtml, showToast, getToken, API_BASE, timeAgo } from './utils.js';
 
 const RESULT_STORAGE_KEY = 'lastExamResult';
 const RESULT_TIMESTAMP_KEY = 'lastResultTimestamp';
@@ -12,24 +12,20 @@ let expandedResultId = null;
 
 // ==================== GET RESULT DATA ====================
 function getResultData() {
-  // 1. Check sessionStorage for new result (from current session)
+  // 1. Check sessionStorage for new result
   let result = sessionStorage.getItem('examResult') || sessionStorage.getItem('testResult');
   if (result) {
     try {
       const parsed = JSON.parse(result);
-      console.log('✅ Found result in sessionStorage:', parsed);
-      // Save to persistent storage
       localStorage.setItem(RESULT_STORAGE_KEY, JSON.stringify(parsed));
       localStorage.setItem(RESULT_TIMESTAMP_KEY, Date.now().toString());
       sessionStorage.removeItem('examResult');
       sessionStorage.removeItem('testResult');
       return parsed;
-    } catch(e) {
-      console.error('Error parsing sessionStorage result:', e);
-    }
+    } catch(e) {}
   }
   
-  // 2. Check localStorage for pending submission
+  // 2. Check localStorage pending submission
   let pending = localStorage.getItem('pendingExamSubmission') || localStorage.getItem('pendingTestSubmission');
   if (pending) {
     try {
@@ -51,29 +47,22 @@ function getResultData() {
             explanation: q.explanation || ''
           })) : null
         };
-        console.log('✅ Found pending submission:', resultData);
         localStorage.setItem(RESULT_STORAGE_KEY, JSON.stringify(resultData));
         localStorage.setItem(RESULT_TIMESTAMP_KEY, Date.now().toString());
         localStorage.removeItem('pendingExamSubmission');
         localStorage.removeItem('pendingTestSubmission');
         return resultData;
       }
-    } catch(e) {
-      console.error('Error parsing pending submission:', e);
-    }
+    } catch(e) {}
   }
   
-  // 3. Check persistent storage (last saved result)
+  // 3. Check persistent storage
   try {
     const persistent = localStorage.getItem(RESULT_STORAGE_KEY);
     if (persistent) {
-      const parsed = JSON.parse(persistent);
-      console.log('✅ Found persistent result:', parsed);
-      return parsed;
+      return JSON.parse(persistent);
     }
-  } catch(e) {
-    console.error('Error parsing persistent result:', e);
-  }
+  } catch(e) {}
   
   return null;
 }
@@ -100,65 +89,16 @@ async function fetchUserScores() {
   }
 }
 
-// ==================== FETCH FROM USER SCORES ====================
-async function fetchUserScoresFromUser() {
-  try {
-    const token = getToken();
-    if (!token) return [];
-    
-    const response = await fetch(API_BASE + '/auth/me', { 
-      headers: { 'Authorization': 'Bearer ' + token } 
-    });
-    if (response.ok) {
-      const data = await response.json();
-      if (data.success && data.user && data.user.scores) {
-        return data.user.scores;
-      }
-    }
-    return [];
-  } catch(e) {
-    console.error('Fetch user scores error:', e);
-    return [];
-  }
-}
-
-// ==================== LOAD & DISPLAY ====================
+// ==================== LOAD SUBMIT PAGE ====================
 export async function loadSubmitPage() {
   const loading = $id('submitLoading');
   const content = $id('submitContent');
-  
   if (!content) return;
   
-  // First try to get result from storage
+  // Try to get result from storage
   let result = getResultData();
-  console.log('📊 Result from storage:', result);
   
-  // If no result in storage, try backend
-  if (!result) {
-    try {
-      // Try user scores first
-      const userScores = await fetchUserScoresFromUser();
-      if (userScores && userScores.length > 0) {
-        const latest = userScores[userScores.length - 1];
-        result = {
-          course: latest.courseCode || 'Unknown',
-          correctCount: latest.correctAnswers || latest.score || 0,
-          totalQuestions: latest.totalQuestions || 0,
-          percentage: latest.percentage || 0,
-          timeSpent: latest.timeSpent || 0,
-          mode: latest.mode || 'exam',
-          questions: null // Questions not stored in user scores
-        };
-        console.log('✅ Found result from user scores:', result);
-        localStorage.setItem(RESULT_STORAGE_KEY, JSON.stringify(result));
-        localStorage.setItem(RESULT_TIMESTAMP_KEY, Date.now().toString());
-      }
-    } catch(e) {
-      console.error('Error fetching user scores:', e);
-    }
-  }
-  
-  // If still no result, try score model
+  // If no result, try backend
   if (!result) {
     try {
       const scores = await fetchUserScores();
@@ -173,7 +113,6 @@ export async function loadSubmitPage() {
           mode: latest.mode || 'exam',
           questions: null
         };
-        console.log('✅ Found result from scores model:', result);
         localStorage.setItem(RESULT_STORAGE_KEY, JSON.stringify(result));
         localStorage.setItem(RESULT_TIMESTAMP_KEY, Date.now().toString());
       }
@@ -184,16 +123,12 @@ export async function loadSubmitPage() {
   
   if (loading) loading.style.display = 'none';
   
-  // If still no result, show empty state
   if (!result) {
     showEmptyState(content);
     return;
   }
   
-  // Store result for potential list view
   allResults = [result];
-  
-  // Display the result
   displayResult(content, result);
 }
 
