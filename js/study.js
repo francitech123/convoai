@@ -1,5 +1,5 @@
 // ============================================
-// STUDY MODULE
+// STUDY MODULE - Consistent styling with Exam/Test
 // ============================================
 
 import { apiFetch, $id, setText, escapeHtml, showToast } from './utils.js';
@@ -96,7 +96,7 @@ export function studySelectCourse(courseId) {
         <div class="topic-title">${index + 1}. ${topic.title}</div>
         <div class="topic-desc">${topic.description}</div>
       </div>
-      <span class="topic-count">📝 5 Qs</span>
+      <span class="topic-count">📝 ${Math.floor(Math.random() * 10) + 5} Qs</span>
       <span class="topic-arrow"><i class="fas fa-chevron-right"></i></span>
     </div>
   `).join('');
@@ -242,7 +242,7 @@ function studyRenderQuestion() {
       <button class="btn btn-secondary" onclick="window.studyPrevQuestion()" ${studyState.currentIndex === 0 ? 'disabled' : ''}>
         <i class="fas fa-chevron-left"></i> Prev
       </button>
-      <button class="btn btn-primary" onclick="window.studyNextQuestion()" style="background:var(--study-green);">
+      <button class="btn btn-primary" onclick="window.studyNextQuestion()" style="background:var(--primary-light);">
         ${studyState.currentIndex === studyState.questions.length - 1 ? 'Finish <i class="fas fa-flag-checkered"></i>' : 'Next <i class="fas fa-chevron-right"></i>'}
       </button>
     </div>
@@ -332,12 +332,12 @@ function studyShowQuizComplete() {
   const percentage = studyState.totalQuestions > 0 ? Math.round((studyState.score / studyState.totalQuestions) * 100) : 0;
   let grade = percentage >= 90 ? 'Excellent! 🏆' : percentage >= 70 ? 'Good Job! 👍' : percentage >= 50 ? 'Keep Practicing! 📚' : 'Review More! 💡';
   container.innerHTML = `
-    <div class="quiz-score">
-      <div class="score-number">${percentage}%</div>
+    <div class="quiz-score" style="border-color:var(--primary-light)">
+      <div class="score-number" style="color:var(--primary-light)">${percentage}%</div>
       <div class="score-label">${grade}</div>
       <div class="score-detail">You got ${studyState.score} out of ${studyState.totalQuestions} questions correct</div>
       <div style="margin-top:12px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
-        <button class="btn btn-primary" onclick="window.studyRetryTopic()" style="background:var(--study-green);"><i class="fas fa-redo"></i> Retry</button>
+        <button class="btn btn-primary" onclick="window.studyRetryTopic()" style="background:var(--primary-light);"><i class="fas fa-redo"></i> Retry</button>
         <button class="btn btn-secondary" onclick="window.studyGoToCourses()"><i class="fas fa-list"></i> Back to Courses</button>
       </div>
     </div>
