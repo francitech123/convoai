@@ -4,6 +4,7 @@
 
 import { apiFetch, $id, setText, escapeHtml, maskName, showToast, showLoading, hideLoading } from './utils.js';
 import { loadNotifications } from './notifications.js';
+import { loadMiniLeaderboard } from './leaderboard.js';
 
 const DASHBOARD_FACULTIES = [
   'Agriculture', 'Arts', 'Basic Medical Sciences', 'Clinical Sciences',
@@ -13,7 +14,26 @@ const DASHBOARD_FACULTIES = [
 ];
 
 let dashboardState = { user: null, stats: null, courses: [], activity: [], notifications: [] };
+let wisdomInterval = null;
+let currentQuoteIndex = 0;
 
+// ==================== WISDOM QUOTES ====================
+const WISDOM_QUOTES = [
+  { q: '"Success is no accident. It is hard work, perseverance, learning, studying, and most of all, love of what you are doing."', a: 'Pelé' },
+  { q: '"The expert in anything was once a beginner."', a: 'Helen Hayes' },
+  { q: '"Education is the passport to the future, for tomorrow belongs to those who prepare for it today."', a: 'Malcolm X' },
+  { q: '"Don\'t watch the clock; do what it does. Keep going."', a: 'Sam Levenson' },
+  { q: '"The beautiful thing about learning is that no one can take it away from you."', a: 'B.B. King' },
+  { q: '"Strive for progress, not perfection."', a: 'Unknown' },
+  { q: '"The only way to do great work is to love what you do."', a: 'Steve Jobs' },
+  { q: '"Believe you can and you\'re halfway there."', a: 'Theodore Roosevelt' },
+  { q: '"It does not matter how slowly you go as long as you do not stop."', a: 'Confucius' },
+  { q: '"The secret of getting ahead is getting started."', a: 'Mark Twain' },
+  { q: '"Success is not final, failure is not fatal: it is the courage to continue that counts."', a: 'Winston Churchill' },
+  { q: '"The best way to predict the future is to create it."', a: 'Peter Drucker' }
+];
+
+// ==================== RENDER FACULTIES ====================
 export function renderDashboardFaculties() {
   const grid = $id('facultyGrid');
   if (!grid) return;
@@ -22,6 +42,54 @@ export function renderDashboardFaculties() {
   `).join('');
 }
 
+// ==================== RENDER WISDOM QUOTE ====================
+export function renderWisdomQuote() {
+  const quoteEl = $id('wisdomQuote');
+  const authorEl = $id('wisdomAuthor');
+  if (!quoteEl || !authorEl) return;
+  
+  const quote = WISDOM_QUOTES[currentQuoteIndex % WISDOM_QUOTES.length];
+  quoteEl.textContent = quote.q;
+  authorEl.textContent = '— ' + quote.a;
+  currentQuoteIndex++;
+}
+
+export function startWisdomRotation() {
+  if (wisdomInterval) clearInterval(wisdomInterval);
+  renderWisdomQuote();
+  wisdomInterval = setInterval(renderWisdomQuote, 15000); // Rotate every 15 seconds
+}
+
+export function stopWisdomRotation() {
+  if (wisdomInterval) {
+    clearInterval(wisdomInterval);
+    wisdomInterval = null;
+  }
+}
+
+// ==================== UPDATE SCORE DISTRIBUTION ====================
+export function updateScoreDistribution(scores) {
+  if (!scores || !scores.length) {
+    setText('distExcellent', '0%');
+    setText('distGood', '0%');
+    setText('distAverage', '0%');
+    setText('distLow', '0%');
+    return;
+  }
+  
+  const total = scores.length;
+  const excellent = scores.filter(s => (s.percentage||0) >= 70).length;
+  const good = scores.filter(s => (s.percentage||0) >= 60 && (s.percentage||0) < 70).length;
+  const average = scores.filter(s => (s.percentage||0) >= 50 && (s.percentage||0) < 60).length;
+  const low = scores.filter(s => (s.percentage||0) < 50).length;
+  
+  setText('distExcellent', Math.round((excellent/total)*100) + '%');
+  setText('distGood', Math.round((good/total)*100) + '%');
+  setText('distAverage', Math.round((average/total)*100) + '%');
+  setText('distLow', Math.round((low/total)*100) + '%');
+}
+
+// ==================== LOAD DASHBOARD ====================
 export async function loadDashboard() {
   try {
     const userData = await apiFetch('/auth/me');
@@ -29,12 +97,16 @@ export async function loadDashboard() {
       const user = userData.user;
       dashboardState.user = user;
       
+      // Get total courses from faculties
       let totalCourses = 0;
       try {
         const facultiesData = await apiFetch('/admin/faculties');
         const faculties = facultiesData.faculties || [];
         faculties.forEach(f => { totalCourses += f.totalCourses || 0; });
-      } catch (e) {}
+      } catch (e) {
+        console.warn('Could not load faculties count:', e);
+        totalCourses = 72; // Fallback
+      }
       
       const stats = {
         coursesActive: totalCourses || 0,
@@ -60,16 +132,32 @@ export async function loadDashboard() {
       setText('statAttempts', String(attempts || 0));
       setText('statStreak', `${stats.currentStreak || 0} day${stats.currentStreak === 1 ? '' : 's'}`);
       
+      // Render all dashboard components
       renderActivity(activity);
       renderStatsChart(user.scores || []);
       renderDashboardFaculties();
-      if (window.loadMiniLeaderboard) window.loadMiniLeaderboard();
+      updateScoreDistribution(user.scores || []);
+      
+      // Load mini leaderboard
+      try {
+        await loadMiniLeaderboard(5);
+      } catch (e) {
+        console.warn('Mini leaderboard load failed:', e);
+      }
+      
+      // Start wisdom quote rotation
+      startWisdomRotation();
+      
+    } else {
+      console.warn('User data not loaded properly');
     }
   } catch (e) {
     console.error('Dashboard load error:', e);
+    showToast('Error loading dashboard data. Please refresh.', 'error');
   }
 }
 
+// ==================== RENDER ACTIVITY ====================
 function renderActivity(items) {
   const box = $id('activityList');
   if (!box) return;
@@ -97,12 +185,17 @@ function renderActivity(items) {
   }).join('');
 }
 
+// ==================== RENDER STATS CHART ====================
 function renderStatsChart(scores) {
   if (!scores || !scores.length) {
-    ['excellentBar','goodBar','averageBar','lowBar'].forEach(id => { const el = $id(id); if (el) el.style.width = '0%'; });
+    ['excellentBar','goodBar','averageBar','lowBar'].forEach(id => { 
+      const el = $id(id); 
+      if (el) el.style.width = '0%'; 
+    });
     ['excellentCount','goodCount','averageCount','lowCount'].forEach(id => setText(id, '0'));
     return;
   }
+  
   const excellent = scores.filter(s => (s.percentage||0) >= 70).length;
   const good = scores.filter(s => (s.percentage||0) >= 60 && (s.percentage||0) < 70).length;
   const average = scores.filter(s => (s.percentage||0) >= 50 && (s.percentage||0) < 60).length;
@@ -110,47 +203,26 @@ function renderStatsChart(scores) {
   const maxCount = Math.max(excellent, good, average, low, 1);
 
   setText('excellentCount', excellent);
-  const eb = $id('excellentBar'); if (eb) eb.style.width = (excellent/maxCount * 100) + '%';
+  const eb = $id('excellentBar'); 
+  if (eb) eb.style.width = (excellent/maxCount * 100) + '%';
+  
   setText('goodCount', good);
-  const gb = $id('goodBar'); if (gb) gb.style.width = (good/maxCount * 100) + '%';
+  const gb = $id('goodBar'); 
+  if (gb) gb.style.width = (good/maxCount * 100) + '%';
+  
   setText('averageCount', average);
-  const ab = $id('averageBar'); if (ab) ab.style.width = (average/maxCount * 100) + '%';
+  const ab = $id('averageBar'); 
+  if (ab) ab.style.width = (average/maxCount * 100) + '%';
+  
   setText('lowCount', low);
-  const lb = $id('lowBar'); if (lb) lb.style.width = (low/maxCount * 100) + '%';
+  const lb = $id('lowBar'); 
+  if (lb) lb.style.width = (low/maxCount * 100) + '%';
 }
 
-export async function loadMiniLeaderboard() {
-  const container = $id('miniLeaderboard');
-  if (!container) return;
-  try {
-    const data = await apiFetch('/leaderboard');
-    const users = data.leaderboard || data.users || [];
-    if (!users || users.length === 0) {
-      container.innerHTML = '<div class="empty-state">No students yet. Be the first! 🏆</div>';
-      return;
-    }
-    const top3 = users.slice(0, 3);
-    const medals = ['👑', '🥈', '🥉'];
-    const rankClasses = ['gold', 'silver', 'bronze'];
-    const bgClasses = ['gold-bg', 'silver-bg', 'bronze-bg'];
-    
-    container.innerHTML = `
-      <div class="leaderboard-mini">
-        ${top3.map((u, i) => {
-          const displayName = maskName(u.fullName || u.username || 'Student');
-          const avgScore = u.averageScore || 0;
-          return `
-            <div class="lb-item">
-              <div class="rank ${rankClasses[i]}">${medals[i]}</div>
-              <div class="avatar ${bgClasses[i]}">${displayName.charAt(0).toUpperCase()}</div>
-              <div class="name">${displayName}</div>
-              <div class="score">${avgScore}%</div>
-            </div>
-          `;
-        }).join('')}
-      </div>
-    `;
-  } catch (e) {
-    container.innerHTML = '<div class="empty-state">Unable to load leaderboard</div>';
-  }
-}
+// ==================== EXPOSE FUNCTIONS TO WINDOW ====================
+window.renderDashboardFaculties = renderDashboardFaculties;
+window.loadDashboard = loadDashboard;
+window.renderWisdomQuote = renderWisdomQuote;
+window.startWisdomRotation = startWisdomRotation;
+window.stopWisdomRotation = stopWisdomRotation;
+window.updateScoreDistribution = updateScoreDistribution;
