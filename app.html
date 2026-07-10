@@ -345,41 +345,6 @@
 <body>
 
 <!-- ============================================
-     LOADING OVERLAY WITH TIMER
-     ============================================ -->
-<div class="loading-overlay" id="loadingOverlay">
-  <div style="text-align:center">
-    <svg class="loading-crest" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="100" cy="100" r="90" fill="none" stroke="#3b82f6" stroke-width="3.5"/>
-      <path id="topArcLoad" d="M 30 100 A 70 70 0 0 1 170 100" fill="none"/>
-      <text font-size="17" font-weight="900" fill="#3b82f6" letter-spacing="3">
-        <textPath href="#topArcLoad" startOffset="50%" text-anchor="middle">OAU</textPath>
-      </text>
-      <path id="bottomArcLoad" d="M 30 100 A 70 70 0 0 0 170 100" fill="none"/>
-      <text font-size="7.5" font-weight="800" fill="#1e3a8a" letter-spacing="1.2">
-        <textPath href="#bottomArcLoad" startOffset="50%" text-anchor="middle">EXAM CBT PRACTICE</textPath>
-      </text>
-      <circle cx="100" cy="100" r="19" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
-      <line x1="81" y1="100" x2="119" y2="100" stroke="#3b82f6" stroke-width="1.5"/>
-      <line x1="100" y1="81" x2="100" y2="119" stroke="#3b82f6" stroke-width="1.5"/>
-      <text x="100" y="104" font-size="7.5" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">OAU</text>
-    </svg>
-    <div class="loading-spinner"></div>
-    <div class="loading-text" id="loadingText">Loading...</div>
-    <div class="loading-timer" id="loadingTimer" style="margin-top:8px;font-size:.8rem;color:var(--text-secondary);font-weight:500">Connecting...</div>
-    <div id="loadingError" style="display:none;margin-top:16px">
-      <p style="color:var(--danger);font-size:.85rem;margin-bottom:8px">⚠️ Connection timeout</p>
-      <button class="btn btn-primary btn-sm" onclick="retryLoading()" style="background:var(--brand-gradient);color:#fff;border:none;padding:8px 20px;border-radius:30px;cursor:pointer;font-weight:600">
-        <i class="fas fa-sync-alt"></i> Retry
-      </button>
-      <button class="btn btn-soft btn-sm" onclick="clearSessionAndGoToLogin()" style="background:transparent;border:1px solid var(--border);color:var(--text);padding:8px 20px;border-radius:30px;cursor:pointer;font-weight:600;margin-left:8px">
-        <i class="fas fa-sign-out-alt"></i> Login Again
-      </button>
-    </div>
-  </div>
-</div>
-
-<!-- ============================================
      TOAST NOTIFICATION
      ============================================ -->
 <div class="toast" id="toast">
@@ -450,7 +415,7 @@
   <header class="topbar">
     <div class="brand">
       <div class="brand-logo" id="brandLogoContainer">
-        <!-- Logo loads here dynamically from logo.svg -->
+        <!-- Logo loads from logo.svg -->
         <img src="/logo.svg" alt="OAU CBE Practice" style="width:42px;height:42px;object-fit:contain">
       </div>
       <div class="brand-copy">
@@ -496,7 +461,7 @@
 
     <section class="main-grid">
       <div class="left-stack">
-        <!-- Available Faculties - Smaller like mini leaderboard -->
+        <!-- Available Faculties -->
         <div class="section-card" style="padding:16px">
           <div class="section-head"><h3 style="font-size:.9rem">📚 Available Faculties</h3><a onclick="window.showPage('exam')" style="font-size:.75rem">View all</a></div>
           <div class="faculty-grid-simple" id="facultyGrid"></div>
@@ -547,17 +512,15 @@
           </div>
         </div>
 
-        <!-- Wisdom Quotes & Score Distribution Combined -->
+        <!-- Wisdom Quotes & Score Distribution -->
         <div class="section-card">
           <div class="section-head"><h3>💡 Wisdom & Insights</h3><a onclick="window.showPage('profile')">More stats</a></div>
           
-          <!-- Wisdom Quote -->
           <div style="background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(6,182,212,.06));border-radius:12px;padding:12px 14px;margin-bottom:12px;border-left:3px solid var(--primary-light)">
             <p id="wisdomQuote" style="font-style:italic;font-size:.82rem;color:var(--text-secondary);line-height:1.5">"Success is no accident."</p>
             <p id="wisdomAuthor" style="font-size:.7rem;color:var(--text-secondary);margin-top:4px;font-weight:500">— Pelé</p>
           </div>
 
-          <!-- Score Distribution -->
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
             <div style="background:var(--bg-soft);border-radius:10px;padding:10px;text-align:center">
               <div style="font-size:1.1rem;font-weight:800;color:var(--success)" id="distExcellent">0%</div>
