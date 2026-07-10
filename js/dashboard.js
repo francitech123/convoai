@@ -2,8 +2,7 @@
 // DASHBOARD MODULE
 // ============================================
 
-import { apiFetch, $id, setText, escapeHtml, maskName, showToast, showLoading, hideLoading } from './utils.js';
-import { loadNotifications } from './notifications.js';
+import { apiFetch, $id, setText, escapeHtml, maskName, showToast } from './utils.js';
 import { loadMiniLeaderboard } from './leaderboard.js';
 
 const DASHBOARD_FACULTIES = [
@@ -57,7 +56,7 @@ export function renderWisdomQuote() {
 export function startWisdomRotation() {
   if (wisdomInterval) clearInterval(wisdomInterval);
   renderWisdomQuote();
-  wisdomInterval = setInterval(renderWisdomQuote, 15000); // Rotate every 15 seconds
+  wisdomInterval = setInterval(renderWisdomQuote, 15000);
 }
 
 export function stopWisdomRotation() {
@@ -97,15 +96,13 @@ export async function loadDashboard() {
       const user = userData.user;
       dashboardState.user = user;
       
-      // Get total courses from faculties
       let totalCourses = 0;
       try {
         const facultiesData = await apiFetch('/admin/faculties');
         const faculties = facultiesData.faculties || [];
         faculties.forEach(f => { totalCourses += f.totalCourses || 0; });
       } catch (e) {
-        console.warn('Could not load faculties count:', e);
-        totalCourses = 72; // Fallback
+        totalCourses = 72;
       }
       
       const stats = {
@@ -132,24 +129,18 @@ export async function loadDashboard() {
       setText('statAttempts', String(attempts || 0));
       setText('statStreak', `${stats.currentStreak || 0} day${stats.currentStreak === 1 ? '' : 's'}`);
       
-      // Render all dashboard components
       renderActivity(activity);
       renderStatsChart(user.scores || []);
       renderDashboardFaculties();
       updateScoreDistribution(user.scores || []);
       
-      // Load mini leaderboard
       try {
         await loadMiniLeaderboard(5);
       } catch (e) {
         console.warn('Mini leaderboard load failed:', e);
       }
       
-      // Start wisdom quote rotation
       startWisdomRotation();
-      
-    } else {
-      console.warn('User data not loaded properly');
     }
   } catch (e) {
     console.error('Dashboard load error:', e);
@@ -219,7 +210,7 @@ function renderStatsChart(scores) {
   if (lb) lb.style.width = (low/maxCount * 100) + '%';
 }
 
-// ==================== EXPOSE FUNCTIONS TO WINDOW ====================
+// ==================== EXPOSE FUNCTIONS ====================
 window.renderDashboardFaculties = renderDashboardFaculties;
 window.loadDashboard = loadDashboard;
 window.renderWisdomQuote = renderWisdomQuote;
