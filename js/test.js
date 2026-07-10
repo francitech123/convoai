@@ -1,8 +1,8 @@
 // ============================================
-// TEST MODULE - Preloaded Data
+// TEST MODULE - Returns to faculty selection after submission
 // ============================================
 
-import { apiFetch, $id, setText, shuffleArray, showToast, enterFullscreenMode, exitFullscreenMode } from './utils.js';
+import { apiFetch, $id, setText, shuffleArray, showToast, enterFullscreenMode, exitFullscreenMode, showLoading, hideLoading } from './utils.js';
 
 export let testState = {
   faculty: null,
@@ -16,24 +16,15 @@ export let testState = {
   showAll: false
 };
 
-let preloadedFaculties = [];
-
-export function setPreloadedTestData(faculties) {
-  preloadedFaculties = faculties || [];
-}
-
 export async function loadTestData() {
-  if (preloadedFaculties.length > 0) {
-    testState.faculties = preloadedFaculties;
-    renderTestFaculties(false);
-  } else {
-    await loadTestFaculties();
-  }
+  if (document.querySelector('#testFacultyGrid .faculty-tag-simple')) return;
+  await loadTestFaculties();
 }
 
 export async function loadTestFaculties() {
   const grid = $id('testFacultyGrid');
   if (!grid) return;
+  grid.innerHTML = '<div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading...</p></div>';
   try {
     const data = await apiFetch('/admin/faculties');
     const faculties = data.faculties || [];
@@ -383,6 +374,13 @@ export async function testSubmit() {
   if (!confirm('Submit your test? You cannot change answers after submission.')) return;
   
   testState.isSubmitting = true;
+  
+  const submitBtn = $id('testSubmitBtn');
+  if (submitBtn) {
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+    submitBtn.disabled = true;
+  }
+  
   if (testState.session.timer) clearInterval(testState.session.timer);
   if (testState.autoSaveInterval) clearInterval(testState.autoSaveInterval);
   
@@ -428,6 +426,8 @@ export async function testSubmit() {
     localStorage.setItem('lastExamResult', JSON.stringify(resultData));
     localStorage.setItem('lastResultTimestamp', Date.now().toString());
     sessionStorage.removeItem('activeTest');
+    
+    testState.session = null;
     testState.isSubmitting = false;
     exitFullscreenMode();
     window.showPage('submit');
@@ -435,6 +435,10 @@ export async function testSubmit() {
   } catch (e) {
     alert('Failed to submit. Please try again.');
     testState.isSubmitting = false;
+    if (submitBtn) {
+      submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Submit';
+      submitBtn.disabled = false;
+    }
   }
 }
 
@@ -446,7 +450,10 @@ export function testQuit() {
     sessionStorage.removeItem('activeTest');
     testState.session = null;
     exitFullscreenMode();
-    window.showPage('dashboard');
+    testState.faculty = null;
+    testState.level = null;
+    testState.course = null;
+    window.showPage('test');
   }
 }
 
