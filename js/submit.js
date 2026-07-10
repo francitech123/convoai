@@ -1,10 +1,11 @@
 // ============================================
-// SUBMIT MODULE - Shows Latest Single Result
+// SUBMIT MODULE - Shows result after exam/test submission
 // ============================================
 
 import { apiFetch, $id, setText, escapeHtml, showToast, getToken, API_BASE, timeAgo } from './utils.js';
 
 let currentResult = null;
+let isSubmitting = false;
 
 // ==================== GET RESULT DATA ====================
 function getResultData() {
@@ -69,7 +70,6 @@ export async function loadSubmitPage() {
   const content = $id('submitContent');
   if (!content) return;
   
-  // Show loading spinner
   if (loading) loading.style.display = 'block';
   
   // Get result from storage
@@ -277,5 +277,66 @@ function displayResult(container, result) {
   `;
 }
 
+// ==================== SUBMIT WITH LOADING ====================
+export async function submitExamResult() {
+  if (isSubmitting) return;
+  isSubmitting = true;
+  
+  const submitBtn = document.querySelector('#examSubmitBtn, #testSubmitBtn');
+  if (submitBtn) {
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+    submitBtn.disabled = true;
+  }
+  
+  // Get exam/test data
+  const session = window.examState?.session || window.testState?.session;
+  if (!session) {
+    isSubmitting = false;
+    showToast('No active exam/test found', 'error');
+    return;
+  }
+  
+  // Calculate score
+  let correct = 0;
+  session.questions.forEach((q, i) => {
+    if (session.answers[i] === q.correctOption) correct++;
+  });
+  const total = session.questions.length;
+  const percentage = Math.round((correct / total) * 100);
+  const timeSpent = Date.now() - session.startTime;
+  
+  const resultData = {
+    course: session.courseCode,
+    correctCount: correct,
+    totalQuestions: total,
+    percentage: percentage,
+    timeSpent: timeSpent,
+    mode: session.mode || 'exam',
+    questions: session.questions.map((q, i) => ({
+      text: q.text,
+      options: q.options,
+      correctOption: q.correctOption,
+      userAnswer: session.answers[i],
+      explanation: q.explanation || ''
+    }))
+  };
+  
+  // Save to storage
+  sessionStorage.setItem('examResult', JSON.stringify(resultData));
+  localStorage.setItem('lastExamResult', JSON.stringify(resultData));
+  localStorage.setItem('lastResultTimestamp', Date.now().toString());
+  
+  // Clear session
+  sessionStorage.removeItem('activeExam');
+  sessionStorage.removeItem('activeTest');
+  
+  // Navigate to submit page
+  setTimeout(() => {
+    window.showPage('submit');
+    isSubmitting = false;
+  }, 500);
+}
+
 // ==================== EXPOSE ====================
 window.loadSubmitPage = loadSubmitPage;
+window.submitExamResult = submitExamResult;
