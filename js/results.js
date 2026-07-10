@@ -1,11 +1,12 @@
 // ============================================
-// RESULTS MODULE - Latest 10 Results with Expandable Cards
+// RESULTS MODULE - Latest 10 Results with Popup
 // ============================================
 
 import { apiFetch, $id, setText, escapeHtml, showToast, getToken, API_BASE, timeAgo } from './utils.js';
 
 let allResults = [];
-let expandedResultId = null;
+let selectedResult = null;
+let popupOpen = false;
 
 // ==================== LOAD RESULTS ====================
 export async function loadResultsPage() {
@@ -37,12 +38,11 @@ export async function loadResultsPage() {
       }
     }
     
-    // Also check local storage for recent results not yet synced
+    // Also check local storage for recent results
     try {
       const localResult = localStorage.getItem('lastExamResult');
       if (localResult) {
         const parsed = JSON.parse(localResult);
-        // Check if this result is already in the list
         const exists = allResults.some(r => 
           r.courseCode === parsed.course && 
           Math.abs(new Date(r.date) - new Date(parsed.date || Date.now())) < 60000
@@ -111,7 +111,6 @@ function displayResults(container) {
   `;
   
   allResults.forEach((result, index) => {
-    const isExpanded = expandedResultId === index;
     const percentage = result.percentage || 0;
     const isExam = result.mode === 'exam';
     const modeLabel = isExam ? '📝 Exam' : '🧪 Test';
@@ -131,15 +130,10 @@ function displayResults(container) {
     if (percentage >= 70) scoreClass = 'high';
     else if (percentage >= 50) scoreClass = 'medium';
     
-    let detailsHtml = '';
-    if (isExpanded) {
-      detailsHtml = buildResultDetails(result);
-    }
-    
     html += `
-      <div style="background:var(--card);border-radius:14px;border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:all .2s" 
-           onclick="window.toggleResultExpand(${index})">
-        <div style="padding:12px 14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+      <div style="background:var(--card);border-radius:14px;border:1px solid var(--border);overflow:hidden;transition:all .2s" 
+           onclick="window.openResultPopup(${index})">
+        <div style="padding:12px 14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;cursor:pointer;">
           <div style="display:flex;align-items:center;gap:10px;flex:1;min-width:0">
             <div style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;flex-shrink:0;background:${percentage >= 70 ? 'rgba(16,185,129,.15)' : percentage >= 50 ? 'rgba(245,158,11,.15)' : 'rgba(239,68,68,.15)'};color:${percentage >= 70 ? 'var(--success)' : percentage >= 50 ? 'var(--warning)' : 'var(--danger)'}">
               ${percentage}%
@@ -161,10 +155,9 @@ function displayResults(container) {
             <span style="font-size:.55rem;padding:2px 8px;border-radius:10px;background:${scoreClass === 'high' ? 'rgba(16,185,129,.15)' : scoreClass === 'medium' ? 'rgba(245,158,11,.15)' : 'rgba(239,68,68,.15)'};color:${scoreClass === 'high' ? 'var(--success)' : scoreClass === 'medium' ? 'var(--warning)' : 'var(--danger)'}">
               ${scoreClass === 'high' ? '✅ Passed' : scoreClass === 'medium' ? '⚠️ Average' : '❌ Failed'}
             </span>
-            <i class="fas fa-chevron-${isExpanded ? 'up' : 'down'}" style="color:var(--text-secondary);font-size:.7rem;transition:transform .2s"></i>
+            <i class="fas fa-chevron-right" style="color:var(--text-secondary);font-size:.7rem"></i>
           </div>
         </div>
-        ${detailsHtml}
       </div>
     `;
   });
@@ -180,14 +173,32 @@ function displayResults(container) {
   container.innerHTML = html;
 }
 
-function buildResultDetails(result) {
+// ==================== OPEN RESULT POPUP ====================
+export function openResultPopup(index) {
+  const result = allResults[index];
+  if (!result) return;
+  selectedResult = result;
+  
+  // Create popup overlay
+  const overlay = document.createElement('div');
+  overlay.className = 'result-popup-overlay';
+  overlay.id = 'resultPopupOverlay';
+  overlay.style.cssText = `
+    position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.85);
+    z-index:1000;display:flex;align-items:center;justify-content:center;
+    padding:20px;animation:fadeIn .3s ease;backdrop-filter:blur(8px);
+  `;
+  
+  // Build popup content
   const percentage = result.percentage || 0;
+  const isExam = result.mode === 'exam';
+  const modeLabel = isExam ? '📝 Exam Mode' : '🧪 Test Mode';
+  const modeColor = isExam ? 'var(--primary-light)' : '#a78bfa';
   const timeSpent = result.timeSpent || 0;
   const minutes = Math.floor(timeSpent / 60000);
   const seconds = Math.floor((timeSpent % 60000) / 1000);
   const timeString = `${minutes}m ${seconds}s`;
   const courseName = result.courseCode || result.course || 'Unknown Course';
-  const isExam = result.mode === 'exam';
   
   let grade = 'F';
   if (percentage >= 90) grade = 'A+';
@@ -202,7 +213,7 @@ function buildResultDetails(result) {
   else if (percentage >= 60) encMessage = '👍 Good effort! You\'re on the right track.';
   else if (percentage >= 50) encMessage = '📚 Nice try! Review the explanations and practice more.';
   
-  // Question review
+  // Build questions review
   let questionsHtml = '';
   const questions = result.questions || [];
   if (questions.length > 0) {
@@ -217,7 +228,7 @@ function buildResultDetails(result) {
         </h4>
         <span style="font-size:.65rem;color:var(--text-secondary)">✅ ${correctCount} | ❌ ${wrongCount} | ⬜ ${unansweredCount}</span>
       </div>
-      <div style="max-height:350px;overflow-y:auto;padding-right:4px">`;
+      <div style="max-height:400px;overflow-y:auto;padding-right:4px">`;
     
     questionsHtml += questions.map((q, idx) => {
       const isCorrect = q.userAnswer === q.correctOption;
@@ -268,56 +279,4 @@ function buildResultDetails(result) {
       return `<div style="background:var(--bg);border-radius:8px;padding:10px;margin-bottom:6px;border:1px solid var(--border);border-left:3px solid ${statusColor}">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:6px">
           <div style="font-weight:500;font-size:.78rem;color:var(--text);flex:1">${idx + 1}. ${q.text}</div>
-          <span style="font-size:.55rem;padding:2px 6px;border-radius:8px;font-weight:600;white-space:nowrap;flex-shrink:0;background:${isCorrect ? 'rgba(16,185,129,.12)' : isUnanswered ? 'rgba(245,158,11,.12)' : 'rgba(239,68,68,.12)'};color:${statusColor}">${statusText}</span>
-        </div>
-        ${optionsHtml}
-        ${explanationHtml}
-      </div>`;
-    }).join('');
-    questionsHtml += `</div>`;
-  } else {
-    questionsHtml = `<p style="color:var(--text2);text-align:center;padding:12px;font-size:.75rem">📋 Detailed review not available.</p>`;
-  }
-  
-  return `
-    <div style="padding:0 14px 14px;border-top:1px solid var(--border)">
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:6px;padding:10px 0">
-        <div style="background:var(--bg);border-radius:6px;padding:6px;text-align:center">
-          <div style="font-size:.9rem;font-weight:700;color:var(--primary-light)">${percentage}%</div>
-          <div style="font-size:.5rem;color:var(--text-secondary)">Score</div>
-        </div>
-        <div style="background:var(--bg);border-radius:6px;padding:6px;text-align:center">
-          <div style="font-size:.9rem;font-weight:700;color:var(--primary-light)">${grade}</div>
-          <div style="font-size:.5rem;color:var(--text-secondary)">Grade</div>
-        </div>
-        <div style="background:var(--bg);border-radius:6px;padding:6px;text-align:center">
-          <div style="font-size:.9rem;font-weight:700;color:var(--primary-light)">${result.correctAnswers || 0}/${result.totalQuestions || 0}</div>
-          <div style="font-size:.5rem;color:var(--text-secondary)">Correct</div>
-        </div>
-        <div style="background:var(--bg);border-radius:6px;padding:6px;text-align:center">
-          <div style="font-size:.9rem;font-weight:700;color:var(--primary-light)">${timeString}</div>
-          <div style="font-size:.5rem;color:var(--text-secondary)">Time</div>
-        </div>
-      </div>
-      <div style="padding:4px 8px;background:${percentage >= 70 ? 'rgba(16,185,129,.06)' : percentage >= 50 ? 'rgba(245,158,11,.06)' : 'rgba(239,68,68,.06)'};border-radius:6px;margin-bottom:6px;text-align:center;font-size:.7rem;color:${percentage >= 70 ? 'var(--success)' : percentage >= 50 ? 'var(--warning)' : 'var(--danger)'}">
-        ${encMessage}
-      </div>
-      ${questionsHtml}
-    </div>
-  `;
-}
-
-// ==================== TOGGLE EXPAND ====================
-export function toggleResultExpand(index) {
-  if (expandedResultId === index) {
-    expandedResultId = null;
-  } else {
-    expandedResultId = index;
-  }
-  const container = $id('resultsContent');
-  if (container) displayResults(container);
-}
-
-// ==================== EXPOSE ====================
-window.loadResultsPage = loadResultsPage;
-window.toggleResultExpand = toggleResultExpand;
+          <span style="font-size:.55rem;padding:2px 6px;border-radius:
