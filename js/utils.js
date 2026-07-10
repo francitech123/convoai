@@ -51,22 +51,6 @@ export function maskName(name) {
   return name.substring(0, 3) + '***';
 }
 
-let loadingTimeout = null;
-
-export function showLoading(text = 'Loading...') {
-  const overlay = $id('loadingOverlay');
-  const textEl = $id('loadingText');
-  if (textEl) textEl.textContent = text;
-  if (overlay) overlay.classList.remove('hidden');
-}
-
-export function hideLoading() {
-  const overlay = $id('loadingOverlay');
-  if (overlay) overlay.classList.add('hidden');
-}
-
-let toastTimeout = null;
-
 export function showToast(message, type = 'info') {
   const toast = $id('toast');
   const icon = $id('toastIcon');
@@ -83,8 +67,8 @@ export function showToast(message, type = 'info') {
   icon.innerHTML = icons[type] || icons.info;
   
   toast.classList.add('show');
-  clearTimeout(toastTimeout);
-  toastTimeout = setTimeout(() => toast.classList.remove('show'), 3000);
+  clearTimeout(window.toastTimeout);
+  window.toastTimeout = setTimeout(() => toast.classList.remove('show'), 3000);
 }
 
 export async function apiFetch(path, options = {}) {
@@ -104,7 +88,6 @@ export async function apiFetch(path, options = {}) {
   return data;
 }
 
-// Button loading state (like login page)
 export function setButtonLoading(btn, loading, text = 'Loading...') {
   if (!btn) return;
   if (loading) {
@@ -117,7 +100,6 @@ export function setButtonLoading(btn, loading, text = 'Loading...') {
   }
 }
 
-// Navigation with button loading
 let isNavigating = false;
 
 export function navigateTo(url, btn = null, target = '_self') {
@@ -212,7 +194,8 @@ export function showPage(page) {
       ai: 'AI Assistant',
       faq: 'FAQ',
       leaderboard: 'Leaderboard',
-      chat: 'Support Chat'
+      chat: 'Support Chat',
+      submit: 'Results'
     };
     setText('pageLabel', labels[page] || page);
     setText('pageTitle', 'OAU CBE Practice');
@@ -220,14 +203,6 @@ export function showPage(page) {
     document.querySelectorAll('.nav-item').forEach(item => {
       item.classList.toggle('active', item.dataset.page === page);
     });
-    
-    // Load page data if needed
-    if (page === 'dashboard' && window.loadDashboard) window.loadDashboard();
-    else if (page === 'exam' && window.loadExamData) window.loadExamData();
-    else if (page === 'test' && window.loadTestData) window.loadTestData();
-    else if (page === 'study' && window.loadStudyData) window.loadStudyData();
-    else if (page === 'profile' && window.loadProfile) window.loadProfile();
-    else if (page === 'leaderboard' && window.loadLeaderboard) window.loadLeaderboard();
     
     window.scrollTo(0, 0);
   }
