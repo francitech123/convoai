@@ -1,8 +1,8 @@
 // ============================================
-// EXAM MODULE - Preloaded Data
+// EXAM MODULE - Returns to faculty selection after submission
 // ============================================
 
-import { apiFetch, $id, setText, shuffleArray, showToast, enterFullscreenMode, exitFullscreenMode } from './utils.js';
+import { apiFetch, $id, setText, shuffleArray, showToast, enterFullscreenMode, exitFullscreenMode, showLoading, hideLoading } from './utils.js';
 
 export let examState = {
   faculty: null,
@@ -14,32 +14,18 @@ export let examState = {
   autoSaveInterval: null,
   faculties: [],
   showAll: false,
-  coursesData: {}
+  isComplete: false
 };
 
-// Preloaded data from app.js
-let preloadedFaculties = [];
-let preloadedCourses = {};
-
-export function setPreloadedExamData(faculties, courses) {
-  preloadedFaculties = faculties || [];
-  preloadedCourses = courses || {};
-}
-
 export async function loadExamData() {
-  // Use preloaded data
-  if (preloadedFaculties.length > 0) {
-    examState.faculties = preloadedFaculties;
-    renderExamFaculties(false);
-  } else {
-    // Fallback: load from API
-    await loadExamFaculties();
-  }
+  if (document.querySelector('#examFacultyGrid .faculty-tag-simple')) return;
+  await loadExamFaculties();
 }
 
 export async function loadExamFaculties() {
   const grid = $id('examFacultyGrid');
   if (!grid) return;
+  grid.innerHTML = '<div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading...</p></div>';
   try {
     const data = await apiFetch('/admin/faculties');
     const faculties = data.faculties || [];
@@ -382,13 +368,21 @@ function examStartAutoSave() {
   }, 10000);
 }
 
-// ==================== EXAM SUBMIT ====================
+// ==================== EXAM SUBMIT - Returns to faculty selection ====================
 export async function examSubmit() {
   if (examState.isSubmitting) return;
   if (!examState.session) return;
   if (!confirm('Submit your exam? You cannot change answers after submission.')) return;
   
   examState.isSubmitting = true;
+  
+  // Show spinner on submit button
+  const submitBtn = $id('examSubmitBtn');
+  if (submitBtn) {
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+    submitBtn.disabled = true;
+  }
+  
   if (examState.session.timer) clearInterval(examState.session.timer);
   if (examState.autoSaveInterval) clearInterval(examState.autoSaveInterval);
   
@@ -434,13 +428,22 @@ export async function examSubmit() {
     localStorage.setItem('lastExamResult', JSON.stringify(resultData));
     localStorage.setItem('lastResultTimestamp', Date.now().toString());
     sessionStorage.removeItem('activeExam');
+    
+    // Reset exam state
+    examState.session = null;
     examState.isSubmitting = false;
     exitFullscreenMode();
+    
+    // Navigate to submit page
     window.showPage('submit');
     
   } catch (e) {
     alert('Failed to submit. Please try again.');
     examState.isSubmitting = false;
+    if (submitBtn) {
+      submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Submit';
+      submitBtn.disabled = false;
+    }
   }
 }
 
@@ -452,7 +455,11 @@ export function examQuit() {
     sessionStorage.removeItem('activeExam');
     examState.session = null;
     exitFullscreenMode();
-    window.showPage('dashboard');
+    // Return to faculty selection
+    examState.faculty = null;
+    examState.level = null;
+    examState.course = null;
+    window.showPage('exam');
   }
 }
 
