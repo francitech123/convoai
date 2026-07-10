@@ -37,7 +37,6 @@ export function initChat() {
     chatLoadMessages();
     chatStartAutoRefresh();
   } else {
-    // Guest mode
     const savedName = localStorage.getItem('chat_guest_name');
     const savedId = localStorage.getItem('chat_device_id');
     if (savedName && savedName.length >= 2) {
@@ -187,7 +186,6 @@ function chatRenderMessages() {
       `;
     }
     
-    // Admin/Support message
     const hasReply = chat.reply && chat.reply.length > 0;
     const isReplied = chat.status === 'replied';
     const replyText = chat.reply || chat.message;
@@ -224,7 +222,6 @@ export async function chatSendMessage() {
   
   input.value = '';
   
-  // Add user message to UI immediately
   const container = $id('chatMessages');
   if (container) {
     const displayName = chatIsLoggedIn ? (chatUser?.fullName?.split(' ')[0] || 'You') : (chatGuestName || 'You');
