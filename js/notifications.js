@@ -2,7 +2,7 @@
 // NOTIFICATIONS MODULE
 // ============================================
 
-import { apiFetch, $id, escapeHtml, timeAgo, showToast } from './utils.js';
+import { apiFetch, $id, escapeHtml, timeAgo } from './utils.js';
 
 let headerNotifications = [];
 let headerUnreadCount = 0;
