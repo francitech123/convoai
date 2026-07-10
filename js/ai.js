@@ -2,7 +2,7 @@
 // AI MODULE - Nox AI
 // ============================================
 
-import { apiFetch, $id, setText, showToast, showLoading, hideLoading, getToken } from './utils.js';
+import { apiFetch, $id, setText, showToast, getToken } from './utils.js';
 
 let aiConvId = null;
 let aiThinkMode = false;
@@ -71,7 +71,6 @@ export async function aiSendMessage() {
     return;
   }
   
-  // Add user message to chat
   aiAddMessage(message || (aiMediaFile ? `📎 Analyzing: ${aiMediaFile.name}` : ''), true);
   input.value = '';
   input.style.height = 'auto';
@@ -83,15 +82,12 @@ export async function aiSendMessage() {
   }
   
   aiIsLoading = true;
-  
-  // Show typing indicator
   const typingId = aiShowTyping();
   
   try {
     let response = null;
     
     if (aiMediaData) {
-      // File analysis
       const formData = new FormData();
       const blob = await fetch(aiMediaData).then(r => r.blob());
       formData.append('file', blob, aiMediaFile?.name || 'upload');
@@ -112,7 +108,6 @@ export async function aiSendMessage() {
       }
       aiRemoveMedia();
     } else {
-      // Chat message
       const data = await apiFetch('/ai/chat', {
         method: 'POST',
         body: JSON.stringify({
@@ -192,15 +187,11 @@ function aiRemoveTyping(id) {
 
 function formatAIResponse(text) {
   if (!text) return '';
-  // Format code blocks
   let formatted = text.replace(/```(\w*)\n([\s\S]*?)```/g, (match, lang, code) => {
     return `<pre><code class="language-${lang || 'javascript'}">${escapeHtml(code.trim())}</code></pre>`;
   });
-  // Inline code
   formatted = formatted.replace(/`([^`]+)`/g, '<code>$1</code>');
-  // Bold
   formatted = formatted.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-  // Line breaks
   formatted = formatted.replace(/\n/g, '<br>');
   return formatted;
 }
