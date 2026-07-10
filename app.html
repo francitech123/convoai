@@ -82,12 +82,9 @@
     .study-course-card .code{font-weight:700;font-size:clamp(.7rem,3vw,.85rem);color:var(--text)}
     .study-course-card .name{font-size:clamp(.5rem,2.5vw,.65rem);color:var(--text-secondary);margin-top:2px}
     .study-course-card .count{font-size:clamp(.45rem,2vw,.55rem);color:var(--primary-light);margin-top:4px;display:inline-block;background:rgba(59,130,246,.1);padding:2px 10px;border-radius:20px}
-    .study-course-card .card-spinner{display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:1.2rem;color:var(--primary-light)}
-    .study-course-card.loading .card-spinner{display:block}
-    .study-course-card.loading .card-content{opacity:.3}
     .study-topics-grid{display:grid;grid-template-columns:1fr;gap:8px}
     @media(min-width:640px){.study-topics-grid{grid-template-columns:1fr 1fr;gap:10px}}
-    .study-topic-item{background:var(--card);border-radius:var(--radius-sm);padding:14px 16px;border:1px solid var(--border);cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:space-between;position:relative}
+    .study-topic-item{background:var(--card);border-radius:var(--radius-sm);padding:14px 16px;border:1px solid var(--border);cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:space-between}
     .study-topic-item:hover{border-color:var(--primary-light);background:var(--card-2);transform:translateX(4px)}
     .study-topic-item .topic-info{flex:1;min-width:0}
     .study-topic-item .topic-title{font-weight:600;font-size:clamp(.75rem,3vw,.85rem);color:var(--text)}
@@ -95,10 +92,6 @@
     .study-topic-item .topic-arrow{color:var(--text-secondary);font-size:.9rem;flex-shrink:0;margin-left:8px}
     .study-topic-item:hover .topic-arrow{color:var(--primary-light);transform:translateX(4px)}
     .study-topic-item .topic-count{font-size:clamp(.45rem,2.5vw,.55rem);color:var(--primary-light);background:rgba(59,130,246,.1);padding:2px 10px;border-radius:20px;flex-shrink:0;margin-right:8px}
-    .study-topic-item .topic-spinner{display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:1.2rem;color:var(--primary-light)}
-    .study-topic-item.loading .topic-spinner{display:block}
-    .study-topic-item.loading .topic-info{opacity:.3}
-    .study-topic-item.loading .topic-arrow{opacity:.3}
     .profile-header-card{background:var(--brand-gradient);background-size:200% 200%;animation:gradientShift 4s ease infinite;border-radius:24px;padding:24px 20px;text-align:center;margin-bottom:20px;position:relative;overflow:hidden;box-shadow:var(--shadow);grid-column:1/-1}
     @keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
     .profile-header-card::after{content:'';position:absolute;top:-30%;right:-20%;width:150px;height:150px;background:rgba(255,255,255,.05);border-radius:50%}
@@ -187,6 +180,15 @@
     .toast .toast-icon.success{color:var(--success)}
     .toast .toast-icon.error{color:var(--danger)}
     .toast .toast-icon.info{color:var(--primary-light)}
+    .study-topic-item .topic-spinner{display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:1.2rem;color:var(--primary-light)}
+    .study-topic-item.loading .topic-spinner{display:block}
+    .study-topic-item.loading .topic-info{opacity:.3}
+    .study-topic-item.loading .topic-arrow{opacity:.3}
+    .study-course-card .card-spinner{display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:1.2rem;color:var(--primary-light)}
+    .study-course-card.loading .card-spinner{display:block}
+    .study-course-card.loading .card-content{opacity:.3}
+    .level-card .badge-ok{background:var(--success);color:#fff}
+    .level-card .badge-wait{background:var(--warning);color:#000}
     .info-banner{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:10px 16px;margin:12px 0;text-align:center}
     .info-banner p{color:var(--success);font-size:.75rem}
     .upgrade-banner{background:linear-gradient(135deg,#f59e0b,#ef4444);border-radius:12px;padding:14px 16px;margin:12px 0;text-align:center;cursor:pointer;transition:transform .2s}
@@ -294,7 +296,9 @@
     .chat-send-btn{background:var(--primary-light);color:#fff;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
     .chat-send-btn:hover{transform:scale(1.05)}
     .chat-send-btn:disabled{opacity:.5;cursor:not-allowed}
-    /* AI ChatGPT-like Interface Styles */
+    /* ============================================
+       AI CHATGPT-LIKE INTERFACE STYLES
+       ============================================ */
     .ai-layout{display:flex;height:calc(100vh - 180px);min-height:500px;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:var(--card);position:relative}
     .ai-sidebar{width:260px;background:var(--bg-soft);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;overflow:hidden;transition:transform .3s ease}
     @media(max-width:768px){.ai-sidebar{position:absolute;left:0;top:0;bottom:0;z-index:10;transform:translateX(-100%);width:280px}.ai-sidebar.open{transform:translateX(0)}}
@@ -358,40 +362,15 @@
     .quick-chip:hover{border-color:var(--nox-purple);color:var(--nox-purple-light);transform:translateY(-2px);box-shadow:0 4px 15px rgba(124,58,237,.1)}
     .ai-sidebar-toggle{display:none;background:none;border:none;color:var(--text);font-size:1.1rem;cursor:pointer;padding:4px 8px}
     @media(max-width:768px){.ai-sidebar-toggle{display:block}}
-    @keyframes micPulse{0%{box-shadow:0 0 0 0 rgba(239,68,68,.4)}70%{box-shadow:0 0 0 10px rgba(239,68,68,0)}100%{box-shadow:0 0 0 0 rgba(239,68,68,0)}}
     /* Result Popup */
     .result-popup-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.85);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;animation:fadeIn .3s ease;backdrop-filter:blur(8px)}
     .result-popup-content{background:var(--card);border-radius:20px;max-width:700px;width:100%;max-height:90vh;overflow-y:auto;padding:24px 20px;border:1px solid var(--border);animation:slideUp .3s ease;position:relative}
     .result-popup-content .close-btn{position:absolute;top:12px;right:16px;background:none;border:none;color:var(--text-secondary);font-size:1.2rem;cursor:pointer;transition:all .2s}
     .result-popup-content .close-btn:hover{color:var(--text)}
-    .mini-spinner{display:none;margin-top:4px}
-    .mini-spinner i{font-size:.7rem;color:var(--text-secondary);animation:spin .8s linear infinite}
+    @keyframes micPulse{0%{box-shadow:0 0 0 0 rgba(239,68,68,.4)}70%{box-shadow:0 0 0 10px rgba(239,68,68,0)}100%{box-shadow:0 0 0 0 rgba(239,68,68,0)}}
   </style>
 </head>
 <body>
-
-<!-- ============================================
-     LOADING OVERLAY
-     ============================================ -->
-<div class="loading-overlay" id="loadingOverlay">
-  <svg class="loading-crest" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="100" cy="100" r="90" fill="none" stroke="#3b82f6" stroke-width="3.5"/>
-    <path id="topArcLoad" d="M 30 100 A 70 70 0 0 1 170 100" fill="none"/>
-    <text font-size="17" font-weight="900" fill="#3b82f6" letter-spacing="3">
-      <textPath href="#topArcLoad" startOffset="50%" text-anchor="middle">OAU</textPath>
-    </text>
-    <path id="bottomArcLoad" d="M 30 100 A 70 70 0 0 0 170 100" fill="none"/>
-    <text font-size="7.5" font-weight="800" fill="#1e3a8a" letter-spacing="1.2">
-      <textPath href="#bottomArcLoad" startOffset="50%" text-anchor="middle">EXAM CBT PRACTICE</textPath>
-    </text>
-    <circle cx="100" cy="100" r="19" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
-    <line x1="81" y1="100" x2="119" y2="100" stroke="#3b82f6" stroke-width="1.5"/>
-    <line x1="100" y1="81" x2="100" y2="119" stroke="#3b82f6" stroke-width="1.5"/>
-    <text x="100" y="104" font-size="7.5" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">OAU</text>
-  </svg>
-  <div class="loading-spinner"></div>
-  <div class="loading-text" id="loadingText">Loading...</div>
-</div>
 
 <!-- ============================================
      TOAST NOTIFICATION
@@ -463,8 +442,22 @@
   <!-- TOPBAR -->
   <header class="topbar">
     <div class="brand">
-      <div class="brand-logo">
-        <img src="/logo.svg" alt="OAU CBE Practice" style="width:42px;height:42px;object-fit:contain">
+      <div class="brand-logo" id="brandLogoContainer">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="90" fill="none" stroke="#3b82f6" stroke-width="3.5"/>
+          <path id="topArcSmall" d="M 30 100 A 70 70 0 0 1 170 100" fill="none"/>
+          <text font-size="17" font-weight="900" fill="#3b82f6" letter-spacing="3">
+            <textPath href="#topArcSmall" startOffset="50%" text-anchor="middle">OAU</textPath>
+          </text>
+          <path id="bottomArcSmall" d="M 30 100 A 70 70 0 0 0 170 100" fill="none"/>
+          <text font-size="7.5" font-weight="800" fill="#1e3a8a" letter-spacing="1.2">
+            <textPath href="#bottomArcSmall" startOffset="50%" text-anchor="middle">EXAM CBT PRACTICE</textPath>
+          </text>
+          <circle cx="100" cy="100" r="19" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
+          <line x1="81" y1="100" x2="119" y2="100" stroke="#3b82f6" stroke-width="1.5"/>
+          <line x1="100" y1="81" x2="100" y2="119" stroke="#3b82f6" stroke-width="1.5"/>
+          <text x="100" y="104" font-size="7.5" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">OAU</text>
+        </svg>
       </div>
       <div class="brand-copy">
         <small id="pageLabel">Dashboard</small>
@@ -490,26 +483,10 @@
         <div class="hero-tag" id="heroTag">100L • 200L</div>
       </div>
       <div class="stats-grid">
-        <div class="stat-card">
-          <span>Courses active</span>
-          <strong id="statCourses">—</strong>
-          <div class="mini-spinner" id="statCoursesSpinner"><i class="fas fa-spinner"></i></div>
-        </div>
-        <div class="stat-card">
-          <span>Average score</span>
-          <strong id="statAvg">—</strong>
-          <div class="mini-spinner" id="statAvgSpinner"><i class="fas fa-spinner"></i></div>
-        </div>
-        <div class="stat-card">
-          <span>Tests + exams</span>
-          <strong id="statAttempts">—</strong>
-          <div class="mini-spinner" id="statAttemptsSpinner"><i class="fas fa-spinner"></i></div>
-        </div>
-        <div class="stat-card">
-          <span>Current streak</span>
-          <strong id="statStreak">—</strong>
-          <div class="mini-spinner" id="statStreakSpinner"><i class="fas fa-spinner"></i></div>
-        </div>
+        <div class="stat-card"><span>Courses active</span><strong id="statCourses">—</strong></div>
+        <div class="stat-card"><span>Average score</span><strong id="statAvg">—</strong></div>
+        <div class="stat-card"><span>Tests + exams</span><strong id="statAttempts">—</strong></div>
+        <div class="stat-card"><span>Current streak</span><strong id="statStreak">—</strong></div>
       </div>
     </section>
 
@@ -868,8 +845,10 @@
     </div>
     
     <div class="ai-layout">
+      <!-- Sidebar Overlay -->
       <div class="ai-sidebar-overlay" id="aiSidebarOverlay" onclick="window.aiCloseSidebar()"></div>
       
+      <!-- Sidebar -->
       <div class="ai-sidebar" id="aiSidebar">
         <div class="ai-sidebar-header">
           <div class="ai-sidebar-title">
@@ -890,7 +869,9 @@
         </div>
       </div>
       
+      <!-- Main Chat Area -->
       <div class="ai-main">
+        <!-- Messages -->
         <div class="ai-messages" id="aiMessages">
           <div style="text-align:center;padding:40px 20px;color:var(--text-secondary)">
             <span style="font-size:3rem;display:block;margin:0 auto 12px">🦉</span>
@@ -906,7 +887,9 @@
           </div>
         </div>
         
+        <!-- Input Area -->
         <div class="ai-input-area">
+          <!-- Media Preview -->
           <div class="ai-media-preview" id="aiMediaPreview">
             <div id="aiMediaContent" style="flex:1;font-size:.75rem;color:var(--text-secondary)"></div>
             <button class="remove-media" onclick="window.aiRemoveMedia()"><i class="fas fa-times"></i></button>
@@ -1026,7 +1009,7 @@
   </div>
 
   <!-- ============================================
-       SUBMIT SCREEN
+       SUBMIT SCREEN - Shows single result
        ============================================ -->
   <div class="screen page-content-only" id="submitScreen">
     <div class="page-title"><h1><i class="fas fa-file-alt"></i> Submit Results</h1></div>
@@ -1039,7 +1022,7 @@
   </div>
 
   <!-- ============================================
-       RESULTS SCREEN
+       RESULTS SCREEN - Latest 10 Results
        ============================================ -->
   <div class="screen page-content-only" id="resultsScreen">
     <div class="page-title"><h1><i class="fas fa-history"></i> Your Results</h1></div>
@@ -1054,12 +1037,12 @@
 </div>
 
 <!-- ============================================
-     CHAT FAB
+     CHAT FAB - Goes to AI
      ============================================ -->
 <a href="#" class="chat-fab" onclick="window.showPage('ai')" aria-label="Open AI"><i class="fas fa-robot"></i></a>
 
 <!-- ============================================
-     BOTTOM NAV
+     BOTTOM NAV - Home, Exam, Test, Study, Me
      ============================================ -->
 <nav class="bottom-nav">
   <div class="bottom-nav-inner">
@@ -1112,7 +1095,10 @@ import * as submit from '/js/submit.js';
 import * as results from '/js/results.js';
 import * as app from '/js/app.js';
 
+// Expose all module functions to window
 Object.assign(window, utils, notifications, dashboard, exam, test, study, profile, ai, faq, leaderboard, chat, submit, results, app);
+
+// Initialize the app
 initApp();
 </script>
 
