@@ -2,7 +2,7 @@
 // PROFILE MODULE
 // ============================================
 
-import { apiFetch, $id, setText, showToast, showLoading, hideLoading } from './utils.js';
+import { apiFetch, $id, setText, showToast } from './utils.js';
 
 let profileUserData = null;
 let profilePicBase64 = '';
@@ -305,4 +305,3 @@ window.toggleDarkModeSetting = toggleDarkModeSetting;
 window.saveSettings = saveSettings;
 window.deleteAccount = deleteAccount;
 window.logoutUser = logoutUser;
-                 
