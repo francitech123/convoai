@@ -51,6 +51,8 @@ export function maskName(name) {
   return name.substring(0, 3) + '***';
 }
 
+let toastTimeout = null;
+
 export function showToast(message, type = 'info') {
   const toast = $id('toast');
   const icon = $id('toastIcon');
@@ -67,8 +69,8 @@ export function showToast(message, type = 'info') {
   icon.innerHTML = icons[type] || icons.info;
   
   toast.classList.add('show');
-  clearTimeout(window.toastTimeout);
-  window.toastTimeout = setTimeout(() => toast.classList.remove('show'), 3000);
+  clearTimeout(toastTimeout);
+  toastTimeout = setTimeout(() => toast.classList.remove('show'), 3000);
 }
 
 export async function apiFetch(path, options = {}) {
@@ -195,7 +197,8 @@ export function showPage(page) {
       faq: 'FAQ',
       leaderboard: 'Leaderboard',
       chat: 'Support Chat',
-      submit: 'Results'
+      submit: 'Submit Results',
+      results: 'Your Results'
     };
     setText('pageLabel', labels[page] || page);
     setText('pageTitle', 'OAU CBE Practice');
