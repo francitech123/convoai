@@ -415,8 +415,22 @@
   <header class="topbar">
     <div class="brand">
       <div class="brand-logo" id="brandLogoContainer">
-        <!-- Logo loads from logo.svg -->
-        <img src="/logo.svg" alt="OAU CBE Practice" style="width:42px;height:42px;object-fit:contain">
+        <!-- Logo embedded directly -->
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="90" fill="none" stroke="#3b82f6" stroke-width="3.5"/>
+          <path id="topArcSmall" d="M 30 100 A 70 70 0 0 1 170 100" fill="none"/>
+          <text font-size="17" font-weight="900" fill="#3b82f6" letter-spacing="3">
+            <textPath href="#topArcSmall" startOffset="50%" text-anchor="middle">OAU</textPath>
+          </text>
+          <path id="bottomArcSmall" d="M 30 100 A 70 70 0 0 0 170 100" fill="none"/>
+          <text font-size="7.5" font-weight="800" fill="#1e3a8a" letter-spacing="1.2">
+            <textPath href="#bottomArcSmall" startOffset="50%" text-anchor="middle">EXAM CBT PRACTICE</textPath>
+          </text>
+          <circle cx="100" cy="100" r="19" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
+          <line x1="81" y1="100" x2="119" y2="100" stroke="#3b82f6" stroke-width="1.5"/>
+          <line x1="100" y1="81" x2="100" y2="119" stroke="#3b82f6" stroke-width="1.5"/>
+          <text x="100" y="104" font-size="7.5" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">OAU</text>
+        </svg>
       </div>
       <div class="brand-copy">
         <small id="pageLabel">Dashboard</small>
@@ -442,19 +456,35 @@
         <div class="hero-tag" id="heroTag">100L • 200L</div>
       </div>
       <div class="stats-grid">
-        <div class="stat-card"><span>Courses active</span><strong id="statCourses">—</strong></div>
-        <div class="stat-card"><span>Average score</span><strong id="statAvg">—</strong></div>
-        <div class="stat-card"><span>Tests + exams</span><strong id="statAttempts">—</strong></div>
-        <div class="stat-card"><span>Current streak</span><strong id="statStreak">—</strong></div>
+        <div class="stat-card">
+          <span>Courses active</span>
+          <strong id="statCourses">—</strong>
+          <div class="mini-spinner" id="statCoursesSpinner" style="display:none;margin-top:4px"><i class="fas fa-spinner fa-spin" style="font-size:.7rem"></i></div>
+        </div>
+        <div class="stat-card">
+          <span>Average score</span>
+          <strong id="statAvg">—</strong>
+          <div class="mini-spinner" id="statAvgSpinner" style="display:none;margin-top:4px"><i class="fas fa-spinner fa-spin" style="font-size:.7rem"></i></div>
+        </div>
+        <div class="stat-card">
+          <span>Tests + exams</span>
+          <strong id="statAttempts">—</strong>
+          <div class="mini-spinner" id="statAttemptsSpinner" style="display:none;margin-top:4px"><i class="fas fa-spinner fa-spin" style="font-size:.7rem"></i></div>
+        </div>
+        <div class="stat-card">
+          <span>Current streak</span>
+          <strong id="statStreak">—</strong>
+          <div class="mini-spinner" id="statStreakSpinner" style="display:none;margin-top:4px"><i class="fas fa-spinner fa-spin" style="font-size:.7rem"></i></div>
+        </div>
       </div>
     </section>
 
     <section class="section-card quick-actions">
       <div class="section-head"><h3>Quick actions</h3><a onclick="window.showPage('profile')">Open profile</a></div>
       <div class="quick-grid">
-        <div class="quick-link" onclick="window.showPage('submit')"><div class="ico"><i class="fas fa-file-alt"></i></div><span>Results</span></div>
+        <div class="quick-link" onclick="window.showPage('submit')"><div class="ico"><i class="fas fa-file-alt"></i></div><span>Submit</span></div>
+        <div class="quick-link" onclick="window.showPage('results')"><div class="ico"><i class="fas fa-history"></i></div><span>Results</span></div>
         <div class="quick-link" onclick="window.showPage('ai')"><div class="ico"><i class="fas fa-robot"></i></div><span>AI</span></div>
-        <div class="quick-link" onclick="window.showPage('faq')"><div class="ico"><i class="fas fa-question-circle"></i></div><span>FAQ</span></div>
         <div class="quick-link" onclick="window.showPage('chat')"><div class="ico"><i class="fas fa-headset"></i></div><span>Support</span></div>
       </div>
     </section>
@@ -464,7 +494,9 @@
         <!-- Available Faculties -->
         <div class="section-card" style="padding:16px">
           <div class="section-head"><h3 style="font-size:.9rem">📚 Available Faculties</h3><a onclick="window.showPage('exam')" style="font-size:.75rem">View all</a></div>
-          <div class="faculty-grid-simple" id="facultyGrid"></div>
+          <div class="faculty-grid-simple" id="facultyGrid">
+            <div class="mini-spinner" style="text-align:center;padding:8px"><i class="fas fa-spinner fa-spin"></i> Loading...</div>
+          </div>
         </div>
 
         <!-- Mini Leaderboard -->
@@ -512,32 +544,11 @@
           </div>
         </div>
 
-        <!-- Wisdom Quotes & Score Distribution -->
+        <!-- Recent Activity -->
         <div class="section-card">
-          <div class="section-head"><h3>💡 Wisdom & Insights</h3><a onclick="window.showPage('profile')">More stats</a></div>
-          
-          <div style="background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(6,182,212,.06));border-radius:12px;padding:12px 14px;margin-bottom:12px;border-left:3px solid var(--primary-light)">
-            <p id="wisdomQuote" style="font-style:italic;font-size:.82rem;color:var(--text-secondary);line-height:1.5">"Success is no accident."</p>
-            <p id="wisdomAuthor" style="font-size:.7rem;color:var(--text-secondary);margin-top:4px;font-weight:500">— Pelé</p>
-          </div>
-
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-            <div style="background:var(--bg-soft);border-radius:10px;padding:10px;text-align:center">
-              <div style="font-size:1.1rem;font-weight:800;color:var(--success)" id="distExcellent">0%</div>
-              <div style="font-size:.6rem;color:var(--text-secondary)">✅ Excellent</div>
-            </div>
-            <div style="background:var(--bg-soft);border-radius:10px;padding:10px;text-align:center">
-              <div style="font-size:1.1rem;font-weight:800;color:var(--primary-light)" id="distGood">0%</div>
-              <div style="font-size:.6rem;color:var(--text-secondary)">📈 Good</div>
-            </div>
-            <div style="background:var(--bg-soft);border-radius:10px;padding:10px;text-align:center">
-              <div style="font-size:1.1rem;font-weight:800;color:var(--warning)" id="distAverage">0%</div>
-              <div style="font-size:.6rem;color:var(--text-secondary)">📊 Average</div>
-            </div>
-            <div style="background:var(--bg-soft);border-radius:10px;padding:10px;text-align:center">
-              <div style="font-size:1.1rem;font-weight:800;color:var(--danger)" id="distLow">0%</div>
-              <div style="font-size:.6rem;color:var(--text-secondary)">📉 Below 50%</div>
-            </div>
+          <div class="section-head"><h3>🕐 Recent Activity</h3><a onclick="window.showPage('profile')">Full history</a></div>
+          <div class="activity-list" id="activityList">
+            <div class="mini-spinner" style="text-align:center;padding:8px"><i class="fas fa-spinner fa-spin"></i> Loading...</div>
           </div>
         </div>
       </div>
@@ -917,12 +928,25 @@
   </div>
 
   <!-- ============================================
-       SUBMIT SCREEN (Results)
+       SUBMIT SCREEN - Shows single latest result
        ============================================ -->
   <div class="screen page-content-only" id="submitScreen">
-    <div class="page-title"><h1><i class="fas fa-file-alt"></i> Results</h1></div>
+    <div class="page-title"><h1><i class="fas fa-file-alt"></i> Submit Results</h1></div>
     <div id="submitContent">
       <div class="loading-spin" id="submitLoading">
+        <i class="fas fa-spinner fa-spin"></i>
+        <p style="margin-top:12px">Loading your result...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       RESULTS SCREEN - Shows latest 10 results
+       ============================================ -->
+  <div class="screen page-content-only" id="resultsScreen">
+    <div class="page-title"><h1><i class="fas fa-history"></i> Your Results</h1></div>
+    <div id="resultsContent">
+      <div class="loading-spin" id="resultsLoading">
         <i class="fas fa-spinner fa-spin"></i>
         <p style="margin-top:12px">Loading your results...</p>
       </div>
@@ -967,6 +991,7 @@
     "/js/leaderboard.js": "/js/leaderboard.js",
     "/js/chat.js": "/js/chat.js",
     "/js/submit.js": "/js/submit.js",
+    "/js/results.js": "/js/results.js",
     "/js/app.js": "/js/app.js"
   }
 }
@@ -986,10 +1011,11 @@ import * as faq from '/js/faq.js';
 import * as leaderboard from '/js/leaderboard.js';
 import * as chat from '/js/chat.js';
 import * as submit from '/js/submit.js';
+import * as results from '/js/results.js';
 import * as app from '/js/app.js';
 
 // Expose all module functions to window
-Object.assign(window, utils, notifications, dashboard, exam, test, study, profile, ai, faq, leaderboard, chat, submit, app);
+Object.assign(window, utils, notifications, dashboard, exam, test, study, profile, ai, faq, leaderboard, chat, submit, results, app);
 
 // Initialize the app
 initApp();
