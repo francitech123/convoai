@@ -1,5 +1,5 @@
 // ============================================
-// DASHBOARD MODULE
+// DASHBOARD MODULE - With Loading Spinners
 // ============================================
 
 import { apiFetch, $id, setText, escapeHtml, maskName, showToast } from './utils.js';
@@ -13,24 +13,17 @@ const DASHBOARD_FACULTIES = [
 ];
 
 let dashboardState = { user: null, stats: null, courses: [], activity: [], notifications: [] };
-let wisdomInterval = null;
-let currentQuoteIndex = 0;
 
-// ==================== WISDOM QUOTES ====================
-const WISDOM_QUOTES = [
-  { q: '"Success is no accident. It is hard work, perseverance, learning, studying, and most of all, love of what you are doing."', a: 'Pelé' },
-  { q: '"The expert in anything was once a beginner."', a: 'Helen Hayes' },
-  { q: '"Education is the passport to the future, for tomorrow belongs to those who prepare for it today."', a: 'Malcolm X' },
-  { q: '"Don\'t watch the clock; do what it does. Keep going."', a: 'Sam Levenson' },
-  { q: '"The beautiful thing about learning is that no one can take it away from you."', a: 'B.B. King' },
-  { q: '"Strive for progress, not perfection."', a: 'Unknown' },
-  { q: '"The only way to do great work is to love what you do."', a: 'Steve Jobs' },
-  { q: '"Believe you can and you\'re halfway there."', a: 'Theodore Roosevelt' },
-  { q: '"It does not matter how slowly you go as long as you do not stop."', a: 'Confucius' },
-  { q: '"The secret of getting ahead is getting started."', a: 'Mark Twain' },
-  { q: '"Success is not final, failure is not fatal: it is the courage to continue that counts."', a: 'Winston Churchill' },
-  { q: '"The best way to predict the future is to create it."', a: 'Peter Drucker' }
-];
+// ==================== SHOW/HIDE SPINNERS ====================
+function showStatSpinner(id) {
+  const spinner = $id(id + 'Spinner');
+  if (spinner) spinner.style.display = 'block';
+}
+
+function hideStatSpinner(id) {
+  const spinner = $id(id + 'Spinner');
+  if (spinner) spinner.style.display = 'none';
+}
 
 // ==================== RENDER FACULTIES ====================
 export function renderDashboardFaculties() {
@@ -41,55 +34,11 @@ export function renderDashboardFaculties() {
   `).join('');
 }
 
-// ==================== RENDER WISDOM QUOTE ====================
-export function renderWisdomQuote() {
-  const quoteEl = $id('wisdomQuote');
-  const authorEl = $id('wisdomAuthor');
-  if (!quoteEl || !authorEl) return;
-  
-  const quote = WISDOM_QUOTES[currentQuoteIndex % WISDOM_QUOTES.length];
-  quoteEl.textContent = quote.q;
-  authorEl.textContent = '— ' + quote.a;
-  currentQuoteIndex++;
-}
-
-export function startWisdomRotation() {
-  if (wisdomInterval) clearInterval(wisdomInterval);
-  renderWisdomQuote();
-  wisdomInterval = setInterval(renderWisdomQuote, 15000);
-}
-
-export function stopWisdomRotation() {
-  if (wisdomInterval) {
-    clearInterval(wisdomInterval);
-    wisdomInterval = null;
-  }
-}
-
-// ==================== UPDATE SCORE DISTRIBUTION ====================
-export function updateScoreDistribution(scores) {
-  if (!scores || !scores.length) {
-    setText('distExcellent', '0%');
-    setText('distGood', '0%');
-    setText('distAverage', '0%');
-    setText('distLow', '0%');
-    return;
-  }
-  
-  const total = scores.length;
-  const excellent = scores.filter(s => (s.percentage||0) >= 70).length;
-  const good = scores.filter(s => (s.percentage||0) >= 60 && (s.percentage||0) < 70).length;
-  const average = scores.filter(s => (s.percentage||0) >= 50 && (s.percentage||0) < 60).length;
-  const low = scores.filter(s => (s.percentage||0) < 50).length;
-  
-  setText('distExcellent', Math.round((excellent/total)*100) + '%');
-  setText('distGood', Math.round((good/total)*100) + '%');
-  setText('distAverage', Math.round((average/total)*100) + '%');
-  setText('distLow', Math.round((low/total)*100) + '%');
-}
-
 // ==================== LOAD DASHBOARD ====================
 export async function loadDashboard() {
+  // Show all spinners
+  ['statCourses', 'statAvg', 'statAttempts', 'statStreak'].forEach(id => showStatSpinner(id));
+  
   try {
     const userData = await apiFetch('/auth/me');
     if (userData.success && userData.user) {
@@ -129,22 +78,23 @@ export async function loadDashboard() {
       setText('statAttempts', String(attempts || 0));
       setText('statStreak', `${stats.currentStreak || 0} day${stats.currentStreak === 1 ? '' : 's'}`);
       
+      // Hide spinners after data loaded
+      ['statCourses', 'statAvg', 'statAttempts', 'statStreak'].forEach(id => hideStatSpinner(id));
+      
       renderActivity(activity);
       renderStatsChart(user.scores || []);
       renderDashboardFaculties();
-      updateScoreDistribution(user.scores || []);
       
       try {
         await loadMiniLeaderboard(5);
       } catch (e) {
         console.warn('Mini leaderboard load failed:', e);
       }
-      
-      startWisdomRotation();
     }
   } catch (e) {
     console.error('Dashboard load error:', e);
     showToast('Error loading dashboard data. Please refresh.', 'error');
+    ['statCourses', 'statAvg', 'statAttempts', 'statStreak'].forEach(id => hideStatSpinner(id));
   }
 }
 
@@ -208,12 +158,33 @@ function renderStatsChart(scores) {
   setText('lowCount', low);
   const lb = $id('lowBar'); 
   if (lb) lb.style.width = (low/maxCount * 100) + '%';
+  
+  // Update score distribution
+  updateScoreDistribution(scores);
 }
 
-// ==================== EXPOSE FUNCTIONS ====================
+// ==================== UPDATE SCORE DISTRIBUTION ====================
+function updateScoreDistribution(scores) {
+  if (!scores || !scores.length) {
+    setText('distExcellent', '0%');
+    setText('distGood', '0%');
+    setText('distAverage', '0%');
+    setText('distLow', '0%');
+    return;
+  }
+  
+  const total = scores.length;
+  const excellent = scores.filter(s => (s.percentage||0) >= 70).length;
+  const good = scores.filter(s => (s.percentage||0) >= 60 && (s.percentage||0) < 70).length;
+  const average = scores.filter(s => (s.percentage||0) >= 50 && (s.percentage||0) < 60).length;
+  const low = scores.filter(s => (s.percentage||0) < 50).length;
+  
+  setText('distExcellent', Math.round((excellent/total)*100) + '%');
+  setText('distGood', Math.round((good/total)*100) + '%');
+  setText('distAverage', Math.round((average/total)*100) + '%');
+  setText('distLow', Math.round((low/total)*100) + '%');
+}
+
+// ==================== EXPOSE ====================
 window.renderDashboardFaculties = renderDashboardFaculties;
 window.loadDashboard = loadDashboard;
-window.renderWisdomQuote = renderWisdomQuote;
-window.startWisdomRotation = startWisdomRotation;
-window.stopWisdomRotation = stopWisdomRotation;
-window.updateScoreDistribution = updateScoreDistribution;
