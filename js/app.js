@@ -1,15 +1,19 @@
+// ============================================
+// MAIN APP CONTROLLER - COMPLETE
+// ============================================
+
 import { 
   initTheme, toggleThemeMode, showToast, showLoading, hideLoading,
   getToken, getUser, showPage, $id, setText, API_BASE
 } from './utils.js';
 import { loadNotifications } from './notifications.js';
 import { loadDashboard } from './dashboard.js';
-import { loadExamData, examState, loadExamFaculties } from './exam.js';
-import { loadTestData, testState, loadTestFaculties } from './test.js';
+import { loadExamData, checkAndResetExam, resetExamState } from './exam.js';
+import { loadTestData, checkAndResetTest, resetTestState } from './test.js';
 import { loadStudyData } from './study.js';
 import { loadProfile } from './profile.js';
 import { loadLeaderboard } from './leaderboard.js';
-import { loadSubmitPage } from './submit.js';
+import { loadSubmitPage, refreshSubmitPage } from './submit.js';
 import { loadResultsPage } from './results.js';
 import { initChat } from './chat.js';
 import { renderFAQs } from './faq.js';
@@ -30,6 +34,7 @@ export async function initApp() {
   if (isInitialized) return;
   isInitialized = true;
   
+  // Check if user is logged in
   const token = getToken();
   if (!token) {
     window.location.href = '/login';
@@ -38,6 +43,7 @@ export async function initApp() {
   
   showLoading('Loading your dashboard...');
   
+  // Initialize theme
   initTheme();
   
   // Preload data
@@ -77,6 +83,7 @@ export async function initApp() {
     loadAIConversations()
   ]);
   
+  // Initialize chat
   initChat();
   
   // Check for saved sessions
@@ -100,21 +107,24 @@ export async function initApp() {
     }
   } catch (e) {}
   
+  // Handle page load parameters
   const urlParams = new URLSearchParams(window.location.search);
   const pageParam = urlParams.get('page');
   const validPages = ['dashboard', 'exam', 'test', 'study', 'profile', 'ai', 'faq', 'leaderboard', 'chat', 'submit', 'results'];
   if (pageParam && validPages.includes(pageParam)) {
-    setTimeout(() => showPage(pageParam), 100);
+    setTimeout(() => showPageWithLoading(pageParam), 100);
   }
   
   hideLoading();
   
+  // Setup inactivity timer (30 minutes)
   resetInactivityTimer();
   document.addEventListener('click', resetInactivityTimer);
   document.addEventListener('touchstart', resetInactivityTimer);
   document.addEventListener('scroll', resetInactivityTimer);
   document.addEventListener('keydown', resetInactivityTimer);
   
+  // Handle back/forward navigation
   window.addEventListener('popstate', () => {
     document.querySelectorAll('.loading').forEach(el => {
       el.classList.remove('loading');
@@ -128,6 +138,7 @@ export async function initApp() {
 function resetInactivityTimer() {
   clearTimeout(inactivityTimer);
   inactivityTimer = setTimeout(() => {
+    // Check if any exam or test is active
     const hasActiveSession = window.examState?.session || window.testState?.session;
     if (!hasActiveSession) {
       showLoading('Session timeout. Reloading...');
@@ -135,11 +146,11 @@ function resetInactivityTimer() {
         window.location.reload();
       }, 1500);
     }
-  }, 30 * 60 * 1000);
+  }, 30 * 60 * 1000); // 30 minutes
 }
 
 // ============================================
-// PAGE NAVIGATION - With proper reset handling
+// PAGE NAVIGATION WITH LOADING
 // ============================================
 
 let currentPage = 'dashboard';
@@ -161,15 +172,18 @@ export function showPageWithLoading(page) {
   
   const target = $id(page + 'Screen');
   if (target) {
+    // Hide all screens
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    
+    // Show target screen
     target.classList.add('active');
     currentPage = page;
     
-    const labels = { 
-      dashboard: 'Dashboard', 
-      exam: 'Exam Mode', 
-      test: 'Test Mode', 
-      study: 'Study Mode', 
+    const labels = {
+      dashboard: 'Dashboard',
+      exam: 'Exam Mode',
+      test: 'Test Mode',
+      study: 'Study Mode',
       profile: 'Profile',
       ai: 'AI Assistant',
       faq: 'FAQ',
@@ -181,57 +195,51 @@ export function showPageWithLoading(page) {
     setText('pageLabel', labels[page] || page);
     setText('pageTitle', 'OAU CBE Practice');
     
+    // Update bottom nav
     document.querySelectorAll('.nav-item').forEach(item => {
       item.classList.toggle('active', item.dataset.page === page);
     });
     
-    // ============ PAGE SPECIFIC LOADING ============
-    if (page === 'dashboard' && window.loadDashboard) {
-      setTimeout(() => window.loadDashboard(), 50);
-    } else if (page === 'profile' && window.loadProfile) {
-      setTimeout(() => window.loadProfile(), 50);
-    } else if (page === 'leaderboard' && window.loadLeaderboard) {
-      setTimeout(() => window.loadLeaderboard(), 50);
-    } else if (page === 'submit' && window.loadSubmitPage) {
-      setTimeout(() => window.loadSubmitPage(), 50);
-    } else if (page === 'results' && window.loadResultsPage) {
-      setTimeout(() => window.loadResultsPage(), 50);
-    } else if (page === 'ai' && window.loadAIConversations) {
-      setTimeout(() => window.loadAIConversations(), 50);
+    // Load page data if needed with reset checks
+    if (page === 'dashboard') {
+      setTimeout(() => {
+        if (window.loadDashboard) window.loadDashboard();
+      }, 50);
     } else if (page === 'exam') {
-      // Reset exam if no active session
-      if (!examState.session) {
-        const facultyScreen = $id('examFacultyScreen');
-        const levelScreen = $id('examLevelScreen');
-        const courseScreen = $id('examCourseScreen');
-        const entryScreen = $id('examEntryScreen');
-        const runningScreen = $id('examRunningScreen');
-        
-        if (facultyScreen) facultyScreen.style.display = 'block';
-        if (levelScreen) levelScreen.style.display = 'none';
-        if (courseScreen) courseScreen.style.display = 'none';
-        if (entryScreen) entryScreen.style.display = 'none';
-        if (runningScreen) runningScreen.style.display = 'none';
-        
-        setTimeout(() => loadExamFaculties(), 50);
-      }
+      setTimeout(() => {
+        // Check and reset exam state first
+        if (window.checkAndResetExam) window.checkAndResetExam();
+        if (window.loadExamData) window.loadExamData();
+      }, 50);
     } else if (page === 'test') {
-      // Reset test if no active session
-      if (!testState.session) {
-        const facultyScreen = $id('testFacultyScreen');
-        const levelScreen = $id('testLevelScreen');
-        const courseScreen = $id('testCourseScreen');
-        const entryScreen = $id('testEntryScreen');
-        const runningScreen = $id('testRunningScreen');
-        
-        if (facultyScreen) facultyScreen.style.display = 'block';
-        if (levelScreen) levelScreen.style.display = 'none';
-        if (courseScreen) courseScreen.style.display = 'none';
-        if (entryScreen) entryScreen.style.display = 'none';
-        if (runningScreen) runningScreen.style.display = 'none';
-        
-        setTimeout(() => loadTestFaculties(), 50);
-      }
+      setTimeout(() => {
+        if (window.checkAndResetTest) window.checkAndResetTest();
+        if (window.loadTestData) window.loadTestData();
+      }, 50);
+    } else if (page === 'study') {
+      setTimeout(() => {
+        if (window.loadStudyData) window.loadStudyData();
+      }, 50);
+    } else if (page === 'profile') {
+      setTimeout(() => {
+        if (window.loadProfile) window.loadProfile();
+      }, 50);
+    } else if (page === 'leaderboard') {
+      setTimeout(() => {
+        if (window.loadLeaderboard) window.loadLeaderboard();
+      }, 50);
+    } else if (page === 'submit') {
+      setTimeout(() => {
+        if (window.loadSubmitPage) window.loadSubmitPage();
+      }, 50);
+    } else if (page === 'results') {
+      setTimeout(() => {
+        if (window.loadResultsPage) window.loadResultsPage();
+      }, 50);
+    } else if (page === 'ai') {
+      setTimeout(() => {
+        if (window.loadAIConversations) window.loadAIConversations();
+      }, 50);
     }
     
     window.scrollTo(0, 0);
@@ -240,6 +248,29 @@ export function showPageWithLoading(page) {
   setTimeout(() => {
     isPageLoading = false;
   }, 300);
+}
+
+// ============================================
+// FORCE RESET EXAM/TEST PAGES
+// ============================================
+export function forceResetExam() {
+  if (window.resetExamState) {
+    window.resetExamState();
+    console.log('🔄 Exam forced reset');
+  }
+  if (window.loadExamData) {
+    setTimeout(() => window.loadExamData(), 100);
+  }
+}
+
+export function forceResetTest() {
+  if (window.resetTestState) {
+    window.resetTestState();
+    console.log('🔄 Test forced reset');
+  }
+  if (window.loadTestData) {
+    setTimeout(() => window.loadTestData(), 100);
+  }
 }
 
 // ============================================
@@ -346,8 +377,46 @@ window.API_BASE = API_BASE;
 window.showPage = showPageWithLoading;
 window.preloadedData = preloadedData;
 window.currentPage = currentPage;
+window.forceResetExam = forceResetExam;
+window.forceResetTest = forceResetTest;
+window.refreshSubmitPage = refreshSubmitPage;
+
+// Speech functions
 window.aiStartSpeech = startSpeechRecognition;
 window.aiStopSpeech = stopSpeechRecognition;
+
+// ============================================
+// KEYBOARD SHORTCUTS
+// ============================================
+export function setupKeyboardShortcuts() {
+  document.addEventListener('keydown', (e) => {
+    // Escape key - close modals/popups
+    if (e.key === 'Escape') {
+      const popup = $id('notificationPopup');
+      if (popup && popup.classList.contains('show')) {
+        popup.classList.remove('show');
+      }
+      
+      const calc = $id('calcOverlay');
+      if (calc && calc.classList.contains('show')) {
+        calc.classList.remove('show');
+      }
+      
+      const resultPopup = document.querySelector('.result-popup-overlay');
+      if (resultPopup) {
+        resultPopup.remove();
+        document.body.style.overflow = '';
+      }
+    }
+    
+    // Ctrl + K - Focus search
+    if (e.ctrlKey && e.key === 'k') {
+      e.preventDefault();
+      const search = $id('searchInput');
+      if (search) search.focus();
+    }
+  });
+}
 
 // ============================================
 // AUTO-INIT
@@ -357,3 +426,6 @@ if (document.readyState === 'loading') {
 } else {
   initApp();
 }
+
+// Setup keyboard shortcuts
+setTimeout(setupKeyboardShortcuts, 100);
