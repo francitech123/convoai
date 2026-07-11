@@ -6,9 +6,10 @@
 // CONFIGURATION
 // ============================================
 const API_BASE = 'https://oau-exam-api.onrender.com/api';
-const totalSlides = 11;
+const totalSlides = 6;
 let currentSlide = 0;
 let autoplayInterval = null;
+let isTransitioning = false;
 
 // ============================================
 // DOM REFERENCES
@@ -16,7 +17,8 @@ let autoplayInterval = null;
 const slidesTrack = document.getElementById('slidesTrack');
 const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
-const dotsContainer = document.getElementById('progressDots');
+const dotsContainer = document.getElementById('dotsContainer');
+const progressText = document.getElementById('progressText');
 
 // ============================================
 // PARTICLES
@@ -24,13 +26,13 @@ const dotsContainer = document.getElementById('progressDots');
 function createParticles() {
   const container = document.getElementById('particles');
   if (!container) return;
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < 25; i++) {
     const particle = document.createElement('div');
     particle.className = 'particle';
     particle.style.left = Math.random() * 100 + '%';
     particle.style.top = Math.random() * 100 + '%';
-    particle.style.animationDelay = Math.random() * 8 + 's';
-    particle.style.animationDuration = (Math.random() * 6 + 6) + 's';
+    particle.style.animationDelay = Math.random() * 10 + 's';
+    particle.style.animationDuration = (Math.random() * 8 + 6) + 's';
     particle.style.width = (Math.random() * 3 + 2) + 'px';
     particle.style.height = particle.style.width;
     container.appendChild(particle);
@@ -52,6 +54,7 @@ function initDots() {
 }
 
 function updateSlide() {
+  if (isTransitioning) return;
   slidesTrack.style.transform = `translateX(-${currentSlide * 100}vw)`;
 
   document.querySelectorAll('.dot').forEach((dot, i) => {
@@ -61,33 +64,49 @@ function updateSlide() {
   prevBtn.disabled = currentSlide === 0;
   nextBtn.disabled = currentSlide === totalSlides - 1;
 
-  // Update indicator
-  const indicator = document.querySelector('.nav-indicator');
-  if (indicator) {
-    indicator.textContent = `${currentSlide + 1} / ${totalSlides}`;
+  // Update progress text
+  if (progressText) {
+    progressText.textContent = `${currentSlide + 1}/${totalSlides}`;
+  }
+
+  // Trigger slide animations
+  const slide = document.querySelectorAll('.slide')[currentSlide];
+  if (slide) {
+    const content = slide.querySelector('.slide-content');
+    if (content) {
+      content.style.animation = 'none';
+      requestAnimationFrame(() => {
+        content.style.animation = 'fadeUp .6s cubic-bezier(.4,0,.2,1) both';
+      });
+    }
   }
 }
 
 function nextSlide() {
-  if (currentSlide < totalSlides - 1) {
-    currentSlide++;
-    updateSlide();
-  }
+  if (isTransitioning || currentSlide >= totalSlides - 1) return;
+  isTransitioning = true;
+  currentSlide++;
+  updateSlide();
+  setTimeout(() => { isTransitioning = false; }, 500);
+  resetAutoplay();
 }
 
 function previousSlide() {
-  if (currentSlide > 0) {
-    currentSlide--;
-    updateSlide();
-  }
+  if (isTransitioning || currentSlide <= 0) return;
+  isTransitioning = true;
+  currentSlide--;
+  updateSlide();
+  setTimeout(() => { isTransitioning = false; }, 500);
+  resetAutoplay();
 }
 
 function goToSlide(index) {
-  if (index >= 0 && index < totalSlides) {
-    currentSlide = index;
-    updateSlide();
-    resetAutoplay();
-  }
+  if (isTransitioning || index === currentSlide || index < 0 || index >= totalSlides) return;
+  isTransitioning = true;
+  currentSlide = index;
+  updateSlide();
+  setTimeout(() => { isTransitioning = false; }, 500);
+  resetAutoplay();
 }
 
 // ============================================
@@ -102,7 +121,7 @@ function startAutoplay() {
       return;
     }
     nextSlide();
-  }, 6000);
+  }, 5000);
 }
 
 function resetAutoplay() {
@@ -130,7 +149,6 @@ function openAuthModal() {
   if (overlay) {
     overlay.classList.add('show');
     document.body.style.overflow = 'hidden';
-    // Reset form
     clearAuthErrors();
     setAuthTab('login');
   }
@@ -149,18 +167,20 @@ function setAuthTab(tab) {
   document.querySelectorAll('.auth-tab').forEach(el => {
     el.classList.toggle('active', el.dataset.tab === tab);
   });
-  
+
   const loginForm = document.getElementById('loginForm');
   const registerForm = document.getElementById('registerForm');
-  
+
   if (tab === 'login') {
     loginForm.style.display = 'block';
     registerForm.style.display = 'none';
+    document.getElementById('authSubtitle').textContent = 'Sign in to continue your exam preparation';
   } else {
     loginForm.style.display = 'none';
     registerForm.style.display = 'block';
+    document.getElementById('authSubtitle').textContent = 'Create your account and start preparing';
   }
-  
+
   clearAuthErrors();
 }
 
@@ -192,8 +212,7 @@ async function handleLogin() {
   const username = document.getElementById('loginUsername').value.trim();
   const password = document.getElementById('loginPassword').value.trim();
   const btn = document.getElementById('loginBtn');
-  
-  // Validation
+
   if (!username) {
     showAuthError('Please enter your username');
     document.getElementById('loginUsername').focus();
@@ -204,27 +223,25 @@ async function handleLogin() {
     document.getElementById('loginPassword').focus();
     return;
   }
-  
-  // Show loading
+
   btn.disabled = true;
   btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
   clearAuthErrors();
-  
+
   try {
     const response = await fetch(API_BASE + '/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password })
     });
-    
+
     const data = await response.json();
-    
+
     if (response.ok && data.success) {
-      // Save token and user data
       localStorage.setItem('oau_token', data.token);
       localStorage.setItem('oau_user', JSON.stringify(data.user));
       showAuthSuccess('✅ Login successful! Redirecting...');
-      
+
       setTimeout(() => {
         window.location.href = '/app';
       }, 500);
@@ -251,8 +268,7 @@ async function handleRegister() {
   const password = document.getElementById('regPassword').value.trim();
   const confirmPassword = document.getElementById('regConfirmPassword').value.trim();
   const btn = document.getElementById('registerBtn');
-  
-  // Validation
+
   if (!username || username.length < 3) {
     showAuthError('Username must be at least 3 characters');
     document.getElementById('regUsername').focus();
@@ -278,32 +294,25 @@ async function handleRegister() {
     document.getElementById('regConfirmPassword').focus();
     return;
   }
-  
-  // Show loading
+
   btn.disabled = true;
   btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating account...';
   clearAuthErrors();
-  
+
   try {
     const response = await fetch(API_BASE + '/auth/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ 
-        username, 
-        fullName, 
-        email, 
-        password 
-      })
+      body: JSON.stringify({ username, fullName, email, password })
     });
-    
+
     const data = await response.json();
-    
+
     if (response.ok && data.success) {
-      // Auto-login after registration
       localStorage.setItem('oau_token', data.token);
       localStorage.setItem('oau_user', JSON.stringify(data.user));
       showAuthSuccess('✅ Account created! Redirecting...');
-      
+
       setTimeout(() => {
         window.location.href = '/app';
       }, 500);
@@ -321,59 +330,6 @@ async function handleRegister() {
 }
 
 // ============================================
-// KEYBOARD SHORTCUTS
-// ============================================
-document.addEventListener('keydown', (e) => {
-  // Left/Right arrows for slides
-  if (e.key === 'ArrowRight' && !document.querySelector('.auth-modal-overlay.show')) {
-    nextSlide();
-    resetAutoplay();
-  }
-  if (e.key === 'ArrowLeft' && !document.querySelector('.auth-modal-overlay.show')) {
-    previousSlide();
-    resetAutoplay();
-  }
-  // Escape for auth modal
-  if (e.key === 'Escape') {
-    closeAuthModal();
-  }
-  // Enter for login/register
-  if (e.key === 'Enter') {
-    const authOverlay = document.querySelector('.auth-modal-overlay.show');
-    if (authOverlay) {
-      if (currentAuthTab === 'login') {
-        handleLogin();
-      } else {
-        handleRegister();
-      }
-    }
-  }
-});
-
-// ============================================
-// SWIPE SUPPORT
-// ============================================
-let touchStartX = 0;
-let touchEndX = 0;
-
-document.addEventListener('touchstart', (e) => {
-  touchStartX = e.changedTouches[0].screenX;
-});
-
-document.addEventListener('touchend', (e) => {
-  if (document.querySelector('.auth-modal-overlay.show')) return;
-  touchEndX = e.changedTouches[0].screenX;
-  if (touchStartX - touchEndX > 50) {
-    nextSlide();
-    resetAutoplay();
-  }
-  if (touchEndX - touchStartX > 50) {
-    previousSlide();
-    resetAutoplay();
-  }
-});
-
-// ============================================
 // HANDLE GET STARTED / SKIP
 // ============================================
 function handleGetStarted() {
@@ -387,12 +343,49 @@ function handleSkip() {
 }
 
 // ============================================
+// KEYBOARD SHORTCUTS
+// ============================================
+document.addEventListener('keydown', (e) => {
+  if (document.querySelector('.auth-modal-overlay.show')) {
+    if (e.key === 'Escape') closeAuthModal();
+    if (e.key === 'Enter') {
+      if (currentAuthTab === 'login') {
+        handleLogin();
+      } else {
+        handleRegister();
+      }
+    }
+    return;
+  }
+
+  if (e.key === 'ArrowRight') { nextSlide(); resetAutoplay(); }
+  if (e.key === 'ArrowLeft') { previousSlide(); resetAutoplay(); }
+});
+
+// ============================================
+// SWIPE SUPPORT
+// ============================================
+let touchStartX = 0;
+let touchEndX = 0;
+
+document.addEventListener('touchstart', (e) => {
+  if (document.querySelector('.auth-modal-overlay.show')) return;
+  touchStartX = e.changedTouches[0].screenX;
+});
+
+document.addEventListener('touchend', (e) => {
+  if (document.querySelector('.auth-modal-overlay.show')) return;
+  touchEndX = e.changedTouches[0].screenX;
+  if (touchStartX - touchEndX > 50) { nextSlide(); resetAutoplay(); }
+  if (touchEndX - touchStartX > 50) { previousSlide(); resetAutoplay(); }
+});
+
+// ============================================
 // CHECK IF USER ALREADY LOGGED IN
 // ============================================
 function checkAuthStatus() {
   const token = localStorage.getItem('oau_token');
   if (token) {
-    // Verify token is still valid
     fetch(API_BASE + '/auth/me', {
       headers: { 'Authorization': 'Bearer ' + token }
     })
@@ -416,69 +409,39 @@ function checkAuthStatus() {
 // INITIALIZE
 // ============================================
 function init() {
-  // Check auth first
   checkAuthStatus();
-  
-  // Create particles
   createParticles();
-  
-  // Initialize dots
   initDots();
-  
-  // Update slide
   updateSlide();
-  
-  // Start autoplay
   startAutoplay();
-  
-  // Stop autoplay on user interaction
+
   document.addEventListener('click', (e) => {
-    if (!e.target.closest('.nav-button') && !e.target.closest('.dot')) {
+    if (!e.target.closest('.bottom-nav') && !e.target.closest('.slide-content')) {
       resetAutoplay();
     }
   });
-  
-  // Login/Register input handlers for Enter key
+
+  // Enter key for login/register inputs
   document.getElementById('loginUsername')?.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      document.getElementById('loginPassword').focus();
-    }
+    if (e.key === 'Enter') document.getElementById('loginPassword').focus();
   });
-  
   document.getElementById('loginPassword')?.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      handleLogin();
-    }
+    if (e.key === 'Enter') handleLogin();
   });
-  
   document.getElementById('regUsername')?.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      document.getElementById('regFullName').focus();
-    }
+    if (e.key === 'Enter') document.getElementById('regFullName').focus();
   });
-  
   document.getElementById('regFullName')?.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      document.getElementById('regEmail').focus();
-    }
+    if (e.key === 'Enter') document.getElementById('regEmail').focus();
   });
-  
   document.getElementById('regEmail')?.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      document.getElementById('regPassword').focus();
-    }
+    if (e.key === 'Enter') document.getElementById('regPassword').focus();
   });
-  
   document.getElementById('regPassword')?.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      document.getElementById('regConfirmPassword').focus();
-    }
+    if (e.key === 'Enter') document.getElementById('regConfirmPassword').focus();
   });
-  
   document.getElementById('regConfirmPassword')?.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      handleRegister();
-    }
+    if (e.key === 'Enter') handleRegister();
   });
 }
 
