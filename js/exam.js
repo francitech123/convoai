@@ -23,7 +23,6 @@ export let examState = {
 
 // ==================== COMPLETE RESET EXAM STATE ====================
 export function resetExamState(clearSession = true) {
-  // Clear timers
   if (examState.session?.timer) {
     clearInterval(examState.session.timer);
     examState.session.timer = null;
@@ -37,17 +36,14 @@ export function resetExamState(clearSession = true) {
     examState.inactivityTimer = null;
   }
   
-  // Remove activity listeners
   document.removeEventListener('click', trackActivity);
   document.removeEventListener('touchstart', trackActivity);
   document.removeEventListener('keydown', trackActivity);
   
-  // Clear session storage
   if (clearSession) {
     sessionStorage.removeItem('activeExam');
   }
   
-  // Reset ALL state
   examState.session = null;
   examState.faculty = null;
   examState.level = null;
@@ -59,25 +55,20 @@ export function resetExamState(clearSession = true) {
   examState.lastActivity = Date.now();
   examState.pageLoaded = false;
   
-  // Exit fullscreen
   exitFullscreenMode();
   
-  // Reset all exam screens to initial state
   const facultyScreen = $id('examFacultyScreen');
   const levelScreen = $id('examLevelScreen');
   const courseScreen = $id('examCourseScreen');
   const entryScreen = $id('examEntryScreen');
   const runningScreen = $id('examRunningScreen');
   
-  if (facultyScreen) {
-    facultyScreen.style.display = 'block';
-  }
+  if (facultyScreen) facultyScreen.style.display = 'block';
   if (levelScreen) levelScreen.style.display = 'none';
   if (courseScreen) courseScreen.style.display = 'none';
   if (entryScreen) entryScreen.style.display = 'none';
   if (runningScreen) runningScreen.style.display = 'none';
   
-  // Clear question display
   const qText = $id('examQText');
   const qOptions = $id('examOptionsArea');
   const qCounter = $id('examQCounter');
@@ -110,17 +101,13 @@ export function resetExamState(clearSession = true) {
     nextBtn.style.display = 'inline-flex';
   }
   
-  // Force refresh faculties
   loadExamFaculties();
-  
   console.log('✅ Exam state fully reset');
 }
 
 // ==================== CHECK AND RESET IF NEEDED ====================
 export function checkAndResetExam() {
-  // If there's no active session but questions are showing, reset
   if (!examState.session && examState.isReset === false) {
-    // Check if running screen is visible
     const runningScreen = $id('examRunningScreen');
     if (runningScreen && runningScreen.style.display !== 'none') {
       console.log('🔄 Detected stuck exam state, resetting...');
@@ -129,7 +116,6 @@ export function checkAndResetExam() {
     }
   }
   
-  // If session ended but questions still visible
   if (!examState.session && document.querySelector('#examQuestionGrid .grid-btn')) {
     console.log('🔄 Detected old questions without session, resetting...');
     resetExamState();
@@ -139,9 +125,7 @@ export function checkAndResetExam() {
   return false;
 }
 
-// ============================================
-// INACTIVITY CHECK
-// ============================================
+// ==================== INACTIVITY CHECK ====================
 function resetInactivityTimer() {
   examState.lastActivity = Date.now();
   
@@ -167,14 +151,16 @@ function trackActivity() {
   examState.lastActivity = Date.now();
 }
 
-// ==================== DISABLE ALL BUTTONS ====================
+// ==================== DISABLE ALL BUTTONS (ONLY DURING SUBMISSION) ====================
 function disableAllButtons() {
+  // Disable options
   document.querySelectorAll('#examOptionsArea .opt').forEach(el => {
     el.classList.add('disabled');
     el.style.cursor = 'not-allowed';
     el.onclick = null;
   });
   
+  // Disable nav buttons
   const prevBtn = $id('examPrevBtn');
   const nextBtn = $id('examNextBtn');
   const submitBtn = $id('examSubmitBtn');
@@ -184,8 +170,16 @@ function disableAllButtons() {
   if (prevBtn) { prevBtn.disabled = true; prevBtn.style.opacity = '0.5'; }
   if (nextBtn) { nextBtn.disabled = true; nextBtn.style.opacity = '0.5'; }
   if (submitBtn) { submitBtn.disabled = true; submitBtn.style.opacity = '0.5'; }
-  if (quitBtn) { quitBtn.disabled = true; quitBtn.style.opacity = '0.5'; }
-  if (calcBtn) { calcBtn.disabled = true; calcBtn.style.opacity = '0.5'; }
+  if (quitBtn) { 
+    quitBtn.disabled = true; 
+    quitBtn.style.opacity = '0.5';
+    quitBtn.style.pointerEvents = 'none';
+  }
+  if (calcBtn) { 
+    calcBtn.disabled = true; 
+    calcBtn.style.opacity = '0.5';
+    calcBtn.style.pointerEvents = 'none';
+  }
   
   document.querySelectorAll('#examQuestionGrid .grid-btn').forEach(el => {
     el.style.pointerEvents = 'none';
@@ -193,6 +187,7 @@ function disableAllButtons() {
   });
 }
 
+// ==================== ENABLE ALL BUTTONS (After submission completes) ====================
 function enableAllButtons() {
   document.querySelectorAll('#examOptionsArea .opt').forEach(el => {
     el.classList.remove('disabled');
@@ -214,8 +209,16 @@ function enableAllButtons() {
   if (prevBtn) { prevBtn.disabled = false; prevBtn.style.opacity = '1'; }
   if (nextBtn) { nextBtn.disabled = false; nextBtn.style.opacity = '1'; }
   if (submitBtn) { submitBtn.disabled = false; submitBtn.style.opacity = '1'; }
-  if (quitBtn) { quitBtn.disabled = false; quitBtn.style.opacity = '1'; }
-  if (calcBtn) { calcBtn.disabled = false; calcBtn.style.opacity = '1'; }
+  if (quitBtn) { 
+    quitBtn.disabled = false; 
+    quitBtn.style.opacity = '1';
+    quitBtn.style.pointerEvents = 'auto';
+  }
+  if (calcBtn) { 
+    calcBtn.disabled = false; 
+    calcBtn.style.opacity = '1';
+    calcBtn.style.pointerEvents = 'auto';
+  }
   
   document.querySelectorAll('#examQuestionGrid .grid-btn').forEach(el => {
     el.style.pointerEvents = 'auto';
@@ -227,10 +230,8 @@ function enableAllButtons() {
 // LOAD EXAM DATA
 // ============================================
 export async function loadExamData() {
-  // Check if we need to reset first
   checkAndResetExam();
   
-  // If exam was reset, make sure faculty grid is visible
   if (examState.isReset) {
     examState.isReset = false;
     const facultyScreen = $id('examFacultyScreen');
@@ -245,7 +246,6 @@ export async function loadExamData() {
     if (courseScreen) courseScreen.style.display = 'none';
     if (entryScreen) entryScreen.style.display = 'none';
     
-    // Clear any stuck content
     const qText = $id('examQText');
     const qOptions = $id('examOptionsArea');
     const qCounter = $id('examQCounter');
@@ -272,7 +272,6 @@ export async function loadExamData() {
     return;
   }
   
-  // If there's an active session, render it
   if (examState.session) {
     const runningScreen = $id('examRunningScreen');
     if (runningScreen) runningScreen.style.display = 'block';
@@ -282,7 +281,6 @@ export async function loadExamData() {
     return;
   }
   
-  // If no session and no reset, load faculties
   if (document.querySelector('#examFacultyGrid .faculty-tag-simple')) {
     examState.pageLoaded = true;
     return;
@@ -684,6 +682,8 @@ export async function examSubmit(autoSubmit = false) {
   }
   
   examState.isSubmitting = true;
+  
+  // DISABLE ALL BUTTONS ONLY DURING SUBMISSION
   disableAllButtons();
   
   const submitBtn = $id('examSubmitBtn');
@@ -752,6 +752,7 @@ export async function examSubmit(autoSubmit = false) {
     localStorage.setItem('lastResultTimestamp', Date.now().toString());
     sessionStorage.removeItem('activeExam');
     
+    // Reset state but keep sessionStorage for result
     resetExamState(false);
     
     exitFullscreenMode();
