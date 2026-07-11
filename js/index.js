@@ -2,6 +2,8 @@ const API_BASE = 'https://oau-exam-api.onrender.com/api';
 const totalSlides = 6;
 let currentSlide = 0;
 let autoplayInterval = null;
+let verifiedUsername = '';
+let verifiedUserId = '';
 
 const slidesTrack = document.getElementById('slidesTrack');
 const prevBtn = document.getElementById('prevBtn');
@@ -202,17 +204,27 @@ async function handleRegister() {
     }
 }
 
-// ==================== FORGOT PASSWORD ====================
+// ==================== FORGOT PASSWORD - UPDATED ROUTES ====================
 let forgotStep = 'verify';
 
 function openForgotPassword() {
     document.getElementById('forgotPasswordModal').classList.add('show');
     document.body.style.overflow = 'hidden';
     forgotStep = 'verify';
+    verifiedUsername = '';
+    verifiedUserId = '';
     document.getElementById('newPasswordGroup').style.display = 'none';
     document.getElementById('confirmNewPasswordGroup').style.display = 'none';
     document.getElementById('forgotBtn').innerHTML = '<i class="fas fa-key"></i> Verify & Reset Password';
     document.getElementById('forgotBtn').disabled = false;
+    // Reset form fields
+    document.getElementById('forgotUsername').value = '';
+    document.getElementById('forgotSecurityQuestion').value = '';
+    document.getElementById('forgotSecurityAnswer').value = '';
+    document.getElementById('forgotNewPassword').value = '';
+    document.getElementById('forgotConfirmPassword').value = '';
+    document.getElementById('forgotPasswordStrengthBar').style.width = '0%';
+    document.getElementById('forgotPasswordStrengthBar').className = 'bar';
     clearForgotErrors();
 }
 
@@ -225,6 +237,7 @@ function clearForgotErrors() {
     document.querySelectorAll('#forgotError, #forgotSuccess').forEach(el => el.classList.remove('show'));
 }
 
+// ==================== VERIFY IDENTITY ====================
 async function handleForgotPassword() {
     const username = document.getElementById('forgotUsername').value.trim();
     const question = document.getElementById('forgotSecurityQuestion').value;
@@ -235,24 +248,36 @@ async function handleForgotPassword() {
         if (!username) { showForgotError('Please enter your username'); return; }
         if (!question) { showForgotError('Please select your security question'); return; }
         if (!answer) { showForgotError('Please enter your security answer'); return; }
+        
         btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying...';
         clearForgotErrors();
+        
         try {
-            const r = await fetch(API_BASE + '/auth/verify-security', {
+            // Use the same route as your working forgot password page
+            const response = await fetch(API_BASE + '/auth/forgot-password', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, question, answer })
+                body: JSON.stringify({
+                    username: username,
+                    securityQuestion: question,
+                    securityAnswer: answer
+                })
             });
-            const d = await r.json();
-            if (r.ok && d.success) {
-                showForgotSuccess('✅ Verified! Enter your new password.');
+
+            const data = await response.json();
+
+            if (response.ok && data.success) {
+                verifiedUsername = username;
+                verifiedUserId = data.userId;
+                showForgotSuccess('✅ Identity verified! Enter your new password below.');
                 forgotStep = 'reset';
                 document.getElementById('newPasswordGroup').style.display = 'block';
                 document.getElementById('confirmNewPasswordGroup').style.display = 'block';
                 document.getElementById('forgotBtn').innerHTML = '<i class="fas fa-save"></i> Reset Password';
                 btn.disabled = false;
+                document.getElementById('forgotNewPassword').focus();
             } else {
-                showForgotError(d.error || 'Verification failed. Please check your answers.');
+                showForgotError(data.error || 'Verification failed. Please check your details.');
                 btn.disabled = false; btn.innerHTML = '<i class="fas fa-key"></i> Verify & Reset Password';
             }
         } catch (e) {
@@ -260,28 +285,41 @@ async function handleForgotPassword() {
             btn.disabled = false; btn.innerHTML = '<i class="fas fa-key"></i> Verify & Reset Password';
         }
     } else {
+        // Reset password step
         const newPassword = document.getElementById('forgotNewPassword').value;
         const confirmPassword = document.getElementById('forgotConfirmPassword').value;
+        
         if (newPassword.length < 6) { showForgotError('Password must be at least 6 characters'); return; }
         if (newPassword !== confirmPassword) { showForgotError('Passwords do not match'); return; }
+        
         btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Resetting...';
         clearForgotErrors();
+        
         try {
-            const r = await fetch(API_BASE + '/auth/reset-password', {
+            // Use the same reset route as your working forgot password page
+            const response = await fetch(API_BASE + '/auth/reset-password', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, newPassword })
+                body: JSON.stringify({
+                    username: verifiedUsername,
+                    securityQuestion: document.getElementById('forgotSecurityQuestion').value,
+                    securityAnswer: document.getElementById('forgotSecurityAnswer').value.trim(),
+                    newPassword: newPassword
+                })
             });
-            const d = await r.json();
-            if (r.ok && d.success) {
+
+            const data = await response.json();
+
+            if (response.ok && data.success) {
                 showForgotSuccess('✅ Password reset successfully! Redirecting to login...');
                 setTimeout(() => {
                     closeForgotPassword();
                     setAuthTab('login');
                     document.getElementById('loginPassword').value = newPassword;
+                    showAuthSuccess('✅ Password reset! Login with your new password.');
                 }, 1500);
             } else {
-                showForgotError(d.error || 'Failed to reset password');
+                showForgotError(data.error || 'Failed to reset password');
                 btn.disabled = false; btn.innerHTML = '<i class="fas fa-save"></i> Reset Password';
             }
         } catch (e) {
@@ -291,6 +329,7 @@ async function handleForgotPassword() {
     }
 }
 
+// ==================== PASSWORD STRENGTH FOR FORGOT ====================
 document.getElementById('forgotNewPassword').addEventListener('input', function() {
     const bar = document.getElementById('forgotPasswordStrengthBar');
     const password = this.value;
@@ -308,9 +347,18 @@ document.getElementById('forgotNewPassword').addEventListener('input', function(
     bar.style.width = widths[index];
 });
 
-// Enter key handlers
+// Enter key handlers for forgot password
+document.getElementById('forgotUsername').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('forgotSecurityQuestion').focus(); });
+document.getElementById('forgotSecurityQuestion').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('forgotSecurityAnswer').focus(); });
+document.getElementById('forgotSecurityAnswer').addEventListener('keydown', (e) => { if (e.key === 'Enter') handleForgotPassword(); });
+document.getElementById('forgotNewPassword').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('forgotConfirmPassword').focus(); });
+document.getElementById('forgotConfirmPassword').addEventListener('keydown', (e) => { if (e.key === 'Enter') handleForgotPassword(); });
+
+// Login enter key handlers
 document.getElementById('loginUsername').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('loginPassword').focus(); });
 document.getElementById('loginPassword').addEventListener('keydown', (e) => { if (e.key === 'Enter') handleLogin(); });
+
+// Register enter key handlers
 document.getElementById('regUsername').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regFullName').focus(); });
 document.getElementById('regFullName').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regEmail').focus(); });
 document.getElementById('regEmail').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regFaculty').focus(); });
@@ -322,12 +370,6 @@ document.getElementById('regSecurityQuestion').addEventListener('keydown', (e) =
 document.getElementById('regSecurityAnswer').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regDepartment').focus(); });
 document.getElementById('regDepartment').addEventListener('keydown', (e) => { if (e.key === 'Enter') handleRegister(); });
 
-document.getElementById('forgotUsername').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('forgotSecurityQuestion').focus(); });
-document.getElementById('forgotSecurityQuestion').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('forgotSecurityAnswer').focus(); });
-document.getElementById('forgotSecurityAnswer').addEventListener('keydown', (e) => { if (e.key === 'Enter') handleForgotPassword(); });
-document.getElementById('forgotNewPassword').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('forgotConfirmPassword').focus(); });
-document.getElementById('forgotConfirmPassword').addEventListener('keydown', (e) => { if (e.key === 'Enter') handleForgotPassword(); });
-
 function checkAuth() {
     const token = localStorage.getItem('oau_token');
     if (token) {
@@ -337,6 +379,7 @@ function checkAuth() {
     }
 }
 
+// ==================== EXPOSE FUNCTIONS TO WINDOW ====================
 window.openAuthModal = openAuthModal;
 window.closeAuthModal = closeAuthModal;
 window.setAuthTab = setAuthTab;
@@ -360,7 +403,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const logoImgs = document.querySelectorAll('img[src="/logo.svg"]');
     logoImgs.forEach(img => {
         img.onerror = function() {
-            this.src = '/logo.svg';
+            // Keep trying to load from server
+            this.src = '/logo.svg?' + Date.now();
         };
     });
 });
