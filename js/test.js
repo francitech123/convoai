@@ -11,8 +11,56 @@ export let testState = {
   inactivityTimer: null,
   faculties: [],
   showAll: false,
-  lastActivity: Date.now()
+  lastActivity: Date.now(),
+  isReset: false
 };
+
+// ==================== RESET TEST STATE ====================
+export function resetTestState() {
+  // Clear timers
+  if (testState.session?.timer) clearInterval(testState.session.timer);
+  if (testState.autoSaveInterval) clearInterval(testState.autoSaveInterval);
+  if (testState.inactivityTimer) clearInterval(testState.inactivityTimer);
+  
+  // Remove activity listeners
+  document.removeEventListener('click', trackActivity);
+  document.removeEventListener('touchstart', trackActivity);
+  document.removeEventListener('keydown', trackActivity);
+  
+  // Clear session storage
+  sessionStorage.removeItem('activeTest');
+  
+  // Reset ALL state
+  testState.session = null;
+  testState.faculty = null;
+  testState.level = null;
+  testState.course = null;
+  testState.isSubmitting = false;
+  testState.showAll = false;
+  testState.isReset = true;
+  testState.lastActivity = Date.now();
+  
+  // Exit fullscreen
+  exitFullscreenMode();
+  
+  // Reset all test screens to initial state
+  const facultyScreen = $id('testFacultyScreen');
+  const levelScreen = $id('testLevelScreen');
+  const courseScreen = $id('testCourseScreen');
+  const entryScreen = $id('testEntryScreen');
+  const runningScreen = $id('testRunningScreen');
+  
+  if (facultyScreen) facultyScreen.style.display = 'block';
+  if (levelScreen) levelScreen.style.display = 'none';
+  if (courseScreen) courseScreen.style.display = 'none';
+  if (entryScreen) entryScreen.style.display = 'none';
+  if (runningScreen) runningScreen.style.display = 'none';
+  
+  // Force refresh faculties
+  loadTestFaculties();
+  
+  console.log('✅ Test state fully reset');
+}
 
 // ==================== INACTIVITY CHECK ====================
 function resetInactivityTimer() {
@@ -22,7 +70,6 @@ function resetInactivityTimer() {
     clearInterval(testState.inactivityTimer);
   }
   
-  // Check every 30 seconds for inactivity
   testState.inactivityTimer = setInterval(() => {
     if (!testState.session) return;
     
@@ -95,6 +142,14 @@ function enableAllButtons() {
 // LOAD TEST DATA
 // ============================================
 export async function loadTestData() {
+  if (testState.isReset) {
+    testState.isReset = false;
+    const facultyScreen = $id('testFacultyScreen');
+    const runningScreen = $id('testRunningScreen');
+    if (facultyScreen) facultyScreen.style.display = 'block';
+    if (runningScreen) runningScreen.style.display = 'none';
+  }
+  
   if (document.querySelector('#testFacultyGrid .faculty-tag-simple')) return;
   await loadTestFaculties();
 }
@@ -319,6 +374,7 @@ export async function testStart() {
     };
     
     testState.lastActivity = Date.now();
+    testState.isReset = false;
     
     const title = $id('testCourseTitle');
     const meta = $id('testMeta');
@@ -546,6 +602,12 @@ export async function testSubmit(autoSubmit = false) {
     exitFullscreenMode();
     window.showPage('submit');
     
+    setTimeout(() => {
+      if (window.refreshSubmitPage) {
+        window.refreshSubmitPage();
+      }
+    }, 100);
+    
   } catch (e) {
     alert('Failed to submit. Please try again.');
     testState.isSubmitting = false;
@@ -569,42 +631,13 @@ export function testQuit() {
   if (!testState.session) return;
   if (!confirm('Quit test? Your progress will be lost.')) return;
   
-  if (testState.session.timer) clearInterval(testState.session.timer);
-  if (testState.autoSaveInterval) clearInterval(testState.autoSaveInterval);
-  if (testState.inactivityTimer) clearInterval(testState.inactivityTimer);
-  
-  document.removeEventListener('click', trackActivity);
-  document.removeEventListener('touchstart', trackActivity);
-  document.removeEventListener('keydown', trackActivity);
-  
-  sessionStorage.removeItem('activeTest');
-  
-  testState.session = null;
-  testState.faculty = null;
-  testState.level = null;
-  testState.course = null;
-  testState.isSubmitting = false;
-  testState.showAll = false;
-  
-  exitFullscreenMode();
-  
-  const facultyScreen = $id('testFacultyScreen');
-  const levelScreen = $id('testLevelScreen');
-  const courseScreen = $id('testCourseScreen');
-  const entryScreen = $id('testEntryScreen');
-  const runningScreen = $id('testRunningScreen');
-  
-  if (facultyScreen) facultyScreen.style.display = 'block';
-  if (levelScreen) levelScreen.style.display = 'none';
-  if (courseScreen) courseScreen.style.display = 'none';
-  if (entryScreen) entryScreen.style.display = 'none';
-  if (runningScreen) runningScreen.style.display = 'none';
-  
-  loadTestFaculties();
+  resetTestState();
   window.showPage('test');
 }
 
-// Expose functions to window
+// ============================================
+// EXPOSE FUNCTIONS TO WINDOW
+// ============================================
 window.testSelectFaculty = testSelectFaculty;
 window.testGoToFaculty = testGoToFaculty;
 window.testSelectLevel = testSelectLevel;
@@ -619,3 +652,4 @@ window.testSubmit = testSubmit;
 window.testQuit = testQuit;
 window.testToggleFaculties = testToggleFaculties;
 window.testJumpTo = testJumpTo;
+window.resetTestState = resetTestState;
