@@ -1,4 +1,5 @@
-import { apiFetch, $id, setText, shuffleArray, showToast, enterFullscreenMode, exitFullscreenMode, showLoading, hideLoading } from './utils.js';
+
+import { apiFetch, $id, setText, shuffleArray, showToast, enterFullscreenMode, exitFullscreenMode } from './utils.js';
 
 export let examState = {
   faculty: null,
@@ -9,8 +10,7 @@ export let examState = {
   timer: null,
   autoSaveInterval: null,
   faculties: [],
-  showAll: false,
-  isComplete: false
+  showAll: false
 };
 
 export async function loadExamData() {
@@ -364,7 +364,9 @@ function examStartAutoSave() {
   }, 10000);
 }
 
-// ==================== EXAM SUBMIT - FIXED ====================
+// ============================================
+// EXAM SUBMIT - FIXED to reset after submission
+// ============================================
 export async function examSubmit() {
   if (examState.isSubmitting) return;
   if (!examState.session) return;
@@ -419,82 +421,26 @@ export async function examSubmit() {
       }))
     };
     
-    // Store the result in sessionStorage for immediate access
     sessionStorage.setItem('examResult', JSON.stringify(resultData));
-    
-    // Also store in localStorage for persistence
     localStorage.setItem('lastExamResult', JSON.stringify(resultData));
     localStorage.setItem('lastResultTimestamp', Date.now().toString());
-    
-    // Clear active session
     sessionStorage.removeItem('activeExam');
     
-    // Reset exam state
-    const session = examState.session;
+    // ============ RESET ALL EXAM STATE ============
+    // Reset session
     examState.session = null;
     examState.isSubmitting = false;
-    examState.isComplete = true;
+    
+    // Reset faculty, level, course selections
     examState.faculty = null;
     examState.level = null;
     examState.course = null;
+    examState.showAll = false;
     
-    // Exit fullscreen
+    // Exit fullscreen mode
     exitFullscreenMode();
     
-    // Force reload of submit page by navigating to it
-    const submitScreen = $id('submitScreen');
-    if (submitScreen) {
-      // Show submit screen with loading
-      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-      submitScreen.classList.add('active');
-      
-      // Reload submit page data
-      if (window.loadSubmitPage) {
-        setTimeout(() => window.loadSubmitPage(), 100);
-      }
-    }
-    
-    // Update current page
-    window.currentPage = 'submit';
-    document.querySelectorAll('.nav-item').forEach(item => {
-      item.classList.toggle('active', item.dataset.page === 'submit');
-    });
-    setText('pageLabel', 'Submit Results');
-    setText('pageTitle', 'OAU CBE Practice');
-    
-    window.scrollTo(0, 0);
-    
-  } catch (e) {
-    alert('Failed to submit. Please try again.');
-    examState.isSubmitting = false;
-    if (submitBtn) {
-      submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Submit';
-      submitBtn.disabled = false;
-    }
-  }
-}
-
-// ==================== EXAM QUIT - FIXED ====================
-export function examQuit() {
-  if (!examState.session) return;
-  if (confirm('Quit exam? Your progress will be lost.')) {
-    // Clear timer
-    if (examState.session.timer) clearInterval(examState.session.timer);
-    if (examState.autoSaveInterval) clearInterval(examState.autoSaveInterval);
-    
-    // Remove saved session
-    sessionStorage.removeItem('activeExam');
-    
-    // Reset state
-    examState.session = null;
-    examState.faculty = null;
-    examState.level = null;
-    examState.course = null;
-    
-    // Exit fullscreen
-    exitFullscreenMode();
-    
-    // Reset UI - show faculty selection
+    // Reset exam screens to faculty selection
     const facultyScreen = $id('examFacultyScreen');
     const levelScreen = $id('examLevelScreen');
     const courseScreen = $id('examCourseScreen');
@@ -507,7 +453,63 @@ export function examQuit() {
     if (entryScreen) entryScreen.style.display = 'none';
     if (runningScreen) runningScreen.style.display = 'none';
     
-    // Go back to exam screen
+    // Force refresh faculties
+    await loadExamFaculties();
+    
+    // Navigate to submit page to show results
+    window.showPage('submit');
+    
+  } catch (e) {
+    alert('Failed to submit. Please try again.');
+    examState.isSubmitting = false;
+    if (submitBtn) {
+      submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Submit';
+      submitBtn.disabled = false;
+    }
+  }
+}
+
+// ============================================
+// EXAM QUIT - FIXED to return to faculty selection
+// ============================================
+export function examQuit() {
+  if (!examState.session) return;
+  if (confirm('Quit exam? Your progress will be lost.')) {
+    // Clear timer
+    if (examState.session.timer) clearInterval(examState.session.timer);
+    if (examState.autoSaveInterval) clearInterval(examState.autoSaveInterval);
+    
+    // Remove saved session
+    sessionStorage.removeItem('activeExam');
+    
+    // Reset ALL state
+    examState.session = null;
+    examState.faculty = null;
+    examState.level = null;
+    examState.course = null;
+    examState.isSubmitting = false;
+    examState.showAll = false;
+    
+    // Exit fullscreen
+    exitFullscreenMode();
+    
+    // Reset exam screens to faculty selection
+    const facultyScreen = $id('examFacultyScreen');
+    const levelScreen = $id('examLevelScreen');
+    const courseScreen = $id('examCourseScreen');
+    const entryScreen = $id('examEntryScreen');
+    const runningScreen = $id('examRunningScreen');
+    
+    if (facultyScreen) facultyScreen.style.display = 'block';
+    if (levelScreen) levelScreen.style.display = 'none';
+    if (courseScreen) courseScreen.style.display = 'none';
+    if (entryScreen) entryScreen.style.display = 'none';
+    if (runningScreen) runningScreen.style.display = 'none';
+    
+    // Force refresh faculties
+    loadExamFaculties();
+    
+    // Go to exam page
     window.showPage('exam');
   }
 }
