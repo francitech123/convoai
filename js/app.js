@@ -1,15 +1,11 @@
-// ============================================
-// MAIN APP CONTROLLER - COMPLETE
-// ============================================
-
 import { 
   initTheme, toggleThemeMode, showToast, showLoading, hideLoading,
   getToken, getUser, showPage, $id, setText, API_BASE
 } from './utils.js';
 import { loadNotifications } from './notifications.js';
 import { loadDashboard } from './dashboard.js';
-import { loadExamData } from './exam.js';
-import { loadTestData } from './test.js';
+import { loadExamData, examState, loadExamFaculties } from './exam.js';
+import { loadTestData, testState, loadTestFaculties } from './test.js';
 import { loadStudyData } from './study.js';
 import { loadProfile } from './profile.js';
 import { loadLeaderboard } from './leaderboard.js';
@@ -34,7 +30,6 @@ export async function initApp() {
   if (isInitialized) return;
   isInitialized = true;
   
-  // Check if user is logged in
   const token = getToken();
   if (!token) {
     window.location.href = '/login';
@@ -43,7 +38,6 @@ export async function initApp() {
   
   showLoading('Loading your dashboard...');
   
-  // Initialize theme
   initTheme();
   
   // Preload data
@@ -83,7 +77,6 @@ export async function initApp() {
     loadAIConversations()
   ]);
   
-  // Initialize chat
   initChat();
   
   // Check for saved sessions
@@ -107,7 +100,6 @@ export async function initApp() {
     }
   } catch (e) {}
   
-  // Handle page load parameters
   const urlParams = new URLSearchParams(window.location.search);
   const pageParam = urlParams.get('page');
   const validPages = ['dashboard', 'exam', 'test', 'study', 'profile', 'ai', 'faq', 'leaderboard', 'chat', 'submit', 'results'];
@@ -117,14 +109,12 @@ export async function initApp() {
   
   hideLoading();
   
-  // Setup inactivity timer (30 minutes)
   resetInactivityTimer();
   document.addEventListener('click', resetInactivityTimer);
   document.addEventListener('touchstart', resetInactivityTimer);
   document.addEventListener('scroll', resetInactivityTimer);
   document.addEventListener('keydown', resetInactivityTimer);
   
-  // Handle back/forward navigation
   window.addEventListener('popstate', () => {
     document.querySelectorAll('.loading').forEach(el => {
       el.classList.remove('loading');
@@ -138,7 +128,6 @@ export async function initApp() {
 function resetInactivityTimer() {
   clearTimeout(inactivityTimer);
   inactivityTimer = setTimeout(() => {
-    // Check if any exam or test is active
     const hasActiveSession = window.examState?.session || window.testState?.session;
     if (!hasActiveSession) {
       showLoading('Session timeout. Reloading...');
@@ -146,11 +135,11 @@ function resetInactivityTimer() {
         window.location.reload();
       }, 1500);
     }
-  }, 30 * 60 * 1000); // 30 minutes
+  }, 30 * 60 * 1000);
 }
 
 // ============================================
-// PAGE NAVIGATION
+// PAGE NAVIGATION - With proper reset handling
 // ============================================
 
 let currentPage = 'dashboard';
@@ -172,10 +161,7 @@ export function showPageWithLoading(page) {
   
   const target = $id(page + 'Screen');
   if (target) {
-    // Hide all screens
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    
-    // Show target screen
     target.classList.add('active');
     currentPage = page;
     
@@ -195,12 +181,11 @@ export function showPageWithLoading(page) {
     setText('pageLabel', labels[page] || page);
     setText('pageTitle', 'OAU CBE Practice');
     
-    // Update bottom nav
     document.querySelectorAll('.nav-item').forEach(item => {
       item.classList.toggle('active', item.dataset.page === page);
     });
     
-    // Load page data if needed
+    // ============ PAGE SPECIFIC LOADING ============
     if (page === 'dashboard' && window.loadDashboard) {
       setTimeout(() => window.loadDashboard(), 50);
     } else if (page === 'profile' && window.loadProfile) {
@@ -213,6 +198,40 @@ export function showPageWithLoading(page) {
       setTimeout(() => window.loadResultsPage(), 50);
     } else if (page === 'ai' && window.loadAIConversations) {
       setTimeout(() => window.loadAIConversations(), 50);
+    } else if (page === 'exam') {
+      // Reset exam if no active session
+      if (!examState.session) {
+        const facultyScreen = $id('examFacultyScreen');
+        const levelScreen = $id('examLevelScreen');
+        const courseScreen = $id('examCourseScreen');
+        const entryScreen = $id('examEntryScreen');
+        const runningScreen = $id('examRunningScreen');
+        
+        if (facultyScreen) facultyScreen.style.display = 'block';
+        if (levelScreen) levelScreen.style.display = 'none';
+        if (courseScreen) courseScreen.style.display = 'none';
+        if (entryScreen) entryScreen.style.display = 'none';
+        if (runningScreen) runningScreen.style.display = 'none';
+        
+        setTimeout(() => loadExamFaculties(), 50);
+      }
+    } else if (page === 'test') {
+      // Reset test if no active session
+      if (!testState.session) {
+        const facultyScreen = $id('testFacultyScreen');
+        const levelScreen = $id('testLevelScreen');
+        const courseScreen = $id('testCourseScreen');
+        const entryScreen = $id('testEntryScreen');
+        const runningScreen = $id('testRunningScreen');
+        
+        if (facultyScreen) facultyScreen.style.display = 'block';
+        if (levelScreen) levelScreen.style.display = 'none';
+        if (courseScreen) courseScreen.style.display = 'none';
+        if (entryScreen) entryScreen.style.display = 'none';
+        if (runningScreen) runningScreen.style.display = 'none';
+        
+        setTimeout(() => loadTestFaculties(), 50);
+      }
     }
     
     window.scrollTo(0, 0);
@@ -222,20 +241,6 @@ export function showPageWithLoading(page) {
     isPageLoading = false;
   }, 300);
 }
-
-// ============================================
-// EXPOSE FUNCTIONS TO WINDOW
-// ============================================
-
-window.toggleThemeMode = toggleThemeMode;
-window.showToast = showToast;
-window.showLoading = showLoading;
-window.hideLoading = hideLoading;
-window.initApp = initApp;
-window.API_BASE = API_BASE;
-window.showPage = showPageWithLoading;
-window.preloadedData = preloadedData;
-window.currentPage = currentPage;
 
 // ============================================
 // SPEECH RECOGNITION FOR AI
@@ -329,6 +334,22 @@ export function stopSpeechRecognition() {
 }
 
 // ============================================
+// EXPOSE FUNCTIONS TO WINDOW
+// ============================================
+
+window.toggleThemeMode = toggleThemeMode;
+window.showToast = showToast;
+window.showLoading = showLoading;
+window.hideLoading = hideLoading;
+window.initApp = initApp;
+window.API_BASE = API_BASE;
+window.showPage = showPageWithLoading;
+window.preloadedData = preloadedData;
+window.currentPage = currentPage;
+window.aiStartSpeech = startSpeechRecognition;
+window.aiStopSpeech = stopSpeechRecognition;
+
+// ============================================
 // AUTO-INIT
 // ============================================
 if (document.readyState === 'loading') {
@@ -336,7 +357,3 @@ if (document.readyState === 'loading') {
 } else {
   initApp();
 }
-
-// Expose speech functions to window
-window.aiStartSpeech = startSpeechRecognition;
-window.aiStopSpeech = stopSpeechRecognition;
