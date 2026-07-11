@@ -1,8 +1,8 @@
 // ============================================
-// TEST MODULE - Complete with fixes
+// TEST MODULE - Complete with proper reset
 // ============================================
 
-import { apiFetch, $id, setText, shuffleArray, showToast, enterFullscreenMode, exitFullscreenMode, showLoading, hideLoading } from './utils.js';
+import { apiFetch, $id, setText, shuffleArray, showToast, enterFullscreenMode, exitFullscreenMode } from './utils.js';
 
 export let testState = {
   faculty: null,
@@ -13,8 +13,7 @@ export let testState = {
   timer: null,
   autoSaveInterval: null,
   faculties: [],
-  showAll: false,
-  isComplete: false
+  showAll: false
 };
 
 export async function loadTestData() {
@@ -368,7 +367,9 @@ function testStartAutoSave() {
   }, 10000);
 }
 
-// ==================== TEST SUBMIT - FIXED ====================
+// ============================================
+// TEST SUBMIT - FIXED to reset after submission
+// ============================================
 export async function testSubmit() {
   if (testState.isSubmitting) return;
   if (!testState.session) return;
@@ -423,78 +424,25 @@ export async function testSubmit() {
       }))
     };
     
-    // Store the result in sessionStorage for immediate access
     sessionStorage.setItem('testResult', JSON.stringify(resultData));
-    
-    // Also store in localStorage for persistence
     localStorage.setItem('lastExamResult', JSON.stringify(resultData));
     localStorage.setItem('lastResultTimestamp', Date.now().toString());
-    
-    // Clear active session
     sessionStorage.removeItem('activeTest');
     
-    // Reset test state
+    // ============ RESET ALL TEST STATE ============
     testState.session = null;
     testState.isSubmitting = false;
-    testState.isComplete = true;
+    
+    // Reset faculty, level, course selections
     testState.faculty = null;
     testState.level = null;
     testState.course = null;
+    testState.showAll = false;
     
-    // Exit fullscreen
+    // Exit fullscreen mode
     exitFullscreenMode();
     
-    // Force reload of submit page by navigating to it
-    const submitScreen = $id('submitScreen');
-    if (submitScreen) {
-      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-      submitScreen.classList.add('active');
-      
-      if (window.loadSubmitPage) {
-        setTimeout(() => window.loadSubmitPage(), 100);
-      }
-    }
-    
-    window.currentPage = 'submit';
-    document.querySelectorAll('.nav-item').forEach(item => {
-      item.classList.toggle('active', item.dataset.page === 'submit');
-    });
-    setText('pageLabel', 'Submit Results');
-    setText('pageTitle', 'OAU CBE Practice');
-    
-    window.scrollTo(0, 0);
-    
-  } catch (e) {
-    alert('Failed to submit. Please try again.');
-    testState.isSubmitting = false;
-    if (submitBtn) {
-      submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Submit';
-      submitBtn.disabled = false;
-    }
-  }
-}
-
-// ==================== TEST QUIT - FIXED ====================
-export function testQuit() {
-  if (!testState.session) return;
-  if (confirm('Quit test? Your progress will be lost.')) {
-    // Clear timer
-    if (testState.session.timer) clearInterval(testState.session.timer);
-    if (testState.autoSaveInterval) clearInterval(testState.autoSaveInterval);
-    
-    // Remove saved session
-    sessionStorage.removeItem('activeTest');
-    
-    // Reset state
-    testState.session = null;
-    testState.faculty = null;
-    testState.level = null;
-    testState.course = null;
-    
-    // Exit fullscreen
-    exitFullscreenMode();
-    
-    // Reset UI - show faculty selection
+    // Reset test screens to faculty selection
     const facultyScreen = $id('testFacultyScreen');
     const levelScreen = $id('testLevelScreen');
     const courseScreen = $id('testCourseScreen');
@@ -507,7 +455,63 @@ export function testQuit() {
     if (entryScreen) entryScreen.style.display = 'none';
     if (runningScreen) runningScreen.style.display = 'none';
     
-    // Go back to test screen
+    // Force refresh faculties
+    await loadTestFaculties();
+    
+    // Navigate to submit page to show results
+    window.showPage('submit');
+    
+  } catch (e) {
+    alert('Failed to submit. Please try again.');
+    testState.isSubmitting = false;
+    if (submitBtn) {
+      submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Submit';
+      submitBtn.disabled = false;
+    }
+  }
+}
+
+// ============================================
+// TEST QUIT - FIXED to return to faculty selection
+// ============================================
+export function testQuit() {
+  if (!testState.session) return;
+  if (confirm('Quit test? Your progress will be lost.')) {
+    // Clear timer
+    if (testState.session.timer) clearInterval(testState.session.timer);
+    if (testState.autoSaveInterval) clearInterval(testState.autoSaveInterval);
+    
+    // Remove saved session
+    sessionStorage.removeItem('activeTest');
+    
+    // Reset ALL state
+    testState.session = null;
+    testState.faculty = null;
+    testState.level = null;
+    testState.course = null;
+    testState.isSubmitting = false;
+    testState.showAll = false;
+    
+    // Exit fullscreen
+    exitFullscreenMode();
+    
+    // Reset test screens to faculty selection
+    const facultyScreen = $id('testFacultyScreen');
+    const levelScreen = $id('testLevelScreen');
+    const courseScreen = $id('testCourseScreen');
+    const entryScreen = $id('testEntryScreen');
+    const runningScreen = $id('testRunningScreen');
+    
+    if (facultyScreen) facultyScreen.style.display = 'block';
+    if (levelScreen) levelScreen.style.display = 'none';
+    if (courseScreen) courseScreen.style.display = 'none';
+    if (entryScreen) entryScreen.style.display = 'none';
+    if (runningScreen) runningScreen.style.display = 'none';
+    
+    // Force refresh faculties
+    loadTestFaculties();
+    
+    // Go to test page
     window.showPage('test');
   }
 }
