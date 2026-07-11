@@ -1,8 +1,4 @@
-// ============================================
-// TEST MODULE - Complete with proper reset
-// ============================================
-
-import { apiFetch, $id, setText, shuffleArray, showToast, enterFullscreenMode, exitFullscreenMode } from './utils.js';
+import { apiFetch, $id, setText, shuffleArray, showToast, enterFullscreenMode, exitFullscreenMode, showLoading, hideLoading } from './utils.js';
 
 export let testState = {
   faculty: null,
@@ -12,10 +8,92 @@ export let testState = {
   isSubmitting: false,
   timer: null,
   autoSaveInterval: null,
+  inactivityTimer: null,
   faculties: [],
-  showAll: false
+  showAll: false,
+  lastActivity: Date.now()
 };
 
+// ==================== INACTIVITY CHECK ====================
+function resetInactivityTimer() {
+  testState.lastActivity = Date.now();
+  
+  if (testState.inactivityTimer) {
+    clearInterval(testState.inactivityTimer);
+  }
+  
+  // Check every 30 seconds for inactivity
+  testState.inactivityTimer = setInterval(() => {
+    if (!testState.session) return;
+    
+    const inactiveTime = Date.now() - testState.lastActivity;
+    const inactiveMinutes = inactiveTime / (1000 * 60);
+    
+    if (inactiveMinutes >= 5) {
+      showToast('⏰ Inactivity detected for 5 minutes. Auto-submitting test...', 'warning');
+      testState.lastActivity = Date.now();
+      testSubmit(true);
+    }
+  }, 30000);
+}
+
+function trackActivity() {
+  testState.lastActivity = Date.now();
+}
+
+// ==================== DISABLE ALL BUTTONS ====================
+function disableAllButtons() {
+  document.querySelectorAll('#testOptionsArea .opt').forEach(el => {
+    el.classList.add('disabled');
+    el.style.cursor = 'not-allowed';
+    el.onclick = null;
+  });
+  
+  const prevBtn = $id('testPrevBtn');
+  const nextBtn = $id('testNextBtn');
+  const submitBtn = $id('testSubmitBtn');
+  const quitBtn = document.querySelector('#testRunningScreen .btn-danger');
+  const calcBtn = document.querySelector('#testRunningScreen .calc-btn-sm');
+  
+  if (prevBtn) { prevBtn.disabled = true; prevBtn.style.opacity = '0.5'; }
+  if (nextBtn) { nextBtn.disabled = true; nextBtn.style.opacity = '0.5'; }
+  if (submitBtn) { submitBtn.disabled = true; submitBtn.style.opacity = '0.5'; }
+  if (quitBtn) { quitBtn.disabled = true; quitBtn.style.opacity = '0.5'; }
+  if (calcBtn) { calcBtn.disabled = true; calcBtn.style.opacity = '0.5'; }
+  
+  document.querySelectorAll('#testQuestionGrid .grid-btn').forEach(el => {
+    el.style.pointerEvents = 'none';
+    el.style.opacity = '0.5';
+  });
+}
+
+function enableAllButtons() {
+  document.querySelectorAll('#testOptionsArea .opt').forEach(el => {
+    el.classList.remove('disabled');
+    el.style.cursor = 'pointer';
+  });
+  
+  const prevBtn = $id('testPrevBtn');
+  const nextBtn = $id('testNextBtn');
+  const submitBtn = $id('testSubmitBtn');
+  const quitBtn = document.querySelector('#testRunningScreen .btn-danger');
+  const calcBtn = document.querySelector('#testRunningScreen .calc-btn-sm');
+  
+  if (prevBtn) { prevBtn.disabled = false; prevBtn.style.opacity = '1'; }
+  if (nextBtn) { nextBtn.disabled = false; nextBtn.style.opacity = '1'; }
+  if (submitBtn) { submitBtn.disabled = false; submitBtn.style.opacity = '1'; }
+  if (quitBtn) { quitBtn.disabled = false; quitBtn.style.opacity = '1'; }
+  if (calcBtn) { calcBtn.disabled = false; calcBtn.style.opacity = '1'; }
+  
+  document.querySelectorAll('#testQuestionGrid .grid-btn').forEach(el => {
+    el.style.pointerEvents = 'auto';
+    el.style.opacity = '1';
+  });
+}
+
+// ============================================
+// LOAD TEST DATA
+// ============================================
 export async function loadTestData() {
   if (document.querySelector('#testFacultyGrid .faculty-tag-simple')) return;
   await loadTestFaculties();
@@ -196,6 +274,9 @@ export async function testOpenEntry(code) {
   }
 }
 
+// ============================================
+// START TEST
+// ============================================
 export async function testStart() {
   const btn = document.querySelector('#testEntryContent .btn');
   if (!btn) return;
@@ -236,6 +317,9 @@ export async function testStart() {
       sessionId: sessionId,
       mode: 'test'
     };
+    
+    testState.lastActivity = Date.now();
+    
     const title = $id('testCourseTitle');
     const meta = $id('testMeta');
     const timer = $id('testTimerDisplay');
@@ -254,6 +338,12 @@ export async function testStart() {
     testStartTimer();
     testRenderGrid();
     testStartAutoSave();
+    resetInactivityTimer();
+    
+    document.addEventListener('click', trackActivity);
+    document.addEventListener('touchstart', trackActivity);
+    document.addEventListener('keydown', trackActivity);
+    
   } catch (e) {
     alert('Failed to load test: ' + e.message);
     btn.innerHTML = '<i class="fas fa-play-circle"></i> START TEST';
@@ -261,6 +351,9 @@ export async function testStart() {
   }
 }
 
+// ============================================
+// RENDER FUNCTIONS
+// ============================================
 function testRenderQuestion() {
   if (!testState.session) return;
   const q = testState.session.questions[testState.session.currentIndex];
@@ -292,26 +385,33 @@ function testRenderQuestion() {
 }
 
 export function testSelectAnswer(index) {
-  if (!testState.session) return;
+  if (!testState.session || testState.isSubmitting) return;
+  trackActivity();
   testState.session.answers[testState.session.currentIndex] = index;
   testRenderQuestion();
 }
 
 export function testPrevQuestion() {
+  if (testState.isSubmitting || !testState.session) return;
   if (testState.session.currentIndex > 0) {
+    trackActivity();
     testState.session.currentIndex--;
     testRenderQuestion();
   }
 }
 
 export function testNextQuestion() {
+  if (testState.isSubmitting || !testState.session) return;
   if (testState.session.currentIndex < testState.session.questions.length - 1) {
+    trackActivity();
     testState.session.currentIndex++;
     testRenderQuestion();
   }
 }
 
 function testJumpTo(index) {
+  if (testState.isSubmitting || !testState.session) return;
+  trackActivity();
   testState.session.currentIndex = index;
   testRenderQuestion();
 }
@@ -321,10 +421,13 @@ function testRenderGrid() {
   if (!grid) return;
   grid.innerHTML = testState.session.questions.map((_, i) => `
     <div class="grid-btn ${testState.session.answers[i] !== null ? 'answered' : ''} ${i === testState.session.currentIndex ? 'current' : ''}" 
-         onclick="window.testJumpTo(${i})">${i + 1}</div>
+         onclick="${testState.isSubmitting ? '' : `window.testJumpTo(${i})`}">${i + 1}</div>
   `).join('');
 }
 
+// ============================================
+// TIMER
+// ============================================
 function testStartTimer() {
   if (testState.session.timer) clearInterval(testState.session.timer);
   const d = $id('testTimerDisplay');
@@ -332,7 +435,7 @@ function testStartTimer() {
     testState.session.timeLeft--;
     if (testState.session.timeLeft <= 0) {
       clearInterval(testState.session.timer);
-      testSubmit();
+      testSubmit(true);
       return;
     }
     const m = Math.floor(testState.session.timeLeft / 60);
@@ -368,14 +471,18 @@ function testStartAutoSave() {
 }
 
 // ============================================
-// TEST SUBMIT - FIXED to reset after submission
+// SUBMIT TEST
 // ============================================
-export async function testSubmit() {
+export async function testSubmit(autoSubmit = false) {
   if (testState.isSubmitting) return;
   if (!testState.session) return;
-  if (!confirm('Submit your test? You cannot change answers after submission.')) return;
+  
+  if (!autoSubmit) {
+    if (!confirm('Submit your test? You cannot change answers after submission.')) return;
+  }
   
   testState.isSubmitting = true;
+  disableAllButtons();
   
   const submitBtn = $id('testSubmitBtn');
   if (submitBtn) {
@@ -385,6 +492,11 @@ export async function testSubmit() {
   
   if (testState.session.timer) clearInterval(testState.session.timer);
   if (testState.autoSaveInterval) clearInterval(testState.autoSaveInterval);
+  if (testState.inactivityTimer) clearInterval(testState.inactivityTimer);
+  
+  document.removeEventListener('click', trackActivity);
+  document.removeEventListener('touchstart', trackActivity);
+  document.removeEventListener('keydown', trackActivity);
   
   const timeSpent = Date.now() - testState.session.startTime;
   let correct = 0;
@@ -429,41 +541,15 @@ export async function testSubmit() {
     localStorage.setItem('lastResultTimestamp', Date.now().toString());
     sessionStorage.removeItem('activeTest');
     
-    // ============ RESET ALL TEST STATE ============
     testState.session = null;
     testState.isSubmitting = false;
-    
-    // Reset faculty, level, course selections
-    testState.faculty = null;
-    testState.level = null;
-    testState.course = null;
-    testState.showAll = false;
-    
-    // Exit fullscreen mode
     exitFullscreenMode();
-    
-    // Reset test screens to faculty selection
-    const facultyScreen = $id('testFacultyScreen');
-    const levelScreen = $id('testLevelScreen');
-    const courseScreen = $id('testCourseScreen');
-    const entryScreen = $id('testEntryScreen');
-    const runningScreen = $id('testRunningScreen');
-    
-    if (facultyScreen) facultyScreen.style.display = 'block';
-    if (levelScreen) levelScreen.style.display = 'none';
-    if (courseScreen) courseScreen.style.display = 'none';
-    if (entryScreen) entryScreen.style.display = 'none';
-    if (runningScreen) runningScreen.style.display = 'none';
-    
-    // Force refresh faculties
-    await loadTestFaculties();
-    
-    // Navigate to submit page to show results
     window.showPage('submit');
     
   } catch (e) {
     alert('Failed to submit. Please try again.');
     testState.isSubmitting = false;
+    enableAllButtons();
     if (submitBtn) {
       submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Submit';
       submitBtn.disabled = false;
@@ -472,48 +558,50 @@ export async function testSubmit() {
 }
 
 // ============================================
-// TEST QUIT - FIXED to return to faculty selection
+// TEST QUIT
 // ============================================
 export function testQuit() {
-  if (!testState.session) return;
-  if (confirm('Quit test? Your progress will be lost.')) {
-    // Clear timer
-    if (testState.session.timer) clearInterval(testState.session.timer);
-    if (testState.autoSaveInterval) clearInterval(testState.autoSaveInterval);
-    
-    // Remove saved session
-    sessionStorage.removeItem('activeTest');
-    
-    // Reset ALL state
-    testState.session = null;
-    testState.faculty = null;
-    testState.level = null;
-    testState.course = null;
-    testState.isSubmitting = false;
-    testState.showAll = false;
-    
-    // Exit fullscreen
-    exitFullscreenMode();
-    
-    // Reset test screens to faculty selection
-    const facultyScreen = $id('testFacultyScreen');
-    const levelScreen = $id('testLevelScreen');
-    const courseScreen = $id('testCourseScreen');
-    const entryScreen = $id('testEntryScreen');
-    const runningScreen = $id('testRunningScreen');
-    
-    if (facultyScreen) facultyScreen.style.display = 'block';
-    if (levelScreen) levelScreen.style.display = 'none';
-    if (courseScreen) courseScreen.style.display = 'none';
-    if (entryScreen) entryScreen.style.display = 'none';
-    if (runningScreen) runningScreen.style.display = 'none';
-    
-    // Force refresh faculties
-    loadTestFaculties();
-    
-    // Go to test page
-    window.showPage('test');
+  if (testState.isSubmitting) {
+    showToast('⏳ Please wait, test is being submitted...', 'warning');
+    return;
   }
+  
+  if (!testState.session) return;
+  if (!confirm('Quit test? Your progress will be lost.')) return;
+  
+  if (testState.session.timer) clearInterval(testState.session.timer);
+  if (testState.autoSaveInterval) clearInterval(testState.autoSaveInterval);
+  if (testState.inactivityTimer) clearInterval(testState.inactivityTimer);
+  
+  document.removeEventListener('click', trackActivity);
+  document.removeEventListener('touchstart', trackActivity);
+  document.removeEventListener('keydown', trackActivity);
+  
+  sessionStorage.removeItem('activeTest');
+  
+  testState.session = null;
+  testState.faculty = null;
+  testState.level = null;
+  testState.course = null;
+  testState.isSubmitting = false;
+  testState.showAll = false;
+  
+  exitFullscreenMode();
+  
+  const facultyScreen = $id('testFacultyScreen');
+  const levelScreen = $id('testLevelScreen');
+  const courseScreen = $id('testCourseScreen');
+  const entryScreen = $id('testEntryScreen');
+  const runningScreen = $id('testRunningScreen');
+  
+  if (facultyScreen) facultyScreen.style.display = 'block';
+  if (levelScreen) levelScreen.style.display = 'none';
+  if (courseScreen) courseScreen.style.display = 'none';
+  if (entryScreen) entryScreen.style.display = 'none';
+  if (runningScreen) runningScreen.style.display = 'none';
+  
+  loadTestFaculties();
+  window.showPage('test');
 }
 
 // Expose functions to window
