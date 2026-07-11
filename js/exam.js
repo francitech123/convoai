@@ -1,5 +1,3 @@
-
-
 import { apiFetch, $id, setText, shuffleArray, showToast, enterFullscreenMode, exitFullscreenMode, showLoading, hideLoading } from './utils.js';
 
 export let examState = {
@@ -14,8 +12,57 @@ export let examState = {
   faculties: [],
   showAll: false,
   isComplete: false,
-  lastActivity: Date.now()
+  lastActivity: Date.now(),
+  isReset: false
 };
+
+// ==================== RESET EXAM STATE ====================
+export function resetExamState() {
+  // Clear timers
+  if (examState.session?.timer) clearInterval(examState.session.timer);
+  if (examState.autoSaveInterval) clearInterval(examState.autoSaveInterval);
+  if (examState.inactivityTimer) clearInterval(examState.inactivityTimer);
+  
+  // Remove activity listeners
+  document.removeEventListener('click', trackActivity);
+  document.removeEventListener('touchstart', trackActivity);
+  document.removeEventListener('keydown', trackActivity);
+  
+  // Clear session storage
+  sessionStorage.removeItem('activeExam');
+  
+  // Reset ALL state
+  examState.session = null;
+  examState.faculty = null;
+  examState.level = null;
+  examState.course = null;
+  examState.isSubmitting = false;
+  examState.showAll = false;
+  examState.isComplete = false;
+  examState.isReset = true;
+  examState.lastActivity = Date.now();
+  
+  // Exit fullscreen
+  exitFullscreenMode();
+  
+  // Reset all exam screens to initial state
+  const facultyScreen = $id('examFacultyScreen');
+  const levelScreen = $id('examLevelScreen');
+  const courseScreen = $id('examCourseScreen');
+  const entryScreen = $id('examEntryScreen');
+  const runningScreen = $id('examRunningScreen');
+  
+  if (facultyScreen) facultyScreen.style.display = 'block';
+  if (levelScreen) levelScreen.style.display = 'none';
+  if (courseScreen) courseScreen.style.display = 'none';
+  if (entryScreen) entryScreen.style.display = 'none';
+  if (runningScreen) runningScreen.style.display = 'none';
+  
+  // Force refresh faculties
+  loadExamFaculties();
+  
+  console.log('✅ Exam state fully reset');
+}
 
 // ==================== INACTIVITY CHECK ====================
 function resetInactivityTimer() {
@@ -38,7 +85,7 @@ function resetInactivityTimer() {
       examState.lastActivity = Date.now();
       examSubmit(true); // Auto-submit
     }
-  }, 30000); // Check every 30 seconds
+  }, 30000);
 }
 
 // ==================== TRACK ACTIVITY ====================
@@ -75,7 +122,7 @@ function disableAllButtons() {
   });
 }
 
-// ==================== ENABLE ALL BUTTONS (for recovery) ====================
+// ==================== ENABLE ALL BUTTONS ====================
 function enableAllButtons() {
   document.querySelectorAll('#examOptionsArea .opt').forEach(el => {
     el.classList.remove('disabled');
@@ -104,6 +151,15 @@ function enableAllButtons() {
 // LOAD EXAM DATA
 // ============================================
 export async function loadExamData() {
+  // If exam was reset, make sure faculty grid is visible
+  if (examState.isReset) {
+    examState.isReset = false;
+    const facultyScreen = $id('examFacultyScreen');
+    const runningScreen = $id('examRunningScreen');
+    if (facultyScreen) facultyScreen.style.display = 'block';
+    if (runningScreen) runningScreen.style.display = 'none';
+  }
+  
   if (document.querySelector('#examFacultyGrid .faculty-tag-simple')) return;
   await loadExamFaculties();
 }
@@ -284,7 +340,7 @@ export async function examOpenEntry(code) {
 }
 
 // ============================================
-// START EXAM - WITH ACTIVITY TRACKING
+// START EXAM
 // ============================================
 export async function examStart() {
   const btn = document.querySelector('#examEntryContent .btn');
@@ -329,6 +385,7 @@ export async function examStart() {
     
     // Reset inactivity tracking
     examState.lastActivity = Date.now();
+    examState.isReset = false;
     
     const title = $id('examCourseTitle');
     const meta = $id('examMeta');
@@ -437,7 +494,7 @@ function examRenderGrid() {
 }
 
 // ============================================
-// TIMER - AUTO SUBMIT WHEN TIME RUNS OUT
+// TIMER
 // ============================================
 function examStartTimer() {
   if (examState.session.timer) clearInterval(examState.session.timer);
@@ -446,7 +503,6 @@ function examStartTimer() {
     examState.session.timeLeft--;
     if (examState.session.timeLeft <= 0) {
       clearInterval(examState.session.timer);
-      // Auto-submit without confirmation
       examSubmit(true);
       return;
     }
@@ -483,7 +539,7 @@ function examStartAutoSave() {
 }
 
 // ============================================
-// SUBMIT EXAM - WITH LOCKING
+// SUBMIT EXAM
 // ============================================
 export async function examSubmit(autoSubmit = false) {
   if (examState.isSubmitting) return;
@@ -567,6 +623,13 @@ export async function examSubmit(autoSubmit = false) {
     // Navigate to submit page
     window.showPage('submit');
     
+    // Force refresh submit page to show current result
+    setTimeout(() => {
+      if (window.refreshSubmitPage) {
+        window.refreshSubmitPage();
+      }
+    }, 100);
+    
   } catch (e) {
     alert('Failed to submit. Please try again.');
     examState.isSubmitting = false;
@@ -579,7 +642,7 @@ export async function examSubmit(autoSubmit = false) {
 }
 
 // ============================================
-// EXAM QUIT - FIXED
+// EXAM QUIT - Reset everything
 // ============================================
 export function examQuit() {
   if (examState.isSubmitting) {
@@ -589,55 +652,18 @@ export function examQuit() {
   
   if (!examState.session) return;
   
-  // Only ask confirmation if not auto-submit is in progress
   if (!confirm('Quit exam? Your progress will be lost.')) return;
   
-  // Clear timers
-  if (examState.session.timer) clearInterval(examState.session.timer);
-  if (examState.autoSaveInterval) clearInterval(examState.autoSaveInterval);
-  if (examState.inactivityTimer) clearInterval(examState.inactivityTimer);
+  // Reset everything
+  resetExamState();
   
-  // Remove activity listeners
-  document.removeEventListener('click', trackActivity);
-  document.removeEventListener('touchstart', trackActivity);
-  document.removeEventListener('keydown', trackActivity);
-  
-  // Remove saved session
-  sessionStorage.removeItem('activeExam');
-  
-  // Reset ALL state
-  examState.session = null;
-  examState.faculty = null;
-  examState.level = null;
-  examState.course = null;
-  examState.isSubmitting = false;
-  examState.showAll = false;
-  examState.isComplete = false;
-  
-  // Exit fullscreen
-  exitFullscreenMode();
-  
-  // Reset exam screens to faculty selection
-  const facultyScreen = $id('examFacultyScreen');
-  const levelScreen = $id('examLevelScreen');
-  const courseScreen = $id('examCourseScreen');
-  const entryScreen = $id('examEntryScreen');
-  const runningScreen = $id('examRunningScreen');
-  
-  if (facultyScreen) facultyScreen.style.display = 'block';
-  if (levelScreen) levelScreen.style.display = 'none';
-  if (courseScreen) courseScreen.style.display = 'none';
-  if (entryScreen) entryScreen.style.display = 'none';
-  if (runningScreen) runningScreen.style.display = 'none';
-  
-  // Force refresh faculties
-  loadExamFaculties();
-  
-  // Go to exam page
+  // Go to exam page (which now shows faculty selection)
   window.showPage('exam');
 }
 
-// Expose functions to window
+// ============================================
+// EXPOSE FUNCTIONS TO WINDOW
+// ============================================
 window.examSelectFaculty = examSelectFaculty;
 window.examGoToFaculty = examGoToFaculty;
 window.examSelectLevel = examSelectLevel;
@@ -652,3 +678,4 @@ window.examSubmit = examSubmit;
 window.examQuit = examQuit;
 window.examToggleFaculties = examToggleFaculties;
 window.examJumpTo = examJumpTo;
+window.resetExamState = resetExamState;
