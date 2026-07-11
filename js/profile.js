@@ -279,7 +279,7 @@ export async function deleteAccount() {
   try {
     await apiFetch('/auth/account', { method: 'DELETE' });
     localStorage.clear();
-    window.location.href = '/;
+    window.location.href = '/login;
   } catch (e) { profileAlert('error', 'Failed to delete account'); }
 }
 
@@ -288,7 +288,7 @@ export function logoutUser() {
     localStorage.removeItem('oau_token');
     localStorage.removeItem('oau_user');
     sessionStorage.clear();
-    window.location.href = '/;
+    window.location.href = '/login;
   }
 }
 
