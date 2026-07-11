@@ -16,12 +16,12 @@ export let testState = {
   faculties: [],
   showAll: false,
   lastActivity: Date.now(),
-  isReset: false
+  isReset: false,
+  pageLoaded: false
 };
 
 // ==================== COMPLETE RESET TEST STATE ====================
 export function resetTestState(clearSession = true) {
-  // Clear timers
   if (testState.session?.timer) {
     clearInterval(testState.session.timer);
     testState.session.timer = null;
@@ -35,7 +35,6 @@ export function resetTestState(clearSession = true) {
     testState.inactivityTimer = null;
   }
   
-  // Remove activity listeners
   document.removeEventListener('click', trackActivity);
   document.removeEventListener('touchstart', trackActivity);
   document.removeEventListener('keydown', trackActivity);
@@ -52,6 +51,7 @@ export function resetTestState(clearSession = true) {
   testState.showAll = false;
   testState.isReset = true;
   testState.lastActivity = Date.now();
+  testState.pageLoaded = false;
   
   exitFullscreenMode();
   
@@ -61,16 +61,66 @@ export function resetTestState(clearSession = true) {
   const entryScreen = $id('testEntryScreen');
   const runningScreen = $id('testRunningScreen');
   
-  if (facultyScreen) {
-    facultyScreen.style.display = 'block';
-    loadTestFaculties();
-  }
+  if (facultyScreen) facultyScreen.style.display = 'block';
   if (levelScreen) levelScreen.style.display = 'none';
   if (courseScreen) courseScreen.style.display = 'none';
   if (entryScreen) entryScreen.style.display = 'none';
   if (runningScreen) runningScreen.style.display = 'none';
   
+  const qText = $id('testQText');
+  const qOptions = $id('testOptionsArea');
+  const qCounter = $id('testQCounter');
+  const qGrid = $id('testQuestionGrid');
+  const timerDisplay = $id('testTimerDisplay');
+  const submitBtn = $id('testSubmitBtn');
+  const prevBtn = $id('testPrevBtn');
+  const nextBtn = $id('testNextBtn');
+  
+  if (qText) qText.textContent = '';
+  if (qOptions) qOptions.innerHTML = '';
+  if (qCounter) qCounter.textContent = '';
+  if (qGrid) qGrid.innerHTML = '';
+  if (timerDisplay) {
+    timerDisplay.textContent = '--:--';
+    timerDisplay.className = 'timer-box';
+  }
+  if (submitBtn) {
+    submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Submit';
+    submitBtn.disabled = false;
+    submitBtn.style.display = 'none';
+  }
+  if (prevBtn) {
+    prevBtn.disabled = true;
+    prevBtn.style.opacity = '1';
+  }
+  if (nextBtn) {
+    nextBtn.disabled = false;
+    nextBtn.style.opacity = '1';
+    nextBtn.style.display = 'inline-flex';
+  }
+  
+  loadTestFaculties();
   console.log('✅ Test state fully reset');
+}
+
+// ==================== CHECK AND RESET IF NEEDED ====================
+export function checkAndResetTest() {
+  if (!testState.session && testState.isReset === false) {
+    const runningScreen = $id('testRunningScreen');
+    if (runningScreen && runningScreen.style.display !== 'none') {
+      console.log('🔄 Detected stuck test state, resetting...');
+      resetTestState();
+      return true;
+    }
+  }
+  
+  if (!testState.session && document.querySelector('#testQuestionGrid .grid-btn')) {
+    console.log('🔄 Detected old questions without session, resetting...');
+    resetTestState();
+    return true;
+  }
+  
+  return false;
 }
 
 // ==================== INACTIVITY CHECK ====================
@@ -159,6 +209,8 @@ function enableAllButtons() {
 // LOAD TEST DATA
 // ============================================
 export async function loadTestData() {
+  checkAndResetTest();
+  
   if (testState.isReset) {
     testState.isReset = false;
     const facultyScreen = $id('testFacultyScreen');
@@ -173,35 +225,47 @@ export async function loadTestData() {
     if (courseScreen) courseScreen.style.display = 'none';
     if (entryScreen) entryScreen.style.display = 'none';
     
+    const qText = $id('testQText');
+    const qOptions = $id('testOptionsArea');
+    const qCounter = $id('testQCounter');
+    const qGrid = $id('testQuestionGrid');
+    const timerDisplay = $id('testTimerDisplay');
     const submitBtn = $id('testSubmitBtn');
+    
+    if (qText) qText.textContent = '';
+    if (qOptions) qOptions.innerHTML = '';
+    if (qCounter) qCounter.textContent = '';
+    if (qGrid) qGrid.innerHTML = '';
+    if (timerDisplay) {
+      timerDisplay.textContent = '--:--';
+      timerDisplay.className = 'timer-box';
+    }
     if (submitBtn) {
       submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Submit';
       submitBtn.disabled = false;
       submitBtn.style.display = 'none';
     }
     
-    const qText = $id('testQText');
-    const qOptions = $id('testOptionsArea');
-    const qCounter = $id('testQCounter');
-    if (qText) qText.textContent = '';
-    if (qOptions) qOptions.innerHTML = '';
-    if (qCounter) qCounter.textContent = '';
-    
-    const timerDisplay = $id('testTimerDisplay');
-    if (timerDisplay) {
-      timerDisplay.textContent = '--:--';
-      timerDisplay.className = 'timer-box';
-    }
-    
-    const qGrid = $id('testQuestionGrid');
-    if (qGrid) qGrid.innerHTML = '';
-    
     await loadTestFaculties();
+    testState.pageLoaded = true;
     return;
   }
   
-  if (document.querySelector('#testFacultyGrid .faculty-tag-simple')) return;
+  if (testState.session) {
+    const runningScreen = $id('testRunningScreen');
+    if (runningScreen) runningScreen.style.display = 'block';
+    testRenderQuestion();
+    testRenderGrid();
+    testState.pageLoaded = true;
+    return;
+  }
+  
+  if (document.querySelector('#testFacultyGrid .faculty-tag-simple')) {
+    testState.pageLoaded = true;
+    return;
+  }
   await loadTestFaculties();
+  testState.pageLoaded = true;
 }
 
 export async function loadTestFaculties() {
@@ -721,3 +785,5 @@ window.testQuit = testQuit;
 window.testToggleFaculties = testToggleFaculties;
 window.testJumpTo = testJumpTo;
 window.resetTestState = resetTestState;
+window.checkAndResetTest = checkAndResetTest;
+window.loadTestData = loadTestData;
