@@ -1,26 +1,20 @@
 // ============================================
-// SUBMIT MODULE - FIXED to show current result
+// SUBMIT MODULE - Shows current result immediately
 // ============================================
 
 import { apiFetch, $id, setText, escapeHtml, showToast, getToken, API_BASE, timeAgo } from './utils.js';
 
 let currentResult = null;
-let isSubmitting = false;
-let reloadAttempts = 0;
 
-// ==================== GET CURRENT RESULT DATA ====================
-function getCurrentResultData() {
-  // 1. FIRST check sessionStorage for new result (HIGHEST PRIORITY)
+// ==================== GET RESULT DATA ====================
+function getResultData() {
+  // 1. Check sessionStorage for new result (PRIORITY - this is the current submission)
   let result = sessionStorage.getItem('examResult') || sessionStorage.getItem('testResult');
   if (result) {
     try {
       const parsed = JSON.parse(result);
-      // Save to localStorage for persistence
-      localStorage.setItem('lastExamResult', JSON.stringify(parsed));
-      localStorage.setItem('lastResultTimestamp', Date.now().toString());
-      // Clear sessionStorage to avoid showing same result twice
-      sessionStorage.removeItem('examResult');
-      sessionStorage.removeItem('testResult');
+      console.log('📊 Loading current result from sessionStorage');
+      // Don't clear sessionStorage yet - keep it for this session
       return parsed;
     } catch(e) {}
   }
@@ -56,11 +50,13 @@ function getCurrentResultData() {
     } catch(e) {}
   }
   
-  // 3. Check localStorage for persistent result
+  // 3. Check persistent storage
   try {
     const persistent = localStorage.getItem('lastExamResult');
     if (persistent) {
-      return JSON.parse(persistent);
+      const parsed = JSON.parse(persistent);
+      console.log('📊 Loading result from localStorage');
+      return parsed;
     }
   } catch(e) {}
   
@@ -76,13 +72,10 @@ export async function loadSubmitPage() {
   // Show loading spinner
   if (loading) loading.style.display = 'block';
   
-  // Clear any previous result to force fresh load
-  let result = null;
+  // Get result from storage
+  let result = getResultData();
   
-  // Get current result from storage (highest priority first)
-  result = getCurrentResultData();
-  
-  // If no result in storage, try backend
+  // If still no result, try backend
   if (!result) {
     try {
       const token = getToken();
@@ -124,26 +117,22 @@ export async function loadSubmitPage() {
   displayResult(content, result);
 }
 
-// ==================== FORCE REFRESH SUBMIT PAGE ====================
-export function refreshSubmitPage() {
-  // Clear sessionStorage to force fresh load
-  sessionStorage.removeItem('examResult');
-  sessionStorage.removeItem('testResult');
-  
-  // Reload the submit page
-  const content = $id('submitContent');
-  if (content) {
-    content.innerHTML = `
-      <div class="loading-spin" id="submitLoading">
-        <i class="fas fa-spinner fa-spin"></i>
-        <p style="margin-top:12px">Loading your result...</p>
+function showEmptyState(container) {
+  if (!container) return;
+  container.innerHTML = `
+    <div class="empty-state" style="padding:60px 20px;text-align:center">
+      <i class="fas fa-file-alt" style="font-size:3rem;display:block;margin-bottom:16px;opacity:.5"></i>
+      <h3 style="font-size:1.2rem;margin-bottom:8px;color:var(--text)">No Results Found</h3>
+      <p style="color:var(--text-secondary);margin-bottom:16px">You haven't taken any exams or tests yet.</p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <button class="btn btn-primary" onclick="window.showPage('exam')"><i class="fas fa-pen"></i> Take Exam</button>
+        <button class="btn btn-test" onclick="window.showPage('test')"><i class="fas fa-flask"></i> Practice Test</button>
+        <button class="btn btn-soft" onclick="window.showPage('dashboard')"><i class="fas fa-home"></i> Dashboard</button>
       </div>
-    `;
-  }
-  loadSubmitPage();
+    </div>
+  `;
 }
 
-// ==================== DISPLAY RESULT ====================
 function displayResult(container, result) {
   const percentage = result.percentage || 0;
   let scoreClass = 'low', grade = 'F';
@@ -288,23 +277,5 @@ function displayResult(container, result) {
   `;
 }
 
-function showEmptyState(container) {
-  if (!container) return;
-  container.innerHTML = `
-    <div class="empty-state" style="padding:60px 20px;text-align:center">
-      <i class="fas fa-file-alt" style="font-size:3rem;display:block;margin-bottom:16px;opacity:.5"></i>
-      <h3 style="font-size:1.2rem;margin-bottom:8px;color:var(--text)">No Results Found</h3>
-      <p style="color:var(--text-secondary);margin-bottom:16px">You haven't taken any exams or tests yet.</p>
-      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-        <button class="btn btn-primary" onclick="window.showPage('exam')"><i class="fas fa-pen"></i> Take Exam</button>
-        <button class="btn btn-test" onclick="window.showPage('test')"><i class="fas fa-flask"></i> Practice Test</button>
-        <button class="btn btn-soft" onclick="window.showPage('dashboard')"><i class="fas fa-home"></i> Dashboard</button>
-      </div>
-    </div>
-  `;
-}
-
-// ============================================
-// EXPOSE ============================================
+// ==================== EXPOSE ====================
 window.loadSubmitPage = loadSubmitPage;
-window.refreshSubmitPage = refreshSubmitPage;
