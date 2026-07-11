@@ -205,7 +205,7 @@
 // ============================================
 // CONFIGURATION - CHANGE THIS TO YOUR APK FILENAME
 // ============================================
-const APK_URL = '/oau-cbe-practice.apk'; // ← Change this if your APK has a different name
+const APK_URL = '/app-file.apk';
 
 // ============================================
 // APK DOWNLOAD
@@ -224,7 +224,7 @@ function downloadApk() {
     setTimeout(() => {
         const a = document.createElement('a');
         a.href = APK_URL;
-        a.download = 'oau-cbe-practice.apk';
+        a.download = 'app-file.apk';
         a.style.display = 'none';
         document.body.appendChild(a);
         a.click();
