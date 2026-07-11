@@ -5,7 +5,12 @@
   "builds": [
     { "src": "**/*.html", "use": "@vercel/static" },
     { "src": "**/*.js", "use": "@vercel/static" },
-    { "src": "**/*.css", "use": "@vercel/static" }
+    { "src": "**/*.css", "use": "@vercel/static" },
+    { "src": "**/*.svg", "use": "@vercel/static" },
+    { "src": "**/*.json", "use": "@vercel/static" },
+    { "src": "**/*.png", "use": "@vercel/static" },
+    { "src": "**/*.jpg", "use": "@vercel/static" },
+    { "src": "**/*.webp", "use": "@vercel/static" }
   ],
   "routes": [
     { "src": "/js/(.*)", "dest": "/js/$1" },
@@ -14,6 +19,9 @@
     { "src": "/manifest.json", "dest": "/manifest.json" },
     { "src": "/sw.js", "dest": "/sw.js" },
     { "src": "/robots.txt", "dest": "/robots.txt" },
+    { "src": "/favicon.ico", "dest": "/favicon.ico" },
+    { "src": "/logo.svg", "dest": "/logo.svg" },
+    
     { "src": "/login", "dest": "/login.html" },
     { "src": "/register", "dest": "/register.html" },
     { "src": "/app", "dest": "/app.html" },
@@ -21,7 +29,8 @@
     { "src": "/test", "dest": "/app.html" },
     { "src": "/ai", "dest": "/app.html" },
     { "src": "/profile", "dest": "/app.html" },
-    { "src": "/submit", "dest": "/submit.html" },
+    { "src": "/submit", "dest": "/app.html" },
+    { "src": "/results", "dest": "/app.html" },
     { "src": "/leaderboard", "dest": "/app.html" },
     { "src": "/notifications", "dest": "/app.html" },
     { "src": "/about", "dest": "/about.html" },
@@ -35,7 +44,12 @@
     { "src": "/verify-device", "dest": "/verify-device.html" },
     { "src": "/forgot-password", "dest": "/forgot-password.html" },
     { "src": "/study", "dest": "/app.html" },
-    { "src": "/study-bulk", "dest": "/studybulk.html" },
+    { "src": "/study-manage", "dest": "/study-manage.html" },
+    { "src": "/studybulk", "dest": "/studybulk.html" },
+    { "src": "/developer", "dest": "/developer.html" },
+    { "src": "/admin-login", "dest": "/admin-login.html" },
+    { "src": "/admin-register", "dest": "/admin-register.html" },
+    
     { "src": "/", "dest": "/index.html" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
