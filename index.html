@@ -2,17 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewfit=cover">
     <title>OAU CBE Practice</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="/js/index.js" defer></script>
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
         :root{
             --primary:#1e3a8a;
             --primary-light:#3b82f6;
+            --primary-dark:#1a2a5a;
             --accent:#10b981;
+            --accent-2:#06b6d4;
             --bg:#0a0e1a;
             --bg-soft:#111827;
             --card:rgba(255,255,255,0.06);
@@ -23,6 +26,9 @@
             --shadow:0 25px 50px -12px rgba(0,0,0,0.5);
             --glass:rgba(255,255,255,0.05);
             --brand-gradient:linear-gradient(135deg,#1e3a8a,#3b82f6,#8b5cf6);
+            --danger:#ef4444;
+            --success:#10b981;
+            --warning:#f59e0b;
         }
         body.light-mode{
             --bg:#f0f4ff;
@@ -35,128 +41,121 @@
             --shadow:0 25px 50px -12px rgba(0,0,0,0.1);
             --glass:rgba(255,255,255,0.5);
         }
-        body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow:hidden;transition:background 0.4s cubic-bezier(0.4,0,0.2,1)}
+        body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow:hidden;transition:background 0.4s cubic-bezier(0.4,0,0.2,1);position:relative}
         
         .bg-animation{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;overflow:hidden;pointer-events:none}
         .bg-orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:0.12;animation:orbFloat 20s ease-in-out infinite alternate}
         .bg-orb:nth-child(1){width:500px;height:500px;top:-150px;right:-150px;background:#3b82f6;animation-delay:0s}
-        .bg-orb:nth-child(2){width:400px;height:400px;bottom:-100px;left:-100px;background:#8b5cf6;animation-delay:-7s}
-        .bg-orb:nth-child(3){width:300px;height:300px;top:50%;left:50%;transform:translate(-50%,-50%);background:#06b6d4;animation-delay:-14s;opacity:0.06}
-        @keyframes orbFloat{0%{transform:translate(0,0) scale(1)}100%{transform:translate(60px,-40px) scale(1.2)}}
+        .bg-orb:nth-child(2){width:350px;height:350px;bottom:-80px;left:-80px;background:#8b5cf6;animation-delay:-7s}
+        .bg-orb:nth-child(3){width:200px;height:200px;top:50%;left:50%;transform:translate(-50%,-50%);background:#06b6d4;animation-delay:-14s;opacity:0.06}
+        @keyframes orbFloat{0%{transform:translate(0,0) scale(1)}100%{transform:translate(50px,-40px) scale(1.2)}}
         
-        .theme-toggle{position:fixed;top:20px;right:20px;z-index:50;width:44px;height:44px;border-radius:50%;background:var(--glass);border:1px solid var(--card-border);color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1rem;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:all 0.3s ease;box-shadow:0 4px 20px rgba(0,0,0,0.1)}
+        .theme-toggle{position:fixed;top:20px;right:20px;z-index:50;width:44px;height:44px;border-radius:50%;background:var(--glass);border:1px solid var(--card-border);color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:all 0.3s ease;box-shadow:0 4px 20px rgba(0,0,0,0.1)}
         .theme-toggle:hover{background:var(--primary-light);color:#fff;transform:scale(1.05)}
-        body.light-mode .theme-toggle{background:rgba(255,255,255,0.8);border-color:rgba(0,0,0,0.08)}
+        body.light-mode .theme-toggle{background:rgba(255,255,255,0.8);border-color:rgba(0,0,0,0.08);box-shadow:0 4px 20px rgba(0,0,0,0.05)}
         
-        .app-container{display:flex;height:100vh;width:100%;position:relative;z-index:2;overflow:hidden}
+        .app-container{max-width:480px;margin:0 auto;padding:30px 20px 40px;position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;justify-content:center}
         
-        /* Left Panel - App Preview */
-        .preview-panel{flex:1.2;display:flex;align-items:center;justify-content:center;padding:40px;position:relative}
-        .preview-phone{width:100%;max-width:380px;background:var(--bg-soft);border-radius:40px;border:2px solid var(--card-border);padding:12px;box-shadow:0 40px 80px rgba(0,0,0,0.4);position:relative}
-        body.light-mode .preview-phone{background:var(--bg-soft);border-color:rgba(0,0,0,0.08)}
-        .preview-phone-screen{background:var(--bg);border-radius:32px;overflow:hidden;aspect-ratio:9/19;position:relative}
-        .preview-phone-screen .status-bar{display:flex;justify-content:space-between;padding:10px 16px 4px;font-size:0.55rem;color:var(--text-secondary)}
-        .preview-phone-screen .app-preview-content{padding:4px 12px 12px}
-        .preview-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}
-        .preview-header .avatar-small{width:28px;height:28px;border-radius:50%;background:var(--brand-gradient);display:flex;align-items:center;justify-content:center;font-size:0.7rem;color:#fff;font-weight:700}
-        .preview-header .name{font-size:0.7rem;font-weight:600;color:var(--text)}
-        .preview-header .badge{font-size:0.45rem;padding:2px 8px;border-radius:10px;background:var(--accent);color:#fff;font-weight:600}
-        .preview-welcome{font-size:0.65rem;color:var(--text-secondary);margin-bottom:6px}
-        .preview-welcome strong{color:var(--text)}
-        .preview-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:8px}
-        .preview-stat{background:var(--card);border-radius:8px;padding:6px 4px;text-align:center;border:1px solid var(--card-border)}
-        .preview-stat .num{font-size:0.8rem;font-weight:700;color:var(--primary-light)}
-        .preview-stat .lbl{font-size:0.4rem;color:var(--text-secondary)}
-        .preview-quick{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:8px}
-        .preview-quick-item{background:var(--card);border-radius:6px;padding:6px 2px;text-align:center;border:1px solid var(--card-border)}
-        .preview-quick-item i{font-size:0.6rem;color:var(--primary-light);display:block;margin-bottom:2px}
-        .preview-quick-item span{font-size:0.4rem;color:var(--text-secondary)}
-        .preview-faculties{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-bottom:6px}
-        .preview-faculty{background:var(--card);border-radius:4px;padding:4px;text-align:center;font-size:0.4rem;color:var(--text-secondary);border:1px solid var(--card-border)}
-        .preview-bottom-nav{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;padding:6px 0 4px;border-top:1px solid var(--card-border)}
-        .preview-nav-item{text-align:center;font-size:0.35rem;color:var(--text-muted)}
-        .preview-nav-item i{font-size:0.6rem;display:block;margin-bottom:2px}
-        .preview-nav-item.active{color:var(--primary-light)}
+        /* Avatar & App Preview */
+        .hero-section{text-align:center;margin-bottom:16px}
+        .app-preview{position:relative;width:100%;max-width:320px;margin:0 auto 16px;border-radius:28px;background:var(--card);border:1px solid var(--card-border);padding:20px 16px 16px;box-shadow:var(--shadow);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+        body.light-mode .app-preview{background:rgba(255,255,255,0.6)}
         
-        /* Right Panel - Content */
-        .content-panel{flex:1;display:flex;flex-direction:column;justify-content:center;padding:40px 60px 40px 20px;max-width:520px}
-        .logo-wrapper{display:flex;align-items:center;gap:12px;margin-bottom:8px}
-        .logo-small{width:48px;height:48px;border-radius:14px;background:var(--brand-gradient);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:6px}
-        .logo-small img{width:100%;height:100%;object-fit:contain}
-        .logo-text{font-size:1.4rem;font-weight:800;background:var(--brand-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-        .tagline{font-size:0.9rem;color:var(--text-secondary);margin-bottom:6px;font-weight:400}
-        .description{font-size:0.85rem;color:var(--text-secondary);line-height:1.6;margin-bottom:16px;max-width:400px}
+        .preview-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;padding:0 4px}
+        .preview-avatar{display:flex;align-items:center;gap:8px}
+        .preview-avatar .avatar{width:32px;height:32px;border-radius:50%;background:var(--brand-gradient);display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;color:#fff;overflow:hidden}
+        .preview-avatar .avatar img{width:100%;height:100%;object-fit:contain}
+        .preview-avatar .name{font-size:0.7rem;font-weight:600;color:var(--text)}
+        .preview-badge{font-size:0.5rem;font-weight:600;padding:2px 10px;border-radius:12px;background:rgba(16,185,129,0.15);color:var(--accent);border:1px solid rgba(16,185,129,0.2)}
         
-        .feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
-        .feature-item{background:var(--card);border-radius:12px;padding:12px;border:1px solid var(--card-border);display:flex;align-items:center;gap:10px}
-        .feature-item .icon{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.8rem;flex-shrink:0}
-        .feature-item .icon.purple{background:rgba(139,92,246,0.15);color:#a78bfa}
-        .feature-item .icon.green{background:rgba(16,185,129,0.15);color:#34d399}
-        .feature-item .icon.gold{background:rgba(251,191,36,0.15);color:#fbbf24}
-        .feature-item .icon.blue{background:rgba(59,130,246,0.15);color:#60a5fa}
-        .feature-item .info h4{font-size:0.75rem;font-weight:600;color:var(--text)}
-        .feature-item .info p{font-size:0.6rem;color:var(--text-secondary)}
+        .preview-body{display:flex;flex-direction:column;gap:10px;padding:4px 0}
+        .preview-row{display:flex;align-items:center;gap:10px;background:var(--glass);border-radius:12px;padding:8px 12px;border:1px solid var(--card-border)}
+        .preview-row .icon{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.7rem;flex-shrink:0}
+        .preview-row .icon.purple{background:rgba(139,92,246,0.15);color:#a78bfa}
+        .preview-row .icon.green{background:rgba(16,185,129,0.15);color:#34d399}
+        .preview-row .icon.gold{background:rgba(251,191,36,0.15);color:#fbbf24}
+        .preview-row .icon.blue{background:rgba(59,130,246,0.15);color:#60a5fa}
+        .preview-row .text{font-size:0.65rem;color:var(--text-secondary);flex:1;text-align:left}
+        .preview-row .arrow{color:var(--text-muted);font-size:0.6rem}
         
-        .btn-group{display:flex;gap:10px;margin-top:4px}
-        .btn{flex:1;padding:14px 20px;border:none;border-radius:14px;font-weight:700;font-size:0.9rem;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);font-family:'Inter',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
+        .preview-footer{display:flex;justify-content:center;gap:6px;margin-top:10px}
+        .preview-dot{width:6px;height:6px;border-radius:50%;background:var(--text-muted)}
+        .preview-dot.active{background:var(--primary-light);width:18px;border-radius:3px}
+        
+        .app-name{font-size:1.4rem;font-weight:900;background:var(--brand-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:center;line-height:1.2;letter-spacing:-0.5px}
+        .app-tagline{font-size:0.7rem;color:var(--text-secondary);text-align:center;margin-top:2px;font-weight:400}
+        
+        /* Section Toggle */
+        .section-toggle{display:flex;background:var(--glass);border-radius:14px;padding:4px;margin:14px 0;border:1px solid var(--card-border);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+        .section-toggle-btn{flex:1;padding:10px;border:none;border-radius:10px;background:transparent;color:var(--text-secondary);font-weight:600;font-size:0.75rem;cursor:pointer;transition:all 0.3s ease;font-family:'Inter',sans-serif}
+        .section-toggle-btn.active{background:var(--brand-gradient);color:#fff;box-shadow:0 4px 20px rgba(59,130,246,0.25)}
+        .section-toggle-btn:hover:not(.active){color:var(--text)}
+        
+        /* Sections */
+        .auth-section{display:none;animation:fadeIn 0.4s ease}
+        .auth-section.active{display:block}
+        .welcome-section{display:none;animation:fadeIn 0.4s ease}
+        .welcome-section.active{display:block}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+        
+        .welcome-actions{display:flex;gap:10px;margin:4px 0}
+        .welcome-actions .btn{flex:1;padding:14px;border:none;border-radius:14px;font-weight:700;font-size:0.85rem;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);text-align:center;display:flex;align-items:center;justify-content:center;gap:8px;font-family:'Inter',sans-serif}
         .btn-primary{background:var(--brand-gradient);color:#fff;box-shadow:0 4px 24px rgba(59,130,246,0.3)}
         .btn-primary:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 8px 32px rgba(59,130,246,0.4)}
         .btn-primary:active{transform:scale(0.97)}
-        .btn-outline{background:var(--glass);border:1.5px solid var(--card-border);color:var(--text);backdrop-filter:blur(8px)}
-        body.light-mode .btn-outline{background:rgba(255,255,255,0.5)}
+        .btn-outline{background:var(--glass);border:1.5px solid var(--card-border);color:var(--text);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+        body.light-mode .btn-outline{background:rgba(255,255,255,0.5);border-color:rgba(0,0,0,0.08)}
         .btn-outline:hover{background:var(--primary-light);color:#fff;border-color:var(--primary-light);transform:translateY(-2px)}
+        .btn-outline:active{transform:scale(0.97)}
         
-        .quick-links{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:12px}
-        .quick-links a{color:var(--text-muted);text-decoration:none;font-size:0.65rem;font-weight:500;transition:color 0.3s}
-        .quick-links a:hover{color:var(--primary-light)}
-        .quick-links .divider{color:var(--text-muted);font-size:0.45rem;opacity:0.3}
-        .version{text-align:center;color:var(--text-muted);font-size:0.55rem;margin-top:6px;font-weight:500;letter-spacing:0.5px}
+        /* Auth Forms */
+        .auth-header{text-align:center;margin-bottom:14px}
+        .auth-header h2{font-size:1.2rem;font-weight:700;color:var(--text)}
+        .auth-header p{color:var(--text-secondary);font-size:0.75rem;margin-top:3px}
         
-        /* Auth Modal */
-        .auth-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:100;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px;animation:fadeIn 0.3s ease}
-        .auth-overlay.show{display:flex}
-        .auth-modal{background:var(--bg-soft);border-radius:24px;max-width:420px;width:100%;padding:32px 28px;border:1px solid var(--card-border);box-shadow:0 40px 80px rgba(0,0,0,0.4);max-height:90vh;overflow-y:auto}
-        body.light-mode .auth-modal{background:#fff}
-        .auth-modal .close-btn{float:right;background:none;border:none;color:var(--text-muted);font-size:1.2rem;cursor:pointer;transition:color 0.2s}
-        .auth-modal .close-btn:hover{color:var(--text)}
-        .auth-modal .auth-header{text-align:center;margin-bottom:16px}
-        .auth-modal .auth-header h2{font-size:1.3rem;font-weight:700;color:var(--text)}
-        .auth-modal .auth-header p{color:var(--text-secondary);font-size:0.8rem;margin-top:4px}
-        .auth-modal .form-group{margin-bottom:12px}
-        .auth-modal .form-group label{display:block;margin-bottom:4px;font-weight:600;font-size:0.72rem;color:var(--text-secondary)}
-        .auth-modal .form-group input{width:100%;padding:12px 14px;background:var(--glass);border:1.5px solid var(--card-border);border-radius:12px;color:var(--text);font-size:0.85rem;font-family:'Inter',sans-serif;transition:all 0.3s}
-        body.light-mode .auth-modal .form-group input{background:rgba(0,0,0,0.04)}
-        .auth-modal .form-group input:focus{outline:none;border-color:var(--primary-light);box-shadow:0 0 0 4px rgba(59,130,246,0.1)}
-        .auth-modal .form-group .input-icon{position:relative}
-        .auth-modal .form-group .input-icon i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:0.9rem}
-        .auth-modal .form-group .input-icon input{padding-left:42px}
-        .auth-modal .form-group .toggle-password{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text-muted);cursor:pointer}
-        .auth-modal .form-group select{width:100%;padding:12px 14px;background:var(--glass);border:1.5px solid var(--card-border);border-radius:12px;color:var(--text);font-size:0.85rem;font-family:'Inter',sans-serif;appearance:none;-webkit-appearance:none}
-        body.light-mode .auth-modal .form-group select{background:rgba(0,0,0,0.04)}
-        .auth-modal .form-options{display:flex;justify-content:space-between;align-items:center;margin:10px 0 14px;flex-wrap:wrap;gap:6px}
-        .auth-modal .form-options label{display:flex;align-items:center;gap:6px;font-size:0.72rem;color:var(--text-secondary);cursor:pointer}
-        .auth-modal .form-options label input[type="checkbox"]{width:14px;height:14px;accent-color:var(--primary-light)}
-        .auth-modal .forgot-link{color:var(--primary-light);text-decoration:none;font-size:0.72rem;font-weight:600}
-        .auth-modal .forgot-link:hover{text-decoration:underline}
-        .auth-btn{width:100%;padding:14px;border:none;border-radius:12px;font-weight:700;font-size:0.9rem;cursor:pointer;transition:all 0.3s;font-family:'Inter',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px}
+        .form-group{margin-bottom:10px}
+        .form-group label{display:block;margin-bottom:4px;font-weight:600;font-size:0.68rem;color:var(--text-secondary)}
+        .form-group input,.form-group select{width:100%;padding:12px 14px;background:var(--glass);border:1.5px solid var(--card-border);border-radius:12px;color:var(--text);font-size:0.82rem;font-family:'Inter',sans-serif;transition:all 0.3s ease;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+        body.light-mode .form-group input,body.light-mode .form-group select{background:rgba(255,255,255,0.6)}
+        .form-group input:focus,.form-group select:focus{outline:none;border-color:var(--primary-light);box-shadow:0 0 0 4px rgba(59,130,246,0.1)}
+        .form-group input::placeholder{color:var(--text-muted)}
+        .form-group .input-icon{position:relative}
+        .form-group .input-icon i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:0.85rem}
+        .form-group .input-icon input,.form-group .input-icon select{padding-left:42px}
+        .form-group .toggle-password{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:0.85rem}
+        .form-group .toggle-password:hover{color:var(--text)}
+        
+        .form-options{display:flex;justify-content:space-between;align-items:center;margin:8px 0 12px;flex-wrap:wrap;gap:4px}
+        .form-options label{display:flex;align-items:center;gap:6px;font-size:0.68rem;color:var(--text-secondary);cursor:pointer}
+        .form-options label input[type="checkbox"]{width:14px;height:14px;accent-color:var(--primary-light)}
+        .forgot-link{color:var(--primary-light);text-decoration:none;font-size:0.68rem;font-weight:600;transition:color 0.2s}
+        .forgot-link:hover{text-decoration:underline}
+        
+        .auth-btn{width:100%;padding:14px;border:none;border-radius:12px;font-weight:700;font-size:0.85rem;cursor:pointer;transition:all 0.3s ease;font-family:'Inter',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px}
         .auth-btn-primary{background:var(--brand-gradient);color:#fff;box-shadow:0 4px 24px rgba(59,130,246,0.3)}
         .auth-btn-primary:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 32px rgba(59,130,246,0.4)}
-        .auth-btn-primary:disabled{opacity:0.6;cursor:not-allowed}
-        .auth-footer{text-align:center;margin-top:14px;font-size:0.78rem;color:var(--text-secondary)}
+        .auth-btn-primary:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+        
+        .auth-footer{text-align:center;margin-top:12px;font-size:0.72rem;color:var(--text-secondary)}
         .auth-footer a{color:var(--primary-light);text-decoration:none;font-weight:600;cursor:pointer}
         .auth-footer a:hover{text-decoration:underline}
-        .divider{display:flex;align-items:center;gap:14px;margin:14px 0;color:var(--text-muted);font-size:0.65rem}
+        
+        .divider{display:flex;align-items:center;gap:12px;margin:12px 0;color:var(--text-muted);font-size:0.6rem}
         .divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--card-border)}
-        .alert{padding:10px 14px;border-radius:10px;margin-bottom:12px;font-size:0.78rem;display:none}
-        .alert-error{background:rgba(239,68,68,0.12);color:#ef4444;border:1px solid rgba(239,68,68,0.2)}
-        .alert-success{background:rgba(16,185,129,0.12);color:#10b981;border:1px solid rgba(16,185,129,0.2)}
+        
+        .alert{padding:10px 14px;border-radius:10px;margin-bottom:10px;font-size:0.72rem;display:none}
+        .alert-error{background:rgba(239,68,68,0.12);color:var(--danger);border:1px solid rgba(239,68,68,0.2)}
+        .alert-success{background:rgba(16,185,129,0.12);color:var(--success);border:1px solid rgba(16,185,129,0.2)}
         .alert.show{display:block}
         
-        @keyframes fadeIn{from{opacity:0;transform:scale(0.95)}to{opacity:1;transform:scale(1)}}
+        .quick-links{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:10px 0 4px}
+        .quick-links a{color:var(--text-muted);text-decoration:none;font-size:0.6rem;font-weight:500;transition:color 0.3s ease;letter-spacing:0.3px}
+        .quick-links a:hover{color:var(--primary-light)}
+        .quick-links .divider{color:var(--text-muted);font-size:0.4rem;opacity:0.3}
+        .version{text-align:center;color:var(--text-muted);font-size:0.5rem;margin-top:4px;font-weight:500;letter-spacing:0.5px}
         
-        @media(max-width:1024px){.app-container{flex-direction:column;overflow-y:auto;height:auto;min-height:100vh;padding:20px 0}.preview-panel{padding:20px}.preview-phone{max-width:300px}.content-panel{padding:20px;max-width:100%;text-align:center;align-items:center}.feature-grid{grid-template-columns:1fr 1fr}.btn-group{flex-direction:column}}
-        @media(max-width:600px){.preview-phone{max-width:260px;border-radius:28px;padding:8px}.preview-phone-screen{border-radius:22px}.preview-stats{grid-template-columns:repeat(4,1fr)}.preview-quick{grid-template-columns:repeat(4,1fr)}.preview-faculties{grid-template-columns:repeat(3,1fr)}.feature-grid{grid-template-columns:1fr}.content-panel{padding:16px}.logo-text{font-size:1.2rem}.auth-modal{padding:24px 16px}}
-        @media(max-width:420px){.preview-phone{max-width:220px;border-radius:20px;padding:6px}.preview-phone-screen{border-radius:16px}.preview-stat .num{font-size:0.6rem}.preview-stat .lbl{font-size:0.3rem}.preview-quick-item i{font-size:0.5rem}}
+        @media(max-height:700px){.app-preview{padding:14px 12px 12px}.preview-body{gap:6px}.preview-row{padding:6px 10px}.app-name{font-size:1.2rem}.auth-header h2{font-size:1.1rem}}
+        @media(max-width:420px){.app-container{padding:20px 16px 30px}.app-preview{max-width:100%;border-radius:20px;padding:14px 12px 12px}.preview-avatar .avatar{width:28px;height:28px}.preview-avatar .name{font-size:0.6rem}.app-name{font-size:1.2rem}}
     </style>
 </head>
 <body>
@@ -173,282 +172,96 @@
     <i class="fas fa-moon"></i>
 </button>
 
-<!-- Main App Container -->
-<div class="app-container" id="appContainer">
+<!-- Main Container -->
+<div class="app-container" id="pageContent">
     
-    <!-- Left Panel - Phone Preview -->
-    <div class="preview-panel">
-        <div class="preview-phone">
-            <div class="preview-phone-screen">
-                <!-- Status Bar -->
-                <div class="status-bar">
-                    <span>9:41</span>
-                    <span><i class="fas fa-signal"></i> <i class="fas fa-wifi"></i> <i class="fas fa-battery-three-quarters"></i></span>
+    <!-- Hero Section with App Preview -->
+    <div class="hero-section">
+        <!-- App Preview Card - Like Spenda's card -->
+        <div class="app-preview">
+            <!-- Preview Header -->
+            <div class="preview-header">
+                <div class="preview-avatar">
+                    <div class="avatar">
+                        <img src="/logo.svg" alt="OAU" style="width:100%;height:100%;object-fit:contain;padding:4px">
+                    </div>
+                    <span class="name">OAU CBT</span>
                 </div>
-                
-                <!-- App Preview Content -->
-                <div class="app-preview-content">
-                    <!-- Header -->
-                    <div class="preview-header">
-                        <div class="avatar-small">🎓</div>
-                        <span class="name">OAU CBE</span>
-                        <span class="badge">Premium</span>
-                    </div>
-                    
-                    <!-- Welcome -->
-                    <div class="preview-welcome">
-                        Welcome back, <strong>Francis</strong> 👋
-                    </div>
-                    
-                    <!-- Stats -->
-                    <div class="preview-stats">
-                        <div class="preview-stat"><div class="num">72+</div><div class="lbl">Courses</div></div>
-                        <div class="preview-stat"><div class="num">45k+</div><div class="lbl">Questions</div></div>
-                        <div class="preview-stat"><div class="num">14</div><div class="lbl">Faculties</div></div>
-                        <div class="preview-stat"><div class="num">99%</div><div class="lbl">Uptime</div></div>
-                    </div>
-                    
-                    <!-- Quick Actions -->
-                    <div class="preview-quick">
-                        <div class="preview-quick-item"><i class="fas fa-file-alt"></i><span>Results</span></div>
-                        <div class="preview-quick-item"><i class="fas fa-robot"></i><span>AI</span></div>
-                        <div class="preview-quick-item"><i class="fas fa-question-circle"></i><span>FAQ</span></div>
-                        <div class="preview-quick-item"><i class="fas fa-headset"></i><span>Support</span></div>
-                    </div>
-                    
-                    <!-- Faculties -->
-                    <div class="preview-faculties">
-                        <div class="preview-faculty">Science</div>
-                        <div class="preview-faculty">Arts</div>
-                        <div class="preview-faculty">Law</div>
-                        <div class="preview-faculty">Engineering</div>
-                        <div class="preview-faculty">Medicine</div>
-                        <div class="preview-faculty">Pharmacy</div>
-                    </div>
-                    
-                    <!-- Bottom Nav -->
-                    <div class="preview-bottom-nav">
-                        <div class="preview-nav-item active"><i class="fas fa-home"></i>Home</div>
-                        <div class="preview-nav-item"><i class="fas fa-pen"></i>Exam</div>
-                        <div class="preview-nav-item"><i class="fas fa-flask"></i>Test</div>
-                        <div class="preview-nav-item"><i class="fas fa-book-open"></i>Study</div>
-                        <div class="preview-nav-item"><i class="fas fa-user"></i>Me</div>
-                    </div>
+                <span class="preview-badge">Live</span>
+            </div>
+            
+            <!-- Preview Body - Shows app features like Spenda -->
+            <div class="preview-body">
+                <div class="preview-row">
+                    <div class="icon purple"><i class="fas fa-book-open"></i></div>
+                    <span class="text">72+ Courses across 15 faculties</span>
+                    <span class="arrow"><i class="fas fa-chevron-right"></i></span>
+                </div>
+                <div class="preview-row">
+                    <div class="icon green"><i class="fas fa-robot"></i></div>
+                    <span class="text">AI Study Assistant (Nox)</span>
+                    <span class="arrow"><i class="fas fa-chevron-right"></i></span>
+                </div>
+                <div class="preview-row">
+                    <div class="icon gold"><i class="fas fa-trophy"></i></div>
+                    <span class="text">Track progress &amp; leaderboard</span>
+                    <span class="arrow"><i class="fas fa-chevron-right"></i></span>
+                </div>
+                <div class="preview-row">
+                    <div class="icon blue"><i class="fas fa-pen"></i></div>
+                    <span class="text">Exam &amp; Test Modes</span>
+                    <span class="arrow"><i class="fas fa-chevron-right"></i></span>
                 </div>
             </div>
+            
+            <!-- Preview Footer Dots -->
+            <div class="preview-footer">
+                <span class="preview-dot active"></span>
+                <span class="preview-dot"></span>
+                <span class="preview-dot"></span>
+                <span class="preview-dot"></span>
+            </div>
         </div>
+        
+        <div class="app-name">OAU CBE Practice</div>
+        <div class="app-tagline">Your Ultimate Exam Preparation Companion</div>
     </div>
-    
-    <!-- Right Panel - Content -->
-    <div class="content-panel">
-        <div class="logo-wrapper">
-            <div class="logo-small">
-                <img src="/logo.svg" alt="OAU CBE Practice" id="logoImg">
-            </div>
-            <span class="logo-text">OAU CBE Practice</span>
-        </div>
-        
-        <h1 style="font-size:2rem;font-weight:900;margin-bottom:2px;color:var(--text)">
-            Ace Your Exams<br>With Confidence
-        </h1>
-        <p class="tagline">Your all-in-one exam preparation platform</p>
-        <p class="description">
-            Access 72+ courses across 15 faculties, practice with AI assistance, 
-            track your progress, and simulate real exam conditions — all for free.
-        </p>
-        
-        <div class="feature-grid">
-            <div class="feature-item">
-                <div class="icon purple"><i class="fas fa-brain"></i></div>
-                <div class="info"><h4>AI Study Assistant</h4><p>Get instant explanations</p></div>
-            </div>
-            <div class="feature-item">
-                <div class="icon green"><i class="fas fa-clock"></i></div>
-                <div class="info"><h4>Timed Exams</h4><p>Simulate real conditions</p></div>
-            </div>
-            <div class="feature-item">
-                <div class="icon gold"><i class="fas fa-trophy"></i></div>
-                <div class="info"><h4>Track Progress</h4><p>Monitor your growth</p></div>
-            </div>
-            <div class="feature-item">
-                <div class="icon blue"><i class="fas fa-users"></i></div>
-                <div class="info"><h4>Leaderboard</h4><p>Compete with peers</p></div>
-            </div>
-        </div>
-        
-        <div class="btn-group">
-            <button class="btn btn-primary" onclick="window.openAuth('login')">
-                <i class="fas fa-sign-in-alt"></i> Login
+
+    <!-- Section Toggle -->
+    <div class="section-toggle">
+        <button class="section-toggle-btn active" data-section="welcome" onclick="window.switchSection('welcome')">
+            <i class="fas fa-home"></i> Welcome
+        </button>
+        <button class="section-toggle-btn" data-section="login" onclick="window.switchSection('login')">
+            <i class="fas fa-sign-in-alt"></i> Login
+        </button>
+        <button class="section-toggle-btn" data-section="register" onclick="window.switchSection('register')">
+            <i class="fas fa-user-plus"></i> Register
+        </button>
+    </div>
+
+    <!-- Welcome Section -->
+    <div class="welcome-section active" id="welcomeSection">
+        <div class="welcome-actions">
+            <button class="btn btn-primary" onclick="window.switchSection('login')">
+                <i class="fas fa-sign-in-alt"></i> Get Started
             </button>
-            <button class="btn btn-outline" onclick="window.openAuth('register')">
-                <i class="fas fa-user-plus"></i> Register
+            <button class="btn btn-outline" onclick="window.switchSection('register')">
+                <i class="fas fa-user-plus"></i> Create Account
             </button>
         </div>
-        
-        <div class="quick-links">
-            <a href="/about">About</a>
-            <span class="divider">|</span>
-            <a href="/terms">Terms</a>
-            <span class="divider">|</span>
-            <a href="/privacy">Privacy</a>
-            <span class="divider">|</span>
-            <a href="/contact">Contact</a>
-            <span class="divider">|</span>
-            <a href="/developer">Developer</a>
-        </div>
-        <p class="version">v2.0.0 · 100% Free · Powered by FrancisTech</p>
     </div>
-</div>
 
-<!-- Auth Modal -->
-<div class="auth-overlay" id="authOverlay" onclick="if(event.target===this)window.closeAuth()">
-    <div class="auth-modal" id="authModal">
-        <button class="close-btn" onclick="window.closeAuth()"><i class="fas fa-times"></i></button>
-        <div id="authContent"></div>
-    </div>
-</div>
-
-<script>
-// ============================================
-// INDEX.JS - Complete functionality
-// ============================================
-
-const API_BASE = 'https://oau-exam-api.onrender.com/api';
-
-// ============================================
-// AUTH CHECK - Redirect if logged in
-// ============================================
-(function checkAuth() {
-    const token = localStorage.getItem('oau_token');
-    if (token) {
-        fetch(API_BASE + '/auth/me', {
-            headers: { 'Authorization': 'Bearer ' + token }
-        })
-        .then(r => r.json())
-        .then(data => {
-            if (data.success) {
-                window.location.href = '/app';
-            } else {
-                localStorage.removeItem('oau_token');
-                localStorage.removeItem('oau_user');
-            }
-        })
-        .catch(() => {
-            localStorage.removeItem('oau_token');
-            localStorage.removeItem('oau_user');
-        });
-    }
-})();
-
-// ============================================
-// THEME MANAGEMENT
-// ============================================
-function initTheme() {
-    const saved = localStorage.getItem('theme');
-    const btn = document.getElementById('themeToggleBtn');
-    if (saved === 'light') {
-        document.body.classList.add('light-mode');
-        btn.innerHTML = '<i class="fas fa-sun"></i>';
-    } else {
-        document.body.classList.remove('light-mode');
-        btn.innerHTML = '<i class="fas fa-moon"></i>';
-    }
-}
-
-function toggleTheme() {
-    const isLight = document.body.classList.toggle('light-mode');
-    localStorage.setItem('theme', isLight ? 'light' : 'dark');
-    const btn = document.getElementById('themeToggleBtn');
-    btn.innerHTML = isLight ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-}
-window.toggleTheme = toggleTheme;
-
-// ============================================
-// AUTH MODAL
-// ============================================
-function openAuth(type) {
-    const overlay = document.getElementById('authOverlay');
-    const content = document.getElementById('authContent');
-    
-    if (type === 'login') {
-        content.innerHTML = getLoginHTML();
-    } else {
-        content.innerHTML = getRegisterHTML();
-    }
-    
-    overlay.classList.add('show');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeAuth() {
-    document.getElementById('authOverlay').classList.remove('show');
-    document.body.style.overflow = '';
-}
-window.openAuth = openAuth;
-window.closeAuth = closeAuth;
-
-function switchAuth(type) {
-    const content = document.getElementById('authContent');
-    if (type === 'login') {
-        content.innerHTML = getLoginHTML();
-    } else {
-        content.innerHTML = getRegisterHTML();
-    }
-}
-window.switchAuth = switchAuth;
-
-// ============================================
-// TOGGLE PASSWORD
-// ============================================
-function togglePassword(inputId, btn) {
-    const input = document.getElementById(inputId);
-    const icon = btn.querySelector('i');
-    if (input.type === 'password') {
-        input.type = 'text';
-        icon.className = 'fas fa-eye-slash';
-    } else {
-        input.type = 'password';
-        icon.className = 'fas fa-eye';
-    }
-}
-window.togglePassword = togglePassword;
-
-// ============================================
-// TOAST NOTIFICATION
-// ============================================
-function showToast(message, type = 'info') {
-    const existing = document.querySelector('.toast-notification');
-    if (existing) existing.remove();
-    
-    const toast = document.createElement('div');
-    const colors = { success: '#10b981', error: '#ef4444', info: '#3b82f6', warning: '#f59e0b' };
-    toast.style.cssText = `
-        position:fixed;bottom:80px;left:50%;transform:translateX(-50%);
-        background:${colors[type] || colors.info};
-        color:#fff;padding:10px 20px;border-radius:12px;
-        z-index:1000;font-size:0.8rem;font-weight:600;
-        box-shadow:0 8px 30px rgba(0,0,0,0.3);
-        animation:fadeIn 0.3s ease;
-        max-width:90%;
-        text-align:center;
-    `;
-    toast.textContent = message;
-    document.body.appendChild(toast);
-    setTimeout(() => toast.remove(), 3000);
-}
-window.showToast = showToast;
-
-// ============================================
-// LOGIN HTML
-// ============================================
-function getLoginHTML() {
-    return `
+    <!-- Login Section -->
+    <div class="auth-section" id="loginSection">
         <div class="auth-header">
             <h2>Welcome Back</h2>
             <p>Log into your account to continue your exam preparation</p>
         </div>
+
         <div class="alert alert-error" id="loginError"></div>
-        <form onsubmit="window.handleLogin(event)">
+
+        <form id="loginForm" onsubmit="window.handleLogin(event)">
             <div class="form-group">
                 <label>Email or Username</label>
                 <div class="input-icon">
@@ -467,39 +280,42 @@ function getLoginHTML() {
                 </div>
             </div>
             <div class="form-options">
-                <label><input type="checkbox" checked> Remember me</label>
+                <label>
+                    <input type="checkbox" checked> Remember me
+                </label>
                 <a href="#" class="forgot-link">Forgot Password?</a>
             </div>
             <button type="submit" class="auth-btn auth-btn-primary" id="loginBtn">
                 <i class="fas fa-sign-in-alt"></i> Login
             </button>
         </form>
+
         <div class="divider">or continue with</div>
+
         <div style="display:flex;gap:10px">
-            <button class="btn btn-outline" style="flex:1;padding:10px;font-size:0.8rem" onclick="window.showToast('Google login coming soon!', 'info')">
+            <button class="btn btn-outline" style="flex:1;padding:10px;font-size:0.75rem" onclick="window.showToast('Google login coming soon!', 'info')">
                 <i class="fab fa-google"></i> Google
             </button>
-            <button class="btn btn-outline" style="flex:1;padding:10px;font-size:0.8rem" onclick="window.showToast('Apple login coming soon!', 'info')">
+            <button class="btn btn-outline" style="flex:1;padding:10px;font-size:0.75rem" onclick="window.showToast('Apple login coming soon!', 'info')">
                 <i class="fab fa-apple"></i> Apple
             </button>
         </div>
-        <div class="auth-footer">
-            Don't have an account? <a onclick="window.switchAuth('register')">Create Account</a>
-        </div>
-    `;
-}
 
-// ============================================
-// REGISTER HTML
-// ============================================
-function getRegisterHTML() {
-    return `
+        <div class="auth-footer">
+            Don't have an account? <a onclick="window.switchSection('register')">Create Account</a>
+        </div>
+    </div>
+
+    <!-- Register Section -->
+    <div class="auth-section" id="registerSection">
         <div class="auth-header">
             <h2>Create Account</h2>
             <p>Join OAU CBE Practice and start your exam preparation journey</p>
         </div>
+
         <div class="alert alert-error" id="registerError"></div>
-        <form onsubmit="window.handleRegister(event)">
+
+        <form id="registerForm" onsubmit="window.handleRegister(event)">
             <div class="form-group">
                 <label>Full Name</label>
                 <div class="input-icon">
@@ -542,7 +358,8 @@ function getRegisterHTML() {
                 <label>Faculty</label>
                 <div class="input-icon">
                     <i class="fas fa-building"></i>
-                    <select id="registerFaculty" style="width:100%;padding:12px 14px 12px 42px;background:var(--glass);border:1.5px solid var(--card-border);border-radius:12px;color:var(--text);font-size:0.85rem;font-family:'Inter',sans-serif;appearance:none;-webkit-appearance:none">
+                    <select id="registerFaculty" required>
+                        <option value="">Select your faculty</option>
                         <option value="Science">Science</option>
                         <option value="Arts">Arts</option>
                         <option value="Law">Law</option>
@@ -565,7 +382,8 @@ function getRegisterHTML() {
                 <label>Level</label>
                 <div class="input-icon">
                     <i class="fas fa-layer-group"></i>
-                    <select id="registerLevel" style="width:100%;padding:12px 14px 12px 42px;background:var(--glass);border:1.5px solid var(--card-border);border-radius:12px;color:var(--text);font-size:0.85rem;font-family:'Inter',sans-serif;appearance:none;-webkit-appearance:none">
+                    <select id="registerLevel" required>
+                        <option value="">Select your level</option>
                         <option value="100">100 Level</option>
                         <option value="200">200 Level</option>
                         <option value="300">300 Level</option>
@@ -580,155 +398,37 @@ function getRegisterHTML() {
                 <i class="fas fa-user-plus"></i> Create Account
             </button>
         </form>
+
         <div class="divider">or continue with</div>
+
         <div style="display:flex;gap:10px">
-            <button class="btn btn-outline" style="flex:1;padding:10px;font-size:0.8rem" onclick="window.showToast('Google sign up coming soon!', 'info')">
+            <button class="btn btn-outline" style="flex:1;padding:10px;font-size:0.75rem" onclick="window.showToast('Google sign up coming soon!', 'info')">
                 <i class="fab fa-google"></i> Google
             </button>
-            <button class="btn btn-outline" style="flex:1;padding:10px;font-size:0.8rem" onclick="window.showToast('Apple sign up coming soon!', 'info')">
+            <button class="btn btn-outline" style="flex:1;padding:10px;font-size:0.75rem" onclick="window.showToast('Apple sign up coming soon!', 'info')">
                 <i class="fab fa-apple"></i> Apple
             </button>
         </div>
+
         <div class="auth-footer">
-            Already have an account? <a onclick="window.switchAuth('login')">Login</a>
+            Already have an account? <a onclick="window.switchSection('login')">Login</a>
         </div>
-    `;
-}
+    </div>
 
-// ============================================
-// LOGIN HANDLER
-// ============================================
-async function handleLogin(e) {
-    e.preventDefault();
-    const email = document.getElementById('loginEmail').value.trim();
-    const password = document.getElementById('loginPassword').value;
-    const btn = document.getElementById('loginBtn');
-    const errorEl = document.getElementById('loginError');
-    
-    if (!email || !password) {
-        errorEl.textContent = 'Please fill in all fields';
-        errorEl.classList.add('show');
-        return;
-    }
-    
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
-    btn.disabled = true;
-    errorEl.classList.remove('show');
-    
-    try {
-        const response = await fetch(API_BASE + '/auth/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
-                email: email,
-                username: email,
-                password: password
-            })
-        });
-        
-        const data = await response.json();
-        
-        if (response.ok && data.success) {
-            localStorage.setItem('oau_token', data.token);
-            localStorage.setItem('oau_user', JSON.stringify(data.user));
-            showToast('✅ Login successful! Redirecting...', 'success');
-            setTimeout(() => {
-                window.location.href = '/app';
-            }, 500);
-        } else {
-            errorEl.textContent = data.error || 'Invalid credentials. Please try again.';
-            errorEl.classList.add('show');
-            btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
-            btn.disabled = false;
-        }
-    } catch (error) {
-        errorEl.textContent = 'Network error. Please check your connection.';
-        errorEl.classList.add('show');
-        btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
-        btn.disabled = false;
-    }
-}
-window.handleLogin = handleLogin;
+    <!-- Quick Links -->
+    <div class="quick-links">
+        <a href="/about">About</a>
+        <span class="divider">|</span>
+        <a href="/terms">Terms</a>
+        <span class="divider">|</span>
+        <a href="/privacy">Privacy</a>
+        <span class="divider">|</span>
+        <a href="/contact">Contact</a>
+        <span class="divider">|</span>
+        <a href="/developer">Developer</a>
+    </div>
+    <p class="version">v2.0.0 · 100% Free</p>
+</div>
 
-// ============================================
-// REGISTER HANDLER
-// ============================================
-async function handleRegister(e) {
-    e.preventDefault();
-    const name = document.getElementById('registerName').value.trim();
-    const username = document.getElementById('registerUsername').value.trim();
-    const email = document.getElementById('registerEmail').value.trim();
-    const password = document.getElementById('registerPassword').value;
-    const confirm = document.getElementById('registerConfirm').value;
-    const faculty = document.getElementById('registerFaculty').value;
-    const level = document.getElementById('registerLevel').value;
-    const btn = document.getElementById('registerBtn');
-    const errorEl = document.getElementById('registerError');
-    
-    if (!name || !username || !email || !password || !confirm) {
-        errorEl.textContent = 'Please fill in all fields';
-        errorEl.classList.add('show');
-        return;
-    }
-    
-    if (password !== confirm) {
-        errorEl.textContent = 'Passwords do not match';
-        errorEl.classList.add('show');
-        return;
-    }
-    
-    if (password.length < 6) {
-        errorEl.textContent = 'Password must be at least 6 characters';
-        errorEl.classList.add('show');
-        return;
-    }
-    
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating account...';
-    btn.disabled = true;
-    errorEl.classList.remove('show');
-    
-    try {
-        const response = await fetch(API_BASE + '/auth/register', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                fullName: name,
-                username: username,
-                email: email,
-                password: password,
-                faculty: faculty,
-                level: level
-            })
-        });
-        
-        const data = await response.json();
-        
-        if (response.ok && data.success) {
-            localStorage.setItem('oau_token', data.token);
-            localStorage.setItem('oau_user', JSON.stringify(data.user));
-            showToast('✅ Account created! Redirecting...', 'success');
-            setTimeout(() => {
-                window.location.href = '/app';
-            }, 500);
-        } else {
-            errorEl.textContent = data.error || 'Registration failed. Please try again.';
-            errorEl.classList.add('show');
-            btn.innerHTML = '<i class="fas fa-user-plus"></i> Create Account';
-            btn.disabled = false;
-        }
-    } catch (error) {
-        errorEl.textContent = 'Network error. Please check your connection.';
-        errorEl.classList.add('show');
-        btn.innerHTML = '<i class="fas fa-user-plus"></i> Create Account';
-        btn.disabled = false;
-    }
-}
-window.handleRegister = handleRegister;
-
-// ============================================
-// INIT
-// ============================================
-initTheme();
-</script>
 </body>
 </html>
