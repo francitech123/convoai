@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="/styles.css">
+  
   <style>
     /* Additional styles that couldn't fit in master CSS */
     .page-title{text-align:center;margin-bottom:24px}
@@ -372,17 +373,20 @@
 </head>
 <body>
 
-<!-- ============================================
-     TOAST NOTIFICATION
-     ============================================ -->
+<!-- LOADING OVERLAY -->
+<div class="loading-overlay" id="loadingOverlay">
+  <img src="/logo.svg" alt="OAU CBE Practice" style="width:140px;height:140px;object-fit:contain;animation:pulse 2s ease-in-out infinite">
+  <div class="loading-spinner"></div>
+  <div class="loading-text" id="loadingText">Loading...</div>
+</div>
+
+<!-- TOAST -->
 <div class="toast" id="toast">
   <span class="toast-icon" id="toastIcon"><i class="fas fa-info-circle"></i></span>
   <span id="toastMessage">Loading...</span>
 </div>
 
-<!-- ============================================
-     CALCULATOR OVERLAY
-     ============================================ -->
+<!-- CALCULATOR -->
 <div class="calc-overlay" id="calcOverlay" onclick="if(event.target===this)window.toggleCalculator()">
   <div class="calc-box">
     <input type="text" id="calcDisplay" value="0" readonly>
@@ -411,9 +415,7 @@
   </div>
 </div>
 
-<!-- ============================================
-     CHEAT WARNING
-     ============================================ -->
+<!-- CHEAT WARNING -->
 <div class="cheat-warning" id="cheatWarning">
   <div class="icon">⚠️</div>
   <h2>Warning!</h2>
@@ -421,9 +423,7 @@
   <button class="btn" onclick="document.getElementById('cheatWarning').classList.remove('show')">I understand</button>
 </div>
 
-<!-- ============================================
-     NOTIFICATION POPUP
-     ============================================ -->
+<!-- NOTIFICATION POPUP -->
 <div class="notification-popup" id="notificationPopup">
   <div class="notification-popup-header">
     <h4><i class="fas fa-bell"></i> Notifications</h4>
@@ -434,30 +434,14 @@
   </div>
 </div>
 
-<!-- ============================================
-     MAIN APP CONTAINER
-     ============================================ -->
+<!-- MAIN APP CONTAINER -->
 <div class="page" id="appContainer">
   
   <!-- TOPBAR -->
   <header class="topbar">
     <div class="brand">
       <div class="brand-logo" id="brandLogoContainer">
-        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="100" cy="100" r="90" fill="none" stroke="#3b82f6" stroke-width="3.5"/>
-          <path id="topArcSmall" d="M 30 100 A 70 70 0 0 1 170 100" fill="none"/>
-          <text font-size="17" font-weight="900" fill="#3b82f6" letter-spacing="3">
-            <textPath href="#topArcSmall" startOffset="50%" text-anchor="middle">OAU</textPath>
-          </text>
-          <path id="bottomArcSmall" d="M 30 100 A 70 70 0 0 0 170 100" fill="none"/>
-          <text font-size="7.5" font-weight="800" fill="#1e3a8a" letter-spacing="1.2">
-            <textPath href="#bottomArcSmall" startOffset="50%" text-anchor="middle">EXAM CBT PRACTICE</textPath>
-          </text>
-          <circle cx="100" cy="100" r="19" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
-          <line x1="81" y1="100" x2="119" y2="100" stroke="#3b82f6" stroke-width="1.5"/>
-          <line x1="100" y1="81" x2="100" y2="119" stroke="#3b82f6" stroke-width="1.5"/>
-          <text x="100" y="104" font-size="7.5" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">OAU</text>
-        </svg>
+        <img src="/logo.svg" alt="OAU CBE Practice" style="width:42px;height:42px;object-fit:contain">
       </div>
       <div class="brand-copy">
         <small id="pageLabel">Dashboard</small>
@@ -468,6 +452,7 @@
       <button class="icon-btn" id="themeToggleBtn" onclick="window.toggleThemeMode()" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
       <button class="icon-btn" onclick="window.toggleNotificationPopup()" aria-label="Notifications"><i class="fas fa-bell"></i><span class="badge" id="notifBadge">0</span></button>
     </div>
+    
   </header>
 
   <!-- ============================================
