@@ -1,51 +1,9 @@
-// ============================================
-// STUDY MODULE - Consistent styling with Exam/Test
-// ============================================
 
-import { apiFetch, $id, setText, escapeHtml, showToast } from './utils.js';
 
-const STUDY_COURSES = [
-  { id: 'chm102', code: 'CHM 102', name: 'Organic Chemistry II', icon: '🧪', topics: [
-    { id: 'chm102_t1', title: 'Introduction to Organic Chemistry', description: 'Historical survey, Electronic theory, Nomenclature' },
-    { id: 'chm102_t2', title: 'Advanced Carbon Forms & Nanochemistry', description: 'Fullerenes, Nanotubes, Nanostructures' },
-    { id: 'chm102_t3', title: 'Organic Reactions & Physical Organic Chemistry', description: 'Reaction mechanisms, Kinetics, Stereochemistry' },
-    { id: 'chm102_t4', title: 'Functional Groups - Alkanes/Alkenes/Alkynes', description: 'Properties and reactions of hydrocarbons' },
-    { id: 'chm102_t5', title: 'Functional Groups - Alcohols/Ethers/Amines', description: 'Properties and reactions of oxygen/nitrogen compounds' },
-    { id: 'chm102_t6', title: 'Functional Groups - Aldehydes/Ketones/Acids', description: 'Carbonyl compounds and carboxylic acids' }
-  ]},
-  { id: 'mth102', code: 'MTH 102', name: 'Elementary Mathematics II', icon: '∫', topics: [
-    { id: 'mth102_t1', title: 'Functions & Limits', description: 'Functions of real variables, Graphs, Limits, Continuity' },
-    { id: 'mth102_t2', title: 'Differentiation', description: 'Derivatives, Algebraic/Exponential/Trigonometric' },
-    { id: 'mth102_t3', title: 'Integration', description: 'Integration methods, Definite integrals, Areas & Volumes' },
-    { id: 'mth102_t4', title: 'Curve Sketching', description: 'Extreme curve sketching, Applications of derivatives' }
-  ]},
-  { id: 'bio102', code: 'BIO 102', name: 'General Biology II', icon: '🧬', topics: [
-    { id: 'bio102_t1', title: 'Microbiology', description: 'Characteristics and classification of Viruses, Bacteria, Fungi' },
-    { id: 'bio102_t2', title: 'Kingdom Survey', description: 'Survey of Plant and Animal kingdoms, external features' },
-    { id: 'bio102_t3', title: 'Ecology & Adaptation', description: 'Ecological adaptations of organisms' },
-    { id: 'bio102_t4', title: 'Physiology Briefs', description: 'Nutrition, Respiration, Circulation, Excretion, Reproduction' }
-  ]},
-  { id: 'phy104', code: 'PHY 104', name: 'General Physics IV', icon: '🌊', topics: [
-    { id: 'phy104_t1', title: 'Vibrations & SHM', description: 'Simple Harmonic Motion, Energy, Damped SHM, Resonance' },
-    { id: 'phy104_t2', title: 'Wave Phenomena', description: 'Wave properties, Interference, Diffraction, Polarization' },
-    { id: 'phy104_t3', title: 'Optics', description: 'Reflection, Refraction, Optical systems, Huygens\'s principle' },
-    { id: 'phy104_t4', title: 'Acoustics', description: 'Echo, Beats, Doppler effect, Propagation in media' }
-  ]},
-  { id: 'phy102', code: 'PHY 102', name: 'General Physics II', icon: '⚡', topics: [
-    { id: 'phy102_t1', title: 'Electrostatics', description: 'Electric charge, Coulomb\'s law, Electric field, Gauss\'s law' },
-    { id: 'phy102_t2', title: 'DC Circuits', description: 'Ohm\'s law, Current, Voltage, Resistance, Circuit analysis' },
-    { id: 'phy102_t3', title: 'Magnetism', description: 'Magnetic fields, Lorentz force, Biot-Savart, Ampère\'s laws' },
-    { id: 'phy102_t4', title: 'Electromagnetism & Induction', description: 'Faraday and Lenz\'s laws, Inductance, Transformers' },
-    { id: 'phy102_t5', title: 'Waves & AC Circuits', description: 'Electromagnetic oscillations, AC circuits' }
-  ]},
-  { id: 'mth104', code: 'MTH 104', name: 'Matrices and Determinant', icon: '🔢', topics: [
-    { id: 'mth104_t1', title: 'Matrices', description: 'Notations, Definitions, Equality, Addition, Multiplication' },
-    { id: 'mth104_t2', title: 'Determinants', description: 'Minors, Cofactors, Adjoint matrix, Properties' },
-    { id: 'mth104_t3', title: 'Matrix Inversion', description: 'Inverse of matrices, Solving linear equations' }
-  ]}
-];
+import { apiFetch, $id, setText, escapeHtml, showToast, setButtonLoading } from './utils.js';
 
 let studyState = {
+  courses: [],
   selectedCourse: null,
   currentTopic: null,
   questions: [],
@@ -57,49 +15,157 @@ let studyState = {
   isLoading: false
 };
 
+// ==================== LOAD STUDY DATA ====================
 export async function loadStudyData() {
   if (document.querySelector('#studyCourseGrid .study-course-card')) return;
-  renderStudyCourses();
+  await loadStudyCourses();
+}
+
+async function loadStudyCourses() {
+  const grid = $id('studyCourseGrid');
+  if (!grid) return;
+  
+  grid.innerHTML = '<div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading courses...</p></div>';
+  
+  try {
+    // First try to get courses from faculties endpoint
+    const data = await apiFetch('/admin/faculties');
+    const faculties = data.faculties || [];
+    
+    if (faculties.length) {
+      // Extract courses from faculties
+      const allCourses = [];
+      faculties.forEach(faculty => {
+        if (faculty.courses && faculty.courses.length) {
+          faculty.courses.forEach(course => {
+            allCourses.push({
+              id: course.code || course.id,
+              code: course.code || course.id,
+              name: course.name || course.title,
+              icon: '📚',
+              faculty: faculty.name,
+              topics: course.topics || [],
+              questionCount: course.questionCount || 0
+            });
+          });
+        }
+      });
+      
+      studyState.courses = allCourses;
+      
+      // If no courses found, try fallback
+      if (studyState.courses.length === 0) {
+        await loadStudyCoursesFallback();
+      }
+    } else {
+      await loadStudyCoursesFallback();
+    }
+    
+    renderStudyCourses();
+    
+  } catch (e) {
+    console.error('Error loading study courses:', e);
+    await loadStudyCoursesFallback();
+  }
+}
+
+async function loadStudyCoursesFallback() {
+  try {
+    // Try to get courses from a different endpoint
+    const data = await apiFetch('/admin/courses');
+    const courses = data.courses || [];
+    studyState.courses = courses.map(c => ({
+      id: c.code || c.id,
+      code: c.code || c.id,
+      name: c.name || c.title,
+      icon: '📚',
+      topics: c.topics || [],
+      questionCount: c.questionCount || 0
+    }));
+  } catch (e) {
+    console.error('Fallback courses error:', e);
+    studyState.courses = [];
+    const grid = $id('studyCourseGrid');
+    if (grid) {
+      grid.innerHTML = `
+        <div class="empty-state" style="grid-column:1/-1;padding:40px 20px;text-align:center">
+          <i class="fas fa-book" style="font-size:2rem;display:block;margin-bottom:12px;opacity:.5"></i>
+          <h3 style="color:var(--text);margin-bottom:8px">No Courses Available</h3>
+          <p style="color:var(--text-secondary);font-size:.85rem">No courses have been added yet. Use the Study Management page to add courses and questions.</p>
+          <button class="btn btn-primary btn-sm" onclick="window.location.href='/study-manage'" style="margin-top:12px">
+            <i class="fas fa-plus"></i> Manage Courses
+          </button>
+        </div>
+      `;
+    }
+  }
 }
 
 function renderStudyCourses() {
   const grid = $id('studyCourseGrid');
   if (!grid) return;
-  grid.innerHTML = STUDY_COURSES.map(c => `
-    <div class="study-course-card" onclick="window.studySelectCourse('${c.id}')">
+  
+  if (!studyState.courses || studyState.courses.length === 0) {
+    grid.innerHTML = `
+      <div class="empty-state" style="grid-column:1/-1;padding:40px 20px;text-align:center">
+        <i class="fas fa-book" style="font-size:2rem;display:block;margin-bottom:12px;opacity:.5"></i>
+        <h3 style="color:var(--text);margin-bottom:8px">No Courses Available</h3>
+        <p style="color:var(--text-secondary);font-size:.85rem">No courses have been added yet.</p>
+      </div>
+    `;
+    return;
+  }
+  
+  grid.innerHTML = studyState.courses.map(c => `
+    <div class="study-course-card" onclick="window.studySelectCourse('${c.id}')" id="study-course-${c.id}">
       <div class="card-spinner"><i class="fas fa-spinner fa-spin"></i></div>
       <div class="card-content">
         <span class="icon">${c.icon}</span>
         <div class="code">${c.code}</div>
         <div class="name">${c.name}</div>
-        <span class="count">${c.topics.length} Topics</span>
+        <span class="count">${c.topics?.length || 0} Topics • ${c.questionCount || 0} Qs</span>
       </div>
     </div>
   `).join('');
 }
 
+// ==================== SELECT COURSE ====================
 export function studySelectCourse(courseId) {
-  const course = STUDY_COURSES.find(c => c.id === courseId);
-  if (!course) return;
+  const course = studyState.courses.find(c => c.id === courseId);
+  if (!course) {
+    showToast('Course not found', 'error');
+    return;
+  }
+  
   studyState.selectedCourse = course;
   const title = $id('studyTopicsTitle');
   const subtitle = $id('studyTopicsSubtitle');
   if (title) title.textContent = `${course.code} - Topics`;
-  if (subtitle) subtitle.textContent = `${course.name} • ${course.topics.length} topics`;
+  if (subtitle) subtitle.textContent = `${course.name} • ${course.topics?.length || 0} topics • ${course.questionCount || 0} questions`;
   
   const grid = $id('studyTopicsGrid');
   if (!grid) return;
-  grid.innerHTML = course.topics.map((topic, index) => `
-    <div class="study-topic-item" onclick="window.studySelectTopic('${topic.id}')">
-      <div class="topic-spinner"><i class="fas fa-spinner fa-spin"></i></div>
-      <div class="topic-info">
-        <div class="topic-title">${index + 1}. ${topic.title}</div>
-        <div class="topic-desc">${topic.description}</div>
+  
+  if (!course.topics || course.topics.length === 0) {
+    grid.innerHTML = `
+      <div class="empty-state" style="grid-column:1/-1;padding:30px 20px;text-align:center">
+        <i class="fas fa-list" style="font-size:1.5rem;display:block;margin-bottom:8px;opacity:.5"></i>
+        <p style="color:var(--text-secondary)">No topics available for this course.</p>
       </div>
-      <span class="topic-count">📝 ${Math.floor(Math.random() * 10) + 5} Qs</span>
-      <span class="topic-arrow"><i class="fas fa-chevron-right"></i></span>
-    </div>
-  `).join('');
+    `;
+  } else {
+    grid.innerHTML = course.topics.map((topic, index) => `
+      <div class="study-topic-item" onclick="window.studySelectTopic('${topic.id || index}')" id="study-topic-${topic.id || index}">
+        <div class="topic-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+        <div class="topic-info">
+          <div class="topic-title">${index + 1}. ${topic.title || topic.name || 'Topic'}</div>
+          <div class="topic-desc">${topic.description || 'Click to start practicing'}</div>
+        </div>
+        <span class="topic-count">📝 ${topic.questionCount || 0} Qs</span>
+        <span class="topic-arrow"><i class="fas fa-chevron-right"></i></span>
+      </div>
+    `).join('');
+  }
   
   const courseScreen = $id('studyCourseScreen');
   const topicsScreen = $id('studyTopicsScreen');
@@ -107,22 +173,46 @@ export function studySelectCourse(courseId) {
   if (topicsScreen) topicsScreen.style.display = 'block';
 }
 
+// ==================== GO BACK TO COURSES ====================
 export function studyGoToCourses() {
   const topicsScreen = $id('studyTopicsScreen');
   const courseScreen = $id('studyCourseScreen');
   if (topicsScreen) topicsScreen.style.display = 'none';
   if (courseScreen) courseScreen.style.display = 'block';
+  // Reset selected course to reload topics later
+  studyState.selectedCourse = null;
 }
 
+// ==================== SELECT TOPIC ====================
 export async function studySelectTopic(topicId) {
+  if (studyState.isLoading) return;
+  
+  const topicItem = $id('study-topic-' + topicId);
+  if (topicItem) topicItem.classList.add('loading');
+  
+  studyState.isLoading = true;
+  
   const course = studyState.selectedCourse;
-  if (!course) return;
-  const topic = course.topics.find(t => t.id === topicId);
-  if (!topic) return;
+  if (!course) {
+    showToast('Please select a course first', 'error');
+    studyState.isLoading = false;
+    if (topicItem) topicItem.classList.remove('loading');
+    return;
+  }
+  
+  const topic = course.topics?.find((t, i) => (t.id || i) == topicId);
+  if (!topic) {
+    showToast('Topic not found', 'error');
+    studyState.isLoading = false;
+    if (topicItem) topicItem.classList.remove('loading');
+    return;
+  }
+  
   studyState.currentTopic = topic;
   
   const container = $id('studyQuizContainer');
   if (!container) return;
+  
   container.innerHTML = `
     <div class="quiz-overlay"><i class="fas fa-spinner"></i><span>Loading questions...</span></div>
     <div class="loading-spin"><i class="fas fa-spinner fa-spin"></i> Loading questions...</div>
@@ -130,7 +220,9 @@ export async function studySelectTopic(topicId) {
   container.classList.add('loading');
   
   try {
-    const data = await apiFetch(`/study/questions/${topicId}`);
+    // Fetch questions from backend using the topic ID
+    const data = await apiFetch(`/study/questions/${topic.id || topicId}`);
+    
     if (data.success && data.questions && data.questions.length > 0) {
       studyState.questions = data.questions.map(q => ({
         ...q,
@@ -139,11 +231,21 @@ export async function studySelectTopic(topicId) {
         explanation: q.explanation || 'No explanation provided.'
       }));
     } else {
-      studyState.questions = [
-        { question: `What is the main concept in ${topic.title}?`, options: ['Option A', 'Option B', 'Option C', 'Option D'], correctOption: 0, explanation: 'This is a sample explanation.' },
-        { question: 'Which of the following is correct?', options: ['Option A', 'Option B', 'Option C', 'Option D'], correctOption: 1, explanation: 'Option B is the correct answer.' },
-        { question: 'What is the best approach to study this topic?', options: ['Approach A', 'Approach B', 'Approach C', 'Approach D'], correctOption: 2, explanation: 'Approach C is recommended.' }
-      ];
+      showToast('No questions available for this topic', 'info');
+      container.innerHTML = `
+        <div class="empty-state" style="padding:40px 20px;text-align:center">
+          <i class="fas fa-question-circle" style="font-size:2rem;display:block;margin-bottom:12px;opacity:.5"></i>
+          <h3 style="color:var(--text);margin-bottom:8px">No Questions Available</h3>
+          <p style="color:var(--text-secondary);font-size:.85rem">This topic doesn't have any questions yet.</p>
+          <button class="btn btn-primary btn-sm" onclick="window.studyGoToCourses()" style="margin-top:12px">
+            <i class="fas fa-arrow-left"></i> Back to Courses
+          </button>
+        </div>
+      `;
+      container.classList.remove('loading');
+      studyState.isLoading = false;
+      if (topicItem) topicItem.classList.remove('loading');
+      return;
     }
     
     studyState.currentIndex = 0;
@@ -154,29 +256,37 @@ export async function studySelectTopic(topicId) {
     
     const title = $id('studyQuizTitle');
     const subtitle = $id('studyQuizSubtitle');
-    if (title) title.textContent = `${topic.title}`;
+    if (title) title.textContent = `${topic.title || 'Practice Questions'}`;
     if (subtitle) subtitle.textContent = `${studyState.questions.length} questions • ${course.code}`;
     
     const topicsScreen = $id('studyTopicsScreen');
     const quizScreen = $id('studyQuizScreen');
     if (topicsScreen) topicsScreen.style.display = 'none';
     if (quizScreen) quizScreen.style.display = 'block';
+    
     container.classList.remove('loading');
     studyRenderQuestion();
+    
   } catch (e) {
     console.error('Error loading questions:', e);
     container.innerHTML = `
-      <div class="empty-state">
-        <i class="fas fa-exclamation-triangle"></i>
-        <h3>Error Loading Questions</h3>
-        <p>${e.message || 'Please try again later.'}</p>
-        <button class="btn btn-primary" onclick="window.studyGoToCourses()" style="margin-top:10px;">Back to Courses</button>
+      <div class="empty-state" style="padding:40px 20px;text-align:center">
+        <i class="fas fa-exclamation-triangle" style="font-size:2rem;display:block;margin-bottom:12px;opacity:.5"></i>
+        <h3 style="color:var(--text);margin-bottom:8px">Error Loading Questions</h3>
+        <p style="color:var(--text-secondary);font-size:.85rem">${e.message || 'Please try again later.'}</p>
+        <button class="btn btn-primary btn-sm" onclick="window.studyGoToCourses()" style="margin-top:12px">
+          <i class="fas fa-arrow-left"></i> Back to Courses
+        </button>
       </div>
     `;
     container.classList.remove('loading');
   }
+  
+  studyState.isLoading = false;
+  if (topicItem) topicItem.classList.remove('loading');
 }
 
+// ==================== RENDER QUESTION ====================
 function studyRenderQuestion() {
   if (!studyState.questions || studyState.questions.length === 0) return;
   if (studyState.currentIndex >= studyState.questions.length) {
@@ -253,6 +363,7 @@ function studyRenderQuestion() {
   if (select) select.value = studyState.currentIndex;
 }
 
+// ==================== SELECT OPTION ====================
 export function studySelectOption(index) {
   if (studyState.answered || studyState.isLoading) return;
   
@@ -300,6 +411,7 @@ export function studySelectOption(index) {
   }
 }
 
+// ==================== NAVIGATION ====================
 export function studyJumpToQuestion(index) {
   if (index >= 0 && index < studyState.questions.length) {
     studyState.currentIndex = index;
@@ -326,11 +438,14 @@ export function studyNextQuestion() {
   }
 }
 
+// ==================== SHOW QUIZ COMPLETE ====================
 function studyShowQuizComplete() {
   const container = $id('studyQuizContainer');
   if (!container) return;
+  
   const percentage = studyState.totalQuestions > 0 ? Math.round((studyState.score / studyState.totalQuestions) * 100) : 0;
   let grade = percentage >= 90 ? 'Excellent! 🏆' : percentage >= 70 ? 'Good Job! 👍' : percentage >= 50 ? 'Keep Practicing! 📚' : 'Review More! 💡';
+  
   container.innerHTML = `
     <div class="quiz-score" style="border-color:var(--primary-light)">
       <div class="score-number" style="color:var(--primary-light)">${percentage}%</div>
@@ -338,24 +453,56 @@ function studyShowQuizComplete() {
       <div class="score-detail">You got ${studyState.score} out of ${studyState.totalQuestions} questions correct</div>
       <div style="margin-top:12px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
         <button class="btn btn-primary" onclick="window.studyRetryTopic()" style="background:var(--primary-light);"><i class="fas fa-redo"></i> Retry</button>
-        <button class="btn btn-secondary" onclick="window.studyGoToCourses()"><i class="fas fa-list"></i> Back to Courses</button>
+        <button class="btn btn-secondary" onclick="window.studyResetToCourses()"><i class="fas fa-list"></i> Back to Courses</button>
       </div>
     </div>
   `;
 }
 
-export function studyRetryTopic() {
-  if (studyState.currentTopic) studySelectTopic(studyState.currentTopic.id);
+// ==================== RESET TO COURSES ====================
+export function studyResetToCourses() {
+  // Reset all study state
+  studyState.selectedCourse = null;
+  studyState.currentTopic = null;
+  studyState.questions = [];
+  studyState.currentIndex = 0;
+  studyState.score = 0;
+  studyState.answered = false;
+  studyState.totalQuestions = 0;
+  studyState.answeredQuestions = 0;
+  
+  // Reset screens
+  const courseScreen = $id('studyCourseScreen');
+  const topicsScreen = $id('studyTopicsScreen');
+  const quizScreen = $id('studyQuizScreen');
+  
+  if (courseScreen) courseScreen.style.display = 'block';
+  if (topicsScreen) topicsScreen.style.display = 'none';
+  if (quizScreen) quizScreen.style.display = 'none';
+  
+  // Reload courses
+  loadStudyCourses();
 }
 
+// ==================== RETRY TOPIC ====================
+export function studyRetryTopic() {
+  if (studyState.currentTopic) {
+    const topicId = studyState.currentTopic.id;
+    studySelectTopic(topicId);
+  } else {
+    studyResetToCourses();
+  }
+}
+
+// ==================== EXIT QUIZ ====================
 export function studyConfirmExitQuiz() {
   if (studyState.answeredQuestions > 0 && studyState.answeredQuestions < studyState.totalQuestions) {
     if (!confirm(`You have answered ${studyState.answeredQuestions} of ${studyState.totalQuestions} questions. Are you sure you want to exit?`)) return;
   }
-  studyGoToCourses();
+  studyResetToCourses();
 }
 
-// Expose functions to window
+// ==================== EXPOSE ====================
 window.studySelectCourse = studySelectCourse;
 window.studyGoToCourses = studyGoToCourses;
 window.studySelectTopic = studySelectTopic;
@@ -365,3 +512,4 @@ window.studyPrevQuestion = studyPrevQuestion;
 window.studyNextQuestion = studyNextQuestion;
 window.studyRetryTopic = studyRetryTopic;
 window.studyConfirmExitQuiz = studyConfirmExitQuiz;
+window.studyResetToCourses = studyResetToCourses;
