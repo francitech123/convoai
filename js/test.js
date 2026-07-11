@@ -1,3 +1,7 @@
+// ============================================
+// TEST MODULE - COMPLETE FIXED
+// ============================================
+
 import { apiFetch, $id, setText, shuffleArray, showToast, enterFullscreenMode, exitFullscreenMode, showLoading, hideLoading } from './utils.js';
 
 export let testState = {
@@ -15,22 +19,31 @@ export let testState = {
   isReset: false
 };
 
-// ==================== RESET TEST STATE ====================
-export function resetTestState() {
+// ==================== COMPLETE RESET TEST STATE ====================
+export function resetTestState(clearSession = true) {
   // Clear timers
-  if (testState.session?.timer) clearInterval(testState.session.timer);
-  if (testState.autoSaveInterval) clearInterval(testState.autoSaveInterval);
-  if (testState.inactivityTimer) clearInterval(testState.inactivityTimer);
+  if (testState.session?.timer) {
+    clearInterval(testState.session.timer);
+    testState.session.timer = null;
+  }
+  if (testState.autoSaveInterval) {
+    clearInterval(testState.autoSaveInterval);
+    testState.autoSaveInterval = null;
+  }
+  if (testState.inactivityTimer) {
+    clearInterval(testState.inactivityTimer);
+    testState.inactivityTimer = null;
+  }
   
   // Remove activity listeners
   document.removeEventListener('click', trackActivity);
   document.removeEventListener('touchstart', trackActivity);
   document.removeEventListener('keydown', trackActivity);
   
-  // Clear session storage
-  sessionStorage.removeItem('activeTest');
+  if (clearSession) {
+    sessionStorage.removeItem('activeTest');
+  }
   
-  // Reset ALL state
   testState.session = null;
   testState.faculty = null;
   testState.level = null;
@@ -40,24 +53,22 @@ export function resetTestState() {
   testState.isReset = true;
   testState.lastActivity = Date.now();
   
-  // Exit fullscreen
   exitFullscreenMode();
   
-  // Reset all test screens to initial state
   const facultyScreen = $id('testFacultyScreen');
   const levelScreen = $id('testLevelScreen');
   const courseScreen = $id('testCourseScreen');
   const entryScreen = $id('testEntryScreen');
   const runningScreen = $id('testRunningScreen');
   
-  if (facultyScreen) facultyScreen.style.display = 'block';
+  if (facultyScreen) {
+    facultyScreen.style.display = 'block';
+    loadTestFaculties();
+  }
   if (levelScreen) levelScreen.style.display = 'none';
   if (courseScreen) courseScreen.style.display = 'none';
   if (entryScreen) entryScreen.style.display = 'none';
   if (runningScreen) runningScreen.style.display = 'none';
-  
-  // Force refresh faculties
-  loadTestFaculties();
   
   console.log('✅ Test state fully reset');
 }
@@ -118,6 +129,12 @@ function enableAllButtons() {
   document.querySelectorAll('#testOptionsArea .opt').forEach(el => {
     el.classList.remove('disabled');
     el.style.cursor = 'pointer';
+    const index = Array.from(el.parentElement.children).indexOf(el);
+    el.onclick = function() {
+      if (!testState.isSubmitting) {
+        testSelectAnswer(index);
+      }
+    };
   });
   
   const prevBtn = $id('testPrevBtn');
@@ -146,8 +163,41 @@ export async function loadTestData() {
     testState.isReset = false;
     const facultyScreen = $id('testFacultyScreen');
     const runningScreen = $id('testRunningScreen');
+    const levelScreen = $id('testLevelScreen');
+    const courseScreen = $id('testCourseScreen');
+    const entryScreen = $id('testEntryScreen');
+    
     if (facultyScreen) facultyScreen.style.display = 'block';
     if (runningScreen) runningScreen.style.display = 'none';
+    if (levelScreen) levelScreen.style.display = 'none';
+    if (courseScreen) courseScreen.style.display = 'none';
+    if (entryScreen) entryScreen.style.display = 'none';
+    
+    const submitBtn = $id('testSubmitBtn');
+    if (submitBtn) {
+      submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Submit';
+      submitBtn.disabled = false;
+      submitBtn.style.display = 'none';
+    }
+    
+    const qText = $id('testQText');
+    const qOptions = $id('testOptionsArea');
+    const qCounter = $id('testQCounter');
+    if (qText) qText.textContent = '';
+    if (qOptions) qOptions.innerHTML = '';
+    if (qCounter) qCounter.textContent = '';
+    
+    const timerDisplay = $id('testTimerDisplay');
+    if (timerDisplay) {
+      timerDisplay.textContent = '--:--';
+      timerDisplay.className = 'timer-box';
+    }
+    
+    const qGrid = $id('testQuestionGrid');
+    if (qGrid) qGrid.innerHTML = '';
+    
+    await loadTestFaculties();
+    return;
   }
   
   if (document.querySelector('#testFacultyGrid .faculty-tag-simple')) return;
@@ -375,6 +425,7 @@ export async function testStart() {
     
     testState.lastActivity = Date.now();
     testState.isReset = false;
+    testState.isSubmitting = false;
     
     const title = $id('testCourseTitle');
     const meta = $id('testMeta');
@@ -433,10 +484,17 @@ function testRenderQuestion() {
       </div>
     `).join('');
   }
-  if (prevBtn) prevBtn.disabled = idx === 0;
+  if (prevBtn) prevBtn.disabled = idx === 0 || testState.isSubmitting;
   const last = idx === total - 1;
-  if (nextBtn) nextBtn.style.display = last ? 'none' : 'inline-flex';
-  if (submitBtn) submitBtn.style.display = last ? 'block' : 'none';
+  if (nextBtn) {
+    if (last) nextBtn.style.display = 'none';
+    else nextBtn.style.display = 'inline-flex';
+    nextBtn.disabled = testState.isSubmitting;
+  }
+  if (submitBtn) {
+    submitBtn.style.display = last ? 'block' : 'none';
+    submitBtn.disabled = testState.isSubmitting;
+  }
   testRenderGrid();
 }
 
@@ -477,7 +535,8 @@ function testRenderGrid() {
   if (!grid) return;
   grid.innerHTML = testState.session.questions.map((_, i) => `
     <div class="grid-btn ${testState.session.answers[i] !== null ? 'answered' : ''} ${i === testState.session.currentIndex ? 'current' : ''}" 
-         onclick="${testState.isSubmitting ? '' : `window.testJumpTo(${i})`}">${i + 1}</div>
+         onclick="${testState.isSubmitting ? '' : `window.testJumpTo(${i})`}"
+         style="${testState.isSubmitting ? 'pointer-events:none;opacity:0.5;' : ''}">${i + 1}</div>
   `).join('');
 }
 
@@ -546,9 +605,18 @@ export async function testSubmit(autoSubmit = false) {
     submitBtn.disabled = true;
   }
   
-  if (testState.session.timer) clearInterval(testState.session.timer);
-  if (testState.autoSaveInterval) clearInterval(testState.autoSaveInterval);
-  if (testState.inactivityTimer) clearInterval(testState.inactivityTimer);
+  if (testState.session.timer) {
+    clearInterval(testState.session.timer);
+    testState.session.timer = null;
+  }
+  if (testState.autoSaveInterval) {
+    clearInterval(testState.autoSaveInterval);
+    testState.autoSaveInterval = null;
+  }
+  if (testState.inactivityTimer) {
+    clearInterval(testState.inactivityTimer);
+    testState.inactivityTimer = null;
+  }
   
   document.removeEventListener('click', trackActivity);
   document.removeEventListener('touchstart', trackActivity);
@@ -597,8 +665,8 @@ export async function testSubmit(autoSubmit = false) {
     localStorage.setItem('lastResultTimestamp', Date.now().toString());
     sessionStorage.removeItem('activeTest');
     
-    testState.session = null;
-    testState.isSubmitting = false;
+    resetTestState(false);
+    
     exitFullscreenMode();
     window.showPage('submit');
     
