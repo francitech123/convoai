@@ -399,42 +399,56 @@
         <div class="auth-header">
             <img src="/logo.svg" alt="OAU CBE Practice" class="logo-mini">
             <h2>Reset Password</h2>
-            <p class="sub">Enter your username and answer your security question to reset your password.</p>
+            <p class="sub" style="color:#94a3b8;font-size:.78rem;">Enter your username and answer your security question to reset your password.</p>
         </div>
         <div class="auth-error" id="forgotError"></div>
         <div class="auth-success" id="forgotSuccess"></div>
-        <div class="form-group">
-            <label><i class="fas fa-user"></i> Username <span class="required">*</span></label>
-            <input type="text" id="forgotUsername" placeholder="Enter your username">
+        
+        <!-- Identity Verification -->
+        <div id="forgotIdentitySection">
+            <div class="form-group">
+                <label><i class="fas fa-user"></i> Username <span class="required">*</span></label>
+                <input type="text" id="forgotUsername" placeholder="Enter your username">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-question-circle"></i> Security Question <span class="required">*</span></label>
+                <select id="forgotSecurityQuestion">
+                    <option value="">Select your security question</option>
+                    <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+                    <option value="What is the name of your first pet?">What is the name of your first pet?</option>
+                    <option value="What city were you born in?">What city were you born in?</option>
+                    <option value="What is your favorite food?">What is your favorite food?</option>
+                    <option value="What was your first car?">What was your first car?</option>
+                    <option value="What is your favorite book?">What is your favorite book?</option>
+                    <option value="What is your childhood nickname?">What is your childhood nickname?</option>
+                    <option value="What is your best friend's name?">What is your best friend's name?</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-lock"></i> Security Answer <span class="required">*</span></label>
+                <input type="text" id="forgotSecurityAnswer" placeholder="Enter your security answer">
+            </div>
         </div>
-        <div class="form-group">
-            <label><i class="fas fa-shield-alt"></i> Security Question <span class="required">*</span></label>
-            <select id="forgotSecurityQuestion">
-                <option value="">Select your security question</option>
-                <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
-                <option value="What is the name of your first pet?">What is the name of your first pet?</option>
-                <option value="What is your favorite book?">What is your favorite book?</option>
-                <option value="What is your best friend's name?">What is your best friend's name?</option>
-                <option value="What is your childhood nickname?">What is your childhood nickname?</option>
-                <option value="What is your favorite food?">What is your favorite food?</option>
-                <option value="What city were you born in?">What city were you born in?</option>
-            </select>
+
+        <!-- Reset Password Section -->
+        <div id="forgotResetSection" style="display:none;">
+            <div style="background:rgba(16,185,129,.1);border:1px solid #10b981;border-radius:10px;padding:10px;margin-bottom:14px;text-align:left;">
+                <p style="color:#10b981;font-weight:600;font-size:.82rem;"><i class="fas fa-check-circle"></i> Identity Verified!</p>
+                <p style="color:#94a3b8;font-size:.7rem;">You can now reset your password.</p>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-lock"></i> New Password <span class="required">*</span></label>
+                <input type="password" id="forgotNewPassword" placeholder="Enter new password (min 6 chars)" oninput="checkForgotPasswordStrength()">
+                <div class="password-strength"><div class="bar" id="forgotPasswordStrengthBar"></div></div>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-check-circle"></i> Confirm New Password <span class="required">*</span></label>
+                <input type="password" id="forgotConfirmPassword" placeholder="Confirm new password">
+            </div>
         </div>
-        <div class="form-group">
-            <label><i class="fas fa-answer"></i> Security Answer <span class="required">*</span></label>
-            <input type="text" id="forgotSecurityAnswer" placeholder="Enter your security answer">
-        </div>
-        <div class="form-group" id="newPasswordGroup" style="display:none">
-            <label><i class="fas fa-lock"></i> New Password <span class="required">*</span></label>
-            <input type="password" id="forgotNewPassword" placeholder="Enter new password (min 6 chars)">
-            <div class="password-strength"><div class="bar" id="forgotPasswordStrengthBar"></div></div>
-        </div>
-        <div class="form-group" id="confirmNewPasswordGroup" style="display:none">
-            <label><i class="fas fa-check-circle"></i> Confirm New Password <span class="required">*</span></label>
-            <input type="password" id="forgotConfirmPassword" placeholder="Confirm new password">
-        </div>
+
         <button class="auth-btn" id="forgotBtn" onclick="handleForgotPassword()"><i class="fas fa-key"></i> Verify & Reset Password</button>
-        <div class="auth-footer"><a onclick="closeForgotPassword()">← Back to Login</a></div>
+        <div class="auth-footer"><a onclick="closeForgotPassword()" style="color:#3b82f6;cursor:pointer;">← Back to Login</a></div>
     </div>
 </div>
 
