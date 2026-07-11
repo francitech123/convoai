@@ -7,14 +7,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="/css/index.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:'Inter',sans-serif;background:#0a0e27;color:#f1f5f9;min-height:100vh;overflow:hidden;-webkit-font-smoothing:antialiased}
         .app-container{position:fixed;top:0;left:0;right:0;bottom:0;display:flex;flex-direction:column;background:radial-gradient(ellipse at 70% 20%,rgba(59,130,246,.12),transparent 50%),radial-gradient(ellipse at 30% 80%,rgba(16,185,129,.06),transparent 50%),#0a0e27}
         .header{display:flex;justify-content:space-between;align-items:center;padding:16px 20px 8px;position:relative;z-index:10}
         .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-        .logo svg{width:36px;height:36px}
+        .logo img{width:36px;height:36px;object-fit:contain}
         .logo span{font-weight:800;font-size:1.1rem;color:#f1f5f9;letter-spacing:.5px}
         .logo span em{color:#3b82f6;font-style:normal}
         .help-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#94a3b8;padding:6px 14px;border-radius:20px;font-size:.75rem;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none}
@@ -66,20 +65,6 @@
         .slide .testimonial .text .title{font-size:.6rem;color:#94a3b8}
         .slide .testimonial .text .quote{font-size:.75rem;color:#cbd5e1;font-style:italic;margin-top:2px}
         .slide .testimonial .stars{color:#f59e0b;font-size:.6rem;margin-top:2px}
-        .slide .mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%}
-        .slide .mode-card{background:rgba(255,255,255,.04);border-radius:12px;padding:12px 8px;border:1px solid rgba(255,255,255,.06);text-align:center}
-        .slide .mode-card .icon{font-size:1.6rem;margin-bottom:4px}
-        .slide .mode-card .title{font-weight:700;color:#f1f5f9;font-size:.78rem}
-        .slide .mode-card .desc{font-size:.6rem;color:#94a3b8}
-        .slide .metric-row{display:flex;align-items:center;gap:8px;margin:4px 0}
-        .slide .metric-row .label{font-size:.7rem;color:#cbd5e1;width:70px;text-align:left;font-weight:600}
-        .slide .metric-row .bar{flex:1;height:5px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden}
-        .slide .metric-row .bar .fill{height:100%;border-radius:4px;transition:width 1s ease}
-        .slide .metric-row .bar .fill.excellent{background:#10b981}
-        .slide .metric-row .bar .fill.good{background:#3b82f6}
-        .slide .metric-row .bar .fill.average{background:#f59e0b}
-        .slide .metric-row .bar .fill.low{background:#ef4444}
-        .slide .metric-row .count{font-weight:700;color:#f1f5f9;font-size:.7rem;width:28px;text-align:right}
         @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
         .control-bar{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:20;display:flex;align-items:center;gap:16px;background:rgba(15,23,42,.7);backdrop-filter:blur(16px);padding:10px 20px;border-radius:50px;border:1px solid rgba(255,255,255,.06)}
         .dots{display:flex;gap:6px}
@@ -95,35 +80,50 @@
         .btn-group{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:12px}
         .auth-modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,14,39,.95);backdrop-filter:blur(20px);z-index:100;display:none;align-items:center;justify-content:center;padding:20px;animation:fadeIn .3s ease}
         .auth-modal-overlay.show{display:flex}
-        .auth-modal{background:#141b38;border-radius:24px;padding:32px 24px;max-width:400px;width:100%;border:1px solid rgba(255,255,255,.06);position:relative;max-height:90vh;overflow-y:auto}
+        .auth-modal{background:#141b38;border-radius:24px;padding:28px 22px;max-width:420px;width:100%;border:1px solid rgba(255,255,255,.06);position:relative;max-height:90vh;overflow-y:auto}
         .auth-modal .close-btn{position:absolute;top:12px;right:16px;background:none;border:none;color:#94a3b8;font-size:1.1rem;cursor:pointer}
         .auth-modal .close-btn:hover{color:#f1f5f9}
-        .auth-modal .auth-header{text-align:center;margin-bottom:20px}
-        .auth-modal .auth-header .icon{font-size:2.2rem;margin-bottom:6px}
-        .auth-modal .auth-header h2{font-size:1.3rem;font-weight:800;color:#f1f5f9}
-        .auth-modal .auth-header p{color:#94a3b8;font-size:.8rem;margin-top:4px}
-        .auth-modal .form-group{margin-bottom:14px}
-        .auth-modal .form-group label{display:block;font-weight:600;font-size:.72rem;color:#cbd5e1;margin-bottom:4px}
-        .auth-modal .form-group input{width:100%;padding:10px 14px;background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.08);border-radius:10px;color:#f1f5f9;font-size:.85rem;transition:all .2s;font-family:inherit}
-        .auth-modal .form-group input:focus{outline:none;border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.1)}
-        .auth-modal .form-group input::placeholder{color:#64748b}
-        .auth-modal .auth-btn{width:100%;padding:12px;background:linear-gradient(135deg,#1e3a8a,#3b82f6);color:#fff;border:none;border-radius:10px;font-weight:700;font-size:.9rem;cursor:pointer;transition:all .2s}
+        .auth-modal .auth-header{text-align:center;margin-bottom:16px}
+        .auth-modal .auth-header .logo-mini{width:48px;height:48px;margin:0 auto 8px;display:block}
+        .auth-modal .auth-header h2{font-size:1.2rem;font-weight:800;color:#f1f5f9}
+        .auth-modal .auth-header p{color:#94a3b8;font-size:.78rem;margin-top:2px}
+        .auth-modal .form-group{margin-bottom:12px}
+        .auth-modal .form-group label{display:block;font-weight:600;font-size:.7rem;color:#cbd5e1;margin-bottom:3px}
+        .auth-modal .form-group label .required{color:#ef4444}
+        .auth-modal .form-group input,.auth-modal .form-group select{width:100%;padding:9px 12px;background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.08);border-radius:10px;color:#f1f5f9;font-size:.82rem;transition:all .2s;font-family:inherit}
+        .auth-modal .form-group input:focus,.auth-modal .form-group select:focus{outline:none;border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.1)}
+        .auth-modal .form-group input::placeholder,.auth-modal .form-group select{color:#64748b}
+        .auth-modal .form-group select option{background:#141b38;color:#f1f5f9}
+        .auth-modal .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+        .auth-modal .auth-btn{width:100%;padding:12px;background:linear-gradient(135deg,#1e3a8a,#3b82f6);color:#fff;border:none;border-radius:10px;font-weight:700;font-size:.88rem;cursor:pointer;transition:all .2s}
         .auth-modal .auth-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(59,130,246,.3)}
         .auth-modal .auth-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
-        .auth-modal .auth-footer{text-align:center;margin-top:14px;font-size:.8rem;color:#94a3b8}
+        .auth-modal .auth-footer{text-align:center;margin-top:12px;font-size:.78rem;color:#94a3b8}
         .auth-modal .auth-footer a{color:#3b82f6;text-decoration:none;font-weight:600;cursor:pointer}
         .auth-modal .auth-footer a:hover{text-decoration:underline}
-        .auth-modal .auth-error{background:rgba(239,68,68,.12);color:#ef4444;padding:8px 12px;border-radius:8px;font-size:.78rem;display:none;border:1px solid rgba(239,68,68,.2);margin-bottom:10px}
+        .auth-modal .auth-error{background:rgba(239,68,68,.12);color:#ef4444;padding:8px 12px;border-radius:8px;font-size:.75rem;display:none;border:1px solid rgba(239,68,68,.2);margin-bottom:10px}
         .auth-modal .auth-error.show{display:block}
-        .auth-modal .auth-success{background:rgba(16,185,129,.12);color:#10b981;padding:8px 12px;border-radius:8px;font-size:.78rem;display:none;border:1px solid rgba(16,185,129,.2);margin-bottom:10px}
+        .auth-modal .auth-success{background:rgba(16,185,129,.12);color:#10b981;padding:8px 12px;border-radius:8px;font-size:.75rem;display:none;border:1px solid rgba(16,185,129,.2);margin-bottom:10px}
         .auth-modal .auth-success.show{display:block}
-        .auth-tabs{display:flex;gap:4px;background:rgba(255,255,255,.04);border-radius:10px;padding:4px;margin-bottom:16px}
-        .auth-tab{flex:1;padding:8px;text-align:center;border:none;background:transparent;color:#94a3b8;font-weight:600;font-size:.8rem;border-radius:8px;cursor:pointer;transition:all .2s;font-family:inherit}
+        .auth-tabs{display:flex;gap:4px;background:rgba(255,255,255,.04);border-radius:10px;padding:4px;margin-bottom:14px}
+        .auth-tab{flex:1;padding:8px;text-align:center;border:none;background:transparent;color:#94a3b8;font-weight:600;font-size:.78rem;border-radius:8px;cursor:pointer;transition:all .2s;font-family:inherit}
         .auth-tab.active{background:#3b82f6;color:#fff}
         .auth-tab:hover:not(.active){color:#f1f5f9}
+        .password-strength{height:3px;margin-top:4px;border-radius:4px;transition:all .3s;background:rgba(255,255,255,.08)}
+        .password-strength .bar{height:100%;border-radius:4px;transition:width .4s ease;width:0%}
+        .password-strength .bar.weak{background:#ef4444;width:25%}
+        .password-strength .bar.medium{background:#f59e0b;width:50%}
+        .password-strength .bar.strong{background:#10b981;width:75%}
+        .password-strength .bar.very-strong{background:#10b981;width:100%}
+        .password-hint{font-size:.6rem;color:#94a3b8;margin-top:3px;display:block}
+        .forgot-btn{background:none;border:none;color:#3b82f6;font-size:.7rem;cursor:pointer;font-weight:600;padding:4px 0;margin-top:2px;font-family:inherit}
+        .forgot-btn:hover{text-decoration:underline}
         @keyframes fadeIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
-        @media(max-width:380px){.control-bar{gap:10px;padding:8px 14px}.mode-grid{grid-template-columns:1fr}.btn-group{flex-direction:column;align-items:stretch}.btn-group .cta-btn,.btn-group .cta-btn-outline{width:100%}}
+        @media(max-width:380px){.control-bar{gap:10px;padding:8px 14px}.btn-group{flex-direction:column;align-items:stretch}.btn-group .cta-btn,.btn-group .cta-btn-outline{width:100%}.auth-modal .form-row{grid-template-columns:1fr}}
         @media(min-width:768px){.slide-content{max-width:480px}.slide .stat-grid{grid-template-columns:repeat(4,1fr)}}
+        .auth-modal-overlay.forgot-password .auth-modal{max-width:400px}
+        .auth-modal-overlay.forgot-password .auth-tabs{display:none}
+        .auth-modal-overlay.forgot-password .auth-header .sub{color:#94a3b8;font-size:.78rem}
     </style>
 </head>
 <body>
@@ -131,21 +131,7 @@
 <div class="app-container">
     <div class="header">
         <a href="/" class="logo">
-            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="100" cy="100" r="90" fill="none" stroke="#3b82f6" stroke-width="3.5"/>
-                <path id="logoArc" d="M 30 100 A 70 70 0 0 1 170 100" fill="none"/>
-                <text font-size="17" font-weight="900" fill="#3b82f6" letter-spacing="3">
-                    <textPath href="#logoArc" startOffset="50%" text-anchor="middle">OAU</textPath>
-                </text>
-                <path id="logoArc2" d="M 30 100 A 70 70 0 0 0 170 100" fill="none"/>
-                <text font-size="7.5" font-weight="800" fill="#1e3a8a" letter-spacing="1.2">
-                    <textPath href="#logoArc2" startOffset="50%" text-anchor="middle">EXAM CBT PRACTICE</textPath>
-                </text>
-                <circle cx="100" cy="100" r="19" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
-                <line x1="81" y1="100" x2="119" y2="100" stroke="#3b82f6" stroke-width="1.5"/>
-                <line x1="100" y1="81" x2="100" y2="119" stroke="#3b82f6" stroke-width="1.5"/>
-                <text x="100" y="104" font-size="7.5" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">OAU</text>
-            </svg>
+            <img src="/logo.svg" alt="OAU CBE Practice" id="logoImg">
             <span>OAU <em>CBE</em> Practice</span>
         </a>
         <a href="/chat" class="help-btn"><i class="fas fa-question-circle"></i> Help</a>
@@ -295,31 +281,164 @@
     </div>
 </div>
 
+<!-- Auth Modal -->
 <div class="auth-modal-overlay" id="authModal">
     <div class="auth-modal">
         <button class="close-btn" onclick="closeAuthModal()"><i class="fas fa-times"></i></button>
-        <div class="auth-header"><div class="icon">🎓</div><h2>OAU CBE Practice</h2><p id="authSubtitle">Sign in to continue</p></div>
+        <div class="auth-header">
+            <img src="/logo.svg" alt="OAU CBE Practice" class="logo-mini" id="modalLogo">
+            <h2 id="authTitle">OAU CBE Practice</h2>
+            <p id="authSubtitle">Sign in to continue your exam preparation</p>
+        </div>
         <div class="auth-tabs">
             <button class="auth-tab active" data-tab="login" onclick="setAuthTab('login')">Login</button>
             <button class="auth-tab" data-tab="register" onclick="setAuthTab('register')">Register</button>
         </div>
         <div class="auth-error" id="authError"></div>
         <div class="auth-success" id="authSuccess"></div>
+        
+        <!-- Login Form -->
         <div id="loginForm">
-            <div class="form-group"><label><i class="fas fa-user"></i> Username</label><input type="text" id="loginUsername" placeholder="Enter your username"></div>
-            <div class="form-group"><label><i class="fas fa-lock"></i> Password</label><input type="password" id="loginPassword" placeholder="Enter your password"></div>
-            <button class="auth-btn" id="loginBtn" onclick="handleLogin()"><i class="fas fa-sign-in-alt"></i> Login</button>
+            <div class="form-group">
+                <label><i class="fas fa-user"></i> Username <span class="required">*</span></label>
+                <input type="text" id="loginUsername" placeholder="Enter your username">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-lock"></i> Password <span class="required">*</span></label>
+                <input type="password" id="loginPassword" placeholder="Enter your password">
+            </div>
+            <button class="forgot-btn" onclick="openForgotPassword()"><i class="fas fa-key"></i> Forgot Password?</button>
+            <button class="auth-btn" id="loginBtn" onclick="handleLogin()" style="margin-top:10px"><i class="fas fa-sign-in-alt"></i> Login</button>
             <div class="auth-footer">Don't have an account? <a onclick="setAuthTab('register')">Create one</a></div>
         </div>
+        
+        <!-- Register Form -->
         <div id="registerForm" style="display:none">
-            <div class="form-group"><label><i class="fas fa-user"></i> Username</label><input type="text" id="regUsername" placeholder="Choose a username"></div>
-            <div class="form-group"><label><i class="fas fa-user-circle"></i> Full Name</label><input type="text" id="regFullName" placeholder="Enter your full name"></div>
-            <div class="form-group"><label><i class="fas fa-envelope"></i> Email</label><input type="email" id="regEmail" placeholder="Enter your email"></div>
-            <div class="form-group"><label><i class="fas fa-lock"></i> Password</label><input type="password" id="regPassword" placeholder="Create a password (min 6 chars)"></div>
-            <div class="form-group"><label><i class="fas fa-check-circle"></i> Confirm Password</label><input type="password" id="regConfirmPassword" placeholder="Confirm your password"></div>
+            <div class="form-group">
+                <label><i class="fas fa-user"></i> Username <span class="required">*</span></label>
+                <input type="text" id="regUsername" placeholder="Choose a username (min 3 chars)">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-user-circle"></i> Full Name <span class="required">*</span></label>
+                <input type="text" id="regFullName" placeholder="Enter your full name">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-envelope"></i> Email <span class="required">*</span></label>
+                <input type="email" id="regEmail" placeholder="Enter your email address">
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label><i class="fas fa-building"></i> Faculty <span class="required">*</span></label>
+                    <select id="regFaculty">
+                        <option value="">Select Faculty</option>
+                        <option value="Agriculture">Agriculture</option>
+                        <option value="Arts">Arts</option>
+                        <option value="Basic Medical Sciences">Basic Medical Sciences</option>
+                        <option value="Clinical Sciences">Clinical Sciences</option>
+                        <option value="Dentistry">Dentistry</option>
+                        <option value="Education">Education</option>
+                        <option value="Engineering">Engineering</option>
+                        <option value="Environmental Design">Environmental Design</option>
+                        <option value="Law">Law</option>
+                        <option value="Management Sciences">Management Sciences</option>
+                        <option value="Pharmacy">Pharmacy</option>
+                        <option value="Sciences">Sciences</option>
+                        <option value="Social Sciences">Social Sciences</option>
+                        <option value="Technology">Technology</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-layer-group"></i> Level <span class="required">*</span></label>
+                    <select id="regLevel">
+                        <option value="100">100 Level</option>
+                        <option value="200">200 Level</option>
+                        <option value="300">300 Level</option>
+                        <option value="400">400 Level</option>
+                        <option value="500">500 Level</option>
+                        <option value="600">600 Level</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-lock"></i> Password <span class="required">*</span></label>
+                <input type="password" id="regPassword" placeholder="Create a password (min 6 chars)" oninput="checkPasswordStrength(this.value)">
+                <div class="password-strength"><div class="bar" id="passwordStrengthBar"></div></div>
+                <span class="password-hint" id="passwordHint">Use 6+ characters with letters and numbers</span>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-check-circle"></i> Confirm Password <span class="required">*</span></label>
+                <input type="password" id="regConfirmPassword" placeholder="Confirm your password">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-shield-alt"></i> Security Question <span class="required">*</span></label>
+                <select id="regSecurityQuestion">
+                    <option value="">Select a security question</option>
+                    <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+                    <option value="What is the name of your first pet?">What is the name of your first pet?</option>
+                    <option value="What is your favorite book?">What is your favorite book?</option>
+                    <option value="What is your best friend's name?">What is your best friend's name?</option>
+                    <option value="What is your childhood nickname?">What is your childhood nickname?</option>
+                    <option value="What is your favorite food?">What is your favorite food?</option>
+                    <option value="What city were you born in?">What city were you born in?</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-answer"></i> Security Answer <span class="required">*</span></label>
+                <input type="text" id="regSecurityAnswer" placeholder="Enter your security answer">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-building"></i> Department</label>
+                <input type="text" id="regDepartment" placeholder="e.g., Computer Science, Electrical Engineering">
+            </div>
             <button class="auth-btn" id="registerBtn" onclick="handleRegister()"><i class="fas fa-user-plus"></i> Create Account</button>
             <div class="auth-footer">Already have an account? <a onclick="setAuthTab('login')">Login</a></div>
         </div>
+    </div>
+</div>
+
+<!-- Forgot Password Modal -->
+<div class="auth-modal-overlay" id="forgotPasswordModal">
+    <div class="auth-modal">
+        <button class="close-btn" onclick="closeForgotPassword()"><i class="fas fa-times"></i></button>
+        <div class="auth-header">
+            <img src="/logo.svg" alt="OAU CBE Practice" class="logo-mini">
+            <h2>Reset Password</h2>
+            <p class="sub">Enter your username and answer your security question to reset your password.</p>
+        </div>
+        <div class="auth-error" id="forgotError"></div>
+        <div class="auth-success" id="forgotSuccess"></div>
+        <div class="form-group">
+            <label><i class="fas fa-user"></i> Username <span class="required">*</span></label>
+            <input type="text" id="forgotUsername" placeholder="Enter your username">
+        </div>
+        <div class="form-group">
+            <label><i class="fas fa-shield-alt"></i> Security Question <span class="required">*</span></label>
+            <select id="forgotSecurityQuestion">
+                <option value="">Select your security question</option>
+                <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+                <option value="What is the name of your first pet?">What is the name of your first pet?</option>
+                <option value="What is your favorite book?">What is your favorite book?</option>
+                <option value="What is your best friend's name?">What is your best friend's name?</option>
+                <option value="What is your childhood nickname?">What is your childhood nickname?</option>
+                <option value="What is your favorite food?">What is your favorite food?</option>
+                <option value="What city were you born in?">What city were you born in?</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label><i class="fas fa-answer"></i> Security Answer <span class="required">*</span></label>
+            <input type="text" id="forgotSecurityAnswer" placeholder="Enter your security answer">
+        </div>
+        <div class="form-group" id="newPasswordGroup" style="display:none">
+            <label><i class="fas fa-lock"></i> New Password <span class="required">*</span></label>
+            <input type="password" id="forgotNewPassword" placeholder="Enter new password (min 6 chars)">
+            <div class="password-strength"><div class="bar" id="forgotPasswordStrengthBar"></div></div>
+        </div>
+        <div class="form-group" id="confirmNewPasswordGroup" style="display:none">
+            <label><i class="fas fa-check-circle"></i> Confirm New Password <span class="required">*</span></label>
+            <input type="password" id="forgotConfirmPassword" placeholder="Confirm new password">
+        </div>
+        <button class="auth-btn" id="forgotBtn" onclick="handleForgotPassword()"><i class="fas fa-key"></i> Verify & Reset Password</button>
+        <div class="auth-footer"><a onclick="closeForgotPassword()">← Back to Login</a></div>
     </div>
 </div>
 
