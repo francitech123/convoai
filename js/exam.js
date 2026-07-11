@@ -17,7 +17,8 @@ export let examState = {
   showAll: false,
   isComplete: false,
   lastActivity: Date.now(),
-  isReset: false
+  isReset: false,
+  pageLoaded: false
 };
 
 // ==================== COMPLETE RESET EXAM STATE ====================
@@ -56,6 +57,7 @@ export function resetExamState(clearSession = true) {
   examState.isComplete = false;
   examState.isReset = true;
   examState.lastActivity = Date.now();
+  examState.pageLoaded = false;
   
   // Exit fullscreen
   exitFullscreenMode();
@@ -69,18 +71,77 @@ export function resetExamState(clearSession = true) {
   
   if (facultyScreen) {
     facultyScreen.style.display = 'block';
-    // Re-render faculties
-    loadExamFaculties();
   }
   if (levelScreen) levelScreen.style.display = 'none';
   if (courseScreen) courseScreen.style.display = 'none';
   if (entryScreen) entryScreen.style.display = 'none';
   if (runningScreen) runningScreen.style.display = 'none';
   
+  // Clear question display
+  const qText = $id('examQText');
+  const qOptions = $id('examOptionsArea');
+  const qCounter = $id('examQCounter');
+  const qGrid = $id('examQuestionGrid');
+  const timerDisplay = $id('examTimerDisplay');
+  const submitBtn = $id('examSubmitBtn');
+  const prevBtn = $id('examPrevBtn');
+  const nextBtn = $id('examNextBtn');
+  
+  if (qText) qText.textContent = '';
+  if (qOptions) qOptions.innerHTML = '';
+  if (qCounter) qCounter.textContent = '';
+  if (qGrid) qGrid.innerHTML = '';
+  if (timerDisplay) {
+    timerDisplay.textContent = '--:--';
+    timerDisplay.className = 'timer-box';
+  }
+  if (submitBtn) {
+    submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Submit';
+    submitBtn.disabled = false;
+    submitBtn.style.display = 'none';
+  }
+  if (prevBtn) {
+    prevBtn.disabled = true;
+    prevBtn.style.opacity = '1';
+  }
+  if (nextBtn) {
+    nextBtn.disabled = false;
+    nextBtn.style.opacity = '1';
+    nextBtn.style.display = 'inline-flex';
+  }
+  
+  // Force refresh faculties
+  loadExamFaculties();
+  
   console.log('✅ Exam state fully reset');
 }
 
-// ==================== INACTIVITY CHECK ====================
+// ==================== CHECK AND RESET IF NEEDED ====================
+export function checkAndResetExam() {
+  // If there's no active session but questions are showing, reset
+  if (!examState.session && examState.isReset === false) {
+    // Check if running screen is visible
+    const runningScreen = $id('examRunningScreen');
+    if (runningScreen && runningScreen.style.display !== 'none') {
+      console.log('🔄 Detected stuck exam state, resetting...');
+      resetExamState();
+      return true;
+    }
+  }
+  
+  // If session ended but questions still visible
+  if (!examState.session && document.querySelector('#examQuestionGrid .grid-btn')) {
+    console.log('🔄 Detected old questions without session, resetting...');
+    resetExamState();
+    return true;
+  }
+  
+  return false;
+}
+
+// ============================================
+// INACTIVITY CHECK
+// ============================================
 function resetInactivityTimer() {
   examState.lastActivity = Date.now();
   
@@ -88,37 +149,32 @@ function resetInactivityTimer() {
     clearInterval(examState.inactivityTimer);
   }
   
-  // Check every 30 seconds for inactivity
   examState.inactivityTimer = setInterval(() => {
     if (!examState.session) return;
     
     const inactiveTime = Date.now() - examState.lastActivity;
     const inactiveMinutes = inactiveTime / (1000 * 60);
     
-    // If inactive for more than 5 minutes, auto-submit
     if (inactiveMinutes >= 5) {
       showToast('⏰ Inactivity detected for 5 minutes. Auto-submitting exam...', 'warning');
       examState.lastActivity = Date.now();
-      examSubmit(true); // Auto-submit
+      examSubmit(true);
     }
   }, 30000);
 }
 
-// ==================== TRACK ACTIVITY ====================
 function trackActivity() {
   examState.lastActivity = Date.now();
 }
 
 // ==================== DISABLE ALL BUTTONS ====================
 function disableAllButtons() {
-  // Disable options
   document.querySelectorAll('#examOptionsArea .opt').forEach(el => {
     el.classList.add('disabled');
     el.style.cursor = 'not-allowed';
     el.onclick = null;
   });
   
-  // Disable nav buttons
   const prevBtn = $id('examPrevBtn');
   const nextBtn = $id('examNextBtn');
   const submitBtn = $id('examSubmitBtn');
@@ -131,19 +187,16 @@ function disableAllButtons() {
   if (quitBtn) { quitBtn.disabled = true; quitBtn.style.opacity = '0.5'; }
   if (calcBtn) { calcBtn.disabled = true; calcBtn.style.opacity = '0.5'; }
   
-  // Disable question grid buttons
   document.querySelectorAll('#examQuestionGrid .grid-btn').forEach(el => {
     el.style.pointerEvents = 'none';
     el.style.opacity = '0.5';
   });
 }
 
-// ==================== ENABLE ALL BUTTONS ====================
 function enableAllButtons() {
   document.querySelectorAll('#examOptionsArea .opt').forEach(el => {
     el.classList.remove('disabled');
     el.style.cursor = 'pointer';
-    // Re-attach click handler
     const index = Array.from(el.parentElement.children).indexOf(el);
     el.onclick = function() {
       if (!examState.isSubmitting) {
@@ -174,7 +227,10 @@ function enableAllButtons() {
 // LOAD EXAM DATA
 // ============================================
 export async function loadExamData() {
-  // If exam was reset, make sure faculty grid is visible and questions are hidden
+  // Check if we need to reset first
+  checkAndResetExam();
+  
+  // If exam was reset, make sure faculty grid is visible
   if (examState.isReset) {
     examState.isReset = false;
     const facultyScreen = $id('examFacultyScreen');
@@ -189,40 +245,50 @@ export async function loadExamData() {
     if (courseScreen) courseScreen.style.display = 'none';
     if (entryScreen) entryScreen.style.display = 'none';
     
-    // Reset any stuck loading states
+    // Clear any stuck content
+    const qText = $id('examQText');
+    const qOptions = $id('examOptionsArea');
+    const qCounter = $id('examQCounter');
+    const qGrid = $id('examQuestionGrid');
+    const timerDisplay = $id('examTimerDisplay');
     const submitBtn = $id('examSubmitBtn');
+    
+    if (qText) qText.textContent = '';
+    if (qOptions) qOptions.innerHTML = '';
+    if (qCounter) qCounter.textContent = '';
+    if (qGrid) qGrid.innerHTML = '';
+    if (timerDisplay) {
+      timerDisplay.textContent = '--:--';
+      timerDisplay.className = 'timer-box';
+    }
     if (submitBtn) {
       submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Submit';
       submitBtn.disabled = false;
       submitBtn.style.display = 'none';
     }
     
-    // Clear question display
-    const qText = $id('examQText');
-    const qOptions = $id('examOptionsArea');
-    const qCounter = $id('examQCounter');
-    if (qText) qText.textContent = '';
-    if (qOptions) qOptions.innerHTML = '';
-    if (qCounter) qCounter.textContent = '';
-    
-    // Reset timer display
-    const timerDisplay = $id('examTimerDisplay');
-    if (timerDisplay) {
-      timerDisplay.textContent = '--:--';
-      timerDisplay.className = 'timer-box';
-    }
-    
-    // Clear question grid
-    const qGrid = $id('examQuestionGrid');
-    if (qGrid) qGrid.innerHTML = '';
-    
-    // Force refresh faculties
     await loadExamFaculties();
+    examState.pageLoaded = true;
     return;
   }
   
-  if (document.querySelector('#examFacultyGrid .faculty-tag-simple')) return;
+  // If there's an active session, render it
+  if (examState.session) {
+    const runningScreen = $id('examRunningScreen');
+    if (runningScreen) runningScreen.style.display = 'block';
+    examRenderQuestion();
+    examRenderGrid();
+    examState.pageLoaded = true;
+    return;
+  }
+  
+  // If no session and no reset, load faculties
+  if (document.querySelector('#examFacultyGrid .faculty-tag-simple')) {
+    examState.pageLoaded = true;
+    return;
+  }
   await loadExamFaculties();
+  examState.pageLoaded = true;
 }
 
 export async function loadExamFaculties() {
@@ -444,7 +510,6 @@ export async function examStart() {
       mode: 'exam'
     };
     
-    // Reset inactivity tracking
     examState.lastActivity = Date.now();
     examState.isReset = false;
     examState.isSubmitting = false;
@@ -469,7 +534,6 @@ export async function examStart() {
     examStartAutoSave();
     resetInactivityTimer();
     
-    // Track all user interactions
     document.addEventListener('click', trackActivity);
     document.addEventListener('touchstart', trackActivity);
     document.addEventListener('keydown', trackActivity);
@@ -510,11 +574,8 @@ function examRenderQuestion() {
   if (prevBtn) prevBtn.disabled = idx === 0 || examState.isSubmitting;
   const last = idx === total - 1;
   if (nextBtn) {
-    if (last) {
-      nextBtn.style.display = 'none';
-    } else {
-      nextBtn.style.display = 'inline-flex';
-    }
+    if (last) nextBtn.style.display = 'none';
+    else nextBtn.style.display = 'inline-flex';
     nextBtn.disabled = examState.isSubmitting;
   }
   if (submitBtn) {
@@ -561,7 +622,7 @@ function examRenderGrid() {
   if (!grid) return;
   grid.innerHTML = examState.session.questions.map((_, i) => `
     <div class="grid-btn ${examState.session.answers[i] !== null ? 'answered' : ''} ${i === examState.session.currentIndex ? 'current' : ''}" 
-         onclick="${examState.isSubmitting ? '' : `window.examJumpTo(${i})`}" 
+         onclick="${examState.isSubmitting ? '' : `window.examJumpTo(${i})`}"
          style="${examState.isSubmitting ? 'pointer-events:none;opacity:0.5;' : ''}">${i + 1}</div>
   `).join('');
 }
@@ -612,30 +673,25 @@ function examStartAutoSave() {
 }
 
 // ============================================
-// SUBMIT EXAM - Full Reset After Submission
+// SUBMIT EXAM
 // ============================================
 export async function examSubmit(autoSubmit = false) {
   if (examState.isSubmitting) return;
   if (!examState.session) return;
   
-  // If not auto-submit, ask for confirmation
   if (!autoSubmit) {
     if (!confirm('Submit your exam? You cannot change answers after submission.')) return;
   }
   
   examState.isSubmitting = true;
-  
-  // DISABLE ALL BUTTONS IMMEDIATELY
   disableAllButtons();
   
-  // Show spinner on submit button
   const submitBtn = $id('examSubmitBtn');
   if (submitBtn) {
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
     submitBtn.disabled = true;
   }
   
-  // Clear timers
   if (examState.session.timer) {
     clearInterval(examState.session.timer);
     examState.session.timer = null;
@@ -649,7 +705,6 @@ export async function examSubmit(autoSubmit = false) {
     examState.inactivityTimer = null;
   }
   
-  // Remove activity listeners
   document.removeEventListener('click', trackActivity);
   document.removeEventListener('touchstart', trackActivity);
   document.removeEventListener('keydown', trackActivity);
@@ -692,22 +747,16 @@ export async function examSubmit(autoSubmit = false) {
       }))
     };
     
-    // Store result
     sessionStorage.setItem('examResult', JSON.stringify(resultData));
     localStorage.setItem('lastExamResult', JSON.stringify(resultData));
     localStorage.setItem('lastResultTimestamp', Date.now().toString());
     sessionStorage.removeItem('activeExam');
     
-    // Reset exam state COMPLETELY
-    resetExamState(false); // Don't clear sessionStorage again
+    resetExamState(false);
     
-    // Exit fullscreen
     exitFullscreenMode();
-    
-    // Navigate to submit page
     window.showPage('submit');
     
-    // Force refresh submit page to show current result
     setTimeout(() => {
       if (window.refreshSubmitPage) {
         window.refreshSubmitPage();
@@ -726,7 +775,7 @@ export async function examSubmit(autoSubmit = false) {
 }
 
 // ============================================
-// EXAM QUIT - Reset everything
+// EXAM QUIT
 // ============================================
 export function examQuit() {
   if (examState.isSubmitting) {
@@ -735,13 +784,9 @@ export function examQuit() {
   }
   
   if (!examState.session) return;
-  
   if (!confirm('Quit exam? Your progress will be lost.')) return;
   
-  // Reset everything
   resetExamState();
-  
-  // Go to exam page (which now shows faculty selection)
   window.showPage('exam');
 }
 
@@ -763,3 +808,5 @@ window.examQuit = examQuit;
 window.examToggleFaculties = examToggleFaculties;
 window.examJumpTo = examJumpTo;
 window.resetExamState = resetExamState;
+window.checkAndResetExam = checkAndResetExam;
+window.loadExamData = loadExamData;
