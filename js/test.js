@@ -149,7 +149,7 @@ function trackActivity() {
   testState.lastActivity = Date.now();
 }
 
-// ==================== DISABLE ALL BUTTONS ====================
+// ==================== DISABLE ALL BUTTONS (ONLY DURING SUBMISSION) ====================
 function disableAllButtons() {
   document.querySelectorAll('#testOptionsArea .opt').forEach(el => {
     el.classList.add('disabled');
@@ -166,8 +166,16 @@ function disableAllButtons() {
   if (prevBtn) { prevBtn.disabled = true; prevBtn.style.opacity = '0.5'; }
   if (nextBtn) { nextBtn.disabled = true; nextBtn.style.opacity = '0.5'; }
   if (submitBtn) { submitBtn.disabled = true; submitBtn.style.opacity = '0.5'; }
-  if (quitBtn) { quitBtn.disabled = true; quitBtn.style.opacity = '0.5'; }
-  if (calcBtn) { calcBtn.disabled = true; calcBtn.style.opacity = '0.5'; }
+  if (quitBtn) { 
+    quitBtn.disabled = true; 
+    quitBtn.style.opacity = '0.5';
+    quitBtn.style.pointerEvents = 'none';
+  }
+  if (calcBtn) { 
+    calcBtn.disabled = true; 
+    calcBtn.style.opacity = '0.5';
+    calcBtn.style.pointerEvents = 'none';
+  }
   
   document.querySelectorAll('#testQuestionGrid .grid-btn').forEach(el => {
     el.style.pointerEvents = 'none';
@@ -196,8 +204,16 @@ function enableAllButtons() {
   if (prevBtn) { prevBtn.disabled = false; prevBtn.style.opacity = '1'; }
   if (nextBtn) { nextBtn.disabled = false; nextBtn.style.opacity = '1'; }
   if (submitBtn) { submitBtn.disabled = false; submitBtn.style.opacity = '1'; }
-  if (quitBtn) { quitBtn.disabled = false; quitBtn.style.opacity = '1'; }
-  if (calcBtn) { calcBtn.disabled = false; calcBtn.style.opacity = '1'; }
+  if (quitBtn) { 
+    quitBtn.disabled = false; 
+    quitBtn.style.opacity = '1';
+    quitBtn.style.pointerEvents = 'auto';
+  }
+  if (calcBtn) { 
+    calcBtn.disabled = false; 
+    calcBtn.style.opacity = '1';
+    calcBtn.style.pointerEvents = 'auto';
+  }
   
   document.querySelectorAll('#testQuestionGrid .grid-btn').forEach(el => {
     el.style.pointerEvents = 'auto';
