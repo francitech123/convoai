@@ -2,8 +2,6 @@ const API_BASE = 'https://oau-exam-api.onrender.com/api';
 const totalSlides = 6;
 let currentSlide = 0;
 let autoplayInterval = null;
-let verifiedUsername = '';
-let verifiedUserId = '';
 
 const slidesTrack = document.getElementById('slidesTrack');
 const prevBtn = document.getElementById('prevBtn');
@@ -61,7 +59,7 @@ nextBtn.addEventListener('click', nextSlide);
 document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowRight') { nextSlide(); resetAutoplay(); }
     if (e.key === 'ArrowLeft') { previousSlide(); resetAutoplay(); }
-    if (e.key === 'Escape') { closeAuthModal(); closeForgotPassword(); }
+    if (e.key === 'Escape') { closeAuthModal(); }
 });
 
 let touchStartX = 0;
@@ -108,8 +106,6 @@ function clearAuthErrors() {
 
 function showAuthError(msg) { const el = document.getElementById('authError'); el.textContent = msg; el.classList.add('show'); }
 function showAuthSuccess(msg) { const el = document.getElementById('authSuccess'); el.textContent = msg; el.classList.add('show'); }
-function showForgotError(msg) { const el = document.getElementById('forgotError'); el.textContent = msg; el.classList.add('show'); }
-function showForgotSuccess(msg) { const el = document.getElementById('forgotSuccess'); el.textContent = msg; el.classList.add('show'); }
 
 function checkPasswordStrength(password) {
     const bar = document.getElementById('passwordStrengthBar');
@@ -204,161 +200,15 @@ async function handleRegister() {
     }
 }
 
-// ==================== FORGOT PASSWORD - UPDATED ROUTES ====================
-let forgotStep = 'verify';
-
+// ==================== FORGOT PASSWORD - Redirect to Page ====================
 function openForgotPassword() {
-    document.getElementById('forgotPasswordModal').classList.add('show');
-    document.body.style.overflow = 'hidden';
-    forgotStep = 'verify';
-    verifiedUsername = '';
-    verifiedUserId = '';
-    document.getElementById('newPasswordGroup').style.display = 'none';
-    document.getElementById('confirmNewPasswordGroup').style.display = 'none';
-    document.getElementById('forgotBtn').innerHTML = '<i class="fas fa-key"></i> Verify & Reset Password';
-    document.getElementById('forgotBtn').disabled = false;
-    // Reset form fields
-    document.getElementById('forgotUsername').value = '';
-    document.getElementById('forgotSecurityQuestion').value = '';
-    document.getElementById('forgotSecurityAnswer').value = '';
-    document.getElementById('forgotNewPassword').value = '';
-    document.getElementById('forgotConfirmPassword').value = '';
-    document.getElementById('forgotPasswordStrengthBar').style.width = '0%';
-    document.getElementById('forgotPasswordStrengthBar').className = 'bar';
-    clearForgotErrors();
+    window.location.href = '/forgot-password';
 }
 
-function closeForgotPassword() {
-    document.getElementById('forgotPasswordModal').classList.remove('show');
-    document.body.style.overflow = '';
-}
-
-function clearForgotErrors() {
-    document.querySelectorAll('#forgotError, #forgotSuccess').forEach(el => el.classList.remove('show'));
-}
-
-// ==================== VERIFY IDENTITY ====================
-async function handleForgotPassword() {
-    const username = document.getElementById('forgotUsername').value.trim();
-    const question = document.getElementById('forgotSecurityQuestion').value;
-    const answer = document.getElementById('forgotSecurityAnswer').value.trim();
-    const btn = document.getElementById('forgotBtn');
-    
-    if (forgotStep === 'verify') {
-        if (!username) { showForgotError('Please enter your username'); return; }
-        if (!question) { showForgotError('Please select your security question'); return; }
-        if (!answer) { showForgotError('Please enter your security answer'); return; }
-        
-        btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying...';
-        clearForgotErrors();
-        
-        try {
-            // Use the same route as your working forgot password page
-            const response = await fetch(API_BASE + '/auth/forgot-password', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    username: username,
-                    securityQuestion: question,
-                    securityAnswer: answer
-                })
-            });
-
-            const data = await response.json();
-
-            if (response.ok && data.success) {
-                verifiedUsername = username;
-                verifiedUserId = data.userId;
-                showForgotSuccess('✅ Identity verified! Enter your new password below.');
-                forgotStep = 'reset';
-                document.getElementById('newPasswordGroup').style.display = 'block';
-                document.getElementById('confirmNewPasswordGroup').style.display = 'block';
-                document.getElementById('forgotBtn').innerHTML = '<i class="fas fa-save"></i> Reset Password';
-                btn.disabled = false;
-                document.getElementById('forgotNewPassword').focus();
-            } else {
-                showForgotError(data.error || 'Verification failed. Please check your details.');
-                btn.disabled = false; btn.innerHTML = '<i class="fas fa-key"></i> Verify & Reset Password';
-            }
-        } catch (e) {
-            showForgotError('Connection error. Please try again.');
-            btn.disabled = false; btn.innerHTML = '<i class="fas fa-key"></i> Verify & Reset Password';
-        }
-    } else {
-        // Reset password step
-        const newPassword = document.getElementById('forgotNewPassword').value;
-        const confirmPassword = document.getElementById('forgotConfirmPassword').value;
-        
-        if (newPassword.length < 6) { showForgotError('Password must be at least 6 characters'); return; }
-        if (newPassword !== confirmPassword) { showForgotError('Passwords do not match'); return; }
-        
-        btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Resetting...';
-        clearForgotErrors();
-        
-        try {
-            // Use the same reset route as your working forgot password page
-            const response = await fetch(API_BASE + '/auth/reset-password', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    username: verifiedUsername,
-                    securityQuestion: document.getElementById('forgotSecurityQuestion').value,
-                    securityAnswer: document.getElementById('forgotSecurityAnswer').value.trim(),
-                    newPassword: newPassword
-                })
-            });
-
-            const data = await response.json();
-
-            if (response.ok && data.success) {
-                showForgotSuccess('✅ Password reset successfully! Redirecting to login...');
-                setTimeout(() => {
-                    closeForgotPassword();
-                    setAuthTab('login');
-                    document.getElementById('loginPassword').value = newPassword;
-                    showAuthSuccess('✅ Password reset! Login with your new password.');
-                }, 1500);
-            } else {
-                showForgotError(data.error || 'Failed to reset password');
-                btn.disabled = false; btn.innerHTML = '<i class="fas fa-save"></i> Reset Password';
-            }
-        } catch (e) {
-            showForgotError('Connection error. Please try again.');
-            btn.disabled = false; btn.innerHTML = '<i class="fas fa-save"></i> Reset Password';
-        }
-    }
-}
-
-// ==================== PASSWORD STRENGTH FOR FORGOT ====================
-document.getElementById('forgotNewPassword').addEventListener('input', function() {
-    const bar = document.getElementById('forgotPasswordStrengthBar');
-    const password = this.value;
-    if (!password) { bar.style.width = '0%'; bar.className = 'bar'; return; }
-    let strength = 0;
-    if (password.length >= 6) strength++;
-    if (password.length >= 10) strength++;
-    if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
-    if (/\d/.test(password)) strength++;
-    if (/[^a-zA-Z0-9]/.test(password)) strength++;
-    const levels = ['', 'weak', 'medium', 'strong', 'very-strong'];
-    const widths = ['0%', '25%', '50%', '75%', '100%'];
-    const index = Math.min(strength, 4);
-    bar.className = 'bar ' + levels[index];
-    bar.style.width = widths[index];
-});
-
-// Enter key handlers for forgot password
-document.getElementById('forgotUsername').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('forgotSecurityQuestion').focus(); });
-document.getElementById('forgotSecurityQuestion').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('forgotSecurityAnswer').focus(); });
-document.getElementById('forgotSecurityAnswer').addEventListener('keydown', (e) => { if (e.key === 'Enter') handleForgotPassword(); });
-document.getElementById('forgotNewPassword').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('forgotConfirmPassword').focus(); });
-document.getElementById('forgotConfirmPassword').addEventListener('keydown', (e) => { if (e.key === 'Enter') handleForgotPassword(); });
-
-// Login enter key handlers
+// ==================== ENTER KEY HANDLERS ====================
 document.getElementById('loginUsername').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('loginPassword').focus(); });
 document.getElementById('loginPassword').addEventListener('keydown', (e) => { if (e.key === 'Enter') handleLogin(); });
 
-// Register enter key handlers
 document.getElementById('regUsername').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regFullName').focus(); });
 document.getElementById('regFullName').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regEmail').focus(); });
 document.getElementById('regEmail').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regFaculty').focus(); });
@@ -379,15 +229,13 @@ function checkAuth() {
     }
 }
 
-// ==================== EXPOSE FUNCTIONS TO WINDOW ====================
+// ==================== EXPOSE FUNCTIONS ====================
 window.openAuthModal = openAuthModal;
 window.closeAuthModal = closeAuthModal;
 window.setAuthTab = setAuthTab;
 window.handleLogin = handleLogin;
 window.handleRegister = handleRegister;
 window.openForgotPassword = openForgotPassword;
-window.closeForgotPassword = closeForgotPassword;
-window.handleForgotPassword = handleForgotPassword;
 window.nextSlide = nextSlide;
 window.previousSlide = previousSlide;
 window.goToSlide = goToSlide;
@@ -398,12 +246,11 @@ initDots();
 updateSlide();
 startAutoplay();
 
-// Try to load logo from server, fallback to /logo.svg
+// Try to load logo from server
 document.addEventListener('DOMContentLoaded', function() {
     const logoImgs = document.querySelectorAll('img[src="/logo.svg"]');
     logoImgs.forEach(img => {
         img.onerror = function() {
-            // Keep trying to load from server
             this.src = '/logo.svg?' + Date.now();
         };
     });
