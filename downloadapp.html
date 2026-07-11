@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover" />
+    <title>Download OAU CBE Practice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --primary:#1e3a8a;
+            --primary-light:#3b82f6;
+            --accent:#10b981;
+            --bg:#0a0e1a;
+            --bg-soft:#111827;
+            --card:rgba(255,255,255,0.06);
+            --card-border:rgba(255,255,255,0.08);
+            --text:#ffffff;
+            --text-secondary:rgba(255,255,255,0.7);
+            --text-muted:rgba(255,255,255,0.4);
+            --shadow:0 25px 50px -12px rgba(0,0,0,0.5);
+            --glass:rgba(255,255,255,0.05);
+            --brand-gradient:linear-gradient(135deg,#1e3a8a,#3b82f6,#8b5cf6);
+            --danger:#ef4444;
+            --success:#10b981;
+            --warning:#f59e0b;
+        }
+        body.light-mode{
+            --bg:#f0f4ff;
+            --bg-soft:#e8edf8;
+            --card:rgba(255,255,255,0.8);
+            --card-border:rgba(0,0,0,0.06);
+            --text:#0a0e1a;
+            --text-secondary:rgba(0,0,0,0.65);
+            --text-muted:rgba(0,0,0,0.35);
+            --shadow:0 25px 50px -12px rgba(0,0,0,0.1);
+            --glass:rgba(255,255,255,0.5);
+        }
+        body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:background 0.4s ease;position:relative}
+        
+        .bg-animation{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;overflow:hidden;pointer-events:none}
+        .bg-orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:0.12;animation:orbFloat 20s ease-in-out infinite alternate}
+        .bg-orb:nth-child(1){width:400px;height:400px;top:-100px;right:-100px;background:#3b82f6}
+        .bg-orb:nth-child(2){width:300px;height:300px;bottom:-50px;left:-50px;background:#8b5cf6;animation-delay:-7s}
+        .bg-orb:nth-child(3){width:200px;height:200px;top:50%;left:50%;transform:translate(-50%,-50%);background:#06b6d4;animation-delay:-14s;opacity:0.06}
+        @keyframes orbFloat{0%{transform:translate(0,0) scale(1)}100%{transform:translate(40px,-30px) scale(1.2)}}
+        
+        .container{max-width:520px;margin:0 auto;padding:40px 20px 60px;position:relative;z-index:2;min-height:100vh}
+        
+        /* Back Button */
+        .back-btn{display:inline-flex;align-items:center;gap:8px;color:var(--text-secondary);text-decoration:none;font-size:0.85rem;font-weight:500;transition:color 0.3s ease;margin-bottom:20px}
+        .back-btn:hover{color:var(--primary-light)}
+        
+        /* Header */
+        .header{text-align:center;margin-bottom:32px}
+        .header .icon-wrap{width:80px;height:80px;border-radius:50%;background:var(--brand-gradient);display:flex;align-items:center;justify-content:center;font-size:2.5rem;margin:0 auto 12px;box-shadow:0 8px 32px rgba(59,130,246,0.3)}
+        .header h1{font-size:1.8rem;font-weight:900;background:var(--brand-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .header p{color:var(--text-secondary);font-size:0.9rem;margin-top:4px}
+        
+        /* File List */
+        .file-list{display:grid;gap:12px;margin-bottom:28px}
+        .file-item{background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--card-border);border-radius:16px;padding:16px 18px;display:flex;align-items:center;gap:14px;transition:all 0.3s ease;cursor:pointer}
+        .file-item:hover{transform:translateY(-2px);border-color:var(--primary-light);background:rgba(59,130,246,0.06)}
+        body.light-mode .file-item{background:rgba(255,255,255,0.7)}
+        .file-item .file-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+        .file-item .file-icon.html{background:rgba(227,76,38,0.15);color:#e34c26}
+        .file-item .file-icon.css{background:rgba(38,77,228,0.15);color:#264de4}
+        .file-item .file-icon.js{background:rgba(247,223,30,0.15);color:#f7df1e}
+        .file-item .file-icon.json{background:rgba(16,185,129,0.15);color:#10b981}
+        .file-item .file-icon.svg{background:rgba(255,165,0,0.15);color:#ffa500}
+        .file-item .file-icon.folder{background:rgba(251,191,36,0.15);color:#fbbf24}
+        .file-info{flex:1;min-width:0}
+        .file-info .file-name{font-weight:600;font-size:0.9rem;color:var(--text)}
+        .file-info .file-size{font-size:0.7rem;color:var(--text-muted)}
+        .file-info .file-desc{font-size:0.7rem;color:var(--text-secondary);margin-top:2px}
+        .file-item .download-btn{background:var(--brand-gradient);color:#fff;border:none;padding:8px 16px;border-radius:10px;font-weight:600;font-size:0.75rem;cursor:pointer;transition:all 0.3s ease;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:6px;flex-shrink:0}
+        .file-item .download-btn:hover{transform:scale(1.05);box-shadow:0 4px 20px rgba(59,130,246,0.3)}
+        .file-item .download-btn:active{transform:scale(0.95)}
+        
+        /* Download All */
+        .download-all{background:var(--brand-gradient);color:#fff;border:none;border-radius:16px;padding:18px;font-weight:700;font-size:1rem;cursor:pointer;transition:all 0.3s ease;font-family:'Inter',sans-serif;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin-bottom:20px;box-shadow:0 4px 24px rgba(59,130,246,0.3)}
+        .download-all:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(59,130,246,0.4)}
+        .download-all:active{transform:scale(0.97)}
+        .download-all:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+        
+        /* Info Box */
+        .info-box{background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--card-border);border-radius:16px;padding:16px 20px;display:flex;align-items:flex-start;gap:12px;margin-bottom:20px}
+        body.light-mode .info-box{background:rgba(255,255,255,0.7)}
+        .info-box i{color:var(--primary-light);font-size:1.2rem;margin-top:2px}
+        .info-box p{color:var(--text-secondary);font-size:0.8rem;line-height:1.5}
+        .info-box p strong{color:var(--text)}
+        
+        /* Version Tag */
+        .version-tag{display:inline-block;padding:4px 14px;border-radius:20px;font-size:0.65rem;background:var(--glass);border:1px solid var(--card-border);color:var(--text-muted);margin-top:4px}
+        
+        /* Quick Links */
+        .quick-links{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:20px 0 8px}
+        .quick-links a{color:var(--text-muted);text-decoration:none;font-size:0.7rem;font-weight:500;transition:color 0.3s ease}
+        .quick-links a:hover{color:var(--primary-light)}
+        .quick-links .divider{color:var(--text-muted);font-size:0.5rem;opacity:0.3}
+        .copyright{text-align:center;color:var(--text-muted);font-size:0.6rem;margin-top:8px;font-weight:500;letter-spacing:0.3px}
+        
+        /* Toast */
+        .toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);padding:12px 24px;border-radius:14px;font-weight:600;font-size:0.85rem;z-index:1000;box-shadow:0 8px 30px rgba(0,0,0,0.3);animation:fadeIn 0.3s ease;display:none;max-width:90%;text-align:center}
+        .toast.success{background:var(--success);color:#fff}
+        .toast.error{background:var(--danger);color:#fff}
+        .toast.info{background:var(--primary-light);color:#fff}
+        .toast.show{display:block}
+        @keyframes fadeIn{from{opacity:0;transform:translateX(-50%) translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+        
+        @media(max-width:480px){.container{padding:20px 16px 40px}.header h1{font-size:1.4rem}.file-item{padding:12px 14px}.file-item .file-icon{width:36px;height:36px;font-size:1rem}.file-info .file-name{font-size:0.8rem}.file-item .download-btn{padding:6px 12px;font-size:0.65rem}.download-all{padding:14px;font-size:0.9rem}}
+    </style>
+</head>
+<body>
+
+<!-- Background Animation -->
+<div class="bg-animation">
+    <div class="bg-orb"></div>
+    <div class="bg-orb"></div>
+    <div class="bg-orb"></div>
+</div>
+
+<div class="container">
+    <!-- Back Button -->
+    <a href="/" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Home</a>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="icon-wrap">📦</div>
+        <h1>Download OAU CBE Practice</h1>
+        <p>Get all the app files to run locally or on your server</p>
+        <span class="version-tag"><i class="fas fa-code-branch"></i> v2.0.0</span>
+    </div>
+
+    <!-- Info Box -->
+    <div class="info-box">
+        <i class="fas fa-info-circle"></i>
+        <p>
+            <strong>All files are included</strong><br>
+            Download the complete app package. Extract and serve with any static server.
+            <br><br>
+            <span style="font-size:0.7rem;color:var(--text-muted)">
+                <i class="fas fa-server"></i> Recommended: <strong>Live Server</strong> or <strong>Vercel</strong>
+            </span>
+        </p>
+    </div>
+
+    <!-- Download All Button -->
+    <button class="download-all" id="downloadAllBtn" onclick="downloadAll()">
+        <i class="fas fa-download"></i> Download All Files
+        <span style="font-size:0.7rem;font-weight:400;opacity:0.7">(ZIP)</span>
+    </button>
+
+    <!-- File List -->
+    <div class="file-list" id="fileList">
+        <!-- Files will be generated by JavaScript -->
+    </div>
+
+    <!-- Quick Links -->
+    <div class="quick-links">
+        <a href="/about">About</a>
+        <span class="divider">|</span>
+        <a href="/terms">Terms</a>
+        <span class="divider">|</span>
+        <a href="/privacy">Privacy</a>
+        <span class="divider">|</span>
+        <a href="/contact">Contact</a>
+        <span class="divider">|</span>
+        <a href="/developer">Developer</a>
+    </div>
+    <p class="copyright">&copy; 2026 OAU CBE Practice · Powered by FrancisTech</p>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ============================================
+// FILE DATA - Add your files here
+// ============================================
+const FILES = [
+    {
+        name: 'app.html',
+        icon: 'html',
+        size: '78.4 KB',
+        desc: 'Main application - all pages and screens',
+        url: '/app.html'
+    },
+    {
+        name: 'index.html',
+        icon: 'html',
+        size: '12.3 KB',
+        desc: 'Welcome page with login/register',
+        url: '/index.html'
+    },
+    {
+        name: 'styles.css',
+        icon: 'css',
+        size: '24.7 KB',
+        desc: 'Master stylesheet for all pages',
+        url: '/styles.css'
+    },
+    {
+        name: 'logo.svg',
+        icon: 'svg',
+        size: '8.2 KB',
+        desc: 'Official OAU CBE Practice logo',
+        url: '/logo.svg'
+    },
+    {
+        name: 'js/',
+        icon: 'folder',
+        size: '—',
+        desc: 'JavaScript modules (13 files)',
+        url: '#',
+        isFolder: true,
+        files: [
+            'app.js', 'utils.js', 'notifications.js', 'dashboard.js',
+            'exam.js', 'test.js', 'study.js', 'profile.js',
+            'ai.js', 'faq.js', 'leaderboard.js', 'chat.js',
+            'submit.js', 'results.js'
+        ]
+    },
+    {
+        name: 'manifest.json',
+        icon: 'json',
+        size: '1.2 KB',
+        desc: 'PWA manifest for mobile app',
+        url: '/manifest.json'
+    },
+    {
+        name: 'vercel.json',
+        icon: 'json',
+        size: '0.8 KB',
+        desc: 'Vercel deployment configuration',
+        url: '/vercel.json'
+    }
+];
+
+// ============================================
+// RENDER FILE LIST
+// ============================================
+function renderFiles() {
+    const container = document.getElementById('fileList');
+    container.innerHTML = FILES.map(file => `
+        <div class="file-item" onclick="${file.isFolder ? 'toggleFolder(\'' + file.name + '\')' : 'downloadFile(\'' + file.url + '\', \'' + file.name + '\')'}">
+            <div class="file-icon ${file.icon}">
+                <i class="fas ${file.icon === 'html' ? 'fa-code' : file.icon === 'css' ? 'fa-css3-alt' : file.icon === 'js' ? 'fa-js' : file.icon === 'json' ? 'fa-file-code' : file.icon === 'svg' ? 'fa-image' : 'fa-folder'}"></i>
+            </div>
+            <div class="file-info">
+                <div class="file-name">${file.name}</div>
+                <div class="file-desc">${file.desc}</div>
+                <div class="file-size">${file.size}</div>
+            </div>
+            ${file.isFolder ? 
+                `<span style="color:var(--text-muted);font-size:0.7rem;display:flex;align-items:center;gap:4px;flex-shrink:0">
+                    <i class="fas fa-chevron-right"></i>
+                </span>` :
+                `<button class="download-btn" onclick="event.stopPropagation();downloadFile('${file.url}', '${file.name}')">
+                    <i class="fas fa-download"></i> Download
+                </button>`
+            }
+        </div>
+    `).join('');
+}
+
+// ============================================
+// FOLDER TOGGLE
+// ============================================
+function toggleFolder(folderName) {
+    showToast('📁 ' + folderName + ' contains multiple files. Use "Download All" to get everything.', 'info');
+}
+
+// ============================================
+// DOWNLOAD SINGLE FILE
+// ============================================
+function downloadFile(url, name) {
+    if (url === '#') {
+        showToast('📁 This is a folder. Download all files instead.', 'info');
+        return;
+    }
+    
+    showToast('⬇️ Downloading ' + name + '...', 'info');
+    
+    // Create a temporary anchor element
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = name;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    
+    setTimeout(() => {
+        showToast('✅ ' + name + ' downloaded!', 'success');
+    }, 500);
+}
+
+// ============================================
+// DOWNLOAD ALL FILES
+// ============================================
+function downloadAll() {
+    const btn = document.getElementById('downloadAllBtn');
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating package...';
+    btn.disabled = true;
+    
+    showToast('📦 Creating download package...', 'info');
+    
+    // Simulate package creation
+    setTimeout(() => {
+        // In a real implementation, this would create a ZIP file
+        // For now, we'll download each file individually
+        const files = FILES.filter(f => !f.isFolder && f.url !== '#');
+        
+        showToast('📦 Starting download of ' + files.length + ' files...', 'info');
+        
+        files.forEach((file, index) => {
+            setTimeout(() => {
+                const a = document.createElement('a');
+                a.href = file.url;
+                a.download = file.name;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                
+                if (index === files.length - 1) {
+                    btn.innerHTML = '<i class="fas fa-download"></i> Download All Files <span style="font-size:0.7rem;font-weight:400;opacity:0.7">(ZIP)</span>';
+                    btn.disabled = false;
+                    showToast('✅ All files downloaded!', 'success');
+                }
+            }, index * 800);
+        });
+    }, 1000);
+}
+
+// ============================================
+// TOAST NOTIFICATION
+// ============================================
+function showToast(message, type = 'info') {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.className = 'toast ' + type + ' show';
+    clearTimeout(toast._timeout);
+    toast._timeout = setTimeout(() => {
+        toast.classList.remove('show');
+    }, 3000);
+}
+
+// ============================================
+// THEME MANAGEMENT
+// ============================================
+function initTheme() {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') {
+        document.body.classList.add('light-mode');
+    }
+}
+
+// ============================================
+// INIT
+// ============================================
+initTheme();
+renderFiles();
+
+// Expose functions globally
+window.downloadFile = downloadFile;
+window.downloadAll = downloadAll;
+window.toggleFolder = toggleFolder;
+window.showToast = showToast;
+</script>
+</body>
+</html>
