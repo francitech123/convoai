@@ -1,5 +1,6 @@
 
-import { apiFetch, $id, setText, shuffleArray, showToast, enterFullscreenMode, exitFullscreenMode } from './utils.js';
+
+import { apiFetch, $id, setText, shuffleArray, showToast, enterFullscreenMode, exitFullscreenMode, showLoading, hideLoading } from './utils.js';
 
 export let examState = {
   faculty: null,
@@ -9,10 +10,99 @@ export let examState = {
   isSubmitting: false,
   timer: null,
   autoSaveInterval: null,
+  inactivityTimer: null,
   faculties: [],
-  showAll: false
+  showAll: false,
+  isComplete: false,
+  lastActivity: Date.now()
 };
 
+// ==================== INACTIVITY CHECK ====================
+function resetInactivityTimer() {
+  examState.lastActivity = Date.now();
+  
+  if (examState.inactivityTimer) {
+    clearInterval(examState.inactivityTimer);
+  }
+  
+  // Check every 30 seconds for inactivity
+  examState.inactivityTimer = setInterval(() => {
+    if (!examState.session) return;
+    
+    const inactiveTime = Date.now() - examState.lastActivity;
+    const inactiveMinutes = inactiveTime / (1000 * 60);
+    
+    // If inactive for more than 5 minutes, auto-submit
+    if (inactiveMinutes >= 5) {
+      showToast('⏰ Inactivity detected for 5 minutes. Auto-submitting exam...', 'warning');
+      examState.lastActivity = Date.now();
+      examSubmit(true); // Auto-submit
+    }
+  }, 30000); // Check every 30 seconds
+}
+
+// ==================== TRACK ACTIVITY ====================
+function trackActivity() {
+  examState.lastActivity = Date.now();
+}
+
+// ==================== DISABLE ALL BUTTONS ====================
+function disableAllButtons() {
+  // Disable options
+  document.querySelectorAll('#examOptionsArea .opt').forEach(el => {
+    el.classList.add('disabled');
+    el.style.cursor = 'not-allowed';
+    el.onclick = null;
+  });
+  
+  // Disable nav buttons
+  const prevBtn = $id('examPrevBtn');
+  const nextBtn = $id('examNextBtn');
+  const submitBtn = $id('examSubmitBtn');
+  const quitBtn = document.querySelector('#examRunningScreen .btn-danger');
+  const calcBtn = document.querySelector('#examRunningScreen .calc-btn-sm');
+  
+  if (prevBtn) { prevBtn.disabled = true; prevBtn.style.opacity = '0.5'; }
+  if (nextBtn) { nextBtn.disabled = true; nextBtn.style.opacity = '0.5'; }
+  if (submitBtn) { submitBtn.disabled = true; submitBtn.style.opacity = '0.5'; }
+  if (quitBtn) { quitBtn.disabled = true; quitBtn.style.opacity = '0.5'; }
+  if (calcBtn) { calcBtn.disabled = true; calcBtn.style.opacity = '0.5'; }
+  
+  // Disable question grid buttons
+  document.querySelectorAll('#examQuestionGrid .grid-btn').forEach(el => {
+    el.style.pointerEvents = 'none';
+    el.style.opacity = '0.5';
+  });
+}
+
+// ==================== ENABLE ALL BUTTONS (for recovery) ====================
+function enableAllButtons() {
+  document.querySelectorAll('#examOptionsArea .opt').forEach(el => {
+    el.classList.remove('disabled');
+    el.style.cursor = 'pointer';
+  });
+  
+  const prevBtn = $id('examPrevBtn');
+  const nextBtn = $id('examNextBtn');
+  const submitBtn = $id('examSubmitBtn');
+  const quitBtn = document.querySelector('#examRunningScreen .btn-danger');
+  const calcBtn = document.querySelector('#examRunningScreen .calc-btn-sm');
+  
+  if (prevBtn) { prevBtn.disabled = false; prevBtn.style.opacity = '1'; }
+  if (nextBtn) { nextBtn.disabled = false; nextBtn.style.opacity = '1'; }
+  if (submitBtn) { submitBtn.disabled = false; submitBtn.style.opacity = '1'; }
+  if (quitBtn) { quitBtn.disabled = false; quitBtn.style.opacity = '1'; }
+  if (calcBtn) { calcBtn.disabled = false; calcBtn.style.opacity = '1'; }
+  
+  document.querySelectorAll('#examQuestionGrid .grid-btn').forEach(el => {
+    el.style.pointerEvents = 'auto';
+    el.style.opacity = '1';
+  });
+}
+
+// ============================================
+// LOAD EXAM DATA
+// ============================================
 export async function loadExamData() {
   if (document.querySelector('#examFacultyGrid .faculty-tag-simple')) return;
   await loadExamFaculties();
@@ -193,6 +283,9 @@ export async function examOpenEntry(code) {
   }
 }
 
+// ============================================
+// START EXAM - WITH ACTIVITY TRACKING
+// ============================================
 export async function examStart() {
   const btn = document.querySelector('#examEntryContent .btn');
   if (!btn) return;
@@ -233,6 +326,10 @@ export async function examStart() {
       sessionId: sessionId,
       mode: 'exam'
     };
+    
+    // Reset inactivity tracking
+    examState.lastActivity = Date.now();
+    
     const title = $id('examCourseTitle');
     const meta = $id('examMeta');
     const timer = $id('examTimerDisplay');
@@ -251,6 +348,13 @@ export async function examStart() {
     examStartTimer();
     examRenderGrid();
     examStartAutoSave();
+    resetInactivityTimer();
+    
+    // Track all user interactions
+    document.addEventListener('click', trackActivity);
+    document.addEventListener('touchstart', trackActivity);
+    document.addEventListener('keydown', trackActivity);
+    
   } catch (e) {
     alert('Failed to load exam: ' + e.message);
     btn.innerHTML = '<i class="fas fa-play-circle"></i> START EXAM';
@@ -258,6 +362,9 @@ export async function examStart() {
   }
 }
 
+// ============================================
+// RENDER FUNCTIONS
+// ============================================
 function examRenderQuestion() {
   if (!examState.session) return;
   const q = examState.session.questions[examState.session.currentIndex];
@@ -271,7 +378,7 @@ function examRenderQuestion() {
   const submitBtn = $id('examSubmitBtn');
   
   if (counter) counter.textContent = `Question ${idx + 1} of ${total}`;
-  if (text) text.textContent = q.text;
+  if (text) text.textContent = q.question;
   const letters = ['A', 'B', 'C', 'D'];
   if (options) {
     options.innerHTML = q.options.map((opt, i) => `
@@ -289,26 +396,33 @@ function examRenderQuestion() {
 }
 
 export function examSelectAnswer(index) {
-  if (!examState.session) return;
+  if (!examState.session || examState.isSubmitting) return;
+  trackActivity();
   examState.session.answers[examState.session.currentIndex] = index;
   examRenderQuestion();
 }
 
 export function examPrevQuestion() {
+  if (examState.isSubmitting || !examState.session) return;
   if (examState.session.currentIndex > 0) {
+    trackActivity();
     examState.session.currentIndex--;
     examRenderQuestion();
   }
 }
 
 export function examNextQuestion() {
+  if (examState.isSubmitting || !examState.session) return;
   if (examState.session.currentIndex < examState.session.questions.length - 1) {
+    trackActivity();
     examState.session.currentIndex++;
     examRenderQuestion();
   }
 }
 
 function examJumpTo(index) {
+  if (examState.isSubmitting || !examState.session) return;
+  trackActivity();
   examState.session.currentIndex = index;
   examRenderQuestion();
 }
@@ -318,10 +432,13 @@ function examRenderGrid() {
   if (!grid) return;
   grid.innerHTML = examState.session.questions.map((_, i) => `
     <div class="grid-btn ${examState.session.answers[i] !== null ? 'answered' : ''} ${i === examState.session.currentIndex ? 'current' : ''}" 
-         onclick="window.examJumpTo(${i})">${i + 1}</div>
+         onclick="${examState.isSubmitting ? '' : `window.examJumpTo(${i})`}">${i + 1}</div>
   `).join('');
 }
 
+// ============================================
+// TIMER - AUTO SUBMIT WHEN TIME RUNS OUT
+// ============================================
 function examStartTimer() {
   if (examState.session.timer) clearInterval(examState.session.timer);
   const d = $id('examTimerDisplay');
@@ -329,7 +446,8 @@ function examStartTimer() {
     examState.session.timeLeft--;
     if (examState.session.timeLeft <= 0) {
       clearInterval(examState.session.timer);
-      examSubmit();
+      // Auto-submit without confirmation
+      examSubmit(true);
       return;
     }
     const m = Math.floor(examState.session.timeLeft / 60);
@@ -365,23 +483,38 @@ function examStartAutoSave() {
 }
 
 // ============================================
-// EXAM SUBMIT - FIXED to reset after submission
+// SUBMIT EXAM - WITH LOCKING
 // ============================================
-export async function examSubmit() {
+export async function examSubmit(autoSubmit = false) {
   if (examState.isSubmitting) return;
   if (!examState.session) return;
-  if (!confirm('Submit your exam? You cannot change answers after submission.')) return;
+  
+  // If not auto-submit, ask for confirmation
+  if (!autoSubmit) {
+    if (!confirm('Submit your exam? You cannot change answers after submission.')) return;
+  }
   
   examState.isSubmitting = true;
   
+  // DISABLE ALL BUTTONS IMMEDIATELY
+  disableAllButtons();
+  
+  // Show spinner on submit button
   const submitBtn = $id('examSubmitBtn');
   if (submitBtn) {
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
     submitBtn.disabled = true;
   }
   
+  // Clear timers
   if (examState.session.timer) clearInterval(examState.session.timer);
   if (examState.autoSaveInterval) clearInterval(examState.autoSaveInterval);
+  if (examState.inactivityTimer) clearInterval(examState.inactivityTimer);
+  
+  // Remove activity listeners
+  document.removeEventListener('click', trackActivity);
+  document.removeEventListener('touchstart', trackActivity);
+  document.removeEventListener('keydown', trackActivity);
   
   const timeSpent = Date.now() - examState.session.startTime;
   let correct = 0;
@@ -421,47 +554,23 @@ export async function examSubmit() {
       }))
     };
     
+    // Store result
     sessionStorage.setItem('examResult', JSON.stringify(resultData));
     localStorage.setItem('lastExamResult', JSON.stringify(resultData));
     localStorage.setItem('lastResultTimestamp', Date.now().toString());
     sessionStorage.removeItem('activeExam');
     
-    // ============ RESET ALL EXAM STATE ============
-    // Reset session
     examState.session = null;
     examState.isSubmitting = false;
-    
-    // Reset faculty, level, course selections
-    examState.faculty = null;
-    examState.level = null;
-    examState.course = null;
-    examState.showAll = false;
-    
-    // Exit fullscreen mode
     exitFullscreenMode();
     
-    // Reset exam screens to faculty selection
-    const facultyScreen = $id('examFacultyScreen');
-    const levelScreen = $id('examLevelScreen');
-    const courseScreen = $id('examCourseScreen');
-    const entryScreen = $id('examEntryScreen');
-    const runningScreen = $id('examRunningScreen');
-    
-    if (facultyScreen) facultyScreen.style.display = 'block';
-    if (levelScreen) levelScreen.style.display = 'none';
-    if (courseScreen) courseScreen.style.display = 'none';
-    if (entryScreen) entryScreen.style.display = 'none';
-    if (runningScreen) runningScreen.style.display = 'none';
-    
-    // Force refresh faculties
-    await loadExamFaculties();
-    
-    // Navigate to submit page to show results
+    // Navigate to submit page
     window.showPage('submit');
     
   } catch (e) {
     alert('Failed to submit. Please try again.');
     examState.isSubmitting = false;
+    enableAllButtons();
     if (submitBtn) {
       submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Submit';
       submitBtn.disabled = false;
@@ -470,48 +579,62 @@ export async function examSubmit() {
 }
 
 // ============================================
-// EXAM QUIT - FIXED to return to faculty selection
+// EXAM QUIT - FIXED
 // ============================================
 export function examQuit() {
-  if (!examState.session) return;
-  if (confirm('Quit exam? Your progress will be lost.')) {
-    // Clear timer
-    if (examState.session.timer) clearInterval(examState.session.timer);
-    if (examState.autoSaveInterval) clearInterval(examState.autoSaveInterval);
-    
-    // Remove saved session
-    sessionStorage.removeItem('activeExam');
-    
-    // Reset ALL state
-    examState.session = null;
-    examState.faculty = null;
-    examState.level = null;
-    examState.course = null;
-    examState.isSubmitting = false;
-    examState.showAll = false;
-    
-    // Exit fullscreen
-    exitFullscreenMode();
-    
-    // Reset exam screens to faculty selection
-    const facultyScreen = $id('examFacultyScreen');
-    const levelScreen = $id('examLevelScreen');
-    const courseScreen = $id('examCourseScreen');
-    const entryScreen = $id('examEntryScreen');
-    const runningScreen = $id('examRunningScreen');
-    
-    if (facultyScreen) facultyScreen.style.display = 'block';
-    if (levelScreen) levelScreen.style.display = 'none';
-    if (courseScreen) courseScreen.style.display = 'none';
-    if (entryScreen) entryScreen.style.display = 'none';
-    if (runningScreen) runningScreen.style.display = 'none';
-    
-    // Force refresh faculties
-    loadExamFaculties();
-    
-    // Go to exam page
-    window.showPage('exam');
+  if (examState.isSubmitting) {
+    showToast('⏳ Please wait, exam is being submitted...', 'warning');
+    return;
   }
+  
+  if (!examState.session) return;
+  
+  // Only ask confirmation if not auto-submit is in progress
+  if (!confirm('Quit exam? Your progress will be lost.')) return;
+  
+  // Clear timers
+  if (examState.session.timer) clearInterval(examState.session.timer);
+  if (examState.autoSaveInterval) clearInterval(examState.autoSaveInterval);
+  if (examState.inactivityTimer) clearInterval(examState.inactivityTimer);
+  
+  // Remove activity listeners
+  document.removeEventListener('click', trackActivity);
+  document.removeEventListener('touchstart', trackActivity);
+  document.removeEventListener('keydown', trackActivity);
+  
+  // Remove saved session
+  sessionStorage.removeItem('activeExam');
+  
+  // Reset ALL state
+  examState.session = null;
+  examState.faculty = null;
+  examState.level = null;
+  examState.course = null;
+  examState.isSubmitting = false;
+  examState.showAll = false;
+  examState.isComplete = false;
+  
+  // Exit fullscreen
+  exitFullscreenMode();
+  
+  // Reset exam screens to faculty selection
+  const facultyScreen = $id('examFacultyScreen');
+  const levelScreen = $id('examLevelScreen');
+  const courseScreen = $id('examCourseScreen');
+  const entryScreen = $id('examEntryScreen');
+  const runningScreen = $id('examRunningScreen');
+  
+  if (facultyScreen) facultyScreen.style.display = 'block';
+  if (levelScreen) levelScreen.style.display = 'none';
+  if (courseScreen) courseScreen.style.display = 'none';
+  if (entryScreen) entryScreen.style.display = 'none';
+  if (runningScreen) runningScreen.style.display = 'none';
+  
+  // Force refresh faculties
+  loadExamFaculties();
+  
+  // Go to exam page
+  window.showPage('exam');
 }
 
 // Expose functions to window
