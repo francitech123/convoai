@@ -1,7 +1,3 @@
-// ============================================
-// EXAM MODULE - Returns to faculty selection after submission
-// ============================================
-
 import { apiFetch, $id, setText, shuffleArray, showToast, enterFullscreenMode, exitFullscreenMode, showLoading, hideLoading } from './utils.js';
 
 export let examState = {
@@ -368,7 +364,7 @@ function examStartAutoSave() {
   }, 10000);
 }
 
-// ==================== EXAM SUBMIT - Returns to faculty selection ====================
+// ==================== EXAM SUBMIT - FIXED ====================
 export async function examSubmit() {
   if (examState.isSubmitting) return;
   if (!examState.session) return;
@@ -376,7 +372,6 @@ export async function examSubmit() {
   
   examState.isSubmitting = true;
   
-  // Show spinner on submit button
   const submitBtn = $id('examSubmitBtn');
   if (submitBtn) {
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
@@ -424,18 +419,50 @@ export async function examSubmit() {
       }))
     };
     
+    // Store the result in sessionStorage for immediate access
     sessionStorage.setItem('examResult', JSON.stringify(resultData));
+    
+    // Also store in localStorage for persistence
     localStorage.setItem('lastExamResult', JSON.stringify(resultData));
     localStorage.setItem('lastResultTimestamp', Date.now().toString());
+    
+    // Clear active session
     sessionStorage.removeItem('activeExam');
     
     // Reset exam state
+    const session = examState.session;
     examState.session = null;
     examState.isSubmitting = false;
+    examState.isComplete = true;
+    examState.faculty = null;
+    examState.level = null;
+    examState.course = null;
+    
+    // Exit fullscreen
     exitFullscreenMode();
     
-    // Navigate to submit page
-    window.showPage('submit');
+    // Force reload of submit page by navigating to it
+    const submitScreen = $id('submitScreen');
+    if (submitScreen) {
+      // Show submit screen with loading
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      submitScreen.classList.add('active');
+      
+      // Reload submit page data
+      if (window.loadSubmitPage) {
+        setTimeout(() => window.loadSubmitPage(), 100);
+      }
+    }
+    
+    // Update current page
+    window.currentPage = 'submit';
+    document.querySelectorAll('.nav-item').forEach(item => {
+      item.classList.toggle('active', item.dataset.page === 'submit');
+    });
+    setText('pageLabel', 'Submit Results');
+    setText('pageTitle', 'OAU CBE Practice');
+    
+    window.scrollTo(0, 0);
     
   } catch (e) {
     alert('Failed to submit. Please try again.');
@@ -447,18 +474,40 @@ export async function examSubmit() {
   }
 }
 
+// ==================== EXAM QUIT - FIXED ====================
 export function examQuit() {
   if (!examState.session) return;
   if (confirm('Quit exam? Your progress will be lost.')) {
+    // Clear timer
     if (examState.session.timer) clearInterval(examState.session.timer);
     if (examState.autoSaveInterval) clearInterval(examState.autoSaveInterval);
+    
+    // Remove saved session
     sessionStorage.removeItem('activeExam');
+    
+    // Reset state
     examState.session = null;
-    exitFullscreenMode();
-    // Return to faculty selection
     examState.faculty = null;
     examState.level = null;
     examState.course = null;
+    
+    // Exit fullscreen
+    exitFullscreenMode();
+    
+    // Reset UI - show faculty selection
+    const facultyScreen = $id('examFacultyScreen');
+    const levelScreen = $id('examLevelScreen');
+    const courseScreen = $id('examCourseScreen');
+    const entryScreen = $id('examEntryScreen');
+    const runningScreen = $id('examRunningScreen');
+    
+    if (facultyScreen) facultyScreen.style.display = 'block';
+    if (levelScreen) levelScreen.style.display = 'none';
+    if (courseScreen) courseScreen.style.display = 'none';
+    if (entryScreen) entryScreen.style.display = 'none';
+    if (runningScreen) runningScreen.style.display = 'none';
+    
+    // Go back to exam screen
     window.showPage('exam');
   }
 }
