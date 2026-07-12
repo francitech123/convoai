@@ -11,14 +11,11 @@
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:'Inter',sans-serif;background:#ffffff;color:#0f172a;min-height:100vh;-webkit-font-smoothing:antialiased;overflow:hidden}
         
-        /* App Container - Full Screen */
         .app-container{position:fixed;top:0;left:0;right:0;bottom:0;display:flex;flex-direction:column;background:#ffffff}
 
-        /* Skip Button */
         .skip-btn{position:absolute;top:20px;right:24px;z-index:30;background:transparent;border:none;color:#94a3b8;font-weight:600;font-size:.85rem;cursor:pointer;padding:8px 12px;transition:color .2s;font-family:inherit}
         .skip-btn:hover{color:#0f172a}
 
-        /* Slides Wrapper */
         .slides-wrapper{flex:1;overflow:hidden;position:relative}
         .slides-track{display:flex;height:100%;transition:transform .6s cubic-bezier(.4,0,.2,1);will-change:transform}
         .slide{min-width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:20px 24px 80px;text-align:center;position:relative}
@@ -28,7 +25,6 @@
         .slide h2 .highlight{background:linear-gradient(135deg,#1e3a8a,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
         .slide p{color:#64748b;font-size:clamp(.9rem,2.2vw,1rem);line-height:1.6;max-width:340px;margin:0 auto 16px}
         
-        /* Features and Cards */
         .slide .feature-item{display:flex;align-items:center;gap:12px;padding:10px 14px;background:#f8fafc;border-radius:12px;border:1px solid #e2e8f0;margin:6px 0;text-align:left}
         .slide .feature-item i{color:#10b981;font-size:1rem;width:20px;text-align:center}
         .slide .feature-item span{color:#334155;font-size:.85rem;font-weight:500}
@@ -64,7 +60,6 @@
         
         @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
-        /* Circular Progress Bottom Bar */
         .progress-container{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:20;display:flex;align-items:center;justify-content:center}
         .progress-ring{position:relative;width:56px;height:56px}
         .progress-ring svg{transform:rotate(-90deg);width:56px;height:56px}
@@ -74,7 +69,6 @@
         .progress-ring .inner-btn:active{transform:translate(-50%,-50%) scale(.95)}
         .progress-ring .inner-btn:disabled{background:#e2e8f0;color:#94a3b8;cursor:not-allowed}
 
-        /* Auth Modal - Full Screen, Clean Design */
         .auth-modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:100;display:none;flex-direction:column;padding:20px;background:#ffffff;animation:slideUp .3s ease}
         .auth-modal-overlay.show{display:flex}
         
@@ -125,7 +119,6 @@
         .password-strength .bar.very-strong{background:#10b981;width:100%}
         .password-hint{font-size:.75rem;color:#94a3b8;margin-top:4px;display:block}
 
-        /* LOADING OVERLAY - RESTORED EXACTLY */
         #loadingOverlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,.7);backdrop-filter:blur(8px);z-index:9999;display:none;align-items:center;justify-content:center;flex-direction:column;gap:16px}
         #loadingOverlay.show{display:flex}
         #loadingOverlay .spinner{width:48px;height:48px;border:4px solid #e2e8f0;border-top-color:#3b82f6;border-radius:50%;animation:spin .8s linear infinite}
@@ -138,14 +131,12 @@
 </head>
 <body>
 
-<!-- LOADING OVERLAY - RESTORED -->
 <div id="loadingOverlay">
     <div class="spinner"></div>
     <p>Please wait...</p>
 </div>
 
 <div class="app-container">
-    <!-- Top Right Skip Button -->
     <button class="skip-btn" onclick="goToLogin()">Skip <i class="fas fa-chevron-right" style="font-size:.6rem;"></i></button>
 
     <div class="slides-wrapper">
@@ -283,7 +274,6 @@
         </div>
     </div>
 
-    <!-- Bottom Circular Progress Button -->
     <div class="progress-container">
         <div class="progress-ring">
             <svg>
@@ -295,7 +285,7 @@
     </div>
 </div>
 
-<!-- Auth Modal (Full Screen) -->
+<!-- Auth Modal -->
 <div class="auth-modal-overlay" id="authModal">
     <div class="auth-header">
         <a href="/" class="auth-header-left" onclick="closeAuthModal(); return false;">
@@ -375,9 +365,6 @@
                     <select id="regLevel">
                         <option value="100">100 Level</option>
                         <option value="200">200 Level</option>
-                        <option value="300">300 Level</option>
-                        <option value="400">400 Level</option>
-                        <option value="500">500 Level</option>
                     </select>
                 </div>
             </div>
@@ -421,7 +408,8 @@
 </div>
 
 <script>
-    // --- SLIDER LOGIC ---
+    const API_BASE = 'https://oau-exam-api.onrender.com/api';
+
     let currentSlide = 0;
     const track = document.getElementById('slidesTrack');
     const slides = track.querySelectorAll('.slide');
@@ -474,7 +462,6 @@
         openAuthModal('register');
     }
 
-    // --- AUTH MODAL UI LOGIC ---
     const authModal = document.getElementById('authModal');
     const loginForm = document.getElementById('loginForm');
     const registerForm = document.getElementById('registerForm');
@@ -483,10 +470,12 @@
     function openAuthModal(tab) {
         authModal.classList.add('show');
         setAuthTab(tab);
+        document.body.style.overflow = 'hidden';
     }
 
     function closeAuthModal() {
         authModal.classList.remove('show');
+        document.body.style.overflow = '';
         hideMessages();
     }
 
@@ -527,7 +516,6 @@
         document.getElementById('authError').classList.remove('show');
     }
 
-    // --- RESTORED ORIGINAL AUTH LOGIC WITH LOADING OVERLAY ---
     function showLoading() {
         document.getElementById('loadingOverlay').classList.add('show');
     }
@@ -535,6 +523,9 @@
         document.getElementById('loadingOverlay').classList.remove('show');
     }
 
+    // ============================================
+    // LOGIN FUNCTION - FIXED API URL
+    // ============================================
     function handleLogin() {
         const username = document.getElementById('loginUsername').value.trim();
         const password = document.getElementById('loginPassword').value.trim();
@@ -542,12 +533,10 @@
 
         if(!username || !password) return showError("Please fill in all fields.");
         
-        // Disable button and show loading
         btn.disabled = true;
         showLoading();
 
-        // RESTORED BACKEND FETCH CALL
-        fetch('/api/auth/login', {
+        fetch(API_BASE + '/auth/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password })
@@ -557,12 +546,12 @@
             hideLoading();
             btn.disabled = false;
             if(data.success) {
-                localStorage.setItem('token', data.token);
-                localStorage.setItem('user', JSON.stringify(data.user));
-                showSuccess("Login successful! Redirecting...");
-                setTimeout(() => { window.location.href = '/dashboard'; }, 1000);
+                localStorage.setItem('oau_token', data.token);
+                localStorage.setItem('oau_user', JSON.stringify(data.user));
+                showSuccess("✅ Login successful! Redirecting...");
+                setTimeout(() => { window.location.href = '/app'; }, 1000);
             } else {
-                showError(data.message || "Invalid username or password.");
+                showError(data.error || "Invalid username or password.");
             }
         })
         .catch(err => {
@@ -573,6 +562,9 @@
         });
     }
 
+    // ============================================
+    // REGISTER FUNCTION - FIXED API URL
+    // ============================================
     function handleRegister() {
         const username = document.getElementById('regUsername').value.trim();
         const fullName = document.getElementById('regFullName').value.trim();
@@ -590,14 +582,12 @@
             return showError("Please fill in all required fields.");
         }
         if(password !== confirmPassword) return showError("Passwords do not match.");
-        if(password.length < 8) return showError("Password must be 8+ characters.");
+        if(password.length < 6) return showError("Password must be at least 6 characters.");
 
-        // Disable button and show loading
         btn.disabled = true;
         showLoading();
 
-        // RESTORED BACKEND FETCH CALL
-        fetch('/api/auth/register', {
+        fetch(API_BASE + '/auth/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
@@ -610,12 +600,12 @@
             hideLoading();
             btn.disabled = false;
             if(data.success) {
-                localStorage.setItem('token', data.token);
-                localStorage.setItem('user', JSON.stringify(data.user));
-                showSuccess("Account created! Redirecting...");
-                setTimeout(() => { window.location.href = '/dashboard'; }, 1000);
+                localStorage.setItem('oau_token', data.token);
+                localStorage.setItem('oau_user', JSON.stringify(data.user));
+                showSuccess("✅ Account created! Redirecting...");
+                setTimeout(() => { window.location.href = '/app'; }, 1000);
             } else {
-                showError(data.message || "Registration failed. Please try again.");
+                showError(data.error || "Registration failed. Please try again.");
             }
         })
         .catch(err => {
@@ -628,19 +618,68 @@
 
     function checkPasswordStrength(pass) {
         const bar = document.getElementById('passwordStrengthBar');
-        if(pass.length === 0) { bar.className = 'bar'; return; }
+        if(!pass) { bar.style.width = '0%'; bar.className = 'bar'; return; }
         let strength = 0;
-        if(pass.length >= 8) strength++;
-        if(pass.length >= 12) strength++;
-        if(/[A-Z]/.test(pass) && /[a-z]/.test(pass)) strength++;
+        if(pass.length >= 6) strength++;
+        if(pass.length >= 10) strength++;
+        if(/[a-z]/.test(pass) && /[A-Z]/.test(pass)) strength++;
         if(/\d/.test(pass)) strength++;
-        if(/[^A-Za-z0-9]/.test(pass)) strength++;
-        
-        const classes = ['weak', 'medium', 'strong', 'very-strong'];
-        bar.className = `bar ${classes[Math.min(strength, 4) - 1] || 'weak'}`;
+        if(/[^a-zA-Z0-9]/.test(pass)) strength++;
+        const levels = ['weak', 'medium', 'strong', 'very-strong'];
+        const widths = ['25%', '50%', '75%', '100%'];
+        const index = Math.min(Math.max(strength - 1, 0), 3);
+        bar.className = 'bar ' + levels[index];
+        bar.style.width = widths[index];
     }
 
-    // Initialize slider view
+    // Enter key handlers
+    document.getElementById('loginUsername').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('loginPassword').focus(); });
+    document.getElementById('loginPassword').addEventListener('keydown', (e) => { if (e.key === 'Enter') handleLogin(); });
+    
+    document.getElementById('regUsername').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regFullName').focus(); });
+    document.getElementById('regFullName').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regEmail').focus(); });
+    document.getElementById('regEmail').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regFaculty').focus(); });
+    document.getElementById('regFaculty').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regLevel').focus(); });
+    document.getElementById('regLevel').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regPassword').focus(); });
+    document.getElementById('regPassword').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regConfirmPassword').focus(); });
+    document.getElementById('regConfirmPassword').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regSecurityQuestion').focus(); });
+    document.getElementById('regSecurityQuestion').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regSecurityAnswer').focus(); });
+    document.getElementById('regSecurityAnswer').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regDepartment').focus(); });
+    document.getElementById('regDepartment').addEventListener('keydown', (e) => { if (e.key === 'Enter') handleRegister(); });
+
+    // Expose functions to window for inline onclick
+    window.openAuthModal = openAuthModal;
+    window.closeAuthModal = closeAuthModal;
+    window.setAuthTab = setAuthTab;
+    window.handleLogin = handleLogin;
+    window.handleRegister = handleRegister;
+    window.goToLogin = goToLogin;
+    window.checkPasswordStrength = checkPasswordStrength;
+
+    // Check if user already logged in
+    function checkAuth() {
+        const token = localStorage.getItem('oau_token');
+        if (token) {
+            fetch(API_BASE + '/auth/me', {
+                headers: { 'Authorization': 'Bearer ' + token }
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = '/app';
+                } else {
+                    localStorage.removeItem('oau_token');
+                    localStorage.removeItem('oau_user');
+                }
+            })
+            .catch(() => {
+                localStorage.removeItem('oau_token');
+                localStorage.removeItem('oau_user');
+            });
+        }
+    }
+
+    checkAuth();
     updateSlider();
 </script>
 </body>
