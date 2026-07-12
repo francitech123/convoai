@@ -15,7 +15,7 @@
         .app-container{position:fixed;top:0;left:0;right:0;bottom:0;display:flex;flex-direction:column;background:#ffffff}
 
         /* Skip Button */
-        .skip-btn{position:absolute;top:16px;right:20px;z-index:30;background:transparent;border:none;color:#94a3b8;font-weight:600;font-size:.85rem;cursor:pointer;padding:8px 12px;transition:color .2s;font-family:inherit}
+        .skip-btn{position:absolute;top:20px;right:24px;z-index:30;background:transparent;border:none;color:#94a3b8;font-weight:600;font-size:.85rem;cursor:pointer;padding:8px 12px;transition:color .2s;font-family:inherit}
         .skip-btn:hover{color:#0f172a}
 
         /* Slides Wrapper */
@@ -61,17 +61,10 @@
         .slide .result-card .status{font-size:.55rem;font-weight:700;padding:2px 8px;border-radius:10px}
         .slide .result-card .status.passed{background:rgba(16,185,129,.12);color:#10b981}
         .slide .result-card .status.failed{background:rgba(239,68,68,.12);color:#ef4444}
-        .slide .testimonial{display:flex;gap:10px;align-items:flex-start;background:#f8fafc;border-radius:12px;padding:10px 12px;margin:4px 0;border:1px solid #e2e8f0;width:100%;text-align:left}
-        .slide .testimonial .avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.7rem;color:#fff;flex-shrink:0}
-        .slide .testimonial .text{flex:1}
-        .slide .testimonial .text .name{font-weight:600;color:#0f172a;font-size:.8rem}
-        .slide .testimonial .text .title{font-size:.6rem;color:#64748b}
-        .slide .testimonial .text .quote{font-size:.75rem;color:#475569;font-style:italic;margin-top:2px}
-        .slide .testimonial .stars{color:#f59e0b;font-size:.6rem;margin-top:2px}
         
         @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
-        /* Circular Progress Bottom Bar (Like Reference) */
+        /* Circular Progress Bottom Bar */
         .progress-container{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:20;display:flex;align-items:center;justify-content:center}
         .progress-ring{position:relative;width:56px;height:56px}
         .progress-ring svg{transform:rotate(-90deg);width:56px;height:56px}
@@ -81,7 +74,7 @@
         .progress-ring .inner-btn:active{transform:translate(-50%,-50%) scale(.95)}
         .progress-ring .inner-btn:disabled{background:#e2e8f0;color:#94a3b8;cursor:not-allowed}
 
-        /* Auth Modal - Full Screen, Clean Design like Reference */
+        /* Auth Modal - Full Screen, Clean Design */
         .auth-modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:100;display:none;flex-direction:column;padding:20px;background:#ffffff;animation:slideUp .3s ease}
         .auth-modal-overlay.show{display:flex}
         
@@ -124,7 +117,6 @@
         .forgot-btn{background:none;border:none;color:#64748b;font-size:.85rem;cursor:pointer;font-weight:500;padding:8px 0;font-family:inherit;display:block;text-align:right;width:100%}
         .forgot-btn:hover{color:#0f172a}
         
-        /* Password Strength */
         .password-strength{height:3px;margin-top:6px;border-radius:4px;transition:all .3s;background:#e2e8f0}
         .password-strength .bar{height:100%;border-radius:4px;transition:width .4s ease;width:0%}
         .password-strength .bar.weak{background:#ef4444;width:25%}
@@ -163,7 +155,7 @@
                             <div class="avatar" style="background:linear-gradient(135deg,#3b82f6,#8b5cf6)">👤</div>
                             <div class="info">
                                 <div class="name">Welcome back, Student! 👋</div>
-                                <div class="sub">📊 85% avg • 🔥 7 day streak</div>
+                                <div class="sub">📊 92% avg • 🔥 7 day streak</div>
                             </div>
                         </div>
                     </div>
@@ -202,10 +194,10 @@
                     <h2><span class="highlight">Top Students</span></h2>
                     <p>See where you rank and stay motivated to climb higher.</p>
                     <div class="app-preview" style="padding:10px 14px">
-                        <div class="lb-item"><div class="rank gold">👑</div><div class="avatar" style="width:28px;height:28px;font-size:.6rem;background:linear-gradient(135deg,#f59e0b,#d97706)">A</div><div class="name">Abdulahi M.</div><div class="score">85%</div></div>
-                        <div class="lb-item"><div class="rank silver">🥈</div><div class="avatar" style="width:28px;height:28px;font-size:.6rem;background:linear-gradient(135deg,#94a3b8,#64748b)">S</div><div class="name">Aghogho S.</div><div class="score">78%</div></div>
-                        <div class="lb-item"><div class="rank bronze">🥉</div><div class="avatar" style="width:28px;height:28px;font-size:.6rem;background:linear-gradient(135deg,#b45309,#92400e)">K</div><div class="name">Kamara P.</div><div class="score">72%</div></div>
-                        <div class="lb-item"><div class="rank">4</div><div class="avatar" style="width:28px;height:28px;font-size:.6rem;background:linear-gradient(135deg,#3b82f6,#1d4ed8)">T</div><div class="name">Tunde A.</div><div class="score">68%</div></div>
+                        <div class="lb-item"><div class="rank gold">👑</div><div class="avatar" style="width:28px;height:28px;font-size:.6rem;background:linear-gradient(135deg,#f59e0b,#d97706)">A</div><div class="name">Abdulahi M.</div><div class="score">91%</div></div>
+                        <div class="lb-item"><div class="rank silver">🥈</div><div class="avatar" style="width:28px;height:28px;font-size:.6rem;background:linear-gradient(135deg,#94a3b8,#64748b)">S</div><div class="name">Aghogho S.</div><div class="score">88%</div></div>
+                        <div class="lb-item"><div class="rank bronze">🥉</div><div class="avatar" style="width:28px;height:28px;font-size:.6rem;background:linear-gradient(135deg,#b45309,#92400e)">K</div><div class="name">Kamara P.</div><div class="score">85%</div></div>
+                        <div class="lb-item"><div class="rank">4</div><div class="avatar" style="width:28px;height:28px;font-size:.6rem;background:linear-gradient(135deg,#3b82f6,#1d4ed8)">T</div><div class="name">Tunde A.</div><div class="score">82%</div></div>
                     </div>
                     <div class="features">
                         <div class="feature-item"><i class="fas fa-fire"></i><span>Compete with peers in real-time</span></div>
@@ -243,9 +235,9 @@
                     <span class="slide-icon">📈</span>
                     <h2>Your <span class="highlight">Results</span></h2>
                     <p>Track every attempt, see your progress, and improve over time.</p>
-                    <div class="result-card"><div class="score passed">85%</div><div class="info"><div class="title">LIB 001 · Test</div><div class="meta">17/20 correct • Grade: A</div></div><div class="status passed">✓ Passed</div></div>
+                    <div class="result-card"><div class="score passed">92%</div><div class="info"><div class="title">LIB 001 · Test</div><div class="meta">18.4/20 correct • Grade: A</div></div><div class="status passed">✓ Passed</div></div>
                     <div class="result-card"><div class="score passed">95%</div><div class="info"><div class="title">GST 112 · Exam</div><div class="meta">19/20 correct • Grade: A+</div></div><div class="status passed">✓ Passed</div></div>
-                    <div class="result-card"><div class="score passed">72%</div><div class="info"><div class="title">MTH 102 · Test</div><div class="meta">36/50 correct • Grade: B</div></div><div class="status passed">✓ Passed</div></div>
+                    <div class="result-card"><div class="score passed">80%</div><div class="info"><div class="title">MTH 102 · Test</div><div class="meta">40/50 correct • Grade: B+</div></div><div class="status passed">✓ Passed</div></div>
                     <div class="features" style="margin-top:4px">
                         <div class="feature-item"><i class="fas fa-chart-pie"></i><span>Detailed performance breakdown</span></div>
                         <div class="feature-item"><i class="fas fa-trending-up"></i><span>Track improvement over time</span></div>
@@ -253,7 +245,7 @@
                 </div>
             </div>
 
-            <!-- Slide 6: Final CTA (Now transitions to Login/Register) -->
+            <!-- Slide 6: Final CTA -->
             <div class="slide">
                 <div class="slide-content">
                     <span class="slide-icon">🎓</span>
@@ -267,8 +259,10 @@
                             <div style="background:rgba(245,158,11,.08);padding:6px;border-radius:8px;text-align:center"><div style="font-weight:700;color:#f59e0b;font-size:.75rem">📈</div><div style="font-size:.5rem;color:#64748b">Analytics</div></div>
                         </div>
                     </div>
-                    <button class="auth-btn" onclick="openAuthModal('register')" style="margin-top:12px; border-radius:12px;"><i class="fas fa-rocket"></i> Get Started</button>
-                    <button onclick="openAuthModal('login')" style="margin-top:12px; background:transparent; color:#64748b; border:1px solid #e2e8f0; padding:14px; border-radius:12px; font-weight:600; cursor:pointer; width:100%; font-family:inherit;">Already have an account? Login</button>
+                    <div class="btn-group" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:12px">
+                        <button class="auth-btn" onclick="openAuthModal('register')" style="padding:14px 28px; width:auto; border-radius:12px;"><i class="fas fa-rocket"></i> Get Started</button>
+                        <button onclick="openAuthModal('login')" style="background:transparent; color:#64748b; border:1px solid #e2e8f0; padding:14px 28px; border-radius:12px; font-weight:600; cursor:pointer; font-family:inherit; width:auto;">Login</button>
+                    </div>
                     <p style="color:#94a3b8;font-size:.7rem;margin-top:16px">⚡ Built with ❤️ by FrancisTech</p>
                 </div>
             </div>
@@ -339,7 +333,7 @@
             </div>
             <div class="form-group">
                 <label>Email</label>
-                <input type="email" id="regEmail" placeholder="francistech123@gmail.com">
+                <input type="email" id="regEmail" placeholder="user@gmail.com">
             </div>
             <div class="form-row">
                 <div class="form-group">
@@ -348,18 +342,19 @@
                         <option value="">Select Faculty</option>
                         <option value="Agriculture">Agriculture</option>
                         <option value="Arts">Arts</option>
+                        <option value="Law">Law</option>
+                        <option value="Science">Science</option>
+                        <option value="Social Sciences">Social Sciences</option>
+                        <option value="Education">Education</option>
+                        <option value="Pharmacy">Pharmacy</option>
+                        <option value="Technology">Technology</option>
+                        <option value="Administration">Administration</option>
+                        <option value="Environmental Design and Management">Environmental Design and Management</option>
                         <option value="Basic Medical Sciences">Basic Medical Sciences</option>
                         <option value="Clinical Sciences">Clinical Sciences</option>
                         <option value="Dentistry">Dentistry</option>
-                        <option value="Education">Education</option>
-                        <option value="Engineering">Engineering</option>
-                        <option value="Environmental Design">Environmental Design</option>
-                        <option value="Law">Law</option>
-                        <option value="Management Sciences">Management Sciences</option>
-                        <option value="Pharmacy">Pharmacy</option>
-                        <option value="Sciences">Sciences</option>
-                        <option value="Social Sciences">Social Sciences</option>
-                        <option value="Technology">Technology</option>
+                        <option value="Computing">Computing</option>
+                        <option value="General Studies">General Studies</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -367,6 +362,9 @@
                     <select id="regLevel">
                         <option value="100">100 Level</option>
                         <option value="200">200 Level</option>
+                        <option value="300">300 Level</option>
+                        <option value="400">400 Level</option>
+                        <option value="500">500 Level</option>
                     </select>
                 </div>
             </div>
@@ -374,7 +372,7 @@
                 <label>Password</label>
                 <input type="password" id="regPassword" placeholder="Create a password" oninput="checkPasswordStrength(this.value)">
                 <div class="password-strength"><div class="bar" id="passwordStrengthBar"></div></div>
-                <span class="password-hint" id="passwordHint">Use 6+ characters with letters and numbers</span>
+                <span class="password-hint" id="passwordHint">Use 8+ characters with letters and numbers</span>
             </div>
             <div class="form-group">
                 <label>Confirm Password</label>
@@ -388,6 +386,10 @@
                     <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
                     <option value="What is the name of your first pet?">What is the name of your first pet?</option>
                     <option value="What is your favorite book?">What is your favorite book?</option>
+                    <option value="What is your best friend's name?">What is your best friend's name?</option>
+                    <option value="What is your childhood nickname?">What is your childhood nickname?</option>
+                    <option value="What is your favorite food?">What is your favorite food?</option>
+                    <option value="What city were you born in?">What city were you born in?</option>
                 </select>
             </div>
             <div class="form-group">
@@ -413,21 +415,13 @@
     const totalSlides = slides.length;
     const nextBtn = document.getElementById('nextBtn');
     const progressCircle = document.getElementById('progressCircle');
-    const circumference = 150.8; // 2 * PI * r (24)
+    const circumference = 150.8;
 
     function updateSlider() {
         track.style.transform = `translateX(-${currentSlide * 100}%)`;
-        // Update progress ring
         const progress = (currentSlide + 1) / totalSlides;
         const offset = circumference - (progress * circumference);
         progressCircle.style.strokeDashoffset = offset;
-        
-        // Change icon on last slide to indicate CTA
-        if(currentSlide === totalSlides - 1) {
-            nextBtn.innerHTML = '<i class="fas fa-arrow-right"></i>';
-        } else {
-            nextBtn.innerHTML = '<i class="fas fa-arrow-right"></i>';
-        }
     }
 
     function nextSlide() {
@@ -435,15 +429,12 @@
             currentSlide++;
             updateSlider();
         } else {
-            // On last slide, open the login/register modal
             openAuthModal('register');
         }
     }
 
-    // Click on center button
     nextBtn.addEventListener('click', nextSlide);
 
-    // Touch/Swipe support
     let touchStartX = 0;
     let touchEndX = 0;
     
@@ -457,18 +448,13 @@
     }, false);
 
     function handleSwipe() {
-        if (touchStartX - touchEndX > 50) {
-            nextSlide(); // Swipe Left
-        }
-        if (touchEndX - touchStartX > 50) {
-            if (currentSlide > 0) { // Swipe Right
-                currentSlide--;
-                updateSlider();
-            }
+        if (touchStartX - touchEndX > 50) nextSlide();
+        if (touchEndX - touchStartX > 50 && currentSlide > 0) {
+            currentSlide--;
+            updateSlider();
         }
     }
 
-    // Skip Button Logic
     function goToLogin() {
         currentSlide = totalSlides - 1;
         updateSlider();
@@ -528,12 +514,10 @@
         document.getElementById('authError').classList.remove('show');
     }
 
-    // --- AUTH HANDLERS ---
     function handleLogin() {
         const user = document.getElementById('loginUsername').value.trim();
         const pass = document.getElementById('loginPassword').value.trim();
         if(!user || !pass) return showError("Please fill in all fields.");
-        // Simulate call
         showSuccess("Login successful! Redirecting...");
         setTimeout(() => { alert("Redirecting to Dashboard..."); }, 1500);
     }
@@ -546,6 +530,9 @@
         if(document.getElementById('regPassword').value !== document.getElementById('regConfirmPassword').value) {
             return showError("Passwords do not match.");
         }
+        if(document.getElementById('regPassword').value.length < 8) {
+            return showError("Password must be 8+ characters.");
+        }
         showSuccess("Account created successfully! Welcome aboard.");
         setTimeout(() => { alert("Redirecting to Dashboard..."); }, 1500);
     }
@@ -554,8 +541,8 @@
         const bar = document.getElementById('passwordStrengthBar');
         if(pass.length === 0) { bar.className = 'bar'; return; }
         let strength = 0;
-        if(pass.length >= 6) strength++;
-        if(pass.length >= 10) strength++;
+        if(pass.length >= 8) strength++;
+        if(pass.length >= 12) strength++;
         if(/[A-Z]/.test(pass) && /[a-z]/.test(pass)) strength++;
         if(/\d/.test(pass)) strength++;
         if(/[^A-Za-z0-9]/.test(pass)) strength++;
