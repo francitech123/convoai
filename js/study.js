@@ -10,12 +10,14 @@ let studyState = {
   answered: false,
   totalQuestions: 0,
   answeredQuestions: 0,
-  isLoading: false,
-  isTopicsLoading: false
+  isLoading: false
 };
 
 // ==================== COURSE DATA ====================
+// These course IDs MUST match the courseId values in your database
+// When you add courses via study-manage, use these exact course IDs
 const STUDY_COURSES = [
+  // ====== CHM 102 - Organic Chemistry II ======
   {
     id: 'CHM102',
     code: 'CHM 102',
@@ -30,6 +32,8 @@ const STUDY_COURSES = [
       { id: 'chm102_t6', title: 'Functional Groups - Aldehydes/Ketones/Acids', description: 'Carbonyl compounds and carboxylic acids' }
     ]
   },
+  
+  // ====== MTH 102 - Elementary Mathematics II ======
   {
     id: 'MTH102',
     code: 'MTH 102',
@@ -42,6 +46,8 @@ const STUDY_COURSES = [
       { id: 'mth102_t4', title: 'Curve Sketching', description: 'Extreme curve sketching, Applications of derivatives' }
     ]
   },
+  
+  // ====== BIO 102 - General Biology II ======
   {
     id: 'BIO102',
     code: 'BIO 102',
@@ -54,6 +60,8 @@ const STUDY_COURSES = [
       { id: 'bio102_t4', title: 'Physiology Briefs', description: 'Nutrition, Respiration, Circulation, Excretion, Reproduction' }
     ]
   },
+  
+  // ====== PHY 104 - General Physics IV ======
   {
     id: 'PHY104',
     code: 'PHY 104',
@@ -66,6 +74,8 @@ const STUDY_COURSES = [
       { id: 'phy104_t4', title: 'Acoustics', description: 'Echo, Beats, Doppler effect, Propagation in media' }
     ]
   },
+  
+  // ====== PHY 102 - General Physics II ======
   {
     id: 'PHY102',
     code: 'PHY 102',
@@ -79,6 +89,8 @@ const STUDY_COURSES = [
       { id: 'phy102_t5', title: 'Waves & AC Circuits', description: 'Electromagnetic oscillations, AC circuits' }
     ]
   },
+  
+  // ====== MTH 104 - Matrices and Determinant ======
   {
     id: 'MTH104',
     code: 'MTH 104',
@@ -90,6 +102,8 @@ const STUDY_COURSES = [
       { id: 'mth104_t3', title: 'Matrix Inversion', description: 'Inverse of matrices, Solving linear equations' }
     ]
   },
+  
+  // ====== STA 112 - Introduction to Statistics ======
   {
     id: 'STA112',
     code: 'STA 112',
@@ -102,52 +116,72 @@ const STUDY_COURSES = [
       { id: 'sta112_t4', title: 'Statistical Inference', description: 'Estimation, Hypothesis testing, Confidence intervals' }
     ]
   },
-  // Placeholder courses
-  { id: 'ACC102', code: 'ACC 102', name: 'Principles of Accounting II', icon: '💰', topics: [] },
-  { id: 'GST112', code: 'GST 112', name: 'Use of English II', icon: '📝', topics: [] },
-  { id: 'LIB001', code: 'LIB 001', name: 'Library Studies', icon: '📚', topics: [] },
-  { id: 'PHL102', code: 'PHL 102', name: 'Introduction to Philosophy II', icon: '🧠', topics: [] },
-  { id: 'BOT102', code: 'BOT 102', name: 'General Botany II', icon: '🌿', topics: [] },
-  { id: 'COS102', code: 'COS 102', name: 'Programming Fundamentals', icon: '💻', topics: [] },
-  { id: 'STA102', code: 'STA 102', name: 'Statistics II', icon: '📈', topics: [] },
-  { id: 'POL102', code: 'POL 102', name: 'Introduction to Political Science II', icon: '🏛️', topics: [] },
-  { id: 'SOC102', code: 'SOC 102', name: 'Introduction to Sociology II', icon: '👥', topics: [] }
+  
+  // ====== PLACEHOLDER COURSES ======
+  {
+    id: 'ACC102',
+    code: 'ACC 102',
+    name: 'Principles of Accounting II',
+    icon: '💰',
+    topics: []
+  },
+  {
+    id: 'GST112',
+    code: 'GST 112',
+    name: 'Use of English II',
+    icon: '📝',
+    topics: []
+  },
+  {
+    id: 'LIB001',
+    code: 'LIB 001',
+    name: 'Library Studies',
+    icon: '📚',
+    topics: []
+  },
+  {
+    id: 'PHL102',
+    code: 'PHL 102',
+    name: 'Introduction to Philosophy II',
+    icon: '🧠',
+    topics: []
+  },
+  {
+    id: 'BOT102',
+    code: 'BOT 102',
+    name: 'General Botany II',
+    icon: '🌿',
+    topics: []
+  },
+  {
+    id: 'COS102',
+    code: 'COS 102',
+    name: 'Programming Fundamentals',
+    icon: '💻',
+    topics: []
+  },
+  {
+    id: 'STA102',
+    code: 'STA 102',
+    name: 'Statistics II',
+    icon: '📈',
+    topics: []
+  },
+  {
+    id: 'POL102',
+    code: 'POL 102',
+    name: 'Introduction to Political Science II',
+    icon: '🏛️',
+    topics: []
+  },
+  {
+    id: 'SOC102',
+    code: 'SOC 102',
+    name: 'Introduction to Sociology II',
+    icon: '👥',
+    topics: []
+  }
 ];
-
-// ==================== GET POSSIBLE TOPIC ID VARIANTS ====================
-function getTopicIdVariants(topicId, courseId) {
-  const variants = new Set();
-  
-  // Original
-  variants.add(topicId);
-  
-  // Uppercase
-  variants.add(topicId.toUpperCase());
-  
-  // Lowercase
-  variants.add(topicId.toLowerCase());
-  
-  // Without underscore
-  variants.add(topicId.replace(/_/g, ''));
-  
-  // With dash instead of underscore
-  variants.add(topicId.replace(/_/g, '-'));
-  
-  // Course prefix variations
-  const coursePrefix = courseId || topicId.split('_')[0];
-  if (coursePrefix) {
-    variants.add(`${coursePrefix.toLowerCase()}_${topicId.split('_')[1] || ''}`);
-    variants.add(`${coursePrefix.toUpperCase()}_${topicId.split('_')[1] || ''}`);
-  }
-  
-  // Just the number part
-  const numberPart = topicId.match(/\d+/);
-  if (numberPart) {
-    variants.add(numberPart[0]);
-  }
-  
-  return Array.from(variants);
-}
 
 // ==================== LOAD STUDY DATA ====================
 export async function loadStudyData() {
@@ -156,7 +190,7 @@ export async function loadStudyData() {
   studyState.courses = STUDY_COURSES;
   renderStudyCourses();
   
-  // Load question counts in background
+  // Load question counts from backend
   await loadQuestionCounts();
 }
 
@@ -167,46 +201,22 @@ async function loadQuestionCounts() {
       if (course.topics.length === 0) continue;
       
       try {
-        // Try to get counts from backend
+        // Try to get counts for this course
         const data = await apiFetch(`/study/count/${course.id}`);
         if (data.success && data.counts) {
-          // Map backend topic IDs to frontend topic IDs
           course.topics.forEach(topic => {
-            // Try all possible variants to find a match
-            const variants = getTopicIdVariants(topic.id, course.id);
-            let found = false;
-            
-            for (const variant of variants) {
-              if (data.counts[variant] !== undefined) {
-                topic.questionCount = data.counts[variant] || 0;
-                found = true;
-                break;
-              }
-            }
-            
-            if (!found) {
-              topic.questionCount = 0;
-            }
+            topic.questionCount = data.counts[topic.id] || 0;
           });
         }
       } catch (e) {
-        // Try course endpoint as fallback
+        // If count endpoint fails, try getting questions directly
         try {
           const qData = await apiFetch(`/study/questions/course/${course.id}`);
           if (qData.success && qData.grouped) {
             course.topics.forEach(topic => {
-              const variants = getTopicIdVariants(topic.id, course.id);
-              let found = false;
-              
-              for (const variant of variants) {
-                if (qData.grouped[variant]) {
-                  topic.questionCount = qData.grouped[variant].length;
-                  found = true;
-                  break;
-                }
-              }
-              
-              if (!found) {
+              if (qData.grouped[topic.id]) {
+                topic.questionCount = qData.grouped[topic.id].length;
+              } else {
                 topic.questionCount = 0;
               }
             });
@@ -263,8 +273,8 @@ function renderStudyCourses() {
   }).join('');
 }
 
-// ==================== SELECT COURSE - REFRESH TOPICS ====================
-export async function studySelectCourse(courseId) {
+// ==================== SELECT COURSE ====================
+export function studySelectCourse(courseId) {
   const course = studyState.courses.find(c => c.id === courseId);
   if (!course) {
     showToast('Course not found', 'error');
@@ -277,106 +287,11 @@ export async function studySelectCourse(courseId) {
   }
 
   studyState.selectedCourse = course;
-  
-  // Show loading state on topics
-  const grid = $id('studyTopicsGrid');
-  if (grid) {
-    grid.innerHTML = `
-      <div class="loading-spin" style="grid-column:1/-1;padding:30px">
-        <i class="fas fa-spinner fa-spin"></i>
-        <p style="margin-top:8px;font-size:.85rem">Loading topics...</p>
-      </div>
-    `;
-  }
-
-  // Update header
   const title = $id('studyTopicsTitle');
   const subtitle = $id('studyTopicsSubtitle');
   if (title) title.textContent = `${course.code} - Topics`;
-  if (subtitle) subtitle.textContent = `${course.name} • Loading question counts...`;
+  if (subtitle) subtitle.textContent = `${course.name} • ${course.topics.length} topics`;
 
-  // Show topics screen
-  const courseScreen = $id('studyCourseScreen');
-  const topicsScreen = $id('studyTopicsScreen');
-  if (courseScreen) courseScreen.style.display = 'none';
-  if (topicsScreen) topicsScreen.style.display = 'block';
-
-  // Fetch fresh question counts from backend
-  studyState.isTopicsLoading = true;
-  
-  try {
-    // Reset question counts to 0 before fetching
-    course.topics.forEach(t => { t.questionCount = 0; });
-    
-    // Try to get counts for this course
-    let countsData = null;
-    try {
-      const data = await apiFetch(`/study/count/${course.id}`);
-      if (data.success && data.counts) {
-        countsData = data.counts;
-      }
-    } catch (e) {
-      console.log('Count endpoint failed, trying course endpoint...');
-    }
-    
-    // If counts endpoint failed, try course questions endpoint
-    if (!countsData) {
-      try {
-        const qData = await apiFetch(`/study/questions/course/${course.id}`);
-        if (qData.success && qData.grouped) {
-          // Build counts from grouped data
-          countsData = {};
-          Object.keys(qData.grouped).forEach(topicId => {
-            countsData[topicId] = qData.grouped[topicId].length;
-          });
-        }
-      } catch (e) {
-        console.log('Course endpoint also failed, using 0 counts');
-      }
-    }
-    
-    // Update topic counts with variant matching
-    if (countsData) {
-      course.topics.forEach(topic => {
-        // Try all possible variants to find a match
-        const variants = getTopicIdVariants(topic.id, course.id);
-        let found = false;
-        
-        for (const variant of variants) {
-          if (countsData[variant] !== undefined && countsData[variant] > 0) {
-            topic.questionCount = countsData[variant];
-            found = true;
-            console.log(`✅ Found match: ${topic.id} -> ${variant} (${countsData[variant]} questions)`);
-            break;
-          }
-        }
-        
-        if (!found) {
-          topic.questionCount = 0;
-          console.log(`❌ No match found for: ${topic.id}`);
-        }
-      });
-    }
-    
-    // Render topics with fresh counts
-    renderTopicsWithCounts(course);
-    
-    // Update subtitle with actual counts
-    const totalQs = course.topics.reduce((sum, t) => sum + (t.questionCount || 0), 0);
-    if (subtitle) subtitle.textContent = `${course.name} • ${course.topics.length} topics • ${totalQs} questions`;
-    
-  } catch (e) {
-    console.error('Error loading topic counts:', e);
-    // Show topics with 0 counts
-    renderTopicsWithCounts(course);
-    if (subtitle) subtitle.textContent = `${course.name} • ${course.topics.length} topics`;
-  }
-  
-  studyState.isTopicsLoading = false;
-}
-
-// ==================== RENDER TOPICS WITH COUNTS ====================
-function renderTopicsWithCounts(course) {
   const grid = $id('studyTopicsGrid');
   if (!grid) return;
 
@@ -387,10 +302,15 @@ function renderTopicsWithCounts(course) {
         <div class="topic-title">${index + 1}. ${topic.title}</div>
         <div class="topic-desc">${topic.description}</div>
       </div>
-      <span class="topic-count" id="topic-count-${topic.id}">📝 ${topic.questionCount || 0} Qs</span>
+      <span class="topic-count">📝 ${topic.questionCount || 0} Qs</span>
       <span class="topic-arrow"><i class="fas fa-chevron-right"></i></span>
     </div>
   `).join('');
+
+  const courseScreen = $id('studyCourseScreen');
+  const topicsScreen = $id('studyTopicsScreen');
+  if (courseScreen) courseScreen.style.display = 'none';
+  if (topicsScreen) topicsScreen.style.display = 'block';
 }
 
 // ==================== GO BACK TO COURSES ====================
@@ -439,48 +359,61 @@ export async function studySelectTopic(topicId) {
   container.classList.add('loading');
 
   try {
-    // Try multiple topic ID variants to find questions
-    const variants = getTopicIdVariants(topicId, course.id);
+    // FIRST: Try to get questions for this specific topic
     let data = null;
     let questionsFound = false;
-    let foundVariant = null;
     
-    for (const variant of variants) {
-      try {
-        const testData = await apiFetch(`/study/questions/${variant}`);
-        if (testData.success && testData.questions && testData.questions.length > 0) {
-          data = testData;
-          questionsFound = true;
-          foundVariant = variant;
-          console.log(`✅ Found questions with topic ID: ${variant}`);
-          break;
-        }
-      } catch (e) {
-        // Continue to next variant
+    try {
+      data = await apiFetch(`/study/questions/${topicId}`);
+      if (data.success && data.questions && data.questions.length > 0) {
+        questionsFound = true;
       }
+    } catch (e) {
+      console.log('No questions found for topic, trying course endpoint...');
     }
     
+    // SECOND: If no questions found, try getting all questions for the course
     if (!questionsFound) {
-      // Try course endpoint as fallback
       try {
         const courseData = await apiFetch(`/study/questions/course/${course.id}`);
         if (courseData.success && courseData.grouped) {
-          // Try each variant to find matching topic
-          for (const variant of variants) {
-            if (courseData.grouped[variant] && courseData.grouped[variant].length > 0) {
-              data = {
-                success: true,
-                questions: courseData.grouped[variant]
-              };
-              questionsFound = true;
-              foundVariant = variant;
-              console.log(`✅ Found questions via course endpoint with topic ID: ${variant}`);
-              break;
-            }
+          // Check if this topic has questions in the grouped data
+          const topicQuestions = courseData.grouped[topicId] || [];
+          if (topicQuestions.length > 0) {
+            data = {
+              success: true,
+              questions: topicQuestions
+            };
+            questionsFound = true;
           }
         }
       } catch (e) {
-        console.log('Course endpoint failed');
+        console.log('No questions found in course endpoint either');
+      }
+    }
+    
+    // THIRD: Try searching for questions that might have different topic ID format
+    if (!questionsFound) {
+      // Try with different topic ID formats (e.g., "chm102_t1" vs "CHM102_t1")
+      const altTopicIds = [
+        topicId,
+        topicId.toUpperCase(),
+        topicId.toLowerCase(),
+        topicId.replace(/_/g, ''),
+        topicId.replace(/[0-9]/g, '')
+      ];
+      
+      for (const altId of altTopicIds) {
+        if (altId === topicId) continue;
+        try {
+          const altData = await apiFetch(`/study/questions/${altId}`);
+          if (altData.success && altData.questions && altData.questions.length > 0) {
+            data = altData;
+            questionsFound = true;
+            console.log(`Found questions with alternative topic ID: ${altId}`);
+            break;
+          }
+        } catch (e) {}
       }
     }
 
@@ -495,12 +428,8 @@ export async function studySelectTopic(topicId) {
       // Update topic question count
       topic.questionCount = data.questions.length;
       
-      // Update the count display
-      const countEl = $id('topic-count-' + topicId);
-      if (countEl) countEl.textContent = `📝 ${data.questions.length} Qs`;
-      
     } else {
-      // No questions found
+      // No questions found - show empty state
       container.innerHTML = `
         <div class="empty-state" style="padding:40px 20px;text-align:center">
           <i class="fas fa-question-circle" style="font-size:2rem;display:block;margin-bottom:12px;opacity:.5"></i>
@@ -539,6 +468,10 @@ export async function studySelectTopic(topicId) {
 
     container.classList.remove('loading');
     studyRenderQuestion();
+
+    // Update topic count
+    const countEl = topicItem?.querySelector('.topic-count');
+    if (countEl) countEl.textContent = `📝 ${topic.questionCount || studyState.questions.length} Qs`;
 
   } catch (e) {
     console.error('Error loading questions:', e);
