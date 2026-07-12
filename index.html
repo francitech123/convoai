@@ -125,11 +125,24 @@
         .password-strength .bar.very-strong{background:#10b981;width:100%}
         .password-hint{font-size:.75rem;color:#94a3b8;margin-top:4px;display:block}
 
+        /* LOADING OVERLAY - RESTORED EXACTLY */
+        #loadingOverlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,.7);backdrop-filter:blur(8px);z-index:9999;display:none;align-items:center;justify-content:center;flex-direction:column;gap:16px}
+        #loadingOverlay.show{display:flex}
+        #loadingOverlay .spinner{width:48px;height:48px;border:4px solid #e2e8f0;border-top-color:#3b82f6;border-radius:50%;animation:spin .8s linear infinite}
+        #loadingOverlay p{color:#ffffff;font-weight:600;font-size:1rem}
+        @keyframes spin{to{transform:rotate(360deg)}}
+
         @media(max-width:380px){.form-row{grid-template-columns:1fr}}
         @media(min-width:768px){.slide-content{max-width:480px}.slide .stat-grid{grid-template-columns:repeat(4,1fr)}}
     </style>
 </head>
 <body>
+
+<!-- LOADING OVERLAY - RESTORED -->
+<div id="loadingOverlay">
+    <div class="spinner"></div>
+    <p>Please wait...</p>
+</div>
 
 <div class="app-container">
     <!-- Top Right Skip Button -->
@@ -461,7 +474,7 @@
         openAuthModal('register');
     }
 
-    // --- AUTH MODAL LOGIC ---
+    // --- AUTH MODAL UI LOGIC ---
     const authModal = document.getElementById('authModal');
     const loginForm = document.getElementById('loginForm');
     const registerForm = document.getElementById('registerForm');
@@ -514,27 +527,103 @@
         document.getElementById('authError').classList.remove('show');
     }
 
+    // --- RESTORED ORIGINAL AUTH LOGIC WITH LOADING OVERLAY ---
+    function showLoading() {
+        document.getElementById('loadingOverlay').classList.add('show');
+    }
+    function hideLoading() {
+        document.getElementById('loadingOverlay').classList.remove('show');
+    }
+
     function handleLogin() {
-        const user = document.getElementById('loginUsername').value.trim();
-        const pass = document.getElementById('loginPassword').value.trim();
-        if(!user || !pass) return showError("Please fill in all fields.");
-        showSuccess("Login successful! Redirecting...");
-        setTimeout(() => { alert("Redirecting to Dashboard..."); }, 1500);
+        const username = document.getElementById('loginUsername').value.trim();
+        const password = document.getElementById('loginPassword').value.trim();
+        const btn = document.getElementById('loginBtn');
+
+        if(!username || !password) return showError("Please fill in all fields.");
+        
+        // Disable button and show loading
+        btn.disabled = true;
+        showLoading();
+
+        // RESTORED BACKEND FETCH CALL
+        fetch('/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+        })
+        .then(res => res.json())
+        .then(data => {
+            hideLoading();
+            btn.disabled = false;
+            if(data.success) {
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user));
+                showSuccess("Login successful! Redirecting...");
+                setTimeout(() => { window.location.href = '/dashboard'; }, 1000);
+            } else {
+                showError(data.message || "Invalid username or password.");
+            }
+        })
+        .catch(err => {
+            hideLoading();
+            btn.disabled = false;
+            showError("Network error. Please try again.");
+            console.error(err);
+        });
     }
 
     function handleRegister() {
-        const fields = ['regUsername','regFullName','regEmail','regFaculty','regLevel','regPassword','regConfirmPassword','regSecurityQuestion','regSecurityAnswer'];
-        for(let id of fields) {
-            if(!document.getElementById(id).value.trim()) return showError("Please fill in all required fields.");
+        const username = document.getElementById('regUsername').value.trim();
+        const fullName = document.getElementById('regFullName').value.trim();
+        const email = document.getElementById('regEmail').value.trim();
+        const faculty = document.getElementById('regFaculty').value;
+        const level = document.getElementById('regLevel').value;
+        const password = document.getElementById('regPassword').value;
+        const confirmPassword = document.getElementById('regConfirmPassword').value;
+        const securityQuestion = document.getElementById('regSecurityQuestion').value;
+        const securityAnswer = document.getElementById('regSecurityAnswer').value.trim();
+        const department = document.getElementById('regDepartment').value.trim();
+        const btn = document.getElementById('registerBtn');
+
+        if(!username || !fullName || !email || !faculty || !level || !password || !confirmPassword || !securityQuestion || !securityAnswer) {
+            return showError("Please fill in all required fields.");
         }
-        if(document.getElementById('regPassword').value !== document.getElementById('regConfirmPassword').value) {
-            return showError("Passwords do not match.");
-        }
-        if(document.getElementById('regPassword').value.length < 8) {
-            return showError("Password must be 8+ characters.");
-        }
-        showSuccess("Account created successfully! Welcome aboard.");
-        setTimeout(() => { alert("Redirecting to Dashboard..."); }, 1500);
+        if(password !== confirmPassword) return showError("Passwords do not match.");
+        if(password.length < 8) return showError("Password must be 8+ characters.");
+
+        // Disable button and show loading
+        btn.disabled = true;
+        showLoading();
+
+        // RESTORED BACKEND FETCH CALL
+        fetch('/api/auth/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                username, fullName, email, faculty, level, 
+                password, securityQuestion, securityAnswer, department 
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            hideLoading();
+            btn.disabled = false;
+            if(data.success) {
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user));
+                showSuccess("Account created! Redirecting...");
+                setTimeout(() => { window.location.href = '/dashboard'; }, 1000);
+            } else {
+                showError(data.message || "Registration failed. Please try again.");
+            }
+        })
+        .catch(err => {
+            hideLoading();
+            btn.disabled = false;
+            showError("Network error. Please try again.");
+            console.error(err);
+        });
     }
 
     function checkPasswordStrength(pass) {
