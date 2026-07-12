@@ -13,9 +13,11 @@ let studyState = {
   isLoading: false
 };
 
-// ==================== COURSE DATA (Only courses with topic outlines) ====================
+// ==================== COURSE DATA ====================
+// These courses match what's in your study-manage.html
+// When you add courses via study-manage, they should appear here too
 const STUDY_COURSES = [
-  // ====== CHM 102 - Organic Chemistry II (Full Outline) ======
+  // ====== CHM 102 - Organic Chemistry II ======
   {
     id: 'CHM102',
     code: 'CHM 102',
@@ -31,7 +33,7 @@ const STUDY_COURSES = [
     ]
   },
   
-  // ====== MTH 102 - Elementary Mathematics II (Full Outline) ======
+  // ====== MTH 102 - Elementary Mathematics II ======
   {
     id: 'MTH102',
     code: 'MTH 102',
@@ -45,7 +47,7 @@ const STUDY_COURSES = [
     ]
   },
   
-  // ====== BIO 102 - General Biology II (Full Outline) ======
+  // ====== BIO 102 - General Biology II ======
   {
     id: 'BIO102',
     code: 'BIO 102',
@@ -59,7 +61,7 @@ const STUDY_COURSES = [
     ]
   },
   
-  // ====== PHY 104 - General Physics IV (Full Outline) ======
+  // ====== PHY 104 - General Physics IV ======
   {
     id: 'PHY104',
     code: 'PHY 104',
@@ -73,7 +75,7 @@ const STUDY_COURSES = [
     ]
   },
   
-  // ====== PHY 102 - General Physics II (Full Outline) ======
+  // ====== PHY 102 - General Physics II ======
   {
     id: 'PHY102',
     code: 'PHY 102',
@@ -88,7 +90,7 @@ const STUDY_COURSES = [
     ]
   },
   
-  // ====== MTH 104 - Matrices and Determinant (Full Outline) ======
+  // ====== MTH 104 - Matrices and Determinant ======
   {
     id: 'MTH104',
     code: 'MTH 104',
@@ -101,7 +103,7 @@ const STUDY_COURSES = [
     ]
   },
   
-  // ====== STA 112 - Introduction to Statistics (Full Outline) ======
+  // ====== STA 112 - Introduction to Statistics ======
   {
     id: 'STA112',
     code: 'STA 112',
@@ -115,11 +117,7 @@ const STUDY_COURSES = [
     ]
   },
   
-  // ============================================
-  // ADDITIONAL COURSES - TOPICS TO BE ADDED LATER
-  // ============================================
-  
-  // ACC 102 - Principles of Accounting II (No topics yet)
+  // ====== PLACEHOLDER COURSES (Topics to be added) ======
   {
     id: 'ACC102',
     code: 'ACC 102',
@@ -127,8 +125,6 @@ const STUDY_COURSES = [
     icon: '💰',
     topics: []
   },
-  
-  // GST 112 - Use of English II (No topics yet)
   {
     id: 'GST112',
     code: 'GST 112',
@@ -136,8 +132,6 @@ const STUDY_COURSES = [
     icon: '📝',
     topics: []
   },
-  
-  // LIB 001 - Library Studies (No topics yet)
   {
     id: 'LIB001',
     code: 'LIB 001',
@@ -145,8 +139,6 @@ const STUDY_COURSES = [
     icon: '📚',
     topics: []
   },
-  
-  // PHL 102 - Introduction to Philosophy II (No topics yet)
   {
     id: 'PHL102',
     code: 'PHL 102',
@@ -154,8 +146,6 @@ const STUDY_COURSES = [
     icon: '🧠',
     topics: []
   },
-  
-  // BOT 102 - General Botany II (No topics yet)
   {
     id: 'BOT102',
     code: 'BOT 102',
@@ -163,8 +153,6 @@ const STUDY_COURSES = [
     icon: '🌿',
     topics: []
   },
-  
-  // COS 102 - Programming Fundamentals (No topics yet)
   {
     id: 'COS102',
     code: 'COS 102',
@@ -172,8 +160,13 @@ const STUDY_COURSES = [
     icon: '💻',
     topics: []
   },
-  
-  // POL 102 - Introduction to Political Science II (No topics yet)
+  {
+    id: 'STA102',
+    code: 'STA 102',
+    name: 'Statistics II',
+    icon: '📈',
+    topics: []
+  },
   {
     id: 'POL102',
     code: 'POL 102',
@@ -181,8 +174,6 @@ const STUDY_COURSES = [
     icon: '🏛️',
     topics: []
   },
-  
-  // SOC 102 - Introduction to Sociology II (No topics yet)
   {
     id: 'SOC102',
     code: 'SOC 102',
@@ -199,23 +190,42 @@ export async function loadStudyData() {
   studyState.courses = STUDY_COURSES;
   renderStudyCourses();
   
-  // Try to load question counts from backend
-  loadQuestionCounts();
+  // Load question counts from backend
+  await loadQuestionCounts();
 }
 
+// ==================== LOAD QUESTION COUNTS FROM BACKEND ====================
 async function loadQuestionCounts() {
   try {
     for (const course of studyState.courses) {
       if (course.topics.length === 0) continue;
-      const data = await apiFetch(`/study/count/${course.id}`);
-      if (data.success && data.counts) {
-        course.topics.forEach(topic => {
-          if (data.counts[topic.id]) {
-            topic.questionCount = data.counts[topic.id];
-          } else {
-            topic.questionCount = 0;
+      
+      try {
+        const data = await apiFetch(`/study/count/${course.id}`);
+        if (data.success && data.counts) {
+          course.topics.forEach(topic => {
+            topic.questionCount = data.counts[topic.id] || 0;
+          });
+        }
+      } catch (e) {
+        // If count endpoint fails, try getting questions directly
+        try {
+          const qData = await apiFetch(`/study/questions/course/${course.id}`);
+          if (qData.success && qData.grouped) {
+            course.topics.forEach(topic => {
+              if (qData.grouped[topic.id]) {
+                topic.questionCount = qData.grouped[topic.id].length;
+              } else {
+                topic.questionCount = 0;
+              }
+            });
           }
-        });
+        } catch (e2) {
+          // If both fail, set to 0
+          course.topics.forEach(topic => {
+            topic.questionCount = 0;
+          });
+        }
       }
     }
     renderStudyCourses();
@@ -224,6 +234,7 @@ async function loadQuestionCounts() {
   }
 }
 
+// ==================== RENDER STUDY COURSES ====================
 function renderStudyCourses() {
   const grid = $id('studyCourseGrid');
   if (!grid) return;
@@ -234,6 +245,9 @@ function renderStudyCourses() {
         <i class="fas fa-book" style="font-size:2rem;display:block;margin-bottom:12px;opacity:.5"></i>
         <h3 style="color:var(--text);margin-bottom:8px">No Courses Available</h3>
         <p style="color:var(--text-secondary);font-size:.85rem">No courses have been added yet.</p>
+        <button class="btn btn-primary btn-sm" onclick="window.location.href='/study-manage'" style="margin-top:12px">
+          <i class="fas fa-plus"></i> Manage Courses
+        </button>
       </div>
     `;
     return;
@@ -308,7 +322,7 @@ export function studyGoToCourses() {
   studyState.selectedCourse = null;
 }
 
-// ==================== SELECT TOPIC ====================
+// ==================== SELECT TOPIC AND FETCH QUESTIONS ====================
 export async function studySelectTopic(topicId) {
   if (studyState.isLoading) return;
 
@@ -355,23 +369,47 @@ export async function studySelectTopic(topicId) {
         correctOption: q.correct || 0,
         explanation: q.explanation || 'No explanation provided.'
       }));
+      
+      // Update topic question count from actual data
+      topic.questionCount = data.questions.length;
+      
     } else {
-      // If no questions in backend, show empty state
-      container.innerHTML = `
-        <div class="empty-state" style="padding:40px 20px;text-align:center">
-          <i class="fas fa-question-circle" style="font-size:2rem;display:block;margin-bottom:12px;opacity:.5"></i>
-          <h3 style="color:var(--text);margin-bottom:8px">No Questions Available</h3>
-          <p style="color:var(--text-secondary);font-size:.85rem">This topic doesn't have any questions yet.</p>
-          <p style="color:var(--text-tertiary);font-size:.75rem;margin-top:4px">Use the <strong>Study Manager</strong> or <strong>Bulk Upload</strong> to add questions.</p>
-          <button class="btn btn-primary btn-sm" onclick="window.studyGoToCourses()" style="margin-top:12px">
-            <i class="fas fa-arrow-left"></i> Back to Courses
-          </button>
-        </div>
-      `;
-      container.classList.remove('loading');
-      studyState.isLoading = false;
-      if (topicItem) topicItem.classList.remove('loading');
-      return;
+      // No questions found - try to get from course endpoint
+      try {
+        const courseData = await apiFetch(`/study/questions/course/${course.id}`);
+        if (courseData.success && courseData.grouped && courseData.grouped[topicId]) {
+          const qs = courseData.grouped[topicId];
+          studyState.questions = qs.map(q => ({
+            ...q,
+            options: q.options || ['A', 'B', 'C', 'D'],
+            correctOption: q.correct || 0,
+            explanation: q.explanation || 'No explanation provided.'
+          }));
+          topic.questionCount = qs.length;
+        } else {
+          throw new Error('No questions found');
+        }
+      } catch (e2) {
+        // No questions available - show empty state
+        container.innerHTML = `
+          <div class="empty-state" style="padding:40px 20px;text-align:center">
+            <i class="fas fa-question-circle" style="font-size:2rem;display:block;margin-bottom:12px;opacity:.5"></i>
+            <h3 style="color:var(--text);margin-bottom:8px">No Questions Available</h3>
+            <p style="color:var(--text-secondary);font-size:.85rem">This topic doesn't have any questions yet.</p>
+            <p style="color:var(--text-tertiary);font-size:.75rem;margin-top:4px">Use the <strong>Study Manager</strong> to add questions for this topic.</p>
+            <button class="btn btn-primary btn-sm" onclick="window.studyGoToCourses()" style="margin-top:12px">
+              <i class="fas fa-arrow-left"></i> Back to Courses
+            </button>
+            <button class="btn btn-soft btn-sm" onclick="window.location.href='/study-manage'" style="margin-top:8px">
+              <i class="fas fa-plus"></i> Go to Study Manager
+            </button>
+          </div>
+        `;
+        container.classList.remove('loading');
+        studyState.isLoading = false;
+        if (topicItem) topicItem.classList.remove('loading');
+        return;
+      }
     }
 
     studyState.currentIndex = 0;
@@ -392,6 +430,10 @@ export async function studySelectTopic(topicId) {
 
     container.classList.remove('loading');
     studyRenderQuestion();
+
+    // Update topic count in the topics list
+    const countEl = topicItem?.querySelector('.topic-count');
+    if (countEl) countEl.textContent = `📝 ${topic.questionCount || studyState.questions.length} Qs`;
 
   } catch (e) {
     console.error('Error loading questions:', e);
