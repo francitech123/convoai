@@ -114,6 +114,41 @@ const STUDY_COURSES = [
   { id: 'SOC102', code: 'SOC 102', name: 'Introduction to Sociology II', icon: '👥', topics: [] }
 ];
 
+// ==================== GET POSSIBLE TOPIC ID VARIANTS ====================
+function getTopicIdVariants(topicId, courseId) {
+  const variants = new Set();
+  
+  // Original
+  variants.add(topicId);
+  
+  // Uppercase
+  variants.add(topicId.toUpperCase());
+  
+  // Lowercase
+  variants.add(topicId.toLowerCase());
+  
+  // Without underscore
+  variants.add(topicId.replace(/_/g, ''));
+  
+  // With dash instead of underscore
+  variants.add(topicId.replace(/_/g, '-'));
+  
+  // Course prefix variations
+  const coursePrefix = courseId || topicId.split('_')[0];
+  if (coursePrefix) {
+    variants.add(`${coursePrefix.toLowerCase()}_${topicId.split('_')[1] || ''}`);
+    variants.add(`${coursePrefix.toUpperCase()}_${topicId.split('_')[1] || ''}`);
+  }
+  
+  // Just the number part
+  const numberPart = topicId.match(/\d+/);
+  if (numberPart) {
+    variants.add(numberPart[0]);
+  }
+  
+  return Array.from(variants);
+}
+
 // ==================== LOAD STUDY DATA ====================
 export async function loadStudyData() {
   if (document.querySelector('#studyCourseGrid .study-course-card')) return;
@@ -132,10 +167,26 @@ async function loadQuestionCounts() {
       if (course.topics.length === 0) continue;
       
       try {
+        // Try to get counts from backend
         const data = await apiFetch(`/study/count/${course.id}`);
         if (data.success && data.counts) {
+          // Map backend topic IDs to frontend topic IDs
           course.topics.forEach(topic => {
-            topic.questionCount = data.counts[topic.id] || 0;
+            // Try all possible variants to find a match
+            const variants = getTopicIdVariants(topic.id, course.id);
+            let found = false;
+            
+            for (const variant of variants) {
+              if (data.counts[variant] !== undefined) {
+                topic.questionCount = data.counts[variant] || 0;
+                found = true;
+                break;
+              }
+            }
+            
+            if (!found) {
+              topic.questionCount = 0;
+            }
           });
         }
       } catch (e) {
@@ -144,9 +195,18 @@ async function loadQuestionCounts() {
           const qData = await apiFetch(`/study/questions/course/${course.id}`);
           if (qData.success && qData.grouped) {
             course.topics.forEach(topic => {
-              if (qData.grouped[topic.id]) {
-                topic.questionCount = qData.grouped[topic.id].length;
-              } else {
+              const variants = getTopicIdVariants(topic.id, course.id);
+              let found = false;
+              
+              for (const variant of variants) {
+                if (qData.grouped[variant]) {
+                  topic.questionCount = qData.grouped[variant].length;
+                  found = true;
+                  break;
+                }
+              }
+              
+              if (!found) {
                 topic.questionCount = 0;
               }
             });
@@ -275,10 +335,26 @@ export async function studySelectCourse(courseId) {
       }
     }
     
-    // Update topic counts
+    // Update topic counts with variant matching
     if (countsData) {
       course.topics.forEach(topic => {
-        topic.questionCount = countsData[topic.id] || 0;
+        // Try all possible variants to find a match
+        const variants = getTopicIdVariants(topic.id, course.id);
+        let found = false;
+        
+        for (const variant of variants) {
+          if (countsData[variant] !== undefined && countsData[variant] > 0) {
+            topic.questionCount = countsData[variant];
+            found = true;
+            console.log(`✅ Found match: ${topic.id} -> ${variant} (${countsData[variant]} questions)`);
+            break;
+          }
+        }
+        
+        if (!found) {
+          topic.questionCount = 0;
+          console.log(`❌ No match found for: ${topic.id}`);
+        }
       });
     }
     
@@ -363,57 +439,48 @@ export async function studySelectTopic(topicId) {
   container.classList.add('loading');
 
   try {
-    // Try to get questions for this specific topic
+    // Try multiple topic ID variants to find questions
+    const variants = getTopicIdVariants(topicId, course.id);
     let data = null;
     let questionsFound = false;
+    let foundVariant = null;
     
-    try {
-      data = await apiFetch(`/study/questions/${topicId}`);
-      if (data.success && data.questions && data.questions.length > 0) {
-        questionsFound = true;
+    for (const variant of variants) {
+      try {
+        const testData = await apiFetch(`/study/questions/${variant}`);
+        if (testData.success && testData.questions && testData.questions.length > 0) {
+          data = testData;
+          questionsFound = true;
+          foundVariant = variant;
+          console.log(`✅ Found questions with topic ID: ${variant}`);
+          break;
+        }
+      } catch (e) {
+        // Continue to next variant
       }
-    } catch (e) {
-      console.log('No questions found for topic, trying course endpoint...');
     }
     
     if (!questionsFound) {
+      // Try course endpoint as fallback
       try {
         const courseData = await apiFetch(`/study/questions/course/${course.id}`);
         if (courseData.success && courseData.grouped) {
-          const topicQuestions = courseData.grouped[topicId] || [];
-          if (topicQuestions.length > 0) {
-            data = {
-              success: true,
-              questions: topicQuestions
-            };
-            questionsFound = true;
+          // Try each variant to find matching topic
+          for (const variant of variants) {
+            if (courseData.grouped[variant] && courseData.grouped[variant].length > 0) {
+              data = {
+                success: true,
+                questions: courseData.grouped[variant]
+              };
+              questionsFound = true;
+              foundVariant = variant;
+              console.log(`✅ Found questions via course endpoint with topic ID: ${variant}`);
+              break;
+            }
           }
         }
       } catch (e) {
-        console.log('No questions found in course endpoint either');
-      }
-    }
-    
-    // Try alternative topic ID formats
-    if (!questionsFound) {
-      const altTopicIds = [
-        topicId,
-        topicId.toUpperCase(),
-        topicId.toLowerCase(),
-        topicId.replace(/_/g, ''),
-        topicId.replace(/[0-9]/g, '')
-      ];
-      
-      for (const altId of altTopicIds) {
-        if (altId === topicId) continue;
-        try {
-          const altData = await apiFetch(`/study/questions/${altId}`);
-          if (altData.success && altData.questions && altData.questions.length > 0) {
-            data = altData;
-            questionsFound = true;
-            break;
-          }
-        } catch (e) {}
+        console.log('Course endpoint failed');
       }
     }
 
