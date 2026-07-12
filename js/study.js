@@ -14,8 +14,8 @@ let studyState = {
 };
 
 // ==================== COURSE DATA ====================
-// These courses match what's in your study-manage.html
-// When you add courses via study-manage, they should appear here too
+// These course IDs MUST match the courseId values in your database
+// When you add courses via study-manage, use these exact course IDs
 const STUDY_COURSES = [
   // ====== CHM 102 - Organic Chemistry II ======
   {
@@ -117,7 +117,7 @@ const STUDY_COURSES = [
     ]
   },
   
-  // ====== PLACEHOLDER COURSES (Topics to be added) ======
+  // ====== PLACEHOLDER COURSES ======
   {
     id: 'ACC102',
     code: 'ACC 102',
@@ -201,6 +201,7 @@ async function loadQuestionCounts() {
       if (course.topics.length === 0) continue;
       
       try {
+        // Try to get counts for this course
         const data = await apiFetch(`/study/count/${course.id}`);
         if (data.success && data.counts) {
           course.topics.forEach(topic => {
@@ -221,7 +222,6 @@ async function loadQuestionCounts() {
             });
           }
         } catch (e2) {
-          // If both fail, set to 0
           course.topics.forEach(topic => {
             topic.questionCount = 0;
           });
@@ -359,10 +359,65 @@ export async function studySelectTopic(topicId) {
   container.classList.add('loading');
 
   try {
-    // Fetch questions from backend using the topic ID
-    const data = await apiFetch(`/study/questions/${topicId}`);
+    // FIRST: Try to get questions for this specific topic
+    let data = null;
+    let questionsFound = false;
+    
+    try {
+      data = await apiFetch(`/study/questions/${topicId}`);
+      if (data.success && data.questions && data.questions.length > 0) {
+        questionsFound = true;
+      }
+    } catch (e) {
+      console.log('No questions found for topic, trying course endpoint...');
+    }
+    
+    // SECOND: If no questions found, try getting all questions for the course
+    if (!questionsFound) {
+      try {
+        const courseData = await apiFetch(`/study/questions/course/${course.id}`);
+        if (courseData.success && courseData.grouped) {
+          // Check if this topic has questions in the grouped data
+          const topicQuestions = courseData.grouped[topicId] || [];
+          if (topicQuestions.length > 0) {
+            data = {
+              success: true,
+              questions: topicQuestions
+            };
+            questionsFound = true;
+          }
+        }
+      } catch (e) {
+        console.log('No questions found in course endpoint either');
+      }
+    }
+    
+    // THIRD: Try searching for questions that might have different topic ID format
+    if (!questionsFound) {
+      // Try with different topic ID formats (e.g., "chm102_t1" vs "CHM102_t1")
+      const altTopicIds = [
+        topicId,
+        topicId.toUpperCase(),
+        topicId.toLowerCase(),
+        topicId.replace(/_/g, ''),
+        topicId.replace(/[0-9]/g, '')
+      ];
+      
+      for (const altId of altTopicIds) {
+        if (altId === topicId) continue;
+        try {
+          const altData = await apiFetch(`/study/questions/${altId}`);
+          if (altData.success && altData.questions && altData.questions.length > 0) {
+            data = altData;
+            questionsFound = true;
+            console.log(`Found questions with alternative topic ID: ${altId}`);
+            break;
+          }
+        } catch (e) {}
+      }
+    }
 
-    if (data.success && data.questions && data.questions.length > 0) {
+    if (questionsFound && data && data.questions && data.questions.length > 0) {
       studyState.questions = data.questions.map(q => ({
         ...q,
         options: q.options || ['A', 'B', 'C', 'D'],
@@ -370,46 +425,29 @@ export async function studySelectTopic(topicId) {
         explanation: q.explanation || 'No explanation provided.'
       }));
       
-      // Update topic question count from actual data
+      // Update topic question count
       topic.questionCount = data.questions.length;
       
     } else {
-      // No questions found - try to get from course endpoint
-      try {
-        const courseData = await apiFetch(`/study/questions/course/${course.id}`);
-        if (courseData.success && courseData.grouped && courseData.grouped[topicId]) {
-          const qs = courseData.grouped[topicId];
-          studyState.questions = qs.map(q => ({
-            ...q,
-            options: q.options || ['A', 'B', 'C', 'D'],
-            correctOption: q.correct || 0,
-            explanation: q.explanation || 'No explanation provided.'
-          }));
-          topic.questionCount = qs.length;
-        } else {
-          throw new Error('No questions found');
-        }
-      } catch (e2) {
-        // No questions available - show empty state
-        container.innerHTML = `
-          <div class="empty-state" style="padding:40px 20px;text-align:center">
-            <i class="fas fa-question-circle" style="font-size:2rem;display:block;margin-bottom:12px;opacity:.5"></i>
-            <h3 style="color:var(--text);margin-bottom:8px">No Questions Available</h3>
-            <p style="color:var(--text-secondary);font-size:.85rem">This topic doesn't have any questions yet.</p>
-            <p style="color:var(--text-tertiary);font-size:.75rem;margin-top:4px">Use the <strong>Study Manager</strong> to add questions for this topic.</p>
-            <button class="btn btn-primary btn-sm" onclick="window.studyGoToCourses()" style="margin-top:12px">
-              <i class="fas fa-arrow-left"></i> Back to Courses
-            </button>
-            <button class="btn btn-soft btn-sm" onclick="window.location.href='/study-manage'" style="margin-top:8px">
-              <i class="fas fa-plus"></i> Go to Study Manager
-            </button>
-          </div>
-        `;
-        container.classList.remove('loading');
-        studyState.isLoading = false;
-        if (topicItem) topicItem.classList.remove('loading');
-        return;
-      }
+      // No questions found - show empty state
+      container.innerHTML = `
+        <div class="empty-state" style="padding:40px 20px;text-align:center">
+          <i class="fas fa-question-circle" style="font-size:2rem;display:block;margin-bottom:12px;opacity:.5"></i>
+          <h3 style="color:var(--text);margin-bottom:8px">No Questions Available</h3>
+          <p style="color:var(--text-secondary);font-size:.85rem">This topic doesn't have any questions yet.</p>
+          <p style="color:var(--text-tertiary);font-size:.75rem;margin-top:4px">Use the <strong>Study Manager</strong> to add questions for this topic.</p>
+          <button class="btn btn-primary btn-sm" onclick="window.studyGoToCourses()" style="margin-top:12px">
+            <i class="fas fa-arrow-left"></i> Back to Courses
+          </button>
+          <button class="btn btn-soft btn-sm" onclick="window.location.href='/study-manage'" style="margin-top:8px">
+            <i class="fas fa-plus"></i> Go to Study Manager
+          </button>
+        </div>
+      `;
+      container.classList.remove('loading');
+      studyState.isLoading = false;
+      if (topicItem) topicItem.classList.remove('loading');
+      return;
     }
 
     studyState.currentIndex = 0;
@@ -431,7 +469,7 @@ export async function studySelectTopic(topicId) {
     container.classList.remove('loading');
     studyRenderQuestion();
 
-    // Update topic count in the topics list
+    // Update topic count
     const countEl = topicItem?.querySelector('.topic-count');
     if (countEl) countEl.textContent = `📝 ${topic.questionCount || studyState.questions.length} Qs`;
 
