@@ -84,10 +84,14 @@
             text-align:center;
             cursor:pointer;
             transition:all .2s;
+            position:relative;
         }
         .stat-card:hover{transform:translateY(-2px);border-color:var(--primary-light)}
         .stat-card .num{font-size:1.5rem;font-weight:800;color:var(--primary-light)}
         .stat-card .lbl{font-size:.65rem;color:var(--text-tertiary);margin-top:2px}
+        .stat-card .stat-spinner{display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:1.2rem;color:var(--primary-light)}
+        .stat-card.loading .num,.stat-card.loading .lbl{opacity:.3}
+        .stat-card.loading .stat-spinner{display:block}
         
         .tabs{
             display:flex;
@@ -198,49 +202,39 @@
             cursor:pointer;
             transition:all .2s;
             font-family:inherit;
+            position:relative;
         }
         .btn-primary{
             background:linear-gradient(135deg,var(--primary),var(--primary-light));
             color:#fff;
         }
-        .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(59,130,246,.3)}
+        .btn-primary:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 25px rgba(59,130,246,.3)}
         .btn-success{
             background:var(--success);
             color:#fff;
         }
-        .btn-success:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(16,185,129,.3)}
+        .btn-success:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 25px rgba(16,185,129,.3)}
         .btn-danger{
             background:var(--danger);
             color:#fff;
         }
-        .btn-danger:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(239,68,68,.3)}
+        .btn-danger:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 25px rgba(239,68,68,.3)}
         .btn-warning{
             background:var(--warning);
             color:#000;
         }
-        .btn-warning:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(245,158,11,.3)}
+        .btn-warning:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 25px rgba(245,158,11,.3)}
         .btn-soft{
             background:transparent;
             border:1px solid var(--border-light);
             color:var(--text);
         }
-        .btn-soft:hover{background:var(--border-light)}
+        .btn-soft:hover:not(:disabled){background:var(--border-light)}
         .btn-sm{padding:6px 14px;font-size:.7rem}
         .btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
-        
-        .btn .spinner{
-            display:none;
-            width:14px;
-            height:14px;
-            border:2px solid rgba(255,255,255,.3);
-            border-top-color:#fff;
-            border-radius:50%;
-            animation:spin .6s linear infinite;
-        }
-        .btn.loading .spinner{display:inline-block}
+        .btn .btn-spinner{display:none}
         .btn.loading .btn-text{display:none}
-        .btn.loading .btn-icon{display:none}
-        
+        .btn.loading .btn-spinner{display:inline-block;animation:spin 1s linear infinite}
         @keyframes spin{to{transform:rotate(360deg)}}
         
         .toolbar{
@@ -278,6 +272,11 @@
             color:var(--text);
             font-size:.8rem;
         }
+        .toolbar .selection-actions{
+            display:flex;
+            gap:6px;
+            align-items:center;
+        }
         
         .list-container{max-height:500px;overflow-y:auto}
         .list-container::-webkit-scrollbar{width:4px}
@@ -297,6 +296,25 @@
             cursor:pointer;
         }
         .list-item:hover{border-color:var(--primary-light)}
+        .list-item.selected{background:rgba(59,130,246,.1);border-color:var(--primary-light)}
+        .list-item .checkbox{
+            width:18px;
+            height:18px;
+            border:2px solid var(--border-light);
+            border-radius:4px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            flex-shrink:0;
+            cursor:pointer;
+            transition:all .2s;
+            margin-right:10px;
+        }
+        .list-item .checkbox.checked{
+            background:var(--primary-light);
+            border-color:var(--primary-light);
+            color:#fff;
+        }
         .list-item .info{flex:1;min-width:0}
         .list-item .info .title{font-weight:600;color:var(--text);font-size:.85rem}
         .list-item .info .sub{
@@ -318,6 +336,17 @@
             flex-shrink:0;
             align-items:center;
         }
+        .list-item .badge{
+            padding:2px 10px;
+            border-radius:12px;
+            font-size:.55rem;
+            font-weight:700;
+            margin-right:6px;
+        }
+        .badge-green{background:rgba(16,185,129,.15);color:var(--accent)}
+        .badge-blue{background:rgba(59,130,246,.15);color:var(--primary-light)}
+        .badge-yellow{background:rgba(245,158,11,.15);color:var(--warning)}
+        .badge-red{background:rgba(239,68,68,.15);color:var(--danger)}
         
         .question-item{
             background:var(--bg);
@@ -331,6 +360,8 @@
             gap:10px;
         }
         .question-item:hover{border-color:var(--primary-light)}
+        .question-item.selected{background:rgba(59,130,246,.05);border-color:var(--primary-light)}
+        .question-item .q-checkbox{margin-top:4px}
         .question-item .q-content{flex:1;min-width:0}
         .question-item .q-text{
             font-weight:500;
@@ -414,7 +445,7 @@
             display:none;
             position:fixed;
             top:0;left:0;right:0;bottom:0;
-            background:rgba(0,0,0,.8);
+            background:rgba(0,0,0,.85);
             z-index:1000;
             align-items:center;
             justify-content:center;
@@ -456,6 +487,7 @@
             margin-top:16px;
             flex-wrap:wrap;
         }
+        .modal .list-container{max-height:300px}
         
         .loading-overlay{
             display:none;
@@ -513,6 +545,8 @@
             .stats-bar{grid-template-columns:repeat(2,1fr)}
             .toolbar{flex-direction:column}
             .toolbar .search-box{width:100%}
+            .list-item{flex-wrap:wrap;gap:6px}
+            .list-item .actions{margin-left:auto}
             .modal{padding:16px}
         }
     </style>
@@ -534,21 +568,18 @@
 </div>
 
 <div class="container">
-    <!-- Header -->
     <div class="header">
         <h1><i class="fas fa-book-open"></i> Study Manager</h1>
         <a class="back-link" onclick="window.location.href='/app'"><i class="fas fa-arrow-left"></i> Dashboard</a>
     </div>
 
-    <!-- Stats -->
     <div class="stats-bar" id="statsBar">
-        <div class="stat-card"><div class="num" id="statCourses">0</div><div class="lbl">📚 Courses</div></div>
-        <div class="stat-card"><div class="num" id="statTopics">0</div><div class="lbl">📋 Topics</div></div>
-        <div class="stat-card"><div class="num" id="statQuestions">0</div><div class="lbl">❓ Questions</div></div>
-        <div class="stat-card"><div class="num" id="statTotal">0</div><div class="lbl">📊 Total Items</div></div>
+        <div class="stat-card" id="statCoursesCard"><div class="num" id="statCourses">0</div><div class="lbl">📚 Courses</div><div class="stat-spinner"><i class="fas fa-spinner fa-spin"></i></div></div>
+        <div class="stat-card" id="statTopicsCard"><div class="num" id="statTopics">0</div><div class="lbl">📋 Topics</div><div class="stat-spinner"><i class="fas fa-spinner fa-spin"></i></div></div>
+        <div class="stat-card" id="statQuestionsCard"><div class="num" id="statQuestions">0</div><div class="lbl">❓ Questions</div><div class="stat-spinner"><i class="fas fa-spinner fa-spin"></i></div></div>
+        <div class="stat-card" id="statTotalCard"><div class="num" id="statTotal">0</div><div class="lbl">📊 Total Items</div><div class="stat-spinner"><i class="fas fa-spinner fa-spin"></i></div></div>
     </div>
 
-    <!-- Tabs -->
     <div class="tabs">
         <button class="tab active" data-tab="courses" onclick="switchTab('courses')"><i class="fas fa-book"></i> Courses</button>
         <button class="tab" data-tab="topics" onclick="switchTab('topics')"><i class="fas fa-list"></i> Topics</button>
@@ -557,9 +588,7 @@
         <button class="tab" data-tab="settings" onclick="switchTab('settings')"><i class="fas fa-cog"></i> Settings</button>
     </div>
 
-    <!-- ============================================
-         COURSES SECTION
-         ============================================ -->
+    <!-- COURSES SECTION -->
     <div class="section active" id="section-courses">
         <div class="card">
             <div class="card-title"><i class="fas fa-plus-circle"></i> Add Course</div>
@@ -597,7 +626,7 @@
                 <label>Description</label>
                 <textarea id="courseDesc" placeholder="Brief description of the course"></textarea>
             </div>
-            <button class="btn btn-primary" onclick="addCourse(this)"><i class="fas fa-plus btn-icon"></i><span class="btn-text">Add Course</span><span class="spinner"></span></button>
+            <button class="btn btn-primary" onclick="addCourse()"><span class="btn-text"><i class="fas fa-plus"></i> Add Course</span><span class="btn-spinner"><i class="fas fa-spinner"></i></span></button>
         </div>
 
         <div class="card">
@@ -608,23 +637,21 @@
                 <button class="btn btn-danger btn-sm" onclick="deleteSelectedCourses()" id="deleteSelectedCoursesBtn" style="display:none">
                     <i class="fas fa-trash"></i> Delete Selected
                 </button>
+                <button class="btn btn-soft btn-sm" onclick="refreshCourses()"><i class="fas fa-sync-alt"></i> Refresh</button>
             </div>
             <div class="toolbar">
                 <div class="search-box">
                     <i class="fas fa-search"></i>
                     <input type="text" id="courseSearch" placeholder="Search courses..." oninput="filterCourses()">
                 </div>
-                <button class="btn btn-soft btn-sm" onclick="refreshCourses()"><i class="fas fa-sync-alt"></i> Refresh</button>
+                <button class="btn btn-soft btn-sm" onclick="selectAllCourses()"><i class="fas fa-check-double"></i> Select All</button>
+                <button class="btn btn-soft btn-sm" onclick="deselectAllCourses()"><i class="fas fa-times"></i> Deselect</button>
             </div>
-            <div class="list-container" id="courseList">
-                <div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading courses...</p></div>
-            </div>
+            <div class="list-container" id="courseList"></div>
         </div>
     </div>
 
-    <!-- ============================================
-         TOPICS SECTION
-         ============================================ -->
+    <!-- TOPICS SECTION -->
     <div class="section" id="section-topics">
         <div class="card">
             <div class="card-title"><i class="fas fa-plus-circle"></i> Add Topic</div>
@@ -635,6 +662,11 @@
                 </select>
             </div>
             <div class="form-group">
+                <label>Topic ID <span style="color:var(--danger)">*</span></label>
+                <input type="text" id="topicIdInput" placeholder="e.g., chm102_t1" />
+                <div style="font-size:.65rem;color:var(--text-tertiary);margin-top:4px">Use format: coursecode_topicnumber (e.g., chm102_t1)</div>
+            </div>
+            <div class="form-group">
                 <label>Topic Title <span style="color:var(--danger)">*</span></label>
                 <input type="text" id="topicTitle" placeholder="e.g., Differentiation" />
             </div>
@@ -642,7 +674,7 @@
                 <label>Description</label>
                 <textarea id="topicDesc" placeholder="Brief description of the topic"></textarea>
             </div>
-            <button class="btn btn-primary" onclick="addTopic(this)"><i class="fas fa-plus btn-icon"></i><span class="btn-text">Add Topic</span><span class="spinner"></span></button>
+            <button class="btn btn-primary" onclick="addTopic()"><span class="btn-text"><i class="fas fa-plus"></i> Add Topic</span><span class="btn-spinner"><i class="fas fa-spinner"></i></span></button>
         </div>
 
         <div class="card">
@@ -653,6 +685,7 @@
                 <button class="btn btn-danger btn-sm" onclick="deleteSelectedTopics()" id="deleteSelectedTopicsBtn" style="display:none">
                     <i class="fas fa-trash"></i> Delete Selected
                 </button>
+                <button class="btn btn-soft btn-sm" onclick="refreshTopics()"><i class="fas fa-sync-alt"></i> Refresh</button>
             </div>
             <div class="toolbar">
                 <div class="search-box">
@@ -662,17 +695,14 @@
                 <select class="filter-select" id="topicCourseFilter" onchange="filterTopics()">
                     <option value="">All Courses</option>
                 </select>
-                <button class="btn btn-soft btn-sm" onclick="refreshTopics()"><i class="fas fa-sync-alt"></i> Refresh</button>
+                <button class="btn btn-soft btn-sm" onclick="selectAllTopics()"><i class="fas fa-check-double"></i> Select All</button>
+                <button class="btn btn-soft btn-sm" onclick="deselectAllTopics()"><i class="fas fa-times"></i> Deselect</button>
             </div>
-            <div class="list-container" id="topicList">
-                <div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading topics...</p></div>
-            </div>
+            <div class="list-container" id="topicList"></div>
         </div>
     </div>
 
-    <!-- ============================================
-         QUESTIONS SECTION
-         ============================================ -->
+    <!-- QUESTIONS SECTION -->
     <div class="section" id="section-questions">
         <div class="card">
             <div class="card-title"><i class="fas fa-plus-circle"></i> Add Question</div>
@@ -687,49 +717,28 @@
                 <textarea id="questionText" placeholder="Enter the question"></textarea>
             </div>
             <div class="form-row">
-                <div class="form-group">
-                    <label>Option A <span style="color:var(--danger)">*</span></label>
-                    <input type="text" id="optA" placeholder="Option A" />
-                </div>
-                <div class="form-group">
-                    <label>Option B <span style="color:var(--danger)">*</span></label>
-                    <input type="text" id="optB" placeholder="Option B" />
-                </div>
+                <div class="form-group"><label>Option A <span style="color:var(--danger)">*</span></label><input type="text" id="optA" placeholder="Option A" /></div>
+                <div class="form-group"><label>Option B <span style="color:var(--danger)">*</span></label><input type="text" id="optB" placeholder="Option B" /></div>
             </div>
             <div class="form-row">
-                <div class="form-group">
-                    <label>Option C <span style="color:var(--danger)">*</span></label>
-                    <input type="text" id="optC" placeholder="Option C" />
-                </div>
-                <div class="form-group">
-                    <label>Option D <span style="color:var(--danger)">*</span></label>
-                    <input type="text" id="optD" placeholder="Option D" />
-                </div>
+                <div class="form-group"><label>Option C <span style="color:var(--danger)">*</span></label><input type="text" id="optC" placeholder="Option C" /></div>
+                <div class="form-group"><label>Option D <span style="color:var(--danger)">*</span></label><input type="text" id="optD" placeholder="Option D" /></div>
             </div>
             <div class="form-row">
                 <div class="form-group">
                     <label>Correct Answer <span style="color:var(--danger)">*</span></label>
-                    <select id="correctAnswer">
-                        <option value="0">A</option>
-                        <option value="1">B</option>
-                        <option value="2">C</option>
-                        <option value="3">D</option>
-                    </select>
+                    <select id="correctAnswer"><option value="0">A</option><option value="1">B</option><option value="2">C</option><option value="3">D</option></select>
                 </div>
                 <div class="form-group">
                     <label>Difficulty</label>
-                    <select id="questionDifficulty">
-                        <option value="easy">Easy</option>
-                        <option value="medium" selected>Medium</option>
-                        <option value="hard">Hard</option>
-                    </select>
+                    <select id="questionDifficulty"><option value="easy">Easy</option><option value="medium" selected>Medium</option><option value="hard">Hard</option></select>
                 </div>
             </div>
             <div class="form-group">
                 <label>Explanation</label>
                 <input type="text" id="questionExplanation" placeholder="Brief explanation (optional)" />
             </div>
-            <button class="btn btn-primary" onclick="addQuestion(this)"><i class="fas fa-plus btn-icon"></i><span class="btn-text">Add Question</span><span class="spinner"></span></button>
+            <button class="btn btn-primary" onclick="addQuestion()"><span class="btn-text"><i class="fas fa-plus"></i> Add Question</span><span class="btn-spinner"><i class="fas fa-spinner"></i></span></button>
         </div>
 
         <div class="card">
@@ -740,32 +749,20 @@
                 <button class="btn btn-danger btn-sm" onclick="deleteSelectedQuestions()" id="deleteSelectedQuestionsBtn" style="display:none">
                     <i class="fas fa-trash"></i> Delete Selected
                 </button>
-            </div>
-            <div class="toolbar">
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" id="questionSearch" placeholder="Search questions..." oninput="filterQuestions()">
-                </div>
-                <select class="filter-select" id="questionTopicFilter" onchange="filterQuestions()">
-                    <option value="">All Topics</option>
-                </select>
-                <select class="filter-select" id="questionDifficultyFilter" onchange="filterQuestions()">
-                    <option value="">All Difficulties</option>
-                    <option value="easy">Easy</option>
-                    <option value="medium">Medium</option>
-                    <option value="hard">Hard</option>
-                </select>
                 <button class="btn btn-soft btn-sm" onclick="refreshQuestions()"><i class="fas fa-sync-alt"></i> Refresh</button>
             </div>
-            <div class="list-container" id="questionList">
-                <div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading questions...</p></div>
+            <div class="toolbar">
+                <div class="search-box"><i class="fas fa-search"></i><input type="text" id="questionSearch" placeholder="Search questions..." oninput="filterQuestions()"></div>
+                <select class="filter-select" id="questionTopicFilter" onchange="filterQuestions()"><option value="">All Topics</option></select>
+                <select class="filter-select" id="questionDifficultyFilter" onchange="filterQuestions()"><option value="">All Difficulties</option><option value="easy">Easy</option><option value="medium">Medium</option><option value="hard">Hard</option></select>
+                <button class="btn btn-soft btn-sm" onclick="selectAllQuestions()"><i class="fas fa-check-double"></i> Select All</button>
+                <button class="btn btn-soft btn-sm" onclick="deselectAllQuestions()"><i class="fas fa-times"></i> Deselect</button>
             </div>
+            <div class="list-container" id="questionList"></div>
         </div>
     </div>
 
-    <!-- ============================================
-         BULK UPLOAD SECTION
-         ============================================ -->
+    <!-- BULK UPLOAD -->
     <div class="section" id="section-bulk">
         <div class="card">
             <div class="card-title"><i class="fas fa-upload"></i> Bulk Upload Questions</div>
@@ -774,9 +771,7 @@
             
             <div class="form-group">
                 <label>Select Topic <span style="color:var(--danger)">*</span></label>
-                <select id="bulkTopicSelect">
-                    <option value="">Select a topic</option>
-                </select>
+                <select id="bulkTopicSelect"><option value="">Select a topic</option></select>
             </div>
             
             <div class="bulk-area" onclick="document.getElementById('bulkFileInput').click()">
@@ -792,8 +787,8 @@
             </div>
             
             <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
-                <button class="btn btn-success" onclick="bulkUpload(this)"><i class="fas fa-upload btn-icon"></i><span class="btn-text">Upload All</span><span class="spinner"></span></button>
-                <button class="btn btn-soft" onclick="validateBulkJson()"><i class="fas fa-check"></i> Validate</button>
+                <button class="btn btn-success" onclick="bulkUpload()"><span class="btn-text"><i class="fas fa-upload"></i> Upload All Questions</span><span class="btn-spinner"><i class="fas fa-spinner"></i></span></button>
+                <button class="btn btn-soft" onclick="validateBulkJson()"><i class="fas fa-check"></i> Validate JSON</button>
                 <button class="btn btn-soft" onclick="document.getElementById('bulkJsonInput').value = ''"><i class="fas fa-undo"></i> Clear</button>
             </div>
             
@@ -815,43 +810,37 @@
             <div style="display:flex;gap:10px;flex-wrap:wrap">
                 <button class="btn btn-primary" onclick="exportQuestions()"><i class="fas fa-file-export"></i> Export Questions</button>
                 <button class="btn btn-soft" onclick="exportCourses()"><i class="fas fa-file-export"></i> Export Courses</button>
-                <button class="btn btn-soft" onclick="exportAllData()"><i class="fas fa-database"></i> Export All</button>
+                <button class="btn btn-soft" onclick="exportAllData()"><i class="fas fa-database"></i> Export All Data</button>
             </div>
         </div>
     </div>
 
-    <!-- ============================================
-         SETTINGS SECTION
-         ============================================ -->
+    <!-- SETTINGS -->
     <div class="section" id="section-settings">
         <div class="card">
             <div class="card-title"><i class="fas fa-cog"></i> Settings</div>
-            
             <div style="display:grid;gap:16px">
                 <div style="background:var(--bg);border-radius:var(--radius-sm);padding:16px;border:1px solid var(--border-light)">
                     <h4 style="color:var(--text);margin-bottom:8px">⚠️ Danger Zone</h4>
                     <div style="display:flex;gap:10px;flex-wrap:wrap">
-                        <button class="btn btn-danger" onclick="deleteAllQuestions()"><i class="fas fa-trash"></i> Delete All Questions</button>
-                        <button class="btn btn-danger" onclick="deleteAllTopics()"><i class="fas fa-trash"></i> Delete All Topics</button>
-                        <button class="btn btn-danger" onclick="deleteAllCourses()"><i class="fas fa-trash"></i> Delete All Courses</button>
-                        <button class="btn btn-danger" onclick="deleteAllData()"><i class="fas fa-trash"></i> Delete Everything</button>
+                        <button class="btn btn-danger" onclick="deleteAllQuestions()"><span class="btn-text"><i class="fas fa-trash"></i> Delete All Questions</span><span class="btn-spinner"><i class="fas fa-spinner"></i></span></button>
+                        <button class="btn btn-danger" onclick="deleteAllTopics()"><span class="btn-text"><i class="fas fa-trash"></i> Delete All Topics</span><span class="btn-spinner"><i class="fas fa-spinner"></i></span></button>
+                        <button class="btn btn-danger" onclick="deleteAllCourses()"><span class="btn-text"><i class="fas fa-trash"></i> Delete All Courses</span><span class="btn-spinner"><i class="fas fa-spinner"></i></span></button>
+                        <button class="btn btn-danger" onclick="deleteAllData()"><span class="btn-text"><i class="fas fa-trash"></i> Delete Everything</span><span class="btn-spinner"><i class="fas fa-spinner"></i></span></button>
                     </div>
                 </div>
-                
                 <div style="background:var(--bg);border-radius:var(--radius-sm);padding:16px;border:1px solid var(--border-light)">
                     <h4 style="color:var(--text);margin-bottom:8px">📊 Data Management</h4>
                     <div style="display:flex;gap:10px;flex-wrap:wrap">
-                        <button class="btn btn-primary" onclick="refreshAllData()"><i class="fas fa-sync-alt"></i> Refresh All</button>
+                        <button class="btn btn-primary" onclick="refreshAllData()"><i class="fas fa-sync-alt"></i> Refresh All Data</button>
                         <button class="btn btn-soft" onclick="clearCache()"><i class="fas fa-broom"></i> Clear Cache</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 
-<!-- Bottom Nav -->
 <nav class="bottom-nav">
     <div class="bottom-nav-inner">
         <a href="/app" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
@@ -879,6 +868,9 @@ if (!TOKEN) {
 let courses = [];
 let topics = [];
 let questions = [];
+let selectedCourses = [];
+let selectedTopics = [];
+let selectedQuestions = [];
 let isLoading = false;
 
 // ============================================
@@ -911,6 +903,20 @@ function showToast(message, type = 'info') {
 }
 
 // ============================================
+// BUTTON LOADING STATE
+// ============================================
+function setButtonLoading(btn, loading) {
+    if (!btn) return;
+    if (loading) {
+        btn.classList.add('loading');
+        btn.disabled = true;
+    } else {
+        btn.classList.remove('loading');
+        btn.disabled = false;
+    }
+}
+
+// ============================================
 // API HELPERS
 // ============================================
 async function apiFetch(path, options = {}) {
@@ -927,20 +933,6 @@ async function apiFetch(path, options = {}) {
         throw new Error(data.error || 'Request failed');
     }
     return data;
-}
-
-// ============================================
-// BUTTON LOADING STATE
-// ============================================
-function setButtonLoading(btn, loading, text = 'Loading...') {
-    if (!btn) return;
-    if (loading) {
-        btn.classList.add('loading');
-        btn.disabled = true;
-    } else {
-        btn.classList.remove('loading');
-        btn.disabled = false;
-    }
 }
 
 // ============================================
@@ -971,7 +963,7 @@ window.switchTab = switchTab;
 // LOAD DATA FROM BACKEND
 // ============================================
 async function loadAllData() {
-    showLoading('Loading data from server...');
+    showLoading('Loading data...');
     try {
         await Promise.all([
             loadCourses(),
@@ -981,74 +973,63 @@ async function loadAllData() {
         updateStats();
         populateSelects();
         renderAll();
-        hideLoading();
     } catch(e) {
         console.error('Load error:', e);
         showAlert('error', 'Failed to load data: ' + e.message);
-        hideLoading();
     }
+    hideLoading();
 }
 
 async function loadCourses() {
     try {
+        // Show loading on stat card
+        $('statCoursesCard').classList.add('loading');
         const data = await apiFetch('/study/courses');
         courses = data.courses || [];
         renderCourses();
     } catch(e) {
         console.error('Load courses error:', e);
         courses = [];
+    } finally {
+        $('statCoursesCard').classList.remove('loading');
     }
 }
 
 async function loadTopics() {
     try {
+        $('statTopicsCard').classList.add('loading');
         const data = await apiFetch('/study/topics');
         topics = data.topics || [];
         renderTopics();
     } catch(e) {
         console.error('Load topics error:', e);
         topics = [];
+    } finally {
+        $('statTopicsCard').classList.remove('loading');
     }
 }
 
 async function loadQuestions() {
     try {
+        $('statQuestionsCard').classList.add('loading');
         const data = await apiFetch('/study/questions');
         questions = data.questions || [];
         renderQuestions();
     } catch(e) {
         console.error('Load questions error:', e);
         questions = [];
+    } finally {
+        $('statQuestionsCard').classList.remove('loading');
     }
 }
 
 // ============================================
 // REFRESH FUNCTIONS
 // ============================================
-async function refreshCourses() {
-    await loadCourses();
-    showAlert('success', 'Courses refreshed');
-}
-
-async function refreshTopics() {
-    await loadTopics();
-    showAlert('success', 'Topics refreshed');
-}
-
-async function refreshQuestions() {
-    await loadQuestions();
-    showAlert('success', 'Questions refreshed');
-}
-
-async function refreshAllData() {
-    await loadAllData();
-    showAlert('success', 'All data refreshed');
-}
-
-window.refreshCourses = refreshCourses;
-window.refreshTopics = refreshTopics;
-window.refreshQuestions = refreshQuestions;
-window.refreshAllData = refreshAllData;
+function refreshCourses() { loadCourses(); }
+function refreshTopics() { loadTopics(); }
+function refreshQuestions() { loadQuestions(); }
+function refreshAllData() { loadAllData(); }
 
 // ============================================
 // UPDATE STATS
@@ -1086,27 +1067,30 @@ function renderCourses() {
     );
     
     container.innerHTML = filtered.map(c => {
+        const isSelected = selectedCourses.includes(c._id);
         const topicCount = topics.filter(t => t.courseId === c._id).length;
         const questionCount = questions.filter(q => q.courseId === c._id).length;
         return `
-            <div class="list-item">
+            <div class="list-item ${isSelected ? 'selected' : ''}" onclick="toggleCourseSelection('${c._id}')">
+                <div class="checkbox ${isSelected ? 'checked' : ''}">${isSelected ? '<i class="fas fa-check"></i>' : ''}</div>
                 <div class="info">
                     <div class="title">${escapeHtml(c.code)} — ${escapeHtml(c.name)}</div>
                     <div class="sub">
                         <span>${escapeHtml(c.faculty || 'No Faculty')}</span>
                         <span class="tag">📋 ${topicCount} topics</span>
                         <span class="tag">❓ ${questionCount} questions</span>
-                        <span>${c.description ? escapeHtml(c.description.substring(0, 60)) + (c.description.length > 60 ? '...' : '') : ''}</span>
                     </div>
                 </div>
                 <div class="actions">
-                    <button class="btn btn-soft btn-sm" onclick="viewCourse('${c._id}')"><i class="fas fa-eye"></i></button>
-                    <button class="btn btn-soft btn-sm" onclick="editCourse('${c._id}')"><i class="fas fa-edit"></i></button>
-                    <button class="btn btn-danger btn-sm" onclick="deleteCourse('${c._id}')"><i class="fas fa-trash"></i></button>
+                    <button class="btn btn-soft btn-sm" onclick="event.stopPropagation();viewCourse('${c._id}')"><i class="fas fa-eye"></i></button>
+                    <button class="btn btn-soft btn-sm" onclick="event.stopPropagation();editCourse('${c._id}')"><i class="fas fa-edit"></i></button>
+                    <button class="btn btn-danger btn-sm" onclick="event.stopPropagation();deleteCourse('${c._id}')"><i class="fas fa-trash"></i></button>
                 </div>
             </div>
         `;
     }).join('');
+    
+    updateDeleteButtonVisibility('courses');
 }
 
 function renderTopics() {
@@ -1126,26 +1110,29 @@ function renderTopics() {
     });
     
     container.innerHTML = filtered.map(t => {
+        const isSelected = selectedTopics.includes(t._id);
         const course = courses.find(c => c._id === t.courseId);
         const questionCount = questions.filter(q => q.topicId === t._id).length;
         return `
-            <div class="list-item">
+            <div class="list-item ${isSelected ? 'selected' : ''}" onclick="toggleTopicSelection('${t._id}')">
+                <div class="checkbox ${isSelected ? 'checked' : ''}">${isSelected ? '<i class="fas fa-check"></i>' : ''}</div>
                 <div class="info">
                     <div class="title">${escapeHtml(t.title)}</div>
                     <div class="sub">
                         <span>${course ? escapeHtml(course.code) : 'Unknown Course'}</span>
                         <span class="tag">❓ ${questionCount} questions</span>
-                        <span>${t.description ? escapeHtml(t.description.substring(0, 60)) + (t.description.length > 60 ? '...' : '') : ''}</span>
                     </div>
                 </div>
                 <div class="actions">
-                    <button class="btn btn-soft btn-sm" onclick="viewTopic('${t._id}')"><i class="fas fa-eye"></i></button>
-                    <button class="btn btn-soft btn-sm" onclick="editTopic('${t._id}')"><i class="fas fa-edit"></i></button>
-                    <button class="btn btn-danger btn-sm" onclick="deleteTopic('${t._id}')"><i class="fas fa-trash"></i></button>
+                    <button class="btn btn-soft btn-sm" onclick="event.stopPropagation();viewTopic('${t._id}')"><i class="fas fa-eye"></i></button>
+                    <button class="btn btn-soft btn-sm" onclick="event.stopPropagation();editTopic('${t._id}')"><i class="fas fa-edit"></i></button>
+                    <button class="btn btn-danger btn-sm" onclick="event.stopPropagation();deleteTopic('${t._id}')"><i class="fas fa-trash"></i></button>
                 </div>
             </div>
         `;
     }).join('');
+    
+    updateDeleteButtonVisibility('topics');
 }
 
 function renderQuestions() {
@@ -1168,9 +1155,13 @@ function renderQuestions() {
     
     const letters = ['A', 'B', 'C', 'D'];
     container.innerHTML = filtered.map(q => {
+        const isSelected = selectedQuestions.includes(q._id);
         const topic = topics.find(t => t._id === q.topicId);
         return `
-            <div class="question-item">
+            <div class="question-item ${isSelected ? 'selected' : ''}" onclick="toggleQuestionSelection('${q._id}')">
+                <div class="q-checkbox checkbox ${isSelected ? 'checked' : ''}" onclick="event.stopPropagation();toggleQuestionSelection('${q._id}')">
+                    ${isSelected ? '<i class="fas fa-check"></i>' : ''}
+                </div>
                 <div class="q-content">
                     <div class="q-text">${escapeHtml(q.question)}</div>
                     <div class="q-options">
@@ -1181,16 +1172,60 @@ function renderQuestions() {
                     <div class="q-meta">
                         <span>${topic ? escapeHtml(topic.title) : 'Unknown Topic'}</span>
                         <span>Difficulty: ${q.difficulty || 'medium'}</span>
-                        <span>${q.explanation ? '💡 Has explanation' : ''}</span>
                     </div>
                 </div>
                 <div class="q-actions">
-                    <button class="btn btn-soft btn-sm" onclick="editQuestion('${q._id}')"><i class="fas fa-edit"></i></button>
-                    <button class="btn btn-danger btn-sm" onclick="deleteQuestion('${q._id}')"><i class="fas fa-trash"></i></button>
+                    <button class="btn btn-soft btn-sm" onclick="event.stopPropagation();editQuestion('${q._id}')"><i class="fas fa-edit"></i></button>
+                    <button class="btn btn-danger btn-sm" onclick="event.stopPropagation();deleteQuestion('${q._id}')"><i class="fas fa-trash"></i></button>
                 </div>
             </div>
         `;
     }).join('');
+    
+    updateDeleteButtonVisibility('questions');
+}
+
+// ============================================
+// SELECTION HELPERS
+// ============================================
+function toggleCourseSelection(id) {
+    const index = selectedCourses.indexOf(id);
+    if (index > -1) selectedCourses.splice(index, 1);
+    else selectedCourses.push(id);
+    renderCourses();
+}
+
+function toggleTopicSelection(id) {
+    const index = selectedTopics.indexOf(id);
+    if (index > -1) selectedTopics.splice(index, 1);
+    else selectedTopics.push(id);
+    renderTopics();
+}
+
+function toggleQuestionSelection(id) {
+    const index = selectedQuestions.indexOf(id);
+    if (index > -1) selectedQuestions.splice(index, 1);
+    else selectedQuestions.push(id);
+    renderQuestions();
+}
+
+function selectAllCourses() { selectedCourses = courses.map(c => c._id); renderCourses(); }
+function deselectAllCourses() { selectedCourses = []; renderCourses(); }
+function selectAllTopics() { selectedTopics = topics.map(t => t._id); renderTopics(); }
+function deselectAllTopics() { selectedTopics = []; renderTopics(); }
+function selectAllQuestions() { selectedQuestions = questions.map(q => q._id); renderQuestions(); }
+function deselectAllQuestions() { selectedQuestions = []; renderQuestions(); }
+
+function updateDeleteButtonVisibility(type) {
+    const btnId = type === 'courses' ? 'deleteSelectedCoursesBtn' : 
+                  type === 'topics' ? 'deleteSelectedTopicsBtn' : 
+                  'deleteSelectedQuestionsBtn';
+    const btn = $(btnId);
+    if (!btn) return;
+    const selected = type === 'courses' ? selectedCourses : 
+                     type === 'topics' ? selectedTopics : 
+                     selectedQuestions;
+    btn.style.display = selected.length > 0 ? 'inline-flex' : 'none';
 }
 
 // ============================================
@@ -1242,7 +1277,7 @@ function filterQuestions() { renderQuestions(); }
 // ============================================
 // ADD COURSE
 // ============================================
-async function addCourse(btn) {
+async function addCourse() {
     const code = $('courseCode').value.trim();
     const name = $('courseName').value.trim();
     const faculty = $('courseFaculty').value;
@@ -1253,6 +1288,7 @@ async function addCourse(btn) {
         return;
     }
     
+    const btn = event.target;
     setButtonLoading(btn, true);
     
     try {
@@ -1279,25 +1315,34 @@ window.addCourse = addCourse;
 // ============================================
 // ADD TOPIC
 // ============================================
-async function addTopic(btn) {
+async function addTopic() {
     const courseId = $('topicCourseSelect').value;
+    const topicId = $('topicIdInput').value.trim();
     const title = $('topicTitle').value.trim();
     const description = $('topicDesc').value.trim();
     
-    if (!courseId || !title) {
-        showAlert('error', 'Please select a course and enter a topic title');
+    if (!courseId || !topicId || !title) {
+        showAlert('error', 'Please select a course, enter a topic ID, and title');
         return;
     }
     
+    // Validate topic ID format
+    if (!/^[a-z]+_[a-z][0-9]+$/.test(topicId) && !/^[a-z]+_[0-9]+$/.test(topicId)) {
+        showAlert('error', 'Topic ID format should be: coursecode_topicnumber (e.g., chm102_t1)');
+        return;
+    }
+    
+    const btn = event.target;
     setButtonLoading(btn, true);
     
     try {
         const data = await apiFetch('/study/topics', {
             method: 'POST',
-            body: JSON.stringify({ courseId, title, description })
+            body: JSON.stringify({ courseId, topicId, title, description })
         });
         if (data.success) {
             showAlert('success', 'Topic added successfully!');
+            $('topicIdInput').value = '';
             $('topicTitle').value = '';
             $('topicDesc').value = '';
             await loadTopics();
@@ -1314,7 +1359,7 @@ window.addTopic = addTopic;
 // ============================================
 // ADD QUESTION
 // ============================================
-async function addQuestion(btn) {
+async function addQuestion() {
     const topicId = $('questionTopicSelect').value;
     const question = $('questionText').value.trim();
     const optA = $('optA').value.trim();
@@ -1330,6 +1375,7 @@ async function addQuestion(btn) {
         return;
     }
     
+    const btn = event.target;
     setButtonLoading(btn, true);
     
     try {
@@ -1392,7 +1438,7 @@ function validateBulkJson() {
         let valid = true;
         data.forEach((q, i) => {
             if (!q.question || !Array.isArray(q.options) || q.options.length !== 4 || q.correct === undefined) {
-                showAlert('error', `Question ${i+1} is invalid`);
+                showAlert('error', `Question ${i+1} is invalid: missing question, options (4), or correct`);
                 valid = false;
             }
         });
@@ -1407,7 +1453,7 @@ function validateBulkJson() {
 }
 window.validateBulkJson = validateBulkJson;
 
-async function bulkUpload(btn) {
+async function bulkUpload() {
     const topicId = $('bulkTopicSelect').value;
     const jsonStr = $('bulkJsonInput').value.trim();
     
@@ -1422,6 +1468,7 @@ async function bulkUpload(btn) {
     if (!validateBulkJson()) return;
     
     const questions = JSON.parse(jsonStr);
+    const btn = event.target;
     setButtonLoading(btn, true);
     
     try {
@@ -1443,42 +1490,152 @@ async function bulkUpload(btn) {
 window.bulkUpload = bulkUpload;
 
 // ============================================
-// VIEW COURSE - Show all topics and questions
+// DELETE FUNCTIONS
+// ============================================
+async function deleteCourse(id) {
+    if (!confirm('Delete this course and all its topics and questions?')) return;
+    const btn = event.target;
+    setButtonLoading(btn, true);
+    try {
+        await apiFetch('/study/courses/' + id, { method: 'DELETE' });
+        await loadCourses();
+        await loadTopics();
+        await loadQuestions();
+        populateSelects();
+        updateStats();
+        showAlert('success', 'Course deleted');
+    } catch(e) {
+        showAlert('error', e.message);
+    }
+    setButtonLoading(btn, false);
+}
+window.deleteCourse = deleteCourse;
+
+async function deleteTopic(id) {
+    if (!confirm('Delete this topic and all its questions?')) return;
+    const btn = event.target;
+    setButtonLoading(btn, true);
+    try {
+        await apiFetch('/study/topics/' + id, { method: 'DELETE' });
+        await loadTopics();
+        await loadQuestions();
+        populateSelects();
+        updateStats();
+        showAlert('success', 'Topic deleted');
+    } catch(e) {
+        showAlert('error', e.message);
+    }
+    setButtonLoading(btn, false);
+}
+window.deleteTopic = deleteTopic;
+
+async function deleteQuestion(id) {
+    if (!confirm('Delete this question?')) return;
+    const btn = event.target;
+    setButtonLoading(btn, true);
+    try {
+        await apiFetch('/study/questions/' + id, { method: 'DELETE' });
+        await loadQuestions();
+        updateStats();
+        showAlert('success', 'Question deleted');
+    } catch(e) {
+        showAlert('error', e.message);
+    }
+    setButtonLoading(btn, false);
+}
+window.deleteQuestion = deleteQuestion;
+
+// ============================================
+// DELETE SELECTED
+// ============================================
+async function deleteSelectedCourses() {
+    if (!selectedCourses.length) return;
+    if (!confirm(`Delete ${selectedCourses.length} selected courses and all their topics/questions?`)) return;
+    const btn = event.target;
+    setButtonLoading(btn, true);
+    try {
+        for (const id of selectedCourses) {
+            await apiFetch('/study/courses/' + id, { method: 'DELETE' });
+        }
+        selectedCourses = [];
+        await loadCourses();
+        await loadTopics();
+        await loadQuestions();
+        populateSelects();
+        updateStats();
+        showAlert('success', 'Selected courses deleted');
+    } catch(e) {
+        showAlert('error', e.message);
+    }
+    setButtonLoading(btn, false);
+}
+window.deleteSelectedCourses = deleteSelectedCourses;
+
+async function deleteSelectedTopics() {
+    if (!selectedTopics.length) return;
+    if (!confirm(`Delete ${selectedTopics.length} selected topics and all their questions?`)) return;
+    const btn = event.target;
+    setButtonLoading(btn, true);
+    try {
+        for (const id of selectedTopics) {
+            await apiFetch('/study/topics/' + id, { method: 'DELETE' });
+        }
+        selectedTopics = [];
+        await loadTopics();
+        await loadQuestions();
+        populateSelects();
+        updateStats();
+        showAlert('success', 'Selected topics deleted');
+    } catch(e) {
+        showAlert('error', e.message);
+    }
+    setButtonLoading(btn, false);
+}
+window.deleteSelectedTopics = deleteSelectedTopics;
+
+async function deleteSelectedQuestions() {
+    if (!selectedQuestions.length) return;
+    if (!confirm(`Delete ${selectedQuestions.length} selected questions?`)) return;
+    const btn = event.target;
+    setButtonLoading(btn, true);
+    try {
+        for (const id of selectedQuestions) {
+            await apiFetch('/study/questions/' + id, { method: 'DELETE' });
+        }
+        selectedQuestions = [];
+        await loadQuestions();
+        updateStats();
+        showAlert('success', 'Selected questions deleted');
+    } catch(e) {
+        showAlert('error', e.message);
+    }
+    setButtonLoading(btn, false);
+}
+window.deleteSelectedQuestions = deleteSelectedQuestions;
+
+// ============================================
+// VIEW FUNCTIONS
 // ============================================
 function viewCourse(id) {
     const course = courses.find(c => c._id === id);
     if (!course) return;
     const topicList = topics.filter(t => t.courseId === id);
     const questionList = questions.filter(q => q.courseId === id);
-    const letters = ['A', 'B', 'C', 'D'];
-    
     openModal(`
         <div class="modal-title"><i class="fas fa-book"></i> ${escapeHtml(course.code)} — ${escapeHtml(course.name)}</div>
         <div style="color:var(--text-secondary);margin-bottom:12px">
             <p>Faculty: ${escapeHtml(course.faculty || 'N/A')}</p>
             <p>Topics: ${topicList.length} | Questions: ${questionList.length}</p>
-            <p>Description: ${escapeHtml(course.description || 'No description')}</p>
         </div>
-        <h4 style="color:var(--text);margin-bottom:8px">📋 Topics (${topicList.length})</h4>
-        ${topicList.length ? topicList.map(t => `
-            <div style="padding:6px 10px;background:var(--bg);border-radius:6px;margin-bottom:4px;border:1px solid var(--border-light);display:flex;justify-content:space-between;align-items:center">
-                <span>${escapeHtml(t.title)} (${questions.filter(q => q.topicId === t._id).length} questions)</span>
-                <button class="btn btn-danger btn-sm" onclick="deleteTopic('${t._id}')"><i class="fas fa-trash"></i></button>
-            </div>
-        `).join('') : '<div style="color:var(--text-tertiary)">No topics yet</div>'}
-        
-        <h4 style="color:var(--text);margin-top:16px;margin-bottom:8px">❓ Questions (${questionList.length})</h4>
-        ${questionList.length ? questionList.slice(0, 20).map(q => `
-            <div style="padding:6px 10px;background:var(--bg);border-radius:6px;margin-bottom:4px;border:1px solid var(--border-light);font-size:.82rem;display:flex;justify-content:space-between;align-items:center">
-                <div>
-                    <span>${escapeHtml(q.question.substring(0, 60))}${q.question.length > 60 ? '...' : ''}</span>
-                    <span style="color:var(--text-tertiary);font-size:.7rem;margin-left:8px">[${q.difficulty || 'medium'}]</span>
+        <h4 style="color:var(--text);margin-bottom:8px">Topics:</h4>
+        <div class="list-container">
+            ${topicList.length ? topicList.map(t => `
+                <div style="padding:6px 10px;background:var(--bg);border-radius:6px;margin-bottom:4px;border:1px solid var(--border-light);display:flex;justify-content:space-between;align-items:center">
+                    <span>${escapeHtml(t.title)}</span>
+                    <span style="color:var(--text-tertiary);font-size:.7rem">${questions.filter(q => q.topicId === t._id).length} questions</span>
                 </div>
-                <button class="btn btn-danger btn-sm" onclick="deleteQuestion('${q._id}')"><i class="fas fa-trash"></i></button>
-            </div>
-        `).join('') : '<div style="color:var(--text-tertiary)">No questions yet</div>'}
-        ${questionList.length > 20 ? `<div style="color:var(--text-tertiary);font-size:.7rem;margin-top:4px">... and ${questionList.length - 20} more</div>` : ''}
-        
+            `).join('') : '<div style="color:var(--text-tertiary)">No topics yet</div>'}
+        </div>
         <div class="modal-actions">
             <button class="btn btn-primary" onclick="closeModal()">Close</button>
         </div>
@@ -1486,38 +1643,26 @@ function viewCourse(id) {
 }
 window.viewCourse = viewCourse;
 
-// ============================================
-// VIEW TOPIC - Show all questions
-// ============================================
 function viewTopic(id) {
     const topic = topics.find(t => t._id === id);
     if (!topic) return;
     const course = courses.find(c => c._id === topic.courseId);
     const questionList = questions.filter(q => q.topicId === id);
-    const letters = ['A', 'B', 'C', 'D'];
-    
     openModal(`
         <div class="modal-title"><i class="fas fa-list"></i> ${escapeHtml(topic.title)}</div>
         <div style="color:var(--text-secondary);margin-bottom:12px">
             <p>Course: ${course ? escapeHtml(course.code) : 'Unknown'}</p>
             <p>Questions: ${questionList.length}</p>
-            <p>Description: ${escapeHtml(topic.description || 'No description')}</p>
         </div>
-        <h4 style="color:var(--text);margin-bottom:8px">❓ Questions (${questionList.length})</h4>
-        ${questionList.length ? questionList.map(q => `
-            <div style="padding:8px 10px;background:var(--bg);border-radius:6px;margin-bottom:6px;border:1px solid var(--border-light)">
-                <div style="font-weight:500;font-size:.82rem">${escapeHtml(q.question)}</div>
-                <div style="font-size:.72rem;color:var(--text-tertiary);margin-top:4px">
-                    ${q.options.map((opt, i) => `
-                        <span class="${i === q.correct ? 'correct' : ''}" style="${i === q.correct ? 'color:var(--accent);font-weight:600' : ''}">${letters[i]}. ${escapeHtml(opt)}</span>
-                    `).join(' | ')}
+        <h4 style="color:var(--text);margin-bottom:8px">Questions:</h4>
+        <div class="list-container">
+            ${questionList.length ? questionList.map(q => `
+                <div style="padding:6px 10px;background:var(--bg);border-radius:6px;margin-bottom:4px;border:1px solid var(--border-light);display:flex;justify-content:space-between;align-items:center">
+                    <span style="font-size:.82rem">${escapeHtml(q.question.substring(0, 60))}${q.question.length > 60 ? '...' : ''}</span>
+                    <span style="color:var(--text-tertiary);font-size:.7rem">[${q.difficulty || 'medium'}]</span>
                 </div>
-                <div style="display:flex;gap:8px;margin-top:6px">
-                    <button class="btn btn-danger btn-sm" onclick="deleteQuestion('${q._id}')"><i class="fas fa-trash"></i></button>
-                </div>
-            </div>
-        `).join('') : '<div style="color:var(--text-tertiary)">No questions yet</div>'}
-        
+            `).join('') : '<div style="color:var(--text-tertiary)">No questions yet</div>'}
+        </div>
         <div class="modal-actions">
             <button class="btn btn-primary" onclick="closeModal()">Close</button>
         </div>
@@ -1526,35 +1671,25 @@ function viewTopic(id) {
 window.viewTopic = viewTopic;
 
 // ============================================
-// EDIT COURSE
+// EDIT FUNCTIONS
 // ============================================
 function editCourse(id) {
     const course = courses.find(c => c._id === id);
     if (!course) return;
     openModal(`
         <div class="modal-title"><i class="fas fa-edit"></i> Edit Course</div>
-        <div class="form-group">
-            <label>Course Code</label>
-            <input type="text" id="editCourseCode" value="${escapeHtml(course.code)}" />
-        </div>
-        <div class="form-group">
-            <label>Course Name</label>
-            <input type="text" id="editCourseName" value="${escapeHtml(course.name)}" />
-        </div>
-        <div class="form-group">
-            <label>Faculty</label>
+        <div class="form-group"><label>Course Code</label><input type="text" id="editCourseCode" value="${escapeHtml(course.code)}" /></div>
+        <div class="form-group"><label>Course Name</label><input type="text" id="editCourseName" value="${escapeHtml(course.name)}" /></div>
+        <div class="form-group"><label>Faculty</label>
             <select id="editCourseFaculty">
                 ${['Agriculture','Arts','Basic Medical Sciences','Clinical Sciences','Dentistry','Education','Engineering','Environmental Design','Law','Management Sciences','Pharmacy','Sciences','Social Sciences','Technology'].map(f => 
                     `<option value="${f}" ${f === course.faculty ? 'selected' : ''}>${f}</option>`
                 ).join('')}
             </select>
         </div>
-        <div class="form-group">
-            <label>Description</label>
-            <textarea id="editCourseDesc">${escapeHtml(course.description || '')}</textarea>
-        </div>
+        <div class="form-group"><label>Description</label><textarea id="editCourseDesc">${escapeHtml(course.description || '')}</textarea></div>
         <div class="modal-actions">
-            <button class="btn btn-primary" onclick="updateCourse('${id}')"><i class="fas fa-save"></i> Save</button>
+            <button class="btn btn-primary" onclick="updateCourse('${id}')"><span class="btn-text"><i class="fas fa-save"></i> Save</span><span class="btn-spinner"><i class="fas fa-spinner"></i></span></button>
             <button class="btn btn-soft" onclick="closeModal()">Cancel</button>
         </div>
     `);
@@ -1566,12 +1701,12 @@ async function updateCourse(id) {
     const name = $('editCourseName').value.trim();
     const faculty = $('editCourseFaculty').value;
     const description = $('editCourseDesc').value.trim();
-    
     if (!code || !name || !faculty) {
         showAlert('error', 'Please fill in all required fields');
         return;
     }
-    
+    const btn = document.querySelector('#modalContent .btn-primary');
+    setButtonLoading(btn, true);
     try {
         await apiFetch('/study/courses/' + id, {
             method: 'PUT',
@@ -1585,27 +1720,19 @@ async function updateCourse(id) {
     } catch(e) {
         showAlert('error', e.message);
     }
+    setButtonLoading(btn, false);
 }
 window.updateCourse = updateCourse;
 
-// ============================================
-// EDIT TOPIC
-// ============================================
 function editTopic(id) {
     const topic = topics.find(t => t._id === id);
     if (!topic) return;
     openModal(`
         <div class="modal-title"><i class="fas fa-edit"></i> Edit Topic</div>
-        <div class="form-group">
-            <label>Topic Title</label>
-            <input type="text" id="editTopicTitle" value="${escapeHtml(topic.title)}" />
-        </div>
-        <div class="form-group">
-            <label>Description</label>
-            <textarea id="editTopicDesc">${escapeHtml(topic.description || '')}</textarea>
-        </div>
+        <div class="form-group"><label>Topic Title</label><input type="text" id="editTopicTitle" value="${escapeHtml(topic.title)}" /></div>
+        <div class="form-group"><label>Description</label><textarea id="editTopicDesc">${escapeHtml(topic.description || '')}</textarea></div>
         <div class="modal-actions">
-            <button class="btn btn-primary" onclick="updateTopic('${id}')"><i class="fas fa-save"></i> Save</button>
+            <button class="btn btn-primary" onclick="updateTopic('${id}')"><span class="btn-text"><i class="fas fa-save"></i> Save</span><span class="btn-spinner"><i class="fas fa-spinner"></i></span></button>
             <button class="btn btn-soft" onclick="closeModal()">Cancel</button>
         </div>
     `);
@@ -1615,12 +1742,12 @@ window.editTopic = editTopic;
 async function updateTopic(id) {
     const title = $('editTopicTitle').value.trim();
     const description = $('editTopicDesc').value.trim();
-    
     if (!title) {
         showAlert('error', 'Topic title is required');
         return;
     }
-    
+    const btn = document.querySelector('#modalContent .btn-primary');
+    setButtonLoading(btn, true);
     try {
         await apiFetch('/study/topics/' + id, {
             method: 'PUT',
@@ -1634,53 +1761,27 @@ async function updateTopic(id) {
     } catch(e) {
         showAlert('error', e.message);
     }
+    setButtonLoading(btn, false);
 }
 window.updateTopic = updateTopic;
 
-// ============================================
-// EDIT QUESTION
-// ============================================
 function editQuestion(id) {
     const q = questions.find(q => q._id === id);
     if (!q) return;
     const letters = ['A', 'B', 'C', 'D'];
     openModal(`
         <div class="modal-title"><i class="fas fa-edit"></i> Edit Question</div>
-        <div class="form-group">
-            <label>Question Text</label>
-            <textarea id="editQuestionText">${escapeHtml(q.question)}</textarea>
-        </div>
+        <div class="form-group"><label>Question</label><textarea id="editQuestionText">${escapeHtml(q.question)}</textarea></div>
         ${q.options.map((opt, i) => `
-            <div class="form-group">
-                <label>Option ${letters[i]}</label>
-                <input type="text" id="editOpt${i}" value="${escapeHtml(opt)}" />
-            </div>
+            <div class="form-group"><label>Option ${letters[i]}</label><input type="text" id="editOpt${i}" value="${escapeHtml(opt)}" /></div>
         `).join('')}
         <div class="form-row">
-            <div class="form-group">
-                <label>Correct Answer</label>
-                <select id="editCorrectAnswer">
-                    <option value="0" ${q.correct === 0 ? 'selected' : ''}>A</option>
-                    <option value="1" ${q.correct === 1 ? 'selected' : ''}>B</option>
-                    <option value="2" ${q.correct === 2 ? 'selected' : ''}>C</option>
-                    <option value="3" ${q.correct === 3 ? 'selected' : ''}>D</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Difficulty</label>
-                <select id="editDifficulty">
-                    <option value="easy" ${q.difficulty === 'easy' ? 'selected' : ''}>Easy</option>
-                    <option value="medium" ${q.difficulty === 'medium' ? 'selected' : ''}>Medium</option>
-                    <option value="hard" ${q.difficulty === 'hard' ? 'selected' : ''}>Hard</option>
-                </select>
-            </div>
+            <div class="form-group"><label>Correct</label><select id="editCorrectAnswer"><option value="0" ${q.correct === 0 ? 'selected' : ''}>A</option><option value="1" ${q.correct === 1 ? 'selected' : ''}>B</option><option value="2" ${q.correct === 2 ? 'selected' : ''}>C</option><option value="3" ${q.correct === 3 ? 'selected' : ''}>D</option></select></div>
+            <div class="form-group"><label>Difficulty</label><select id="editDifficulty"><option value="easy" ${q.difficulty === 'easy' ? 'selected' : ''}>Easy</option><option value="medium" ${q.difficulty === 'medium' ? 'selected' : ''}>Medium</option><option value="hard" ${q.difficulty === 'hard' ? 'selected' : ''}>Hard</option></select></div>
         </div>
-        <div class="form-group">
-            <label>Explanation</label>
-            <input type="text" id="editExplanation" value="${escapeHtml(q.explanation || '')}" />
-        </div>
+        <div class="form-group"><label>Explanation</label><input type="text" id="editExplanation" value="${escapeHtml(q.explanation || '')}" /></div>
         <div class="modal-actions">
-            <button class="btn btn-primary" onclick="updateQuestion('${id}')"><i class="fas fa-save"></i> Save</button>
+            <button class="btn btn-primary" onclick="updateQuestion('${id}')"><span class="btn-text"><i class="fas fa-save"></i> Save</span><span class="btn-spinner"><i class="fas fa-spinner"></i></span></button>
             <button class="btn btn-soft" onclick="closeModal()">Cancel</button>
         </div>
     `);
@@ -1696,22 +1797,16 @@ async function updateQuestion(id) {
     const correct = parseInt($('editCorrectAnswer').value);
     const explanation = $('editExplanation').value.trim();
     const difficulty = $('editDifficulty').value;
-    
     if (!question || !optA || !optB || !optC || !optD) {
         showAlert('error', 'Please fill in all fields');
         return;
     }
-    
+    const btn = document.querySelector('#modalContent .btn-primary');
+    setButtonLoading(btn, true);
     try {
         await apiFetch('/study/questions/' + id, {
             method: 'PUT',
-            body: JSON.stringify({
-                question,
-                options: [optA, optB, optC, optD],
-                correct,
-                explanation: explanation || 'No explanation provided.',
-                difficulty
-            })
+            body: JSON.stringify({ question, options: [optA, optB, optC, optD], correct, explanation, difficulty })
         });
         closeModal();
         await loadQuestions();
@@ -1720,80 +1815,17 @@ async function updateQuestion(id) {
     } catch(e) {
         showAlert('error', e.message);
     }
+    setButtonLoading(btn, false);
 }
 window.updateQuestion = updateQuestion;
-
-// ============================================
-// DELETE FUNCTIONS
-// ============================================
-async function deleteCourse(id) {
-    if (!confirm('Delete this course and all its topics and questions?')) return;
-    try {
-        await apiFetch('/study/courses/' + id, { method: 'DELETE' });
-        await loadCourses();
-        await loadTopics();
-        await loadQuestions();
-        populateSelects();
-        updateStats();
-        showAlert('success', 'Course deleted');
-    } catch(e) {
-        showAlert('error', e.message);
-    }
-}
-window.deleteCourse = deleteCourse;
-
-async function deleteTopic(id) {
-    if (!confirm('Delete this topic and all its questions?')) return;
-    try {
-        await apiFetch('/study/topics/' + id, { method: 'DELETE' });
-        await loadTopics();
-        await loadQuestions();
-        populateSelects();
-        updateStats();
-        showAlert('success', 'Topic deleted');
-    } catch(e) {
-        showAlert('error', e.message);
-    }
-}
-window.deleteTopic = deleteTopic;
-
-async function deleteQuestion(id) {
-    if (!confirm('Delete this question?')) return;
-    try {
-        await apiFetch('/study/questions/' + id, { method: 'DELETE' });
-        await loadQuestions();
-        updateStats();
-        showAlert('success', 'Question deleted');
-    } catch(e) {
-        showAlert('error', e.message);
-    }
-}
-window.deleteQuestion = deleteQuestion;
-
-// ============================================
-// DELETE SELECTED
-// ============================================
-async function deleteSelectedCourses() {
-    // This is a placeholder - you can implement multi-select if needed
-    showAlert('info', 'Select courses to delete using checkboxes (coming soon)');
-}
-window.deleteSelectedCourses = deleteSelectedCourses;
-
-async function deleteSelectedTopics() {
-    showAlert('info', 'Select topics to delete using checkboxes (coming soon)');
-}
-window.deleteSelectedTopics = deleteSelectedTopics;
-
-async function deleteSelectedQuestions() {
-    showAlert('info', 'Select questions to delete using checkboxes (coming soon)');
-}
-window.deleteSelectedQuestions = deleteSelectedQuestions;
 
 // ============================================
 // DANGER ZONE FUNCTIONS
 // ============================================
 async function deleteAllQuestions() {
     if (!confirm('⚠️ PERMANENTLY delete ALL questions? This cannot be undone!')) return;
+    const btn = event.target;
+    setButtonLoading(btn, true);
     try {
         await apiFetch('/study/questions/all', { method: 'DELETE' });
         await loadQuestions();
@@ -1802,11 +1834,14 @@ async function deleteAllQuestions() {
     } catch(e) {
         showAlert('error', e.message);
     }
+    setButtonLoading(btn, false);
 }
 window.deleteAllQuestions = deleteAllQuestions;
 
 async function deleteAllTopics() {
     if (!confirm('⚠️ PERMANENTLY delete ALL topics and their questions? This cannot be undone!')) return;
+    const btn = event.target;
+    setButtonLoading(btn, true);
     try {
         await apiFetch('/study/topics/all', { method: 'DELETE' });
         await loadTopics();
@@ -1817,11 +1852,14 @@ async function deleteAllTopics() {
     } catch(e) {
         showAlert('error', e.message);
     }
+    setButtonLoading(btn, false);
 }
 window.deleteAllTopics = deleteAllTopics;
 
 async function deleteAllCourses() {
     if (!confirm('⚠️ PERMANENTLY delete ALL courses, topics, and questions? This cannot be undone!')) return;
+    const btn = event.target;
+    setButtonLoading(btn, true);
     try {
         await apiFetch('/study/courses/all', { method: 'DELETE' });
         await loadCourses();
@@ -1833,15 +1871,19 @@ async function deleteAllCourses() {
     } catch(e) {
         showAlert('error', e.message);
     }
+    setButtonLoading(btn, false);
 }
 window.deleteAllCourses = deleteAllCourses;
 
 async function deleteAllData() {
     if (!confirm('⚠️ PERMANENTLY delete EVERYTHING? This cannot be undone!')) return;
     if (!confirm('Are you ABSOLUTELY sure?')) return;
+    const btn = event.target;
+    setButtonLoading(btn, true);
     try {
         await apiFetch('/study/delete-all', { method: 'DELETE' });
         courses = []; topics = []; questions = [];
+        selectedCourses = []; selectedTopics = []; selectedQuestions = [];
         renderAll();
         populateSelects();
         updateStats();
@@ -1849,6 +1891,7 @@ async function deleteAllData() {
     } catch(e) {
         showAlert('error', e.message);
     }
+    setButtonLoading(btn, false);
 }
 window.deleteAllData = deleteAllData;
 
@@ -1871,9 +1914,7 @@ window.exportCourses = exportCourses;
 
 function exportAllData() {
     const data = JSON.stringify({ 
-        courses, 
-        topics, 
-        questions,
+        courses, topics, questions,
         exportedAt: new Date().toISOString(),
         total: { courses: courses.length, topics: topics.length, questions: questions.length }
     }, null, 2);
@@ -1895,8 +1936,9 @@ function downloadFile(content, filename, mimeType) {
 }
 
 // ============================================
-// CLEAR CACHE
+// SETTINGS FUNCTIONS
 // ============================================
+function refreshAllData() { loadAllData(); }
 function clearCache() {
     if (confirm('Clear local cache? This will reload all data from the server.')) {
         localStorage.removeItem('studyCache');
