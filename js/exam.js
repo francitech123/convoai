@@ -1,6 +1,6 @@
 // ============================================
 // EXAM MODULE - COMPLETE FIXED
-// ALL FEATURES INTACT
+// ALL FEATURES INTACT - DEEP ROTATION, INACTIVITY, FULLSCREEN, CALCULATOR, ETC
 // ============================================
 
 import { apiFetch, $id, setText, shuffleArray, showToast, enterFullscreenMode, exitFullscreenMode, showLoading, hideLoading } from './utils.js';
@@ -19,7 +19,9 @@ export let examState = {
   isComplete: false,
   lastActivity: Date.now(),
   isReset: false,
-  pageLoaded: false
+  pageLoaded: false,
+  calcExpression: '0',
+  calcOpen: false
 };
 
 // ==================== COMPLETE RESET EXAM STATE ====================
@@ -55,6 +57,8 @@ export function resetExamState(clearSession = true) {
   examState.isReset = true;
   examState.lastActivity = Date.now();
   examState.pageLoaded = false;
+  examState.calcOpen = false;
+  examState.calcExpression = '0';
   
   exitFullscreenMode();
   
@@ -101,6 +105,10 @@ export function resetExamState(clearSession = true) {
     nextBtn.style.opacity = '1';
     nextBtn.style.display = 'inline-flex';
   }
+  
+  // Hide calculator overlay
+  const calcOverlay = $id('examCalcOverlay');
+  if (calcOverlay) calcOverlay.classList.remove('show');
   
   loadExamFaculties();
   console.log('✅ Exam state fully reset');
@@ -152,16 +160,69 @@ function trackActivity() {
   examState.lastActivity = Date.now();
 }
 
-// ==================== DISABLE ALL BUTTONS (ONLY DURING SUBMISSION) ====================
+// ==================== CALCULATOR FUNCTIONS ====================
+export function examToggleCalculator() {
+  examState.calcOpen = !examState.calcOpen;
+  const overlay = $id('examCalcOverlay');
+  if (overlay) {
+    if (examState.calcOpen) {
+      overlay.classList.add('show');
+      updateCalcDisplay();
+    } else {
+      overlay.classList.remove('show');
+    }
+  }
+}
+
+export function examCalcAppend(value) {
+  if (examState.calcExpression === '0' && !isNaN(value)) {
+    examState.calcExpression = value;
+  } else {
+    examState.calcExpression += value;
+  }
+  updateCalcDisplay();
+}
+
+export function examCalcClear() {
+  examState.calcExpression = '0';
+  updateCalcDisplay();
+}
+
+export function examCalcBackspace() {
+  examState.calcExpression = examState.calcExpression.slice(0, -1) || '0';
+  updateCalcDisplay();
+}
+
+export function examCalcResult() {
+  try {
+    const result = Function('"use strict"; return (' + examState.calcExpression + ')')();
+    examState.calcExpression = result.toString();
+    updateCalcDisplay();
+  } catch (e) {
+    examState.calcExpression = 'Error';
+    updateCalcDisplay();
+    setTimeout(() => {
+      examState.calcExpression = '0';
+      updateCalcDisplay();
+    }, 1500);
+  }
+}
+
+function updateCalcDisplay() {
+  const display = $id('examCalcDisplay');
+  if (display) {
+    display.value = examState.calcExpression.replace(/\*/g, '×');
+  }
+}
+
+// ==================== DISABLE ALL BUTTONS ====================
 function disableAllButtons() {
-  // Disable options
   document.querySelectorAll('#examOptionsArea .opt').forEach(el => {
     el.classList.add('disabled');
     el.style.cursor = 'not-allowed';
     el.onclick = null;
   });
   
-  // Disable nav buttons
   const prevBtn = $id('examPrevBtn');
   const nextBtn = $id('examNextBtn');
   const submitBtn = $id('examSubmitBtn');
@@ -188,7 +249,6 @@ function disableAllButtons() {
   });
 }
 
-// ==================== ENABLE ALL BUTTONS (After submission completes) ====================
 function enableAllButtons() {
   document.querySelectorAll('#examOptionsArea .opt').forEach(el => {
     el.classList.remove('disabled');
@@ -232,6 +292,12 @@ function enableAllButtons() {
 // ============================================
 export async function loadExamData() {
   checkAndResetExam();
+  
+  // Check for recovered session first
+  if (recoverExamSession()) {
+    examState.pageLoaded = true;
+    return;
+  }
   
   if (examState.isReset) {
     examState.isReset = false;
@@ -466,7 +532,7 @@ export async function examOpenEntry(code) {
 }
 
 // ============================================
-// START EXAM - FIXED! Now uses existing endpoints
+// START EXAM - FULL FEATURES INTACT
 // ============================================
 export async function examStart() {
   const btn = document.querySelector('#examEntryContent .btn');
@@ -476,12 +542,12 @@ export async function examStart() {
   btn.disabled = true;
 
   try {
-    // 1. Get course details (for time limit and question count)
+    // 1. Get course details
     const courseData = await apiFetch(`/admin/course-detail/${encodeURIComponent(examState.course)}`);
     const timeLimit = courseData.course?.examSettings?.timeLimit || 30;
     const numQuestions = courseData.course?.examSettings?.numberOfQuestions || 50;
     
-    // 2. Fetch questions using the existing endpoint ✅
+    // 2. Fetch questions using DEEP ROTATION via existing endpoint
     const data = await apiFetch(`/admin/questions/${encodeURIComponent(examState.course)}/exam`);
     
     // 3. Check if questions exist
@@ -492,14 +558,46 @@ export async function examStart() {
       return;
     }
 
-    // 4. Shuffle questions for variety
-    const shuffledQuestions = shuffleArray(data.questions);
+    // 4. DEEP ROTATION: Shuffle and select with exclusion logic
+    let availableQuestions = [...data.questions];
     
-    // 5. Limit to required number (or use available if less)
+    // Check for previous sessions to avoid repeats
+    let recentIds = [];
+    try {
+      const sessions = JSON.parse(sessionStorage.getItem('examSessions') || '[]');
+      recentIds = sessions.flatMap(s => s.questionIds || []);
+    } catch(e) {}
+    
+    // Filter out recently used questions
+    let filteredQuestions = availableQuestions.filter(q => !recentIds.includes(q._id));
+    
+    // If not enough, fallback to all
+    if (filteredQuestions.length < numQuestions) {
+      filteredQuestions = availableQuestions;
+    }
+    
+    const shuffledQuestions = shuffleArray(filteredQuestions);
     const questions = shuffledQuestions.slice(0, Math.min(numQuestions, shuffledQuestions.length));
     
-    // 6. Create session
+    // 5. Store session with question IDs for rotation
     const sessionId = Date.now() + '_' + Math.random().toString(36).substring(2, 8);
+    const questionIds = questions.map(q => q._id);
+    
+    // Save to session history
+    try {
+      const sessions = JSON.parse(sessionStorage.getItem('examSessions') || '[]');
+      sessions.push({ 
+        sessionId, 
+        questionIds, 
+        timestamp: Date.now(),
+        courseCode: examState.course 
+      });
+      // Keep only last 10 sessions
+      while (sessions.length > 10) sessions.shift();
+      sessionStorage.setItem('examSessions', JSON.stringify(sessions));
+    } catch(e) {}
+    
+    // 6. Create session object
     examState.session = {
       courseCode: examState.course,
       questions: questions,
@@ -510,7 +608,8 @@ export async function examStart() {
       timer: null,
       startTime: Date.now(),
       sessionId: sessionId,
-      mode: 'exam'
+      mode: 'exam',
+      questionIds: questionIds
     };
 
     examState.lastActivity = Date.now();
@@ -550,7 +649,7 @@ export async function examStart() {
     document.addEventListener('touchstart', trackActivity);
     document.addEventListener('keydown', trackActivity);
     
-    showToast(`Exam started! ${questions.length} questions`, 'success');
+    showToast(`✅ Exam started! ${questions.length} questions`, 'success');
 
   } catch (e) {
     console.error('Exam start error:', e);
@@ -680,7 +779,8 @@ function examStartAutoSave() {
           currentIndex: examState.session.currentIndex,
           startTime: examState.session.startTime,
           sessionId: examState.session.sessionId,
-          mode: 'exam'
+          mode: 'exam',
+          questionIds: examState.session.questionIds
         }));
       } catch (e) {}
     }
@@ -700,7 +800,6 @@ export async function examSubmit(autoSubmit = false) {
   
   examState.isSubmitting = true;
   
-  // DISABLE ALL BUTTONS ONLY DURING SUBMISSION
   disableAllButtons();
   
   const submitBtn = $id('examSubmitBtn');
@@ -744,7 +843,8 @@ export async function examSubmit(autoSubmit = false) {
         totalQuestions: total,
         percentage: percentage,
         timeSpent: timeSpent,
-        mode: 'exam'
+        mode: 'exam',
+        questionIds: examState.session.questionIds || []
       })
     });
     
@@ -769,7 +869,6 @@ export async function examSubmit(autoSubmit = false) {
     localStorage.setItem('lastResultTimestamp', Date.now().toString());
     sessionStorage.removeItem('activeExam');
     
-    // Reset state but keep sessionStorage for result
     resetExamState(false);
     
     exitFullscreenMode();
@@ -817,7 +916,6 @@ export function recoverExamSession() {
     if (saved) {
       const data = JSON.parse(saved);
       
-      // Check if session is still valid (not expired)
       const elapsed = (Date.now() - data.startTime) / 1000;
       if (elapsed > data.timeLimit * 60) {
         sessionStorage.removeItem('activeExam');
@@ -834,14 +932,14 @@ export function recoverExamSession() {
         timer: null,
         startTime: data.startTime,
         sessionId: data.sessionId,
-        mode: data.mode || 'exam'
+        mode: data.mode || 'exam',
+        questionIds: data.questionIds || []
       };
       
       examState.course = data.courseCode;
       examState.isSubmitting = false;
       examState.isReset = false;
       
-      // Update UI
       const title = $id('examCourseTitle');
       const meta = $id('examMeta');
       const timer = $id('examTimerDisplay');
@@ -857,13 +955,11 @@ export function recoverExamSession() {
         else if (data.timeLeft <= 300) timer.classList.add('warning');
       }
       
-      // Switch to running screen
       const entryScreen = $id('examEntryScreen');
       const runningScreen = $id('examRunningScreen');
       if (entryScreen) entryScreen.style.display = 'none';
       if (runningScreen) runningScreen.style.display = 'block';
       
-      // Render and start timer
       examRenderQuestion();
       examStartTimer();
       examRenderGrid();
@@ -904,3 +1000,8 @@ window.resetExamState = resetExamState;
 window.checkAndResetExam = checkAndResetExam;
 window.loadExamData = loadExamData;
 window.recoverExamSession = recoverExamSession;
+window.examToggleCalculator = examToggleCalculator;
+window.examCalcAppend = examCalcAppend;
+window.examCalcClear = examCalcClear;
+window.examCalcBackspace = examCalcBackspace;
+window.examCalcResult = examCalcResult;
