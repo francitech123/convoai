@@ -1,6 +1,5 @@
 // ============================================
-// EXAM MODULE - COMPLETE FIXED
-// ALL FEATURES INTACT - DEEP ROTATION, INACTIVITY, FULLSCREEN, CALCULATOR, ETC
+// EXAM MODULE - WITH SHUFFLED OPTIONS & NO LABELS
 // ============================================
 
 import { apiFetch, $id, setText, shuffleArray, showToast, enterFullscreenMode, exitFullscreenMode, showLoading, hideLoading } from './utils.js';
@@ -23,6 +22,34 @@ export let examState = {
   calcExpression: '0',
   calcOpen: false
 };
+
+// ==================== SHUFFLE OPTIONS WITHIN A QUESTION ====================
+function shuffleQuestionOptions(question) {
+  // Create array of option objects with their original index
+  const optionsWithIndex = question.options.map((text, index) => ({
+    text: text,
+    originalIndex: index
+  }));
+  
+  // Shuffle the options
+  const shuffled = shuffleArray(optionsWithIndex);
+  
+  // Map to find which shuffled index corresponds to the correct answer
+  const correctOption = question.correctOption;
+  const correctIndex = shuffled.findIndex(item => item.originalIndex === correctOption);
+  
+  return {
+    ...question,
+    options: shuffled.map(item => item.text),
+    correctOption: correctIndex,
+    _originalCorrectIndex: correctOption // Keep for reference if needed
+  };
+}
+
+// ==================== SHUFFLE ALL QUESTIONS OPTIONS ====================
+function shuffleAllQuestionOptions(questions) {
+  return questions.map(q => shuffleQuestionOptions(q));
+}
 
 // ==================== COMPLETE RESET EXAM STATE ====================
 export function resetExamState(clearSession = true) {
@@ -106,7 +133,6 @@ export function resetExamState(clearSession = true) {
     nextBtn.style.display = 'inline-flex';
   }
   
-  // Hide calculator overlay
   const calcOverlay = $id('examCalcOverlay');
   if (calcOverlay) calcOverlay.classList.remove('show');
   
@@ -293,7 +319,6 @@ function enableAllButtons() {
 export async function loadExamData() {
   checkAndResetExam();
   
-  // Check for recovered session first
   if (recoverExamSession()) {
     examState.pageLoaded = true;
     return;
@@ -532,7 +557,7 @@ export async function examOpenEntry(code) {
 }
 
 // ============================================
-// START EXAM - FULL FEATURES INTACT
+// START EXAM - WITH SHUFFLED OPTIONS & NO LABELS
 // ============================================
 export async function examStart() {
   const btn = document.querySelector('#examEntryContent .btn');
@@ -547,10 +572,9 @@ export async function examStart() {
     const timeLimit = courseData.course?.examSettings?.timeLimit || 30;
     const numQuestions = courseData.course?.examSettings?.numberOfQuestions || 50;
     
-    // 2. Fetch questions using DEEP ROTATION via existing endpoint
+    // 2. Fetch questions
     const data = await apiFetch(`/admin/questions/${encodeURIComponent(examState.course)}/exam`);
     
-    // 3. Check if questions exist
     if (!data.success || !data.questions || !data.questions.length) {
       alert('No questions available for this course. Please try again later.');
       btn.innerHTML = '<i class="fas fa-play-circle"></i> START EXAM';
@@ -558,32 +582,29 @@ export async function examStart() {
       return;
     }
 
-    // 4. DEEP ROTATION: Shuffle and select with exclusion logic
+    // 3. Deep Rotation - avoid repeats
     let availableQuestions = [...data.questions];
-    
-    // Check for previous sessions to avoid repeats
     let recentIds = [];
     try {
       const sessions = JSON.parse(sessionStorage.getItem('examSessions') || '[]');
       recentIds = sessions.flatMap(s => s.questionIds || []);
     } catch(e) {}
     
-    // Filter out recently used questions
     let filteredQuestions = availableQuestions.filter(q => !recentIds.includes(q._id));
-    
-    // If not enough, fallback to all
     if (filteredQuestions.length < numQuestions) {
       filteredQuestions = availableQuestions;
     }
     
     const shuffledQuestions = shuffleArray(filteredQuestions);
-    const questions = shuffledQuestions.slice(0, Math.min(numQuestions, shuffledQuestions.length));
-    
-    // 5. Store session with question IDs for rotation
+    let questions = shuffledQuestions.slice(0, Math.min(numQuestions, shuffledQuestions.length));
+
+    // ⭐ KEY CHANGE: Shuffle options within each question (no labels)
+    questions = shuffleAllQuestionOptions(questions);
+
+    // 4. Store session
     const sessionId = Date.now() + '_' + Math.random().toString(36).substring(2, 8);
     const questionIds = questions.map(q => q._id);
     
-    // Save to session history
     try {
       const sessions = JSON.parse(sessionStorage.getItem('examSessions') || '[]');
       sessions.push({ 
@@ -592,12 +613,11 @@ export async function examStart() {
         timestamp: Date.now(),
         courseCode: examState.course 
       });
-      // Keep only last 10 sessions
       while (sessions.length > 10) sessions.shift();
       sessionStorage.setItem('examSessions', JSON.stringify(sessions));
     } catch(e) {}
-    
-    // 6. Create session object
+
+    // 5. Create session
     examState.session = {
       courseCode: examState.course,
       questions: questions,
@@ -616,7 +636,7 @@ export async function examStart() {
     examState.isReset = false;
     examState.isSubmitting = false;
 
-    // 7. Update UI
+    // 6. Update UI
     const title = $id('examCourseTitle');
     const meta = $id('examMeta');
     const timer = $id('examTimerDisplay');
@@ -628,28 +648,24 @@ export async function examStart() {
       timer.className = 'timer-box';
     }
 
-    // 8. Switch screens
+    // 7. Switch screens
     const entryScreen = $id('examEntryScreen');
     const runningScreen = $id('examRunningScreen');
     if (entryScreen) entryScreen.style.display = 'none';
     if (runningScreen) runningScreen.style.display = 'block';
     
-    // 9. Enter fullscreen
     enterFullscreenMode();
-    
-    // 10. Render and start
     examRenderQuestion();
     examStartTimer();
     examRenderGrid();
     examStartAutoSave();
     resetInactivityTimer();
 
-    // 11. Track activity
     document.addEventListener('click', trackActivity);
     document.addEventListener('touchstart', trackActivity);
     document.addEventListener('keydown', trackActivity);
     
-    showToast(`✅ Exam started! ${questions.length} questions`, 'success');
+    showToast(`✅ Exam started! ${questions.length} questions (options randomized)`, 'success');
 
   } catch (e) {
     console.error('Exam start error:', e);
@@ -660,7 +676,7 @@ export async function examStart() {
 }
 
 // ============================================
-// RENDER FUNCTIONS
+// RENDER QUESTION - NO A, B, C, D LABELS
 // ============================================
 function examRenderQuestion() {
   if (!examState.session) return;
@@ -676,15 +692,17 @@ function examRenderQuestion() {
   
   if (counter) counter.textContent = `Question ${idx + 1} of ${total}`;
   if (text) text.textContent = q.text;
-  const letters = ['A', 'B', 'C', 'D'];
+  
+  // ⭐ KEY CHANGE: Render options WITHOUT A, B, C, D labels
+  // Just show the option text itself
   if (options) {
     options.innerHTML = q.options.map((opt, i) => `
       <div class="opt ${examState.session.answers[idx] === i ? 'selected' : ''}" onclick="window.examSelectAnswer(${i})">
-        <span class="prefix">${letters[i]}.</span>
         <span>${opt}</span>
       </div>
     `).join('');
   }
+  
   if (prevBtn) prevBtn.disabled = idx === 0 || examState.isSubmitting;
   const last = idx === total - 1;
   if (nextBtn) {
