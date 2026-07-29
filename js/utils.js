@@ -241,7 +241,7 @@ export async function apiFetch(path, options = {}) {
   if (!response.ok) {
     if (response.status === 401) {
       clearUser();
-      window.location.href = '/login';
+      window.location.href = '/';
       throw new Error('Session expired');
     }
     throw new Error(data.error || 'Request failed');
