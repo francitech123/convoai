@@ -1,6 +1,6 @@
 // ============================================
 // EXAM MODULE - COMPLETE WITH ALL FEATURES
-// Option shuffling + No labels + Everything else intact
+// Option shuffling + No labels + Enhanced Rotation + MathJax
 // ============================================
 
 import { apiFetch, $id, setText, shuffleArray, showToast, enterFullscreenMode, exitFullscreenMode, showLoading, hideLoading } from './utils.js';
@@ -21,8 +21,55 @@ export let examState = {
   isReset: false,
   pageLoaded: false,
   calcExpression: '0',
-  calcOpen: false
+  calcOpen: false,
+  retryCount: 0,
+  maxRetries: 3
 };
+
+// ==================== MATHJAX RENDERER ====================
+function renderMathJax() {
+  try {
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise().catch(err => {
+        console.warn('MathJax render error:', err);
+      });
+    }
+  } catch(e) {
+    console.warn('MathJax not available:', e);
+  }
+}
+
+function renderMathJaxContainer(container) {
+  try {
+    if (window.MathJax && MathJax.typesetPromise && container) {
+      MathJax.typesetPromise([container]).catch(err => {
+        console.warn('MathJax container render error:', err);
+      });
+    }
+  } catch(e) {
+    console.warn('MathJax not available');
+  }
+}
+
+// ==================== TEXT SIMILARITY DETECTION ====================
+function getTextSimilarity(text1, text2) {
+  if (!text1 || !text2) return 0;
+  
+  const s1 = text1.toLowerCase().replace(/[^a-zA-Z0-9\s]/g, '').trim();
+  const s2 = text2.toLowerCase().replace(/[^a-zA-Z0-9\s]/g, '').trim();
+  
+  if (s1 === s2) return 100;
+  if (s1.length === 0 || s2.length === 0) return 0;
+  
+  const words1 = s1.split(/\s+/);
+  const words2 = s2.split(/\s+/);
+  
+  // Calculate word overlap percentage
+  const commonWords = words1.filter(word => words2.includes(word));
+  const similarity = (commonWords.length / Math.max(words1.length, words2.length)) * 100;
+  
+  return Math.round(similarity);
+}
 
 // ==================== SHUFFLE OPTIONS WITHIN A QUESTION ====================
 function shuffleQuestionOptions(question) {
@@ -83,6 +130,7 @@ export function resetExamState(clearSession = true) {
   examState.pageLoaded = false;
   examState.calcOpen = false;
   examState.calcExpression = '0';
+  examState.retryCount = 0;
   
   exitFullscreenMode();
   
@@ -198,12 +246,16 @@ export function examToggleCalculator() {
 }
 
 export function examCalcAppend(value) {
-  if (examState.calcExpression === '0' && !isNaN(value)) {
-    examState.calcExpression = value;
-  } else {
-    examState.calcExpression += value;
+  try {
+    if (examState.calcExpression === '0' && !isNaN(value)) {
+      examState.calcExpression = value;
+    } else {
+      examState.calcExpression += value;
+    }
+    updateCalcDisplay();
+  } catch(e) {
+    console.warn('Calculator append error:', e);
   }
-  updateCalcDisplay();
 }
 
 export function examCalcClear() {
@@ -314,68 +366,73 @@ function enableAllButtons() {
 // LOAD EXAM DATA
 // ============================================
 export async function loadExamData() {
-  checkAndResetExam();
-  
-  if (recoverExamSession()) {
-    examState.pageLoaded = true;
-    return;
-  }
-  
-  if (examState.isReset) {
-    examState.isReset = false;
-    const facultyScreen = $id('examFacultyScreen');
-    const runningScreen = $id('examRunningScreen');
-    const levelScreen = $id('examLevelScreen');
-    const courseScreen = $id('examCourseScreen');
-    const entryScreen = $id('examEntryScreen');
+  try {
+    checkAndResetExam();
     
-    if (facultyScreen) facultyScreen.style.display = 'block';
-    if (runningScreen) runningScreen.style.display = 'none';
-    if (levelScreen) levelScreen.style.display = 'none';
-    if (courseScreen) courseScreen.style.display = 'none';
-    if (entryScreen) entryScreen.style.display = 'none';
-    
-    const qText = $id('examQText');
-    const qOptions = $id('examOptionsArea');
-    const qCounter = $id('examQCounter');
-    const qGrid = $id('examQuestionGrid');
-    const timerDisplay = $id('examTimerDisplay');
-    const submitBtn = $id('examSubmitBtn');
-    
-    if (qText) qText.textContent = '';
-    if (qOptions) qOptions.innerHTML = '';
-    if (qCounter) qCounter.textContent = '';
-    if (qGrid) qGrid.innerHTML = '';
-    if (timerDisplay) {
-      timerDisplay.textContent = '--:--';
-      timerDisplay.className = 'timer-box';
-    }
-    if (submitBtn) {
-      submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Submit';
-      submitBtn.disabled = false;
-      submitBtn.style.display = 'none';
+    if (recoverExamSession()) {
+      examState.pageLoaded = true;
+      return;
     }
     
+    if (examState.isReset) {
+      examState.isReset = false;
+      const facultyScreen = $id('examFacultyScreen');
+      const runningScreen = $id('examRunningScreen');
+      const levelScreen = $id('examLevelScreen');
+      const courseScreen = $id('examCourseScreen');
+      const entryScreen = $id('examEntryScreen');
+      
+      if (facultyScreen) facultyScreen.style.display = 'block';
+      if (runningScreen) runningScreen.style.display = 'none';
+      if (levelScreen) levelScreen.style.display = 'none';
+      if (courseScreen) courseScreen.style.display = 'none';
+      if (entryScreen) entryScreen.style.display = 'none';
+      
+      const qText = $id('examQText');
+      const qOptions = $id('examOptionsArea');
+      const qCounter = $id('examQCounter');
+      const qGrid = $id('examQuestionGrid');
+      const timerDisplay = $id('examTimerDisplay');
+      const submitBtn = $id('examSubmitBtn');
+      
+      if (qText) qText.textContent = '';
+      if (qOptions) qOptions.innerHTML = '';
+      if (qCounter) qCounter.textContent = '';
+      if (qGrid) qGrid.innerHTML = '';
+      if (timerDisplay) {
+        timerDisplay.textContent = '--:--';
+        timerDisplay.className = 'timer-box';
+      }
+      if (submitBtn) {
+        submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Submit';
+        submitBtn.disabled = false;
+        submitBtn.style.display = 'none';
+      }
+      
+      await loadExamFaculties();
+      examState.pageLoaded = true;
+      return;
+    }
+    
+    if (examState.session) {
+      const runningScreen = $id('examRunningScreen');
+      if (runningScreen) runningScreen.style.display = 'block';
+      examRenderQuestion();
+      examRenderGrid();
+      examState.pageLoaded = true;
+      return;
+    }
+    
+    if (document.querySelector('#examFacultyGrid .faculty-tag-simple')) {
+      examState.pageLoaded = true;
+      return;
+    }
     await loadExamFaculties();
     examState.pageLoaded = true;
-    return;
+  } catch (error) {
+    console.error('Load exam data error:', error);
+    showToast('Failed to load exam data. Please refresh.', 'error');
   }
-  
-  if (examState.session) {
-    const runningScreen = $id('examRunningScreen');
-    if (runningScreen) runningScreen.style.display = 'block';
-    examRenderQuestion();
-    examRenderGrid();
-    examState.pageLoaded = true;
-    return;
-  }
-  
-  if (document.querySelector('#examFacultyGrid .faculty-tag-simple')) {
-    examState.pageLoaded = true;
-    return;
-  }
-  await loadExamFaculties();
-  examState.pageLoaded = true;
 }
 
 export async function loadExamFaculties() {
@@ -394,7 +451,8 @@ export async function loadExamFaculties() {
       if (link) link.style.display = 'none';
     }
   } catch (e) {
-    grid.innerHTML = '<div class="empty-state">Failed to load faculties</div>';
+    console.error('Load faculties error:', e);
+    grid.innerHTML = '<div class="empty-state">Failed to load faculties. Please refresh.</div>';
   }
 }
 
@@ -422,14 +480,19 @@ export function examToggleFaculties() {
 }
 
 export function examSelectFaculty(name) {
-  examState.faculty = name;
-  const title = $id('examLevelTitle');
-  if (title) title.textContent = `${name} - Select Level`;
-  const facultyScreen = $id('examFacultyScreen');
-  const levelScreen = $id('examLevelScreen');
-  if (facultyScreen) facultyScreen.style.display = 'none';
-  if (levelScreen) levelScreen.style.display = 'block';
-  loadExamLevels();
+  try {
+    examState.faculty = name;
+    const title = $id('examLevelTitle');
+    if (title) title.textContent = `${name} - Select Level`;
+    const facultyScreen = $id('examFacultyScreen');
+    const levelScreen = $id('examLevelScreen');
+    if (facultyScreen) facultyScreen.style.display = 'none';
+    if (levelScreen) levelScreen.style.display = 'block';
+    loadExamLevels();
+  } catch (error) {
+    console.error('Select faculty error:', error);
+    showToast('Failed to load levels. Please try again.', 'error');
+  }
 }
 
 export function examGoToFaculty() {
@@ -461,19 +524,25 @@ async function loadExamLevels() {
       `;
     }).join('');
   } catch (e) {
-    grid.innerHTML = '<div class="empty-state">Error loading levels</div>';
+    console.error('Load levels error:', e);
+    grid.innerHTML = '<div class="empty-state">Error loading levels. Please refresh.</div>';
   }
 }
 
 export function examSelectLevel(level) {
-  examState.level = level;
-  const title = $id('examCoursePageTitle');
-  if (title) title.textContent = `${examState.faculty} - ${level} Level Exams`;
-  const levelScreen = $id('examLevelScreen');
-  const courseScreen = $id('examCourseScreen');
-  if (levelScreen) levelScreen.style.display = 'none';
-  if (courseScreen) courseScreen.style.display = 'block';
-  loadExamCourses();
+  try {
+    examState.level = level;
+    const title = $id('examCoursePageTitle');
+    if (title) title.textContent = `${examState.faculty} - ${level} Level Exams`;
+    const levelScreen = $id('examLevelScreen');
+    const courseScreen = $id('examCourseScreen');
+    if (levelScreen) levelScreen.style.display = 'none';
+    if (courseScreen) courseScreen.style.display = 'block';
+    loadExamCourses();
+  } catch (error) {
+    console.error('Select level error:', error);
+    showToast('Failed to load courses. Please try again.', 'error');
+  }
 }
 
 export function examGoToLevel() {
@@ -504,7 +573,8 @@ async function loadExamCourses() {
     }
     container.innerHTML = html || '<div class="empty-state">No courses available</div>';
   } catch (e) {
-    container.innerHTML = '<div class="empty-state">Error loading courses</div>';
+    console.error('Load courses error:', e);
+    container.innerHTML = '<div class="empty-state">Error loading courses. Please refresh.</div>';
   }
 }
 
@@ -520,16 +590,17 @@ export function examGoToCourse() {
 }
 
 export async function examOpenEntry(code) {
-  examState.course = code;
-  const courseScreen = $id('examCourseScreen');
-  const entryScreen = $id('examEntryScreen');
-  if (courseScreen) courseScreen.style.display = 'none';
-  if (entryScreen) entryScreen.style.display = 'block';
-  
-  const container = $id('examEntryContent');
-  if (!container) return;
-  container.innerHTML = '<div class="loading-spin"><i class="fas fa-spinner"></i></div>';
   try {
+    examState.course = code;
+    const courseScreen = $id('examCourseScreen');
+    const entryScreen = $id('examEntryScreen');
+    if (courseScreen) courseScreen.style.display = 'none';
+    if (entryScreen) entryScreen.style.display = 'block';
+    
+    const container = $id('examEntryContent');
+    if (!container) return;
+    container.innerHTML = '<div class="loading-spin"><i class="fas fa-spinner"></i></div>';
+    
     const data = await apiFetch(`/admin/course-detail/${encodeURIComponent(code)}`);
     const c = data.course;
     container.innerHTML = `
@@ -549,12 +620,60 @@ export async function examOpenEntry(code) {
       </div>
     `;
   } catch (e) {
-    container.innerHTML = '<div class="empty-state">Error loading course</div>';
+    console.error('Open entry error:', e);
+    const container = $id('examEntryContent');
+    if (container) {
+      container.innerHTML = '<div class="empty-state">Error loading course. Please try again.</div>';
+    }
+    showToast('Failed to load course details.', 'error');
   }
 }
 
 // ============================================
-// START EXAM - WITH SHUFFLED OPTIONS & NO LABELS
+// ENHANCED QUESTION SELECTION WITH SIMILARITY CHECK
+// ============================================
+function selectQuestionsWithRotation(availableQuestions, numQuestions, recentHistory) {
+  const SIMILARITY_THRESHOLD = 70;
+  const recentIds = recentHistory.map(item => item.questionId).filter(Boolean);
+  const recentTexts = recentHistory.map(item => item.questionText).filter(Boolean);
+  
+  // First pass: Filter out exact matches
+  let filtered = availableQuestions.filter(q => !recentIds.includes(q._id));
+  
+  // Second pass: Filter out similar questions (word overlap >= 70%)
+  if (filtered.length < numQuestions) {
+    // If not enough questions, use all but with similarity check
+    filtered = availableQuestions.filter(q => {
+      // Check similarity with recent questions
+      for (const recentText of recentTexts) {
+        const similarity = getTextSimilarity(q.text, recentText);
+        if (similarity >= SIMILARITY_THRESHOLD) {
+          return false; // Skip this question (too similar)
+        }
+      }
+      return true;
+    });
+  }
+  
+  // If still not enough, fallback to all questions (except exact matches)
+  if (filtered.length < numQuestions) {
+    console.log('⚠️ Not enough unique questions, using all available (except exact matches)');
+    filtered = availableQuestions.filter(q => !recentIds.includes(q._id));
+  }
+  
+  // If still not enough, use all questions
+  if (filtered.length === 0) {
+    console.log('⚠️ No questions available, using all');
+    filtered = availableQuestions;
+  }
+  
+  // Shuffle and select
+  const shuffled = shuffleArray(filtered);
+  return shuffled.slice(0, Math.min(numQuestions, shuffled.length));
+}
+
+// ============================================
+// START EXAM - WITH ENHANCED ROTATION
 // ============================================
 export async function examStart() {
   const btn = document.querySelector('#examEntryContent .btn');
@@ -564,10 +683,12 @@ export async function examStart() {
   btn.disabled = true;
 
   try {
+    // 1. Get course details
     const courseData = await apiFetch(`/admin/course-detail/${encodeURIComponent(examState.course)}`);
     const timeLimit = courseData.course?.examSettings?.timeLimit || 30;
     const numQuestions = courseData.course?.examSettings?.numberOfQuestions || 50;
     
+    // 2. Fetch questions
     const data = await apiFetch(`/admin/questions/${encodeURIComponent(examState.course)}/exam`);
     
     if (!data.success || !data.questions || !data.questions.length) {
@@ -577,42 +698,67 @@ export async function examStart() {
       return;
     }
 
-    // Deep Rotation - avoid repeats
-    let availableQuestions = [...data.questions];
-    let recentIds = [];
+    // 3. Get user's recent question history from sessionStorage
+    let recentHistory = [];
     try {
       const sessions = JSON.parse(sessionStorage.getItem('examSessions') || '[]');
-      recentIds = sessions.flatMap(s => s.questionIds || []);
-    } catch(e) {}
-    
-    let filteredQuestions = availableQuestions.filter(q => !recentIds.includes(q._id));
-    if (filteredQuestions.length < numQuestions) {
-      filteredQuestions = availableQuestions;
+      // Flatten all question history with their text
+      recentHistory = sessions.flatMap(s => 
+        (s.questions || []).map(q => ({
+          questionId: q._id || q.id,
+          questionText: q.text || ''
+        }))
+      );
+      // Also include from current session if exists
+      if (examState.session?.questionIds) {
+        const currentQuestions = examState.session.questions || [];
+        recentHistory = recentHistory.concat(
+          currentQuestions.map(q => ({
+            questionId: q._id,
+            questionText: q.text
+          }))
+        );
+      }
+    } catch(e) {
+      console.log('No recent history found');
     }
+
+    // 4. Select questions with enhanced rotation
+    const availableQuestions = [...data.questions];
+    let selectedQuestions = selectQuestionsWithRotation(availableQuestions, numQuestions, recentHistory);
     
-    const shuffledQuestions = shuffleArray(filteredQuestions);
-    let questions = shuffledQuestions.slice(0, Math.min(numQuestions, shuffledQuestions.length));
+    // If somehow we got fewer questions than needed, use all available
+    if (selectedQuestions.length < Math.min(numQuestions, availableQuestions.length)) {
+      console.log('⚠️ Fallback: Using all available questions');
+      selectedQuestions = shuffleArray(availableQuestions).slice(0, Math.min(numQuestions, availableQuestions.length));
+    }
 
-    // ⭐ Shuffle options within each question
-    questions = shuffleAllQuestionOptions(questions);
+    // 5. Shuffle options within each question
+    let questions = shuffleAllQuestionOptions(selectedQuestions);
 
-    // Store session
+    // 6. Store session
     const sessionId = Date.now() + '_' + Math.random().toString(36).substring(2, 8);
     const questionIds = questions.map(q => q._id);
+    const questionTexts = questions.map(q => q.text);
     
+    // Save to session history with question texts for similarity check
     try {
       const sessions = JSON.parse(sessionStorage.getItem('examSessions') || '[]');
       sessions.push({ 
         sessionId, 
-        questionIds, 
+        questionIds,
+        questions: questions.map(q => ({ _id: q._id, text: q.text })),
         timestamp: Date.now(),
         courseCode: examState.course 
       });
+      // Keep only last 10 sessions (50 questions each = 500 questions history)
       while (sessions.length > 10) sessions.shift();
       sessionStorage.setItem('examSessions', JSON.stringify(sessions));
-    } catch(e) {}
+    } catch(e) {
+      console.log('Failed to save session history:', e);
+    }
 
-    // Create session
+    // 7. Create session
     examState.session = {
       courseCode: examState.course,
       questions: questions,
@@ -631,7 +777,7 @@ export async function examStart() {
     examState.isReset = false;
     examState.isSubmitting = false;
 
-    // Update UI
+    // 8. Update UI
     const title = $id('examCourseTitle');
     const meta = $id('examMeta');
     const timer = $id('examTimerDisplay');
@@ -643,7 +789,7 @@ export async function examStart() {
       timer.className = 'timer-box';
     }
 
-    // Switch screens
+    // 9. Switch screens
     const entryScreen = $id('examEntryScreen');
     const runningScreen = $id('examRunningScreen');
     if (entryScreen) entryScreen.style.display = 'none';
@@ -660,6 +806,9 @@ export async function examStart() {
     document.addEventListener('touchstart', trackActivity);
     document.addEventListener('keydown', trackActivity);
     
+    // Trigger MathJax after render
+    setTimeout(() => renderMathJax(), 300);
+    
     showToast(`✅ Exam started! ${questions.length} questions`, 'success');
 
   } catch (e) {
@@ -671,140 +820,186 @@ export async function examStart() {
 }
 
 // ============================================
-// RENDER QUESTION - NO A, B, C, D LABELS
+// RENDER QUESTION - WITH MATHJAX SUPPORT
 // ============================================
 function examRenderQuestion() {
-  if (!examState.session) return;
-  const q = examState.session.questions[examState.session.currentIndex];
-  const idx = examState.session.currentIndex;
-  const total = examState.session.questions.length;
-  const counter = $id('examQCounter');
-  const text = $id('examQText');
-  const options = $id('examOptionsArea');
-  const prevBtn = $id('examPrevBtn');
-  const nextBtn = $id('examNextBtn');
-  const submitBtn = $id('examSubmitBtn');
-  
-  if (counter) counter.textContent = `Question ${idx + 1} of ${total}`;
-  if (text) text.textContent = q.text;
-  
-  // Render options WITHOUT A, B, C, D labels
-  if (options) {
-    options.innerHTML = q.options.map((opt, i) => `
-      <div class="opt ${examState.session.answers[idx] === i ? 'selected' : ''}" onclick="window.examSelectAnswer(${i})">
-        <span>${opt}</span>
-      </div>
-    `).join('');
+  try {
+    if (!examState.session) return;
+    const q = examState.session.questions[examState.session.currentIndex];
+    const idx = examState.session.currentIndex;
+    const total = examState.session.questions.length;
+    const counter = $id('examQCounter');
+    const text = $id('examQText');
+    const options = $id('examOptionsArea');
+    const prevBtn = $id('examPrevBtn');
+    const nextBtn = $id('examNextBtn');
+    const submitBtn = $id('examSubmitBtn');
+    
+    if (counter) counter.textContent = `Question ${idx + 1} of ${total}`;
+    
+    if (text) {
+      text.innerHTML = q.text;
+      text.classList.add('mathjax-process');
+    }
+    
+    if (options) {
+      options.innerHTML = q.options.map((opt, i) => `
+        <div class="opt ${examState.session.answers[idx] === i ? 'selected' : ''}" onclick="window.examSelectAnswer(${i})">
+          <span class="mathjax-process">${opt}</span>
+        </div>
+      `).join('');
+    }
+    
+    if (prevBtn) prevBtn.disabled = idx === 0 || examState.isSubmitting;
+    const last = idx === total - 1;
+    if (nextBtn) {
+      if (last) nextBtn.style.display = 'none';
+      else nextBtn.style.display = 'inline-flex';
+      nextBtn.disabled = examState.isSubmitting;
+    }
+    if (submitBtn) {
+      submitBtn.style.display = last ? 'block' : 'none';
+      submitBtn.disabled = examState.isSubmitting;
+    }
+    examRenderGrid();
+    
+    // Trigger MathJax
+    setTimeout(() => renderMathJax(), 100);
+  } catch (error) {
+    console.error('Render question error:', error);
+    showToast('Error displaying question. Please try again.', 'error');
   }
-  
-  if (prevBtn) prevBtn.disabled = idx === 0 || examState.isSubmitting;
-  const last = idx === total - 1;
-  if (nextBtn) {
-    if (last) nextBtn.style.display = 'none';
-    else nextBtn.style.display = 'inline-flex';
-    nextBtn.disabled = examState.isSubmitting;
-  }
-  if (submitBtn) {
-    submitBtn.style.display = last ? 'block' : 'none';
-    submitBtn.disabled = examState.isSubmitting;
-  }
-  examRenderGrid();
 }
 
 export function examSelectAnswer(index) {
-  if (!examState.session || examState.isSubmitting) return;
-  trackActivity();
-  examState.session.answers[examState.session.currentIndex] = index;
-  examRenderQuestion();
+  try {
+    if (!examState.session || examState.isSubmitting) return;
+    trackActivity();
+    examState.session.answers[examState.session.currentIndex] = index;
+    examRenderQuestion();
+  } catch (error) {
+    console.error('Select answer error:', error);
+    showToast('Error selecting answer.', 'error');
+  }
 }
 
 export function examPrevQuestion() {
-  if (examState.isSubmitting || !examState.session) return;
-  if (examState.session.currentIndex > 0) {
-    trackActivity();
-    examState.session.currentIndex--;
-    examRenderQuestion();
+  try {
+    if (examState.isSubmitting || !examState.session) return;
+    if (examState.session.currentIndex > 0) {
+      trackActivity();
+      examState.session.currentIndex--;
+      examRenderQuestion();
+    }
+  } catch (error) {
+    console.error('Prev question error:', error);
   }
 }
 
 export function examNextQuestion() {
-  if (examState.isSubmitting || !examState.session) return;
-  if (examState.session.currentIndex < examState.session.questions.length - 1) {
-    trackActivity();
-    examState.session.currentIndex++;
-    examRenderQuestion();
+  try {
+    if (examState.isSubmitting || !examState.session) return;
+    if (examState.session.currentIndex < examState.session.questions.length - 1) {
+      trackActivity();
+      examState.session.currentIndex++;
+      examRenderQuestion();
+    }
+  } catch (error) {
+    console.error('Next question error:', error);
   }
 }
 
 function examJumpTo(index) {
-  if (examState.isSubmitting || !examState.session) return;
-  trackActivity();
-  examState.session.currentIndex = index;
-  examRenderQuestion();
+  try {
+    if (examState.isSubmitting || !examState.session) return;
+    trackActivity();
+    examState.session.currentIndex = index;
+    examRenderQuestion();
+  } catch (error) {
+    console.error('Jump to question error:', error);
+  }
 }
 
 function examRenderGrid() {
-  const grid = $id('examQuestionGrid');
-  if (!grid) return;
-  grid.innerHTML = examState.session.questions.map((_, i) => `
-    <div class="grid-btn ${examState.session.answers[i] !== null ? 'answered' : ''} ${i === examState.session.currentIndex ? 'current' : ''}" 
-         onclick="${examState.isSubmitting ? '' : `window.examJumpTo(${i})`}"
-         style="${examState.isSubmitting ? 'pointer-events:none;opacity:0.5;' : ''}">${i + 1}</div>
-  `).join('');
+  try {
+    const grid = $id('examQuestionGrid');
+    if (!grid) return;
+    grid.innerHTML = examState.session.questions.map((_, i) => `
+      <div class="grid-btn ${examState.session.answers[i] !== null ? 'answered' : ''} ${i === examState.session.currentIndex ? 'current' : ''}" 
+           onclick="${examState.isSubmitting ? '' : `window.examJumpTo(${i})`}"
+           style="${examState.isSubmitting ? 'pointer-events:none;opacity:0.5;' : ''}">${i + 1}</div>
+    `).join('');
+  } catch (error) {
+    console.error('Render grid error:', error);
+  }
 }
 
 // ============================================
 // TIMER
 // ============================================
 function examStartTimer() {
-  if (examState.session.timer) clearInterval(examState.session.timer);
-  const d = $id('examTimerDisplay');
-  examState.session.timer = setInterval(() => {
-    examState.session.timeLeft--;
-    if (examState.session.timeLeft <= 0) {
-      clearInterval(examState.session.timer);
-      examSubmit(true);
-      return;
-    }
-    const m = Math.floor(examState.session.timeLeft / 60);
-    const s = examState.session.timeLeft % 60;
-    if (d) {
-      d.textContent = `${m}:${s.toString().padStart(2, '0')}`;
-      d.classList.remove('warning', 'danger');
-      if (examState.session.timeLeft <= 60) d.classList.add('danger');
-      else if (examState.session.timeLeft <= 300) d.classList.add('warning');
-    }
-  }, 1000);
+  try {
+    if (examState.session.timer) clearInterval(examState.session.timer);
+    const d = $id('examTimerDisplay');
+    examState.session.timer = setInterval(() => {
+      examState.session.timeLeft--;
+      if (examState.session.timeLeft <= 0) {
+        clearInterval(examState.session.timer);
+        examSubmit(true);
+        return;
+      }
+      const m = Math.floor(examState.session.timeLeft / 60);
+      const s = examState.session.timeLeft % 60;
+      if (d) {
+        d.textContent = `${m}:${s.toString().padStart(2, '0')}`;
+        d.classList.remove('warning', 'danger');
+        if (examState.session.timeLeft <= 60) d.classList.add('danger');
+        else if (examState.session.timeLeft <= 300) d.classList.add('warning');
+      }
+    }, 1000);
+  } catch (error) {
+    console.error('Timer error:', error);
+  }
 }
 
 function examStartAutoSave() {
-  if (examState.autoSaveInterval) clearInterval(examState.autoSaveInterval);
-  examState.autoSaveInterval = setInterval(() => {
-    if (examState.session) {
-      try {
-        sessionStorage.setItem('activeExam', JSON.stringify({
-          courseCode: examState.session.courseCode,
-          questions: examState.session.questions,
-          answers: examState.session.answers,
-          timeLimit: examState.session.timeLimit,
-          timeLeft: examState.session.timeLeft,
-          currentIndex: examState.session.currentIndex,
-          startTime: examState.session.startTime,
-          sessionId: examState.session.sessionId,
-          mode: 'exam',
-          questionIds: examState.session.questionIds
-        }));
-      } catch (e) {}
-    }
-  }, 10000);
+  try {
+    if (examState.autoSaveInterval) clearInterval(examState.autoSaveInterval);
+    examState.autoSaveInterval = setInterval(() => {
+      if (examState.session) {
+        try {
+          sessionStorage.setItem('activeExam', JSON.stringify({
+            courseCode: examState.session.courseCode,
+            questions: examState.session.questions,
+            answers: examState.session.answers,
+            timeLimit: examState.session.timeLimit,
+            timeLeft: examState.session.timeLeft,
+            currentIndex: examState.session.currentIndex,
+            startTime: examState.session.startTime,
+            sessionId: examState.session.sessionId,
+            mode: 'exam',
+            questionIds: examState.session.questionIds
+          }));
+        } catch (e) {}
+      }
+    }, 10000);
+  } catch (error) {
+    console.error('Auto-save error:', error);
+  }
 }
 
 // ============================================
 // SUBMIT EXAM
 // ============================================
 export async function examSubmit(autoSubmit = false) {
-  if (examState.isSubmitting) return;
-  if (!examState.session) return;
+  if (examState.isSubmitting) {
+    showToast('⏳ Exam is already being submitted...', 'warning');
+    return;
+  }
+  if (!examState.session) {
+    showToast('❌ No active exam to submit.', 'error');
+    return;
+  }
   
   if (!autoSubmit) {
     if (!confirm('Submit your exam? You cannot change answers after submission.')) return;
@@ -893,7 +1088,8 @@ export async function examSubmit(autoSubmit = false) {
     }, 100);
     
   } catch (e) {
-    alert('Failed to submit. Please try again.');
+    console.error('Submit error:', e);
+    alert('Failed to submit. Please check your internet and try again.');
     examState.isSubmitting = false;
     enableAllButtons();
     if (submitBtn) {
@@ -912,11 +1108,16 @@ export function examQuit() {
     return;
   }
   
-  if (!examState.session) return;
+  if (!examState.session) {
+    showToast('No active exam to quit.', 'info');
+    return;
+  }
+  
   if (!confirm('Quit exam? Your progress will be lost.')) return;
   
   resetExamState();
   window.showPage('exam');
+  showToast('Exam quit successfully.', 'info');
 }
 
 // ============================================
@@ -981,6 +1182,8 @@ export function recoverExamSession() {
       document.addEventListener('click', trackActivity);
       document.addEventListener('touchstart', trackActivity);
       document.addEventListener('keydown', trackActivity);
+      
+      setTimeout(() => renderMathJax(), 300);
       
       showToast('📌 Exam recovered from previous session', 'info');
       return true;
