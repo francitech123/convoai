@@ -34,346 +34,171 @@ function shuffleQuestionOptions(question) {
   const shuffled = shuffleArray(optionsWithIndex);
   
   const correctOption = question.correctOption;
-  const newCorrectIndex = shuffled.findIndex(item => item.originalIndex === correctOption);
+  const correctIndex = shuffled.findIndex(item => item.originalIndex === correctOption);
   
   return {
     ...question,
     options: shuffled.map(item => item.text),
-    correctOption: newCorrectIndex
+    correctOption: correctIndex,
+    _originalCorrectIndex: correctOption
   };
 }
 
-// ==================== RENDER MATHJAX ====================
-export function renderMathJax() {
-  try {
-    if (window.MathJax && MathJax.typesetPromise) {
-      MathJax.typesetPromise().catch(function(err) {
-        console.log('MathJax typeset error:', err);
-      });
-    } else if (window.MathJax && MathJax.Hub) {
-      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-    }
-  } catch (e) {
-    console.log('MathJax render error:', e);
-  }
+function shuffleAllQuestionOptions(questions) {
+  return questions.map(q => shuffleQuestionOptions(q));
 }
 
-// ==================== RENDER QUESTIONS ====================
-export function renderQuestions(questions, containerId = 'questions-container') {
-  const container = document.getElementById(containerId);
-  if (!container) {
-    console.warn('Container not found:', containerId);
-    return;
+// ==================== COMPLETE RESET EXAM STATE ====================
+export function resetExamState(clearSession = true) {
+  if (examState.session?.timer) {
+    clearInterval(examState.session.timer);
+    examState.session.timer = null;
+  }
+  if (examState.autoSaveInterval) {
+    clearInterval(examState.autoSaveInterval);
+    examState.autoSaveInterval = null;
+  }
+  if (examState.inactivityTimer) {
+    clearInterval(examState.inactivityTimer);
+    examState.inactivityTimer = null;
   }
   
-  let html = '';
-  const questionsToShow = examState.showAll ? questions : questions.slice(0, 25);
+  document.removeEventListener('click', trackActivity);
+  document.removeEventListener('touchstart', trackActivity);
+  document.removeEventListener('keydown', trackActivity);
   
-  questionsToShow.forEach((q, index) => {
-    const questionNumber = examState.showAll ? index + 1 : index + 1;
-    const shuffledQ = shuffleQuestionOptions(q);
-    
-    html += `
-      <div class="question-card" data-index="${index}" data-question-id="${q.id || index}">
-        <div class="question-header">
-          <span class="question-number">${questionNumber}.</span>
-          <span class="question-text">${shuffledQ.text}</span>
-        </div>
-        <div class="options-container">
-    `;
-    
-    const optionLabels = ['A', 'B', 'C', 'D'];
-    shuffledQ.options.forEach((option, optIndex) => {
-      const isCorrect = optIndex === shuffledQ.correctOption;
-      html += `
-        <div class="option-item" data-option-index="${optIndex}" data-correct="${isCorrect}">
-          <span class="option-label">${optionLabels[optIndex]}</span>
-          <span class="option-text">${option}</span>
-        </div>
-      `;
-    });
-    
-    html += `
-        </div>
-        <div class="question-actions">
-          <button class="btn-show-answer" data-index="${index}">Show Answer</button>
-          <button class="btn-hint" data-index="${index}">Hint</button>
-          <button class="btn-explain" data-index="${index}">Explanation</button>
-        </div>
-        <div class="answer-section" style="display:none;">
-          <div class="correct-answer">Correct Answer: ${optionLabels[shuffledQ.correctOption]}</div>
-          ${shuffledQ.hint ? `<div class="hint-section"><strong>Hint:</strong> ${shuffledQ.hint}</div>` : ''}
-          ${shuffledQ.explanation ? `<div class="explanation-section"><strong>Explanation:</strong> ${shuffledQ.explanation}</div>` : ''}
-        </div>
-      </div>
-    `;
-  });
-  
-  container.innerHTML = html;
-  
-  // Render MathJax after inserting content
-  renderMathJax();
-  
-  // Attach event listeners
-  attachQuestionEventListeners(container);
-}
-
-// ==================== ATTACH EVENT LISTENERS ====================
-function attachQuestionEventListeners(container) {
-  // Show Answer buttons
-  container.querySelectorAll('.btn-show-answer').forEach(btn => {
-    btn.addEventListener('click', function() {
-      const card = this.closest('.question-card');
-      const answerSection = card.querySelector('.answer-section');
-      if (answerSection) {
-        if (answerSection.style.display === 'none') {
-          answerSection.style.display = 'block';
-          this.textContent = 'Hide Answer';
-          renderMathJax();
-        } else {
-          answerSection.style.display = 'none';
-          this.textContent = 'Show Answer';
-        }
-      }
-    });
-  });
-  
-  // Hint buttons
-  container.querySelectorAll('.btn-hint').forEach(btn => {
-    btn.addEventListener('click', function() {
-      const card = this.closest('.question-card');
-      const answerSection = card.querySelector('.answer-section');
-      if (answerSection) {
-        const hintSection = answerSection.querySelector('.hint-section');
-        if (hintSection) {
-          if (answerSection.style.display === 'none') {
-            answerSection.style.display = 'block';
-            renderMathJax();
-          }
-          hintSection.style.display = hintSection.style.display === 'none' ? 'block' : 'none';
-        } else {
-          showToast('No hint available for this question', 'info');
-        }
-      }
-    });
-  });
-  
-  // Explanation buttons
-  container.querySelectorAll('.btn-explain').forEach(btn => {
-    btn.addEventListener('click', function() {
-      const card = this.closest('.question-card');
-      const answerSection = card.querySelector('.answer-section');
-      if (answerSection) {
-        const explainSection = answerSection.querySelector('.explanation-section');
-        if (explainSection) {
-          if (answerSection.style.display === 'none') {
-            answerSection.style.display = 'block';
-            renderMathJax();
-          }
-          explainSection.style.display = explainSection.style.display === 'none' ? 'block' : 'none';
-        } else {
-          showToast('No explanation available for this question', 'info');
-        }
-      }
-    });
-  });
-}
-
-// ==================== LOAD QUESTIONS ====================
-export async function loadQuestions() {
-  if (!examState.faculty || !examState.level || !examState.course || !examState.session) {
-    showToast('Please select all required fields', 'error');
-    return;
+  if (clearSession) {
+    sessionStorage.removeItem('activeExam');
   }
   
-  try {
-    showLoading('Loading questions...');
-    
-    const response = await apiFetch('/api/exam/questions', {
-      method: 'POST',
-      body: JSON.stringify({
-        facultyId: examState.faculty,
-        level: examState.level,
-        courseCode: examState.course,
-        session: examState.session
-      })
-    });
-    
-    const data = await response.json();
-    
-    if (data.success && data.questions) {
-      examState.questions = data.questions;
-      examState.totalQuestions = data.questions.length;
-      
-      // Show load more button if more than 25 questions
-      examState.showAll = data.questions.length <= 25;
-      
-      renderQuestions(data.questions);
-      
-      // Update UI
-      const infoEl = document.getElementById('questions-info');
-      if (infoEl) {
-        const showing = examState.showAll ? data.questions.length : Math.min(25, data.questions.length);
-        setText(infoEl, `Showing ${showing} of ${data.questions.length} questions`);
-      }
-      
-      document.getElementById('load-more-container').style.display = data.questions.length > 25 ? 'block' : 'none';
-      
-      showToast('Questions loaded successfully!', 'success');
-    } else {
-      showToast(data.message || 'Failed to load questions', 'error');
-    }
-  } catch (error) {
-    console.error('Error loading questions:', error);
-    showToast('An error occurred while loading questions', 'error');
-  } finally {
-    hideLoading();
-  }
-}
-
-// ==================== LOAD MORE QUESTIONS ====================
-export function loadMoreQuestions() {
-  if (!examState.questions) return;
-  
-  examState.showAll = true;
-  renderQuestions(examState.questions);
-  
-  document.getElementById('load-more-container').style.display = 'none';
-  const infoEl = document.getElementById('questions-info');
-  if (infoEl) {
-    setText(infoEl, `Showing all ${examState.questions.length} questions`);
-  }
-  
-  renderMathJax();
-}
-
-// ==================== SUBMIT EXAM ====================
-export async function submitExam() {
-  if (examState.isSubmitting) return;
-  
-  const answers = {};
-  const questionCards = document.querySelectorAll('.question-card');
-  
-  questionCards.forEach((card, index) => {
-    const selectedOption = card.querySelector('.option-item.selected');
-    if (selectedOption) {
-      const optionIndex = parseInt(selectedOption.dataset.optionIndex);
-      answers[index] = optionIndex;
-    }
-  });
-  
-  const answered = Object.keys(answers).length;
-  const total = examState.questions ? examState.questions.length : 0;
-  
-  if (answered < total) {
-    const confirmSubmit = confirm(`You have answered ${answered} out of ${total} questions. ${total - answered} questions remain unanswered. Do you want to submit anyway?`);
-    if (!confirmSubmit) return;
-  }
-  
-  try {
-    examState.isSubmitting = true;
-    showLoading('Submitting your exam...');
-    
-    const response = await apiFetch('/api/exam/submit', {
-      method: 'POST',
-      body: JSON.stringify({
-        facultyId: examState.faculty,
-        level: examState.level,
-        courseCode: examState.course,
-        session: examState.session,
-        answers: answers
-      })
-    });
-    
-    const data = await response.json();
-    
-    if (data.success) {
-      examState.isComplete = true;
-      showToast('Exam submitted successfully!', 'success');
-      
-      // Show results
-      showResults(data.results);
-    } else {
-      showToast(data.message || 'Failed to submit exam', 'error');
-    }
-  } catch (error) {
-    console.error('Error submitting exam:', error);
-    showToast('An error occurred while submitting', 'error');
-  } finally {
-    examState.isSubmitting = false;
-    hideLoading();
-  }
-}
-
-// ==================== SHOW RESULTS ====================
-function showResults(results) {
-  const container = document.getElementById('results-container');
-  if (!container) return;
-  
-  let html = `
-    <div class="results-header">
-      <h3>Exam Results</h3>
-      <div class="score-display">
-        <span class="score">${results.score}/${results.total}</span>
-        <span class="percentage">${Math.round((results.score/results.total)*100)}%</span>
-      </div>
-    </div>
-    <div class="results-details">
-  `;
-  
-  results.details.forEach((item, index) => {
-    const isCorrect = item.isCorrect;
-    html += `
-      <div class="result-item ${isCorrect ? 'correct' : 'incorrect'}">
-        <span class="q-number">Q${index + 1}</span>
-        <span class="q-status">${isCorrect ? '✓' : '✗'}</span>
-        <span class="q-answer">Your answer: ${item.userAnswer !== undefined ? item.userAnswer : 'Not answered'}</span>
-        <span class="q-correct">Correct: ${item.correctAnswer}</span>
-      </div>
-    `;
-  });
-  
-  html += '</div>';
-  container.innerHTML = html;
-  container.style.display = 'block';
-  
-  renderMathJax();
-}
-
-// ==================== RESET EXAM ====================
-export function resetExam() {
-  if (examState.isSubmitting) return;
-  
-  if (!confirm('Are you sure you want to reset the exam? All progress will be lost.')) {
-    return;
-  }
-  
-  examState.isComplete = false;
-  examState.questions = null;
-  examState.totalQuestions = 0;
+  examState.session = null;
+  examState.faculty = null;
+  examState.level = null;
+  examState.course = null;
+  examState.isSubmitting = false;
   examState.showAll = false;
+  examState.isComplete = false;
+  examState.isReset = true;
+  examState.lastActivity = Date.now();
+  examState.pageLoaded = false;
+  examState.calcOpen = false;
+  examState.calcExpression = '0';
   
-  document.getElementById('questions-container').innerHTML = '';
-  document.getElementById('results-container').innerHTML = '';
-  document.getElementById('results-container').style.display = 'none';
-  document.getElementById('questions-info').innerHTML = '';
-  document.getElementById('load-more-container').style.display = 'none';
+  exitFullscreenMode();
   
-  showToast('Exam has been reset', 'info');
+  const facultyScreen = $id('examFacultyScreen');
+  const levelScreen = $id('examLevelScreen');
+  const courseScreen = $id('examCourseScreen');
+  const entryScreen = $id('examEntryScreen');
+  const runningScreen = $id('examRunningScreen');
+  
+  if (facultyScreen) facultyScreen.style.display = 'block';
+  if (levelScreen) levelScreen.style.display = 'none';
+  if (courseScreen) courseScreen.style.display = 'none';
+  if (entryScreen) entryScreen.style.display = 'none';
+  if (runningScreen) runningScreen.style.display = 'none';
+  
+  const qText = $id('examQText');
+  const qOptions = $id('examOptionsArea');
+  const qCounter = $id('examQCounter');
+  const qGrid = $id('examQuestionGrid');
+  const timerDisplay = $id('examTimerDisplay');
+  const submitBtn = $id('examSubmitBtn');
+  const prevBtn = $id('examPrevBtn');
+  const nextBtn = $id('examNextBtn');
+  
+  if (qText) qText.textContent = '';
+  if (qOptions) qOptions.innerHTML = '';
+  if (qCounter) qCounter.textContent = '';
+  if (qGrid) qGrid.innerHTML = '';
+  if (timerDisplay) {
+    timerDisplay.textContent = '--:--';
+    timerDisplay.className = 'timer-box';
+  }
+  if (submitBtn) {
+    submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Submit';
+    submitBtn.disabled = false;
+    submitBtn.style.display = 'none';
+  }
+  if (prevBtn) {
+    prevBtn.disabled = true;
+    prevBtn.style.opacity = '1';
+  }
+  if (nextBtn) {
+    nextBtn.disabled = false;
+    nextBtn.style.opacity = '1';
+    nextBtn.style.display = 'inline-flex';
+  }
+  
+  const calcOverlay = $id('examCalcOverlay');
+  if (calcOverlay) calcOverlay.classList.remove('show');
+  
+  loadExamFaculties();
+  console.log('✅ Exam state fully reset');
 }
 
-// ==================== TOGGLE CALCULATOR ====================
-export function toggleCalculator() {
+// ==================== CHECK AND RESET IF NEEDED ====================
+export function checkAndResetExam() {
+  if (!examState.session && examState.isReset === false) {
+    const runningScreen = $id('examRunningScreen');
+    if (runningScreen && runningScreen.style.display !== 'none') {
+      console.log('🔄 Detected stuck exam state, resetting...');
+      resetExamState();
+      return true;
+    }
+  }
+  
+  if (!examState.session && document.querySelector('#examQuestionGrid .grid-btn')) {
+    console.log('🔄 Detected old questions without session, resetting...');
+    resetExamState();
+    return true;
+  }
+  
+  return false;
+}
+
+// ==================== INACTIVITY CHECK ====================
+function resetInactivityTimer() {
+  examState.lastActivity = Date.now();
+  
+  if (examState.inactivityTimer) {
+    clearInterval(examState.inactivityTimer);
+  }
+  
+  examState.inactivityTimer = setInterval(() => {
+    if (!examState.session) return;
+    
+    const inactiveTime = Date.now() - examState.lastActivity;
+    const inactiveMinutes = inactiveTime / (1000 * 60);
+    
+    if (inactiveMinutes >= 5) {
+      showToast('⏰ Inactivity detected for 5 minutes. Auto-submitting exam...', 'warning');
+      examState.lastActivity = Date.now();
+      examSubmit(true);
+    }
+  }, 30000);
+}
+
+function trackActivity() {
+  examState.lastActivity = Date.now();
+}
+
+// ==================== CALCULATOR FUNCTIONS ====================
+export function examToggleCalculator() {
   examState.calcOpen = !examState.calcOpen;
-  const calcContainer = document.getElementById('calculator-container');
-  if (calcContainer) {
-    calcContainer.style.display = examState.calcOpen ? 'block' : 'none';
+  const overlay = $id('examCalcOverlay');
+  if (overlay) {
+    if (examState.calcOpen) {
+      overlay.classList.add('show');
+      updateCalcDisplay();
+    } else {
+      overlay.classList.remove('show');
+    }
   }
 }
 
-// ==================== CALCULATOR INPUT ====================
-export function calcInput(value) {
-  if (examState.calcExpression === '0') {
+export function examCalcAppend(value) {
+  if (examState.calcExpression === '0' && !isNaN(value)) {
     examState.calcExpression = value;
   } else {
     examState.calcExpression += value;
@@ -381,24 +206,20 @@ export function calcInput(value) {
   updateCalcDisplay();
 }
 
-export function calcClear() {
+export function examCalcClear() {
   examState.calcExpression = '0';
   updateCalcDisplay();
 }
 
-export function calcDelete() {
-  if (examState.calcExpression.length <= 1) {
-    examState.calcExpression = '0';
-  } else {
-    examState.calcExpression = examState.calcExpression.slice(0, -1);
-  }
+export function examCalcBackspace() {
+  examState.calcExpression = examState.calcExpression.slice(0, -1) || '0';
   updateCalcDisplay();
 }
 
-export function calcEvaluate() {
+export function examCalcResult() {
   try {
     const result = Function('"use strict"; return (' + examState.calcExpression + ')')();
-    examState.calcExpression = String(result);
+    examState.calcExpression = result.toString();
     updateCalcDisplay();
   } catch (e) {
     examState.calcExpression = 'Error';
@@ -411,163 +232,788 @@ export function calcEvaluate() {
 }
 
 function updateCalcDisplay() {
-  const display = document.getElementById('calc-display');
+  const display = $id('examCalcDisplay');
   if (display) {
-    setText(display, examState.calcExpression);
+    display.value = examState.calcExpression.replace(/\*/g, '×');
   }
 }
 
-// ==================== TOGGLE FULLSCREEN ====================
-export function toggleFullscreen() {
-  if (document.fullscreenElement) {
-    exitFullscreenMode();
-  } else {
-    enterFullscreenMode();
+// ==================== DISABLE ALL BUTTONS ====================
+function disableAllButtons() {
+  document.querySelectorAll('#examOptionsArea .opt').forEach(el => {
+    el.classList.add('disabled');
+    el.style.cursor = 'not-allowed';
+    el.onclick = null;
+  });
+  
+  const prevBtn = $id('examPrevBtn');
+  const nextBtn = $id('examNextBtn');
+  const submitBtn = $id('examSubmitBtn');
+  const quitBtn = document.querySelector('#examRunningScreen .btn-danger');
+  const calcBtn = document.querySelector('#examRunningScreen .calc-btn-sm');
+  
+  if (prevBtn) { prevBtn.disabled = true; prevBtn.style.opacity = '0.5'; }
+  if (nextBtn) { nextBtn.disabled = true; nextBtn.style.opacity = '0.5'; }
+  if (submitBtn) { submitBtn.disabled = true; submitBtn.style.opacity = '0.5'; }
+  if (quitBtn) { 
+    quitBtn.disabled = true; 
+    quitBtn.style.opacity = '0.5';
+    quitBtn.style.pointerEvents = 'none';
   }
+  if (calcBtn) { 
+    calcBtn.disabled = true; 
+    calcBtn.style.opacity = '0.5';
+    calcBtn.style.pointerEvents = 'none';
+  }
+  
+  document.querySelectorAll('#examQuestionGrid .grid-btn').forEach(el => {
+    el.style.pointerEvents = 'none';
+    el.style.opacity = '0.5';
+  });
 }
 
-// ==================== INITIALIZE EXAM ====================
-export function initExamModule() {
-  // Load faculties on page load
-  loadFaculties();
-  
-  // Attach event listeners for filters
-  document.getElementById('faculty-select')?.addEventListener('change', function() {
-    examState.faculty = this.value;
-    loadLevels(this.value);
-  });
-  
-  document.getElementById('level-select')?.addEventListener('change', function() {
-    examState.level = this.value;
-    loadCourses(this.value);
-  });
-  
-  document.getElementById('course-select')?.addEventListener('change', function() {
-    examState.course = this.value;
-  });
-  
-  document.getElementById('session-select')?.addEventListener('change', function() {
-    examState.session = this.value;
-  });
-  
-  document.getElementById('load-questions-btn')?.addEventListener('click', loadQuestions);
-  document.getElementById('load-more-btn')?.addEventListener('click', loadMoreQuestions);
-  document.getElementById('submit-exam-btn')?.addEventListener('click', submitExam);
-  document.getElementById('reset-exam-btn')?.addEventListener('click', resetExam);
-  document.getElementById('toggle-calc-btn')?.addEventListener('click', toggleCalculator);
-  document.getElementById('fullscreen-btn')?.addEventListener('click', toggleFullscreen);
-  
-  // Calculator buttons
-  document.querySelectorAll('.calc-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-      const value = this.dataset.value;
-      if (value === '=') {
-        calcEvaluate();
-      } else if (value === 'C') {
-        calcClear();
-      } else if (value === '⌫') {
-        calcDelete();
-      } else {
-        calcInput(value);
+function enableAllButtons() {
+  document.querySelectorAll('#examOptionsArea .opt').forEach(el => {
+    el.classList.remove('disabled');
+    el.style.cursor = 'pointer';
+    const index = Array.from(el.parentElement.children).indexOf(el);
+    el.onclick = function() {
+      if (!examState.isSubmitting) {
+        examSelectAnswer(index);
       }
-    });
+    };
   });
   
-  // Keyboard shortcuts for calculator
-  document.addEventListener('keydown', function(e) {
-    if (!examState.calcOpen) return;
+  const prevBtn = $id('examPrevBtn');
+  const nextBtn = $id('examNextBtn');
+  const submitBtn = $id('examSubmitBtn');
+  const quitBtn = document.querySelector('#examRunningScreen .btn-danger');
+  const calcBtn = document.querySelector('#examRunningScreen .calc-btn-sm');
+  
+  if (prevBtn) { prevBtn.disabled = false; prevBtn.style.opacity = '1'; }
+  if (nextBtn) { nextBtn.disabled = false; nextBtn.style.opacity = '1'; }
+  if (submitBtn) { submitBtn.disabled = false; submitBtn.style.opacity = '1'; }
+  if (quitBtn) { 
+    quitBtn.disabled = false; 
+    quitBtn.style.opacity = '1';
+    quitBtn.style.pointerEvents = 'auto';
+  }
+  if (calcBtn) { 
+    calcBtn.disabled = false; 
+    calcBtn.style.opacity = '1';
+    calcBtn.style.pointerEvents = 'auto';
+  }
+  
+  document.querySelectorAll('#examQuestionGrid .grid-btn').forEach(el => {
+    el.style.pointerEvents = 'auto';
+    el.style.opacity = '1';
+  });
+}
+
+// ============================================
+// LOAD EXAM DATA
+// ============================================
+export async function loadExamData() {
+  checkAndResetExam();
+  
+  if (recoverExamSession()) {
+    examState.pageLoaded = true;
+    return;
+  }
+  
+  if (examState.isReset) {
+    examState.isReset = false;
+    const facultyScreen = $id('examFacultyScreen');
+    const runningScreen = $id('examRunningScreen');
+    const levelScreen = $id('examLevelScreen');
+    const courseScreen = $id('examCourseScreen');
+    const entryScreen = $id('examEntryScreen');
     
-    if (e.key >= '0' && e.key <= '9') {
-      calcInput(e.key);
-    } else if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/') {
-      calcInput(e.key);
-    } else if (e.key === '.') {
-      calcInput('.');
-    } else if (e.key === 'Enter' || e.key === '=') {
-      e.preventDefault();
-      calcEvaluate();
-    } else if (e.key === 'Backspace') {
-      e.preventDefault();
-      calcDelete();
-    } else if (e.key === 'Escape') {
-      calcClear();
+    if (facultyScreen) facultyScreen.style.display = 'block';
+    if (runningScreen) runningScreen.style.display = 'none';
+    if (levelScreen) levelScreen.style.display = 'none';
+    if (courseScreen) courseScreen.style.display = 'none';
+    if (entryScreen) entryScreen.style.display = 'none';
+    
+    const qText = $id('examQText');
+    const qOptions = $id('examOptionsArea');
+    const qCounter = $id('examQCounter');
+    const qGrid = $id('examQuestionGrid');
+    const timerDisplay = $id('examTimerDisplay');
+    const submitBtn = $id('examSubmitBtn');
+    
+    if (qText) qText.textContent = '';
+    if (qOptions) qOptions.innerHTML = '';
+    if (qCounter) qCounter.textContent = '';
+    if (qGrid) qGrid.innerHTML = '';
+    if (timerDisplay) {
+      timerDisplay.textContent = '--:--';
+      timerDisplay.className = 'timer-box';
     }
-  });
+    if (submitBtn) {
+      submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Submit';
+      submitBtn.disabled = false;
+      submitBtn.style.display = 'none';
+    }
+    
+    await loadExamFaculties();
+    examState.pageLoaded = true;
+    return;
+  }
   
+  if (examState.session) {
+    const runningScreen = $id('examRunningScreen');
+    if (runningScreen) runningScreen.style.display = 'block';
+    examRenderQuestion();
+    examRenderGrid();
+    examState.pageLoaded = true;
+    return;
+  }
+  
+  if (document.querySelector('#examFacultyGrid .faculty-tag-simple')) {
+    examState.pageLoaded = true;
+    return;
+  }
+  await loadExamFaculties();
   examState.pageLoaded = true;
-  console.log('Exam module initialized');
 }
 
-// ==================== LOAD FACULTIES ====================
-async function loadFaculties() {
+export async function loadExamFaculties() {
+  const grid = $id('examFacultyGrid');
+  if (!grid) return;
+  grid.innerHTML = '<div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading...</p></div>';
   try {
-    const response = await apiFetch('/api/exam/faculties');
-    const data = await response.json();
+    const data = await apiFetch('/admin/faculties');
+    const faculties = data.faculties || [];
+    examState.faculties = faculties;
+    if (faculties.length) {
+      renderExamFaculties(false);
+    } else {
+      grid.innerHTML = '<div class="empty-state">No faculties available</div>';
+      const link = $id('examSeeMoreLink');
+      if (link) link.style.display = 'none';
+    }
+  } catch (e) {
+    grid.innerHTML = '<div class="empty-state">Failed to load faculties</div>';
+  }
+}
+
+function renderExamFaculties(showAll) {
+  const grid = $id('examFacultyGrid');
+  if (!grid) return;
+  const faculties = examState.faculties;
+  const display = showAll ? faculties : faculties.slice(0, 4);
+  grid.innerHTML = display.map(f => `
+    <div class="faculty-tag-simple" onclick="window.examSelectFaculty('${f.name.replace(/'/g,"\\'")}')">${f.name}</div>
+  `).join('');
+  const link = $id('examSeeMoreLink');
+  if (faculties.length > 4) {
+    link.style.display = 'block';
+    const btn = link.querySelector('button');
+    if (btn) btn.innerHTML = showAll ? '<i class="fas fa-chevron-up"></i> See Less' : '<i class="fas fa-chevron-down"></i> See More';
+  } else {
+    link.style.display = 'none';
+  }
+  examState.showAll = showAll;
+}
+
+export function examToggleFaculties() {
+  renderExamFaculties(!examState.showAll);
+}
+
+export function examSelectFaculty(name) {
+  examState.faculty = name;
+  const title = $id('examLevelTitle');
+  if (title) title.textContent = `${name} - Select Level`;
+  const facultyScreen = $id('examFacultyScreen');
+  const levelScreen = $id('examLevelScreen');
+  if (facultyScreen) facultyScreen.style.display = 'none';
+  if (levelScreen) levelScreen.style.display = 'block';
+  loadExamLevels();
+}
+
+export function examGoToFaculty() {
+  const levelScreen = $id('examLevelScreen');
+  const facultyScreen = $id('examFacultyScreen');
+  if (levelScreen) levelScreen.style.display = 'none';
+  if (facultyScreen) facultyScreen.style.display = 'block';
+}
+
+async function loadExamLevels() {
+  const grid = $id('examLevelGrid');
+  if (!grid) return;
+  grid.innerHTML = '<div class="loading-spin"><i class="fas fa-spinner"></i></div>';
+  try {
+    const data = await apiFetch('/admin/available-levels');
+    const levels = data.levels || [];
+    const availableLevels = ['100', '200'];
+    grid.innerHTML = availableLevels.map(lv => {
+      const available = levels.includes(lv);
+      return `
+        <div class="level-card ${available ? '' : 'locked'}" 
+             onclick="${available ? `window.examSelectLevel('${lv}')` : ''}">
+          <i class="fas fa-layer-group"></i>
+          <h4>${lv} Level</h4>
+          <span class="badge ${available ? 'badge-ok' : 'badge-wait'}">
+            ${available ? '✅ Available' : '⏳ Soon'}
+          </span>
+        </div>
+      `;
+    }).join('');
+  } catch (e) {
+    grid.innerHTML = '<div class="empty-state">Error loading levels</div>';
+  }
+}
+
+export function examSelectLevel(level) {
+  examState.level = level;
+  const title = $id('examCoursePageTitle');
+  if (title) title.textContent = `${examState.faculty} - ${level} Level Exams`;
+  const levelScreen = $id('examLevelScreen');
+  const courseScreen = $id('examCourseScreen');
+  if (levelScreen) levelScreen.style.display = 'none';
+  if (courseScreen) courseScreen.style.display = 'block';
+  loadExamCourses();
+}
+
+export function examGoToLevel() {
+  const courseScreen = $id('examCourseScreen');
+  const levelScreen = $id('examLevelScreen');
+  if (courseScreen) courseScreen.style.display = 'none';
+  if (levelScreen) levelScreen.style.display = 'block';
+}
+
+async function loadExamCourses() {
+  const container = $id('examCoursesContainer');
+  if (!container) return;
+  container.innerHTML = '<div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading...</p></div>';
+  try {
+    const data = await apiFetch(`/admin/faculty-courses/${encodeURIComponent(examState.faculty)}/${examState.level}`);
+    let html = '';
+    const firstSem = data.firstSemester || [];
+    const secondSem = data.secondSemester || [];
+    if (firstSem.length) {
+      html += `<div class="semester-label"><i class="fas fa-sun"></i> First Semester</div><div class="courses-grid">`;
+      firstSem.forEach(c => html += makeExamCourseCard(c));
+      html += '</div>';
+    }
+    if (secondSem.length) {
+      html += `<div class="semester-label"><i class="fas fa-moon"></i> Second Semester</div><div class="courses-grid">`;
+      secondSem.forEach(c => html += makeExamCourseCard(c));
+      html += '</div>';
+    }
+    container.innerHTML = html || '<div class="empty-state">No courses available</div>';
+  } catch (e) {
+    container.innerHTML = '<div class="empty-state">Error loading courses</div>';
+  }
+}
+
+function makeExamCourseCard(c) {
+  return `<div class="course-card" onclick="window.examOpenEntry('${c.code}')"><div class="code">${c.code}</div><div class="name">${c.name}</div></div>`;
+}
+
+export function examGoToCourse() {
+  const entryScreen = $id('examEntryScreen');
+  const courseScreen = $id('examCourseScreen');
+  if (entryScreen) entryScreen.style.display = 'none';
+  if (courseScreen) courseScreen.style.display = 'block';
+}
+
+export async function examOpenEntry(code) {
+  examState.course = code;
+  const courseScreen = $id('examCourseScreen');
+  const entryScreen = $id('examEntryScreen');
+  if (courseScreen) courseScreen.style.display = 'none';
+  if (entryScreen) entryScreen.style.display = 'block';
+  
+  const container = $id('examEntryContent');
+  if (!container) return;
+  container.innerHTML = '<div class="loading-spin"><i class="fas fa-spinner"></i></div>';
+  try {
+    const data = await apiFetch(`/admin/course-detail/${encodeURIComponent(code)}`);
+    const c = data.course;
+    container.innerHTML = `
+      <div class="entry-card">
+        <div class="icon">📝</div>
+        <h1>${c.code}</h1>
+        <p>${c.name}</p>
+        <div class="stat-row">
+          <span class="stat-badge">📚 ${c.examSettings.numberOfQuestions} Qs</span>
+          <span class="stat-badge">⏱️ ${c.examSettings.timeLimit} min</span>
+          <span class="stat-badge">📦 ${c.questionCounts.exam} Available</span>
+        </div>
+        <button class="btn btn-primary" onclick="window.examStart()" style="width:100%;padding:14px;background:var(--brand-gradient);color:#fff;border:none;border-radius:14px;font-weight:700;font-size:1rem;cursor:pointer" ${!c.examReady ? 'disabled' : ''}>
+          <i class="fas fa-play-circle"></i> ${c.examReady ? 'START EXAM' : 'NOT ENOUGH QUESTIONS'}
+        </button>
+        <p style="color:var(--text-secondary);font-size:.75rem;margin-top:8px">${c.examReady ? '✅ Ready' : `⚠️ Need ${c.examSettings.numberOfQuestions - c.questionCounts.exam} more`}</p>
+      </div>
+    `;
+  } catch (e) {
+    container.innerHTML = '<div class="empty-state">Error loading course</div>';
+  }
+}
+
+// ============================================
+// START EXAM - WITH SHUFFLED OPTIONS & NO LABELS
+// ============================================
+export async function examStart() {
+  const btn = document.querySelector('#examEntryContent .btn');
+  if (!btn) return;
+  
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+  btn.disabled = true;
+
+  try {
+    const courseData = await apiFetch(`/admin/course-detail/${encodeURIComponent(examState.course)}`);
+    const timeLimit = courseData.course?.examSettings?.timeLimit || 30;
+    const numQuestions = courseData.course?.examSettings?.numberOfQuestions || 50;
     
-    if (data.success && data.faculties) {
-      examState.faculties = data.faculties;
-      const select = document.getElementById('faculty-select');
-      if (select) {
-        select.innerHTML = '<option value="">Select Faculty</option>';
-        data.faculties.forEach(f => {
-          select.innerHTML += `<option value="${f.id}">${f.name}</option>`;
-        });
+    const data = await apiFetch(`/admin/questions/${encodeURIComponent(examState.course)}/exam`);
+    
+    if (!data.success || !data.questions || !data.questions.length) {
+      alert('No questions available for this course. Please try again later.');
+      btn.innerHTML = '<i class="fas fa-play-circle"></i> START EXAM';
+      btn.disabled = false;
+      return;
+    }
+
+    // Deep Rotation - avoid repeats
+    let availableQuestions = [...data.questions];
+    let recentIds = [];
+    try {
+      const sessions = JSON.parse(sessionStorage.getItem('examSessions') || '[]');
+      recentIds = sessions.flatMap(s => s.questionIds || []);
+    } catch(e) {}
+    
+    let filteredQuestions = availableQuestions.filter(q => !recentIds.includes(q._id));
+    if (filteredQuestions.length < numQuestions) {
+      filteredQuestions = availableQuestions;
+    }
+    
+    const shuffledQuestions = shuffleArray(filteredQuestions);
+    let questions = shuffledQuestions.slice(0, Math.min(numQuestions, shuffledQuestions.length));
+
+    // ⭐ Shuffle options within each question
+    questions = shuffleAllQuestionOptions(questions);
+
+    // Store session
+    const sessionId = Date.now() + '_' + Math.random().toString(36).substring(2, 8);
+    const questionIds = questions.map(q => q._id);
+    
+    try {
+      const sessions = JSON.parse(sessionStorage.getItem('examSessions') || '[]');
+      sessions.push({ 
+        sessionId, 
+        questionIds, 
+        timestamp: Date.now(),
+        courseCode: examState.course 
+      });
+      while (sessions.length > 10) sessions.shift();
+      sessionStorage.setItem('examSessions', JSON.stringify(sessions));
+    } catch(e) {}
+
+    // Create session
+    examState.session = {
+      courseCode: examState.course,
+      questions: questions,
+      answers: new Array(questions.length).fill(null),
+      timeLimit: timeLimit,
+      timeLeft: timeLimit * 60,
+      currentIndex: 0,
+      timer: null,
+      startTime: Date.now(),
+      sessionId: sessionId,
+      mode: 'exam',
+      questionIds: questionIds
+    };
+
+    examState.lastActivity = Date.now();
+    examState.isReset = false;
+    examState.isSubmitting = false;
+
+    // Update UI
+    const title = $id('examCourseTitle');
+    const meta = $id('examMeta');
+    const timer = $id('examTimerDisplay');
+    
+    if (title) title.textContent = `📝 ${examState.course}`;
+    if (meta) meta.textContent = `${questions.length} Questions • ${timeLimit} min`;
+    if (timer) {
+      timer.textContent = `${timeLimit}:00`;
+      timer.className = 'timer-box';
+    }
+
+    // Switch screens
+    const entryScreen = $id('examEntryScreen');
+    const runningScreen = $id('examRunningScreen');
+    if (entryScreen) entryScreen.style.display = 'none';
+    if (runningScreen) runningScreen.style.display = 'block';
+    
+    enterFullscreenMode();
+    examRenderQuestion();
+    examStartTimer();
+    examRenderGrid();
+    examStartAutoSave();
+    resetInactivityTimer();
+
+    document.addEventListener('click', trackActivity);
+    document.addEventListener('touchstart', trackActivity);
+    document.addEventListener('keydown', trackActivity);
+    
+    showToast(`✅ Exam started! ${questions.length} questions`, 'success');
+
+  } catch (e) {
+    console.error('Exam start error:', e);
+    alert('Failed to load exam: ' + e.message);
+    btn.innerHTML = '<i class="fas fa-play-circle"></i> START EXAM';
+    btn.disabled = false;
+  }
+}
+
+// ============================================
+// RENDER QUESTION - NO A, B, C, D LABELS
+// ============================================
+function examRenderQuestion() {
+  if (!examState.session) return;
+  const q = examState.session.questions[examState.session.currentIndex];
+  const idx = examState.session.currentIndex;
+  const total = examState.session.questions.length;
+  const counter = $id('examQCounter');
+  const text = $id('examQText');
+  const options = $id('examOptionsArea');
+  const prevBtn = $id('examPrevBtn');
+  const nextBtn = $id('examNextBtn');
+  const submitBtn = $id('examSubmitBtn');
+  
+  if (counter) counter.textContent = `Question ${idx + 1} of ${total}`;
+  if (text) text.textContent = q.text;
+  
+  // Render options WITHOUT A, B, C, D labels
+  if (options) {
+    options.innerHTML = q.options.map((opt, i) => `
+      <div class="opt ${examState.session.answers[idx] === i ? 'selected' : ''}" onclick="window.examSelectAnswer(${i})">
+        <span>${opt}</span>
+      </div>
+    `).join('');
+  }
+  
+  if (prevBtn) prevBtn.disabled = idx === 0 || examState.isSubmitting;
+  const last = idx === total - 1;
+  if (nextBtn) {
+    if (last) nextBtn.style.display = 'none';
+    else nextBtn.style.display = 'inline-flex';
+    nextBtn.disabled = examState.isSubmitting;
+  }
+  if (submitBtn) {
+    submitBtn.style.display = last ? 'block' : 'none';
+    submitBtn.disabled = examState.isSubmitting;
+  }
+  examRenderGrid();
+}
+
+export function examSelectAnswer(index) {
+  if (!examState.session || examState.isSubmitting) return;
+  trackActivity();
+  examState.session.answers[examState.session.currentIndex] = index;
+  examRenderQuestion();
+}
+
+export function examPrevQuestion() {
+  if (examState.isSubmitting || !examState.session) return;
+  if (examState.session.currentIndex > 0) {
+    trackActivity();
+    examState.session.currentIndex--;
+    examRenderQuestion();
+  }
+}
+
+export function examNextQuestion() {
+  if (examState.isSubmitting || !examState.session) return;
+  if (examState.session.currentIndex < examState.session.questions.length - 1) {
+    trackActivity();
+    examState.session.currentIndex++;
+    examRenderQuestion();
+  }
+}
+
+function examJumpTo(index) {
+  if (examState.isSubmitting || !examState.session) return;
+  trackActivity();
+  examState.session.currentIndex = index;
+  examRenderQuestion();
+}
+
+function examRenderGrid() {
+  const grid = $id('examQuestionGrid');
+  if (!grid) return;
+  grid.innerHTML = examState.session.questions.map((_, i) => `
+    <div class="grid-btn ${examState.session.answers[i] !== null ? 'answered' : ''} ${i === examState.session.currentIndex ? 'current' : ''}" 
+         onclick="${examState.isSubmitting ? '' : `window.examJumpTo(${i})`}"
+         style="${examState.isSubmitting ? 'pointer-events:none;opacity:0.5;' : ''}">${i + 1}</div>
+  `).join('');
+}
+
+// ============================================
+// TIMER
+// ============================================
+function examStartTimer() {
+  if (examState.session.timer) clearInterval(examState.session.timer);
+  const d = $id('examTimerDisplay');
+  examState.session.timer = setInterval(() => {
+    examState.session.timeLeft--;
+    if (examState.session.timeLeft <= 0) {
+      clearInterval(examState.session.timer);
+      examSubmit(true);
+      return;
+    }
+    const m = Math.floor(examState.session.timeLeft / 60);
+    const s = examState.session.timeLeft % 60;
+    if (d) {
+      d.textContent = `${m}:${s.toString().padStart(2, '0')}`;
+      d.classList.remove('warning', 'danger');
+      if (examState.session.timeLeft <= 60) d.classList.add('danger');
+      else if (examState.session.timeLeft <= 300) d.classList.add('warning');
+    }
+  }, 1000);
+}
+
+function examStartAutoSave() {
+  if (examState.autoSaveInterval) clearInterval(examState.autoSaveInterval);
+  examState.autoSaveInterval = setInterval(() => {
+    if (examState.session) {
+      try {
+        sessionStorage.setItem('activeExam', JSON.stringify({
+          courseCode: examState.session.courseCode,
+          questions: examState.session.questions,
+          answers: examState.session.answers,
+          timeLimit: examState.session.timeLimit,
+          timeLeft: examState.session.timeLeft,
+          currentIndex: examState.session.currentIndex,
+          startTime: examState.session.startTime,
+          sessionId: examState.session.sessionId,
+          mode: 'exam',
+          questionIds: examState.session.questionIds
+        }));
+      } catch (e) {}
+    }
+  }, 10000);
+}
+
+// ============================================
+// SUBMIT EXAM
+// ============================================
+export async function examSubmit(autoSubmit = false) {
+  if (examState.isSubmitting) return;
+  if (!examState.session) return;
+  
+  if (!autoSubmit) {
+    if (!confirm('Submit your exam? You cannot change answers after submission.')) return;
+  }
+  
+  examState.isSubmitting = true;
+  
+  disableAllButtons();
+  
+  const submitBtn = $id('examSubmitBtn');
+  if (submitBtn) {
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+    submitBtn.disabled = true;
+  }
+  
+  if (examState.session.timer) {
+    clearInterval(examState.session.timer);
+    examState.session.timer = null;
+  }
+  if (examState.autoSaveInterval) {
+    clearInterval(examState.autoSaveInterval);
+    examState.autoSaveInterval = null;
+  }
+  if (examState.inactivityTimer) {
+    clearInterval(examState.inactivityTimer);
+    examState.inactivityTimer = null;
+  }
+  
+  document.removeEventListener('click', trackActivity);
+  document.removeEventListener('touchstart', trackActivity);
+  document.removeEventListener('keydown', trackActivity);
+  
+  const timeSpent = Date.now() - examState.session.startTime;
+  let correct = 0;
+  examState.session.questions.forEach((q, i) => {
+    if (examState.session.answers[i] === q.correctOption) correct++;
+  });
+  const total = examState.session.questions.length;
+  const percentage = Math.round((correct / total) * 100);
+  
+  try {
+    await apiFetch('/exams/session/submit', {
+      method: 'POST',
+      body: JSON.stringify({
+        sessionId: examState.session.sessionId,
+        courseCode: examState.session.courseCode,
+        correctCount: correct,
+        totalQuestions: total,
+        percentage: percentage,
+        timeSpent: timeSpent,
+        mode: 'exam',
+        questionIds: examState.session.questionIds || []
+      })
+    });
+    
+    const resultData = {
+      course: examState.session.courseCode,
+      correctCount: correct,
+      totalQuestions: total,
+      percentage: percentage,
+      timeSpent: timeSpent,
+      mode: 'exam',
+      questions: examState.session.questions.map((q, i) => ({
+        text: q.text,
+        options: q.options,
+        correctOption: q.correctOption,
+        userAnswer: examState.session.answers[i],
+        explanation: q.explanation || ''
+      }))
+    };
+    
+    sessionStorage.setItem('examResult', JSON.stringify(resultData));
+    localStorage.setItem('lastExamResult', JSON.stringify(resultData));
+    localStorage.setItem('lastResultTimestamp', Date.now().toString());
+    sessionStorage.removeItem('activeExam');
+    
+    resetExamState(false);
+    
+    exitFullscreenMode();
+    window.showPage('submit');
+    
+    setTimeout(() => {
+      if (window.refreshSubmitPage) {
+        window.refreshSubmitPage();
       }
+    }, 100);
+    
+  } catch (e) {
+    alert('Failed to submit. Please try again.');
+    examState.isSubmitting = false;
+    enableAllButtons();
+    if (submitBtn) {
+      submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Submit';
+      submitBtn.disabled = false;
     }
-  } catch (error) {
-    console.error('Error loading faculties:', error);
   }
 }
 
-// ==================== LOAD LEVELS ====================
-async function loadLevels(facultyId) {
-  if (!facultyId) {
-    document.getElementById('level-select').innerHTML = '<option value="">Select Level</option>';
+// ============================================
+// EXAM QUIT
+// ============================================
+export function examQuit() {
+  if (examState.isSubmitting) {
+    showToast('⏳ Please wait, exam is being submitted...', 'warning');
     return;
   }
   
-  try {
-    const response = await apiFetch(`/api/exam/levels?facultyId=${facultyId}`);
-    const data = await response.json();
-    
-    if (data.success && data.levels) {
-      const select = document.getElementById('level-select');
-      select.innerHTML = '<option value="">Select Level</option>';
-      data.levels.forEach(l => {
-        select.innerHTML += `<option value="${l}">${l}</option>`;
-      });
-    }
-  } catch (error) {
-    console.error('Error loading levels:', error);
-  }
-}
-
-// ==================== LOAD COURSES ====================
-async function loadCourses(level) {
-  if (!level) {
-    document.getElementById('course-select').innerHTML = '<option value="">Select Course</option>';
-    return;
-  }
+  if (!examState.session) return;
+  if (!confirm('Quit exam? Your progress will be lost.')) return;
   
-  try {
-    const response = await apiFetch(`/api/exam/courses?level=${level}`);
-    const data = await response.json();
-    
-    if (data.success && data.courses) {
-      const select = document.getElementById('course-select');
-      select.innerHTML = '<option value="">Select Course</option>';
-      data.courses.forEach(c => {
-        select.innerHTML += `<option value="${c.code}">${c.code} - ${c.name}</option>`;
-      });
-    }
-  } catch (error) {
-    console.error('Error loading courses:', error);
-  }
+  resetExamState();
+  window.showPage('exam');
 }
 
-// Auto-initialize when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initExamModule);
-} else {
-  initExamModule();
+// ============================================
+// RECOVER EXAM FROM SESSION STORAGE
+// ============================================
+export function recoverExamSession() {
+  try {
+    const saved = sessionStorage.getItem('activeExam');
+    if (saved) {
+      const data = JSON.parse(saved);
+      
+      const elapsed = (Date.now() - data.startTime) / 1000;
+      if (elapsed > data.timeLimit * 60) {
+        sessionStorage.removeItem('activeExam');
+        return false;
+      }
+      
+      examState.session = {
+        courseCode: data.courseCode,
+        questions: data.questions,
+        answers: data.answers,
+        timeLimit: data.timeLimit,
+        timeLeft: data.timeLeft,
+        currentIndex: data.currentIndex,
+        timer: null,
+        startTime: data.startTime,
+        sessionId: data.sessionId,
+        mode: data.mode || 'exam',
+        questionIds: data.questionIds || []
+      };
+      
+      examState.course = data.courseCode;
+      examState.isSubmitting = false;
+      examState.isReset = false;
+      
+      const title = $id('examCourseTitle');
+      const meta = $id('examMeta');
+      const timer = $id('examTimerDisplay');
+      
+      if (title) title.textContent = `📝 ${data.courseCode}`;
+      if (meta) meta.textContent = `${data.questions.length} Questions • ${data.timeLimit} min`;
+      if (timer) {
+        const m = Math.floor(data.timeLeft / 60);
+        const s = data.timeLeft % 60;
+        timer.textContent = `${m}:${s.toString().padStart(2, '0')}`;
+        timer.className = 'timer-box';
+        if (data.timeLeft <= 60) timer.classList.add('danger');
+        else if (data.timeLeft <= 300) timer.classList.add('warning');
+      }
+      
+      const entryScreen = $id('examEntryScreen');
+      const runningScreen = $id('examRunningScreen');
+      if (entryScreen) entryScreen.style.display = 'none';
+      if (runningScreen) runningScreen.style.display = 'block';
+      
+      examRenderQuestion();
+      examStartTimer();
+      examRenderGrid();
+      examStartAutoSave();
+      resetInactivityTimer();
+      
+      document.addEventListener('click', trackActivity);
+      document.addEventListener('touchstart', trackActivity);
+      document.addEventListener('keydown', trackActivity);
+      
+      showToast('📌 Exam recovered from previous session', 'info');
+      return true;
+    }
+  } catch (e) {
+    console.error('Recover exam error:', e);
+  }
+  return false;
 }
+
+// ============================================
+// EXPOSE FUNCTIONS TO WINDOW
+// ============================================
+window.examSelectFaculty = examSelectFaculty;
+window.examGoToFaculty = examGoToFaculty;
+window.examSelectLevel = examSelectLevel;
+window.examGoToLevel = examGoToLevel;
+window.examGoToCourse = examGoToCourse;
+window.examOpenEntry = examOpenEntry;
+window.examStart = examStart;
+window.examSelectAnswer = examSelectAnswer;
+window.examPrevQuestion = examPrevQuestion;
+window.examNextQuestion = examNextQuestion;
+window.examSubmit = examSubmit;
+window.examQuit = examQuit;
+window.examToggleFaculties = examToggleFaculties;
+window.examJumpTo = examJumpTo;
+window.resetExamState = resetExamState;
+window.checkAndResetExam = checkAndResetExam;
+window.loadExamData = loadExamData;
+window.recoverExamSession = recoverExamSession;
+window.examToggleCalculator = examToggleCalculator;
+window.examCalcAppend = examCalcAppend;
+window.examCalcClear = examCalcClear;
+window.examCalcBackspace = examCalcBackspace;
+window.examCalcResult = examCalcResult;
