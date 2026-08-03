@@ -481,81 +481,67 @@
         updateSlider();
         openAuthModal('register');
     }
+  // ============================================
+// LEADERBOARD - LOADS TOP 3 FROM BACKEND
+// ============================================
+async function loadLeaderboard() {
+    const container = document.getElementById('leaderboardContainer');
+    if (!container) return;
+
+    container.innerHTML = '<div class="lb-loading"><i class="fas fa-spinner"></i> Loading leaderboard...</div>';
+
+    try {
+        const response = await fetch(API_BASE + '/leaderboard');
+        const data = await response.json();
+        const lb = data.leaderboard || [];
+
+        if (!lb || !lb.length) {
+            container.innerHTML = '<div class="lb-loading">No students yet. Be the first! 🏆</div>';
+            return;
+        }
+
+        // Get top 3
+        const top3 = lb.slice(0, 3);
+        const medals = ['👑', '🥈', '🥉'];
+        const rankClasses = ['gold', 'silver', 'bronze'];
+        const colors = ['#f59e0b', '#94a3b8', '#cd853f'];
+
+        // Build HTML
+        let html = '<div class="lb-top-three">';
+
+        // Show top 3 in special cards
+        top3.forEach((u, i) => {
+            const displayName = maskName(u.fullName || u.username || 'Student');
+            html += `
+                <div class="lb-top-card ${rankClasses[i] || ''}">
+                    <div class="lb-top-avatar" style="background:${colors[i]}">${medals[i]}</div>
+                    <div class="lb-top-name">${displayName}</div>
+                    <div class="lb-top-dept">${u.faculty || ''} • ${u.level || '100'}L</div>
+                    <div class="lb-top-score">${u.averageScore || 0}%</div>
+                </div>
+            `;
+        });
+
+        html += '</div>';
+
+        container.innerHTML = html;
+
+    } catch (error) {
+        console.error('Leaderboard error:', error);
+        container.innerHTML = '<div class="lb-loading">Unable to load leaderboard. Check internet connection.</div>';
+    }
+}
+
+// Helper: Mask name for privacy
+function maskName(name) {
+    if (!name || name.length <= 2) return name || '**';
+    return name.substring(0, 2) + '***';
+}
 
     // ============================================
     // LEADERBOARD - LOADS TOP 4 FROM BACKEND
     // ============================================
-    async function loadLeaderboard() {
-        const container = document.getElementById('leaderboardContainer');
-        if (!container) return;
-
-        container.innerHTML = '<div class="lb-loading"><i class="fas fa-spinner"></i> Loading leaderboard...</div>';
-
-        try {
-            const response = await fetch(API_BASE + '/leaderboard');
-            const data = await response.json();
-            const lb = data.leaderboard || [];
-
-            if (!lb || !lb.length) {
-                container.innerHTML = '<div class="lb-loading">No students yet. Be the first! 🏆</div>';
-                return;
-            }
-
-            // Get top 3 for cards
-            const top3 = lb.slice(0, 3); // FIXED: Changed from top4 to top3
-            const medals = ['👑', '🥈', '🥉'];
-            const rankClasses = ['gold', 'silver', 'bronze'];
-            const colors = ['#f59e0b', '#94a3b8', '#cd853f'];
-
-            // Build HTML
-            let html = '<div class="lb-top-three">';
-
-            // Show top 3 in special cards
-            top3.forEach((u, i) => { // FIXED: Removed unnecessary .slice(0,3) since top3 already has 3 elements
-                const displayName = maskName(u.fullName || u.username || 'Student');
-                html += `
-                    <div class="lb-top-card ${rankClasses[i] || ''}">
-                        <div class="lb-top-avatar" style="background:${colors[i]}">${medals[i]}</div>
-                        <div class="lb-top-name">${displayName}</div>
-                        <div class="lb-top-dept">${u.faculty || ''} • ${u.level || '100'}L</div>
-                        <div class="lb-top-score">${u.averageScore || 0}%</div>
-                    </div>
-                `;
-            });
-
-            html += '</div>';
-
-            // Show 4th place in list style (if exists)
-            if (lb.length >= 4) { // FIXED: Changed from top3.length >= 3 to lb.length >= 4
-                const u = lb[3]; // FIXED: Changed from top4[3] to lb[3]
-                const displayName = maskName(u.fullName || u.username || 'Student');
-                const initials = (u.fullName || 'ST').split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
-                html += `
-                    <div class="lb-item" style="padding-top:8px;border-top:1px solid #1e2a45;margin-top:4px;">
-                        <span class="lb-rank">4️⃣</span>
-                        <div class="lb-avatar-sm">${initials}</div>
-                        <span class="lb-name">${displayName}</span>
-                        <span class="lb-dept">${u.faculty || ''}</span>
-                        <span class="lb-score">${u.averageScore || 0}%</span>
-                    </div>
-                `;
-            }
-
-            container.innerHTML = html;
-
-        } catch (error) {
-            console.error('Leaderboard error:', error);
-            container.innerHTML = '<div class="lb-loading">Unable to load leaderboard. Check internet connection.</div>';
-        }
-    }
-
-    // Helper: Mask name for privacy
-    function maskName(name) {
-        if (!name || name.length <= 2) return name || '**';
-        // FIXED: Removed duplicate condition, now handles names of length 2 or less
-        return name.substring(0, 2) + '***';
-    }
-
+    
     // ============================================
     // AUTH MODAL
     // ============================================
