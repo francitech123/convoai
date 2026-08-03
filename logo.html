@@ -421,12 +421,11 @@
         </div>
     </div>
 </div>
-
 <script>
     // ============================================
     // API CONFIG
     // ============================================
-        const API_BASE = 'https://oau-exam-api.onrender.com/api';
+    const API_BASE = 'https://oau-exam-api.onrender.com/api';
 
     // ============================================
     // SLIDER
@@ -484,7 +483,7 @@
     }
 
     // ============================================
-    // LEADERBOARD - LOADS TOP 3 FROM BACKEND
+    // LEADERBOARD - LOADS TOP 4 FROM BACKEND
     // ============================================
     async function loadLeaderboard() {
         const container = document.getElementById('leaderboardContainer');
@@ -502,17 +501,17 @@
                 return;
             }
 
-            // Get top 3
-            const top3 = lb.slice(0, 3);
+            // Get top 3 for cards
+            const top3 = lb.slice(0, 3); // FIXED: Changed from top4 to top3
             const medals = ['👑', '🥈', '🥉'];
             const rankClasses = ['gold', 'silver', 'bronze'];
-            const colors = ['#f59e0b', '#94a3b8', '#cd853f', '#3b82f6'];
+            const colors = ['#f59e0b', '#94a3b8', '#cd853f'];
 
             // Build HTML
             let html = '<div class="lb-top-three">';
 
             // Show top 3 in special cards
-            top3.slice(0, 3).forEach((u, i) => {
+            top3.forEach((u, i) => { // FIXED: Removed unnecessary .slice(0,3) since top3 already has 3 elements
                 const displayName = maskName(u.fullName || u.username || 'Student');
                 html += `
                     <div class="lb-top-card ${rankClasses[i] || ''}">
@@ -526,9 +525,9 @@
 
             html += '</div>';
 
-            // Show #3 in list style
-            if (top3.length >= 3) {
-                const u = top4[3];
+            // Show 4th place in list style (if exists)
+            if (lb.length >= 4) { // FIXED: Changed from top3.length >= 3 to lb.length >= 4
+                const u = lb[3]; // FIXED: Changed from top4[3] to lb[3]
                 const displayName = maskName(u.fullName || u.username || 'Student');
                 const initials = (u.fullName || 'ST').split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
                 html += `
@@ -553,7 +552,7 @@
     // Helper: Mask name for privacy
     function maskName(name) {
         if (!name || name.length <= 2) return name || '**';
-        if (name.length <= 2) return name + '***';
+        // FIXED: Removed duplicate condition, now handles names of length 2 or less
         return name.substring(0, 2) + '***';
     }
 
