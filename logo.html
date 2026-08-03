@@ -3,536 +3,687 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>Logo Manager • OAU CBE Practice</title>
+    <title>OAU CBE Practice</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
-        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI','Inter',system-ui,-apple-system,sans-serif}
-        :root{
-            --primary:#1e3a8a;
-            --primary-light:#3b82f6;
-            --accent:#10b981;
-            --bg:#0f172a;
-            --bg-soft:#111c33;
-            --card:#1e293b;
-            --card-2:#152033;
-            --border:#334155;
-            --text:#f1f5f9;
-            --text-secondary:#94a3b8;
-            --danger:#ef4444;
-            --success:#10b981;
-            --warning:#f59e0b;
-            --shadow:0 18px 40px rgba(0,0,0,.28);
-            --brand-gradient:linear-gradient(135deg,#1e3a8a,#3b82f6);
-            --radius:24px;
-        }
-        body.light-mode{
-            --bg:#f4f7fb;
-            --bg-soft:#edf3fb;
-            --card:#ffffff;
-            --card-2:#f8fbff;
-            --border:#d7e2ef;
-            --text:#0f172a;
-            --text-secondary:#526173;
-            --shadow:0 16px 36px rgba(15,23,42,.08)
-        }
-        body{background:radial-gradient(circle at top right,rgba(59,130,246,.08),transparent 25%),linear-gradient(180deg,var(--bg),#0b1324 100%);color:var(--text);min-height:100vh;padding:20px}
-        
-        .container{max-width:600px;margin:0 auto;padding:20px 16px 60px}
-        .back-link{display:inline-flex;align-items:center;gap:6px;color:var(--primary-light);text-decoration:none;font-weight:600;font-size:.85rem;margin-bottom:20px;transition:color .2s}
-        .back-link:hover{color:var(--text)}
-        
-        .page-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px 24px;box-shadow:var(--shadow)}
-        .page-title{text-align:center;margin-bottom:24px}
-        .page-title h1{font-size:1.4rem;display:flex;align-items:center;justify-content:center;gap:10px;color:var(--text)}
-        .page-title h1 i{color:var(--primary-light)}
-        .page-title p{color:var(--text-secondary);font-size:.85rem;margin-top:4px}
-        
-        .logo-preview{text-align:center;padding:24px;background:var(--bg-soft);border-radius:16px;border:2px dashed var(--border);margin-bottom:20px;transition:all .3s}
-        .logo-preview.has-logo{border-color:var(--primary-light);background:rgba(59,130,246,.05)}
-        .logo-preview img{max-width:200px;max-height:150px;object-fit:contain;border-radius:8px}
-        .logo-preview .placeholder{color:var(--text-secondary);font-size:.85rem}
-        .logo-preview .placeholder i{font-size:2.5rem;display:block;margin-bottom:8px;opacity:.3}
-        
-        .upload-area{border:2px dashed var(--border);border-radius:16px;padding:30px;text-align:center;cursor:pointer;transition:all .3s;background:var(--bg-soft);margin-bottom:16px}
-        .upload-area:hover{border-color:var(--primary-light);background:rgba(59,130,246,.05)}
-        .upload-area.dragover{border-color:var(--primary-light);background:rgba(59,130,246,.1)}
-        .upload-area i{font-size:2.5rem;color:var(--primary-light);margin-bottom:8px;display:block}
-        .upload-area p{color:var(--text-secondary);font-size:.85rem}
-        .upload-area .sub{font-size:.7rem;color:var(--text-secondary);margin-top:4px}
-        .upload-area input{display:none}
-        
-        .file-info{background:var(--bg-soft);border:1px solid var(--border);border-radius:12px;padding:12px 16px;margin-bottom:16px;display:none;align-items:center;gap:12px}
-        .file-info.show{display:flex}
-        .file-info .name{flex:1;font-weight:500;font-size:.85rem;color:var(--text)}
-        .file-info .size{color:var(--text-secondary);font-size:.75rem}
-        .file-info .remove{background:none;border:none;color:var(--danger);cursor:pointer;font-size:1.1rem;padding:4px}
-        
-        .btn-group{display:flex;gap:10px;flex-wrap:wrap}
-        .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border:none;border-radius:14px;font-weight:700;font-size:.85rem;cursor:pointer;transition:all .2s;font-family:inherit;justify-content:center;flex:1;min-width:120px}
-        .btn-primary{background:var(--brand-gradient);color:#fff}
-        .btn-primary:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 25px rgba(59,130,246,.35)}
-        .btn-primary:disabled{opacity:.6;cursor:not-allowed}
-        .btn-danger{background:var(--danger);color:#fff}
-        .btn-danger:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 25px rgba(239,68,68,.35)}
-        .btn-danger:disabled{opacity:.6;cursor:not-allowed}
-        .btn-outline{background:transparent;border:2px solid var(--border);color:var(--text)}
-        .btn-outline:hover:not(:disabled){background:var(--card-2);border-color:var(--primary-light)}
-        .btn-outline:disabled{opacity:.6;cursor:not-allowed}
-        .btn-success{background:var(--success);color:#fff}
-        .btn-success:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 25px rgba(16,185,129,.35)}
-        .btn-success:disabled{opacity:.6;cursor:not-allowed}
-        
-        .btn .spinner{display:none;width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite}
-        .btn.loading .spinner{display:inline-block}
-        .btn.loading .btn-text{display:none}
-        .btn.loading .btn-icon{display:none}
-        
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:#f8fafc;color:#0f172a;min-height:100vh;-webkit-font-smoothing:antialiased;overflow:hidden}
+
+        .app-container{position:fixed;top:0;left:0;right:0;bottom:0;display:flex;flex-direction:column;background:#f8fafc}
+
+        .skip-btn{position:absolute;top:20px;right:24px;z-index:30;background:transparent;border:none;color:#64748b;font-weight:600;font-size:.85rem;cursor:pointer;padding:8px 12px;transition:color .2s;font-family:inherit}
+        .skip-btn:hover{color:#0f172a}
+
+        .slides-wrapper{flex:1;overflow:hidden;position:relative}
+        .slides-track{display:flex;height:100%;transition:transform .6s cubic-bezier(.4,0,.2,1);will-change:transform}
+        .slide{min-width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:20px 24px 80px;text-align:center;position:relative}
+        .slide-content{max-width:420px;width:100%;animation:fadeUp .6s ease both}
+        .slide-icon{font-size:clamp(4rem,12vw,6rem);margin-bottom:16px;display:block}
+        .slide h2{font-size:clamp(1.4rem,4.5vw,1.9rem);font-weight:700;margin-bottom:8px;line-height:1.2;color:#0f172a}
+        .slide h2 .highlight{background:linear-gradient(135deg,#1e293b,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .slide p{color:#475569;font-size:clamp(.9rem,2.2vw,1rem);line-height:1.6;max-width:340px;margin:0 auto 16px}
+
+        .slide .feature-item{display:flex;align-items:center;gap:12px;padding:10px 14px;background:#ffffff;border-radius:12px;border:1px solid #e2e8f0;box-shadow:0 1px 3px rgba(0,0,0,0.04);margin:6px 0;text-align:left}
+        .slide .feature-item i{color:#3b82f6;font-size:1rem;width:20px;text-align:center}
+        .slide .feature-item span{color:#1e293b;font-size:.85rem;font-weight:500}
+        .slide .features{display:flex;flex-direction:column;gap:6px;margin:14px 0;width:100%}
+        .slide .app-preview{background:#ffffff;border:1px solid #e2e8f0;border-radius:16px;padding:14px;margin:10px 0;width:100%;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+        .slide .app-preview .row{display:flex;align-items:center;gap:10px}
+        .slide .app-preview .row .avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;color:#fff;flex-shrink:0}
+        .slide .app-preview .row .info{flex:1;text-align:left}
+        .slide .app-preview .row .info .name{font-weight:600;color:#0f172a;font-size:.8rem}
+        .slide .app-preview .row .info .sub{font-size:.65rem;color:#64748b}
+        .slide .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;margin:6px 0}
+        .slide .stat-grid .stat{background:#ffffff;border-radius:10px;padding:10px;border:1px solid #e2e8f0;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+        .slide .stat-grid .stat .num{font-weight:800;font-size:1.1rem}
+        .slide .stat-grid .stat .lbl{font-size:.55rem;color:#64748b;margin-top:2px}
+        .slide .lb-item{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid #f1f5f9}
+        .slide .lb-item:last-child{border-bottom:none}
+        .slide .lb-item .rank{font-weight:800;font-size:.9rem;color:#64748b;width:28px;text-align:center}
+        .slide .lb-item .rank.gold{color:#f59e0b}
+        .slide .lb-item .rank.silver{color:#94a3b8}
+        .slide .lb-item .rank.bronze{color:#cd853f}
+        .slide .lb-item .name{flex:1;font-weight:600;color:#0f172a;font-size:.8rem}
+        .slide .lb-item .score{font-weight:700;color:#3b82f6;font-size:.8rem}
+        .slide .result-card{display:flex;align-items:center;gap:10px;background:#ffffff;border-radius:10px;padding:8px 12px;margin:4px 0;border:1px solid #e2e8f0;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+        .slide .result-card .score{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;flex-shrink:0}
+        .slide .result-card .score.passed{background:rgba(16,185,129,.12);color:#10b981;border:2px solid #10b981}
+        .slide .result-card .score.failed{background:rgba(239,68,68,.12);color:#ef4444;border:2px solid #ef4444}
+        .slide .result-card .info{flex:1;text-align:left}
+        .slide .result-card .info .title{font-weight:600;color:#0f172a;font-size:.78rem}
+        .slide .result-card .info .meta{font-size:.6rem;color:#64748b}
+        .slide .result-card .status{font-size:.55rem;font-weight:700;padding:2px 8px;border-radius:10px}
+        .slide .result-card .status.passed{background:rgba(16,185,129,.12);color:#10b981}
+        .slide .result-card .status.failed{background:rgba(239,68,68,.12);color:#ef4444}
+
+        @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+        .progress-container{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:20;display:flex;align-items:center;justify-content:center}
+        .progress-ring{position:relative;width:56px;height:56px}
+        .progress-ring svg{transform:rotate(-90deg);width:56px;height:56px}
+        .progress-ring .bg{fill:none;stroke:#e2e8f0;stroke-width:4}
+        .progress-ring .progress{fill:none;stroke:#3b82f6;stroke-width:4;stroke-linecap:round;transition:stroke-dashoffset .5s ease}
+        .progress-ring .inner-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#1e293b;color:#ffffff;width:40px;height:40px;border-radius:50%;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.9rem;transition:background .2s}
+        .progress-ring .inner-btn:active{transform:translate(-50%,-50%) scale(.95)}
+        .progress-ring .inner-btn:disabled{background:#e2e8f0;color:#94a3b8;cursor:not-allowed}
+
+        .auth-modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:100;display:none;flex-direction:column;padding:20px;background:#f8fafc;animation:slideUp .3s ease}
+        .auth-modal-overlay.show{display:flex}
+
+        @keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+        .auth-header{display:flex;justify-content:space-between;align-items:center;padding-bottom:16px;border-bottom:1px solid #e2e8f0;margin-bottom:24px}
+        .auth-header-left{display:flex;align-items:center;gap:10px;text-decoration:none}
+        .auth-header-left img{width:32px;height:32px}
+        .auth-header-left span{font-weight:700;font-size:1rem;color:#0f172a}
+        .auth-header .close-btn{background:none;border:none;font-size:1.5rem;color:#64748b;cursor:pointer}
+
+        .auth-body{flex:1;overflow-y:auto;background:#ffffff;border-radius:24px;padding:24px 20px;box-shadow:0 4px 24px rgba(0,0,0,0.04)}
+        .auth-body h2{font-size:1.8rem;font-weight:700;margin-bottom:6px;color:#0f172a}
+        .auth-body .subtitle{color:#64748b;font-size:.95rem;margin-bottom:24px}
+
+        .auth-tabs{display:flex;gap:8px;background:#f1f5f9;border-radius:12px;padding:4px;margin-bottom:20px}
+        .auth-tab{flex:1;padding:10px;text-align:center;border:none;background:transparent;color:#64748b;font-weight:600;font-size:.85rem;border-radius:8px;cursor:pointer;transition:all .2s;font-family:inherit}
+        .auth-tab.active{background:#ffffff;color:#0f172a;box-shadow:0 2px 8px rgba(0,0,0,0.06)}
+
+        .form-group{margin-bottom:16px}
+        .form-group label{display:block;font-weight:600;font-size:.85rem;color:#0f172a;margin-bottom:6px}
+        .form-group input,.form-group select{width:100%;padding:14px 16px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-size:.95rem;transition:all .2s;font-family:inherit}
+        .form-group input:focus,.form-group select:focus{outline:none;border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.1);background:#ffffff}
+        .form-group input::placeholder{color:#94a3b8}
+
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+        .auth-btn{width:100%;padding:16px;background:linear-gradient(135deg,#1e293b,#3b82f6);color:#ffffff;border:none;border-radius:50px;font-weight:700;font-size:1rem;cursor:pointer;transition:all .2s;margin-top:8px}
+        .auth-btn:hover{opacity:.85;transform:translateY(-2px);box-shadow:0 8px 24px rgba(59,130,246,.25)}
+        .auth-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+        .auth-footer{text-align:center;margin-top:20px;font-size:.9rem;color:#64748b}
+        .auth-footer a{color:#0f172a;text-decoration:none;font-weight:700;cursor:pointer}
+
+        .auth-error{color:#ef4444;padding:10px;border-radius:8px;font-size:.85rem;display:none;margin-bottom:12px}
+        .auth-error.show{display:block;background:rgba(239,68,68,.06)}
+        .auth-success{color:#10b981;padding:10px;border-radius:8px;font-size:.85rem;display:none;margin-bottom:12px}
+        .auth-success.show{display:block;background:rgba(16,185,129,.06)}
+
+        .forgot-btn{background:none;border:none;color:#64748b;font-size:.85rem;cursor:pointer;font-weight:500;padding:8px 0;font-family:inherit;display:block;text-align:right;width:100%}
+        .forgot-btn:hover{color:#0f172a}
+
+        .password-strength{height:4px;margin-top:6px;border-radius:4px;transition:all .3s;background:#e2e8f0}
+        .password-strength .bar{height:100%;border-radius:4px;transition:width .4s ease;width:0%}
+        .password-strength .bar.weak{background:#ef4444;width:25%}
+        .password-strength .bar.medium{background:#f59e0b;width:50%}
+        .password-strength .bar.strong{background:#3b82f6;width:75%}
+        .password-strength .bar.very-strong{background:#10b981;width:100%}
+        .password-hint{font-size:.75rem;color:#94a3b8;margin-top:4px;display:block}
+
+        #loadingOverlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,.6);backdrop-filter:blur(8px);z-index:9999;display:none;align-items:center;justify-content:center;flex-direction:column;gap:16px}
+        #loadingOverlay.show{display:flex}
+        #loadingOverlay .spinner{width:48px;height:48px;border:4px solid #e2e8f0;border-top-color:#3b82f6;border-radius:50%;animation:spin .8s linear infinite}
+        #loadingOverlay p{color:#ffffff;font-weight:600;font-size:1rem}
         @keyframes spin{to{transform:rotate(360deg)}}
-        
-        .alert{padding:12px 16px;border-radius:12px;margin-bottom:16px;display:none;font-size:.82rem;text-align:center}
-        .alert-success{background:rgba(16,185,129,.12);color:var(--success);border:1px solid rgba(16,185,129,.2)}
-        .alert-error{background:rgba(239,68,68,.12);color:var(--danger);border:1px solid rgba(239,68,68,.2)}
-        .alert.show{display:block}
-        
-        .instructions{margin-top:16px;padding:16px;background:var(--bg-soft);border-radius:12px;border:1px solid var(--border)}
-        .instructions h4{font-size:.85rem;color:var(--text);margin-bottom:8px}
-        .instructions ul{list-style:none;padding:0}
-        .instructions ul li{color:var(--text-secondary);font-size:.75rem;padding:4px 0;display:flex;align-items:center;gap:8px}
-        .instructions ul li i{color:var(--primary-light);width:16px;font-size:.7rem}
-        
-        .current-logo-info{background:var(--bg-soft);border-radius:12px;padding:12px 16px;margin-bottom:16px;border:1px solid var(--border);display:none}
-        .current-logo-info.show{display:block}
-        .current-logo-info .label{font-size:.7rem;color:var(--text-secondary);font-weight:600;text-transform:uppercase;letter-spacing:.05em}
-        .current-logo-info .value{font-size:.8rem;color:var(--text);margin-top:2px}
-        
-        .toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 20px;box-shadow:0 8px 30px rgba(0,0,0,.4);z-index:9999;font-size:.85rem;color:var(--text);max-width:90%;opacity:0;transition:all .3s ease;pointer-events:none;display:flex;align-items:center;gap:10px}
-        .toast.show{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
-        .toast .toast-icon{font-size:1.2rem}
-        .toast .toast-icon.success{color:var(--success)}
-        .toast .toast-icon.error{color:var(--danger)}
-        .toast .toast-icon.info{color:var(--primary-light)}
-        
-        @media(max-width:480px){.container{padding:12px 10px 40px}.page-card{padding:20px 16px}.btn{min-width:100px;padding:10px 14px;font-size:.78rem}}
+
+        @media(max-width:380px){.form-row{grid-template-columns:1fr}}
+        @media(min-width:768px){.slide-content{max-width:480px}.slide .stat-grid{grid-template-columns:repeat(4,1fr)}}
     </style>
 </head>
 <body>
 
-<div class="container">
-    <a href="/app" class="back-link"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
-    
-    <div class="page-card">
-        <div class="page-title">
-            <h1><i class="fas fa-image"></i> Logo Manager</h1>
-            <p>Upload a custom logo to display across all pages</p>
-        </div>
+<div id="loadingOverlay">
+    <div class="spinner"></div>
+    <p>Please wait...</p>
+</div>
 
-        <div class="alert alert-success" id="successAlert"></div>
-        <div class="alert alert-error" id="errorAlert"></div>
+<div class="app-container">
+    <button class="skip-btn" onclick="goToLogin()">Skip <i class="fas fa-chevron-right" style="font-size:.6rem;"></i></button>
 
-        <!-- Current Logo Preview -->
-        <div class="logo-preview" id="logoPreview">
-            <div class="placeholder" id="placeholderLogo">
-                <i class="fas fa-image"></i>
-                <p>No custom logo uploaded</p>
-                <span style="font-size:.7rem;color:var(--text-secondary)">Default OAU crest is shown on pages</span>
+    <div class="slides-wrapper">
+        <div class="slides-track" id="slidesTrack">
+
+            <!-- Slide 1: Welcome -->
+            <div class="slide">
+                <div class="slide-content">
+                    <span class="slide-icon">🚀</span>
+                    <h2>Welcome to <span class="highlight">OAU CBE Practice</span></h2>
+                    <p>Master your exams, ace your future with 10,000+ practice questions and AI-powered learning.</p>
+                    <div class="stat-grid">
+                        <div class="stat"><div class="num" style="color:#10b981">72+</div><div class="lbl">Courses</div></div>
+                        <div class="stat"><div class="num" style="color:#3b82f6">10K+</div><div class="lbl">Questions</div></div>
+                        <div class="stat"><div class="num" style="color:#8b5cf6">14</div><div class="lbl">Faculties</div></div>
+                        <div class="stat"><div class="num" style="color:#f59e0b">99%</div><div class="lbl">Uptime</div></div>
+                    </div>
+                    <div class="app-preview">
+                        <div class="row">
+                            <div class="avatar" style="background:linear-gradient(135deg,#1e293b,#3b82f6)">👤</div>
+                            <div class="info">
+                                <div class="name">Welcome back, Student! 👋</div>
+                                <div class="sub">📊 92% avg • 🔥 7 day streak</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="features">
+                        <div class="feature-item"><i class="fas fa-check-circle"></i><span>72+ courses across all faculties</span></div>
+                        <div class="feature-item"><i class="fas fa-check-circle"></i><span>AI Study Assistant (Nox)</span></div>
+                        <div class="feature-item"><i class="fas fa-check-circle"></i><span>Real-time progress tracking</span></div>
+                    </div>
+                </div>
             </div>
-            <img id="logoImage" style="display:none" alt="Current Logo">
-        </div>
 
-        <!-- Upload Area -->
-        <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()">
-            <i class="fas fa-cloud-upload-alt"></i>
-            <p><strong>Click to upload</strong> or drag & drop</p>
-            <div class="sub">PNG, JPG, WebP, GIF, SVG • Max 5MB</div>
-            <input type="file" id="fileInput" accept="image/*" onchange="handleFileSelect(event)">
-        </div>
+            <!-- Slide 2: Dashboard -->
+            <div class="slide">
+                <div class="slide-content">
+                    <span class="slide-icon">📊</span>
+                    <h2>Your <span class="highlight">Dashboard</span></h2>
+                    <p>Monitor everything at a glance — courses, scores, streaks, and analytics.</p>
+                    <div class="stat-grid">
+                        <div class="stat"><div class="num" style="color:#10b981">193</div><div class="lbl">Courses Active</div></div>
+                        <div class="stat"><div class="num" style="color:#3b82f6">81%</div><div class="lbl">Avg Score</div></div>
+                        <div class="stat"><div class="num" style="color:#f59e0b">68</div><div class="lbl">Tests + Exams</div></div>
+                        <div class="stat"><div class="num" style="color:#ef4444">7</div><div class="lbl">Day Streak</div></div>
+                    </div>
+                    <div class="features">
+                        <div class="feature-item"><i class="fas fa-trophy"></i><span>View leaderboard rankings</span></div>
+                        <div class="feature-item"><i class="fas fa-brain"></i><span>Access Nox AI Assistant</span></div>
+                        <div class="feature-item"><i class="fas fa-chart-bar"></i><span>Track performance analytics</span></div>
+                    </div>
+                </div>
+            </div>
 
-        <!-- File Info -->
-        <div class="file-info" id="fileInfo">
-            <i class="fas fa-file-image" style="color:var(--primary-light);font-size:1.2rem"></i>
-            <span class="name" id="fileName">image.png</span>
-            <span class="size" id="fileSize">0 KB</span>
-            <button class="remove" onclick="clearFile()"><i class="fas fa-times"></i></button>
-        </div>
+            <!-- Slide 3: Leaderboard -->
+            <div class="slide">
+                <div class="slide-content">
+                    <span class="slide-icon">🏆</span>
+                    <h2><span class="highlight">Top Students</span></h2>
+                    <p>See where you rank and stay motivated to climb higher.</p>
+                    <div class="app-preview" style="padding:10px 14px">
+                        <div class="lb-item"><div class="rank gold">👑</div><div class="avatar" style="width:28px;height:28px;font-size:.6rem;background:linear-gradient(135deg,#f59e0b,#d97706)">A</div><div class="name">Abdulahi M.</div><div class="score">91%</div></div>
+                        <div class="lb-item"><div class="rank silver">🥈</div><div class="avatar" style="width:28px;height:28px;font-size:.6rem;background:linear-gradient(135deg,#94a3b8,#64748b)">S</div><div class="name">Aghogho S.</div><div class="score">88%</div></div>
+                        <div class="lb-item"><div class="rank bronze">🥉</div><div class="avatar" style="width:28px;height:28px;font-size:.6rem;background:linear-gradient(135deg,#b45309,#92400e)">K</div><div class="name">Kamara P.</div><div class="score">85%</div></div>
+                        <div class="lb-item"><div class="rank">4</div><div class="avatar" style="width:28px;height:28px;font-size:.6rem;background:linear-gradient(135deg,#3b82f6,#1d4ed8)">T</div><div class="name">Tunde A.</div><div class="score">82%</div></div>
+                    </div>
+                    <div class="features">
+                        <div class="feature-item"><i class="fas fa-fire"></i><span>Compete with peers in real-time</span></div>
+                        <div class="feature-item"><i class="fas fa-star"></i><span>Earn badges for achievements</span></div>
+                    </div>
+                </div>
+            </div>
 
-        <!-- Current Logo Info -->
-        <div class="current-logo-info" id="currentLogoInfo">
-            <div class="label">Current Logo</div>
-            <div class="value" id="currentLogoText">No custom logo uploaded</div>
-        </div>
+            <!-- Slide 4: Nox AI -->
+            <div class="slide">
+                <div class="slide-content">
+                    <span class="slide-icon">🦉</span>
+                    <h2>Meet <span class="highlight">Nox AI</span></h2>
+                    <p>Your 24/7 AI study companion — ask anything, get instant answers.</p>
+                    <div class="app-preview" style="background:#f0f4ff;border-color:#dbeafe">
+                        <div style="display:flex;gap:10px;align-items:flex-start">
+                            <span style="font-size:1.5rem">🦉</span>
+                            <div style="flex:1;text-align:left">
+                                <div style="font-weight:600;font-size:.75rem;color:#1e293b">Nox</div>
+                                <div style="font-size:.75rem;color:#475569">I can help explain concepts, solve problems, and give study tips! What would you like to learn?</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="features">
+                        <div class="feature-item"><i class="fas fa-lightbulb"></i><span>Learn concepts — break down difficult topics</span></div>
+                        <div class="feature-item"><i class="fas fa-calculator"></i><span>Solve math — step-by-step solutions</span></div>
+                        <div class="feature-item"><i class="fas fa-code"></i><span>Code help — debug and understand code</span></div>
+                    </div>
+                </div>
+            </div>
 
-        <!-- Buttons -->
-        <div class="btn-group">
-            <button class="btn btn-primary" id="uploadBtn" onclick="uploadLogo()" disabled>
-                <span class="spinner"></span>
-                <span class="btn-icon"><i class="fas fa-upload"></i></span>
-                <span class="btn-text">Upload Logo</span>
-            </button>
-            <button class="btn btn-danger" id="deleteBtn" onclick="deleteLogo()" style="display:none">
-                <span class="spinner"></span>
-                <span class="btn-icon"><i class="fas fa-trash"></i></span>
-                <span class="btn-text">Remove Logo</span>
-            </button>
-            <button class="btn btn-outline" onclick="loadCurrentLogo()">
-                <i class="fas fa-sync-alt"></i> Refresh
-            </button>
-        </div>
+            <!-- Slide 5: Results & Analytics -->
+            <div class="slide">
+                <div class="slide-content">
+                    <span class="slide-icon">📈</span>
+                    <h2>Your <span class="highlight">Results</span></h2>
+                    <p>Track every attempt, see your progress, and improve over time.</p>
+                    <div class="result-card"><div class="score passed">92%</div><div class="info"><div class="title">LIB 001 · Test</div><div class="meta">18.4/20 correct • Grade: A</div></div><div class="status passed">✓ Passed</div></div>
+                    <div class="result-card"><div class="score passed">95%</div><div class="info"><div class="title">GST 112 · Exam</div><div class="meta">19/20 correct • Grade: A+</div></div><div class="status passed">✓ Passed</div></div>
+                    <div class="result-card"><div class="score passed">80%</div><div class="info"><div class="title">MTH 102 · Test</div><div class="meta">40/50 correct • Grade: B+</div></div><div class="status passed">✓ Passed</div></div>
+                    <div class="features" style="margin-top:4px">
+                        <div class="feature-item"><i class="fas fa-chart-pie"></i><span>Detailed performance breakdown</span></div>
+                        <div class="feature-item"><i class="fas fa-trending-up"></i><span>Track improvement over time</span></div>
+                    </div>
+                </div>
+            </div>
 
-        <!-- Instructions -->
-        <div class="instructions">
-            <h4><i class="fas fa-info-circle" style="color:var(--primary-light)"></i> How it works</h4>
-            <ul>
-                <li><i class="fas fa-check-circle"></i> Upload any image (PNG, JPG, WebP, GIF, SVG)</li>
-                <li><i class="fas fa-check-circle"></i> Logo appears on all pages (Login, Register, App, etc.)</li>
-                <li><i class="fas fa-check-circle"></i> Default OAU crest is shown if no custom logo</li>
-                <li><i class="fas fa-check-circle"></i> Changes reflect immediately across the app</li>
-                <li><i class="fas fa-check-circle"></i> Recommended size: 72x72px or larger (square)</li>
-            </ul>
+            <!-- Slide 6: Final CTA -->
+            <div class="slide">
+                <div class="slide-content">
+                    <span class="slide-icon">🎓</span>
+                    <h2>Ready to <span class="highlight">Excel?</span></h2>
+                    <p>Join thousands of OAU students acing their exams with our comprehensive platform.</p>
+                    <div style="background:#ffffff;border-radius:14px;padding:12px;width:100%;border:1px solid #e2e8f0;margin:10px 0;box-shadow:0 1px 3px rgba(0,0,0,0.04)">
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+                            <div style="background:rgba(16,185,129,.08);padding:6px;border-radius:8px;text-align:center"><div style="font-weight:700;color:#10b981;font-size:.75rem">72+</div><div style="font-size:.5rem;color:#64748b">Courses</div></div>
+                            <div style="background:rgba(59,130,246,.08);padding:6px;border-radius:8px;text-align:center"><div style="font-weight:700;color:#3b82f6;font-size:.75rem">10K+</div><div style="font-size:.5rem;color:#64748b">Questions</div></div>
+                            <div style="background:rgba(124,58,237,.08);padding:6px;border-radius:8px;text-align:center"><div style="font-weight:700;color:#8b5cf6;font-size:.75rem">AI</div><div style="font-size:.5rem;color:#64748b">Nox Assistant</div></div>
+                            <div style="background:rgba(245,158,11,.08);padding:6px;border-radius:8px;text-align:center"><div style="font-weight:700;color:#f59e0b;font-size:.75rem">📈</div><div style="font-size:.5rem;color:#64748b">Analytics</div></div>
+                        </div>
+                    </div>
+                    <div class="btn-group" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:12px">
+                        <button class="auth-btn" onclick="openAuthModal('register')" style="padding:14px 28px; width:auto; border-radius:12px;"><i class="fas fa-rocket"></i> Get Started</button>
+                        <button onclick="openAuthModal('login')" style="background:transparent; color:#475569; border:1px solid #e2e8f0; padding:14px 28px; border-radius:12px; font-weight:600; cursor:pointer; font-family:inherit; width:auto;">Login</button>
+                    </div>
+                    <p style="color:#94a3b8;font-size:.7rem;margin-top:16px">⚡ Built with ❤️ by FrancisTech</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="progress-container">
+        <div class="progress-ring">
+            <svg>
+                <circle class="bg" cx="28" cy="28" r="24"></circle>
+                <circle class="progress" id="progressCircle" cx="28" cy="28" r="24" stroke-dasharray="150.8" stroke-dashoffset="0"></circle>
+            </svg>
+            <button class="inner-btn" id="nextBtn"><i class="fas fa-arrow-right"></i></button>
         </div>
     </div>
 </div>
 
-<!-- Toast Notification -->
-<div class="toast" id="toast">
-    <span class="toast-icon" id="toastIcon"><i class="fas fa-info-circle"></i></span>
-    <span id="toastMessage">Loading...</span>
+<!-- Auth Modal -->
+<div class="auth-modal-overlay" id="authModal">
+    <div class="auth-header">
+        <a href="/" class="auth-header-left" onclick="closeAuthModal(); return false;">
+            <img src="/logo.svg" alt="OAU" id="modalLogo">
+            <span>OAU CBE Practice</span>
+        </a>
+        <button class="close-btn" onclick="closeAuthModal()"><i class="fas fa-times"></i></button>
+    </div>
+
+    <div class="auth-body">
+        <h2 id="authTitle">Welcome back</h2>
+        <p class="subtitle" id="authSubtitle">Enter your details to access your account.</p>
+
+        <div class="auth-tabs">
+            <button class="auth-tab active" data-tab="login" onclick="setAuthTab('login')">Login</button>
+            <button class="auth-tab" data-tab="register" onclick="setAuthTab('register')">Register</button>
+        </div>
+
+        <div class="auth-error" id="authError"></div>
+        <div class="auth-success" id="authSuccess"></div>
+
+        <!-- Login Form -->
+        <div id="loginForm">
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" id="loginUsername" placeholder="Enter your username">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="loginPassword" placeholder="Type your password">
+            </div>
+            <button class="forgot-btn" onclick="window.location.href='/forgot-password'">Forgot Password?</button>
+            <button class="auth-btn" id="loginBtn" onclick="handleLogin()">Login</button>
+            <div class="auth-footer">Don't have an account? <a onclick="setAuthTab('register')">Create Account</a></div>
+        </div>
+
+        <!-- Register Form -->
+        <div id="registerForm" style="display:none">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="regUsername" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="regFullName" placeholder="Full Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="regEmail" placeholder="user@gmail.com">
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Faculty</label>
+                    <select id="regFaculty">
+                        <option value="">Select Faculty</option>
+                        <option value="Agriculture">Agriculture</option>
+                        <option value="Arts">Arts</option>
+                        <option value="Law">Law</option>
+                        <option value="Science">Science</option>
+                        <option value="Social Sciences">Social Sciences</option>
+                        <option value="Education">Education</option>
+                        <option value="Pharmacy">Pharmacy</option>
+                        <option value="Technology">Technology</option>
+                        <option value="Administration">Administration</option>
+                        <option value="Environmental Design and Management">Environmental Design and Management</option>
+                        <option value="Basic Medical Sciences">Basic Medical Sciences</option>
+                        <option value="Clinical Sciences">Clinical Sciences</option>
+                        <option value="Dentistry">Dentistry</option>
+                        <option value="Computing">Computing</option>
+                        <option value="General Studies">General Studies</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Level</label>
+                    <select id="regLevel">
+                        <option value="100">100 Level</option>
+                        <option value="200">200 Level</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="regPassword" placeholder="Create a password" oninput="checkPasswordStrength(this.value)">
+                <div class="password-strength"><div class="bar" id="passwordStrengthBar"></div></div>
+                <span class="password-hint" id="passwordHint">Use 8+ characters with letters and numbers</span>
+            </div>
+            <div class="form-group">
+                <label>Confirm Password</label>
+                <input type="password" id="regConfirmPassword" placeholder="Confirm your password">
+            </div>
+
+            <div class="form-group">
+                <label>Security Question</label>
+                <select id="regSecurityQuestion">
+                    <option value="">Select a security question</option>
+                    <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+                    <option value="What is the name of your first pet?">What is the name of your first pet?</option>
+                    <option value="What is your favorite book?">What is your favorite book?</option>
+                    <option value="What is your best friend's name?">What is your best friend's name?</option>
+                    <option value="What is your childhood nickname?">What is your childhood nickname?</option>
+                    <option value="What is your favorite food?">What is your favorite food?</option>
+                    <option value="What city were you born in?">What city were you born in?</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Security Answer</label>
+                <input type="text" id="regSecurityAnswer" placeholder="Enter your security answer">
+            </div>
+            <div class="form-group">
+                <label>Department</label>
+                <input type="text" id="regDepartment" placeholder="e.g., Computer Science">
+            </div>
+
+            <button class="auth-btn" id="registerBtn" onclick="handleRegister()">Create Account</button>
+            <div class="auth-footer">Already have an account? <a onclick="setAuthTab('login')">Login</a></div>
+        </div>
+    </div>
 </div>
 
 <script>
-// ==================== CONFIGURATION ====================
-const API_BASE = 'https://oau-exam-api.onrender.com/api';
-const TOKEN = localStorage.getItem('oau_token');
+    // ============================================
+    // FIXED: Use Vercel API (Not Render!)
+    // ============================================
+    const API_BASE = '/api';
 
-if (!TOKEN) {
-    window.location.href = '/login';
-}
+    let currentSlide = 0;
+    const track = document.getElementById('slidesTrack');
+    const slides = track.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const nextBtn = document.getElementById('nextBtn');
+    const progressCircle = document.getElementById('progressCircle');
+    const circumference = 150.8;
 
-let selectedFile = null;
-let isUploading = false;
-let isDeleting = false;
-let currentLogoUrl = null;
+    function updateSlider() {
+        track.style.transform = `translateX(-${currentSlide * 100}%)`;
+        const progress = (currentSlide + 1) / totalSlides;
+        const offset = circumference - (progress * circumference);
+        progressCircle.style.strokeDashoffset = offset;
+    }
 
-// ==================== DOM REFS ====================
-const $ = id => document.getElementById(id);
-const qs = (sel, ctx = document) => ctx.querySelector(sel);
-
-// ==================== TOAST ====================
-function showToast(message, type = 'info') {
-    const toast = $('toast');
-    const icon = $('toastIcon');
-    const msg = $('toastMessage');
-    
-    msg.textContent = message;
-    icon.className = 'toast-icon ' + type;
-    const icons = {
-        success: '<i class="fas fa-check-circle"></i>',
-        error: '<i class="fas fa-exclamation-circle"></i>',
-        info: '<i class="fas fa-info-circle"></i>'
-    };
-    icon.innerHTML = icons[type] || icons.info;
-    
-    toast.classList.add('show');
-    clearTimeout(window.toastTimeout);
-    window.toastTimeout = setTimeout(() => toast.classList.remove('show'), 4000);
-}
-
-// ==================== SHOW ALERTS ====================
-function showAlert(type, msg) {
-    const el = $(type + 'Alert');
-    el.textContent = msg;
-    el.classList.add('show');
-    setTimeout(() => el.classList.remove('show'), 5000);
-}
-
-function hideAlerts() {
-    $('successAlert').classList.remove('show');
-    $('errorAlert').classList.remove('show');
-}
-
-// ==================== LOAD CURRENT LOGO ====================
-async function loadCurrentLogo() {
-    try {
-        const response = await fetch(API_BASE + '/logo/get-logo');
-        const data = await response.json();
-        
-        const preview = $('logoPreview');
-        const img = $('logoImage');
-        const placeholder = $('placeholderLogo');
-        const info = $('currentLogoInfo');
-        const infoText = $('currentLogoText');
-        const deleteBtn = $('deleteBtn');
-        
-        if (data.success && data.logoUrl) {
-            currentLogoUrl = data.logoUrl;
-            img.src = data.logoUrl + '?t=' + Date.now();
-            img.style.display = 'block';
-            placeholder.style.display = 'none';
-            preview.classList.add('has-logo');
-            
-            infoText.textContent = data.logoUrl.split('/').pop() || 'Custom logo uploaded';
-            info.classList.add('show');
-            deleteBtn.style.display = 'inline-flex';
-            
-            showToast('✅ Logo loaded successfully', 'success');
+    function nextSlide() {
+        if (currentSlide < totalSlides - 1) {
+            currentSlide++;
+            updateSlider();
         } else {
-            currentLogoUrl = null;
-            img.style.display = 'none';
-            placeholder.style.display = 'block';
-            preview.classList.remove('has-logo');
-            
-            infoText.textContent = 'No custom logo uploaded';
-            info.classList.remove('show');
-            deleteBtn.style.display = 'none';
+            openAuthModal('register');
         }
-    } catch (e) {
-        console.error('Load logo error:', e);
     }
-}
 
-// ==================== HANDLE FILE SELECT ====================
-function handleFileSelect(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-    
-    // Validate size (5MB)
-    if (file.size > 5 * 1024 * 1024) {
-        showAlert('error', 'File too large! Maximum 5MB allowed.');
-        clearFile();
-        return;
-    }
-    
-    // Validate type
-    const validTypes = ['image/png', 'image/jpeg', 'image/webp', 'image/gif', 'image/svg+xml'];
-    if (!validTypes.includes(file.type)) {
-        showAlert('error', 'Invalid file type. Please upload PNG, JPG, WebP, GIF, or SVG.');
-        clearFile();
-        return;
-    }
-    
-    selectedFile = file;
-    
-    // Show file info
-    const info = $('fileInfo');
-    $('fileName').textContent = file.name;
-    $('fileSize').textContent = (file.size / 1024).toFixed(1) + ' KB';
-    info.classList.add('show');
-    
-    // Enable upload button
-    $('uploadBtn').disabled = false;
-    $('uploadBtn').title = 'Upload ' + file.name;
-    
-    // Preview selected file
-    const reader = new FileReader();
-    reader.onload = function(e) {
-        const img = $('logoImage');
-        img.src = e.target.result;
-        img.style.display = 'block';
-        $('placeholderLogo').style.display = 'none';
-        $('logoPreview').classList.add('has-logo');
-    };
-    reader.readAsDataURL(file);
-    
-    hideAlerts();
-    showToast('📎 ' + file.name + ' selected', 'info');
-}
+    nextBtn.addEventListener('click', nextSlide);
 
-// ==================== CLEAR FILE ====================
-function clearFile() {
-    selectedFile = null;
-    $('fileInfo').classList.remove('show');
-    $('uploadBtn').disabled = true;
-    $('fileInput').value = '';
-    
-    // Revert preview to current logo
-    if (currentLogoUrl) {
-        $('logoImage').src = currentLogoUrl + '?t=' + Date.now();
-        $('logoImage').style.display = 'block';
-        $('placeholderLogo').style.display = 'none';
-        $('logoPreview').classList.add('has-logo');
-    } else {
-        $('logoImage').style.display = 'none';
-        $('placeholderLogo').style.display = 'block';
-        $('logoPreview').classList.remove('has-logo');
-    }
-    
-    hideAlerts();
-}
+    let touchStartX = 0;
+    let touchEndX = 0;
 
-// ==================== UPLOAD LOGO ====================
-async function uploadLogo() {
-    if (!selectedFile || isUploading) return;
-    
-    isUploading = true;
-    const btn = $('uploadBtn');
-    btn.classList.add('loading');
-    btn.disabled = true;
-    hideAlerts();
-    
-    const formData = new FormData();
-    formData.append('logo', selectedFile);
-    
-    try {
-        const response = await fetch(API_BASE + '/logo/upload-logo', {
+    document.querySelector('.slides-wrapper').addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, false);
+
+    document.querySelector('.slides-wrapper').addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, false);
+
+    function handleSwipe() {
+        if (touchStartX - touchEndX > 50) nextSlide();
+        if (touchEndX - touchStartX > 50 && currentSlide > 0) {
+            currentSlide--;
+            updateSlider();
+        }
+    }
+
+    function goToLogin() {
+        currentSlide = totalSlides - 1;
+        updateSlider();
+        openAuthModal('register');
+    }
+
+    const authModal = document.getElementById('authModal');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const authTabs = document.querySelectorAll('.auth-tab');
+
+    function openAuthModal(tab) {
+        authModal.classList.add('show');
+        setAuthTab(tab);
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeAuthModal() {
+        authModal.classList.remove('show');
+        document.body.style.overflow = '';
+        hideMessages();
+    }
+
+    function setAuthTab(tab) {
+        hideMessages();
+        authTabs.forEach(t => t.classList.remove('active'));
+        document.querySelector(`.auth-tab[data-tab="${tab}"]`).classList.add('active');
+
+        if (tab === 'login') {
+            loginForm.style.display = 'block';
+            registerForm.style.display = 'none';
+            document.getElementById('authTitle').innerText = 'Welcome back';
+            document.getElementById('authSubtitle').innerText = 'Enter your details to access your account.';
+        } else {
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+            document.getElementById('authTitle').innerText = 'Create Account';
+            document.getElementById('authSubtitle').innerText = 'Join thousands of students acing their exams.';
+        }
+    }
+
+    function hideMessages() {
+        document.getElementById('authError').classList.remove('show');
+        document.getElementById('authSuccess').classList.remove('show');
+    }
+
+    function showError(msg) {
+        const el = document.getElementById('authError');
+        el.innerText = msg;
+        el.classList.add('show');
+        document.getElementById('authSuccess').classList.remove('show');
+    }
+
+    function showSuccess(msg) {
+        const el = document.getElementById('authSuccess');
+        el.innerText = msg;
+        el.classList.add('show');
+        document.getElementById('authError').classList.remove('show');
+    }
+
+    function showLoading() {
+        document.getElementById('loadingOverlay').classList.add('show');
+    }
+    function hideLoading() {
+        document.getElementById('loadingOverlay').classList.remove('show');
+    }
+
+    // ============================================
+    // LOGIN - Uses Vercel API
+    // ============================================
+    function handleLogin() {
+        const username = document.getElementById('loginUsername').value.trim();
+        const password = document.getElementById('loginPassword').value.trim();
+        const btn = document.getElementById('loginBtn');
+
+        if(!username || !password) return showError("Please fill in all fields.");
+
+        btn.disabled = true;
+        showLoading();
+
+        fetch(API_BASE + '/auth/login', {
             method: 'POST',
-            headers: {
-                'Authorization': 'Bearer ' + TOKEN
-            },
-            body: formData
-        });
-        
-        const data = await response.json();
-        
-        if (data.success) {
-            showAlert('success', '✅ Logo uploaded successfully! Refreshing...');
-            showToast('✅ Logo uploaded successfully!', 'success');
-            
-            // Clear file state
-            selectedFile = null;
-            $('fileInfo').classList.remove('show');
-            $('fileInput').value = '';
-            
-            // Reload logo
-            await loadCurrentLogo();
-            
-            // Refresh the page after a moment to show logo everywhere
-            setTimeout(() => {
-                // Trigger logo update on all pages
-                localStorage.setItem('logoUpdated', Date.now().toString());
-                window.location.reload();
-            }, 1000);
-        } else {
-            showAlert('error', '❌ ' + (data.error || 'Upload failed'));
-            showToast('Upload failed: ' + (data.error || 'Unknown error'), 'error');
-        }
-    } catch (e) {
-        console.error('Upload error:', e);
-        showAlert('error', '❌ Connection error. Please try again.');
-        showToast('Connection error. Please try again.', 'error');
-    }
-    
-    isUploading = false;
-    btn.classList.remove('loading');
-    btn.disabled = false;
-}
-
-// ==================== DELETE LOGO ====================
-async function deleteLogo() {
-    if (isDeleting) return;
-    if (!confirm('Remove the custom logo? The default OAU crest will be restored.')) return;
-    
-    isDeleting = true;
-    const btn = $('deleteBtn');
-    btn.classList.add('loading');
-    btn.disabled = true;
-    hideAlerts();
-    
-    try {
-        const response = await fetch(API_BASE + '/logo/delete-logo', {
-            method: 'DELETE',
-            headers: {
-                'Authorization': 'Bearer ' + TOKEN
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+        })
+        .then(res => res.json())
+        .then(data => {
+            hideLoading();
+            btn.disabled = false;
+            if(data.success) {
+                localStorage.setItem('oau_token', data.token);
+                localStorage.setItem('oau_user', JSON.stringify(data.user));
+                showSuccess("✅ Login successful! Redirecting...");
+                setTimeout(() => { window.location.href = '/app'; }, 1000);
+            } else {
+                showError(data.error || "Invalid username or password.");
             }
+        })
+        .catch(err => {
+            hideLoading();
+            btn.disabled = false;
+            showError("Network error. Please try again.");
+            console.error(err);
         });
-        
-        const data = await response.json();
-        
-        if (data.success) {
-            showAlert('success', '✅ Logo removed successfully!');
-            showToast('Logo removed successfully', 'success');
-            
-            // Reload logo
-            await loadCurrentLogo();
-            
-            // Refresh to show default logo
-            setTimeout(() => {
-                localStorage.setItem('logoUpdated', Date.now().toString());
-                window.location.reload();
-            }, 1000);
-        } else {
-            showAlert('error', '❌ ' + (data.error || 'Delete failed'));
-        }
-    } catch (e) {
-        console.error('Delete error:', e);
-        showAlert('error', '❌ Connection error. Please try again.');
     }
-    
-    isDeleting = false;
-    btn.classList.remove('loading');
-    btn.disabled = false;
-}
 
-// ==================== DRAG & DROP ====================
-function initDragDrop() {
-    const area = $('uploadArea');
-    
-    area.addEventListener('dragover', function(e) {
-        e.preventDefault();
-        this.classList.add('dragover');
-    });
-    
-    area.addEventListener('dragleave', function(e) {
-        e.preventDefault();
-        this.classList.remove('dragover');
-    });
-    
-    area.addEventListener('drop', function(e) {
-        e.preventDefault();
-        this.classList.remove('dragover');
-        
-        const files = e.dataTransfer.files;
-        if (files.length > 0) {
-            const input = $('fileInput');
-            const dt = new DataTransfer();
-            dt.items.add(files[0]);
-            input.files = dt.files;
-            input.dispatchEvent(new Event('change'));
+    // ============================================
+    // REGISTER - Uses Vercel API
+    // ============================================
+    function handleRegister() {
+        const username = document.getElementById('regUsername').value.trim();
+        const fullName = document.getElementById('regFullName').value.trim();
+        const email = document.getElementById('regEmail').value.trim();
+        const faculty = document.getElementById('regFaculty').value;
+        const level = document.getElementById('regLevel').value;
+        const password = document.getElementById('regPassword').value;
+        const confirmPassword = document.getElementById('regConfirmPassword').value;
+        const securityQuestion = document.getElementById('regSecurityQuestion').value;
+        const securityAnswer = document.getElementById('regSecurityAnswer').value.trim();
+        const department = document.getElementById('regDepartment').value.trim();
+        const btn = document.getElementById('registerBtn');
+
+        if(!username || !fullName || !email || !faculty || !level || !password || !confirmPassword || !securityQuestion || !securityAnswer) {
+            return showError("Please fill in all required fields.");
         }
-    });
-}
+        if(password !== confirmPassword) return showError("Passwords do not match.");
+        if(password.length < 6) return showError("Password must be at least 6 characters.");
 
-// ==================== THEME ====================
-function initTheme() {
-    const saved = localStorage.getItem('theme');
-    if (saved === 'light') {
-        document.body.classList.add('light-mode');
-    }
-}
-initTheme();
+        btn.disabled = true;
+        showLoading();
 
-// ==================== INIT ====================
-document.addEventListener('DOMContentLoaded', function() {
-    loadCurrentLogo();
-    initDragDrop();
-    
-    // Check for logo update signal from other tabs
-    window.addEventListener('storage', function(e) {
-        if (e.key === 'logoUpdated') {
-            loadCurrentLogo();
-            showToast('🔄 Logo updated', 'info');
-        }
-    });
-    
-    // Also check on focus
-    document.addEventListener('visibilitychange', function() {
-        if (!document.hidden) {
-            // Check if logo might have changed
-            const logoUpdated = localStorage.getItem('logoUpdated');
-            if (logoUpdated) {
-                loadCurrentLogo();
-                // Clear the flag after checking
-                setTimeout(() => localStorage.removeItem('logoUpdated'), 1000);
+        fetch(API_BASE + '/auth/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                username, fullName, email, faculty, level, 
+                password, securityQuestion, securityAnswer, department 
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            hideLoading();
+            btn.disabled = false;
+            if(data.success) {
+                localStorage.setItem('oau_token', data.token);
+                localStorage.setItem('oau_user', JSON.stringify(data.user));
+                showSuccess("✅ Account created! Redirecting...");
+                setTimeout(() => { window.location.href = '/app'; }, 1000);
+            } else {
+                showError(data.error || "Registration failed. Please try again.");
             }
-        }
-    });
-});
+        })
+        .catch(err => {
+            hideLoading();
+            btn.disabled = false;
+            showError("Network error. Please try again.");
+            console.error(err);
+        });
+    }
 
-// ==================== EXPOSE GLOBALLY ====================
-window.handleFileSelect = handleFileSelect;
-window.clearFile = clearFile;
-window.uploadLogo = uploadLogo;
-window.deleteLogo = deleteLogo;
-window.loadCurrentLogo = loadCurrentLogo;
+    function checkPasswordStrength(pass) {
+        const bar = document.getElementById('passwordStrengthBar');
+        if(!pass) { bar.style.width = '0%'; bar.className = 'bar'; return; }
+        let strength = 0;
+        if(pass.length >= 6) strength++;
+        if(pass.length >= 10) strength++;
+        if(/[a-z]/.test(pass) && /[A-Z]/.test(pass)) strength++;
+        if(/\d/.test(pass)) strength++;
+        if(/[^a-zA-Z0-9]/.test(pass)) strength++;
+        const levels = ['weak', 'medium', 'strong', 'very-strong'];
+        const widths = ['25%', '50%', '75%', '100%'];
+        const index = Math.min(Math.max(strength - 1, 0), 3);
+        bar.className = 'bar ' + levels[index];
+        bar.style.width = widths[index];
+    }
+
+    // Enter key handlers
+    document.getElementById('loginUsername').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('loginPassword').focus(); });
+    document.getElementById('loginPassword').addEventListener('keydown', (e) => { if (e.key === 'Enter') handleLogin(); });
+
+    document.getElementById('regUsername').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regFullName').focus(); });
+    document.getElementById('regFullName').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regEmail').focus(); });
+    document.getElementById('regEmail').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regFaculty').focus(); });
+    document.getElementById('regFaculty').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regLevel').focus(); });
+    document.getElementById('regLevel').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regPassword').focus(); });
+    document.getElementById('regPassword').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regConfirmPassword').focus(); });
+    document.getElementById('regConfirmPassword').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regSecurityQuestion').focus(); });
+    document.getElementById('regSecurityQuestion').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regSecurityAnswer').focus(); });
+    document.getElementById('regSecurityAnswer').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regDepartment').focus(); });
+    document.getElementById('regDepartment').addEventListener('keydown', (e) => { if (e.key === 'Enter') handleRegister(); });
+
+    // Expose functions to window for inline onclick
+    window.openAuthModal = openAuthModal;
+    window.closeAuthModal = closeAuthModal;
+    window.setAuthTab = setAuthTab;
+    window.handleLogin = handleLogin;
+    window.handleRegister = handleRegister;
+    window.goToLogin = goToLogin;
+    window.checkPasswordStrength = checkPasswordStrength;
+
+    // Check if user already logged in
+    function checkAuth() {
+        const token = localStorage.getItem('oau_token');
+        if (token) {
+            fetch(API_BASE + '/auth/me', {
+                headers: { 'Authorization': 'Bearer ' + token }
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = '/app';
+                } else {
+                    localStorage.removeItem('oau_token');
+                    localStorage.removeItem('oau_user');
+                }
+            })
+            .catch(() => {
+                localStorage.removeItem('oau_token');
+                localStorage.removeItem('oau_user');
+            });
+        }
+    }
+
+    checkAuth();
+    updateSlider();
 </script>
 </body>
 </html>
