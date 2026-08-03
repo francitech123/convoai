@@ -1,245 +1,841 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
-  <title>FrancisTech — Developer | Apps | OAU CBE Practice</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#0b0d17;color:#ffffff;min-height:100vh}
-    .container{max-width:1100px;margin:0 auto;padding:30px 20px 60px}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FrancisTech — Developer | OAU CBE Practice</title>
+    <meta name="description" content="FrancisTech — Software developer building innovative apps for students and businesses. Creator of OAU CBE Practice." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <style>
+        /* ============================================
+                   ROOT & RESET
+                   ============================================ */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    /* Header / Nav */
-    .nav{display:flex;justify-content:space-between;align-items:center;padding:10px 0 30px;flex-wrap:wrap;gap:16px}
-    .logo{font-size:1.3rem;font-weight:800;background:linear-gradient(135deg,#3b82f6,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-    .nav-links{display:flex;gap:20px;flex-wrap:wrap}
-    .nav-links a{color:rgba(255,255,255,0.6);text-decoration:none;font-size:0.85rem;font-weight:500;transition:0.2s}
-    .nav-links a:hover{color:#3b82f6}
+        :root {
+            --bg-primary: #090b14;
+            --bg-secondary: #0f1322;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --border-color: rgba(255, 255, 255, 0.06);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.6);
+            --text-muted: rgba(255, 255, 255, 0.3);
+            --accent: #3b82f6;
+            --accent-gradient: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            --accent-hover: #2563eb;
+            --radius: 16px;
+            --radius-sm: 10px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
 
-    /* Hero */
-    .hero{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;padding:20px 0 40px}
-    @media(max-width:768px){.hero{grid-template-columns:1fr;gap:30px;text-align:center}}
-    .hero h1{font-size:2.5rem;font-weight:900;line-height:1.1}
-    .hero h1 span{background:linear-gradient(135deg,#3b82f6,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-    .hero p{color:rgba(255,255,255,0.6);font-size:1.05rem;margin:16px 0 24px;line-height:1.6}
-    .hero-badge{display:inline-block;background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.2);padding:4px 14px;border-radius:30px;font-size:0.75rem;color:#3b82f6;margin-bottom:14px}
-    .hero-image{background:linear-gradient(135deg,#1a1d2e,#0b0d17);border-radius:20px;padding:30px;text-align:center;border:1px solid rgba(255,255,255,0.05);position:relative;overflow:hidden}
-    .hero-image .big-icon{font-size:6rem;display:block;margin-bottom:10px}
-    .hero-image .code-text{font-size:0.8rem;color:rgba(255,255,255,0.3);font-family:monospace;word-break:break-all}
+        html {
+            scroll-behavior: smooth;
+        }
 
-    /* Buttons */
-    .btn-group{display:flex;gap:12px;flex-wrap:wrap}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:12px;font-weight:600;font-size:0.9rem;cursor:pointer;border:none;text-decoration:none;transition:all 0.2s}
-    .btn-primary{background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff}
-    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(59,130,246,0.3)}
-    .btn-outline{background:transparent;border:1px solid rgba(255,255,255,0.15);color:#fff}
-    .btn-outline:hover{background:rgba(255,255,255,0.05);border-color:#3b82f6}
-    .btn-success{background:#10b981;color:#fff}
-    .btn-success:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(16,185,129,0.3)}
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
 
-    /* Section Titles */
-    .section-title{font-size:1.8rem;font-weight:700;margin-bottom:8px}
-    .section-sub{color:rgba(255,255,255,0.4);font-size:0.95rem;margin-bottom:30px}
+        /* ============================================
+                   UTILITY
+                   ============================================ */
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
 
-    /* App Card */
-    .app-card{background:rgba(30,35,55,0.4);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:30px;margin-bottom:30px;display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center}
-    @media(max-width:600px){.app-card{grid-template-columns:1fr;text-align:center;gap:16px}}
-    .app-icon{width:60px;height:60px;border-radius:16px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);display:flex;align-items:center;justify-content:center;font-size:1.8rem}
-    .app-info h3{font-size:1.2rem;font-weight:700}
-    .app-info p{color:rgba(255,255,255,0.5);font-size:0.85rem;margin-top:4px}
-    .app-info .tags{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}
-    .app-info .tags span{background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.1);padding:2px 12px;border-radius:20px;font-size:0.65rem;color:#3b82f6}
+        .section-badge {
+            display: inline-block;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.15);
+            padding: 4px 16px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
 
-    /* Grid for other apps */
-    .apps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-bottom:30px}
-    .app-mini-card{background:rgba(30,35,55,0.3);border:1px solid rgba(255,255,255,0.04);border-radius:16px;padding:20px;text-align:center;transition:0.2s}
-    .app-mini-card:hover{transform:translateY(-4px);border-color:rgba(59,130,246,0.2)}
-    .app-mini-card .icon{font-size:2rem;margin-bottom:8px}
-    .app-mini-card h4{font-size:0.9rem;font-weight:600}
-    .app-mini-card p{font-size:0.7rem;color:rgba(255,255,255,0.4);margin-top:4px}
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+        }
 
-    /* Services */
-    .services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px;margin-bottom:30px}
-    .service-card{background:rgba(30,35,55,0.3);border:1px solid rgba(255,255,255,0.04);border-radius:16px;padding:20px;text-align:center;transition:0.2s}
-    .service-card:hover{transform:translateY(-4px);border-color:rgba(59,130,246,0.2)}
-    .service-card i{font-size:2rem;color:#3b82f6;margin-bottom:8px}
-    .service-card h4{font-size:0.9rem;font-weight:600}
-    .service-card p{font-size:0.7rem;color:rgba(255,255,255,0.4);margin-top:4px}
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 400;
+            max-width: 500px;
+        }
 
-    /* Social Links */
-    .social-links{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
-    .social-link{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.06);color:rgba(255,255,255,0.5);text-decoration:none;transition:0.2s;font-size:1.1rem}
-    .social-link:hover{background:rgba(59,130,246,0.1);color:#3b82f6;border-color:#3b82f6}
+        /* ============================================
+                   NAVIGATION
+                   ============================================ */
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            gap: 16px;
+        }
 
-    /* Footer */
-    .footer{border-top:1px solid rgba(255,255,255,0.05);padding:24px 0 10px;margin-top:40px;text-align:center;color:rgba(255,255,255,0.2);font-size:0.75rem}
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+        }
 
-    /* Responsive */
-    @media(max-width:480px){.hero h1{font-size:1.8rem}.container{padding:16px}.app-card{padding:20px}}
-  </style>
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gradient);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--accent-gradient);
+            color: #fff !important;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.8rem !important;
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        @media (max-width: 640px) {
+            .nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 16px;
+            }
+        }
+
+        /* ============================================
+                   HERO
+                   ============================================ */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            padding: 60px 0 50px;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+                padding: 30px 0;
+            }
+        }
+
+        .hero-content h1 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+
+        .hero-content h1 .highlight {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            margin: 20px 0 28px;
+            line-height: 1.7;
+            max-width: 480px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content p {
+                max-width: 100%;
+            }
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .hero-buttons {
+                justify-content: center;
+            }
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--accent-gradient);
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.25);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 35px rgba(59, 130, 246, 0.35);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .btn-success {
+            background: #10b981;
+            color: #fff;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(16, 185, 129, 0.3);
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-code-block {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 28px 32px;
+            width: 100%;
+            max-width: 420px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-code-block .dots {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+
+        .hero-code-block .dots span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: block;
+        }
+
+        .hero-code-block .dots span:nth-child(1) {
+            background: #ef4444;
+        }
+        .hero-code-block .dots span:nth-child(2) {
+            background: #f59e0b;
+        }
+        .hero-code-block .dots span:nth-child(3) {
+            background: #10b981;
+        }
+
+        .hero-code-block .line {
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .hero-code-block .line .keyword {
+            color: #8b5cf6;
+        }
+        .hero-code-block .line .string {
+            color: #34d399;
+        }
+        .hero-code-block .line .function {
+            color: #60a5fa;
+        }
+        .hero-code-block .line .comment {
+            color: var(--text-muted);
+        }
+
+        /* ============================================
+                   SOCIAL LINKS
+                   ============================================ */
+        .social-bar {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .social-bar {
+                justify-content: center;
+            }
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .social-link:hover {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent);
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* ============================================
+                   FEATURED APP SECTION
+                   ============================================ */
+        .featured-app {
+            padding: 60px 0 40px;
+        }
+
+        .app-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 32px;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 24px;
+            align-items: center;
+            margin-top: 16px;
+            transition: var(--transition);
+        }
+
+        .app-card:hover {
+            border-color: rgba(59, 130, 246, 0.2);
+            transform: translateY(-4px);
+        }
+
+        @media (max-width: 640px) {
+            .app-card {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 16px;
+                padding: 24px;
+            }
+        }
+
+        .app-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: var(--radius-sm);
+            background: var(--accent-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 640px) {
+            .app-icon {
+                margin: 0 auto;
+            }
+        }
+
+        .app-info h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .app-info p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            max-width: 500px;
+        }
+
+        .app-tags {
+            display: flex;
+            gap: 6px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 640px) {
+            .app-tags {
+                justify-content: center;
+            }
+        }
+
+        .app-tags span {
+            background: rgba(59, 130, 246, 0.08);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            padding: 2px 12px;
+            border-radius: 50px;
+            font-size: 0.65rem;
+            font-weight: 500;
+            color: var(--accent);
+        }
+
+        /* ============================================
+                   APP FEATURES GRID
+                   ============================================ */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin: 24px 0 16px;
+        }
+
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .feature-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 16px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .feature-item:hover {
+            border-color: rgba(59, 130, 246, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .feature-item i {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .feature-item h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .feature-item p {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        /* ============================================
+                   SERVICES SECTION
+                   ============================================ */
+        .services-section {
+            padding: 40px 0;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 20px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            border-color: rgba(59, 130, 246, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .service-card i {
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .service-card h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .service-card p {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        /* ============================================
+                   CONTACT SECTION
+                   ============================================ */
+        .contact-section {
+            padding: 40px 0 20px;
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 16px 0 20px;
+        }
+
+        .contact-methods .btn {
+            padding: 10px 22px;
+            font-size: 0.85rem;
+        }
+
+        /* ============================================
+                   FOOTER
+                   ============================================ */
+        .footer {
+            border-top: 1px solid var(--border-color);
+            padding: 24px 0 16px;
+            margin-top: 40px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+        }
+
+        .footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer a:hover {
+            color: var(--accent);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+
+        /* ============================================
+                   RESPONSIVE TWEAKS
+                   ============================================ */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 16px;
+            }
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.8rem;
+            }
+            .app-card {
+                padding: 18px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<div class="container">
-
-  <!-- ==================== NAV ==================== -->
-  <nav class="nav">
-    <div class="logo">FrancisTech</div>
-    <div class="nav-links">
-      <a href="#apps">Apps</a>
-      <a href="#services">Services</a>
-      <a href="#contact">Contact</a>
+    <!-- ============================================
+    NAVIGATION
+    ============================================ -->
+    <div class="container">
+        <nav class="nav">
+            <a href="/" class="logo">FrancisTech</a>
+            <div class="nav-links">
+                <a href="#apps">Apps</a>
+                <a href="#services">Services</a>
+                <a href="#contact">Contact</a>
+                <a href="/download" class="nav-cta"><i class="fas fa-download"></i> Download App</a>
+            </div>
+        </nav>
     </div>
-  </nav>
 
-  <!-- ==================== HERO ==================== -->
-  <section class="hero">
-    <div>
-      <div class="hero-badge"><i class="fas fa-code"></i> Developer &amp; Founder</div>
-      <h1>Hi, I'm <span>FrancisTech</span></h1>
-      <p>I build apps, websites, and tools for students and businesses. Passionate about technology and education.</p>
-      <div class="btn-group">
-        <a href="#apps" class="btn btn-primary"><i class="fas fa-rocket"></i> View My Apps</a>
-        <a href="#contact" class="btn btn-outline"><i class="fas fa-envelope"></i> Contact Me</a>
-      </div>
-      <div class="social-links">
-        <a href="https://github.com/francitech123" class="social-link" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-        <a href="https://wa.me/2348065508373" class="social-link" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-        <a href="https://t.me/francistech" class="social-link" target="_blank" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
-        <a href="mailto:francistech123@gmail.com" class="social-link" target="_blank" aria-label="Email"><i class="fas fa-envelope"></i></a>
-        <a href="https://x.com/francistech_" class="social-link" target="_blank" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
-      </div>
-    </div>
-    <div class="hero-image">
-      <span class="big-icon">🚀</span>
-      <div style="font-size:1.3rem;font-weight:700;color:rgba(255,255,255,0.8)">FrancisTech</div>
-      <div style="color:rgba(255,255,255,0.3);font-size:0.8rem;margin-top:4px">Building the future, one line of code at a time.</div>
-      <div class="code-text" style="margin-top:16px;font-size:0.7rem;color:rgba(255,255,255,0.15)">
-        &lt;developer /&gt; &lt;problem-solver /&gt; &lt;innovator /&gt;
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== FEATURED APP ==================== -->
-  <section id="apps">
-    <h2 class="section-title">📱 Featured App</h2>
-    <p class="section-sub">My flagship project — built for OAU students</p>
-
-    <div class="app-card">
-      <div class="app-icon"><i class="fas fa-graduation-cap"></i></div>
-      <div class="app-info">
-        <h3>OAU CBE Practice</h3>
-        <p>The ultimate exam preparation app for Obafemi Awolowo University students. 10,000+ questions, AI tutor, leaderboards, and more.</p>
-        <div class="tags">
-          <span>100% FREE</span>
-          <span>100 &amp; 200 Level</span>
-          <span>Android App</span>
-          <span>Web App</span>
+    <!-- ============================================
+    HERO
+    ============================================ -->
+    <section class="hero container">
+        <div class="hero-content">
+            <span class="section-badge"><i class="fas fa-code"></i> Developer &amp; Founder</span>
+            <h1>
+                Hi, I'm <span class="highlight">FrancisTech</span>
+            </h1>
+            <p>
+                I build software that solves real problems — from exam prep apps for
+                students to custom platforms for businesses. Currently focused on
+                education technology and mobile development.
+            </p>
+            <div class="hero-buttons">
+                <a href="#apps" class="btn btn-primary"><i class="fas fa-rocket"></i> View My Work</a>
+                <a href="#contact" class="btn btn-secondary"><i class="fas fa-envelope"></i> Contact</a>
+            </div>
+            <div class="social-bar">
+                <a href="https://github.com/francitech123" class="social-link" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://x.com/francistech_" class="social-link" target="_blank" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://linkedin.com/in/francistech" class="social-link" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://wa.me/2348065508373" class="social-link" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://t.me/francistech" class="social-link" target="_blank" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+                <a href="mailto:francistech123@gmail.com" class="social-link" target="_blank" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
         </div>
-      </div>
-      <div>
-        <a href="/download" class="btn btn-success" style="white-space:nowrap"><i class="fas fa-download"></i> Download APK</a>
-      </div>
-    </div>
-  </section>
+        <div class="hero-visual">
+            <div class="hero-code-block">
+                <div class="dots">
+                    <span></span><span></span><span></span>
+                </div>
+                <div class="line"><span class="comment">// Building the future</span></div>
+                <div class="line"><span class="keyword">const</span> <span class="function">developer</span> = <span class="string">{</span></div>
+                <div class="line">&nbsp;&nbsp;<span class="keyword">name</span>: <span class="string">"FrancisTech"</span>,</div>
+                <div class="line">&nbsp;&nbsp;<span class="keyword">mission</span>: <span class="string">"Build &amp; Solve"</span>,</div>
+                <div class="line">&nbsp;&nbsp;<span class="keyword">tools</span>: [<span class="string">"JS"</span>, <span class="string">"Node"</span>, <span class="string">"React"</span>, <span class="string">"MongoDB"</span>]</div>
+                <div class="line"><span class="string">}</span>;</div>
+            </div>
+        </div>
+    </section>
 
-  <!-- ==================== OTHER APPS ==================== -->
-  <h3 style="font-size:1.1rem;font-weight:600;margin-bottom:12px">More Apps</h3>
-  <div class="apps-grid">
-    <div class="app-mini-card">
-      <div class="icon">🤖</div>
-      <h4>Nox AI Chat</h4>
-      <p>AI study assistant</p>
-    </div>
-    <div class="app-mini-card">
-      <div class="icon">📊</div>
-      <h4>Leaderboard</h4>
-      <p>Compete with peers</p>
-    </div>
-    <div class="app-mini-card">
-      <div class="icon">📚</div>
-      <h4>Study Mode</h4>
-      <p>Topic by topic</p>
-    </div>
-    <div class="app-mini-card">
-      <div class="icon">🔔</div>
-      <h4>Push Notifications</h4>
-      <p>Daily reminders</p>
-    </div>
-  </div>
+    <!-- ============================================
+    FEATURED APP
+    ============================================ -->
+    <section id="apps" class="featured-app container">
+        <span class="section-badge"><i class="fas fa-star"></i> Featured Project</span>
+        <h2 class="section-title">OAU CBE Practice</h2>
+        <p class="section-subtitle">The ultimate exam preparation platform for Obafemi Awolowo University students.</p>
 
-  <!-- ==================== SERVICES ==================== -->
-  <section id="services">
-    <h2 class="section-title">🛠️ What I Do</h2>
-    <p class="section-sub">Services I offer to clients and businesses</p>
+        <div class="app-card">
+            <div class="app-icon"><i class="fas fa-graduation-cap"></i></div>
+            <div class="app-info">
+                <h3>OAU CBE Practice</h3>
+                <p>10,000+ practice questions • Nox AI Tutor • Leaderboards • Study Mode • 100% Free</p>
+                <div class="app-tags">
+                    <span>Android App</span>
+                    <span>Web App</span>
+                    <span>100 &amp; 200 Level</span>
+                    <span>100% Free</span>
+                </div>
+            </div>
+            <div>
+                <a href="/download" class="btn btn-success"><i class="fas fa-download"></i> Download APK</a>
+            </div>
+        </div>
 
-    <div class="services-grid">
-      <div class="service-card">
-        <i class="fas fa-code"></i>
-        <h4>Web Development</h4>
-        <p>Full-stack websites and web apps</p>
-      </div>
-      <div class="service-card">
-        <i class="fas fa-mobile-alt"></i>
-        <h4>Mobile Apps</h4>
-        <p>Android and cross-platform apps</p>
-      </div>
-      <div class="service-card">
-        <i class="fas fa-robot"></i>
-        <h4>AI Integration</h4>
-        <p>Chatbots, AI assistants, automation</p>
-      </div>
-      <div class="service-card">
-        <i class="fas fa-cloud"></i>
-        <h4>Cloud &amp; DevOps</h4>
-        <p>Deployment, hosting, scaling</p>
-      </div>
-      <div class="service-card">
-        <i class="fas fa-database"></i>
-        <h4>Database Design</h4>
-        <p>MongoDB, SQL, Firebase</p>
-      </div>
-      <div class="service-card">
-        <i class="fas fa-headset"></i>
-        <h4>Tech Consulting</h4>
-        <p>Project planning &amp; architecture</p>
-      </div>
-    </div>
-  </section>
+        <div class="features-grid">
+            <div class="feature-item">
+                <i class="fas fa-brain"></i>
+                <h4>Nox AI</h4>
+                <p>AI study assistant</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-book-open"></i>
+                <h4>Study Mode</h4>
+                <p>Topic by topic</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-pen"></i>
+                <h4>Exam Mode</h4>
+                <p>Full CBT simulation</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-trophy"></i>
+                <h4>Leaderboard</h4>
+                <p>Compete with peers</p>
+            </div>
+        </div>
+    </section>
 
-  <!-- ==================== CONTACT ==================== -->
-  <section id="contact">
-    <h2 class="section-title">📬 Let's Connect</h2>
-    <p class="section-sub">Have a project in mind? Or just want to say hi?</p>
+    <!-- ============================================
+    SERVICES
+    ============================================ -->
+    <section id="services" class="services-section container">
+        <span class="section-badge"><i class="fas fa-tools"></i> What I Do</span>
+        <h2 class="section-title">Services</h2>
+        <p class="section-subtitle">Helping businesses and individuals bring their ideas to life.</p>
 
-    <div style="display:flex;flex-wrap:wrap;gap:16px;margin-bottom:20px">
-      <a href="mailto:francistech123@gmail.com" class="btn btn-primary"><i class="fas fa-envelope"></i> francistech123@gmail.com</a>
-      <a href="https://wa.me/2348065508373" class="btn btn-success"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-      <a href="https://t.me/francistech" class="btn btn-outline"><i class="fab fa-telegram-plane"></i> Telegram</a>
-    </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fas fa-code"></i>
+                <h4>Web Development</h4>
+                <p>Full-stack websites and web applications</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-mobile-alt"></i>
+                <h4>Mobile Apps</h4>
+                <p>Android and cross-platform mobile apps</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-robot"></i>
+                <h4>AI Integration</h4>
+                <p>Chatbots, AI assistants, automation</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-cloud"></i>
+                <h4>Cloud &amp; DevOps</h4>
+                <p>Deployment, hosting, and scaling</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-database"></i>
+                <h4>Database Design</h4>
+                <p>MongoDB, SQL, Firebase, Supabase</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-headset"></i>
+                <h4>Tech Consulting</h4>
+                <p>Project planning and architecture</p>
+            </div>
+        </div>
+    </section>
 
-    <div class="social-links" style="gap:16px">
-      <a href="https://github.com/francitech123" class="social-link" target="_blank" style="width:50px;height:50px;font-size:1.4rem"><i class="fab fa-github"></i></a>
-      <a href="https://x.com/francistech_" class="social-link" target="_blank" style="width:50px;height:50px;font-size:1.4rem"><i class="fab fa-x-twitter"></i></a>
-      <a href="https://linkedin.com/in/francistech" class="social-link" target="_blank" style="width:50px;height:50px;font-size:1.4rem"><i class="fab fa-linkedin-in"></i></a>
-      <a href="https://youtube.com/@francistech" class="social-link" target="_blank" style="width:50px;height:50px;font-size:1.4rem"><i class="fab fa-youtube"></i></a>
-      <a href="mailto:francistech123@gmail.com" class="social-link" target="_blank" style="width:50px;height:50px;font-size:1.4rem"><i class="fas fa-envelope"></i></a>
-    </div>
-  </section>
+    <!-- ============================================
+    CONTACT
+    ============================================ -->
+    <section id="contact" class="contact-section container">
+        <span class="section-badge"><i class="fas fa-envelope"></i> Let's Connect</span>
+        <h2 class="section-title">Get in Touch</h2>
+        <p class="section-subtitle">Have a project in mind? Or just want to say hello?</p>
 
-  <!-- ==================== FOOTER ==================== -->
-  <div class="footer">
-    <p>© 2026 FrancisTech. Built with ❤️ in Nigeria.</p>
-    <p style="margin-top:4px">
-      <a href="/" style="color:rgba(255,255,255,0.2);text-decoration:none">Home</a> &middot;
-      <a href="/download" style="color:rgba(255,255,255,0.2);text-decoration:none">Download OAU CBE Practice</a>
-    </p>
-  </div>
+        <div class="contact-methods">
+            <a href="mailto:francistech123@gmail.com" class="btn btn-primary"><i class="fas fa-envelope"></i> francistech123@gmail.com</a>
+            <a href="https://wa.me/2348065508373" class="btn btn-success"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <a href="https://t.me/francistech" class="btn btn-secondary"><i class="fab fa-telegram-plane"></i> Telegram</a>
+        </div>
 
-</div>
+        <div class="social-bar" style="gap:12px;">
+            <a href="https://github.com/francitech123" class="social-link" target="_blank" style="width:44px;height:44px;font-size:1.2rem;"><i class="fab fa-github"></i></a>
+            <a href="https://x.com/francistech_" class="social-link" target="_blank" style="width:44px;height:44px;font-size:1.2rem;"><i class="fab fa-x-twitter"></i></a>
+            <a href="https://linkedin.com/in/francistech" class="social-link" target="_blank" style="width:44px;height:44px;font-size:1.2rem;"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://wa.me/2348065508373" class="social-link" target="_blank" style="width:44px;height:44px;font-size:1.2rem;"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://t.me/francistech" class="social-link" target="_blank" style="width:44px;height:44px;font-size:1.2rem;"><i class="fab fa-telegram-plane"></i></a>
+            <a href="https://youtube.com/@francistech" class="social-link" target="_blank" style="width:44px;height:44px;font-size:1.2rem;"><i class="fab fa-youtube"></i></a>
+        </div>
+    </section>
+
+    <!-- ============================================
+    FOOTER
+    ============================================ -->
+    <footer class="footer container">
+        <div class="footer-links">
+            <a href="/">Home</a>
+            <a href="/download">Download OAU CBE Practice</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <p>&copy; 2026 FrancisTech. Built with ❤️ in Nigeria.</p>
+    </footer>
 
 </body>
 </html>
