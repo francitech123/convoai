@@ -9,121 +9,139 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Inter',sans-serif;background:#f8fafc;color:#0f172a;min-height:100vh;-webkit-font-smoothing:antialiased;overflow:hidden}
+        body{font-family:'Inter',sans-serif;background:#0a0e1a;color:#f0f4ff;min-height:100vh;-webkit-font-smoothing:antialiased;overflow:hidden}
 
-        .app-container{position:fixed;top:0;left:0;right:0;bottom:0;display:flex;flex-direction:column;background:#f8fafc}
+        .app-container{position:fixed;top:0;left:0;right:0;bottom:0;display:flex;flex-direction:column;background:#0a0e1a}
 
-        .skip-btn{position:absolute;top:20px;right:24px;z-index:30;background:transparent;border:none;color:#64748b;font-weight:600;font-size:.85rem;cursor:pointer;padding:8px 12px;transition:color .2s;font-family:inherit}
-        .skip-btn:hover{color:#0f172a}
+        .skip-btn{position:absolute;top:20px;right:24px;z-index:30;background:transparent;border:none;color:#8899bb;font-weight:600;font-size:.85rem;cursor:pointer;padding:8px 12px;transition:color .2s;font-family:inherit}
+        .skip-btn:hover{color:#f0f4ff}
 
         .slides-wrapper{flex:1;overflow:hidden;position:relative}
         .slides-track{display:flex;height:100%;transition:transform .6s cubic-bezier(.4,0,.2,1);will-change:transform}
         .slide{min-width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:20px 24px 80px;text-align:center;position:relative}
         .slide-content{max-width:420px;width:100%;animation:fadeUp .6s ease both}
         .slide-icon{font-size:clamp(4rem,12vw,6rem);margin-bottom:16px;display:block}
-        .slide h2{font-size:clamp(1.4rem,4.5vw,1.9rem);font-weight:700;margin-bottom:8px;line-height:1.2;color:#0f172a}
-        .slide h2 .highlight{background:linear-gradient(135deg,#1e293b,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-        .slide p{color:#475569;font-size:clamp(.9rem,2.2vw,1rem);line-height:1.6;max-width:340px;margin:0 auto 16px}
+        .slide h2{font-size:clamp(1.4rem,4.5vw,1.9rem);font-weight:700;margin-bottom:8px;line-height:1.2;color:#f0f4ff}
+        .slide h2 .highlight{background:linear-gradient(135deg,#3b82f6,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .slide p{color:#8899bb;font-size:clamp(.9rem,2.2vw,1rem);line-height:1.6;max-width:340px;margin:0 auto 16px}
 
-        .slide .feature-item{display:flex;align-items:center;gap:12px;padding:10px 14px;background:#ffffff;border-radius:12px;border:1px solid #e2e8f0;box-shadow:0 1px 3px rgba(0,0,0,0.04);margin:6px 0;text-align:left}
+        .slide .feature-item{display:flex;align-items:center;gap:12px;padding:10px 14px;background:#141b2d;border-radius:12px;border:1px solid #1e2a45;margin:6px 0;text-align:left}
         .slide .feature-item i{color:#3b82f6;font-size:1rem;width:20px;text-align:center}
-        .slide .feature-item span{color:#1e293b;font-size:.85rem;font-weight:500}
+        .slide .feature-item span{color:#f0f4ff;font-size:.85rem;font-weight:500}
         .slide .features{display:flex;flex-direction:column;gap:6px;margin:14px 0;width:100%}
-        .slide .app-preview{background:#ffffff;border:1px solid #e2e8f0;border-radius:16px;padding:14px;margin:10px 0;width:100%;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+        .slide .app-preview{background:#141b2d;border:1px solid #1e2a45;border-radius:16px;padding:14px;margin:10px 0;width:100%}
         .slide .app-preview .row{display:flex;align-items:center;gap:10px}
         .slide .app-preview .row .avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;color:#fff;flex-shrink:0}
         .slide .app-preview .row .info{flex:1;text-align:left}
-        .slide .app-preview .row .info .name{font-weight:600;color:#0f172a;font-size:.8rem}
-        .slide .app-preview .row .info .sub{font-size:.65rem;color:#64748b}
+        .slide .app-preview .row .info .name{font-weight:600;color:#f0f4ff;font-size:.8rem}
+        .slide .app-preview .row .info .sub{font-size:.65rem;color:#8899bb}
         .slide .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;margin:6px 0}
-        .slide .stat-grid .stat{background:#ffffff;border-radius:10px;padding:10px;border:1px solid #e2e8f0;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
-        .slide .stat-grid .stat .num{font-weight:800;font-size:1.1rem}
-        .slide .stat-grid .stat .lbl{font-size:.55rem;color:#64748b;margin-top:2px}
-        .slide .lb-item{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid #f1f5f9}
-        .slide .lb-item:last-child{border-bottom:none}
-        .slide .lb-item .rank{font-weight:800;font-size:.9rem;color:#64748b;width:28px;text-align:center}
-        .slide .lb-item .rank.gold{color:#f59e0b}
-        .slide .lb-item .rank.silver{color:#94a3b8}
-        .slide .lb-item .rank.bronze{color:#cd853f}
-        .slide .lb-item .name{flex:1;font-weight:600;color:#0f172a;font-size:.8rem}
-        .slide .lb-item .score{font-weight:700;color:#3b82f6;font-size:.8rem}
-        .slide .result-card{display:flex;align-items:center;gap:10px;background:#ffffff;border-radius:10px;padding:8px 12px;margin:4px 0;border:1px solid #e2e8f0;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
-        .slide .result-card .score{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;flex-shrink:0}
-        .slide .result-card .score.passed{background:rgba(16,185,129,.12);color:#10b981;border:2px solid #10b981}
-        .slide .result-card .score.failed{background:rgba(239,68,68,.12);color:#ef4444;border:2px solid #ef4444}
-        .slide .result-card .info{flex:1;text-align:left}
-        .slide .result-card .info .title{font-weight:600;color:#0f172a;font-size:.78rem}
-        .slide .result-card .info .meta{font-size:.6rem;color:#64748b}
-        .slide .result-card .status{font-size:.55rem;font-weight:700;padding:2px 8px;border-radius:10px}
-        .slide .result-card .status.passed{background:rgba(16,185,129,.12);color:#10b981}
-        .slide .result-card .status.failed{background:rgba(239,68,68,.12);color:#ef4444}
+        .slide .stat-grid .stat{background:#141b2d;border-radius:10px;padding:10px;border:1px solid #1e2a45}
+        .slide .stat-grid .stat .num{font-weight:800;font-size:1.1rem;color:#f0f4ff}
+        .slide .stat-grid .stat .lbl{font-size:.55rem;color:#8899bb;margin-top:2px}
+
+        /* ==================== LEADERBOARD STYLES ==================== */
+        .lb-container{width:100%;padding:4px 0}
+        .lb-item{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+        .lb-item:last-child{border-bottom:none}
+        .lb-item .lb-rank{font-weight:800;font-size:.85rem;color:#8899bb;width:28px;text-align:center}
+        .lb-item .lb-rank.gold{color:#f59e0b}
+        .lb-item .lb-rank.silver{color:#94a3b8}
+        .lb-item .lb-rank.bronze{color:#cd853f}
+        .lb-item .lb-avatar-sm{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.6rem;color:#fff;flex-shrink:0;background:linear-gradient(135deg,#1e3a8a,#3b82f6)}
+        .lb-item .lb-name{flex:1;font-weight:600;color:#f0f4ff;font-size:.78rem;text-align:left}
+        .lb-item .lb-score{font-weight:700;color:#3b82f6;font-size:.78rem}
+        .lb-item .lb-dept{font-size:.55rem;color:#8899bb;margin-right:4px}
+
+        .lb-top-three{display:flex;justify-content:center;align-items:flex-end;gap:14px;padding:4px 0 8px;flex-wrap:wrap}
+        .lb-top-card{background:#141b2d;border:1px solid #1e2a45;border-radius:14px;padding:12px 10px;text-align:center;min-width:70px;flex:1;max-width:100px}
+        .lb-top-card.gold{border-color:#f59e0b}
+        .lb-top-card.silver{border-color:#94a3b8}
+        .lb-top-card.bronze{border-color:#cd853f}
+        .lb-top-card .lb-top-avatar{width:36px;height:36px;border-radius:50%;margin:0 auto 4px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#fff}
+        .lb-top-card .lb-top-name{font-weight:600;font-size:.65rem;color:#f0f4ff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        .lb-top-card .lb-top-dept{font-size:.5rem;color:#8899bb;margin-top:1px}
+        .lb-top-card .lb-top-score{font-weight:700;font-size:.75rem;color:#3b82f6}
+        .lb-loading{text-align:center;padding:12px;color:#8899bb;font-size:.7rem}
+        .lb-loading i{animation:spin 1s linear infinite}
+
+        .result-card{display:flex;align-items:center;gap:10px;background:#141b2d;border-radius:10px;padding:8px 12px;margin:4px 0;border:1px solid #1e2a45}
+        .result-card .score{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;flex-shrink:0}
+        .result-card .score.passed{background:rgba(16,185,129,.15);color:#10b981;border:2px solid #10b981}
+        .result-card .score.failed{background:rgba(239,68,68,.15);color:#ef4444;border:2px solid #ef4444}
+        .result-card .info{flex:1;text-align:left}
+        .result-card .info .title{font-weight:600;color:#f0f4ff;font-size:.78rem}
+        .result-card .info .meta{font-size:.6rem;color:#8899bb}
+        .result-card .status{font-size:.55rem;font-weight:700;padding:2px 8px;border-radius:10px}
+        .result-card .status.passed{background:rgba(16,185,129,.15);color:#10b981}
+        .result-card .status.failed{background:rgba(239,68,68,.15);color:#ef4444}
 
         @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes spin{to{transform:rotate(360deg)}}
 
         .progress-container{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:20;display:flex;align-items:center;justify-content:center}
         .progress-ring{position:relative;width:56px;height:56px}
         .progress-ring svg{transform:rotate(-90deg);width:56px;height:56px}
-        .progress-ring .bg{fill:none;stroke:#e2e8f0;stroke-width:4}
+        .progress-ring .bg{fill:none;stroke:#1e2a45;stroke-width:4}
         .progress-ring .progress{fill:none;stroke:#3b82f6;stroke-width:4;stroke-linecap:round;transition:stroke-dashoffset .5s ease}
-        .progress-ring .inner-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#1e293b;color:#ffffff;width:40px;height:40px;border-radius:50%;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.9rem;transition:background .2s}
+        .progress-ring .inner-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#3b82f6;color:#ffffff;width:40px;height:40px;border-radius:50%;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.9rem;transition:background .2s}
         .progress-ring .inner-btn:active{transform:translate(-50%,-50%) scale(.95)}
-        .progress-ring .inner-btn:disabled{background:#e2e8f0;color:#94a3b8;cursor:not-allowed}
+        .progress-ring .inner-btn:disabled{background:#1e2a45;color:#8899bb;cursor:not-allowed}
 
-        .auth-modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:100;display:none;flex-direction:column;padding:20px;background:#f8fafc;animation:slideUp .3s ease}
+        .auth-modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:100;display:none;flex-direction:column;padding:20px;background:#0a0e1a;animation:slideUp .3s ease}
         .auth-modal-overlay.show{display:flex}
 
         @keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
-        .auth-header{display:flex;justify-content:space-between;align-items:center;padding-bottom:16px;border-bottom:1px solid #e2e8f0;margin-bottom:24px}
+        .auth-header{display:flex;justify-content:space-between;align-items:center;padding-bottom:16px;border-bottom:1px solid #1e2a45;margin-bottom:24px}
         .auth-header-left{display:flex;align-items:center;gap:10px;text-decoration:none}
         .auth-header-left img{width:32px;height:32px}
-        .auth-header-left span{font-weight:700;font-size:1rem;color:#0f172a}
-        .auth-header .close-btn{background:none;border:none;font-size:1.5rem;color:#64748b;cursor:pointer}
+        .auth-header-left span{font-weight:700;font-size:1rem;color:#f0f4ff}
+        .auth-header .close-btn{background:none;border:none;font-size:1.5rem;color:#8899bb;cursor:pointer}
 
-        .auth-body{flex:1;overflow-y:auto;background:#ffffff;border-radius:24px;padding:24px 20px;box-shadow:0 4px 24px rgba(0,0,0,0.04)}
-        .auth-body h2{font-size:1.8rem;font-weight:700;margin-bottom:6px;color:#0f172a}
-        .auth-body .subtitle{color:#64748b;font-size:.95rem;margin-bottom:24px}
+        .auth-body{flex:1;overflow-y:auto;background:#141b2d;border-radius:24px;padding:24px 20px;border:1px solid #1e2a45}
+        .auth-body h2{font-size:1.8rem;font-weight:700;margin-bottom:6px;color:#f0f4ff}
+        .auth-body .subtitle{color:#8899bb;font-size:.95rem;margin-bottom:24px}
 
-        .auth-tabs{display:flex;gap:8px;background:#f1f5f9;border-radius:12px;padding:4px;margin-bottom:20px}
-        .auth-tab{flex:1;padding:10px;text-align:center;border:none;background:transparent;color:#64748b;font-weight:600;font-size:.85rem;border-radius:8px;cursor:pointer;transition:all .2s;font-family:inherit}
-        .auth-tab.active{background:#ffffff;color:#0f172a;box-shadow:0 2px 8px rgba(0,0,0,0.06)}
+        .auth-tabs{display:flex;gap:8px;background:#0a0e1a;border-radius:12px;padding:4px;margin-bottom:20px}
+        .auth-tab{flex:1;padding:10px;text-align:center;border:none;background:transparent;color:#8899bb;font-weight:600;font-size:.85rem;border-radius:8px;cursor:pointer;transition:all .2s;font-family:inherit}
+        .auth-tab.active{background:#1e2a45;color:#f0f4ff}
 
         .form-group{margin-bottom:16px}
-        .form-group label{display:block;font-weight:600;font-size:.85rem;color:#0f172a;margin-bottom:6px}
-        .form-group input,.form-group select{width:100%;padding:14px 16px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;font-size:.95rem;transition:all .2s;font-family:inherit}
-        .form-group input:focus,.form-group select:focus{outline:none;border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.1);background:#ffffff}
-        .form-group input::placeholder{color:#94a3b8}
+        .form-group label{display:block;font-weight:600;font-size:.85rem;color:#f0f4ff;margin-bottom:6px}
+        .form-group input,.form-group select{width:100%;padding:14px 16px;background:#0a0e1a;border:1px solid #1e2a45;border-radius:12px;color:#f0f4ff;font-size:.95rem;transition:all .2s;font-family:inherit}
+        .form-group input:focus,.form-group select:focus{outline:none;border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.1)}
+        .form-group input::placeholder{color:#4a5a7a}
 
         .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 
-        .auth-btn{width:100%;padding:16px;background:linear-gradient(135deg,#1e293b,#3b82f6);color:#ffffff;border:none;border-radius:50px;font-weight:700;font-size:1rem;cursor:pointer;transition:all .2s;margin-top:8px}
+        .auth-btn{width:100%;padding:16px;background:linear-gradient(135deg,#1e3a8a,#3b82f6);color:#ffffff;border:none;border-radius:50px;font-weight:700;font-size:1rem;cursor:pointer;transition:all .2s;margin-top:8px}
         .auth-btn:hover{opacity:.85;transform:translateY(-2px);box-shadow:0 8px 24px rgba(59,130,246,.25)}
         .auth-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
 
-        .auth-footer{text-align:center;margin-top:20px;font-size:.9rem;color:#64748b}
-        .auth-footer a{color:#0f172a;text-decoration:none;font-weight:700;cursor:pointer}
+        .auth-footer{text-align:center;margin-top:20px;font-size:.9rem;color:#8899bb}
+        .auth-footer a{color:#3b82f6;text-decoration:none;font-weight:700;cursor:pointer}
 
         .auth-error{color:#ef4444;padding:10px;border-radius:8px;font-size:.85rem;display:none;margin-bottom:12px}
-        .auth-error.show{display:block;background:rgba(239,68,68,.06)}
+        .auth-error.show{display:block;background:rgba(239,68,68,.1)}
         .auth-success{color:#10b981;padding:10px;border-radius:8px;font-size:.85rem;display:none;margin-bottom:12px}
-        .auth-success.show{display:block;background:rgba(16,185,129,.06)}
+        .auth-success.show{display:block;background:rgba(16,185,129,.1)}
 
-        .forgot-btn{background:none;border:none;color:#64748b;font-size:.85rem;cursor:pointer;font-weight:500;padding:8px 0;font-family:inherit;display:block;text-align:right;width:100%}
-        .forgot-btn:hover{color:#0f172a}
+        .forgot-btn{background:none;border:none;color:#8899bb;font-size:.85rem;cursor:pointer;font-weight:500;padding:8px 0;font-family:inherit;display:block;text-align:right;width:100%}
+        .forgot-btn:hover{color:#f0f4ff}
 
-        .password-strength{height:4px;margin-top:6px;border-radius:4px;transition:all .3s;background:#e2e8f0}
+        .password-strength{height:4px;margin-top:6px;border-radius:4px;transition:all .3s;background:#1e2a45}
         .password-strength .bar{height:100%;border-radius:4px;transition:width .4s ease;width:0%}
         .password-strength .bar.weak{background:#ef4444;width:25%}
         .password-strength .bar.medium{background:#f59e0b;width:50%}
         .password-strength .bar.strong{background:#3b82f6;width:75%}
         .password-strength .bar.very-strong{background:#10b981;width:100%}
-        .password-hint{font-size:.75rem;color:#94a3b8;margin-top:4px;display:block}
+        .password-hint{font-size:.75rem;color:#4a5a7a;margin-top:4px;display:block}
 
-        #loadingOverlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,.6);backdrop-filter:blur(8px);z-index:9999;display:none;align-items:center;justify-content:center;flex-direction:column;gap:16px}
+        #loadingOverlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,14,26,.8);backdrop-filter:blur(8px);z-index:9999;display:none;align-items:center;justify-content:center;flex-direction:column;gap:16px}
         #loadingOverlay.show{display:flex}
-        #loadingOverlay .spinner{width:48px;height:48px;border:4px solid #e2e8f0;border-top-color:#3b82f6;border-radius:50%;animation:spin .8s linear infinite}
-        #loadingOverlay p{color:#ffffff;font-weight:600;font-size:1rem}
-        @keyframes spin{to{transform:rotate(360deg)}}
+        #loadingOverlay .spinner{width:48px;height:48px;border:4px solid #1e2a45;border-top-color:#3b82f6;border-radius:50%;animation:spin .8s linear infinite}
+        #loadingOverlay p{color:#f0f4ff;font-weight:600;font-size:1rem}
 
         @media(max-width:380px){.form-row{grid-template-columns:1fr}}
         @media(min-width:768px){.slide-content{max-width:480px}.slide .stat-grid{grid-template-columns:repeat(4,1fr)}}
@@ -156,7 +174,7 @@
                     </div>
                     <div class="app-preview">
                         <div class="row">
-                            <div class="avatar" style="background:linear-gradient(135deg,#1e293b,#3b82f6)">👤</div>
+                            <div class="avatar" style="background:linear-gradient(135deg,#1e3a8a,#3b82f6)">👤</div>
                             <div class="info">
                                 <div class="name">Welcome back, Student! 👋</div>
                                 <div class="sub">📊 92% avg • 🔥 7 day streak</div>
@@ -191,19 +209,16 @@
                 </div>
             </div>
 
-            <!-- Slide 3: Leaderboard -->
+            <!-- Slide 3: Leaderboard (Dynamic) -->
             <div class="slide">
                 <div class="slide-content">
                     <span class="slide-icon">🏆</span>
                     <h2><span class="highlight">Top Students</span></h2>
                     <p>See where you rank and stay motivated to climb higher.</p>
-                    <div class="app-preview" style="padding:10px 14px">
-                        <div class="lb-item"><div class="rank gold">👑</div><div class="avatar" style="width:28px;height:28px;font-size:.6rem;background:linear-gradient(135deg,#f59e0b,#d97706)">A</div><div class="name">Abdulahi M.</div><div class="score">91%</div></div>
-                        <div class="lb-item"><div class="rank silver">🥈</div><div class="avatar" style="width:28px;height:28px;font-size:.6rem;background:linear-gradient(135deg,#94a3b8,#64748b)">S</div><div class="name">Aghogho S.</div><div class="score">88%</div></div>
-                        <div class="lb-item"><div class="rank bronze">🥉</div><div class="avatar" style="width:28px;height:28px;font-size:.6rem;background:linear-gradient(135deg,#b45309,#92400e)">K</div><div class="name">Kamara P.</div><div class="score">85%</div></div>
-                        <div class="lb-item"><div class="rank">4</div><div class="avatar" style="width:28px;height:28px;font-size:.6rem;background:linear-gradient(135deg,#3b82f6,#1d4ed8)">T</div><div class="name">Tunde A.</div><div class="score">82%</div></div>
+                    <div id="leaderboardContainer" class="lb-container">
+                        <div class="lb-loading"><i class="fas fa-spinner"></i> Loading leaderboard...</div>
                     </div>
-                    <div class="features">
+                    <div class="features" style="margin-top:8px">
                         <div class="feature-item"><i class="fas fa-fire"></i><span>Compete with peers in real-time</span></div>
                         <div class="feature-item"><i class="fas fa-star"></i><span>Earn badges for achievements</span></div>
                     </div>
@@ -216,12 +231,12 @@
                     <span class="slide-icon">🦉</span>
                     <h2>Meet <span class="highlight">Nox AI</span></h2>
                     <p>Your 24/7 AI study companion — ask anything, get instant answers.</p>
-                    <div class="app-preview" style="background:#f0f4ff;border-color:#dbeafe">
+                    <div class="app-preview" style="background:#0f172a;border-color:#1e3a8a">
                         <div style="display:flex;gap:10px;align-items:flex-start">
                             <span style="font-size:1.5rem">🦉</span>
                             <div style="flex:1;text-align:left">
-                                <div style="font-weight:600;font-size:.75rem;color:#1e293b">Nox</div>
-                                <div style="font-size:.75rem;color:#475569">I can help explain concepts, solve problems, and give study tips! What would you like to learn?</div>
+                                <div style="font-weight:600;font-size:.75rem;color:#3b82f6">Nox</div>
+                                <div style="font-size:.75rem;color:#8899bb">I can help explain concepts, solve problems, and give study tips! What would you like to learn?</div>
                             </div>
                         </div>
                     </div>
@@ -255,19 +270,19 @@
                     <span class="slide-icon">🎓</span>
                     <h2>Ready to <span class="highlight">Excel?</span></h2>
                     <p>Join thousands of OAU students acing their exams with our comprehensive platform.</p>
-                    <div style="background:#ffffff;border-radius:14px;padding:12px;width:100%;border:1px solid #e2e8f0;margin:10px 0;box-shadow:0 1px 3px rgba(0,0,0,0.04)">
+                    <div style="background:#141b2d;border-radius:14px;padding:12px;width:100%;border:1px solid #1e2a45;margin:10px 0">
                         <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
-                            <div style="background:rgba(16,185,129,.08);padding:6px;border-radius:8px;text-align:center"><div style="font-weight:700;color:#10b981;font-size:.75rem">72+</div><div style="font-size:.5rem;color:#64748b">Courses</div></div>
-                            <div style="background:rgba(59,130,246,.08);padding:6px;border-radius:8px;text-align:center"><div style="font-weight:700;color:#3b82f6;font-size:.75rem">10K+</div><div style="font-size:.5rem;color:#64748b">Questions</div></div>
-                            <div style="background:rgba(124,58,237,.08);padding:6px;border-radius:8px;text-align:center"><div style="font-weight:700;color:#8b5cf6;font-size:.75rem">AI</div><div style="font-size:.5rem;color:#64748b">Nox Assistant</div></div>
-                            <div style="background:rgba(245,158,11,.08);padding:6px;border-radius:8px;text-align:center"><div style="font-weight:700;color:#f59e0b;font-size:.75rem">📈</div><div style="font-size:.5rem;color:#64748b">Analytics</div></div>
+                            <div style="background:rgba(16,185,129,.1);padding:6px;border-radius:8px;text-align:center"><div style="font-weight:700;color:#10b981;font-size:.75rem">72+</div><div style="font-size:.5rem;color:#8899bb">Courses</div></div>
+                            <div style="background:rgba(59,130,246,.1);padding:6px;border-radius:8px;text-align:center"><div style="font-weight:700;color:#3b82f6;font-size:.75rem">10K+</div><div style="font-size:.5rem;color:#8899bb">Questions</div></div>
+                            <div style="background:rgba(139,92,246,.1);padding:6px;border-radius:8px;text-align:center"><div style="font-weight:700;color:#8b5cf6;font-size:.75rem">AI</div><div style="font-size:.5rem;color:#8899bb">Nox Assistant</div></div>
+                            <div style="background:rgba(245,158,11,.1);padding:6px;border-radius:8px;text-align:center"><div style="font-weight:700;color:#f59e0b;font-size:.75rem">📈</div><div style="font-size:.5rem;color:#8899bb">Analytics</div></div>
                         </div>
                     </div>
                     <div class="btn-group" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:12px">
                         <button class="auth-btn" onclick="openAuthModal('register')" style="padding:14px 28px; width:auto; border-radius:12px;"><i class="fas fa-rocket"></i> Get Started</button>
-                        <button onclick="openAuthModal('login')" style="background:transparent; color:#475569; border:1px solid #e2e8f0; padding:14px 28px; border-radius:12px; font-weight:600; cursor:pointer; font-family:inherit; width:auto;">Login</button>
+                        <button onclick="openAuthModal('login')" style="background:transparent; color:#8899bb; border:1px solid #1e2a45; padding:14px 28px; border-radius:12px; font-weight:600; cursor:pointer; font-family:inherit; width:auto;">Login</button>
                     </div>
-                    <p style="color:#94a3b8;font-size:.7rem;margin-top:16px">⚡ Built with ❤️ by FrancisTech</p>
+                    <p style="color:#4a5a7a;font-size:.7rem;margin-top:16px">⚡ Built with ❤️ by FrancisTech</p>
                 </div>
             </div>
 
@@ -409,10 +424,13 @@
 
 <script>
     // ============================================
-    // FIXED: Use Vercel API (Not Render!)
+    // API CONFIG
     // ============================================
     const API_BASE = '/api';
 
+    // ============================================
+    // SLIDER
+    // ============================================
     let currentSlide = 0;
     const track = document.getElementById('slidesTrack');
     const slides = track.querySelectorAll('.slide');
@@ -465,6 +483,83 @@
         openAuthModal('register');
     }
 
+    // ============================================
+    // LEADERBOARD - LOADS TOP 4 FROM BACKEND
+    // ============================================
+    async function loadLeaderboard() {
+        const container = document.getElementById('leaderboardContainer');
+        if (!container) return;
+
+        container.innerHTML = '<div class="lb-loading"><i class="fas fa-spinner"></i> Loading leaderboard...</div>';
+
+        try {
+            const response = await fetch(API_BASE + '/leaderboard');
+            const data = await response.json();
+            const lb = data.leaderboard || [];
+
+            if (!lb || !lb.length) {
+                container.innerHTML = '<div class="lb-loading">No students yet. Be the first! 🏆</div>';
+                return;
+            }
+
+            // Get top 4
+            const top4 = lb.slice(0, 4);
+            const medals = ['👑', '🥈', '🥉', '4️⃣'];
+            const rankClasses = ['gold', 'silver', 'bronze', ''];
+            const colors = ['#f59e0b', '#94a3b8', '#cd853f', '#3b82f6'];
+
+            // Build HTML
+            let html = '<div class="lb-top-three">';
+
+            // Show top 3 in special cards
+            top4.slice(0, 3).forEach((u, i) => {
+                const displayName = maskName(u.fullName || u.username || 'Student');
+                html += `
+                    <div class="lb-top-card ${rankClasses[i] || ''}">
+                        <div class="lb-top-avatar" style="background:${colors[i]}">${medals[i]}</div>
+                        <div class="lb-top-name">${displayName}</div>
+                        <div class="lb-top-dept">${u.faculty || ''} • ${u.level || '100'}L</div>
+                        <div class="lb-top-score">${u.averageScore || 0}%</div>
+                    </div>
+                `;
+            });
+
+            html += '</div>';
+
+            // Show #4 in list style
+            if (top4.length >= 4) {
+                const u = top4[3];
+                const displayName = maskName(u.fullName || u.username || 'Student');
+                const initials = (u.fullName || 'ST').split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+                html += `
+                    <div class="lb-item" style="padding-top:8px;border-top:1px solid #1e2a45;margin-top:4px;">
+                        <span class="lb-rank">4️⃣</span>
+                        <div class="lb-avatar-sm">${initials}</div>
+                        <span class="lb-name">${displayName}</span>
+                        <span class="lb-dept">${u.faculty || ''}</span>
+                        <span class="lb-score">${u.averageScore || 0}%</span>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
+
+        } catch (error) {
+            console.error('Leaderboard error:', error);
+            container.innerHTML = '<div class="lb-loading">Unable to load leaderboard. Please try again.</div>';
+        }
+    }
+
+    // Helper: Mask name for privacy
+    function maskName(name) {
+        if (!name || name.length <= 2) return name || '**';
+        if (name.length <= 3) return name + '***';
+        return name.substring(0, 3) + '***';
+    }
+
+    // ============================================
+    // AUTH MODAL
+    // ============================================
     const authModal = document.getElementById('authModal');
     const loginForm = document.getElementById('loginForm');
     const registerForm = document.getElementById('registerForm');
@@ -635,31 +730,9 @@
         bar.style.width = widths[index];
     }
 
-    // Enter key handlers
-    document.getElementById('loginUsername').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('loginPassword').focus(); });
-    document.getElementById('loginPassword').addEventListener('keydown', (e) => { if (e.key === 'Enter') handleLogin(); });
-
-    document.getElementById('regUsername').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regFullName').focus(); });
-    document.getElementById('regFullName').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regEmail').focus(); });
-    document.getElementById('regEmail').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regFaculty').focus(); });
-    document.getElementById('regFaculty').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regLevel').focus(); });
-    document.getElementById('regLevel').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regPassword').focus(); });
-    document.getElementById('regPassword').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regConfirmPassword').focus(); });
-    document.getElementById('regConfirmPassword').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regSecurityQuestion').focus(); });
-    document.getElementById('regSecurityQuestion').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regSecurityAnswer').focus(); });
-    document.getElementById('regSecurityAnswer').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('regDepartment').focus(); });
-    document.getElementById('regDepartment').addEventListener('keydown', (e) => { if (e.key === 'Enter') handleRegister(); });
-
-    // Expose functions to window for inline onclick
-    window.openAuthModal = openAuthModal;
-    window.closeAuthModal = closeAuthModal;
-    window.setAuthTab = setAuthTab;
-    window.handleLogin = handleLogin;
-    window.handleRegister = handleRegister;
-    window.goToLogin = goToLogin;
-    window.checkPasswordStrength = checkPasswordStrength;
-
-    // Check if user already logged in
+    // ============================================
+    // CHECK AUTH
+    // ============================================
     function checkAuth() {
         const token = localStorage.getItem('oau_token');
         if (token) {
@@ -682,8 +755,28 @@
         }
     }
 
+    // ============================================
+    // EXPOSE FUNCTIONS
+    // ============================================
+    window.openAuthModal = openAuthModal;
+    window.closeAuthModal = closeAuthModal;
+    window.setAuthTab = setAuthTab;
+    window.handleLogin = handleLogin;
+    window.handleRegister = handleRegister;
+    window.goToLogin = goToLogin;
+    window.checkPasswordStrength = checkPasswordStrength;
+    window.loadLeaderboard = loadLeaderboard;
+
+    // ============================================
+    // INIT
+    // ============================================
     checkAuth();
     updateSlider();
+
+    // Load leaderboard after page render
+    setTimeout(() => {
+        loadLeaderboard();
+    }, 500);
 </script>
 </body>
 </html>
