@@ -2,358 +2,244 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover" />
-  <title>Download OAU CBE Practice</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+  <title>FrancisTech — Developer | Apps | OAU CBE Practice</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#0b0d17;color:#ffffff;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
-    .container{max-width:420px;width:100%;padding:20px 0 30px;position:relative}
-    .header{text-align:center;margin-bottom:24px}
-    .header h1{font-size:1.5rem;font-weight:600;color:#ffffff;letter-spacing:-0.5px}
-    .header p{color:rgba(255,255,255,0.5);font-size:0.85rem;margin-top:2px;letter-spacing:0.3px}
-    .meta-row{display:flex;justify-content:space-around;align-items:center;background:rgba(255,255,255,0.03);backdrop-filter:blur(20px);border-radius:16px;padding:12px 10px;margin-bottom:20px;border:1px solid rgba(255,255,255,0.05)}
-    .meta-item{text-align:center}
-    .meta-item .meta-val{font-weight:700;font-size:1rem;color:#3b82f6}
-    .meta-item .meta-lbl{font-size:0.6rem;color:rgba(255,255,255,0.4);margin-top:2px;font-weight:500}
-    .apk-card{background:rgba(30,35,55,0.5);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:20px 18px;text-align:center;margin-bottom:24px;box-shadow:0 8px 32px rgba(0,0,0,0.2)}
-    .instruction-note{background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.15);border-radius:12px;padding:12px 14px;text-align:left;display:flex;align-items:flex-start;gap:10px;margin-bottom:16px}
-    .instruction-note i{color:#3b82f6;font-size:0.9rem;margin-top:2px;flex-shrink:0}
-    .instruction-note p{color:rgba(255,255,255,0.65);font-size:0.7rem;line-height:1.4}
-    .instruction-note p strong{color:#ffffff}
-    .download-btn{background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;border:none;border-radius:16px;padding:18px 20px;font-weight:600;font-size:1rem;cursor:pointer;transition:all 0.3s ease;font-family:'Inter',sans-serif;display:flex;align-items:center;justify-content:center;gap:12px;width:100%;box-shadow:0 4px 20px rgba(59,130,246,0.2)}
-    .download-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(59,130,246,0.3)}
-    .download-btn:active{transform:scale(0.98)}
-    .download-btn:disabled{opacity:0.6;cursor:not-allowed;transform:none}
-    .features{display:flex;flex-direction:column;gap:12px;width:100%;margin-bottom:24px}
-    .feature{background:rgba(30,35,55,0.4);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.04);border-radius:18px;padding:20px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px}
-    .feature i{font-size:1.8rem;color:#3b82f6;background:rgba(59,130,246,0.1);padding:10px;border-radius:12px}
-    .feature span{font-size:0.85rem;color:rgba(255,255,255,0.7);font-weight:400}
-    .warning{background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.1);border-radius:18px;padding:14px 16px;display:flex;align-items:flex-start;gap:10px;width:100%;margin-bottom:24px}
-    .warning i{color:#f59e0b;font-size:1rem;margin-top:1px;flex-shrink:0}
-    .warning p{color:rgba(255,255,255,0.5);font-size:0.7rem;line-height:1.4}
-    .warning p strong{color:rgba(255,255,255,0.7)}
-    .copyright{text-align:center;color:rgba(255,255,255,0.2);font-size:0.6rem;margin-top:16px;font-weight:400;letter-spacing:0.5px}
-    .back-btn{display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,0.4);text-decoration:none;font-size:0.85rem;font-weight:500;transition:color 0.2s;margin-top:10px;justify-content:center;width:100%}
-    .back-btn:hover{color:#ffffff}
-    .modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);backdrop-filter:blur(10px);z-index:1000;display:none;align-items:center;justify-content:center;padding:20px;animation:fadeIn 0.3s ease}
-    .modal-overlay.show{display:flex}
-    .modal-box{background:#1a1d2e;border:1px solid rgba(255,255,255,0.06);border-radius:28px;padding:32px 24px;max-width:440px;width:100%;box-shadow:0 25px 80px rgba(0,0,0,0.8);position:relative;animation:slideUp 0.3s ease}
-    .modal-box .close-modal{position:absolute;top:16px;right:16px;background:none;border:none;font-size:1.5rem;color:rgba(255,255,255,0.3);cursor:pointer;transition:0.2s}
-    .modal-box .close-modal:hover{color:#ffffff}
-    .modal-box h2{font-size:1.3rem;font-weight:700;color:#ffffff;text-align:center;margin-bottom:4px}
-    .modal-box p.sub{color:rgba(255,255,255,0.5);font-size:0.85rem;text-align:center;margin-bottom:20px}
-    .step-item{display:flex;align-items:flex-start;gap:14px;padding:16px;background:rgba(255,255,255,0.03);border-radius:16px;border:1px solid rgba(255,255,255,0.06);margin-bottom:12px}
-    .step-item .step-num{background:#3b82f6;color:#fff;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.75rem;flex-shrink:0}
-    .step-item .step-content{flex:1}
-    .step-item .step-content .title{font-weight:600;font-size:0.85rem;color:#ffffff}
-    .step-item .step-content .desc{font-size:0.7rem;color:rgba(255,255,255,0.5);margin-top:2px}
-    .action-btn{width:100%;padding:12px;border-radius:12px;font-weight:600;font-size:0.85rem;cursor:pointer;border:none;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s}
-    .action-btn.primary{background:#3b82f6;color:#fff}
-    .action-btn.primary:hover{opacity:0.9}
-    .action-btn.success{background:#10b981;color:#fff;margin-top:4px}
-    .action-btn.success:hover{opacity:0.9}
-    .action-btn:disabled{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.3);cursor:not-allowed}
-    .check-area{margin:12px 0}
-    .check-item{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);padding:12px;border-radius:10px;margin-bottom:10px;cursor:pointer;transition:all 0.2s}
-    .check-item:hover{background:rgba(255,255,255,0.08)}
-    .check-item input[type=checkbox]{width:20px;height:20px;accent-color:#10b981;cursor:pointer;flex-shrink:0;opacity:0.5;pointer-events:none}
-    .check-item input[type=checkbox].unlocked{opacity:1}
-    .check-item label{font-size:0.85rem;color:rgba(255,255,255,0.4);cursor:pointer;font-weight:500;flex:1;pointer-events:none}
-    .check-item label.unlocked{color:rgba(255,255,255,0.8)}
-    .hidden-timer{display:none !important}
-    .waiting-indicator{display:inline-block;color:#f59e0b;font-size:0.7rem;font-weight:500;margin-left:8px;pointer-events:none}
-    .hidden{display:none !important}
-    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-    @keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
-    .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#ef4444;color:#fff;padding:14px 20px;border-radius:12px;font-weight:600;font-size:0.85rem;z-index:9999;box-shadow:0 10px 30px rgba(0,0,0,0.5);display:none;animation:fadeIn 0.3s ease;text-align:center;max-width:90%}
-    .toast.show{display:block}
-    @media(max-width:480px){.container{padding:10px 0 20px}}
+    body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#0b0d17;color:#ffffff;min-height:100vh}
+    .container{max-width:1100px;margin:0 auto;padding:30px 20px 60px}
+
+    /* Header / Nav */
+    .nav{display:flex;justify-content:space-between;align-items:center;padding:10px 0 30px;flex-wrap:wrap;gap:16px}
+    .logo{font-size:1.3rem;font-weight:800;background:linear-gradient(135deg,#3b82f6,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .nav-links{display:flex;gap:20px;flex-wrap:wrap}
+    .nav-links a{color:rgba(255,255,255,0.6);text-decoration:none;font-size:0.85rem;font-weight:500;transition:0.2s}
+    .nav-links a:hover{color:#3b82f6}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;padding:20px 0 40px}
+    @media(max-width:768px){.hero{grid-template-columns:1fr;gap:30px;text-align:center}}
+    .hero h1{font-size:2.5rem;font-weight:900;line-height:1.1}
+    .hero h1 span{background:linear-gradient(135deg,#3b82f6,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero p{color:rgba(255,255,255,0.6);font-size:1.05rem;margin:16px 0 24px;line-height:1.6}
+    .hero-badge{display:inline-block;background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.2);padding:4px 14px;border-radius:30px;font-size:0.75rem;color:#3b82f6;margin-bottom:14px}
+    .hero-image{background:linear-gradient(135deg,#1a1d2e,#0b0d17);border-radius:20px;padding:30px;text-align:center;border:1px solid rgba(255,255,255,0.05);position:relative;overflow:hidden}
+    .hero-image .big-icon{font-size:6rem;display:block;margin-bottom:10px}
+    .hero-image .code-text{font-size:0.8rem;color:rgba(255,255,255,0.3);font-family:monospace;word-break:break-all}
+
+    /* Buttons */
+    .btn-group{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:12px;font-weight:600;font-size:0.9rem;cursor:pointer;border:none;text-decoration:none;transition:all 0.2s}
+    .btn-primary{background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(59,130,246,0.3)}
+    .btn-outline{background:transparent;border:1px solid rgba(255,255,255,0.15);color:#fff}
+    .btn-outline:hover{background:rgba(255,255,255,0.05);border-color:#3b82f6}
+    .btn-success{background:#10b981;color:#fff}
+    .btn-success:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(16,185,129,0.3)}
+
+    /* Section Titles */
+    .section-title{font-size:1.8rem;font-weight:700;margin-bottom:8px}
+    .section-sub{color:rgba(255,255,255,0.4);font-size:0.95rem;margin-bottom:30px}
+
+    /* App Card */
+    .app-card{background:rgba(30,35,55,0.4);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:30px;margin-bottom:30px;display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center}
+    @media(max-width:600px){.app-card{grid-template-columns:1fr;text-align:center;gap:16px}}
+    .app-icon{width:60px;height:60px;border-radius:16px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);display:flex;align-items:center;justify-content:center;font-size:1.8rem}
+    .app-info h3{font-size:1.2rem;font-weight:700}
+    .app-info p{color:rgba(255,255,255,0.5);font-size:0.85rem;margin-top:4px}
+    .app-info .tags{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}
+    .app-info .tags span{background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.1);padding:2px 12px;border-radius:20px;font-size:0.65rem;color:#3b82f6}
+
+    /* Grid for other apps */
+    .apps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-bottom:30px}
+    .app-mini-card{background:rgba(30,35,55,0.3);border:1px solid rgba(255,255,255,0.04);border-radius:16px;padding:20px;text-align:center;transition:0.2s}
+    .app-mini-card:hover{transform:translateY(-4px);border-color:rgba(59,130,246,0.2)}
+    .app-mini-card .icon{font-size:2rem;margin-bottom:8px}
+    .app-mini-card h4{font-size:0.9rem;font-weight:600}
+    .app-mini-card p{font-size:0.7rem;color:rgba(255,255,255,0.4);margin-top:4px}
+
+    /* Services */
+    .services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px;margin-bottom:30px}
+    .service-card{background:rgba(30,35,55,0.3);border:1px solid rgba(255,255,255,0.04);border-radius:16px;padding:20px;text-align:center;transition:0.2s}
+    .service-card:hover{transform:translateY(-4px);border-color:rgba(59,130,246,0.2)}
+    .service-card i{font-size:2rem;color:#3b82f6;margin-bottom:8px}
+    .service-card h4{font-size:0.9rem;font-weight:600}
+    .service-card p{font-size:0.7rem;color:rgba(255,255,255,0.4);margin-top:4px}
+
+    /* Social Links */
+    .social-links{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
+    .social-link{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.06);color:rgba(255,255,255,0.5);text-decoration:none;transition:0.2s;font-size:1.1rem}
+    .social-link:hover{background:rgba(59,130,246,0.1);color:#3b82f6;border-color:#3b82f6}
+
+    /* Footer */
+    .footer{border-top:1px solid rgba(255,255,255,0.05);padding:24px 0 10px;margin-top:40px;text-align:center;color:rgba(255,255,255,0.2);font-size:0.75rem}
+
+    /* Responsive */
+    @media(max-width:480px){.hero h1{font-size:1.8rem}.container{padding:16px}.app-card{padding:20px}}
   </style>
 </head>
 <body>
-  <div class="toast" id="toast"></div>
-  
-  <div class="container">
-    <div class="header">
-      <h1>OAU CBE Practice v2.0.0</h1>
-      <p>100% FREE for 100 & 200 Level Students</p>
+
+<div class="container">
+
+  <!-- ==================== NAV ==================== -->
+  <nav class="nav">
+    <div class="logo">FrancisTech</div>
+    <div class="nav-links">
+      <a href="#apps">Apps</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
     </div>
-    
-    <div class="meta-row">
-      <div class="meta-item"><div class="meta-val">APK</div><div class="meta-lbl">File Type</div></div>
-      <div class="meta-item"><div class="meta-val">v2.0.0</div><div class="meta-lbl">Version</div></div>
-      <div class="meta-item"><div class="meta-val">13 MB</div><div class="meta-lbl">Size</div></div>
-      <div class="meta-item"><div class="meta-val">6.0+</div><div class="meta-lbl">Android</div></div>
-    </div>
-    
-    <div class="apk-card">
-      <div class="instruction-note">
-        <i class="fas fa-shield-halved"></i>
-        <p><strong>Installation Note:</strong> You may need to enable <strong>"Install from Unknown Sources"</strong> in your Android settings to install this APK. The app is safe and developed by FrancisTech.</p>
+  </nav>
+
+  <!-- ==================== HERO ==================== -->
+  <section class="hero">
+    <div>
+      <div class="hero-badge"><i class="fas fa-code"></i> Developer &amp; Founder</div>
+      <h1>Hi, I'm <span>FrancisTech</span></h1>
+      <p>I build apps, websites, and tools for students and businesses. Passionate about technology and education.</p>
+      <div class="btn-group">
+        <a href="#apps" class="btn btn-primary"><i class="fas fa-rocket"></i> View My Apps</a>
+        <a href="#contact" class="btn btn-outline"><i class="fas fa-envelope"></i> Contact Me</a>
       </div>
-      <button class="download-btn" id="downloadBtn" onclick="startVerification()">
-        <span class="btn-icon"><i class="fas fa-download"></i></span>
-        Download APK
-      </button>
+      <div class="social-links">
+        <a href="https://github.com/francitech123" class="social-link" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://wa.me/2348065508373" class="social-link" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://t.me/francistech" class="social-link" target="_blank" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+        <a href="mailto:francistech123@gmail.com" class="social-link" target="_blank" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        <a href="https://x.com/francistech_" class="social-link" target="_blank" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+      </div>
     </div>
-    
-    <div class="features">
-      <div class="feature"><i class="fas fa-brain"></i><span>100+ Courses & 10,000+ Questions</span></div>
-      <div class="feature"><i class="fas fa-robot"></i><span>Nox AI Study Assistant</span></div>
-      <div class="feature"><i class="fas fa-trophy"></i><span>Live Leaderboards</span></div>
-      <div class="feature"><i class="fas fa-graduation-cap"></i><span>100% Free for 100 & 200 Level</span></div>
+    <div class="hero-image">
+      <span class="big-icon">🚀</span>
+      <div style="font-size:1.3rem;font-weight:700;color:rgba(255,255,255,0.8)">FrancisTech</div>
+      <div style="color:rgba(255,255,255,0.3);font-size:0.8rem;margin-top:4px">Building the future, one line of code at a time.</div>
+      <div class="code-text" style="margin-top:16px;font-size:0.7rem;color:rgba(255,255,255,0.15)">
+        &lt;developer /&gt; &lt;problem-solver /&gt; &lt;innovator /&gt;
+      </div>
     </div>
-    
-    <div class="warning">
-      <i class="fas fa-shield-halved"></i>
-      <p><strong>Installation Note:</strong> You may need to enable <strong>"Install from Unknown Sources"</strong> in your Android settings to install this APK. The app is safe and developed by FrancisTech.</p>
+  </section>
+
+  <!-- ==================== FEATURED APP ==================== -->
+  <section id="apps">
+    <h2 class="section-title">📱 Featured App</h2>
+    <p class="section-sub">My flagship project — built for OAU students</p>
+
+    <div class="app-card">
+      <div class="app-icon"><i class="fas fa-graduation-cap"></i></div>
+      <div class="app-info">
+        <h3>OAU CBE Practice</h3>
+        <p>The ultimate exam preparation app for Obafemi Awolowo University students. 10,000+ questions, AI tutor, leaderboards, and more.</p>
+        <div class="tags">
+          <span>100% FREE</span>
+          <span>100 &amp; 200 Level</span>
+          <span>Android App</span>
+          <span>Web App</span>
+        </div>
+      </div>
+      <div>
+        <a href="/download" class="btn btn-success" style="white-space:nowrap"><i class="fas fa-download"></i> Download APK</a>
+      </div>
     </div>
-    
-    <a href="/" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Home</a>
-    <p class="copyright">© 2026 OAU CBE Practice · Powered by FrancisTech</p>
+  </section>
+
+  <!-- ==================== OTHER APPS ==================== -->
+  <h3 style="font-size:1.1rem;font-weight:600;margin-bottom:12px">More Apps</h3>
+  <div class="apps-grid">
+    <div class="app-mini-card">
+      <div class="icon">🤖</div>
+      <h4>Nox AI Chat</h4>
+      <p>AI study assistant</p>
+    </div>
+    <div class="app-mini-card">
+      <div class="icon">📊</div>
+      <h4>Leaderboard</h4>
+      <p>Compete with peers</p>
+    </div>
+    <div class="app-mini-card">
+      <div class="icon">📚</div>
+      <h4>Study Mode</h4>
+      <p>Topic by topic</p>
+    </div>
+    <div class="app-mini-card">
+      <div class="icon">🔔</div>
+      <h4>Push Notifications</h4>
+      <p>Daily reminders</p>
+    </div>
   </div>
 
-  <!-- VERIFICATION MODAL -->
-  <div class="modal-overlay" id="verifyModal">
-    <div class="modal-box">
-      <button class="close-modal" onclick="closeModal()"><i class="fas fa-times"></i></button>
-      <h2>🔒 Unlock Download</h2>
-      <p class="sub">Complete tasks below to access the 100% free 100/200 Level app.</p>
-      
-      <div class="step-item">
-        <div class="step-num">1</div>
-        <div class="step-content">
-          <div class="title">Join our WhatsApp Channel</div>
-          <div class="desc">Stay updated on new courses.</div>
-          <button class="action-btn primary" style="margin-top:10px;" id="waChannelBtn" onclick="startChannelTimer()">
-            <i class="fab fa-whatsapp"></i> Join Channel
-          </button>
-        </div>
+  <!-- ==================== SERVICES ==================== -->
+  <section id="services">
+    <h2 class="section-title">🛠️ What I Do</h2>
+    <p class="section-sub">Services I offer to clients and businesses</p>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <i class="fas fa-code"></i>
+        <h4>Web Development</h4>
+        <p>Full-stack websites and web apps</p>
       </div>
-      
-      <div class="step-item">
-        <div class="step-num">2</div>
-        <div class="step-content">
-          <div class="title">Share with 2 OAU Groups</div>
-          <div class="desc">Help other 100/200 level students get 100% free CBT access!</div>
-          <button class="action-btn success" style="margin-top:10px;" id="waShareBtn" onclick="startShareTimer()">
-            <i class="fab fa-whatsapp"></i> Share Now
-          </button>
-        </div>
+      <div class="service-card">
+        <i class="fas fa-mobile-alt"></i>
+        <h4>Mobile Apps</h4>
+        <p>Android and cross-platform apps</p>
       </div>
-      
-      <div class="check-area">
-        <div class="check-item" onclick="toggleCheck('check1')">
-          <input type="checkbox" id="check1" disabled />
-          <label for="check1" id="lbl1">✅ I have joined the channel <span class="waiting-indicator hidden-timer" id="timer1">(Waiting...)</span></label>
-        </div>
-        <div class="check-item" onclick="toggleCheck('check2')">
-          <input type="checkbox" id="check2" disabled />
-          <label for="check2" id="lbl2">✅ I have shared with 2 groups <span class="waiting-indicator hidden-timer" id="timer2">(Waiting...)</span></label>
-        </div>
+      <div class="service-card">
+        <i class="fas fa-robot"></i>
+        <h4>AI Integration</h4>
+        <p>Chatbots, AI assistants, automation</p>
       </div>
-      
-      <button class="action-btn primary" id="finalDownloadBtn" onclick="redirectToDownload()" style="background:#64748b; width:100%; padding:14px; margin-top:8px; cursor:not-allowed;" disabled>
-        <i class="fas fa-lock"></i> Complete Tasks to Unlock
-      </button>
+      <div class="service-card">
+        <i class="fas fa-cloud"></i>
+        <h4>Cloud &amp; DevOps</h4>
+        <p>Deployment, hosting, scaling</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-database"></i>
+        <h4>Database Design</h4>
+        <p>MongoDB, SQL, Firebase</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-headset"></i>
+        <h4>Tech Consulting</h4>
+        <p>Project planning &amp; architecture</p>
+      </div>
     </div>
+  </section>
+
+  <!-- ==================== CONTACT ==================== -->
+  <section id="contact">
+    <h2 class="section-title">📬 Let's Connect</h2>
+    <p class="section-sub">Have a project in mind? Or just want to say hi?</p>
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;margin-bottom:20px">
+      <a href="mailto:francistech123@gmail.com" class="btn btn-primary"><i class="fas fa-envelope"></i> francistech123@gmail.com</a>
+      <a href="https://wa.me/2348065508373" class="btn btn-success"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      <a href="https://t.me/francistech" class="btn btn-outline"><i class="fab fa-telegram-plane"></i> Telegram</a>
+    </div>
+
+    <div class="social-links" style="gap:16px">
+      <a href="https://github.com/francitech123" class="social-link" target="_blank" style="width:50px;height:50px;font-size:1.4rem"><i class="fab fa-github"></i></a>
+      <a href="https://x.com/francistech_" class="social-link" target="_blank" style="width:50px;height:50px;font-size:1.4rem"><i class="fab fa-x-twitter"></i></a>
+      <a href="https://linkedin.com/in/francistech" class="social-link" target="_blank" style="width:50px;height:50px;font-size:1.4rem"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://youtube.com/@francistech" class="social-link" target="_blank" style="width:50px;height:50px;font-size:1.4rem"><i class="fab fa-youtube"></i></a>
+      <a href="mailto:francistech123@gmail.com" class="social-link" target="_blank" style="width:50px;height:50px;font-size:1.4rem"><i class="fas fa-envelope"></i></a>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <div class="footer">
+    <p>© 2026 FrancisTech. Built with ❤️ in Nigeria.</p>
+    <p style="margin-top:4px">
+      <a href="/" style="color:rgba(255,255,255,0.2);text-decoration:none">Home</a> &middot;
+      <a href="/download" style="color:rgba(255,255,255,0.2);text-decoration:none">Download OAU CBE Practice</a>
+    </p>
   </div>
 
-  <script>
-    // ============================================
-    // CONFIGURATION - UPDATED DOWNLOAD LINK
-    // ============================================
-    const APK_DOWNLOAD_LINK = 'https://web2apkpro.com/public_download.php?project_id=19536&token=c99f1ca959';
-    const CHANNEL_LINK = 'https://whatsapp.com/channel/0029Vb81wq0G3R3h20w2Ce0C';
-    const WEB_APP_LINK = 'https://francistech.edgeone.app';
+</div>
 
-    const SHARING_MESSAGE = `🚀 FREE OAU CBT PREP APP - FOR 100 & 200 LEVEL!
-
-Get instant access to the ultimate exam prep tool for Obafemi Awolowo University students.
-
-✅ 100+ Courses & 10,000+ Practice Questions
-✅ Nox AI Study Assistant (24/7 Help)
-✅ Live Leaderboards & Progress Trackers
-
-🎓 100% FREE for 100 & 200 Level Students!
-
-📲 Download the App:
-${WEB_APP_LINK}
-
-Share this with your classmates and start acing your tests today!`;
-
-    // ============================================
-    // MODAL LOGIC
-    // ============================================
-    const modal = document.getElementById('verifyModal');
-
-    function startVerification() {
-        modal.classList.add('show');
-        resetState();
-    }
-
-    function closeModal() {
-        modal.classList.remove('show');
-        hideToast();
-    }
-
-    function resetState() {
-        document.getElementById('check1').checked = false;
-        document.getElementById('check2').checked = false;
-        lockCheckbox('check1', 'lbl1', 'timer1');
-        lockCheckbox('check2', 'lbl2', 'timer2');
-        document.getElementById('finalDownloadBtn').disabled = true;
-        document.getElementById('finalDownloadBtn').style.background = '#64748b';
-        document.getElementById('finalDownloadBtn').style.cursor = 'not-allowed';
-        document.getElementById('finalDownloadBtn').innerHTML = '<i class="fas fa-lock"></i> Complete Tasks to Unlock';
-        hideToast();
-    }
-
-    // ============================================
-    // TOAST NOTIFICATION
-    // ============================================
-    function showToast(msg) {
-        const toast = document.getElementById('toast');
-        toast.innerText = msg;
-        toast.classList.add('show');
-        clearTimeout(toast._hideTimeout);
-    }
-
-    function hideToast() {
-        document.getElementById('toast').classList.remove('show');
-    }
-
-    // ============================================
-    // STEP 1 TIMER (5 Seconds - HIDDEN)
-    // ============================================
-    function startChannelTimer() {
-        const btn = document.getElementById('waChannelBtn');
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Opening...';
-        btn.disabled = true;
-        
-        window.open(CHANNEL_LINK, '_blank');
-
-        let seconds = 5;
-        const timerLabel = document.getElementById('timer1');
-        timerLabel.classList.remove('hidden-timer');
-        
-        const interval = setInterval(() => {
-            seconds--;
-            if(seconds <= 0) {
-                clearInterval(interval);
-                timerLabel.classList.add('hidden-timer');
-                unlockCheckbox('check1', 'lbl1');
-                btn.innerHTML = '<i class="fab fa-whatsapp"></i> Join Channel';
-                btn.disabled = false;
-                hideToast();
-            }
-        }, 1000);
-    }
-
-    // ============================================
-    // STEP 2 TIMER (10 Seconds - HIDDEN)
-    // ============================================
-    function startShareTimer() {
-        const btn = document.getElementById('waShareBtn');
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Opening...';
-        btn.disabled = true;
-        
-        const encodedMessage = encodeURIComponent(SHARING_MESSAGE);
-        window.open(`https://wa.me/?text=${encodedMessage}`, '_blank');
-
-        let seconds = 10;
-        const timerLabel = document.getElementById('timer2');
-        timerLabel.classList.remove('hidden-timer');
-        
-        const interval = setInterval(() => {
-            seconds--;
-            if(seconds <= 0) {
-                clearInterval(interval);
-                timerLabel.classList.add('hidden-timer');
-                unlockCheckbox('check2', 'lbl2');
-                btn.innerHTML = '<i class="fab fa-whatsapp"></i> Share Now';
-                btn.disabled = false;
-                hideToast();
-            }
-        }, 1000);
-    }
-
-    // ============================================
-    // CHECKBOX HELPER FUNCTIONS
-    // ============================================
-    function lockCheckbox(id, labelId, timerId) {
-        const cb = document.getElementById(id);
-        const lbl = document.getElementById(labelId);
-        const timer = document.getElementById(timerId);
-        
-        cb.disabled = true;
-        cb.classList.remove('unlocked');
-        lbl.classList.remove('unlocked');
-        timer.classList.add('hidden-timer');
-    }
-
-    function unlockCheckbox(id, labelId) {
-        const cb = document.getElementById(id);
-        const lbl = document.getElementById(labelId);
-        
-        cb.disabled = false;
-        cb.classList.add('unlocked');
-        lbl.classList.add('unlocked');
-    }
-
-    function toggleCheck(id) {
-        const checkbox = document.getElementById(id);
-        
-        if(checkbox.disabled) {
-            if(id === 'check1') {
-                showToast('⚠️ You have not joined the channel yet.');
-            } else if(id === 'check2') {
-                showToast('⚠️ You have not shared to at least 2 OAU groups yet.');
-            }
-            return;
-        }
-        
-        checkbox.checked = !checkbox.checked;
-        checkRequirements();
-    }
-
-    function checkRequirements() {
-        const c1 = document.getElementById('check1').checked;
-        const c2 = document.getElementById('check2').checked;
-        const btn = document.getElementById('finalDownloadBtn');
-        
-        if(c1 && c2) {
-            btn.disabled = false;
-            btn.style.background = '#10b981';
-            btn.style.cursor = 'pointer';
-            btn.innerHTML = '<i class="fas fa-check-circle"></i> Unlock & Download APK';
-            hideToast();
-        } else {
-            btn.disabled = true;
-            btn.style.background = '#64748b';
-            btn.style.cursor = 'not-allowed';
-            btn.innerHTML = '<i class="fas fa-lock"></i> Complete Tasks to Unlock';
-        }
-    }
-
-    // ============================================
-    // FINAL STEP: REDIRECT TO APK
-    // ============================================
-    function redirectToDownload() {
-        if(document.getElementById('finalDownloadBtn').disabled) return;
-        
-        const btn = document.getElementById('finalDownloadBtn');
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparing Download...';
-        btn.disabled = true;
-        btn.style.background = '#3b82f6';
-
-        setTimeout(() => {
-            window.location.href = APK_DOWNLOAD_LINK;
-        }, 800);
-    }
-  </script>
 </body>
 </html>
