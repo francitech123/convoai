@@ -428,7 +428,7 @@
   {
     "id": 72,
     "question": "In a circuit with a 100 Ω resistor and a 0.2 H inductor connected in series to a 50 Hz AC supply, find the impedance of the circuit.",
-    "options": ["100 Ω", "157 Ω", "186 Ω", "200 Ω", "314 Ω"],
+    "options": ["100 Ω", "157 Ω", "186 Ω", "200 Ω", "118 Ω"],
     "solution": "X_L = 2πfL = 2 * π * 50 * 0.2 = 62.83 Ω.\nZ = √(R² + X_L²) = √(100² + 62.83²) ≈ 118 Ω.\nANSWER: (e)"
   }
 ]
