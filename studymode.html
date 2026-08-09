@@ -34,7 +34,7 @@
         <header>
             <div class="header-left">
                 <div class="logo">
-                    <img src="/logo.svg" alt="OAU CBE Practice">
+                    <img src="/logo.svg" alt="OAU CBE Practice" onerror="this.style.display='none';this.parentElement.textContent='O'">
                 </div>
                 <div>
                     <div class="app-name">OAU <span>CBE</span> Practice</div>
@@ -56,7 +56,54 @@
             <h2>📚 Study Mode</h2>
             <p class="subtitle">Select a course to start studying topic by topic.</p>
             <div class="course-grid" id="courseGrid">
-                <!-- Courses rendered by JS -->
+                <button class="course-btn" data-code="PHY 102">
+                    <span class="course-content">
+                        <span class="course-code">PHY 102</span>
+                        <span class="course-name">General Physics II (Electricity &amp; Magnetism)</span>
+                        <span class="course-status">Click to start</span>
+                    </span>
+                    <span class="course-spinner"><i class="fas fa-spinner fa-spin"></i></span>
+                </button>
+                <button class="course-btn" data-code="PHY 104">
+                    <span class="course-content">
+                        <span class="course-code">PHY 104</span>
+                        <span class="course-name">General Physics IV (Waves &amp; Optics)</span>
+                        <span class="course-status">Click to start</span>
+                    </span>
+                    <span class="course-spinner"><i class="fas fa-spinner fa-spin"></i></span>
+                </button>
+                <button class="course-btn" data-code="CHM 102">
+                    <span class="course-content">
+                        <span class="course-code">CHM 102</span>
+                        <span class="course-name">Organic Chemistry II</span>
+                        <span class="course-status">Click to start</span>
+                    </span>
+                    <span class="course-spinner"><i class="fas fa-spinner fa-spin"></i></span>
+                </button>
+                <button class="course-btn" data-code="MTH 102">
+                    <span class="course-content">
+                        <span class="course-code">MTH 102</span>
+                        <span class="course-name">Elementary Mathematics II (Calculus)</span>
+                        <span class="course-status">Click to start</span>
+                    </span>
+                    <span class="course-spinner"><i class="fas fa-spinner fa-spin"></i></span>
+                </button>
+                <button class="course-btn" data-code="MTH 104">
+                    <span class="course-content">
+                        <span class="course-code">MTH 104</span>
+                        <span class="course-name">Elementary Mathematics IV (Matrices)</span>
+                        <span class="course-status">Click to start</span>
+                    </span>
+                    <span class="course-spinner"><i class="fas fa-spinner fa-spin"></i></span>
+                </button>
+                <button class="course-btn" data-code="BIO 102">
+                    <span class="course-content">
+                        <span class="course-code">BIO 102</span>
+                        <span class="course-name">General Biology II</span>
+                        <span class="course-status">Click to start</span>
+                    </span>
+                    <span class="course-spinner"><i class="fas fa-spinner fa-spin"></i></span>
+                </button>
             </div>
         </div>
 
