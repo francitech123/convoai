@@ -1,17 +1,15 @@
 // ============================================
 // STUDY MODE - OAU CBE Practice
-// Fully compatible with your JSON format
+// FULLY WORKING WITH YOUR JSON FORMAT
 // ============================================
 
 // ==================== CONFIGURATION ====================
-const API_BASE = '/api';
-
 const COURSES = [
-    { id: 'phy102', code: 'PHY 102', name: 'General Physics II (Electricity & Magnetism)', file: 'phy102.json', icon: '⚡' },
-    { id: 'phy104', code: 'PHY 104', name: 'General Physics IV (Waves & Optics)', file: 'phy104.json', icon: '🌊' },
+    { id: 'phy102', code: 'PHY 102', name: 'General Physics II', file: 'phy102.json', icon: '⚡' },
+    { id: 'phy104', code: 'PHY 104', name: 'General Physics IV', file: 'phy104.json', icon: '🌊' },
     { id: 'chm102', code: 'CHM 102', name: 'Organic Chemistry II', file: 'chm102.json', icon: '🧪' },
-    { id: 'mth102', code: 'MTH 102', name: 'Elementary Mathematics II (Calculus)', file: 'mth102.json', icon: '∫' },
-    { id: 'mth104', code: 'MTH 104', name: 'Elementary Mathematics IV (Matrices)', file: 'mth104.json', icon: '📐' },
+    { id: 'mth102', code: 'MTH 102', name: 'Elementary Mathematics II', file: 'mth102.json', icon: '∫' },
+    { id: 'mth104', code: 'MTH 104', name: 'Elementary Mathematics IV', file: 'mth104.json', icon: '📐' },
     { id: 'bio102', code: 'BIO 102', name: 'General Biology II', file: 'bio102.json', icon: '🧬' }
 ];
 
@@ -19,7 +17,6 @@ const COURSES = [
 let currentQuestions = [];
 let currentIndex = 0;
 let isAnswered = false;
-let isLoading = false;
 let totalQuestions = 0;
 let score = 0;
 let currentCourse = null;
@@ -27,8 +24,6 @@ let currentCourse = null;
 // ==================== DOM REFS ====================
 const $ = (id) => document.getElementById(id);
 
-const courseScreen = $('course-selection-screen');
-const studyScreen = $('study-screen');
 const courseGrid = $('courseGrid');
 const questionText = $('question-text');
 const optionsContainer = $('options-container');
@@ -75,18 +70,18 @@ function toggleTheme() {
     document.getElementById('themeIcon').className = isLight ? 'fas fa-sun' : 'fas fa-moon';
 }
 
-// ==================== PARSE CORRECT ANSWER FROM SOLUTION ====================
+// ==================== PARSE CORRECT ANSWER ====================
 function parseCorrectAnswer(solution) {
     if (!solution) return -1;
 
-    // Look for "ANSWER: (a)" or "ANSWER: (e)" etc.
+    // Look for "ANSWER: (a)" or "ANSWER: (e)"
     const match = solution.match(/ANSWER:\s*\(([a-e])\)/i);
     if (match) {
         const letter = match[1].toLowerCase();
         return letter.charCodeAt(0) - 97;
     }
 
-    // Fallback: "ANSWER: a" without parentheses
+    // Fallback: "ANSWER: a"
     const match2 = solution.match(/ANSWER:\s*([a-e])/i);
     if (match2) {
         const letter = match2[1].toLowerCase();
@@ -112,8 +107,6 @@ function renderCourses() {
 
 // ==================== SELECT COURSE ====================
 async function selectCourse(courseId) {
-    if (isLoading) return;
-
     const btn = document.querySelector(`.course-btn[data-course="${courseId}"]`);
     btn.classList.add('loading');
     btn.disabled = true;
@@ -128,103 +121,109 @@ async function selectCourse(courseId) {
         }
 
         // ============================================
-        // FETCH FROM JSON FILE - YOUR EXACT FORMAT
+        // FETCH JSON - WITH DEBUG LOGS
         // ============================================
-        let questions = null;
+        console.log(`📁 Loading: /data/${currentCourse.file}`);
         
-        // Try multiple paths
-        const paths = [
-            `/data/${currentCourse.file}`,
-            `/data/${currentCourse.id}.json`,
-            `${currentCourse.file}`,
-            `./data/${currentCourse.file}`
-        ];
-
-        for (const path of paths) {
-            try {
-                console.log(`📁 Trying to load: ${path}`);
-                const response = await fetch(path);
-                if (response.ok) {
-                    const data = await response.json();
-                    
-                    // Check if data is array
-                    if (Array.isArray(data) && data.length > 0) {
-                        // Validate format
-                        const valid = data.every(q => 
-                            q.id !== undefined && 
-                            q.question && 
-                            Array.isArray(q.options) && 
-                            q.options.length >= 4 &&
-                            q.solution
-                        );
-                        
-                        if (valid) {
-                            questions = data;
-                            console.log(`✅ Loaded ${questions.length} questions from ${path}`);
-                            break;
-                        } else {
-                            console.warn(`⚠️ Invalid format in ${path}`);
-                        }
-                    } else if (data && data.questions && Array.isArray(data.questions)) {
-                        // Handle nested format: { questions: [...] }
-                        const nestedData = data.questions;
-                        const valid = nestedData.every(q => 
-                            q.id !== undefined && 
-                            q.question && 
-                            Array.isArray(q.options) && 
-                            q.options.length >= 4 &&
-                            q.solution
-                        );
-                        if (valid) {
-                            questions = nestedData;
-                            console.log(`✅ Loaded ${questions.length} questions from ${path} (nested)`);
-                            break;
-                        }
-                    }
-                }
-            } catch (e) {
-                console.log(`❌ Failed to load ${path}:`, e.message);
-            }
-        }
-
-        if (!questions || !questions.length) {
-            showToast(`No questions found for ${currentCourse.code}`, 'error');
+        const response = await fetch(`/data/${currentCourse.file}`);
+        
+        if (!response.ok) {
+            console.error(`❌ HTTP ${response.status}: ${response.statusText}`);
+            showToast(`Could not load ${currentCourse.code} questions (HTTP ${response.status})`, 'error');
             btn.classList.remove('loading');
             btn.disabled = false;
             return;
         }
 
-        // Parse correct answers from solution text
+        const data = await response.json();
+        console.log(`✅ JSON loaded:`, data.length || Object.keys(data).length, 'items');
+
+        // ============================================
+        // HANDLE DIFFERENT JSON FORMATS
+        // ============================================
+        let questions = null;
+
+        // Format 1: Direct array [ { id, question, options, solution } ]
+        if (Array.isArray(data) && data.length > 0) {
+            const valid = data.every(q => 
+                q.id !== undefined && 
+                q.question && 
+                Array.isArray(q.options) && 
+                q.options.length >= 4 &&
+                q.solution
+            );
+            if (valid) {
+                questions = data;
+                console.log('✅ Format: Direct array');
+            }
+        }
+
+        // Format 2: { questions: [ ... ] }
+        if (!questions && data && data.questions && Array.isArray(data.questions) && data.questions.length > 0) {
+            const valid = data.questions.every(q => 
+                q.id !== undefined && 
+                q.question && 
+                Array.isArray(q.options) && 
+                q.options.length >= 4 &&
+                q.solution
+            );
+            if (valid) {
+                questions = data.questions;
+                console.log('✅ Format: { questions: [...] }');
+            }
+        }
+
+        // Format 3: { data: [ ... ] }
+        if (!questions && data && data.data && Array.isArray(data.data) && data.data.length > 0) {
+            const valid = data.data.every(q => 
+                q.id !== undefined && 
+                q.question && 
+                Array.isArray(q.options) && 
+                q.options.length >= 4 &&
+                q.solution
+            );
+            if (valid) {
+                questions = data.data;
+                console.log('✅ Format: { data: [...] }');
+            }
+        }
+
+        if (!questions || !questions.length) {
+            console.error('❌ No valid questions found in JSON');
+            showToast(`No valid questions found in ${currentCourse.code}`, 'error');
+            btn.classList.remove('loading');
+            btn.disabled = false;
+            return;
+        }
+
+        // Parse correct answers from solution
         questions = questions.map(q => ({
             ...q,
             correct: parseCorrectAnswer(q.solution)
         }));
 
         // Count invalid questions
-        const invalidQuestions = questions.filter(q => q.correct === -1);
-        if (invalidQuestions.length > 0) {
-            console.warn(`⚠️ ${invalidQuestions.length} questions have no valid ANSWER: in solution`);
+        const invalid = questions.filter(q => q.correct === -1);
+        if (invalid.length > 0) {
+            console.warn(`⚠️ ${invalid.length} questions have no valid ANSWER: in solution`);
         }
 
-        // Filter out questions with invalid answers (optional - keep them with -1)
-        // questions = questions.filter(q => q.correct !== -1);
-
-        // Store questions with shuffle
+        // Store and shuffle
         currentQuestions = shuffleArray(questions);
         currentIndex = 0;
         totalQuestions = currentQuestions.length;
         score = 0;
         isAnswered = false;
 
-        // Update UI
-        courseScreen.style.display = 'none';
-        studyScreen.style.display = 'block';
+        // Switch screens
+        document.getElementById('course-selection-screen').style.display = 'none';
+        document.getElementById('study-screen').style.display = 'block';
 
         renderQuestion();
         showToast(`📚 Loaded ${totalQuestions} questions for ${currentCourse.code}`, 'success');
 
     } catch (error) {
-        console.error('Select course error:', error);
+        console.error('❌ Select course error:', error);
         showToast('Failed to load course questions', 'error');
     }
 
@@ -242,16 +241,13 @@ function renderQuestion() {
     const q = currentQuestions[currentIndex];
     const letters = ['A', 'B', 'C', 'D', 'E'];
 
-    // Reset state
     isAnswered = false;
     solutionContainer.style.display = 'none';
     solutionText.classList.remove('show');
 
-    // Set question text with MathJax
     questionText.innerHTML = q.question;
     questionText.classList.add('mathjax-process');
 
-    // Render options - exactly from your JSON format
     optionsContainer.innerHTML = q.options.map((opt, i) => `
         <button class="option-btn" data-index="${i}" onclick="selectOption(${i})">
             <span class="letter">${letters[i]}</span>
@@ -259,40 +255,32 @@ function renderQuestion() {
         </button>
     `).join('');
 
-    // Update progress
     const answered = currentQuestions.filter(q => q.userAnswer !== undefined && q.userAnswer !== null).length;
     progressText.textContent = `Question ${currentIndex + 1} of ${totalQuestions}`;
     scoreDisplay.textContent = `✅ ${answered}/${totalQuestions}`;
     progressFill.style.width = `${((currentIndex + 1) / totalQuestions) * 100}%`;
 
-    // Update buttons
     prevBtn.disabled = currentIndex === 0;
     nextBtn.textContent = currentIndex === totalQuestions - 1 ? '🎯 Finish' : 'Next →';
 
-    // Trigger MathJax
     setTimeout(() => {
         if (window.MathJax && MathJax.typesetPromise) {
             MathJax.typesetPromise().catch(() => {});
         }
     }, 100);
-
-    // Scroll to top
-    document.querySelector('.question-card').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 // ==================== SELECT OPTION ====================
 function selectOption(index) {
-    if (isAnswered || isLoading) return;
+    if (isAnswered) return;
 
     const q = currentQuestions[currentIndex];
     const isCorrect = index === q.correct;
     q.userAnswer = index;
-
     isAnswered = true;
 
     if (isCorrect) score++;
 
-    // Update UI
     const btns = optionsContainer.querySelectorAll('.option-btn');
     btns.forEach((btn, i) => {
         btn.classList.add('disabled');
@@ -301,23 +289,19 @@ function selectOption(index) {
         if (i === index) btn.classList.add('selected');
     });
 
-    // Show solution - from your JSON format
     solutionContainer.style.display = 'block';
     solutionText.innerHTML = q.solution || 'No explanation provided.';
     solutionText.classList.add('show');
 
-    // Update progress
     const answered = currentQuestions.filter(q => q.userAnswer !== undefined && q.userAnswer !== null).length;
     scoreDisplay.textContent = `✅ ${answered}/${totalQuestions}`;
 
-    // Trigger MathJax for solution
     setTimeout(() => {
         if (window.MathJax && MathJax.typesetPromise) {
             MathJax.typesetPromise().catch(() => {});
         }
     }, 100);
 
-    // Show toast
     if (isCorrect) {
         showToast('✅ Correct! Well done!', 'success');
     } else {
@@ -390,8 +374,8 @@ function restartTopic() {
 
 // ==================== BACK TO MENU ====================
 function backToMenu() {
-    studyScreen.style.display = 'none';
-    courseScreen.style.display = 'block';
+    document.getElementById('study-screen').style.display = 'none';
+    document.getElementById('course-selection-screen').style.display = 'block';
     currentQuestions = [];
     currentIndex = 0;
     totalQuestions = 0;
@@ -399,7 +383,11 @@ function backToMenu() {
     showToast('↩️ Back to courses', 'info');
 }
 
-// ==================== TOGGLE SOLUTION ====================
+// ==================== EVENT LISTENERS ====================
+if (prevBtn) prevBtn.addEventListener('click', prevQuestion);
+if (nextBtn) nextBtn.addEventListener('click', nextQuestion);
+if (backBtn) backBtn.addEventListener('click', backToMenu);
+
 if (toggleSolutionBtn) {
     toggleSolutionBtn.addEventListener('click', () => {
         solutionText.classList.toggle('show');
@@ -407,17 +395,10 @@ if (toggleSolutionBtn) {
     });
 }
 
-// ==================== NAVIGATION EVENT LISTENERS ====================
-if (prevBtn) prevBtn.addEventListener('click', prevQuestion);
-if (nextBtn) nextBtn.addEventListener('click', nextQuestion);
-if (backBtn) backBtn.addEventListener('click', backToMenu);
-
-// ==================== KEYBOARD SHORTCUTS ====================
+// Keyboard shortcuts
 document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft' && !prevBtn.disabled) prevQuestion();
     if (e.key === 'ArrowRight' && !nextBtn.disabled) nextQuestion();
-
-    // Number keys 1-5 for options
     if (e.key >= '1' && e.key <= '5' && !isAnswered) {
         const idx = parseInt(e.key) - 1;
         const btns = optionsContainer.querySelectorAll('.option-btn');
@@ -440,10 +421,9 @@ function init() {
     initTheme();
     renderCourses();
     console.log('📚 Study Mode loaded successfully!');
-    console.log('📁 Waiting for course selection...');
 }
 
-// ==================== EXPOSE FUNCTIONS ====================
+// ==================== EXPOSE ====================
 window.selectCourse = selectCourse;
 window.selectOption = selectOption;
 window.prevQuestion = prevQuestion;
