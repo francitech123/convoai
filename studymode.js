@@ -4,24 +4,24 @@
 
 // ==================== CONFIGURATION ====================
 const API_BASE = '/api';
-const COURSES_DATA = [
-    { code: 'CHM102', name: 'Organic Chemistry II', file: 'chm102.json' },
-    { code: 'MTH102', name: 'Elementary Mathematics II (Calculus)', file: 'mth102.json' },
-    { code: 'BIO102', name: 'General Biology II', file: 'bio102.json' },
-    { code: 'PHY104', name: 'General Physics IV (Waves & Optics)', file: 'phy104.json' },
-    { code: 'PHY102', name: 'General Physics II (Electricity & Magnetism)', file: 'phy102.json' },
-    { code: 'MTH104', name: 'Elementary Mathematics IV (Matrices)', file: 'mth104.json' }
+
+const COURSES = [
+    { id: 'phy102', code: 'PHY 102', name: 'General Physics II (Electricity & Magnetism)', file: 'phy102.json', icon: '⚡' },
+    { id: 'phy104', code: 'PHY 104', name: 'General Physics IV (Waves & Optics)', file: 'phy104.json', icon: '🌊' },
+    { id: 'chm102', code: 'CHM 102', name: 'Organic Chemistry II', file: 'chm102.json', icon: '🧪' },
+    { id: 'mth102', code: 'MTH 102', name: 'Elementary Mathematics II (Calculus)', file: 'mth102.json', icon: '∫' },
+    { id: 'mth104', code: 'MTH 104', name: 'Elementary Mathematics IV (Matrices)', file: 'mth104.json', icon: '📐' },
+    { id: 'bio102', code: 'BIO 102', name: 'General Biology II', file: 'bio102.json', icon: '🧬' }
 ];
 
 // ==================== STATE ====================
-let currentCourse = null;
 let currentQuestions = [];
 let currentIndex = 0;
-let selectedAnswer = null;
 let isAnswered = false;
 let isLoading = false;
 let totalQuestions = 0;
 let score = 0;
+let currentCourse = null;
 
 // ==================== DOM REFS ====================
 const $ = (id) => document.getElementById(id);
@@ -29,7 +29,7 @@ const $$ = (sel) => document.querySelectorAll(sel);
 
 const courseScreen = $('course-selection-screen');
 const studyScreen = $('study-screen');
-const courseGrid = document.querySelector('.course-grid');
+const courseGrid = $('courseGrid');
 const questionText = $('question-text');
 const optionsContainer = $('options-container');
 const solutionContainer = $('solution-container');
@@ -40,8 +40,7 @@ const nextBtn = $('next-btn');
 const backBtn = $('back-to-menu-btn');
 const progressText = $('progress-text');
 const progressFill = $('progress-fill');
-const courseTitle = $('course-title');
-const studyHeader = $('study-header');
+const scoreDisplay = $('score-display');
 
 // ==================== TOAST ====================
 function showToast(message, type = 'info') {
@@ -50,7 +49,7 @@ function showToast(message, type = 'info') {
 
     const toast = document.createElement('div');
     toast.className = 'toast';
-    const icons = { success: '✅', error: '❌', info: 'ℹ️', warning: '⚠️' };
+    const icons = { success: '✅', error: '❌', info: 'ℹ️' };
     toast.innerHTML = `<span class="toast-icon ${type}">${icons[type] || 'ℹ️'}</span> ${message}`;
     document.body.appendChild(toast);
     setTimeout(() => toast.classList.add('show'), 10);
@@ -60,29 +59,12 @@ function showToast(message, type = 'info') {
     }, 3000);
 }
 
-// ==================== LOADING ====================
-function setLoading(btn, loading) {
-    if (!btn) return;
-    if (loading) {
-        btn.classList.add('loading');
-        btn.disabled = true;
-    } else {
-        btn.classList.remove('loading');
-        btn.disabled = false;
-    }
-}
-
-function setQuestionLoading(loading) {
-    const card = document.querySelector('.question-card');
-    if (!card) return;
-    card.classList.toggle('loading', loading);
-}
-
 // ==================== THEME ====================
 function initTheme() {
     const saved = localStorage.getItem('theme');
     if (saved === 'light') {
         document.body.classList.add('light-mode');
+        document.getElementById('themeIcon').className = 'fas fa-sun';
     }
 }
 
@@ -90,17 +72,37 @@ function toggleTheme() {
     document.body.classList.toggle('light-mode');
     const isLight = document.body.classList.contains('light-mode');
     localStorage.setItem('theme', isLight ? 'light' : 'dark');
-    const icon = document.querySelector('#themeToggle i');
-    if (icon) icon.className = isLight ? 'fas fa-sun' : 'fas fa-moon';
+    document.getElementById('themeIcon').className = isLight ? 'fas fa-sun' : 'fas fa-moon';
+}
+
+// ==================== PARSE CORRECT ANSWER FROM SOLUTION ====================
+function parseCorrectAnswer(solution) {
+    if (!solution) return -1;
+    
+    // Look for "ANSWER: (a)" or "ANSWER: (e)" or "ANSWER: (c)" etc.
+    const match = solution.match(/ANSWER:\s*\(([a-e])\)/i);
+    if (match) {
+        const letter = match[1].toLowerCase();
+        return letter.charCodeAt(0) - 97; // a=0, b=1, c=2, d=3, e=4
+    }
+    
+    // Fallback: look for "ANSWER:" without parentheses
+    const match2 = solution.match(/ANSWER:\s*([a-e])/i);
+    if (match2) {
+        const letter = match2[1].toLowerCase();
+        return letter.charCodeAt(0) - 97;
+    }
+    
+    return -1;
 }
 
 // ==================== RENDER COURSES ====================
 function renderCourses() {
-    courseGrid.innerHTML = COURSES_DATA.map(c => `
-        <button class="course-btn" data-course="${c.code}" onclick="selectCourse('${c.code}')">
+    courseGrid.innerHTML = COURSES.map(c => `
+        <button class="course-btn" data-course="${c.id}" onclick="selectCourse('${c.id}')">
             <div class="course-spinner"><i class="fas fa-spinner fa-spin"></i></div>
             <div class="course-content">
-                <span class="course-code">${c.code}</span>
+                <span class="course-code">${c.icon} ${c.code}</span>
                 <span class="course-name">${c.name}</span>
                 <span class="course-status">📚 Click to start</span>
             </div>
@@ -109,70 +111,87 @@ function renderCourses() {
 }
 
 // ==================== SELECT COURSE ====================
-async function selectCourse(code) {
+async function selectCourse(courseId) {
     if (isLoading) return;
 
-    const btn = document.querySelector(`.course-btn[data-course="${code}"]`);
-    setLoading(btn, true);
+    const btn = document.querySelector(`.course-btn[data-course="${courseId}"]`);
+    btn.classList.add('loading');
+    btn.disabled = true;
 
     try {
-        currentCourse = COURSES_DATA.find(c => c.code === code);
+        currentCourse = COURSES.find(c => c.id === courseId);
         if (!currentCourse) {
             showToast('Course not found', 'error');
+            btn.classList.remove('loading');
+            btn.disabled = false;
             return;
         }
 
-        // Try to load from JSON file first, then fallback to API
+        // ============================================
+        // FETCH FROM JSON FILE - YOUR EXACT FORMAT
+        // ============================================
         let questions = null;
         try {
             const response = await fetch(`/data/${currentCourse.file}`);
-            if (response.ok) {
-                const data = await response.json();
-                if (data.questions && data.questions.length) {
-                    questions = data.questions;
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+            const data = await response.json();
+            
+            // Validate: Expecting array of questions with your format
+            if (Array.isArray(data) && data.length > 0) {
+                // Validate each question has required fields
+                const valid = data.every(q => 
+                    q.id !== undefined && 
+                    q.question && 
+                    Array.isArray(q.options) && 
+                    q.options.length >= 4 &&
+                    q.solution
+                );
+                
+                if (valid) {
+                    questions = data;
+                } else {
+                    console.warn('⚠️ Invalid question format in JSON');
                 }
             }
         } catch (e) {
-            console.log('No local JSON found, trying API...');
-        }
-
-        // Fallback to API
-        if (!questions) {
-            try {
-                const response = await fetch(`${API_BASE}/study/questions?course=${code}`);
-                const data = await response.json();
-                if (data.success && data.questions) {
-                    questions = data.questions;
-                }
-            } catch (e) {
-                console.log('API fetch failed, using sample data');
-            }
-        }
-
-        // If still no questions, use sample data
-        if (!questions || !questions.length) {
-            questions = getSampleQuestions(code);
-        }
-
-        if (!questions || !questions.length) {
-            showToast('No questions available for this course', 'error');
-            setLoading(btn, false);
+            console.log('📁 JSON load error:', e.message);
+            showToast(`Could not load ${currentCourse.code} questions`, 'error');
+            btn.classList.remove('loading');
+            btn.disabled = false;
             return;
         }
 
+        if (!questions || !questions.length) {
+            showToast(`No questions found for ${currentCourse.code}`, 'error');
+            btn.classList.remove('loading');
+            btn.disabled = false;
+            return;
+        }
+
+        // Parse correct answers from solution text
+        questions = questions.map(q => ({
+            ...q,
+            correct: parseCorrectAnswer(q.solution)
+        }));
+
+        // Filter out questions where correct answer couldn't be parsed
+        const invalidQuestions = questions.filter(q => q.correct === -1);
+        if (invalidQuestions.length > 0) {
+            console.warn(`⚠️ ${invalidQuestions.length} questions have no valid ANSWER: in solution`);
+        }
+
+        // Store questions with shuffle
         currentQuestions = shuffleArray(questions);
         currentIndex = 0;
         totalQuestions = currentQuestions.length;
         score = 0;
         isAnswered = false;
-        selectedAnswer = null;
 
         // Update UI
-        courseTitle.textContent = `${currentCourse.code} - ${currentCourse.name}`;
-        studyHeader.style.display = 'block';
-
-        courseScreen.classList.add('hidden');
-        studyScreen.classList.remove('hidden');
+        courseScreen.style.display = 'none';
+        studyScreen.style.display = 'block';
 
         renderQuestion();
         showToast(`📚 Loaded ${totalQuestions} questions for ${currentCourse.code}`, 'success');
@@ -182,7 +201,8 @@ async function selectCourse(code) {
         showToast('Failed to load course questions', 'error');
     }
 
-    setLoading(btn, false);
+    btn.classList.remove('loading');
+    btn.disabled = false;
 }
 
 // ==================== RENDER QUESTION ====================
@@ -193,35 +213,43 @@ function renderQuestion() {
     }
 
     const q = currentQuestions[currentIndex];
-    const letters = ['A', 'B', 'C', 'D'];
+    const letters = ['A', 'B', 'C', 'D', 'E'];
 
     // Reset state
     isAnswered = false;
-    selectedAnswer = null;
-    solutionText.classList.remove('show');
     solutionContainer.style.display = 'none';
+    solutionText.classList.remove('show');
 
-    // Set question text
-    questionText.textContent = q.question;
+    // Set question text with MathJax
+    questionText.innerHTML = q.question;
+    questionText.classList.add('mathjax-process');
 
-    // Render options
+    // Render options - exactly from your JSON format
     optionsContainer.innerHTML = q.options.map((opt, i) => `
         <button class="option-btn" data-index="${i}" onclick="selectOption(${i})">
             <span class="letter">${letters[i]}</span>
-            <span>${opt}</span>
+            <span class="mathjax-process">${opt}</span>
         </button>
     `).join('');
 
     // Update progress
-    const answered = currentQuestions.filter(q => q.userAnswer !== undefined).length;
-    progressText.textContent = `Question ${currentIndex + 1} of ${totalQuestions} • ✅ ${answered} answered`;
+    const answered = currentQuestions.filter(q => q.userAnswer !== undefined && q.userAnswer !== null).length;
+    progressText.textContent = `Question ${currentIndex + 1} of ${totalQuestions}`;
+    scoreDisplay.textContent = `✅ ${answered}/${totalQuestions}`;
     progressFill.style.width = `${((currentIndex + 1) / totalQuestions) * 100}%`;
 
     // Update buttons
     prevBtn.disabled = currentIndex === 0;
-    nextBtn.textContent = currentIndex === totalQuestions - 1 ? 'Finish 🎯' : 'Next →';
+    nextBtn.textContent = currentIndex === totalQuestions - 1 ? '🎯 Finish' : 'Next →';
 
-    // Scroll to top of question
+    // Trigger MathJax
+    setTimeout(() => {
+        if (window.MathJax && MathJax.typesetPromise) {
+            MathJax.typesetPromise().catch(() => {});
+        }
+    }, 100);
+
+    // Scroll to top
     document.querySelector('.question-card').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
@@ -234,7 +262,6 @@ function selectOption(index) {
     q.userAnswer = index;
 
     isAnswered = true;
-    selectedAnswer = index;
 
     if (isCorrect) score++;
 
@@ -247,20 +274,27 @@ function selectOption(index) {
         if (i === index) btn.classList.add('selected');
     });
 
-    // Show solution
+    // Show solution - from your JSON format
     solutionContainer.style.display = 'block';
-    solutionText.textContent = q.explanation || 'No explanation provided.';
+    solutionText.innerHTML = q.solution || 'No explanation provided.';
     solutionText.classList.add('show');
 
     // Update progress
-    const answered = currentQuestions.filter(q => q.userAnswer !== undefined).length;
-    progressText.textContent = `Question ${currentIndex + 1} of ${totalQuestions} • ✅ ${answered} answered`;
+    const answered = currentQuestions.filter(q => q.userAnswer !== undefined && q.userAnswer !== null).length;
+    scoreDisplay.textContent = `✅ ${answered}/${totalQuestions}`;
+
+    // Trigger MathJax for solution
+    setTimeout(() => {
+        if (window.MathJax && MathJax.typesetPromise) {
+            MathJax.typesetPromise().catch(() => {});
+        }
+    }, 100);
 
     // Show toast
     if (isCorrect) {
         showToast('✅ Correct! Well done!', 'success');
     } else {
-        const letters = ['A', 'B', 'C', 'D'];
+        const letters = ['A', 'B', 'C', 'D', 'E'];
         showToast(`❌ Incorrect. The correct answer is ${letters[q.correct]}`, 'error');
     }
 }
@@ -310,7 +344,8 @@ function showComplete() {
     optionsContainer.innerHTML = '';
     solutionContainer.style.display = 'none';
     progressFill.style.width = '100%';
-    progressText.textContent = `🎯 Complete! ${score}/${totalQuestions} correct`;
+    progressText.textContent = '🎯 Complete!';
+    scoreDisplay.textContent = `✅ ${score}/${totalQuestions}`;
     prevBtn.disabled = true;
     nextBtn.disabled = true;
     nextBtn.textContent = '✅ Done';
@@ -322,18 +357,14 @@ function restartTopic() {
     score = 0;
     currentQuestions.forEach(q => q.userAnswer = undefined);
     isAnswered = false;
-    selectedAnswer = null;
-    prevBtn.disabled = false;
-    nextBtn.disabled = false;
     renderQuestion();
     showToast('🔄 Restarted!', 'info');
 }
 
 // ==================== BACK TO MENU ====================
 function backToMenu() {
-    studyHeader.style.display = 'none';
-    studyScreen.classList.add('hidden');
-    courseScreen.classList.remove('hidden');
+    studyScreen.style.display = 'none';
+    courseScreen.style.display = 'block';
     currentQuestions = [];
     currentIndex = 0;
     totalQuestions = 0;
@@ -341,29 +372,29 @@ function backToMenu() {
     showToast('↩️ Back to courses', 'info');
 }
 
-// ==================== CALCULATOR ====================
-function toggleCalculator() {
-    // Simple calculator toggle - you can expand this
-    showToast('🧮 Calculator feature coming soon!', 'info');
-}
+// ==================== TOGGLE SOLUTION ====================
+toggleSolutionBtn.addEventListener('click', () => {
+    solutionText.classList.toggle('show');
+    toggleSolutionBtn.textContent = solutionText.classList.contains('show') ? '🙈 Hide Solution' : '💡 Show Solution';
+});
 
-// ==================== SAMPLE QUESTIONS ====================
-function getSampleQuestions(code) {
-    const samples = {
-        'CHM102': [
-            { question: 'What is the IUPAC name for CH4?', options: ['Methane', 'Ethane', 'Propane', 'Butane'], correct: 0, explanation: 'CH4 is methane, the simplest alkane.' },
-            { question: 'What is the functional group in alcohols?', options: ['-OH', '-COOH', '-NH2', '-CHO'], correct: 0, explanation: 'Alcohols contain the hydroxyl group (-OH).' }
-        ],
-        'PHY102': [
-            { question: 'What is Coulomb\'s law?', options: ['F = kQ1Q2/r²', 'F = ma', 'E = mc²', 'V = IR'], correct: 0, explanation: 'Coulomb\'s law describes the force between two charges.' },
-            { question: 'What is Ohm\'s law?', options: ['V = IR', 'P = IV', 'E = mc²', 'F = ma'], correct: 0, explanation: 'Ohm\'s law states V = IR.' }
-        ],
-        'MTH102': [
-            { question: 'What is the derivative of x²?', options: ['2x', 'x²', '2', 'x'], correct: 0, explanation: 'The derivative of x² is 2x using the power rule.' }
-        ]
-    };
-    return samples[code] || [];
-}
+// ==================== NAVIGATION EVENT LISTENERS ====================
+prevBtn.addEventListener('click', prevQuestion);
+nextBtn.addEventListener('click', nextQuestion);
+backBtn.addEventListener('click', backToMenu);
+
+// ==================== KEYBOARD SHORTCUTS ====================
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft' && !prevBtn.disabled) prevQuestion();
+    if (e.key === 'ArrowRight' && !nextBtn.disabled) nextQuestion();
+    
+    // Number keys 1-5 for options
+    if (e.key >= '1' && e.key <= '5' && !isAnswered) {
+        const idx = parseInt(e.key) - 1;
+        const btns = optionsContainer.querySelectorAll('.option-btn');
+        if (btns[idx]) btns[idx].click();
+    }
+});
 
 // ==================== UTILITY ====================
 function shuffleArray(arr) {
@@ -375,6 +406,14 @@ function shuffleArray(arr) {
     return s;
 }
 
+// ==================== INIT ====================
+function init() {
+    initTheme();
+    renderCourses();
+    console.log('📚 Study Mode loaded successfully!');
+    console.log('📁 Waiting for course selection...');
+}
+
 // ==================== EXPOSE FUNCTIONS ====================
 window.selectCourse = selectCourse;
 window.selectOption = selectOption;
@@ -383,32 +422,6 @@ window.nextQuestion = nextQuestion;
 window.backToMenu = backToMenu;
 window.restartTopic = restartTopic;
 window.toggleTheme = toggleTheme;
-window.toggleCalculator = toggleCalculator;
 
-// ==================== INIT ====================
-document.addEventListener('DOMContentLoaded', () => {
-    initTheme();
-    renderCourses();
-
-    // Event listeners
-    prevBtn.addEventListener('click', prevQuestion);
-    nextBtn.addEventListener('click', nextQuestion);
-    backBtn.addEventListener('click', backToMenu);
-    toggleSolutionBtn.addEventListener('click', () => {
-        solutionText.classList.toggle('show');
-        toggleSolutionBtn.textContent = solutionText.classList.contains('show') ? 'Hide Solution' : 'Show Solution';
-    });
-
-    // Keyboard shortcuts
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft' && !prevBtn.disabled) prevQuestion();
-        if (e.key === 'ArrowRight' && !nextBtn.disabled) nextQuestion();
-        if (e.key >= '1' && e.key <= '4' && !isAnswered) {
-            const idx = parseInt(e.key) - 1;
-            const btns = optionsContainer.querySelectorAll('.option-btn');
-            if (btns[idx]) btns[idx].click();
-        }
-    });
-
-    console.log('📚 Study Mode loaded successfully!');
-});
+// Start
+init();
