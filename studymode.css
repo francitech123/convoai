@@ -39,7 +39,7 @@ body {
 .app-container {
     max-width: 800px;
     margin: 0 auto;
-    padding: 20px 16px 100px; /* Extra padding for bottom floating button */
+    padding: 20px 16px 100px;
 }
 
 /* ============================================
@@ -154,28 +154,58 @@ body.light-mode .logo-circle {
     align-items: center;
     gap: 8px 12px;
     transition: 0.2s;
+    position: relative;
 }
 
-.course-btn:hover {
+.course-btn:hover:not(:disabled) {
     border-color: var(--blue-accent);
     transform: translateY(-2px);
 }
 
-.course-btn .code {
+.course-btn .course-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+    width: 100%;
+}
+
+.course-btn .course-code {
     font-weight: 700;
     font-size: 15px;
     color: var(--blue-light);
 }
 
-.course-btn .name {
+.course-btn .course-name {
     color: var(--text-muted);
     font-size: 14px;
 }
 
-.course-btn .status {
+.course-btn .course-status {
     margin-left: auto;
     font-size: 12px;
     color: #10b981;
+}
+
+.course-btn .course-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    font-size: 24px;
+    color: var(--blue-accent);
+}
+
+.course-btn.loading .course-spinner {
+    display: block;
+}
+.course-btn.loading .course-content {
+    opacity: 0.3;
+    pointer-events: none;
+}
+.course-btn.loading {
+    cursor: not-allowed;
 }
 
 /* ============================================
@@ -204,6 +234,43 @@ body.light-mode .logo-circle {
     border-radius: var(--radius-lg);
     padding: 20px;
     margin-bottom: 16px;
+    position: relative;
+    min-height: 200px;
+}
+
+/* LOADING OVERLAY */
+.question-card .loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+    color: var(--text-muted);
+    z-index: 10;
+}
+
+body.light-mode .question-card .loading-overlay {
+    background: rgba(241, 245, 249, 0.9);
+}
+
+.question-card.loading .loading-overlay {
+    display: flex;
+}
+
+.question-card .loading-overlay i {
+    font-size: 32px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
 }
 
 .question-text {
@@ -229,10 +296,103 @@ body.light-mode .logo-circle {
     cursor: pointer;
     font-family: inherit;
     transition: 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
-.option-btn:hover:not(.disabled) { border-color: var(--blue-accent); }
-.option-btn.correct { border-color: #10b981; background: rgba(16,185,129,0.1); }
-.option-btn.wrong { border-color: #ef4444; background: rgba(239,68,68,0.1); }
+
+.option-btn .letter {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 12px;
+    flex-shrink: 0;
+    color: var(--text-muted);
+}
+
+.option-btn:hover:not(.disabled) { 
+    border-color: var(--blue-accent); 
+}
+
+.option-btn.selected {
+    border-color: var(--blue-accent);
+    background: rgba(59, 130, 246, 0.08);
+}
+
+.option-btn.selected .letter {
+    background: var(--blue-accent);
+    color: #fff;
+}
+
+.option-btn.correct { 
+    border-color: #10b981; 
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.option-btn.correct .letter {
+    background: #10b981;
+    color: #fff;
+}
+
+.option-btn.wrong { 
+    border-color: #ef4444; 
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.option-btn.wrong .letter {
+    background: #ef4444;
+    color: #fff;
+}
+
+.option-btn.disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Solution */
+.solution-container {
+    margin-top: 12px;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+}
+
+.toggle-solution-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 30px;
+    padding: 6px 16px;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 13px;
+    font-family: inherit;
+    transition: 0.2s;
+}
+
+.toggle-solution-btn:hover {
+    border-color: var(--blue-accent);
+    color: var(--text);
+}
+
+.solution-text {
+    margin-top: 10px;
+    padding: 12px 16px;
+    background: var(--bg-dark);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    display: none;
+    border-left: 3px solid var(--blue-accent);
+}
+
+.solution-text.show {
+    display: block;
+}
 
 .nav-controls {
     display: flex;
@@ -249,18 +409,98 @@ body.light-mode .logo-circle {
     font-family: inherit;
     transition: 0.2s;
 }
-.nav-btn.next { background: var(--blue-accent); color: #fff; }
-.nav-btn.next:hover { opacity: 0.9; transform: scale(0.98); }
-.nav-btn.prev { background: var(--bg-card); border: 1px solid var(--border); color: var(--text); }
-.nav-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.nav-btn.next { 
+    background: var(--blue-accent); 
+    color: #fff; 
+}
+
+.nav-btn.next:hover:not(:disabled) { 
+    opacity: 0.9; 
+    transform: scale(0.98); 
+}
+
+.nav-btn.prev { 
+    background: var(--bg-card); 
+    border: 1px solid var(--border); 
+    color: var(--text); 
+}
+
+.nav-btn.prev:hover:not(:disabled) {
+    border-color: var(--blue-accent);
+}
+
+.nav-btn:disabled { 
+    opacity: 0.5; 
+    cursor: not-allowed; 
+}
 
 /* Progress Bar */
-.progress-top { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-muted); margin-bottom: 6px; }
-.progress-bg { height: 4px; background: var(--border); border-radius: 4px; }
-.progress-fill { height: 100%; background: var(--blue-accent); border-radius: 4px; width: 0%; transition: width 0.3s ease; }
+.progress-top { 
+    display: flex; 
+    justify-content: space-between; 
+    font-size: 13px; 
+    color: var(--text-muted); 
+    margin-bottom: 6px; 
+}
+
+.progress-bg { 
+    height: 4px; 
+    background: var(--border); 
+    border-radius: 4px; 
+    overflow: hidden;
+}
+
+.progress-fill { 
+    height: 100%; 
+    background: var(--blue-accent); 
+    border-radius: 4px; 
+    width: 0%; 
+    transition: width 0.3s ease; 
+}
 
 /* ============================================
-   FLOATING HOME BUTTON (Bottom Center)
+   TOAST
+   ============================================ */
+.toast {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 12px 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    z-index: 9999;
+    font-size: 14px;
+    color: var(--text);
+    max-width: 90%;
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+}
+
+.toast .toast-icon {
+    font-size: 18px;
+}
+
+.toast .toast-icon.success { color: #10b981; }
+.toast .toast-icon.error { color: #ef4444; }
+.toast .toast-icon.info { color: var(--blue-accent); }
+.toast .toast-icon.warning { color: #f59e0b; }
+
+/* ============================================
+   FLOATING HOME BUTTON
    ============================================ */
 .floating-home-btn {
     position: fixed;
@@ -296,4 +536,93 @@ body.light-mode .logo-circle {
 
 .floating-home-btn i {
     font-size: 20px;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 480px) {
+    .app-container {
+        padding: 16px 12px 90px;
+    }
+
+    .course-btn {
+        padding: 14px 12px;
+    }
+    .course-btn .course-name {
+        font-size: 12px;
+    }
+    .course-btn .course-code {
+        font-size: 13px;
+    }
+
+    .question-card {
+        padding: 14px;
+    }
+    .question-text {
+        font-size: 14px;
+    }
+    .option-btn {
+        font-size: 13px;
+        padding: 10px 12px;
+    }
+
+    .nav-btn {
+        font-size: 13px;
+        padding: 10px;
+    }
+
+    .floating-home-btn {
+        padding: 14px 32px;
+        font-size: 16px;
+        bottom: 24px;
+    }
+
+    .header-text h1 {
+        font-size: 16px;
+    }
+    .header-text h2 {
+        font-size: 10px;
+    }
+    .logo-circle {
+        width: 36px;
+        height: 36px;
+    }
+    .logo-circle img {
+        width: 24px;
+        height: 24px;
+    }
+    .btn-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 14px;
+    }
+
+    .page-title {
+        font-size: 18px;
+    }
+    .page-subtitle {
+        font-size: 13px;
+    }
+
+    .toast {
+        font-size: 13px;
+        padding: 10px 16px;
+        bottom: 80px;
+    }
+}
+
+@media (max-width: 380px) {
+    .course-btn .course-status {
+        margin-left: 0;
+        width: 100%;
+    }
+    .floating-home-btn {
+        padding: 12px 24px;
+        font-size: 14px;
+        gap: 8px;
+    }
+    .floating-home-btn i {
+        font-size: 16px;
+    }
 }
