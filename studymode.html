@@ -46,7 +46,7 @@
             <h2 class="page-title">Select a course</h2>
             <p class="page-subtitle">Start studying topic by topic.</p>
 
-            <div class="course-grid" id="courseGrid">
+            <div class="course-list" id="courseGrid">
                 <!-- Courses rendered by JS -->
             </div>
         </div>
@@ -58,32 +58,30 @@
             </button>
 
             <div id="question-card" class="question-card">
-                <div class="loading-overlay">
+                <div class="loading-overlay" style="display:none;">
                     <i class="fas fa-spinner fa-spin"></i>
                     <span>Loading questions...</span>
                 </div>
 
-                <div class="progress-container">
-                    <div class="progress-top">
-                        <span id="progress-text">Question 1 of 0</span>
-                        <span id="score-display">✅ 0/0</span>
-                    </div>
-                    <div class="progress-bar-bg">
-                        <div id="progress-fill" class="progress-bar-fill" style="width:0%;"></div>
-                    </div>
+                <div class="progress-top">
+                    <span id="progress-text">Question 1 of 0</span>
+                    <span id="score-display">✅ 0/0</span>
+                </div>
+                <div class="progress-bg">
+                    <div id="progress-fill" class="progress-fill" style="width:0%;"></div>
                 </div>
 
-                <div id="question-text" class="question-text mathjax-process">Loading question...</div>
+                <div id="question-text" class="question-text" style="margin-top:16px;">Loading question...</div>
 
                 <div id="options-container" class="options-container"></div>
 
-                <div id="solution-container" class="solution-container" style="display:none;">
-                    <button id="toggle-solution-btn" class="toggle-solution-btn">💡 Show Solution</button>
-                    <div id="solution-text" class="solution-text mathjax-process"></div>
+                <div id="solution-container" style="display:none; margin-top:12px; border-top:1px solid var(--border); padding-top:12px;">
+                    <button id="toggle-solution-btn" class="toggle-solution-btn" style="background:transparent;border:1px solid var(--border);border-radius:30px;padding:6px 16px;color:var(--text-muted);cursor:pointer;font-size:0.75rem;font-family:inherit;">💡 Show Solution</button>
+                    <div id="solution-text" class="solution-text" style="margin-top:10px;padding:12px 16px;background:var(--bg-dark);border-radius:12px;font-size:0.82rem;color:var(--text-muted);line-height:1.6;display:none;border-left:3px solid var(--blue-accent);"></div>
                 </div>
             </div>
 
-            <div class="navigation-controls">
+            <div class="nav-controls">
                 <button id="prev-btn" class="nav-btn prev" disabled>Previous</button>
                 <button id="next-btn" class="nav-btn next">Next</button>
             </div>
@@ -93,7 +91,7 @@
 
     <!-- FLOATING HOME BUTTON -->
     <button class="floating-home-btn" onclick="window.location.href='/app'">
-        <i class="fas fa-home"></i>
+        <i class="fas fa-home"></i> Home
     </button>
 
     <!-- EXTERNAL JS FILE -->
