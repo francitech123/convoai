@@ -1,6 +1,6 @@
 /* ============================================
    STUDY MODE - OAU CBE Practice
-   Dark/Light Theme with Cloud & UI Design
+   Matches Dashboard Top Bar Design
    ============================================ */
 
 :root {
@@ -79,7 +79,7 @@ body {
 }
 
 /* ============================================
-   HEADER
+   HEADER - MATCHES DASHBOARD TOP BAR
    ============================================ */
 header {
     display: flex;
@@ -106,6 +106,10 @@ header .header-left .logo {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    background: var(--accent-gradient);
+    color: #fff;
+    font-weight: 800;
+    font-size: 14px;
 }
 
 header .header-left .logo img {
@@ -318,7 +322,6 @@ header .header-actions .back-home:hover {
     color: var(--text-primary);
 }
 
-/* Question Card */
 .question-card {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
@@ -369,7 +372,6 @@ body.light-mode .question-card .loading-overlay {
     margin-bottom: 16px;
 }
 
-/* Options */
 .options-container {
     display: flex;
     flex-direction: column;
@@ -448,7 +450,6 @@ body.light-mode .question-card .loading-overlay {
     opacity: 0.7;
 }
 
-/* Solution Container */
 .solution-container {
     margin-top: 12px;
     border-top: 1px solid var(--border-color);
@@ -488,7 +489,6 @@ body.light-mode .question-card .loading-overlay {
     display: block;
 }
 
-/* Navigation Controls */
 .navigation-controls {
     display: flex;
     gap: 10px;
@@ -606,9 +606,15 @@ body.light-mode .question-card .loading-overlay {
     }
 
     header {
-        flex-direction: column;
-        align-items: stretch;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
         gap: 8px;
+    }
+
+    header .header-left .mode-badge {
+        font-size: 0.5rem;
+        padding: 1px 8px;
     }
 
     .course-grid {
@@ -628,5 +634,19 @@ body.light-mode .question-card .loading-overlay {
     .option-btn {
         padding: 10px 12px;
         font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 380px) {
+    header .header-left .app-name {
+        font-size: 0.7rem;
+    }
+    header .header-left .mode-badge {
+        display: none;
+    }
+    .nav-btn {
+        max-width: 100px;
+        font-size: 0.7rem;
+        padding: 8px 10px;
     }
 }
