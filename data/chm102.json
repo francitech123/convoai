@@ -1126,11 +1126,16 @@
     "solution": "The polar end of a soap molecule is water-loving, which is called hydrophilic.\nCorrect Answer: (a)"
   },
   {
-    "id": 188,
-    "question": "What is the IUPAC name of linoleic acid? (Structure: Octadeca-9,12-dienoic acid)",
-    "options": ["Octadeca-9-enoic acid", "Octadecanoic acid", "Octadeca-9, 12-dienoic acid", "Octadeca-6, 9-dienoic acid"],
-    "solution": "Linoleic acid has 18 carbons (octadec-) and two double bonds at positions 9 and 12 (-dienoic acid), with the carboxyl carbon starting at C1. The correct name is Octadeca-9, 12-dienoic acid.\nCorrect Answer: (c)"
-  },
+  "id": 188,
+  "question": "What is the IUPAC name of the organic compound with the following structural formula?\n\n    H   H   H   H   H   H   H         H   H         H   H   H   H   H   H   H   O\n    |   |   |   |   |   |   |         |   |         |   |   |   |   |   |   |  //\nH—C—C—C—C—C—C = C—C—C = C—C—C—C—C—C—C—C—C\n    |   |   |   |   |             |             |   |   |   |   |   |   |   \\\n    H   H   H   H   H             H             H   H   H   H   H   H   H    OH",
+  "options": [
+    "Octadeca-9-enoic acid",
+    "Octadecanoic acid",
+    "Octadeca-9, 12-dienoic acid",
+    "Octadeca-6, 9-dienoic acid"
+  ],
+  "solution": "Counting the carbon chain from the carboxylic carbon (-COOH at C1):\n- C1: Carboxylic carbon (-COOH)\n- C2 to C8: 7 methylene carbons [-(CH₂)₇-]\n- C9=C10: First double bond starts at C9\n- C11: Methylene bridge (-CH₂-)\n- C12=C13: Second double bond starts at C12\n- C14 to C17: 4 methylene carbons [-(CH₂)₄-]\n- C18: Terminal methyl group (-CH₃)\n\nWith 18 carbons (octadec-) and two double bonds at positions 9 and 12 (-dienoic acid), the IUPAC name is Octadeca-9, 12-dienoic acid.\nCorrect Answer: (c)"
+},
   {
     "id": 189,
     "question": "The reason why Cl₃C-COOH is much more acidic than CH₃-COOH is: (i) negative inductive effect of Cl group which releases electrons towards the -COOH group. (ii) positive inductive effect of Cl group which releases electrons towards the -COOH group. (iii) negative inductive effect of Cl group, which withdraws electrons away the -COOH group. (iv) positive inductive effect of Cl group, which withdraws electrons away the -COOH group.",
