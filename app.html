@@ -694,38 +694,79 @@
   </div>
 
   <!-- ============================================
-       STUDY SCREEN
-       ============================================ -->
-  <div class="screen page-content-only" id="studyScreen">
+     STUDY SCREEN (Updated Integration)
+     ============================================ -->
+<div class="screen page-content-only" id="studyScreen">
+  
+  <!-- 1. DASHBOARD / COURSE LIST VIEW -->
+  <div id="studyCourseScreen" class="active-study-view">
     <div class="study-header">
-      <h1><i class="fas fa-graduation-cap"></i> Study Mode</h1>
+      <h1><i class="fas fa-graduation-cap" style="color:var(--primary-light)"></i> Study Mode</h1>
       <p>Select a course to start studying topic by topic</p>
     </div>
-    <div id="studyCourseScreen">
-      <div class="study-course-grid" id="studyCourseGrid">
-        <div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading courses...</p></div>
-      </div>
-    </div>
-    <div id="studyTopicsScreen" style="display:none">
-      <button class="back-btn" onclick="window.studyGoToCourses()"><i class="fas fa-arrow-left"></i> Back to Courses</button>
-      <div class="study-header">
-        <h1 id="studyTopicsTitle"><i class="fas fa-list"></i> Course Topics</h1>
-        <p id="studyTopicsSubtitle">Select a topic to start practicing</p>
-      </div>
-      <div class="study-topics-grid" id="studyTopicsGrid"></div>
-    </div>
-    <div id="studyQuizScreen" style="display:none">
-      <button class="back-btn" onclick="window.studyConfirmExitQuiz()"><i class="fas fa-arrow-left"></i> Exit Quiz</button>
-      <div class="study-header">
-        <h1 id="studyQuizTitle"><i class="fas fa-question-circle"></i> Practice Questions</h1>
-        <p id="studyQuizSubtitle">Answer the questions below</p>
-      </div>
-      <div class="quiz-container" id="studyQuizContainer">
-        <div class="quiz-overlay"><i class="fas fa-spinner"></i><span>Loading questions...</span></div>
-        <div class="loading-spin"><i class="fas fa-spinner fa-spin"></i> Loading questions...</div>
-      </div>
+    <div class="study-course-grid" id="studyCourseGrid">
+      <!-- Cards injected by JS -->
+      <div class="loading-spin"><i class="fas fa-spinner"></i><p style="margin-top:8px">Loading courses...</p></div>
     </div>
   </div>
+
+  <!-- 2. TOPIC LIST VIEW (Shows when a course is clicked) -->
+  <div id="studyTopicsScreen" class="active-study-view" style="display:none">
+    <button class="back-btn" onclick="window.studyGoToCourses()" style="margin-bottom:12px;display:inline-flex;align-items:center;gap:6px;background:none;border:none;color:var(--primary-light);font-weight:600;font-size:.8rem;cursor:pointer">
+      <i class="fas fa-arrow-left"></i> Back to Courses
+    </button>
+    <div class="study-header" style="text-align:left;padding:0 0 12px 0">
+      <h2 id="studyTopicsTitle" style="font-size:1.1rem;"><i class="fas fa-list" style="color:var(--primary-light)"></i> <span id="studyTopicsCourseCode">CHM 102</span></h2>
+      <p id="studyTopicsSubtitle" style="color:var(--text-secondary);font-size:.8rem">Select a topic to start practicing</p>
+    </div>
+    <div class="study-topics-grid" id="studyTopicsGrid">
+      <!-- Topics injected by JS -->
+    </div>
+  </div>
+
+  <!-- 3. QUIZ VIEW (Shows when a topic is clicked) -->
+  <div id="studyQuizScreen" class="active-study-view" style="display:none">
+    <button class="back-btn" onclick="window.studyConfirmExitQuiz()" style="margin-bottom:12px;display:inline-flex;align-items:center;gap:6px;background:none;border:none;color:var(--primary-light);font-weight:600;font-size:.8rem;cursor:pointer">
+      <i class="fas fa-arrow-left"></i> Exit Quiz
+    </button>
+
+    <div class="exam-container" style="margin-top:0;">
+      <!-- Quiz Header -->
+      <div class="exam-header">
+        <div class="info">
+          <h2 id="studyQuizCourseTitle">Topic Name</h2>
+          <p id="studyQuizMeta">Questions remaining</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <button class="calc-btn-sm" onclick="window.toggleCalculator()" title="Calculator"><i class="fas fa-calculator"></i></button>
+          <button class="btn btn-danger" onclick="window.studyConfirmExitQuiz()" style="padding:6px 12px;font-size:.75rem"><i class="fas fa-times"></i> Quit</button>
+        </div>
+      </div>
+
+      <!-- Question Card -->
+      <div class="question-card">
+        <div class="q-counter" id="studyQCounter">Question 1 of 0</div>
+        <div class="q-text" id="studyQText"></div>
+        <div class="options-area" id="studyOptionsArea"></div>
+        
+        <!-- Solution Dropdown -->
+        <div id="studySolutionContainer" class="solution-container" style="margin-top:15px;border-top:1px solid var(--border);padding-top:15px;display:none;">
+          <button id="studyToggleSolutionBtn" class="btn btn-warning" onclick="window.studyToggleSolution()" style="width:100%;padding:8px;border:none;border-radius:8px;font-weight:600;cursor:pointer;background:var(--warning);color:#000">Show Solution</button>
+          <div id="studySolutionText" class="solution-text" style="display:none;margin-top:10px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px;font-size:.85rem;color:var(--text-secondary);line-height:1.5"></div>
+        </div>
+
+        <div class="nav-buttons">
+          <button class="btn btn-soft" id="studyPrevBtn" onclick="window.studyPrevQuestion()" disabled style="flex:1"><i class="fas fa-chevron-left"></i> Prev</button>
+          <button class="btn btn-primary" id="studyNextBtn" onclick="window.studyNextQuestion()" style="flex:1">Next <i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+
+      <!-- Grid Navigation -->
+      <div class="question-grid" id="studyQuestionGrid"></div>
+    </div>
+  </div>
+
+</div>
 
   <!-- ============================================
        PROFILE SCREEN
