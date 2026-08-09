@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Physics Study Mode Simulator</title>
+    <title>Study Mode Simulator</title>
     <link rel="stylesheet" href="studymode.css">
 </head>
 <body>
 
     <div class="app-container">
-        <header>
-            <h1>Physics Past Questions</h1>
+        <!-- HEADER (Hidden on Course Selection) -->
+        <header id="study-header" style="display: none;">
+            <h1 id="course-title">Physics Past Questions</h1>
             <div class="progress-container">
                 <span id="progress-text">Question 1 of 72</span>
                 <div class="progress-bar-bg">
@@ -19,25 +20,43 @@
             </div>
         </header>
 
+        <!-- MAIN CONTENT -->
         <main>
-            <div id="question-card" class="question-card">
-                <!-- Content is injected by JavaScript -->
-                <div id="question-text" class="question-text">Loading question...</div>
-                
-                <div id="options-container" class="options-container">
-                    <!-- Options injected here -->
-                </div>
-
-                <!-- Dropdown solution area -->
-                <div id="solution-container" class="solution-container" style="display: none;">
-                    <button id="toggle-solution-btn" class="toggle-solution-btn">Show Solution</button>
-                    <div id="solution-text" class="solution-text"></div>
+            <!-- COURSE SELECTION SCREEN -->
+            <div id="course-selection-screen" class="screen">
+                <h2>Select Your Course</h2>
+                <p class="subtitle">Choose a subject below to begin studying.</p>
+                <div class="course-grid">
+                    <button class="course-btn" data-course="phy102">
+                        <span class="course-code">PHY 102</span>
+                        <span class="course-name">Physics (Electricity & Magnetism)</span>
+                    </button>
+                    <button class="course-btn" data-course="chm102">
+                        <span class="course-code">CHM 102</span>
+                        <span class="course-name">General Chemistry</span>
+                    </button>
                 </div>
             </div>
 
-            <div class="navigation-controls">
-                <button id="prev-btn" class="nav-btn" disabled>Previous</button>
-                <button id="next-btn" class="nav-btn">Next</button>
+            <!-- STUDY INTERFACE SCREEN (Hidden initially) -->
+            <div id="study-screen" class="screen" style="display: none;">
+                <button id="back-to-menu-btn" class="back-btn">← Change Course</button>
+                
+                <div id="question-card" class="question-card">
+                    <div id="question-text" class="question-text">Loading question...</div>
+                    
+                    <div id="options-container" class="options-container"></div>
+
+                    <div id="solution-container" class="solution-container" style="display: none;">
+                        <button id="toggle-solution-btn" class="toggle-solution-btn">Show Solution</button>
+                        <div id="solution-text" class="solution-text"></div>
+                    </div>
+                </div>
+
+                <div class="navigation-controls">
+                    <button id="prev-btn" class="nav-btn" disabled>Previous</button>
+                    <button id="next-btn" class="nav-btn">Next</button>
+                </div>
             </div>
         </main>
     </div>
