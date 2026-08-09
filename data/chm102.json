@@ -1,602 +1,122 @@
 [
   {
     "id": 1,
-    "question": "Which statement about hybridization is correct?",
-    "options": ["Hybridization mixes orbitals of different energy levels.", "With hybridization, the shape of the molecule can be predicted.", "The bigger lobe always has a negative sign.", "The smaller lobe has a positive sign."],
-    "solution": "Hybridization theory is specifically used to explain and predict the geometry (shape) of molecules.\nANSWER: (b)"
+    "question": "What is the IUPAC name for CH₄?",
+    "options": ["Methane", "Ethane", "Propane", "Butane", "Pentane"],
+    "solution": "CH₄ is methane, the simplest alkane with one carbon atom.\nANSWER: (a)"
   },
   {
     "id": 2,
-    "question": "A hybrid orbital with 50% s-character and 50% p-character is:",
-    "options": ["sp", "sp²", "sp³", "sp³d"],
-    "solution": "sp hybridization means 1 s-orbital mixes with 1 p-orbital (1:1 ratio), resulting in 50% s-character and 50% p-character.\nANSWER: (a)"
+    "question": "What is the functional group in alcohols?",
+    "options": ["-OH", "-COOH", "-NH₂", "-CHO", "-CO-"],
+    "solution": "Alcohols contain the hydroxyl group (-OH).\nANSWER: (a)"
   },
   {
     "id": 3,
-    "question": "What is the bond angle for sp hybridization?",
-    "options": ["120°", "109.5°", "180°", "90°"],
-    "solution": "sp hybridization results in a linear geometry with a bond angle of exactly 180°.\nANSWER: (c)"
+    "question": "What is the functional group in carboxylic acids?",
+    "options": ["-COOH", "-CHO", "-OH", "-NH₂", "-CO-"],
+    "solution": "Carboxylic acids contain the carboxyl group (-COOH).\nANSWER: (a)"
   },
   {
     "id": 4,
-    "question": "Which compound undergoes sp hybridization?",
-    "options": ["NaCl", "BeF₂", "H₂O", "CH₄"],
-    "solution": "BeF₂ is a classic example of a molecule with central Beryllium undergoing sp hybridization to form 2 equivalent bonds.\nANSWER: (b)"
+    "question": "What is the general formula for alkanes?",
+    "options": ["CₙH₂ₙ₊₂", "CₙH₂ₙ", "CₙH₂ₙ₋₂", "CₙH₂ₙ₊₄", "CₙH₂ₙ₋₄"],
+    "solution": "Alkanes have the general formula CₙH₂ₙ₊₂.\nANSWER: (a)"
   },
   {
     "id": 5,
-    "question": "What is the hybridization of Beryllium in BeH₂?",
-    "options": ["sp", "sp²", "sp³", "sp³d"],
-    "solution": "BeH₂ is linear. Beryllium uses its 2s and one 2p orbital to form two equivalent sp hybrid orbitals.\nANSWER: (a)"
+    "question": "Which of the following is an alkene?",
+    "options": ["C₂H₄", "C₂H₆", "C₃H₈", "C₄H₁₀", "C₅H₁₂"],
+    "solution": "C₂H₄ is ethene, an alkene with a carbon-carbon double bond.\nANSWER: (a)"
   },
   {
     "id": 6,
-    "question": "Which compound contains carbon with sp hybridization?",
-    "options": ["CH₄", "C₂H₄", "C₂H₂", "CO₂"],
-    "solution": "Acetylene (C₂H₂) contains a triple bond between carbons, which requires sp hybridization for each carbon.\nANSWER: (c)"
+    "question": "What is the functional group in aldehydes?",
+    "options": ["-CHO", "-COOH", "-OH", "-NH₂", "-CO-"],
+    "solution": "Aldehydes contain the formyl group (-CHO).\nANSWER: (a)"
   },
   {
     "id": 7,
-    "question": "How does Beryllium achieve sp hybridization in its excited state?",
-    "options": ["By promoting a 2s electron to an empty 2p orbital.", "By promoting a 2p electron to 2s.", "By promoting a 1s electron to 2p.", "By promoting a 2s electron to 1s."],
-    "solution": "Beryllium ground state is 1s² 2s². To form 2 bonds, it promotes one 2s electron to the empty 2p orbital, creating two unpaired electrons to form sp hybrids.\nANSWER: (a)"
+    "question": "What is the functional group in ketones?",
+    "options": ["-CO-", "-CHO", "-OH", "-NH₂", "-COOH"],
+    "solution": "Ketones contain the carbonyl group (-CO-) bonded to two carbon atoms.\nANSWER: (a)"
   },
   {
     "id": 8,
-    "question": "What is the geometry of sp² hybridization?",
-    "options": ["Linear", "Trigonal planar", "Tetrahedral", "Octahedral"],
-    "solution": "sp² hybridization mixes 1 s-orbital and 2 p-orbitals. This forms 3 equivalent orbitals oriented at 120°, creating a trigonal planar geometry.\nANSWER: (b)"
+    "question": "Which of the following is an example of a secondary alcohol?",
+    "options": ["Propan-2-ol", "Ethanol", "Methanol", "Propan-1-ol", "Butan-1-ol"],
+    "solution": "Propan-2-ol has the OH group on a secondary carbon.\nANSWER: (a)"
   },
   {
     "id": 9,
-    "question": "How many equivalent orbitals are formed in sp² hybridization?",
-    "options": ["1", "2", "3", "4"],
-    "solution": "sp² means 1 s + 2 p = 3 equivalent hybrid orbitals.\nANSWER: (c)"
+    "question": "What is the product of complete combustion of alkanes?",
+    "options": ["CO₂ and H₂O", "CO and H₂O", "C and H₂O", "CO₂ and H₂", "C and O₂"],
+    "solution": "Complete combustion produces carbon dioxide and water.\nANSWER: (a)"
   },
   {
     "id": 10,
-    "question": "What shape does BCl₃ exhibit?",
-    "options": ["Linear", "Tetrahedral", "Trigonal planar", "Octahedral"],
-    "solution": "Boron in BCl₃ has 3 valence electrons, forming 3 bonds using sp² hybridization. This yields a trigonal planar shape.\nANSWER: (c)"
+    "question": "What type of reaction is the addition of hydrogen to an alkene?",
+    "options": ["Hydrogenation", "Hydration", "Halogenation", "Oxidation", "Reduction"],
+    "solution": "Hydrogenation is the addition of hydrogen to a double bond.\nANSWER: (a)"
   },
   {
     "id": 11,
-    "question": "Which molecule exemplifies sp² hybridization?",
-    "options": ["NH₃", "CH₄", "BF₃", "H₂O"],
-    "solution": "BF₃ is the perfect textbook example of a molecule with sp² hybridized central atom (Boron) forming 3 bonds.\nANSWER: (c)"
+    "question": "What is the functional group in amines?",
+    "options": ["-NH₂", "-OH", "-COOH", "-CHO", "-CO-"],
+    "solution": "Amines contain the amino group (-NH₂).\nANSWER: (a)"
   },
   {
     "id": 12,
-    "question": "What type of bonds are formed in sp² hybridization?",
-    "options": ["Single bonds", "Double bonds", "Triple bonds", "Ionic bonds"],
-    "solution": "The unhybridized p-orbital left over in sp² hybridization forms a π-bond, which results in a double bond (one σ and one π).\nANSWER: (b)"
+    "question": "Which of the following is the correct structure for benzene?",
+    "options": ["C₆H₆", "C₆H₁₂", "C₆H₁₄", "C₆H₁₀", "C₆H₈"],
+    "solution": "Benzene has the molecular formula C₆H₆.\nANSWER: (a)"
   },
   {
     "id": 13,
-    "question": "How many unpaired electrons does Boron have in its ground state?",
-    "options": ["0", "1", "2", "3"],
-    "solution": "Boron (Z=5) electron config: 1s² 2s² 2p¹. It has 1 unpaired electron in the 2p orbital.\nANSWER: (b)"
+    "question": "What type of reaction is the addition of water to an alkene?",
+    "options": ["Hydration", "Hydrogenation", "Halogenation", "Oxidation", "Reduction"],
+    "solution": "Hydration is the addition of water to an alkene.\nANSWER: (a)"
   },
   {
     "id": 14,
-    "question": "What is the geometry of sp³ hybridization?",
-    "options": ["Linear", "Trigonal planar", "Tetrahedral", "Octahedral"],
-    "solution": "sp³ hybridization mixes 1 s and 3 p orbitals to form 4 equivalent orbitals pointing towards the corners of a tetrahedron.\nANSWER: (c)"
+    "question": "What is the functional group in esters?",
+    "options": ["-COO-", "-COOH", "-OH", "-CHO", "-NH₂"],
+    "solution": "Esters contain the ester group (-COO-).\nANSWER: (a)"
   },
   {
     "id": 15,
-    "question": "How many equivalent orbitals are formed in sp³ hybridization?",
-    "options": ["1", "2", "3", "4"],
-    "solution": "sp³ means 1 s + 3 p = 4 equivalent hybrid orbitals.\nANSWER: (d)"
+    "question": "Which of the following is an example of a tertiary alcohol?",
+    "options": ["2-methylpropan-2-ol", "Propan-2-ol", "Ethanol", "Propan-1-ol", "Butan-2-ol"],
+    "solution": "2-methylpropan-2-ol has the OH group on a tertiary carbon.\nANSWER: (a)"
   },
   {
     "id": 16,
-    "question": "What is the angle between sp³ hybrid orbitals?",
-    "options": ["90°", "104.5°", "109.28°", "120°"],
-    "solution": "To minimize repulsion, the 4 orbitals in a tetrahedral arrangement are separated by exactly 109.5° (often approximated as 109.28°).\nANSWER: (c)"
+    "question": "What is the product of the reaction between an alcohol and a carboxylic acid?",
+    "options": ["Ester", "Aldehyde", "Ketone", "Ether", "Amine"],
+    "solution": "Alcohol + Carboxylic acid → Ester + Water (Esterification).\nANSWER: (a)"
   },
   {
     "id": 17,
-    "question": "What is the % s-character in each sp³ orbital?",
-    "options": ["25%", "50%", "75%", "100%"],
-    "solution": "sp³ uses 1 s-orbital shared among 4 hybrids: (1/4) = 25% s-character.\nANSWER: (a)"
+    "question": "What is the functional group in ethers?",
+    "options": ["-O-", "-OH", "-COOH", "-CHO", "-NH₂"],
+    "solution": "Ethers contain the alkoxy group (-O-).\nANSWER: (a)"
   },
   {
     "id": 18,
-    "question": "Which molecule exemplifies sp³ hybridization?",
-    "options": ["NH₃", "CH₄", "BF₃", "CO₂"],
-    "solution": "Methane (CH₄) is the ideal tetrahedral molecule with 4 equal C-H bonds made from sp³ hybridized Carbon.\nANSWER: (b)"
+    "question": "Which of the following reactions is characteristic of alkenes?",
+    "options": ["Addition", "Substitution", "Elimination", "Condensation", "Hydrolysis"],
+    "solution": "Alkenes undergo addition reactions due to the double bond.\nANSWER: (a)"
   },
   {
     "id": 19,
-    "question": "How many unpaired electrons does Carbon have in its excited state for sp³?",
-    "options": ["1", "2", "3", "4"],
-    "solution": "Carbon ground: 1s² 2s² 2p². To form 4 bonds, it promotes to 1s² 2s¹ 2p³, giving 4 unpaired electrons.\nANSWER: (d)"
+    "question": "What is the IUPAC name for C₂H₅OH?",
+    "options": ["Ethanol", "Methanol", "Propanol", "Butanol", "Pentanol"],
+    "solution": "C₂H₅OH is ethanol.\nANSWER: (a)"
   },
   {
     "id": 20,
-    "question": "What is the % p-character in each sp³ orbital?",
-    "options": ["25%", "50%", "75%", "100%"],
-    "solution": "sp³ uses 3 p-orbitals shared among 4 hybrids: (3/4) = 75% p-character.\nANSWER: (c)"
-  },
-  {
-    "id": 21,
-    "question": "Which molecule exemplifies sp³d hybridization?",
-    "options": ["NH₃", "CH₄", "PCl₅", "H₂O"],
-    "solution": "Phosphorus in PCl₅ has 5 bonds. It requires 5 hybrid orbitals (1 s + 3 p + 1 d = sp³d), forming a trigonal bipyramidal shape.\nANSWER: (c)"
-  },
-  {
-    "id": 22,
-    "question": "Which element can exhibit sp³d hybridization?",
-    "options": ["Carbon", "Nitrogen", "Oxygen", "Phosphorus"],
-    "solution": "Only elements in Period 3 or below (like P, S) have accessible d-orbitals to expand their octet. Carbon (Period 2) cannot do sp³d.\nANSWER: (d)"
-  },
-  {
-    "id": 23,
-    "question": "How many hybrid orbitals are involved in sp³d²?",
-    "options": ["3", "4", "5", "6"],
-    "solution": "sp³d² means 1 s + 3 p + 2 d = 6 hybrid orbitals (leading to an octahedral geometry).\nANSWER: (d)"
-  },
-  {
-    "id": 24,
-    "question": "Which molecule exemplifies sp³d² hybridization?",
-    "options": ["SF₄", "PCl₅", "SF₆", "NH₃"],
-    "solution": "SF₆ has Sulfur bonded to 6 Fluorines, requiring 6 equivalent hybrid orbitals (sp³d²) in an octahedral shape.\nANSWER: (c)"
-  },
-  {
-    "id": 25,
-    "question": "Why were noble gases once labeled as Group 0?",
-    "options": ["Proton number 0", "Atomic number 0", "Believed chemically inactive", "Discovered last"],
-    "solution": "They were called Group 0 because they were thought to have zero valence and be completely chemically inert.\nANSWER: (c)"
-  },
-  {
-    "id": 26,
-    "question": "Which noble gas is most common in the universe after hydrogen?",
-    "options": ["Helium", "Neon", "Argon", "Xenon"],
-    "solution": "Helium is the second most abundant element in the universe (formed mainly by nuclear fusion in stars).\nANSWER: (a)"
-  },
-  {
-    "id": 27,
-    "question": "Which noble gas is produced from radioactive decay?",
-    "options": ["Helium", "Neon", "Argon", "Radon"],
-    "solution": "Radon (Rn) is a radioactive gas produced by the decay of radium and uranium in the earth's crust.\nANSWER: (d)"
-  },
-  {
-    "id": 28,
-    "question": "What is the major source of Helium?",
-    "options": ["Cryogenic separation of natural gas", "Fractional distillation of air", "Electrolysis"],
-    "solution": "Helium is commercially extracted from natural gas by cryogenic fractional distillation.\nANSWER: (a)"
-  },
-  {
-    "id": 29,
-    "question": "Which noble gas has the highest electronegativity?",
-    "options": ["Helium", "Neon", "Argon", "Radon"],
-    "solution": "Electronegativity decreases down a group, but increases across a period. Neon is highest because it is furthest right and top.\nANSWER: (b)"
-  },
-  {
-    "id": 30,
-    "question": "How are Neon, Argon, Krypton, and Xenon obtained?",
-    "options": ["Natural gas", "Fractional distillation of air", "Mining", "Synthesis"],
-    "solution": "These noble gases are present in the atmosphere and are isolated by fractional distillation of liquid air.\nANSWER: (b)"
-  },
-  {
-    "id": 31,
-    "question": "Which noble gas exhibits the highest reactivity?",
-    "options": ["Neon", "Helium", "Argon", "Xenon"],
-    "solution": "Xenon is the most reactive noble gas because it is large with low ionization energy, allowing it to form stable compounds with F and O.\nANSWER: (d)"
-  },
-  {
-    "id": 32,
-    "question": "What is the oxidation state of Xenon in most compounds?",
-    "options": ["-1", "0", "+2, +4, +6, or +8", "+1, +3, +5"],
-    "solution": "Xenon can form compounds like XeF₂ (+2), XeF₄ (+4), XeF₆ (+6), and XeO₄ (+8).\nANSWER: (c)"
-  },
-  {
-    "id": 33,
-    "question": "Why is Helium preferred for deep-sea divers?",
-    "options": ["High solubility", "Forms bubbles", "Less soluble in blood", "Reacts with oxygen"],
-    "solution": "Helium is much less soluble in blood than nitrogen, reducing the risk of decompression sickness (the bends).\nANSWER: (c)"
-  },
-  {
-    "id": 34,
-    "question": "What is the order of reactivity of noble gas fluorides (least → most)?",
-    "options": ["Ne < He < Ar < Kr < Xe", "Xe < Kr < Ar...", "Ne < Ar < Kr...", "He < Ne < Ar..."],
-    "solution": "Reactivity increases with size and decreasing ionization energy. Ne is smallest, Xe is largest and most reactive. (He and Ne actually don't form stable fluorides).\nANSWER: (a)"
-  },
-  {
-    "id": 35,
-    "question": "Which noble gas is used to provide an inert atmosphere for welding?",
-    "options": ["Helium", "Neon", "Argon", "Radon"],
-    "solution": "Argon is heavy, cheap, and completely inert, making it perfect for shielding welding arcs from oxygen.\nANSWER: (c)"
-  },
-  {
-    "id": 36,
-    "question": "Helium is used in cryoscopy because:",
-    "options": ["Low boiling point", "Low melting point", "Low electronegativity", "Low ionization energy"],
-    "solution": "Helium has the lowest boiling point of all elements (4.2 K), making it ideal for cryogenic applications.\nANSWER: (a)"
-  },
-  {
-    "id": 37,
-    "question": "Origin of the term 'alkali':",
-    "options": ["Latin", "Arabic: 'from ashes'", "Greek", "Sanskrit"],
-    "solution": "The word alkali comes from Arabic 'al-qali', referring to the ashes of saltwort plants which are rich in sodium and potassium.\nANSWER: (b)"
-  },
-  {
-    "id": 38,
-    "question": "Which alkali metal is a natural radioactive isotope?",
-    "options": ["Sodium", "Potassium", "Rubidium", "Francium"],
-    "solution": "Francium (Fr) is highly unstable and radioactive with a very short half-life.\nANSWER: (d)"
-  },
-  {
-    "id": 39,
-    "question": "How are alkali metals primarily prepared?",
-    "options": ["Distillation", "Electrolysis of fused salts", "Filtration", "Crystallization"],
-    "solution": "Because they are extremely reactive, they cannot be isolated from aqueous solution. They are obtained by electrolysis of their fused (molten) salts.\nANSWER: (b)"
-  },
-  {
-    "id": 40,
-    "question": "Which alkali metal is the softest?",
-    "options": ["Sodium", "Potassium", "Rubidium", "Cesium"],
-    "solution": "Cesium is the largest alkali metal, with the weakest metallic bonding holding its atoms together, making it extremely soft.\nANSWER: (d)"
-  },
-  {
-    "id": 41,
-    "question": "What contributes to high reactivity of alkali metals?",
-    "options": ["Small radii", "Large radii and low ionization energies", "High electronegativity"],
-    "solution": "As you go down group 1, atomic radius increases and ionization energy decreases, making it easier to lose the outer valence electron.\nANSWER: (b)"
-  },
-  {
-    "id": 42,
-    "question": "How do alkali metals react with water?",
-    "options": ["Produce oxygen", "Form acids", "Liberate hydrogen and form caustic solutions", "No reaction"],
-    "solution": "M + H₂O → MOH + H₂. The solution formed is strongly alkaline (caustic).\nANSWER: (c)"
-  },
-  {
-    "id": 43,
-    "question": "Reactivity of alkali metals:",
-    "options": ["Decreases down group", "Increases down group from Li to Cs", "Constant", "Highest for Li"],
-    "solution": "Reactivity increases down Group 1 as ionization energy decreases, from the least reactive Li to the most reactive Cs.\nANSWER: (b)"
-  },
-  {
-    "id": 44,
-    "question": "Solubility of alkali metal hydroxides:",
-    "options": ["Decreases down group", "Increases down group", "Constant"],
-    "solution": "Lattice energy decreases rapidly down the group, making it easier for water to separate the ions. Therefore solubility increases from LiOH to CsOH.\nANSWER: (b)"
-  },
-  {
-    "id": 45,
-    "question": "Why do alkali cations have weak tendency to form complexes?",
-    "options": ["High charge", "Low charge and small radii", "Low charge and large radii", "High charge and large radii"],
-    "solution": "Alkali metals have a +1 charge and large radii. This means they have a very low charge density and cannot polarize ligands effectively to form stable complexes.\nANSWER: (c)"
-  },
-  {
-    "id": 46,
-    "question": "Which alkali metal exhibits anomalous behavior?",
-    "options": ["Sodium", "Potassium", "Rubidium", "Lithium"],
-    "solution": "Lithium is exceptionally small and behaves significantly differently (high hydration energy, covalent character) from the rest of the group.\nANSWER: (d)"
-  },
-  {
-    "id": 47,
-    "question": "Which alkali metal is used in soap/detergents?",
-    "options": ["Lithium", "Sodium", "Potassium", "Rubidium"],
-    "solution": "Sodium salts of long-chain fatty acids (soap) are the most common commercial soaps.\nANSWER: (b)"
-  },
-  {
-    "id": 48,
-    "question": "Hydration energy of Lithium compared to others:",
-    "options": ["Lowest", "Highest", "Similar", "Varies"],
-    "solution": "Hydration energy is inversely proportional to ionic size. Lithium is the smallest, so it has the highest hydration energy.\nANSWER: (b)"
-  },
-  {
-    "id": 49,
-    "question": "Why is LiBr and LiI soluble in organic solvents?",
-    "options": ["Ionic bonds", "Covalent structures", "Chemical reaction", "Highly polar"],
-    "solution": "Due to its very small size and high charge density, Lithium can polarize large anions like Br⁻ and I⁻, giving bonds significant covalent character.\nANSWER: (b)"
-  },
-  {
-    "id": 50,
-    "question": "Lithium is used in metallurgy as a:",
-    "options": ["Scavenger of impurities", "Fuel", "Rat poison", "Contrast agent"],
-    "solution": "Lithium is highly reactive and is used to remove oxygen and other gas impurities from molten metals.\nANSWER: (a)"
-  },
-  {
-    "id": 51,
-    "question": "Lithium alloys with silver are used for:",
-    "options": ["Brazing", "Toothpaste", "Fertilizer", "Batteries"],
-    "solution": "Lithium-silver alloys are used as specialized brazing (soldering) materials.\nANSWER: (a)"
-  },
-  {
-    "id": 52,
-    "question": "Lithium is used in light-weight electrical batteries.",
-    "options": ["True", "False"],
-    "solution": "Lithium-ion batteries are the standard for lightweight, high-energy portable electronics.\nANSWER: (a)"
-  },
-  {
-    "id": 53,
-    "question": "Which fluoride has the highest lattice energy (LiF, NaF, RbF, CsF)?",
-    "options": ["LiF", "NaF", "RbF", "CsF"],
-    "solution": "Lattice energy is highest when ions are small. Li⁺ and F⁻ are the smallest ions in the group, creating the strongest ionic attraction.\nANSWER: (a)"
-  },
-  {
-    "id": 54,
-    "question": "Lithium is the best reducing agent in Group IA because:",
-    "options": ["High electronegativity", "High hydration energy due to small size"],
-    "solution": "Reducing power is determined by standard electrode potential. Li's high hydration energy (despite high ionization energy) gives it the most negative E° value.\nANSWER: (b)"
-  },
-  {
-    "id": 55,
-    "question": "In aqueous solution, conductivity order of alkali metals is:",
-    "options": ["Li⁺ < Na⁺ < K⁺ < Rb⁺ < Cs⁺", "Rb⁺ < Na⁺...", "Na⁺ < K⁺...", "Na⁺ < K⁺ < Cs⁺..."],
-    "solution": "Ionic mobility increases as size (hydration radius) decreases. Cs⁺ has the smallest hydrated radius and highest mobility.\nANSWER: (a)"
-  },
-  {
-    "id": 56,
-    "question": "Lithium does not form superoxides because:",
-    "options": ["Small size of Li compared to oxygen", "High reactivity", "Low electronegativity"],
-    "solution": "The small Li⁺ cation cannot stabilize the large superoxide ion (O₂⁻). It only forms normal oxide (Li₂O).\nANSWER: (a)"
-  },
-  {
-    "id": 57,
-    "question": "Which alkaline earth metal is known as glucinium (sweet but poisonous)?",
-    "options": ["Mg", "Beryllium (Be)", "Ca", "Ba"],
-    "solution": "Beryllium compounds taste sweet but are extremely toxic.\nANSWER: (b)"
-  },
-  {
-    "id": 58,
-    "question": "Hardness of alkaline earth metals (Be to Ra):",
-    "options": ["Decreases", "Increases", "Constant"],
-    "solution": "As atomic radius increases down the group, metallic bonding becomes weaker, so hardness decreases.\nANSWER: (a)"
-  },
-  {
-    "id": 59,
-    "question": "Melting/boiling points of Group 2 vs Group 1:",
-    "options": ["Lower", "Higher", "Similar", "Unpredictable"],
-    "solution": "Group 2 metals have two valence electrons participating in metallic bonding, resulting in higher melting/boiling points than Group 1.\nANSWER: (b)"
-  },
-  {
-    "id": 60,
-    "question": "Which alkaline earth metal forms oxide and nitride when burned in air?",
-    "options": ["Ca", "Ba", "Mg", "Be"],
-    "solution": "Magnesium actively reacts with both O₂ (to form MgO) and N₂ (to form Mg₃N₂) when ignited in air.\nANSWER: (c)"
-  },
-  {
-    "id": 61,
-    "question": "What compound is formed with halogens?",
-    "options": ["MX", "MX₂", "M₂X", "M₂X₃"],
-    "solution": "Alkaline earth metals have a valency of +2 (losing two electrons), so they form halides of the form MX₂ (e.g., CaCl₂).\nANSWER: (b)"
-  },
-  {
-    "id": 62,
-    "question": "Which alkaline earth metal forms covalent compounds due to small size?",
-    "options": ["Beryllium (Be)", "Mg", "Ca", "Ba"],
-    "solution": "Be²⁺ is tiny and has a very high charge density (polarizing power), which allows it to strongly distort electron clouds and form covalent bonds.\nANSWER: (a)"
-  },
-  {
-    "id": 63,
-    "question": "Which alkaline earth does not react with steam at red heat?",
-    "options": ["Be", "Mg", "Ca", "Sr"],
-    "solution": "Beryllium is highly inert due to the formation of a protective, stable oxide film on its surface.\nANSWER: (a)"
-  },
-  {
-    "id": 64,
-    "question": "Reaction with steam produces:",
-    "options": ["Metal oxide", "Metal hydroxide", "Metal nitride", "Metal sulfide"],
-    "solution": "M + 2H₂O → M(OH)₂ + H₂ (Metal hydroxide + hydrogen gas).\nANSWER: (b)"
-  },
-  {
-    "id": 65,
-    "question": "Solubility of sulfates down the group (Mg → Ba):",
-    "options": ["Increases", "Decreases", "Constant"],
-    "solution": "As the cation size increases down the group, the lattice energy of the sulfate decreases. This increases the solubility, but the hydration energy decreases faster. Actually, hydration energy drops more rapidly, making it harder to dissolve. Therefore solubility DECREASES (MgSO₄ is soluble, BaSO₄ is insoluble).\nANSWER: (b)"
-  },
-  {
-    "id": 66,
-    "question": "Which oxide is amphoteric?",
-    "options": ["BeO", "MgO", "CaO", "BaO"],
-    "solution": "BeO is amphoteric; it reacts with both acids (to form salts) and strong bases (to form beryllates).\nANSWER: (a)"
-  },
-  {
-    "id": 67,
-    "question": "Solubility of hydroxides down Group 2:",
-    "options": ["Decreases", "Increases down the group", "Constant"],
-    "solution": "Solubility of alkaline earth hydroxides increases as you go down the group. Be(OH)₂ is insoluble, while Ba(OH)₂ is highly soluble.\nANSWER: (b)"
-  },
-  {
-    "id": 68,
-    "question": "Why does BeO not react with water and CO₂?",
-    "options": ["Highly reactive", "Less chemically active", "High melting point"],
-    "solution": "BeO is very stable and covalently bonded, making it chemically inactive towards water and CO₂.\nANSWER: (b)"
-  },
-  {
-    "id": 69,
-    "question": "Which Group IIA metal forms complexes with EDTA?",
-    "options": ["Be", "Sr", "Calcium (Ca)", "Ba"],
-    "solution": "Calcium ions readily form stable complexes with EDTA (a common chelating agent used in water softening).\nANSWER: (c)"
-  },
-  {
-    "id": 70,
-    "question": "Melting point of BeO is:",
-    "options": ["2530°C", "2800°C", "3100°C", "3500°C"],
-    "solution": "Beryllium oxide has a very high melting point of approximately 2530°C due to its strong covalent network structure.\nANSWER: (a)"
-  },
-  {
-    "id": 71,
-    "question": "Which hydrides share amphoteric behavior (Be and Al)?",
-    "options": ["Basic", "Amphoteric", "Acidic", "Non-reactive"],
-    "solution": "Both BeH₂ and AlH₃ behave as covalent hydrides and display amphoteric properties.\nANSWER: (b)"
-  },
-  {
-    "id": 72,
-    "question": "Why are Be and Al passive towards nitric acid?",
-    "options": ["Protective oxide layer", "High reactivity", "Insoluble salts"],
-    "solution": "Both Be and Al form a thin, very stable, and adherent oxide layer on their surface, which prevents further reaction with concentrated nitric acid.\nANSWER: (a)"
-  },
-  {
-    "id": 73,
-    "question": "Be is suitable for radiation windows because:",
-    "options": ["High reactivity", "Transparency to X-rays", "Resistance to corrosion", "High density"],
-    "solution": "Beryllium has a very low atomic number (Z=4) and is highly transparent to X-rays, making it ideal for X-ray tube windows.\nANSWER: (b)"
-  },
-  {
-    "id": 74,
-    "question": "Mg is used in fireworks because:",
-    "options": ["Ionic nature", "Red color", "Bright white flame color", "Low reactivity"],
-    "solution": "Magnesium burns in air with a very intense, bright white light, making it a key ingredient in flares and fireworks.\nANSWER: (c)"
-  },
-  {
-    "id": 75,
-    "question": "In the aqua complex of Beryllium, the coordination number and geometry are:",
-    "options": ["2 and Linear", "4 and Tetrahedral", "6 and Octahedral"],
-    "solution": "Due to its extremely small size, Be can only fit 4 ligands around it. The [Be(H₂O)₄]²⁺ complex has a coordination number of 4 and a tetrahedral geometry.\nANSWER: (b)"
-  },
-  {
-    "id": 76,
-    "question": "The most abundant chemical substance in the universe is:",
-    "options": ["Oxygen", "Hydrogen", "Carbon", "Nitrogen"],
-    "solution": "Hydrogen makes up about 75% of the mass of the visible universe.\nANSWER: (b)"
-  },
-  {
-    "id": 77,
-    "question": "Why is monoatomic hydrogen rare on Earth?",
-    "options": ["Low reactivity", "Forms ionic bonds easily", "Tendency to form covalent bonds", "Highly soluble"],
-    "solution": "Monoatomic hydrogen is highly reactive and unstable, immediately combining with other atoms to form covalent diatomic molecules (H₂).\nANSWER: (c)"
-  },
-  {
-    "id": 78,
-    "question": "Most important industrial method for H₂ production:",
-    "options": ["Electrolysis", "Catalytic steam-hydrocarbon process", "Reaction of zinc and acid"],
-    "solution": "The catalytic steam reforming of methane (CH₄ + H₂O → CO + 3H₂) is the most widely used industrial method.\nANSWER: (b)"
-  },
-  {
-    "id": 79,
-    "question": "What metal is used in the lab to liberate H₂ from acid?",
-    "options": ["Zinc", "Copper", "Iron", "Aluminum"],
-    "solution": "Zinc is the most common metal used in the lab because it reacts at a moderate, controllable rate with dilute acids.\nANSWER: (a)"
-  },
-  {
-    "id": 80,
-    "question": "Explosive concentration range of H₂ in air:",
-    "options": ["1-10%", "10-30%", "30-50%", "4-75%"],
-    "solution": "Hydrogen is dangerously explosive when mixed with air between 4% and 75% by volume.\nANSWER: (d)"
-  },
-  {
-    "id": 81,
-    "question": "Density of H₂ at STP:",
-    "options": ["0.08988 g/L", "1.0 g/L", "0.078 g/L", "2.0 g/L"],
-    "solution": "The density of hydrogen gas at standard temperature and pressure is exceptionally low: 0.08988 g/L.\nANSWER: (a)"
-  },
-  {
-    "id": 82,
-    "question": "Extremely low melting/boiling points of H₂ is due to:",
-    "options": ["Strong forces", "Weak intermolecular forces", "High molecular weight"],
-    "solution": "Hydrogen molecules are nonpolar and only experience very weak London dispersion forces, resulting in very low boiling points.\nANSWER: (b)"
-  },
-  {
-    "id": 83,
-    "question": "Enthalpy of combustion for H₂:",
-    "options": ["-286 kJ/mol", "-572 kJ/mol", "286 kJ/mol"],
-    "solution": "2H₂ + O₂ → 2H₂O releases 572 kJ. Per 1 mole of H₂, it is 286 kJ released (hence -286 kJ/mol).\nANSWER: (a)"
-  },
-  {
-    "id": 84,
-    "question": "Oxidation state of H when reacting with electropositive elements:",
-    "options": ["+1", "-1", "0", "+2"],
-    "solution": "When reacting with metals (electropositive), hydrogen accepts an electron to form the hydride ion (H⁻), giving it an oxidation state of -1.\nANSWER: (b)"
-  },
-  {
-    "id": 85,
-    "question": "Hydrides are classified into how many major groups?",
-    "options": ["Two", "Three", "Four", "Five"],
-    "solution": "Hydrides are broadly classified into three main categories: Ionic (Salt-like), Covalent, and Metallic (Interstitial).\nANSWER: (b)"
-  },
-  {
-    "id": 86,
-    "question": "Hydrides formed when H reacts with non-metals:",
-    "options": ["Ionic", "Covalent", "Metallic", "Interstitial"],
-    "solution": "Reaction with nonmetals (like C, N, O) leads to the sharing of electrons, forming covalent (molecular) hydrides.\nANSWER: (b)"
-  },
-  {
-    "id": 87,
-    "question": "Example of an ionic hydride:",
-    "options": ["CH₄", "NH₃", "NaH", "SiH₄"],
-    "solution": "Sodium hydride (NaH) is a classic ionic (salt-like) hydride where hydrogen exists as the H⁻ anion.\nANSWER: (c)"
-  },
-  {
-    "id": 88,
-    "question": "Which hydride involves H bonding with metals?",
-    "options": ["Ionic hydrides", "Covalent", "Metallic", "Interstitial"],
-    "solution": "Ionic hydrides are formed specifically when hydrogen reacts with highly electropositive metals (alkali and alkaline earth metals).\nANSWER: (a)"
-  },
-  {
-    "id": 89,
-    "question": "What is the primary use of H₂ in ammonia (Haber-Bosch) manufacturing?",
-    "options": ["Fuel", "Reducing agent", "Catalyst", "Oxidizing agent"],
-    "solution": "In the Haber process (N₂ + 3H₂ ⇌ 2NH₃), Hydrogen acts as a reducing agent to combine with Nitrogen to form Ammonia.\nANSWER: (b)"
-  },
-  {
-    "id": 90,
-    "question": "Primary application of H₂ in catalytic hydrogenation:",
-    "options": ["Margarine production", "Plastics", "Pharmaceuticals", "Oil refining"],
-    "solution": "Catalytic hydrogenation adds hydrogen to unsaturated vegetable oils to convert them into solid fats like margarine.\nANSWER: (a)"
-  },
-  {
-    "id": 91,
-    "question": "In Haber-Bosch, pressure is:",
-    "options": ["100 atm", "500 atm", "750 atm", "1,000 atm"],
-    "solution": "To favor the forward reaction (which reduces the number of gas molecules), Haber-Bosch operates at very high pressure, usually around 200-1,000 atm. 1,000 atm is a common academic answer.\nANSWER: (d)"
-  },
-  {
-    "id": 92,
-    "question": "Haber-Bosch operating temperature:",
-    "options": ["100°C", "250°C", "500°C", "750°C"],
-    "solution": "Even though low temperatures favor the yield, the reaction is too slow. 500°C is used to provide sufficient activation energy for the catalyst to work.\nANSWER: (c)"
-  },
-  {
-    "id": 93,
-    "question": "Which halogen reacts most violently with H₂?",
-    "options": ["Chlorine", "Bromine", "Iodine", "Fluorine"],
-    "solution": "Fluorine is the most electronegative and reactive element, combining explosively with hydrogen even in the dark.\nANSWER: (d)"
-  },
-  {
-    "id": 94,
-    "question": "Among halogens, HF is a liquid at room temp while others are gases. Why?",
-    "options": ["F-F bond weak", "F-F bond strong", "F is electronegative", "Hydrogen bonding in HF"],
-    "solution": "HF molecules form strong intermolecular hydrogen bonds, creating a network that raises the boiling point above room temperature.\nANSWER: (d)"
-  },
-  {
-    "id": 95,
-    "question": "What shape does H₂O adopt based on hybridization?",
-    "options": ["Tetrahedral", "Angular/Bent", "Trigonal planar", "Pyramidal"],
-    "solution": "Oxygen in H₂O is sp³ hybridized. With 2 lone pairs, the molecular geometry is angular/bent.\nANSWER: (b)"
-  },
-  {
-    "id": 96,
-    "question": "Atomic and oxy-hydrogen torches are used for:",
-    "options": ["Welding", "Metal cutting and welding", "Transistors", "Electrolysis"],
-    "solution": "Combining hydrogen with oxygen produces a very high-temperature flame, commonly used for cutting and welding metals.\nANSWER: (b)"
-  },
-  {
-    "id": 97,
-    "question": "Hydrogen is extracted from water by:",
-    "options": ["Elimination", "Decomposition reaction", "Displacement", "Reduction"],
-    "solution": "Electrolysis is a decomposition reaction that breaks water (H₂O) down into hydrogen and oxygen gas.\nANSWER: (b)"
-  },
-  {
-    "id": 98,
-    "question": "What happens to temperature when H₂ expands from high to low pressure?",
-    "options": ["Constant", "Decreases", "Increases", "Fluctuates"],
-    "solution": "For most real gases at room temperature, the Joule-Thomson effect causes cooling. However, Hydrogen is an exception! At room temperature, H₂ actually heats up slightly upon expansion.\nANSWER: (c)"
-  },
-  {
-    "id": 99,
-    "question": "Dimerization of acetic acid is due to:",
-    "options": ["H-bonding", "Van der Waals", "Dispersion forces", "Chemical bonding"],
-    "solution": "Carboxylic acids form stable cyclic dimers in the vapor phase due to strong intermolecular hydrogen bonding between the -COOH groups.\nANSWER: (a)"
-  },
-  {
-    "id": 100,
-    "question": "Which of the following is NOT a good reducing agent?",
-    "options": ["H₂", "CH₄", "SiH₄", "CO"],
-    "solution": "Methane (CH₄) is highly stable and generally does not act as a reducing agent under standard conditions. H₂, SiH₄, and CO are all known reducing agents.\nANSWER: (b)"
+    "question": "What is the functional group in nitriles?",
+    "options": ["-C≡N", "-NH₂", "-OH", "-COOH", "-CHO"],
+    "solution": "Nitriles contain the cyano group (-C≡N).\nANSWER: (a)"
   }
 ]
