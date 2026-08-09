@@ -107,63 +107,6 @@
     <!-- IMPORTANT: This loads your actual question data. DO NOT REMOVE -->
     <script src="studymode.js"></script>
 
-    <!-- Page Logic Script -->
-    <script>
-        /* ================= THEME TOGGLE ================= */
-        const themeToggle = document.getElementById('themeToggle');
-        const icon = themeToggle.querySelector('i');
-        
-        // Check saved theme
-        if (localStorage.getItem('theme') === 'light') {
-            document.body.classList.add('light-mode');
-            icon.className = 'fas fa-sun';
-        }
-
-        themeToggle.addEventListener('click', function() {
-            document.body.classList.toggle('light-mode');
-            if (document.body.classList.contains('light-mode')) {
-                icon.className = 'fas fa-sun';
-                localStorage.setItem('theme', 'light');
-            } else {
-                icon.className = 'fas fa-moon';
-                localStorage.setItem('theme', 'dark');
-            }
-        });
-
-        /* ================= NAVIGATION ================= */
-        function startStudy(courseCode) {
-            document.getElementById('course-selection').style.display = 'none';
-            document.getElementById('study-screen').style.display = 'block';
-            
-            // Trigger studymode.js to load course data
-            if(typeof loadCourse === 'function') {
-                loadCourse(courseCode);
-            } else {
-                document.getElementById('question-text').innerText = "Loaded: " + courseCode;
-                document.getElementById('progress-text').innerText = "Question 1 of 10";
-            }
-        }
-
-        function goBackToCourses() {
-            document.getElementById('course-selection').style.display = 'block';
-            document.getElementById('study-screen').style.display = 'none';
-        }
-
-        /* ================= PREV / NEXT BUTTONS ================= */
-        document.getElementById('next-btn').addEventListener('click', function() {
-            // Calls your studymode.js logic if it exists
-            if(typeof nextQuestion === 'function') {
-                nextQuestion();
-            } else {
-                console.log("Next button clicked (no JS attached)");
-            }
-        });
-
-        document.getElementById('prev-btn').addEventListener('click', function() {
-            if(typeof prevQuestion === 'function') {
-                prevQuestion();
-            }
-        });
     </script>
 </body>
 </html>
