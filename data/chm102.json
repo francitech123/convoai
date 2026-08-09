@@ -385,11 +385,19 @@
     "solution": "Gallium forms a white, gelatinous superoxide which dissolves in alkali.\nCorrect Answer: (c)"
   },
   {
-    "id": 65,
-    "question": "The double bond equivalence of the compound below is the same as that of: (Refer to structure of 1,3,5,7-cyclooctatetraene)",
-    "options": ["acetone", "cyclohexan-2-one", "benzene", "deca-1,3,5,7,9-pentaene"],
-    "solution": "The compound has 1 ring, 1 DBE (ring). It has 4 double bonds, 4 DBE. Total DBE = 1 + 4 = 5. Benzene has 1 ring + 3 double bonds = 4 DBE. Deca-1,3,5,7,9-pentaene has 5 double bonds and 0 rings = 5 DBE.\nCorrect Answer: (d)"
-  },
+  "id": 65,
+  "question": "The double bond equivalence (DBE) of the compound shown below is the same as that of which of the following options?\n\n     HC = CH\n    /       \\\n  HC         CH\n  ||         ||\n  HC         CH\n    \\       /\n     HC = CH\n\n  (1,3,5,7-Cyclooctatetraene)",
+  "options": [
+    "(a) Acetone\n        O\n        ||\n    CH₃–C–CH₃",
+
+    "(b) Cyclohexanone\n        O\n       //\n      C\n    /   \\\n   H₂C   CH₂\n   |     |\n   H₂C — CH₂",
+
+    "(c) Benzene\n       CH\n     /    \\\n   HC      CH\n   ||      ||\n   HC      CH\n     \\    /\n       CH",
+
+    "(d) Deca-1,3,5,7,9-pentaene\n    CH₂=CH–CH=CH–CH=CH–CH=CH–CH=CH₂"
+  ],
+  "solution": "1. Target Compound: 1,3,5,7-Cyclooctatetraene (C₈H₈)\n   - Formula: DBE = C + 1 - (H / 2)\n   - DBE = 8 + 1 - (8 / 2) = 5\n   - Structural components: 1 ring + 4 double bonds = 5 DBE\n\n2. Comparing Options:\n   - (a) Acetone (C₃H₆O): 1 double bond (C=O) = 1 DBE\n   - (b) Cyclohexanone (C₆H₁₀O): 1 ring + 1 double bond (C=O) = 2 DBE\n   - (c) Benzene (C₆H₆): 1 ring + 3 double bonds = 4 DBE\n   - (d) Deca-1,3,5,7,9-pentaene (C₁₀H₁₂): 0 rings + 5 double bonds = 5 DBE\n\nTherefore, Deca-1,3,5,7,9-pentaene has the same DBE (5) as 1,3,5,7-cyclooctatetraene.\nCorrect Answer: (d)"
+},
   {
     "id": 66,
     "question": "The IUPAC nomenclature of (CH₃CH₂)₂C(C₂H₅)(C₃H₇) is:",
