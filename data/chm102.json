@@ -1,87 +1,13 @@
 [
   {
-    "id": 1,
-    "question": "Which of the following correctly represents the structural formula of But-1-yne?",
+    "id": 11,
+    "question": "Which of the following structures represents But-1-yne?<br><br>        H   H<br>        |   |<br>H—C ≡ C—C — C—H<br>        |   |<br>        H   H",
     "options": [
       "CH₃-CH₂-CH₂-CH₃",
-      "CH≡C-CH₂-CH₃",
+      "<br>        H   H<br>        |   |<br>H—C ≡ C—C — C—H<br>        |   |<br>        H   H<br>   (But-1-yne)",
       "CH₃-C≡C-CH₃",
       "CH₂=CH-CH₂-CH₃"
     ],
-    "solution": "<pre>\n        H   H\n        |   |\nH—C ≡ C—C — C—H\n        |   |\n        H   H\n     (But-1-yne)\n</pre>\n\nExplanation: But-1-yne has a triple bond between the first and second carbon atoms. \nCorrect Answer: (b) CH≡C-CH₂-CH₃"
-  },
-  {
-    "id": 2,
-    "question": "What is the molecular geometry of the water (H₂O) molecule?",
-    "options": ["Linear", "Trigonal Planar", "Bent/Angular", "Tetrahedral"],
-    "solution": "<pre>\n      H\n       \\\n        O\n       /\n      H\n  (Bent / Angular, 104.5°)\n</pre>\n\nExplanation: Oxygen has 2 lone pairs and 2 bond pairs. The lone pairs repel the bonding pairs, reducing the angle from 109.5° to 104.5°.\nCorrect Answer: (c) Bent/Angular"
-  },
-  {
-    "id": 3,
-    "question": "Which molecule exhibits sp hybridization?",
-    "options": ["CH₄", "BF₃", "BeCl₂", "H₂O"],
-    "solution": "<pre>\nCl — Be — Cl\n    (Linear, 180°)\n</pre>\n\nExplanation: Beryllium in BeCl₂ forms 2 bonds with 0 lone pairs. It uses 1 s-orbital and 1 p-orbital to form 2 equivalent sp hybrid orbitals.\nCorrect Answer: (c) BeCl₂"
-  },
-  {
-    "id": 4,
-    "question": "What is the chemical equation for the formation of Sodium Hydride (an ionic hydride)?",
-    "options": [
-      "2Na + H₂ → 2NaH",
-      "Na + H₂O → NaOH + H₂",
-      "NaCl + H₂ → NaH + Cl₂",
-      "2Na + O₂ → Na₂O₂"
-    ],
-    "solution": "<pre>\n2Na  +  H₂   →   2NaH\n(Solid) (Gas)   (Ionic Hydride)\n</pre>\n\nExplanation: Sodium reacts directly with hydrogen gas at high temperatures to form Sodium Hydride, where hydrogen exists as the H⁻ ion.\nCorrect Answer: (a) 2Na + H₂ → 2NaH"
-  },
-  {
-    "id": 5,
-    "question": "Which element can exhibit sp³d hybridization?",
-    "options": ["Carbon", "Nitrogen", "Oxygen", "Phosphorus"],
-    "solution": "<pre>\n       Cl\n        |\n   Cl—P—Cl\n        |\n       Cl\n  (Trigonal Bipyramidal - PCl₅)\n</pre>\n\nExplanation: Only elements in Period 3 (like Phosphorus) have accessible d-orbitals to expand their octet and form 5 bonds.\nCorrect Answer: (d) Phosphorus"
-  },
-  {
-    "id": 6,
-    "question": "What is the major source of commercial Helium gas?",
-    "options": [
-      "Fractional distillation of liquid air",
-      "Cryogenic separation of natural gas",
-      "Electrolysis of water",
-      "Burning of hydrogen"
-    ],
-    "solution": "<pre>\nNatural Gas (CH₄, C₂H₆, etc.)\n      ↓\nCryogenic Cooling \n      ↓\n   Helium (He) Gas\n</pre>\n\nExplanation: Helium is extracted by cooling natural gas to extremely low temperatures, which liquifies methane and leaves Helium behind as a gas.\nCorrect Answer: (b) Cryogenic separation of natural gas"
-  },
-  {
-    "id": 7,
-    "question": "Which alkaline earth metal exhibits amphoteric properties (acting as both acid and base)?",
-    "options": ["Magnesium (Mg)", "Calcium (Ca)", "Beryllium (Be)", "Strontium (Sr)"],
-    "solution": "<pre>\nBeO + 2HCl  →  BeCl₂ + H₂O   (Acts as a base)\nBeO + 2NaOH →  Na₂BeO₂ + H₂O (Acts as an acid)\n</pre>\n\nExplanation: Beryllium oxide (BeO) is amphoteric because it can react with both acids and strong bases.\nCorrect Answer: (c) Beryllium (Be)"
-  },
-  {
-    "id": 8,
-    "question": "In the industrial Haber-Bosch process, Nitrogen and Hydrogen react to form ammonia. What is the balanced equation?",
-    "options": [
-      "N₂ + H₂ → NH₃",
-      "N₂ + 2H₂ → 2NH₃",
-      "N₂ + 3H₂ → 2NH₃",
-      "N₂ + 4H₂ → 2NH₃"
-    ],
-    "solution": "<pre>\nN₂  +  3H₂   ⇌   2NH₃\n(1 mol) (3 mol)    (2 mol)\n</pre>\n\nExplanation: The Haber process requires 1 mole of Nitrogen reacting with 3 moles of Hydrogen to yield 2 moles of Ammonia. It is carried out at ~500°C and 1000 atm.\nCorrect Answer: (c) N₂ + 3H₂ → 2NH₃"
-  },
-  {
-    "id": 9,
-    "question": "Why is Lithium considered anomalous compared to other Group 1 (Alkali) metals?",
-    "options": [
-      "It is the largest alkali metal",
-      "It has the lowest hydration energy",
-      "It forms covalent compounds and reacts slowly with water",
-      "It floats on water"
-    ],
-    "solution": "<pre>\nLithium (Li⁺)  vs  Sodium (Na⁺)\n   Small size       Large size\n   High charge den. Low charge den.\n   Forms covalent   Forms ionic\n</pre>\n\nExplanation: Because of its extremely small size and high charge density, lithium can polarize anions and form covalent bonds (like LiBr in organic solvents). It also reacts less violently with water compared to other alkali metals.\nCorrect Answer: (c)"
-  },
-  {
-    "id": 10,
-    "question": "Which halogen reacts most violently with Hydrogen gas?",
-    "options": ["Chlorine (Cl₂)", "Bromine (Br₂)", "Iodine (I₂)", "Fluorine (F₂)"],
-    "solution": "<pre>\nH₂  +  F₂  →  2HF\n(Hydrogen + Fluorine →  Hydrogen Fluoride)\n         (Explosive reaction!)\n</pre>\n\nExplanation: Fluorine is the most electronegative element. It reacts explosively with hydrogen, even in the dark and at very low temperatures.\nCorrect Answer: (d) Fluorine (F₂)"
+    "solution": "Explanation: But-1-yne has a triple bond between carbon 1 and carbon 2.<br><br>Correct Answer: (b) The structure with the triple bond."
   }
 ]
