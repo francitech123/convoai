@@ -66,11 +66,11 @@
   "solution": "<pre>\n      H\n       \\\n        O\n       /\n      H\n  (Bent/Angular, 104.5°)\n</pre>\n\nExplanation:\nWater has 2 bond pairs and 2 lone pairs around the central Oxygen atom. The repulsion from the lone pairs pushes the hydrogen atoms closer together, resulting in a Bent/Angular shape with an angle of 104.5°.\n\nCorrect Answer: (c) Bent/Angular"
   },
   {
-    "id": 12,
-    "question": "Which of the following is the correct structure for benzene?",
-    "options": ["C₆H₆", "C₆H₁₂", "C₆H₁₄", "C₆H₁₀", "C₆H₈"],
-    "solution": "Benzene has the molecular formula C₆H₆.\nANSWER: (a)"
-  },
+  "id": 12,
+  "question": "What is the molecular geometry of water (H₂O) based on VSEPR theory?",
+  "options": ["Linear", "Trigonal Planar", "Bent/Angular", "Tetrahedral"],
+  "solution": "<pre>\n      H\n       \\\n        O\n       /\n      H\n  (Bent/Angular, 104.5°)\n</pre>\n\nExplanation:\nWater has 2 bond pairs and 2 lone pairs around the central Oxygen atom. The repulsion from the lone pairs pushes the hydrogen atoms closer together, resulting in a Bent/Angular shape with an angle of 104.5°.\n\nCorrect Answer: (c) Bent/Angular"
+},
   {
     "id": 13,
     "question": "What type of reaction is the addition of water to an alkene?",
