@@ -1022,5 +1022,125 @@
     "question": "What is the name given to the reaction between an amino acid and 1,3-fluorodinitrobenzene (FDNB)?",
     "options": ["Alkylation", "Esterification", "Methylation", "Arylation"],
     "solution": "The reaction of FDNB (Sanger's reagent) with an amino acid involves the introduction of an aromatic ring onto the amino acid molecule. This type of reaction is called arylation.\nCorrect Answer: (d)"
+  },
+   {
+    "id": 171,
+    "question": "Explain the difference between the boiling points of the following two compounds: (Structures: Pentane (b.p. 36°C) and 1-butanol (b.p. 117°C))",
+    "options": ["The hydroxyl group (OH) in 1-butanol is able to form hydrogen-bonds which must be broken in the vaporization process", "Pentane has five carbon atoms while 1-butanol has four carbon atoms", "There is a difference between C-H and C-O bond energies", "The force of attraction in pentane is lower than in butanol"],
+    "solution": "Pentane is a non-polar organic compound while 1-butanol is a polar organic compound with hydroxyl group. Pentane molecules are held together by weak Van der Waal forces while 1-butanol molecules are held together by hydrogen bond, a stronger intermolecular force of attraction.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 172,
+    "question": "Which of the following is not the method of preparation of alkyl halide?",
+    "options": ["Halogenation of alcohols", "Halogenation of alkene", "Addition of HX on alkenes", "Hydration of alkene"],
+    "solution": "Hydration of alkene is the addition of water to a double bond, which produces an alcohol, not an alkyl halide. Halogenation of alcohols, alkenes, and addition of HX are methods for preparing alkyl halides.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 173,
+    "question": "Which of the following reagents gives the best method of preparation of alkyl halides when it reacts with alcohol?",
+    "options": ["Zn/HCl", "PCl₃", "SOCl₂", "PCl₅"],
+    "solution": "The best chlorinating agent for converting alcohols to alkyl halides is thionyl chloride (SOCl₂), because the by-products are gaseous (SO₂ and HCl) and easily removed.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 174,
+    "question": "During a reaction of Tollens test, the formation of mirror inside the tube is due to which of the following?",
+    "options": ["Silver ions", "Silver atoms", "Silver compounds", "Silver nitrate"],
+    "solution": "Tollens' reagent contains silver ions (Ag⁺) complexed with ammonia. In the presence of an aldehyde, the silver ions are reduced to metallic silver (Ag⁰), which deposits on the glass tube as a silver mirror.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 175,
+    "question": "Which of the following is the final product of the reaction of ethanol with C₂H₅MgCl?",
+    "options": ["An aldehyde", "A ketone", "A primary alcohol", "A secondary alcohol"],
+    "solution": "Ethanol reacts with Grignard reagent (C₂H₅MgCl) to form butan-2-ol, which is a secondary alcohol.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 176,
+    "question": "Which of the following compounds gives a primary alcohol upon reaction with ethylmagnesium bromide?",
+    "options": ["Propanone", "Methanal", "Ethyl methanoate", "Carbon dioxide"],
+    "solution": "The reaction of Grignard reagent with methanal (formaldehyde) gives a primary alcohol. The reaction with other aldehydes gives secondary alcohols, and with ketones gives tertiary alcohols.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 177,
+    "question": "The Group VIA elements form oxides of the type MO₂. The arrangement of these oxides in order of increasing acidity is:",
+    "options": ["SO₂ < SeO₂ < TeO₂ < PoO₂", "PoO₂ < TeO₂ < SeO₂ < SO₂", "SeO₂ < TeO₂ < PoO₂ < SO₂", "PoO₂ < TeO₂ < SO₂ < SeO₂"],
+    "solution": "Down the group, atomic radius increases, ionization energy and electron affinity decreases, metallic character increases and so basicity increases. Acidity decreases down the group. Therefore PoO₂ is least acidic and SO₂ is most acidic.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 178,
+    "question": "A student mistakenly added ethanol to ethanoic anhydride, what product(s) do you think will be formed? (i) ethylethanoate (ii) ethanoic acid (iii) methylethanoate (iv) butanoate (v) butanoic acid (vi) ethoxyethane",
+    "options": ["(i) & (ii)", "(i) and (ii)", "(iii) and (iv)", "(iv) and (vi)"],
+    "solution": "Ethanol reacts with ethanoic anhydride to form ethyl ethanoate (an ester) and ethanoic acid as by-product.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 179,
+    "question": "If ammonia gas is bubbled into methylbutanoate, the products formed will be? (i) butanoic acid (ii) methanol (iii) butanamide (iv) butanol (v) butylalcohol (vi) aminobutane",
+    "options": ["(i) & (ii)", "(ii) & (iii)", "(iii) and (iv)", "(ii) & (vi)"],
+    "solution": "Ammonia reacts with methylbutanoate to form butanamide and methanol.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 180,
+    "question": "Which of the following are properties of amines? (i) They form intermolecular hydrogen bonds. (ii) Their boiling points are higher that non-polar compounds of corresponding molecular weight. (iii) Their boiling points are higher than that of alcohol of corresponding molecular weight (iv) Higher amines are soluble in water (v) The small amines smell like ammonia.",
+    "options": ["All the above properties", "(i), (ii) and (v)", "(iii), (iv) and (v)", "None of the above"],
+    "solution": "Amines with lower molecular weights form hydrogen bonds and have higher boiling points than non-polar compounds. They also have characteristic ammonia-like smells. However, their boiling points are lower than alcohols of similar molecular weight because alcohols have stronger O-H hydrogen bonds. (iii) is false.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 181,
+    "question": "Give a suitable name for the compound below: (Structure: CH₃CH₂-NH-C(=O)-CH₃)",
+    "options": ["Ethylethanamide", "N-ethylethanamide", "Diethylamide", "N-diethylamide"],
+    "solution": "The highlighted part is ethanamide (amide), and the substituent on the nitrogen atom is ethyl. Therefore, the name is N-ethylethanamide.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 182,
+    "question": "What is the name of the intra-molecular reaction of D-glucose that results in its Haworth structure? (i) Ring formation reaction (ii) Haworth reaction (iii) Anomerization reaction (iv) Hemiacetal reaction (v) Fischer projection reaction (vi) Monomeric reaction.",
+    "options": ["(iii) only", "(i), (ii), (iv) and (v)", "(iii) and (iv)", "(v) and (vi)"],
+    "solution": "The conversion involves the anomeric carbon (carbon 1), hence it is called anomerization reaction. It also involves the formation of a hemiacetal via intramolecular reaction.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 183,
+    "question": "Fructose, a non-reducing sugar was observed to give positive test with Fehling's solution, which of the following is or are the reason(s) for the observation? (i) Fructose is a carbonyl compound (ii) Fructose is a very reactive sugar (iii) Fructose is a soluble sugar (iv) The alkaline nature of the test solution catalyses the rearrangement of fructose leading to the formation of two reducing sugars (v) Fructose is similar to glucose.",
+    "options": ["(i) and (ii)", "(iii), (iv) and (v)", "(iv) only", "(iv) and (v)"],
+    "solution": "The test is carried out in a basic medium. The basicity of the medium causes the rearrangement (isomerization) of fructose into glucose and mannose, which are reducing sugars, leading to a positive Fehling's test.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 184,
+    "question": "Which of the following is or are the structure(s) of lysine in solid form? (Refer to attached zwitterion structures)",
+    "options": ["(i) only", "(i) and (ii)", "(iii), (iv) and (v)", "(vi) only"],
+    "solution": "The solid form of any amino acid is the zwitterion (dipolar ion) form, with the amino group protonated and the carboxyl group deprotonated. For lysine, structure (i) correctly shows this zwitterion form.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 185,
+    "question": "The hydrogen ion concentration of solution in which a particular amino acid does not migrate is called?",
+    "options": ["Isotropic point", "Isotonic point", "Isoelectric point", "Amphiprotic point"],
+    "solution": "The isoelectric point (pI) is the pH at which an amino acid exists in its zwitterion (neutral) form, hence it does not migrate in an electric field.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 186,
+    "question": "Which of the structures given below is the structure of glycylalanyllysine? (Refer to attached tripeptide structures)",
+    "options": ["Structure a", "Structure b", "Structure c", "Structure d"],
+    "solution": "The name glycylalanyllysine indicates the sequence from the N-terminal: glycine (glycyl) → alanine (alanyl) → lysine. The correct structure shows glycine at the N-terminus, alanine in the middle, and lysine at the C-terminus.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 187,
+    "question": "The polar end of a soap molecule is called?",
+    "options": ["Hydrophilic", "Hydrophobic", "Lipophilic", "Amphoteric"],
+    "solution": "The polar end of a soap molecule is water-loving, which is called hydrophilic.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 188,
+    "question": "What is the IUPAC name of linoleic acid? (Structure: Octadeca-9,12-dienoic acid)",
+    "options": ["Octadeca-9-enoic acid", "Octadecanoic acid", "Octadeca-9, 12-dienoic acid", "Octadeca-6, 9-dienoic acid"],
+    "solution": "Linoleic acid has 18 carbons (octadec-) and two double bonds at positions 9 and 12 (-dienoic acid), with the carboxyl carbon starting at C1. The correct name is Octadeca-9, 12-dienoic acid.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 189,
+    "question": "The reason why Cl₃C-COOH is much more acidic than CH₃-COOH is: (i) negative inductive effect of Cl group which releases electrons towards the -COOH group. (ii) positive inductive effect of Cl group which releases electrons towards the -COOH group. (iii) negative inductive effect of Cl group, which withdraws electrons away the -COOH group. (iv) positive inductive effect of Cl group, which withdraws electrons away the -COOH group.",
+    "options": ["(i) only", "(ii) & (iii) only", "(iii) only", "(ii) & (iv) only"],
+    "solution": "The chlorine atoms exert a negative inductive effect (-I), withdrawing electron density away from the -COOH group. This stabilizes the carboxylate ion, making the acid stronger. Therefore, statement (iii) is correct.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 190,
+    "question": "Which of the listed alkyl halides is needed to convert ethyne to hex-3-yne using NaNH₂? (i) methyl bromide (ii) ethyl bromide (iii) propyl bromide (iv) butyl bromide",
+    "options": ["(i) only", "(ii) only", "(iii) only", "(iv) only"],
+    "solution": "Ethyne (HC≡CH) is first deprotonated by NaNH₂ to form HC≡C⁻. To get hex-3-yne (CH₃CH₂-C≡C-CH₂CH₃), two ethyl groups must be added to the alkyne. Ethyl bromide (ii) provides the ethyl group.\nCorrect Answer: (b)"
   }
 ]
