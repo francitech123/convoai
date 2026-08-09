@@ -3,25 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>Study Mode • OAU CBE Practice</title>
+    <title>Dashboard • OAU CBE Practice</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="studymode.css">
 
-    <!-- MathJax Configuration -->
     <script>
         MathJax = {
-            tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']],
-                displayMath: [['$$', '$$'], ['\\[', '\\]']],
-                processEscapes: true,
-                processEnvironments: true
-            },
-            options: {
-                ignoreHtmlClass: 'no-mathjax',
-                processHtmlClass: 'mathjax-process'
-            }
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            options: { ignoreHtmlClass: 'no-mathjax', processHtmlClass: 'mathjax-process' }
         };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -30,121 +21,155 @@
 
     <div class="app-container">
 
-        <!-- ==================== HEADER ==================== -->
+        <!-- ================= HEADER ================= -->
         <header>
             <div class="header-left">
-                <div class="logo">
-                    <img src="/logo.svg" alt="OAU CBE Practice" onerror="this.style.display='none';this.parentElement.textContent='O'">
+                <div class="logo-circle">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="header-text">
+                    <h2>Dashboard</h2>
+                    <h1>OAU CBE Practice</h1>
                 </div>
             </div>
             <div class="header-actions">
-                <button onclick="window.location.href='/app'" class="back-home" title="Back to Home">
-                    <i class="fas fa-home"></i> Home
-                </button>
-                <button onclick="toggleTheme()" title="Toggle Theme">
-                    <i class="fas fa-moon" id="themeIcon"></i>
-                </button>
+                <button class="header-btn" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
+                <button class="header-btn"><i class="fas fa-bell"></i></button>
             </div>
         </header>
 
-        <!-- ==================== COURSE SELECTION ==================== -->
-        <div class="course-selection">
-            <p class="subtitle">Select a course to start studying topic by topic.</p>
+        <!-- ================= HERO ================= -->
+        <div class="hero-card">
+            <div class="hero-content">
+                <h2>Welcome back, Student 👋</h2>
+                <p>Keep your OAU practice streak alive. Track exams, tests, course progress, and more from one place.</p>
+                <div class="level-badge">100L • 200L</div>
+                
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <span>Courses active</span>
+                        <strong>—</strong>
+                    </div>
+                    <div class="stat-box">
+                        <span>Average score</span>
+                        <strong>—</strong>
+                    </div>
+                    <div class="stat-box">
+                        <span>Tests + exams</span>
+                        <strong>—</strong>
+                    </div>
+                    <div class="stat-box">
+                        <span>Current streak</span>
+                        <strong>—</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= QUICK ACTIONS ================= -->
+        <div class="section-header">
+            <h3>Quick actions</h3>
+            <a href="#">Open profile</a>
+        </div>
+
+        <div class="actions-grid">
+            <a href="#" class="action-btn" onclick="showStudyMode(); return false;">
+                <div class="action-icon"><i class="fas fa-clock"></i></div>
+                <span>Results</span>
+            </a>
+            <a href="#" class="action-btn" onclick="showStudyMode(); return false;">
+                <div class="action-icon"><i class="fas fa-robot"></i></div>
+                <span>AI</span>
+            </a>
+            <a href="#" class="action-btn" onclick="showStudyMode(); return false;">
+                <div class="action-icon"><i class="fas fa-question-circle"></i></div>
+                <span>FAQ</span>
+            </a>
+            <a href="#" class="action-btn" onclick="showStudyMode(); return false;">
+                <div class="action-icon"><i class="fas fa-headset"></i></div>
+                <span>Support</span>
+            </a>
+        </div>
+
+        <!-- ================= COURSE SELECTION (STUDY MODE) ================= -->
+        <div id="course-selection-screen" style="display:none;">
+            <div class="section-header" style="margin-top:10px;">
+                <h3>Select a course</h3>
+            </div>
+            <p class="hero-content" style="font-size:14px; color:var(--text-muted); margin-bottom:16px;">Start studying topic by topic.</p>
+            
             <div class="course-grid" id="courseGrid">
-                <button class="course-btn" data-code="PHY 102">
-                    <span class="course-content">
-                        <span class="course-code">PHY 102</span>
-                        <span class="course-name">General Physics II (Electricity &amp; Magnetism)</span>
-                        <span class="course-status">Click to start</span>
-                    </span>
-                    <span class="course-spinner"><i class="fas fa-spinner fa-spin"></i></span>
+                <button class="action-btn" data-code="PHY 102" style="width:100%;">
+                    <span style="font-weight:700; color:var(--blue-light);">PHY 102</span>
+                    <span style="font-size:13px; color:var(--text-muted);">General Physics II</span>
                 </button>
-                <button class="course-btn" data-code="PHY 104">
-                    <span class="course-content">
-                        <span class="course-code">PHY 104</span>
-                        <span class="course-name">General Physics IV (Waves &amp; Optics)</span>
-                        <span class="course-status">Click to start</span>
-                    </span>
-                    <span class="course-spinner"><i class="fas fa-spinner fa-spin"></i></span>
+                <button class="action-btn" data-code="PHY 104" style="width:100%;">
+                    <span style="font-weight:700; color:var(--blue-light);">PHY 104</span>
+                    <span style="font-size:13px; color:var(--text-muted);">Waves &amp; Optics</span>
                 </button>
-                <button class="course-btn" data-code="CHM 102">
-                    <span class="course-content">
-                        <span class="course-code">CHM 102</span>
-                        <span class="course-name">Organic Chemistry II</span>
-                        <span class="course-status">Click to start</span>
-                    </span>
-                    <span class="course-spinner"><i class="fas fa-spinner fa-spin"></i></span>
+                <button class="action-btn" data-code="CHM 102" style="width:100%;">
+                    <span style="font-weight:700; color:var(--blue-light);">CHM 102</span>
+                    <span style="font-size:13px; color:var(--text-muted);">Organic Chemistry II</span>
                 </button>
-                <button class="course-btn" data-code="MTH 102">
-                    <span class="course-content">
-                        <span class="course-code">MTH 102</span>
-                        <span class="course-name">Elementary Mathematics II (Calculus)</span>
-                        <span class="course-status">Click to start</span>
-                    </span>
-                    <span class="course-spinner"><i class="fas fa-spinner fa-spin"></i></span>
-                </button>
-                <button class="course-btn" data-code="MTH 104">
-                    <span class="course-content">
-                        <span class="course-code">MTH 104</span>
-                        <span class="course-name">Elementary Mathematics IV (Matrices)</span>
-                        <span class="course-status">Click to start</span>
-                    </span>
-                    <span class="course-spinner"><i class="fas fa-spinner fa-spin"></i></span>
-                </button>
-                <button class="course-btn" data-code="BIO 102">
-                    <span class="course-content">
-                        <span class="course-code">BIO 102</span>
-                        <span class="course-name">General Biology II</span>
-                        <span class="course-status">Click to start</span>
-                    </span>
-                    <span class="course-spinner"><i class="fas fa-spinner fa-spin"></i></span>
+                <button class="action-btn" data-code="MTH 102" style="width:100%;">
+                    <span style="font-weight:700; color:var(--blue-light);">MTH 102</span>
+                    <span style="font-size:13px; color:var(--text-muted);">Elementary Math II</span>
                 </button>
             </div>
         </div>
 
-        <!-- ==================== STUDY INTERFACE ==================== -->
-        <div id="study-screen" style="display:none;">
-            <button id="back-to-menu-btn" class="back-btn">← Back to Courses</button>
+        <!-- ================= STUDY INTERFACE ================= -->
+        <div id="study-screen">
+            <button id="back-to-menu-btn" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Courses</button>
 
             <div id="question-card" class="question-card">
-                <div class="loading-overlay">
-                    <i class="fas fa-spinner fa-spin"></i>
-                    <span>Loading questions...</span>
-                </div>
-
                 <!-- Progress -->
-                <div class="progress-container">
-                    <div class="progress-top">
+                <div class="progress-container" style="margin-bottom:14px;">
+                    <div class="progress-top" style="display:flex; justify-content:space-between; font-size:13px; color:var(--text-muted);">
                         <span id="progress-text">Question 1 of 0</span>
                         <span id="score-display">✅ 0/0</span>
                     </div>
-                    <div class="progress-bar-bg">
-                        <div id="progress-fill" class="progress-bar-fill" style="width:0%;"></div>
+                    <div class="progress-bar-bg" style="height:4px; background:var(--border); border-radius:4px; margin-top:4px;">
+                        <div id="progress-fill" class="progress-bar-fill" style="height:100%; background:var(--blue-accent); border-radius:4px; width:0%;"></div>
                     </div>
                 </div>
 
                 <div id="question-text" class="question-text mathjax-process">Loading question...</div>
-
                 <div id="options-container" class="options-container"></div>
-
-                <div id="solution-container" class="solution-container" style="display:none;">
-                    <button id="toggle-solution-btn" class="toggle-solution-btn">💡 Show Solution</button>
-                    <div id="solution-text" class="solution-text mathjax-process"></div>
-                </div>
             </div>
 
-            <div class="navigation-controls">
-                <button id="prev-btn" class="nav-btn prev" disabled>
-                    <i class="fas fa-chevron-left"></i> Previous
-                </button>
-                <button id="next-btn" class="nav-btn next">
-                    Next <i class="fas fa-chevron-right"></i>
-                </button>
+            <div class="navigation-controls" style="display:flex; gap:12px;">
+                <button id="prev-btn" class="nav-btn prev" disabled style="flex:1; border:1px solid var(--border); background:transparent;"><i class="fas fa-chevron-left"></i> Previous</button>
+                <button id="next-btn" class="nav-btn next" style="flex:1; background:var(--blue-accent); color:#fff;">Next <i class="fas fa-chevron-right"></i></button>
             </div>
         </div>
 
     </div>
 
+    <!-- ================= BOTTOM NAV ================= -->
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item active"><i class="fas fa-home"></i> Home</a>
+        <a href="#" class="nav-item"><i class="fas fa-pen"></i> Exam</a>
+        <a href="#" class="nav-item"><i class="fas fa-flask"></i> Test</a>
+        <a href="#" class="nav-item"><i class="fas fa-book-open"></i> Study</a>
+        <a href="#" class="nav-item"><i class="fas fa-user"></i> Me</a>
+    </nav>
+
     <script src="studymode.js"></script>
+    <script>
+        // Simple Script to toggle between Dashboard and Course Selection
+        function showStudyMode() {
+            document.getElementById('course-selection-screen').style.display = 'block';
+            document.querySelector('.hero-card').style.display = 'none';
+            document.querySelector('.section-header').style.display = 'none';
+            document.querySelector('.actions-grid').style.display = 'none';
+        }
+        document.getElementById('back-to-menu-btn')?.addEventListener('click', function() {
+            document.getElementById('course-selection-screen').style.display = 'none';
+            document.querySelector('.hero-card').style.display = 'block';
+            document.querySelector('.section-header').style.display = 'flex';
+            document.querySelector('.actions-grid').style.display = 'grid';
+        });
+    </script>
 </body>
 </html>
