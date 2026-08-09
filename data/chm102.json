@@ -665,5 +665,120 @@
     "question": "Choose from the list (a) aromatic amino acid (b) sulphur containing amino acid (c) polar amino acid, and (d) acidic amino acid. (i. Glycine ii. Alanine iii. Phenylalanine iv. Methionine v. Serine vi. Glutamic acid vii. Lysine viii. Leucine)",
     "options": ["iii, iv, v & vi", "i, ii, iii & iv", "vii, viii, ii, iv", "ii, v, vi, & viii"],
     "solution": "Phenylalanine (iii) is aromatic. Methionine (iv) is sulfur-containing. Serine (v) is polar (hydroxyl group). Glutamic acid (vi) is acidic. Glycine, Alanine, and Leucine are non-polar, and Lysine is basic.\nCorrect Answer: (a)"
+  },
+  
+   {
+    "id": 112,
+    "question": "The molecular mass of an organic compound A was found to be 121.88 g/mol. Mass of organic compound = 10.98 g, vapor pressure = 20 mmHg, mass of water = 60 g, vapor pressure of water = 740 mmHg. Calculate the molar mass of A.",
+    "options": ["88.2 gmol⁻¹", "121.88 gmol⁻¹", "44.1 gmol⁻¹", "60.0 gmol⁻¹"],
+    "solution": "Using the formula: PA = Pt - Pwater = 760 - 740 = 20 mmHg. MA = (mA * Pwater * Mwater) / (PA * mwater) = (10.98 * 740 * 18) / (20 * 60) = 121.88 gmol⁻¹.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 113,
+    "question": "200 ml of water containing 20 g of an organic compound B, was extracted with 80 ml of ether. Ether and water are immiscible and the partition coefficient of B between ether and water is 10. Calculate the total weight of B extracted by ether in two batches of equal volume.",
+    "options": ["13.34 g", "4.45 g", "17.78 g", "8.89 g"],
+    "solution": "Two batches of equal volume = 40 cm³. FIRST BATCH: Let mass transferred = a. Partition coefficient = 10 = 25a / 5(20-a) -> a = 13.33 g. SECOND BATCH: Kd = 10 = 25a / 5(6.67-a) -> a = 4.45 g. Total = 13.33 + 4.45 = 17.78 g.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 114,
+    "question": "16 cm³ of a gaseous hydrocarbon were mixed with 90 cm³ of oxygen. After explosion and cooling, the volume was 66 cm³. It was reduced to 34 cm³ of residual oxygen by absorption by potassium hydroxide solution. What is the name of the hydrocarbon?",
+    "options": ["Ethane", "Ethene", "Ethyne", "Methane"],
+    "solution": "Volume of O₂ used = 90 - 34 = 56 cm³. Volume of CO₂ = 66 - 34 = 32 cm³. Using Gay-Lussac's Law: 16 cm³ + 56 cm³ O₂ -> 32 cm³ CO₂. Ratio is 1 : 3.5 : 2. Therefore x = 2. 2 + y/4 = 3.5 -> y = 6. Formula is C₂H₆ (Ethane).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 115,
+    "question": "1.40 g sample of a newly isolated organic compound was subjected to Kjeldahl analysis. The gas produced was completely neutralized by 26.3 cm³ of 0.25 M sulphuric acid. Calculate the percentage of nitrogen in the organic compound.",
+    "options": ["20 %", "13 %", "16 %", "17 %"],
+    "solution": "Moles H₂SO₄ = (26.3 * 0.25)/1000 = 0.0066 mol. Moles NH₃ = 2 * 0.0066 = 0.0132 mol. Mass NH₃ = 0.0132 * 17 = 0.2244 g. Mass N = 0.2244 * (14/17) = 0.185 g. %N = (0.185/1.40) * 100 = 13%.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 116,
+    "question": "The molecular mass of an organic compound containing carbon, hydrogen and nitrogen was found to be 59. On combustion, 0.13 g of the compound gave 0.29 g of carbon dioxide and 0.18 g of water. Another 0.145 g of the compound on suitable treatment gave 27.44 cm³ of nitrogen measured at STP. Deduce the molecular formula of the compound.",
+    "options": ["C₃H₇N", "C₃H₈N", "C₃H₉N", "C₃H₉N"],
+    "solution": "Moles ratio C : H : N = 0.0066 : 0.02 : 0.0022 = 3 : 9 : 1. Empirical = C₃H₉N. Mr = 59. (C₃H₉N)n = 59 -> n = 1. Molecular formula = C₃H₉N.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 117,
+    "question": "Give the correct IUPAC names for 3-methylpent-3-ene and 2-chloro-2-ethyl-3-methylbutane respectively.",
+    "options": ["3-methylpent-3-ene and 3-chloro-2,3-dimethylpentane", "3-methylpent-2-ene and 2-ethyl-3-methylbut-2-chloride", "3-methylpent-2-ene and 2,3-dimethyl-3-chloro-pentane", "3-methylpent-2-ene and 3-chloro-2,3-dimethylpentane"],
+    "solution": "The correct IUPAC names are 3-methylpent-2-ene and 3-chloro-2,3-dimethylpentane.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 118,
+    "question": "Arrange the following in order of decreasing volatility: (i) CH₃C(CH₃)₂CH₃ (ii) CH₃(CH₂)₂CH₃ (iii) CH₃CH(CH₃)CH₂CH₃",
+    "options": ["(iii) > (ii) > (i)", "(i) > (iii) > (ii)", "(ii) > (iii) > (i)", "(ii) > (i) > (iii)"],
+    "solution": "Volatility increases as branching increases. Branching decreases from (i) to (iii) to (ii). Therefore the order is (i) > (iii) > (ii).\nCorrect Answer: (b)"
+  },
+  {
+    "id": 119,
+    "question": "Name the main product formed when hypobromous acid (bromine water) reacts with CH₃CBr=CHCH(CH₃)₂?",
+    "options": ["2-methyl-3,4-dibromo-4-pentane", "2,2-dibromo-3-hydroxy-4-methylpentane", "2,3-dibromo-2-hydroxy-4-methylpentane", "2-hydroxy-4-methyl-2,3-dibromopentane"],
+    "solution": "The reaction follows Markovnikov's rule. The major product is 2,3-dibromo-2-hydroxy-4-methylpentane.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 120,
+    "question": "Give the IUPAC name of the main product of dehydrohalogenation of 3-chloro-2,3-dimethylpentane.",
+    "options": ["2,3-dimethylpent-2-ene", "2,3-dimethylpent-3-ene", "2-ethyl-3-ethylbut-1-ene", "3,4-dimethylpent-2-ene"],
+    "solution": "Dehydrohalogenation of 3-chloro-2,3-dimethylpentane yields 2,3-dimethylpent-2-ene as the major product.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 121,
+    "question": "Give the product of ozonolysis of 3-methylpent-2-ene.",
+    "options": ["Ethanal and propanone", "Butanal and ethanal", "But-2-one and ethanoic acid", "But-2-one and ethanal"],
+    "solution": "Ozonolysis of 3-methylpent-2-ene gives but-2-one and ethanal as products.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 122,
+    "question": "Thallium(I) compounds are more stable than Thallium(III) compounds because:",
+    "options": ["Thallium electrons are poorly shielded", "Metallic character decreases down the group", "Valence s orbital electrons are not involved in chemical reactions", "Differences in atomic sizes"],
+    "solution": "The most stable oxidation state of Thallium is +1. The 6s electrons are poorly shielded by 4f and 5d electrons, making them tightly held and unavailable for chemical bonding.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 123,
+    "question": "What type of chemical bonding is between Boron and Fluorine in BF₃?",
+    "options": ["Ionic", "Metallic", "Coordinate covalent", "Covalent"],
+    "solution": "Boron can only form covalent bonds. The three valence electrons are tightly held and the only way for bonding to occur is through sharing of electrons.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 124,
+    "question": "What is responsible for the low-melting point of Gallium?",
+    "options": ["Presence of icosahedrons crystal structures", "Discrete diatomic arrangement in its crystal lattice", "Fused arrangement of Gallium atoms in the crystal structures", "It is liquid at room temperature"],
+    "solution": "Each Gallium atom has one close neighbor at a very short distance and six distant neighbors at longer distances, resembling a discrete diatomic molecule rather than metallic structure. Its melting point is 30°C.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 125,
+    "question": "The element in group V with the highest number of oxidation states is:",
+    "options": ["As", "Bi", "N", "P"],
+    "solution": "The d-block contraction causes d¹⁰ inner shell elements like As and Ga to be smaller, making higher oxidation states and lower oxidation states more stable with increasing metallic character.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 126,
+    "question": "The process of passivation in Aluminium surfaces involves:",
+    "options": ["Amalgamation of unreactive aluminium with air", "Formation of unreactive thin-film of aluminium trioxide on the surface", "Formation of unreactive thin-film of aluminium nitride on the surface", "Electrolysis of aluminium to ionic forms"],
+    "solution": "Passivation involves the formation of a thin, unreactive oxide film (Al₂O₃) on the aluminium surface, which protects the metal from further attack.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 127,
+    "question": "The following are as a result of \"Inert Pair Effect\" on group IV elements except:",
+    "options": ["Variable oxidation states", "Carbon having highest covalency", "Increase in metallic character down the group", "Increase in stability of lower oxidation states down the group"],
+    "solution": "Carbon does not undergo inert pair effect due to the absence of d and f electrons to provide poor shielding.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 128,
+    "question": "The major cause of variability in the properties of Diamond and Graphite is due to:",
+    "options": ["The type of chemical bonding", "The oxidation state of carbon atoms", "The different ionization energies observed", "Different structural arrangement of carbon atoms present in their crystal lattices"],
+    "solution": "Diamond and graphite are both allotropes of carbon with the same chemical bonding and oxidation state. The difference is due to the different structural arrangement of carbon atoms in their crystal lattices.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 129,
+    "question": "What is responsible for the strongly oxidizing power of Lead(IV) compounds?",
+    "options": ["The metallic character of Lead(IV) ions", "The lower melting point of Lead", "The instability of Lead(IV) due to inert pair effect", "The stability of Lead(IV) due to inert pair effect"],
+    "solution": "Lead(IV) has a strongly oxidizing power meaning it will react by gaining electrons (reduction) quickly back into its vacant valence 's' shell to become the stable Lead (II). Lead(IV) compounds are not stable due to inert pair effect.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 130,
+    "question": "Nitrogen molecule is inert at room temperature because, its",
+    "options": ["Decomposition energy is very high", "Dissociation energy is very high", "Atomization energy is very high", "Thermal energy is the same as room temperature"],
+    "solution": "Nitrogen is a colourless and odourless gas which only exists as diatomic molecule N≡N. The fact that the dissociation energy of N₂ molecule is very high makes it inert at room temperature.\nCorrect Answer: (b)"
   }
 ]
