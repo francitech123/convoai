@@ -59,11 +59,11 @@
     "options": ["Hydrogenation", "Hydration", "Halogenation", "Oxidation", "Reduction"],
     "solution": "Hydrogenation is the addition of hydrogen to a double bond.\nANSWER: (a)"
   },
-  {
-    "id": 11,
-    "question": "What is the functional group in amines?",
-    "options": ["-NH₂", "-OH", "-COOH", "-CHO", "-CO-"],
-    "solution": "Amines contain the amino group (-NH₂).\nANSWER: (a)"
+    {
+  "id": 12,
+  "question": "What is the molecular geometry of water (H₂O) based on VSEPR theory?",
+  "options": ["Linear", "Trigonal Planar", "Bent/Angular", "Tetrahedral"],
+  "solution": "<pre>\n      H\n       \\\n        O\n       /\n      H\n  (Bent/Angular, 104.5°)\n</pre>\n\nExplanation:\nWater has 2 bond pairs and 2 lone pairs around the central Oxygen atom. The repulsion from the lone pairs pushes the hydrogen atoms closer together, resulting in a Bent/Angular shape with an angle of 104.5°.\n\nCorrect Answer: (c) Bent/Angular"
   },
   {
     "id": 12,
