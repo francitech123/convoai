@@ -780,5 +780,247 @@
     "question": "Nitrogen molecule is inert at room temperature because, its",
     "options": ["Decomposition energy is very high", "Dissociation energy is very high", "Atomization energy is very high", "Thermal energy is the same as room temperature"],
     "solution": "Nitrogen is a colourless and odourless gas which only exists as diatomic molecule N≡N. The fact that the dissociation energy of N₂ molecule is very high makes it inert at room temperature.\nCorrect Answer: (b)"
+  },
+ 
+  {
+    "id": 131,
+    "question": "The most stable oxide of Bismuth is:",
+    "options": ["Bismuth dioxide (BiO)", "Bismuth pentoxide (Bi₂O₅)", "Bismuth tetraoxide (Bi₂O₄)", "Bismuth trioxide (Bi₂O₃)"],
+    "solution": "In Group V, the stability of the lower oxidation states increases down the group due to inert pair effect caused by poor shielding of d and f electrons. Bismuth trioxide (Bi₂O₃) is the most stable oxide.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 132,
+    "question": "What is responsible for the inability of nitrogen to have coordination number greater than four?",
+    "options": ["Small atomic size", "Presence of five valency electrons", "Absence of d-orbitals", "All of the above"],
+    "solution": "Nitrogen cannot exceed coordination number 4 because it only has four orbitals in its outer shell (one 's' and three 'p' orbitals) and does not have any available 'd' orbitals to expand its octet.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 133,
+    "question": "The following are amphoteric oxides except:",
+    "options": ["Al₂O₃ and Ga₂O₃", "SnO₂ and PbO₂", "As₂O₃ and Sb₂O₃", "All of the above"],
+    "solution": "Amphoteric oxide means it can display both acidic and basic properties. All the listed oxides are amphoteric.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 134,
+    "question": "Arrange the following oxides in the order of increasing acidity: N₂O, NO, N₂O₃, N₂O₄, N₂O₅.",
+    "options": ["N₂O < NO < N₂O₃ < N₂O₄ < N₂O₅", "N₂O < NO < N₂O₃ < N₂O₄ < N₂O₅", "N₂O < N₂O₃ < NO < N₂O₄ < N₂O₅", "N₂O < NO < N₂O₃ < N₂O₅ < N₂O₄"],
+    "solution": "Nitrogen forms a very wide range of oxides. The lowest is N₂O (neutral), while N₂O₅ is highest in acidity where nitrogen is in +5 oxidation state. Acidity increases with higher oxidation states.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 135,
+    "question": "The first element in Groups III, IV and V of the periodic table differs from the rest in the following areas except:",
+    "options": ["Ionization energy", "Stable oxidation states", "Number of valence electrons", "Atomic radius"],
+    "solution": "The first elements in group III, IV and V are Boron, Carbon and Nitrogen respectively. They differ from the rest in ionization energy, stable oxidation states, atomic radius and melting point, but they all have the same number of valence electrons.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 136,
+    "question": "Given the following: ₂₁Sc, ₂₃V, ₂₅Mn and ₃₀Zn, which of the following metal ions is coloured?",
+    "options": ["Sc³⁺", "V⁴⁺", "Zn²⁺", "Mn²⁺"],
+    "solution": "The colors observed in transition metals are as a result of the presence of electrons in the d-orbitals. V⁴⁺ has one d-electron which undergoes d-d transition and is coloured. Sc³⁺ has no d-electrons. Zn²⁺ has completely filled d-orbitals, and Mn²⁺ transitions are forbidden.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 137,
+    "question": "The catalytic activity of transition metals is due to which of the reasons?",
+    "options": ["Their ability to adsorb and exist in different oxidation states", "Their ability to adsorb and form large surface area", "Their ability to adsorb and form complexes", "Their ability to adsorb and magnetise"],
+    "solution": "Transition metals and their compounds function as catalysts because of the presence of the partially filled d-orbitals which provide the surface area for the reactants to be adsorbed. This lowers the activation energy.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 138,
+    "question": "The oxidation number of Co in [Co(NH₃)₆]Cl₂ and Fe in K₃Fe(CN)₆ respectively is:",
+    "options": ["+2 and +3", "+3 and +3", "+3 and +2", "+3 and +4"],
+    "solution": "[Co(NH₃)₆]Cl₂: Ligands (NH₃) are neutral, charge +2, so Co = +2. K₃Fe(CN)₆: K⁺ = +3, ligands 6CN⁻ = -6, so Fe = +3.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 139,
+    "question": "In which of the following species does the transition metal ion have d⁵ electronic configuration?",
+    "options": ["[Cr(NH₃)₆]³⁺", "[Co(H₂O)₆]³⁺", "[CoF₆]³⁻", "[Fe(CN)₆]³⁻"],
+    "solution": "Fe in [Fe(CN)₆]³⁻: Ligands 6CN⁻ = -6, charge -3, so Fe = +3. Fe (Z=26) is [Ar] 3d⁶ 4s². Fe³⁺ = [Ar] 3d⁵ (d⁵ configuration).\nCorrect Answer: (d)"
+  },
+  {
+    "id": 140,
+    "question": "Consider the complex ion [Mn(H₂O)₆]²⁺. Which response(s) from the following statements correctly describe the complex? (i) It is diamagnetic (ii) The metal ion is a d5 ion (iii) It is Octahedral (iv) The ligands are weak field ligands.",
+    "options": ["(i), (ii) and (iii)", "(i), (ii) and (iv)", "(i) and (ii) only", "(ii), (iii) and (iv)"],
+    "solution": "Mn²⁺ is d⁵. With weak field ligands like H₂O, electrons fill singly (high spin). It has 5 unpaired electrons (paramagnetic). Coordination number 6 is octahedral. Therefore (ii), (iii), and (iv) are correct.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 141,
+    "question": "The correct IUPAC name for the complex [FeF₆(H₂O)₃]⁻ is:",
+    "options": ["diaquatetrafluoroiron(III) ion", "diaquatetrafluoroferrate(III) ion", "diaquatetrafluoroiron(I) ion", "diaquatetrafluoroferrate(I) ion"],
+    "solution": "Ligands = 4 fluoride, 2 water. Charge = -1. [Fe + 4(-1) + 2(0)] = -1, so Fe = +3. It is an anionic complex, so the name is diaquatetrafluoroferrate(III) ion.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 142,
+    "question": "Which of the following about the magnetic properties of transition metals is correct?",
+    "options": ["Paramagnetic properties is due to the presence of paired electrons", "Diamagnetic properties is due to the presence of unpaired electrons", "Paramagnetic properties is due to the presence of unpaired electrons", "Ferromagnetic metals are less paramagnetic than other metals"],
+    "solution": "Paramagnetism is due to the presence of unpaired electrons. Diamagnetism is due to the absence of unpaired electrons (all electrons are paired).\nCorrect Answer: (c)"
+  },
+  {
+    "id": 143,
+    "question": "Consider the following statements: Which of the pairs correctly describe the properties of halogens? (i) The melting point and boiling point increase from F to I (ii) The attractive forces between the molecules of halogen become more prominent with increase in size and mass (iii) The boiling point of HCl is higher than HF (iv) The ionic character of NaF is greater than NaBr.",
+    "options": ["(i) and (ii) only", "(i), (ii) and (iii) only", "(ii) and (iii) only", "(i) and (iv) only"],
+    "solution": "Halogen molecules increase in size down the group, causing larger Van der Waals forces and higher boiling points. (i) and (ii) are correct. (iii) is false (HF has H-bonding and higher BP). (iv) is false (NaF has higher ionic character than NaBr).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 144,
+    "question": "Which of the following statements about interhalogen compounds is not correct?",
+    "options": ["They are more reactive than halogen", "They are covalent with Fluorine maintaining +1 oxidation state", "Fluorine is always in oxidation state of -1", "Reaction of later halogen with fluorine leads to higher oxidation state"],
+    "solution": "Due to its high electronegativity, Fluorine always has an oxidation state of -1 in compounds. Larger halogens can have variable oxidation states (+1, +3, +5, +7) when reacting with Fluorine.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 145,
+    "question": "The interhalogen compound that is not likely to be stable among the listed is:",
+    "options": ["ClF", "ICl", "IBr₃", "IF₇"],
+    "solution": "Interhalogen compounds like IBr₃ are unstable due to the large size difference and weak bonding characteristics between iodine and bromine.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 146,
+    "question": "The ester (CH₃CH₂COOCH₂CH₃) must have been formed from the condensation of:",
+    "options": ["Ethanol and ethanoic acid", "Propanol and ethanoic acid", "Ethanol and propanoic acid", "Propanol and propanoic acid"],
+    "solution": "CH₃CH₂COOCH₂CH₃ is formed from ethanol (CH₃CH₂OH) and propanoic acid (CH₃CH₂COOH).\nCorrect Answer: (c)"
+  },
+  {
+    "id": 147,
+    "question": "CH₃COCH₂CH₂COOCH₂CH₃ --[LiAlH₄]--> Products. The products in the equation above are:",
+    "options": ["CH₃COCH₂CH₂COOH & CH₃CH₂OH", "CH₃COCH₂CH₂CH₂OH & CH₃CH₂OH", "CH₃CH(OH)CH₂CH₂COOH & CH₃CH₂OH", "CH₃CH(OH)CH₂CH₂CH₂OH & CH₃CH₂OH"],
+    "solution": "Lithium aluminium hydride is a strong reducing agent that can reduce C=O of carbonyl compounds, carboxylic acids and its derivatives. The products are pentan-1,4-diol and ethanol.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 148,
+    "question": "The carbonyl compounds, 2-methylpropanal and ethanal, were formed from the ozonolysis reaction of an alkene. What is the IUPAC name of the alkene?",
+    "options": ["3-methylpent-2-ene", "2-methylpent-2-ene", "2-methylpent-3-ene", "2-methylhex-2-ene"],
+    "solution": "2-methylpropanal + ethanal combine (reverse ozonolysis) to form 2-methylpent-3-ene.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 149,
+    "question": "What is the IUPAC name of compound B formed from the reaction: (CH₃)₂CCH₂CH₂OH --[H₂CrO₄ / CH₂Cl₂]--> B?",
+    "options": ["2,2-dimethylpropanoic acid", "No reaction", "3,3,3-trimethylpropanal", "3,3-dimethylbutanoic acid"],
+    "solution": "H₂CrO₄ is a strong oxidizing agent in CH₂Cl₂ which will convert the primary alcohol directly to the carboxylic acid. 2,2-dimethylpropanol converts to 2,2-dimethylpropanoic acid.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 150,
+    "question": "Isopropanol --[PCC]--> Product Y. Product Y is:",
+    "options": ["Isopropanol", "Isopropanone", "Propanone", "Propanal"],
+    "solution": "PCC (Pyridinium chlorochromate) is a mild oxidizing agent which oxidizes secondary alcohols to ketones. Isopropanol becomes propanone.\nCorrect Answer: (c)"
+  },
+
+  {
+    "id": 151,
+    "question": "The compound A is: CH₃CH₂MgCl --[1. A; 2. H₃O⁺]--> CH₃CH₂CH₂OH",
+    "options": ["Ethanal", "Methanal", "Methanol", "Ethanol"],
+    "solution": "The Grignard reagent CH₃CH₂MgCl has 2 carbon atoms, and the product (propanol) has 3. Therefore A must be a 1-carbon carbonyl compound, which is methanal (HCHO).\nCorrect Answer: (b)"
+  },
+  {
+    "id": 152,
+    "question": "Two sample bottles labeled X and Y contains unknown liquids having the formula C₃H₆O. X tested positive to DNP but tested negative to Tollens's reagent. Y tested negative to DNP but produced steamy white fumes when passed over dry PCl₅. Which functional group is present in X?",
+    "options": ["Alkanol", "Alkanone", "Alkanal", "Alkanoic acid"],
+    "solution": "DNP positive indicates carbonyl (ketone or aldehyde). Negative Tollens indicates a ketone. Therefore X is an alkanone.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 153,
+    "question": "The bottle labeled Y in the previous question must contain which functional group and what is the name of the compound in the given options?",
+    "options": ["Alkanal; cyclopropanal", "Alkanol; propanol", "Alkanol; cyclopropanol", "Alkanol; cyclopropanol"],
+    "solution": "Negative DNP means no aldehyde/ketone. Steamy white fumes with PCl₅ confirms an alcohol (OH group). With C₃H₆O and 1 DBE (from a ring structure), it must be cyclopropanol.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 154,
+    "question": "The secondary alcohol, butan-2-ol, may be formed from the Grignard reaction involving which of the following Grignard reagent and carbonyl compound?",
+    "options": ["Methylmagnesium bromide & ethanol", "Ethylmagnesium bromide & ethanal", "Methylmagnesium bromide & propanal", "Ethylmagnesium bromide & ethanol"],
+    "solution": "Butan-2-ol has 4 carbons. It is formed by adding ethylmagnesium bromide (2 carbons) to ethanal (2 carbons).\nCorrect Answer: (b)"
+  },
+  {
+    "id": 155,
+    "question": "What is the IUPAC name of the product from the ozonolysis of the cyclic alkene in the reaction above? (Refer to attached 3-methylcyclohexene diagram)",
+    "options": ["3-methylhexan-1,6-dioic acid", "2-methylpentane dial", "2-methyl-2-oxohexanal", "3-methylhexan-1,6-dial"],
+    "solution": "Ozonolysis of 3-methylcyclohexene opens the ring and cleaves the double bond, producing 3-methylhexan-1,6-dial.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 156,
+    "question": "Which of the following set of reagents correctly completes the reaction scheme: CH₃CH₂CH₂OH --(i)--> CH₃CH₂CH₂Cl --(ii)--> CH₃CH₂CH₂MgCl --(iii)--> CH₃CH₂CH₂CH₂OH",
+    "options": ["i = KCl, ii = Mg, iii = H₂CO", "i = SOCl₂, ii = dry ether, iii = formaldehyde", "i = SOCl₂, ii = Mg/dry ether, iii = ethanol", "i = SOCl₂, ii = Mg/dry ether, iii = H₂CO"],
+    "solution": "From alcohol to alkyl halide, a chlorinating agent like SOCl₂ is used. From alkyl halide to Grignard, magnesium ribbon in dry ether is used. From Grignard reagent (3 carbons) to 4-carbon alcohol, carbonyl compound with one carbon atom (H₂CO) is used.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 157,
+    "question": "The IUPAC name of compound A in the equation above is: (Refer to 4-phenylbutan-2-one structure reacting with KCN/H⁺)",
+    "options": ["Phenylpropanal", "3-Phenylpropan-2-one", "2-Phenylpropanone", "4-Phenylbutan-2-one"],
+    "solution": "The starting compound shown is 4-phenylbutan-2-one reacting with KCN.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 158,
+    "question": "The expected product(s) from the treatment of the alkene above with aq. KMnO₄ is/are any of the following: (Refer to 2-methylbut-2-ene structure)",
+    "options": ["2-Ethylpropan-1,2-diol", "Vicinal diol", "Butan-2-one and methanol", "2-Methylbutan-1,2-diol"],
+    "solution": "Reaction with cold, dilute, alkaline KMnO₄ adds OH groups across the double bond, producing a vicinal diol. 2-Methylbutan-1,2-diol is formed.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 159,
+    "question": "Which of the following alcohols shown below are secondary alcohols? (Refer to structures of 1-butanol, 2-butanol, 2-methyl-2-propanol, cyclohexanol, cyclopentanol)",
+    "options": ["(iii) and (v)", "(ii) and (iv)", "(ii), (iii) and (iv)", "(iii), (iv) and (v)"],
+    "solution": "Secondary alcohols have the hydroxyl group attached to a secondary carbon atom. (ii) 2-butanol and (iv) cyclohexanol are secondary. (i) is primary, (iii) is tertiary, (v) is tertiary.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 160,
+    "question": "Which of the following functional groups are among those present in vanillin? (i) Alkanol (ii) Ester (iii) Benzene ring (iv) Ether (v) Alkanal",
+    "options": ["(i), (ii) and (v)", "(iii), (iv) and (v)", "(i), (ii), (iii) and (v)", "(ii), (iii) and (v)"],
+    "solution": "Vanillin contains a benzene ring, an aldehyde group (alkanals), and an ether group.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 161,
+    "question": "Write the names of the numbered compounds (1-4) in the following chemical reactions: 1 --[NaCN/NaHSO₃]--> 2 --[Dilute acid]--> 3 --[Na-Hg]--> 4",
+    "options": ["D-galactose (1), water (2), D-fructose (3) and D-glucose (4)", "D-arabinose (1), Dilute acid (2), D-glucose (3) and D-mannose (4)", "D-glucose (1), Hydrogen peroxide (2), D-arabinose (3) and D-fructose (4)", "D-glucose (1), D-arabinose (3) and D-fructose (4)"],
+    "solution": "The reaction sequence starts with D-glucose (1), which reacts with NaCN/NaHSO₃ to form a cyanohydrin (2). Acid hydrolysis yields gluconic acid (3). Na-Hg reduction yields D-glucose and D-mannose (epimers) (4).\nCorrect Answer: (b)"
+  },
+  {
+    "id": 162,
+    "question": "What are the names given to the reactions involving the conversion of Fischer projection of simple sugar to the Haworth structure?",
+    "options": ["Anomerization reaction, Hemiacetal reaction and Intramolecular reaction", "Anomerization reaction, reduction reaction and intermolecular reaction", "Hemiacetal reaction, polymerization reaction and isomerization reaction", "Anomerization reaction and elongation reaction"],
+    "solution": "The reaction involves the anomeric carbon (carbon 1), hence it is called anomerization reaction. It also involves the formation of hemiacetal, which occurs within the molecule, hence it is called intramolecular reaction.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 163,
+    "question": "Why is sucrose a non-reducing sugar?",
+    "options": ["It is a disaccharide", "It is insoluble in the test reagents", "The hydroxyl group on the anomeric carbon of both sugars that formed sucrose are involved in glycosidic bond formation", "It is a complex sugar"],
+    "solution": "Sucrose is a non-reducing sugar because the two sugars that formed the disaccharide used their respective anomeric hydroxyl groups to form glycoside. Hence, they cannot mutarotate.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 164,
+    "question": "Name all the glycosidic bonds in amylopectin.",
+    "options": ["α- 1, 2 - glycosidic bond and α- 1,4 - glycosidic bond", "α- 1,4 - glycosidic bond and α- 1,6 - glycosidic bond", "β- 1,2 - glycosidic bond and α- 1,4 - glycosidic bond", "α- 1,4 - glycosidic bond and β- 1,6 - glycosidic bond"],
+    "solution": "Amylopectin is a branched polymer. It contains two types of glycosidic linkages: α-1,4-glycosidic linkages (in the main chain) and α-1,6-glycosidic linkages (at the branch points).\nCorrect Answer: (b)"
+  },
+  {
+    "id": 165,
+    "question": "Which of the following structures is the solid form of lysine? (Refer to zwitterion and ionic forms)",
+    "options": ["H₂N-(CH₂)₄-CH(NH₂)-COOH", "H₂N-(CH₂)₄-CH(NH₃⁺)-COO⁻", "H₂N-(CH₂)₄-CH(NH₂)-COO⁻", "H₂N-(CH₂)₄-CH(NH₃⁺)-COOH"],
+    "solution": "The solid form of any amino acid is the dipolar ion (zwitterion) form. In the solid state, the amino group is protonated (NH₃⁺) and the carboxyl group is deprotonated (COO⁻).\nCorrect Answer: (b)"
+  },
+  {
+    "id": 166,
+    "question": "Using the IUPAC rule, which of the under listed structures is the correct structure of a dipeptide formed from the reaction between cysteine and glycine if cysteine is the N-terminal?",
+    "options": ["H₂N-CH(CH₂SH)-CO-NH-CH₂-COOH", "H₂N-CH₂-CO-NH-CH(CH₂SH)-COOH", "HOOC-CH₂-NH-CO-CH(CH₂SH)-NH₂", "H₂N-CH₂-CO-NH-CH(CH₃)-COOH"],
+    "solution": "If cysteine is the N-terminal amino acid (free NH₂ group), its -COOH group must form the peptide bond with the -NH₂ group of glycine. The correct sequence is Cysteine at the N-terminus.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 167,
+    "question": "The hydrogen ion concentration of solution in which amino acid does not migrate under the influence of electric field is called:",
+    "options": ["Isomeric point", "Isoelectric point", "Isotonic point", "Isoelectric point"],
+    "solution": "The isoelectric point (pI) of an amino acid is the pH at which the amino acid exists as a zwitterion (net charge 0), so it will not migrate either to anode or cathode under the influence of a voltage difference.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 168,
+    "question": "The IUPAC name of Fat and Oil (triester) is:",
+    "options": ["Tristearine", "Propan-1, 2, 3-triol", "Triacylglycerol", "Glycerin"],
+    "solution": "Fats and oils are triesters of glycerol (a triol) with three fatty acid molecules. The IUPAC name for these triesters is triacylglycerol.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 169,
+    "question": "Which of the following shorten forms truly represent Linoleic acid? (i) C 18:0 (ii) C18:1 Δ⁹ (iii) C18:2 Δ⁹,¹² (iv) C18:2 Δ⁶,⁹ (v) C18:2 ω⁶,⁹",
+    "options": ["(i) and (iii)", "(ii) and (iv)", "(iii) and (v)", "(i) and (ii)"],
+    "solution": "Linoleic acid is an 18-carbon polyunsaturated fatty acid with two double bonds (at positions 9 and 12 from the carboxyl end). This is represented as C18:2 Δ⁹,¹² and omega-6,9 (ω⁶,⁹).\nCorrect Answer: (c)"
+  },
+  {
+    "id": 170,
+    "question": "What is the name given to the reaction between an amino acid and 1,3-fluorodinitrobenzene (FDNB)?",
+    "options": ["Alkylation", "Esterification", "Methylation", "Arylation"],
+    "solution": "The reaction of FDNB (Sanger's reagent) with an amino acid involves the introduction of an aromatic ring onto the amino acid molecule. This type of reaction is called arylation.\nCorrect Answer: (d)"
   }
 ]
