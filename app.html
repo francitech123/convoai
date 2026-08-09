@@ -722,46 +722,17 @@
   </div>
 
   <!-- ============================================
-       STUDY SCREEN
+       STUDY SCREEN - Routes to standalone studymode.js
        ============================================ -->
   <div class="screen page-content-only" id="studyScreen">
     <div class="study-header">
       <h1><i class="fas fa-book-open"></i> Study Mode</h1>
       <p>Select a course to begin studying</p>
     </div>
-    <div id="studyFacultyScreen">
-      <h3 style="margin:16px 0 8px;color:var(--text)">Select Faculty</h3>
-      <div id="studyFacultyGrid" class="faculty-grid-simple"><div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading...</p></div></div>
-    </div>
-    <div id="studyLevelScreen" style="display:none">
-      <button class="back-btn" onclick="window.studyGoToFaculty()"><i class="fas fa-arrow-left"></i> Change Faculty</button>
-      <h3 style="margin:16px 0 8px;color:var(--text)" id="studyLevelTitle">Select Level</h3>
-      <div id="studyLevelGrid" class="level-grid"><div class="loading-spin"><i class="fas fa-spinner"></i></div></div>
-    </div>
-    <div id="studyCourseScreen" style="display:none">
-      <button class="back-btn" onclick="window.studyGoToLevel()"><i class="fas fa-arrow-left"></i> Change Level</button>
-      <h3 style="margin:16px 0 8px;color:var(--text)" id="studyCoursePageTitle">Available Courses</h3>
-      <div class="study-course-grid" id="studyCoursesContainer"></div>
-    </div>
-    <div id="studyTopicScreen" style="display:none">
-      <button class="back-btn" onclick="window.studyGoToCourse()"><i class="fas fa-arrow-left"></i> Change Course</button>
-      <h3 style="margin:16px 0 8px;color:var(--text)" id="studyTopicTitle">Select Topic</h3>
-      <div class="study-topics-grid" id="studyTopicsContainer"></div>
-    </div>
-    <div id="studyRunningScreen" style="display:none">
-      <button class="back-btn" onclick="window.studyGoToTopic()"><i class="fas fa-arrow-left"></i> Change Topic</button>
-      <div class="question-card">
-        <div class="q-counter" id="studyQCounter">Question 1 of 0</div>
-        <div class="q-text" id="studyQText"></div>
-        <div class="options-area" id="studyOptionsArea"></div>
-        <div class="explanation-box" id="studyExplanationBox">
-          <div class="label">Explanation</div>
-          <div class="text" id="studyExplanationText"></div>
-        </div>
-        <div class="nav-buttons">
-          <button class="btn btn-soft" id="studyPrevBtn" onclick="window.studyPrevQuestion()" disabled style="flex:1"><i class="fas fa-chevron-left"></i> Prev</button>
-          <button class="btn btn-primary" id="studyNextBtn" onclick="window.studyNextQuestion()" style="flex:1">Next <i class="fas fa-chevron-right"></i></button>
-        </div>
+    <div id="studyContentContainer">
+      <div class="loading-spin">
+        <i class="fas fa-spinner"></i>
+        <p>Loading study mode...</p>
       </div>
     </div>
   </div>
@@ -1103,7 +1074,7 @@
     "/js/dashboard.js": "/js/dashboard.js",
     "/js/exam.js": "/js/exam.js",
     "/js/test.js": "/js/test.js",
-    "/js/study.js": "/js/study.js",
+    "/js/study.js": "/studymode.js",
     "/js/profile.js": "/js/profile.js",
     "/js/ai.js": "/js/ai.js",
     "/js/faq.js": "/js/faq.js",
@@ -1123,7 +1094,7 @@ import * as notifications from '/js/notifications.js';
 import * as dashboard from '/js/dashboard.js';
 import * as exam from '/js/exam.js';
 import * as test from '/js/test.js';
-import * as study from '/js/study.js';
+import * as study from '/studymode.js';
 import * as profile from '/js/profile.js';
 import * as ai from '/js/ai.js';
 import * as faq from '/js/faq.js';
@@ -1135,6 +1106,42 @@ import * as app from '/js/app.js';
 
 // Expose all module functions to window
 Object.assign(window, utils, notifications, dashboard, exam, test, study, profile, ai, faq, leaderboard, chat, submit, results, app);
+
+// Override showPage for study mode to load standalone studymode.js
+const originalShowPage = window.showPage;
+window.showPage = function(page) {
+  if (page === 'study') {
+    // Show the study screen
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    const studyScreen = document.getElementById('studyScreen');
+    if (studyScreen) studyScreen.classList.add('active');
+    
+    // Update bottom nav
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    const studyNav = document.querySelector('[data-page="study"]');
+    if (studyNav) studyNav.classList.add('active');
+    
+    // Initialize study mode from studymode.js
+    const studyContainer = document.getElementById('studyContentContainer');
+    if (studyContainer && window.initStudyMode) {
+      window.initStudyMode(studyContainer);
+    } else if (studyContainer) {
+      studyContainer.innerHTML = '<div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading study mode...</p></div>';
+      // Retry after a short delay
+      setTimeout(() => {
+        if (window.initStudyMode) {
+          window.initStudyMode(studyContainer);
+        }
+      }, 500);
+    }
+    return;
+  }
+  
+  // For all other pages, use the original showPage function
+  if (originalShowPage) {
+    originalShowPage(page);
+  }
+};
 
 // Initialize the app
 initApp();
