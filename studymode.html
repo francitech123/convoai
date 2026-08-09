@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
-    <!-- IMPORTANT: This is your CSS file -->
+    <!-- This is your CSS file -->
     <link rel="stylesheet" href="studymode.css">
 
     <!-- MathJax Config -->
@@ -39,7 +39,7 @@
             </div>
             <div class="header-actions">
                 <button class="btn-icon"><i class="fas fa-bell"></i></button>
-                <a href="/app" class="btn-home"><i class="fas fa-home"></i> Home</a>
+                <button id="themeToggle" class="btn-icon"><i class="fas fa-moon"></i></button>
             </div>
         </header>
 
@@ -99,20 +99,48 @@
 
     </div>
 
+    <!-- FLOATING HOME BUTTON -->
+    <button class="floating-home-btn" onclick="window.location.href='/app'">
+        <i class="fas fa-home"></i> Home
+    </button>
+
     <!-- IMPORTANT: This loads your actual question data. DO NOT REMOVE -->
     <script src="studymode.js"></script>
 
-    <!-- Simple Page Navigation Logic -->
+    <!-- Page Logic Script -->
     <script>
+        /* ================= THEME TOGGLE ================= */
+        const themeToggle = document.getElementById('themeToggle');
+        const icon = themeToggle.querySelector('i');
+        
+        // Check saved theme
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+            icon.className = 'fas fa-sun';
+        }
+
+        themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('light-mode');
+            if (document.body.classList.contains('light-mode')) {
+                icon.className = 'fas fa-sun';
+                localStorage.setItem('theme', 'light');
+            } else {
+                icon.className = 'fas fa-moon';
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        /* ================= NAVIGATION ================= */
         function startStudy(courseCode) {
             document.getElementById('course-selection').style.display = 'none';
             document.getElementById('study-screen').style.display = 'block';
             
-            // Call your existing studymode.js logic to load course
+            // Trigger studymode.js to load course data
             if(typeof loadCourse === 'function') {
                 loadCourse(courseCode);
             } else {
-                document.getElementById('question-text').innerText = "Course loaded: " + courseCode + ". (Make sure your studymode.js has a loadCourse() function)";
+                document.getElementById('question-text').innerText = "Loaded: " + courseCode;
+                document.getElementById('progress-text').innerText = "Question 1 of 10";
             }
         }
 
@@ -120,6 +148,22 @@
             document.getElementById('course-selection').style.display = 'block';
             document.getElementById('study-screen').style.display = 'none';
         }
+
+        /* ================= PREV / NEXT BUTTONS ================= */
+        document.getElementById('next-btn').addEventListener('click', function() {
+            // Calls your studymode.js logic if it exists
+            if(typeof nextQuestion === 'function') {
+                nextQuestion();
+            } else {
+                console.log("Next button clicked (no JS attached)");
+            }
+        });
+
+        document.getElementById('prev-btn').addEventListener('click', function() {
+            if(typeof prevQuestion === 'function') {
+                prevQuestion();
+            }
+        });
     </script>
 </body>
 </html>
