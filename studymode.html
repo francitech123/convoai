@@ -8,118 +8,100 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="studymode.css">
+
+    <!-- MathJax Configuration -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                ignoreHtmlClass: 'no-mathjax',
+                processHtmlClass: 'mathjax-process'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
     <div class="app-container">
 
         <!-- ==================== HEADER ==================== -->
-        <header id="study-header" style="display: none;">
+        <header>
             <div class="header-left">
-                <div class="logo">📚</div>
+                <div class="logo">
+                    <img src="/logo.svg" alt="OAU CBE Practice" style="width:32px;height:32px;object-fit:contain;">
+                </div>
                 <div>
                     <div class="app-name">OAU <span>CBE</span> Practice</div>
                     <div class="mode-badge">📖 Study Mode</div>
                 </div>
             </div>
             <div class="header-actions">
-                <button id="calcToggle" onclick="toggleCalculator()" title="Calculator">
-                    <i class="fas fa-calculator"></i>
-                </button>
-                <button id="themeToggle" onclick="toggleTheme()" title="Toggle Theme">
-                    <i class="fas fa-moon"></i>
-                </button>
-                <button onclick="window.location.href='/notifications'" style="position:relative;" title="Notifications">
-                    <i class="fas fa-bell"></i>
-                    <span class="badge hidden" id="notifBadge">0</span>
-                </button>
                 <button onclick="window.location.href='/app'" class="back-home" title="Back to Home">
-                    <i class="fas fa-home"></i>
+                    <i class="fas fa-home"></i> Home
+                </button>
+                <button onclick="toggleTheme()" title="Toggle Theme">
+                    <i class="fas fa-moon" id="themeIcon"></i>
                 </button>
             </div>
         </header>
 
-        <!-- ==================== PROGRESS BAR ==================== -->
-        <div id="progress-container" style="display:none;">
-            <div class="progress-container">
-                <div class="progress-top">
-                    <span id="progress-text">Question 1 of 72</span>
-                    <span id="score-display">✅ 0/72</span>
-                </div>
-                <div class="progress-bar-bg">
-                    <div id="progress-fill" class="progress-bar-fill" style="width: 0%;"></div>
-                </div>
+        <!-- ==================== COURSE SELECTION ==================== -->
+        <div id="course-selection-screen" class="screen">
+            <h2>📚 Study Mode</h2>
+            <p class="subtitle">Select a course to start studying topic by topic.</p>
+            <div class="course-grid" id="courseGrid">
+                <!-- Courses rendered by JS -->
             </div>
         </div>
 
-        <!-- ==================== MAIN CONTENT ==================== -->
-        <main>
+        <!-- ==================== STUDY INTERFACE ==================== -->
+        <div id="study-screen" class="screen" style="display:none;">
+            <button id="back-to-menu-btn" class="back-btn">← Back to Courses</button>
 
-            <!-- ==================== COURSE SELECTION ==================== -->
-            <div id="course-selection-screen" class="screen">
-                <h2>📚 Study Mode</h2>
-                <p class="subtitle">Select a course to start studying topic by topic.</p>
-                <div class="course-grid">
-                    <!-- Courses rendered by JS -->
+            <div id="question-card" class="question-card">
+                <div class="loading-overlay">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <span>Loading questions...</span>
                 </div>
-            </div>
 
-            <!-- ==================== STUDY INTERFACE ==================== -->
-            <div id="study-screen" class="screen hidden">
-                <button id="back-to-menu-btn" class="back-btn">← Back to Courses</button>
-
-                <div id="question-card" class="question-card">
-                    <div class="loading-overlay">
-                        <i class="fas fa-spinner fa-spin"></i>
-                        <span>Loading questions...</span>
+                <!-- Progress -->
+                <div class="progress-container">
+                    <div class="progress-top">
+                        <span id="progress-text">Question 1 of 0</span>
+                        <span id="score-display">✅ 0/0</span>
                     </div>
-
-                    <div id="question-text" class="question-text">Loading question...</div>
-
-                    <div id="options-container" class="options-container"></div>
-
-                    <div id="solution-container" class="solution-container" style="display: none;">
-                        <button id="toggle-solution-btn" class="toggle-solution-btn">💡 Show Solution</button>
-                        <div id="solution-text" class="solution-text"></div>
+                    <div class="progress-bar-bg">
+                        <div id="progress-fill" class="progress-bar-fill" style="width:0%;"></div>
                     </div>
                 </div>
 
-                <div class="navigation-controls">
-                    <button id="prev-btn" class="nav-btn prev" disabled>
-                        <i class="fas fa-chevron-left"></i> Previous
-                    </button>
-                    <button id="next-btn" class="nav-btn next">
-                        Next <i class="fas fa-chevron-right"></i>
-                    </button>
+                <div id="question-text" class="question-text">Loading question...</div>
+
+                <div id="options-container" class="options-container"></div>
+
+                <div id="solution-container" class="solution-container" style="display:none;">
+                    <button id="toggle-solution-btn" class="toggle-solution-btn">💡 Show Solution</button>
+                    <div id="solution-text" class="solution-text"></div>
                 </div>
             </div>
 
-        </main>
+            <div class="navigation-controls">
+                <button id="prev-btn" class="nav-btn prev" disabled>
+                    <i class="fas fa-chevron-left"></i> Previous
+                </button>
+                <button id="next-btn" class="nav-btn next">
+                    Next <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
     </div>
-
-    <!-- ==================== BOTTOM NAV ==================== -->
-    <nav class="bottom-nav">
-        <a href="/app" class="nav-item">
-            <i class="fas fa-home"></i>
-            <span>Home</span>
-        </a>
-        <a href="/exam" class="nav-item">
-            <i class="fas fa-pen"></i>
-            <span>Exam</span>
-        </a>
-        <a href="/test" class="nav-item">
-            <i class="fas fa-flask"></i>
-            <span>Test</span>
-        </a>
-        <a href="/study" class="nav-item active">
-            <i class="fas fa-graduation-cap"></i>
-            <span>Study</span>
-        </a>
-        <a href="/profile" class="nav-item">
-            <i class="fas fa-user"></i>
-            <span>Me</span>
-        </a>
-    </nav>
 
     <script src="studymode.js"></script>
 </body>
