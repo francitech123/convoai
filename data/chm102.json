@@ -1,13 +1,254 @@
 [
   {
+    "id": 1,
+    "question": "A solution of salt X gave a white precipitate which is soluble when hot with aqueous solution of lead nitrate. Salt X is:",
+    "options": ["Sodium iodide", "Sodium bromide", "Zinc nitrate", "Sodium chloride"],
+    "solution": "Lead (II) chloride precipitate is white, is sparingly soluble in cold water but completely dissolved in hot water. Lead (II) iodide is yellow, Lead (II) bromide is moderately soluble in hot water, and lead nitrate with zinc nitrate gives no visible reaction.\nCorrect Answer: (d) Sodium chloride"
+  },
+  {
+    "id": 2,
+    "question": "All the sulphides of these metal ions are soluble in acid medium EXCEPT:",
+    "options": ["Potassium (I)", "Copper (II)", "Manganese (II)", "Zinc (II)"],
+    "solution": "Copper (II) sulphide is not soluble in acid medium.\nCorrect Answer: (b) Copper (II)"
+  },
+  {
+    "id": 3,
+    "question": "A Polar covalent bond is a bond formed when:",
+    "options": ["There is separation of electric charge in a covalent bond involving a shift of electrons toward the more electronegative atom", "Lone pairs of electrons in an atom take part in bonding", "There is transfer of electrons", "Two atoms share a lone pair of electrons"],
+    "solution": "There is separation of electric charge in a covalent bond involving a shift of electrons toward the more electronegative atom. The electronegativity differences must be large enough for considerable shifting.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 4,
+    "question": "Which of the followings are examples for sp hybridization? (i) Acetylene (ii) Boron trifluoride (iii) Beryllium chloride (iv) Carbon dioxide",
+    "options": ["(i) and (ii)", "(i), (iii) and (iv)", "(ii) and (iv)", "(i)"],
+    "solution": "For sp-hybridization, one 's' orbital and one 'p' orbital hybridize to form two sp-hybrid orbitals. In acetylene, the sp-hybridized carbons are formed; For Beryllium chloride, the sp-hybrid orbitals were formed by mixing 2s and one 2p orbital to form two sigma bonds with chlorine; For carbon dioxide, the valence shell of carbon has 2s²2p², one electron from 2s moves from the 2s level to 2p level, which results in the formation of two hybrid orbitals. Now, these sp hybridized orbitals of the carbon atom overlap with two p orbitals of the oxygen atoms to form 2 sigma bonds.\nCorrect Answer: (b) (i), (iii) and (iv)"
+  },
+  {
+    "id": 5,
+    "question": "Which of these bonds/forces is responsible for the dimerization of gaseous and liquid acetic acid?",
+    "options": ["H-bonding", "Van der Waals forces", "Dispersion/London forces", "Chemical bonding"],
+    "solution": "Acetic acid has the -COOH functional groups, dimerization formed by the bonding of the hydrogen of the OH-end of one acetic molecule to the -CO end of another acetic molecule. This bonding is called H-bonding (hydrogen bonding).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 6,
+    "question": "Hydrogen is extracted from water by:",
+    "options": ["Elimination reaction", "Decomposition reaction", "Displacement reaction", "Reduction reaction"],
+    "solution": "The molecule of water is H₂O, and hydrogen is removed from this molecule by the process known as electrolysis of water. This is the process whereby electric current is used to split the molecule into hydrogen and oxygen. In a typical galvanic cell, the negatively charged electrode (cathode), electron is given to the H⁺ ion, causing it to be reduced with the generation of hydrogen gas. On the other hand, the positively charged electrode (anode), electron is taking from the O²⁻ causing the ion to be oxidized with the formation of oxygen gas.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 7,
+    "question": "Atomic and oxy-hydrogen torches are useful in:",
+    "options": ["Welding", "Metal cutting and welding", "Hydrogenation reaction", "Transistors"],
+    "solution": "These torches can generate up to a temperature of 4000°C, which is ideal for cutting and welding of metals. These torches work by dissociation of dihydrogen with the help of an electric arc to generate atomic hydrogen atoms, with the release of huge amount of energy to generate temperature up to 4000°C.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 8,
+    "question": "The action of water on the Alkaline Earth metals produces the:",
+    "options": ["Hydroxides and hydrogen", "The hydroxides", "Oxides and hydrogen", "Hydroxides and nitrides"],
+    "solution": "Alkaline earth metals are group 2 elements, they react with water to produce hydrogen gas and the hydroxides of the metals involved.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 9,
+    "question": "The predicted geometries of ammonia molecule by VSEPR theory and that adopted by the molecule respectively, are:",
+    "options": ["Tetrahedral, Tetrahedral", "Pyramidal, Tetrahedral", "Tetrahedral, Pyramidal", "Pyramidal, Angular shaped"],
+    "solution": "In the ammonia molecule, NH₃, the central nitrogen is surrounded by four electron pairs, which should normally take up a tetrahedral geometry according to electron repulsion theory, however, three of these electron pairs were bonded to three hydrogen atoms, while the remaining lone pair is located in the axial region, giving the molecule a pyramidal geometry.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 10,
+    "question": "The observation of Prussian blue solution in a qualitative Lassaigne's sodium fusion test for nitrogen in an organic compound is as a result of the formation of:",
+    "options": ["Na₄[Fe(CN)₆]", "Na₂[Fe(CN)₅]", "Na₃[Fe(CN)₆]", "Na₄[Fe(CN)₆]"],
+    "solution": "Na + C + N → NaCN; 6NaCN + FeSO₄ → Na₄[Fe(CN)₆] + Na₂SO₄; Na₄[Fe(CN)₆] + FeCl₃ → 3NaCl + NaFe[Fe(CN)₆] (prussian blue).\nCorrect Answer: (d)"
+  },
+  {
     "id": 11,
-    "question": "Which of the following structures represents But-1-yne?<br><br>        H   H<br>        |   |<br>H—C ≡ C—C — C—H<br>        |   |<br>        H   H",
-    "options": [
-      "CH₃-CH₂-CH₂-CH₃",
-      "<br>        H   H<br>        |   |<br>H—C ≡ C—C — C—H<br>        |   |<br>        H   H<br>   (But-1-yne)",
-      "CH₃-C≡C-CH₃",
-      "CH₂=CH-CH₂-CH₃"
-    ],
-    "solution": "Explanation: But-1-yne has a triple bond between carbon 1 and carbon 2.<br><br>Correct Answer: (b) The structure with the triple bond."
+    "question": "How many sigma and pi bonds respectively are there in butyne?",
+    "options": ["8 & 2", "9 & 2", "7 & 3", "10 & 2"],
+    "solution": "<pre>\n        H   H\n        |   |\nH—C ≡ C—C — C—H\n        |   |\n        H   H\n     (butyne)\n</pre>\nSigma bond = 9 and pi bond = 2.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 12,
+    "question": "An organic compound may be defined as:",
+    "options": ["a non-polar molecule that does not dissolve well in water, but often dissolve in other organic compounds", "a branch of chemistry which deals with the study of compounds of carbon with hydrogen and their derivatives", "a simple substance with a molecule made up of carbon and only any other element", "a member of a class of chemicals containing carbon atoms linked to each other and to atoms of other element (typically H, N, O) by covalent bonds"],
+    "solution": "Organic compound could be either non-polar e.g. alkanes etc, or polar e.g. carboxylic acids etc. Organic compound is a compound of carbon and other elements that is largely a covalent compound.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 13,
+    "question": "The best separation technique to separate a mixture of kerosene and gasoline is:",
+    "options": ["Steam distillation", "Simple distillation", "Fractional distillation", "Cracking"],
+    "solution": "Due to the closeness in their boiling points, fractional distillation will be preferred to simple distillation of the mixture.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 14,
+    "question": "Heterolytic fission of bonds in organic compounds produces:",
+    "options": ["Electrophiles", "Ions", "Radicals", "Nucleophiles"],
+    "solution": "Homolytic fission produces radicals i.e. A-B → A• + B•. Heterolytic fission produces carbocation and carbanion i.e. A-B → A⁺ + B⁻. Carbocation and carbanion are ions.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 15,
+    "question": "What theory did Wöhler disprove? (I) organic compounds are formed in the living cells only (II) conversion of ammonium cyanate to Urea in the Laboratory (III) organic compounds can be prepared in the laboratories (IV) inorganic compounds are compounds of elements in the periodic table",
+    "options": ["I & IV", "I", "II & IV", "IV"],
+    "solution": "Before Wöhler synthesized urea, an organic compound, in the laboratory from ammonium cyanate, an inorganic compound, it was believed that organic compounds were formed in the living cells only.\nCorrect Answer: (b) I"
+  },
+  {
+    "id": 16,
+    "question": "200 ml of water containing 20 g of an organic compound B, was extracted with 80 ml of ether. Ether and water are immiscible and the partition coefficient of B between ether and water is 10. Calculate the total weight of B extracted by ether in two batches of equal volume.",
+    "options": ["13.34 g", "4.45 g", "17.78 g", "8.89 g"],
+    "solution": "Two batches of equal volume = 40 cm³\nFIRST BATCH: Let mass of B transferred to ether layer = a g. Mass of B left in water = (20 - a) g.\nPartition coefficient = 10 = 25a / 5(20 - a).\n25a = 50(20 - a) → 25a = 1000 - 50a → 75a = 1000 → a = 13.33 g.\nSECOND BATCH: Mass of B left in water after first batch = (20 - 13.33) g = 6.67 g.\nLet mass of B transferred to ether layer = a g. Mass of B left in water = (6.67 - a) g.\n10 = 25a / 5(6.67 - a) → 25a = 50(6.67 - a) → 25a = 333.5 - 50a → 75a = 333.5 → a = 4.45 g.\nTotal mass extracted = 13.33 + 4.45 = 17.78 g.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 17,
+    "question": "16 cm³ of a gaseous hydrocarbon were mixed with 90 cm³ of oxygen. After explosion and cooling, the volume was 66 cm³. It was reduced to 34 cm³ of residual oxygen by absorption by potassium hydroxide solution. What is the name of the hydrocarbon?",
+    "options": ["Ethane", "Ethene", "Ethyne", "Methane"],
+    "solution": "Volume of hydrocarbon = 16 cm³; Volume of O₂ produced = (90 - 34) = 56 cm³; Volume of CO₂ = (66 - 34) = 32 cm³.\nBy Gay-Lussac's Law: CxHy + (x + y/4)O₂ → xCO₂ + (y/2)H₂O.\nDividing by 16: 1 mole + 3.5 moles O₂ → 2 moles CO₂. So x = 2, y = 6. Molecular formula = C₂H₆.\nCorrect Answer: (a) Ethane"
+  },
+  {
+    "id": 18,
+    "question": "1.40 g sample of a newly isolated organic compound was subjected to Kjeldahl analysis. The gas produced was completely neutralized by 26.3 cm³ of 0.25 M sulphuric acid. Calculate the percentage of nitrogen in the organic compound.",
+    "options": ["20%", "13%", "16%", "17%"],
+    "solution": "Number of moles of H₂SO₄ used = (26.3 x 0.25)/1000 = 0.0066 moles.\nNumber of moles of NH₃ produced = 2 x 0.0066 = 0.0132 moles.\nMass of NH₃ = 0.0132 x 17 = 0.2244 g.\nMass of nitrogen = (0.2244 x 14)/17 = 0.185 g.\n% of nitrogen = (0.185 x 100)/1.40 = 13%.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 19,
+    "question": "The molecular mass of an organic compound containing carbon, hydrogen and nitrogen was found to be 59. On combustion, 0.13 g of the compound gave 0.29 g of carbon dioxide and 0.18 g of water. Another 0.145 g of the compound on suitable treatment gave 27.44 cm³ of nitrogen measured at STP. Deduce the molecular formula of the compound.",
+    "options": ["C₃H₇N", "C₃H₈N", "C₃H₉N", "C₃H₉N"],
+    "solution": "Mass of C = (12/44) x 0.29 = 0.079 g; Mass of H = (2/18) x 0.18 = 0.02 g; Mass of N = 0.0343 g (from STP).\nMole ratio C : H : N = 0.0066 : 0.02 : 0.0022 = 3 : 9 : 1. Empirical formula = C₃H₉N.\nMolecular mass = 59 = (C₃H₉N)n = (12x3 + 9 + 14)n = 59n. n = 1. Molecular formula = C₃H₉N.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 20,
+    "question": "Which of the following names of organic hydrocarbons is not correct?",
+    "options": ["hexa-2,3-diene", "2-methyl-1-hexyne", "1-methylcyclo-1-hexene", "4-methylcyclo-1-hexyne"],
+    "solution": "Looking at the structures, structure (b) is not correct according to the name because the second carbon atom from the left-hand side has five bonds around it.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 21,
+    "question": "Which of the following is the most stable? (Refer to attached cycloalkene structures)",
+    "options": ["Structure A", "Structure B", "Structure C", "Structure D"],
+    "solution": "According to Zaitsev's rule, the more substituted alkene is the more stable alkene.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 22,
+    "question": "How many stereoisomers does the compound below have? (Refer to attached cyclic structure with Cl and OH)",
+    "options": ["4", "8", "16", "32"],
+    "solution": "The compound has 4 stereogenic centres. The number of stereoisomers = 2⁴ = 16.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 23,
+    "question": "Which of the following does not exhibit positional isomerism?",
+    "options": ["propanamine", "2-chlorobutane", "pentanal", "2-pentyne"],
+    "solution": "Among the above functional groups, only aldehyde is a terminal functional group that cannot be moved along the chain of the compounds. Therefore, pentanal (an aldehyde) cannot exhibit positional isomerism.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 24,
+    "question": "The major product of the reaction of 2-methyl-2-pentene and hydrogen iodine in acetic acid is:",
+    "options": ["3-iodo-2-methylpentane", "2-iodo-2-methylpentane", "2,3-diiodo-2-methylpentene", "3-iodo-2-methyl-2-pentene"],
+    "solution": "According to Markovnikov's rule, 2-iodo-2-methylpentane is the major product while 3-iodo-2-methylpentane is the minor product.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 25,
+    "question": "Which of the following will react with CH₃CH₂MgCl to give 2-butanol on hydrolysis?",
+    "options": ["acetaldehyde", "acetone", "ethanol", "ethanone"],
+    "solution": "Acetaldehyde (ethanal) will react with Grignard reagent to give 2-butanol on hydrolysis but acetone will give 2-methyl-2-butanol.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 26,
+    "question": "Ozonolysis of compound P followed by a reductive work-up gives propan-1,3-dial and 3-methylpropan-1,3-dial. What is the structure for compound P?",
+    "options": ["3-methylcyclohexene", "cyclohexa-1,4-diene", "3-methylcyclo-hexa-1,4-diene", "2-methylcyclohexa-1,3-diene"],
+    "solution": "The name of the second product, 3-methylpropan-1,3-dial is not correct. None of the options is correct.\nCorrect Answer: None of the options"
+  },
+  {
+    "id": 27,
+    "question": "Addition of chlorine water to 1-pentene will give which of the following:",
+    "options": ["CH₃CH₂CH₂CH(OH)CH₂Cl", "CH₃CH₂CH₂CH₂CH₂Cl", "CH₃CH₂CH₂CH(Cl)CH₂OH", "CH₃CH₂CH₂CH(Cl)CH₂Cl"],
+    "solution": "The chlorine water is HOCl and so following the Markovnikov addition, the Cl is terminal.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 28,
+    "question": "Two compounds Q and R have the empirical formula C₅H₉ and a molar mass of 82 g/mol. Compound Q reacts with two moles of hydrogen chloride and also reacts with silver nitrate to give a white precipitate. Compound R reacts with only one mole of hydrogen and also reacts with dilute sulphuric acid to give an alcohol. The possible compound identities are:",
+    "options": ["Q = Hex-2-yne, R = 2-hexene", "Q = hexa-2,4-diene, R = hepta-2,5-diene", "Q = Hex-1-yne, R = hexa-2,4-diene", "Q = Hex-1-yne, R = cyclohexene"],
+    "solution": "Molecular formula = C₁₀H₁₈. DBE = 2 (either 2 double bonds or 1 triple bond). Q reacts with 2 moles HCl, implies 1 triple bond (Hex-1-yne). R reacts with 1 mole H₂, implies 1 ring, and with H₂SO₄ to give alcohol suggests cycloalkene. Hence R is cyclohexene.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 29,
+    "question": "What is the product of the reaction between iodoethane and sodium ethoxide?",
+    "options": ["diethyl ether", "ethyl acetate", "ethanol", "butanol"],
+    "solution": "Iodoethane + sodium ethoxide → diethyl ether.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 30,
+    "question": "A statement I is given, and a corresponding Statement II is also given below it. Mark the correct answer as: STATEMENT I: Halogens are all strong oxidizing agents. STATEMENT II: Halogens have a strong tendency to accept one electron to attain the next noble gas configuration.",
+    "options": ["Both Statement I and Statement II are true, but Statement II is the correct explanation of Statement I.", "Both Statement I and Statement II are true, but Statement II is not the correct explanation for Statement I.", "Statement I is true, and Statement II is false, but Statement II is the correct explanation of Statement I.", "Statement I is false and Statement II is true, but Statement I is the correct explanation of Statement II."],
+    "solution": "Oxidizing agents are substances that can oxidize other chemical substances by accepting electrons from them, and Halogens (Fluorine, chlorine, Bromine and Iodine) readily accept one electron to attain noble configuration.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 31,
+    "question": "A first-row transition metal has atomic number 27. What will be its electronic configuration after the loss of 2 electrons?",
+    "options": ["[Ar] 4s² 3d⁵", "[Ar] 4s⁰ 3d⁷", "[Ar] 4s¹ 3d⁶", "[Ar] 4s² 3d⁶"],
+    "solution": "First row transition metal with atomic number of 27 will have the electronic configuration of [Ar] 4s² 3d⁷, when it loses 2 electrons, it becomes [Ar] 4s⁰ 3d⁷, the electrons will be lost from the 4s orbital because it is lower in energy to 3d orbital.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 32,
+    "question": "Which of the following set of ionic species will not impart colour in an aqueous solution? (i. Ti⁴⁺, ii. Cr³⁺, iii. Cu⁺, iv. Zn²⁺)",
+    "options": ["(i) & (ii) only", "(ii) & (iv) only", "(i), (iii) & (iv) only", "(ii), (iii) & (iv) only"],
+    "solution": "Colouration is caused when there is excitation of electrons from lower energy d-orbitals to higher energy d-orbitals. Ti⁴⁺ has no electron in d-orbitals, Cu⁺ has fully filled d-orbital (3d¹⁰), Zn²⁺ has fully filled d-orbital (3d¹⁰). No transition is possible.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 33,
+    "question": "What is the systematic name of the complex: [Cr(H₂O)₄Cl₂]Cl?",
+    "options": ["tetraaquadichlorochromate(III) chloride", "dichlorotetraaquachromium(III) chloride", "dichlorotetraaquachromate(III) chloride", "tetraaquadichlorochromium(III) chloride"],
+    "solution": "IUPAC naming: (i) Name positive side first: ligand is 'aqua', then 'chloro' (alphabetical order), then central metal 'chromium(III)', then negative side 'chloride'. Result: tetraaquadichlorochromium(III) chloride.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 34,
+    "question": "Which of the following statements about first-row transition metals is/are true? (i) Transition metals exhibit variable oxidation states in their compounds. (ii) The stability of the +2 oxidation state increases across the row. (iii) Characteristics properties arise from an incomplete d-subshell in atoms or ions.",
+    "options": ["(i) & (iii) only", "(ii) & (iii) only", "(i) and (ii) only", "(i), (ii) & (iii)"],
+    "solution": "All the three statements are true for first-row transition metals. The main characteristic of these metals is in their incompletely filled d-orbitals, which facilitate variable oxidation states. The +2 oxidation state has been found to be the most stable across the row (from Scandium to Zinc).\nCorrect Answer: (d)"
+  },
+  {
+    "id": 35,
+    "question": "Which of the following about the magnetic properties of transition metals is/are correct? (i) In paramagnetism, the magnetic lines of force pass through the vacuum rather than through a substance. (ii) In diamagnetism, the magnetic lines of force pass through the substance rather than through the vacuum. (iii) A diamagnetic substance is repelled by a magnetic field and hence tends to set itself at right angles to the field.",
+    "options": ["(i) & (ii) only", "(iii) only", "(i) only", "(ii) only"],
+    "solution": "Transition metals form complexes that could either be diamagnetic or paramagnetic. This is due to the condition of the d-orbitals when placed in an external magnetic field. If the electrons are all paired, the complex is diamagnetic and repels the magnetic field, setting itself at right angles to the field.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 36,
+    "question": "What shapes are associated with sp³d and sp³d² hybrid orbitals, respectively?",
+    "options": ["tetrahedral & linear", "trigonal bipyramidal & octahedral", "octahedral & pentagonal bipyramidal", "trigonal bipyramidal & tetrahedral"],
+    "solution": "sp³d hybridization uses one 's', three 'p' and one 'd' orbitals to make five similar orbitals leading to Trigonal bipyramidal, while sp³d² hybridization uses one 's', three 'p' and two 'd' orbitals to form six similar hybrid orbitals leading to an octahedral shape.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 37,
+    "question": "Which of the noble gases is used by divers and why?",
+    "options": ["Helium, due to low solubility of He in fluids, including blood", "Argon, due to its low solubility in fluids", "Helium, due to high solubility of He in fluids, including blood", "Helium, due to its unreactive nature"],
+    "solution": "Due to the high-pressured underwater environment, divers need to mix their oxygen with gases that have low solubility in fluids, such as blood. The low solubility of helium in fluids leads to it makes it appropriate gas to be mixed with oxygen for breathing by deep-sea divers, because helium does not dissolve in the blood, it does not form bubbles upon decompression.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 38,
+    "question": "The solubilities in g/100g water of the alkali metal fluorides are as follows: LiF (0.27), NaF (4.22), KF (9.23), RbF (130.6), CsF (366.5). This is because:",
+    "options": ["Lattice energies of the fluorides increase down the group", "The enthalpies for the formation of the fluorides are zero", "Lattice energies of the fluorides decrease down the group", "Lattice energies of the fluorides and the heats of formation are almost equal"],
+    "solution": "The solubility of alkali metal fluorides increases down the group. This is because lattice energy decreases down the group. This means that LiF has higher lattice energy than NaF, which is the result of the fact that Li⁺ and F⁻ ions have small ionic sizes, thus making LiF bond to be covalent in nature, thus leading to insolubility in water.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 39,
+    "question": "Beryllium and magnesium are both in Group IIA of the periodic table. Beryllium hydroxide, Be(OH)₂ and magnesium hydroxide, Mg(OH)₂, have different geometrical structures, tetrahedral and octahedral respectively. This is because:",
+    "options": ["Beryllium is small and magnesium is large", "Beryllium can expand its shell and magnesium cannot", "Magnesium is very flexible", "Magnesium can expand its 3d shell"],
+    "solution": "Beryllium does not contain any d-orbitals in its atomic shell, while Magnesium has d-orbitals, and it can use it to receive more electrons thus expanding its 3d shell.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 40,
+    "question": "Lithium in Group IA is the best reducing agent. This is because:",
+    "options": ["It is highly electronegative", "It has a high hydration energy", "It has a low electrode potential value", "It is very small"],
+    "solution": "A reducing agent is a substance that easily donates electrons to another chemical species to be reduced, while the reducing agent becomes oxidized. The higher the hydration energy of a substance, the higher the reduction potential of that substance. In solution, the Li⁺ cation, due to its small size, is easily stabilized by hydration (higher hydration energy is released). The more stable the cation (Li⁺) will be on hydration, the more easily its atom (Li element) will lose electron, making it a powerful reducing agent.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 41,
+    "question": "The geometrical shapes respectively of PF₅ and BrF₅ are:",
+    "options": ["trigonal and square planar", "trigonal bipyramidal and square pyramid", "tetrahedral and square planar", "linear and tetrahedral"],
+    "solution": "In PF₅, Phosphorus has 5 valence electrons, leaving zero lone pair forming 5 bonds, resulting in trigonal bipyramidal. In BrF₅, Bromine has 7 valence electrons, using only 5 to bond, leaving one lone pair of electrons occupying an axial position, leading to a square pyramid shape.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 42,
+    "question": "Francium, a natural radioactive element belongs to:",
+    "options": ["Group VIIIA", "Group IA", "Group IIIB", "Group IIA"],
+    "solution": "It has one electron in its outer most shell, hence it belongs to Group IA.\nCorrect Answer: (b)"
   }
 ]
