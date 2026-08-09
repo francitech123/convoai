@@ -46,43 +46,14 @@
             <h2 class="page-title">Select a course</h2>
             <p class="page-subtitle">Start studying topic by topic.</p>
 
-            <div class="course-list">
-                <button class="course-btn" data-code="PHY 102">
-                    <span class="code">PHY 102</span>
-                    <span class="name">General Physics II (Electricity &amp; Magnetism)</span>
-                    <span class="status">Click to start</span>
-                </button>
-                <button class="course-btn" data-code="PHY 104">
-                    <span class="code">PHY 104</span>
-                    <span class="name">General Physics IV (Waves &amp; Optics)</span>
-                    <span class="status">Click to start</span>
-                </button>
-                <button class="course-btn" data-code="CHM 102">
-                    <span class="code">CHM 102</span>
-                    <span class="name">Organic Chemistry II</span>
-                    <span class="status">Click to start</span>
-                </button>
-                <button class="course-btn" data-code="MTH 102">
-                    <span class="code">MTH 102</span>
-                    <span class="name">Elementary Mathematics II (Calculus)</span>
-                    <span class="status">Click to start</span>
-                </button>
-                <button class="course-btn" data-code="MTH 104">
-                    <span class="code">MTH 104</span>
-                    <span class="name">Elementary Mathematics IV (Matrices)</span>
-                    <span class="status">Click to start</span>
-                </button>
-                <button class="course-btn" data-code="BIO 102">
-                    <span class="code">BIO 102</span>
-                    <span class="name">General Biology II</span>
-                    <span class="status">Click to start</span>
-                </button>
+            <div class="course-list" id="courseGrid">
+                <!-- Courses rendered by JS -->
             </div>
         </div>
 
         <!-- STUDY INTERFACE -->
         <div id="study-screen" style="display:none;">
-            <button class="back-link" onclick="goBackToCourses()">
+            <button class="back-link" id="back-to-menu-btn">
                 <i class="fas fa-arrow-left"></i> Back to Courses
             </button>
 
