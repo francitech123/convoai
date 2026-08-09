@@ -1,652 +1,633 @@
 /* ============================================
    STUDY MODE - OAU CBE Practice
-   Matches Dashboard Top Bar Design
+   Matches Dashboard Design Exactly
    ============================================ */
 
-:root {
-    --bg-primary: #0a0e1a;
-    --bg-secondary: #0f172a;
-    --bg-card: #141b2d;
-    --bg-card-hover: #1e2842;
-    --bg-input: #0a0e1a;
-    --border-color: #1e2a45;
-    --text-primary: #f0f4ff;
-    --text-secondary: #8899bb;
-    --text-muted: #4a5a7a;
-    --accent: #3b82f6;
-    --accent-hover: #2563eb;
-    --accent-gradient: linear-gradient(135deg, #1e3a8a, #3b82f6);
-    --success: #10b981;
-    --danger: #ef4444;
-    --warning: #f59e0b;
-    --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
-    --radius: 16px;
-    --radius-sm: 10px;
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+/* ============================================
+   TOPBAR - MATCHES DASHBOARD
+   ============================================ */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  margin-top: 6px;
+  padding: 0 4px;
 }
 
-body.light-mode {
-    --bg-primary: #f0f4ff;
-    --bg-secondary: #e8edf8;
-    --bg-card: #ffffff;
-    --bg-card-hover: #f1f5f9;
-    --bg-input: #f8fafc;
-    --border-color: #dce3f0;
-    --text-primary: #0a0e1a;
-    --text-secondary: #4a5a7a;
-    --text-muted: #8899bb;
-    --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.brand-logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  background: rgba(59,130,246,.12);
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
-body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--bg-primary);
-    color: var(--text-primary);
-    min-height: 100vh;
-    transition: background 0.3s ease, color 0.3s ease;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
+.brand-logo svg {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
 }
 
-::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
+.brand-copy small {
+  display: block;
+  color: #7dd3fc;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  font-weight: 800;
+  font-size: .72rem;
+  margin-bottom: 4px;
 }
-::-webkit-scrollbar-track {
-    background: var(--bg-secondary);
-    border-radius: 4px;
+
+.brand-copy h1 {
+  font-size: 1.2rem;
 }
-::-webkit-scrollbar-thumb {
-    background: var(--accent);
-    border-radius: 4px;
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icon-btn {
+  position: relative;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  width: 46px;
+  height: 46px;
+  border-radius: 16px;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: all .2s;
+}
+
+.icon-btn:hover {
+  background: var(--primary-light);
+  color: #fff;
+  border-color: var(--primary-light);
 }
 
 /* ============================================
-   APP CONTAINER
+   STUDY MODE SPECIFIC
    ============================================ */
-.app-container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 16px 16px 100px;
-    min-height: 100vh;
-    position: relative;
+.study-mode-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 16px 16px 100px;
+  min-height: 100vh;
+  position: relative;
 }
 
-/* ============================================
-   HEADER - MATCHES DASHBOARD TOP BAR
-   ============================================ */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 0 16px;
-    border-bottom: 1px solid var(--border-color);
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-    gap: 10px;
+.study-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0 16px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-header .header-left {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+.study-header .header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-header .header-left .logo {
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    background: var(--accent-gradient);
-    color: #fff;
-    font-weight: 800;
-    font-size: 14px;
+.study-header .header-left .logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: var(--brand-gradient);
+  color: #fff;
+  font-weight: 800;
+  font-size: 14px;
 }
 
-header .header-left .logo img {
-    width: 32px;
-    height: 32px;
-    object-fit: contain;
+.study-header .header-left .app-name {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--text);
+}
+.study-header .header-left .app-name span {
+  color: var(--primary-light);
 }
 
-header .header-left .app-name {
-    font-weight: 700;
-    font-size: 0.85rem;
-    color: var(--text-primary);
-}
-header .header-left .app-name span {
-    color: var(--accent);
-}
-
-header .header-left .mode-badge {
-    font-size: 0.55rem;
-    font-weight: 600;
-    color: var(--accent);
-    background: rgba(59, 130, 246, 0.1);
-    padding: 2px 10px;
-    border-radius: 20px;
-    border: 1px solid rgba(59, 130, 246, 0.15);
+.study-header .header-left .mode-badge {
+  font-size: 0.55rem;
+  font-weight: 600;
+  color: var(--primary-light);
+  background: rgba(59, 130, 246, 0.1);
+  padding: 2px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(59, 130, 246, 0.15);
 }
 
-header .header-actions {
-    display: flex;
-    align-items: center;
-    gap: 6px;
+.study-header .header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-header .header-actions button {
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-secondary);
-    cursor: pointer;
-    transition: var(--transition);
-    font-size: 0.9rem;
+.study-header .header-actions button {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 0.9rem;
 }
 
-header .header-actions button:hover {
-    border-color: var(--accent);
-    color: var(--text-primary);
-    background: var(--bg-card-hover);
+.study-header .header-actions button:hover {
+  border-color: var(--primary-light);
+  color: var(--text);
+  background: var(--card-2);
 }
 
-header .header-actions .back-home {
-    background: transparent;
-    border: none;
-    color: var(--text-secondary);
-    font-size: 0.8rem;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding: 0 8px;
-    width: auto;
-    border-radius: 8px;
+.study-header .header-actions .back-home {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 8px;
+  width: auto;
+  border-radius: 8px;
 }
-header .header-actions .back-home:hover {
-    color: var(--text-primary);
+.study-header .header-actions .back-home:hover {
+  color: var(--text);
 }
 
 /* ============================================
    PROGRESS BAR
    ============================================ */
 .progress-container {
-    width: 100%;
-    margin-top: 8px;
-    margin-bottom: 16px;
+  width: 100%;
+  margin-top: 8px;
+  margin-bottom: 16px;
 }
 
 .progress-container .progress-top {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.7rem;
-    color: var(--text-secondary);
-    margin-bottom: 4px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
 }
 
 .progress-bar-bg {
-    width: 100%;
-    height: 4px;
-    background: var(--border-color);
-    border-radius: 4px;
-    overflow: hidden;
+  width: 100%;
+  height: 4px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
 }
 
 .progress-bar-fill {
-    height: 100%;
-    background: var(--accent-gradient);
-    border-radius: 4px;
-    transition: width 0.4s ease;
-    width: 0%;
+  height: 100%;
+  background: var(--brand-gradient);
+  border-radius: 4px;
+  transition: width 0.4s ease;
+  width: 0%;
 }
 
 /* ============================================
    COURSE SELECTION
    ============================================ */
-#course-selection-screen h2 {
-    font-size: 1.4rem;
-    font-weight: 700;
-    margin-bottom: 4px;
-    color: var(--text-primary);
+.course-selection h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--text);
 }
 
-#course-selection-screen .subtitle {
-    color: var(--text-secondary);
-    font-size: 0.85rem;
-    margin-bottom: 20px;
+.course-selection .subtitle {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin-bottom: 20px;
 }
 
 .course-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
 }
 
 @media (max-width: 600px) {
-    .course-grid {
-        grid-template-columns: 1fr;
-    }
+  .course-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .course-btn {
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius);
-    padding: 18px 16px;
-    text-align: left;
-    cursor: pointer;
-    transition: var(--transition);
-    color: var(--text-primary);
-    font-family: inherit;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    position: relative;
-    overflow: hidden;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 18px 16px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--text);
+  font-family: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  position: relative;
+  overflow: hidden;
 }
 
 .course-btn:hover {
-    border-color: var(--accent);
-    transform: translateY(-3px);
-    background: var(--bg-card-hover);
-    box-shadow: var(--shadow);
+  border-color: var(--primary-light);
+  transform: translateY(-3px);
+  background: var(--card-2);
+  box-shadow: var(--shadow);
 }
 
 .course-btn .course-code {
-    font-weight: 700;
-    font-size: 0.9rem;
-    color: var(--accent);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--primary-light);
 }
 
 .course-btn .course-name {
-    font-size: 0.75rem;
-    color: var(--text-secondary);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
 }
 
 .course-btn .course-status {
-    font-size: 0.55rem;
-    color: var(--success);
-    margin-top: 4px;
+  font-size: 0.55rem;
+  color: var(--success);
+  margin-top: 4px;
 }
 
 .course-btn .course-spinner {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: none;
-    font-size: 1.2rem;
-    color: var(--accent);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  font-size: 1.2rem;
+  color: var(--primary-light);
 }
 
 .course-btn.loading .course-spinner {
-    display: block;
+  display: block;
 }
 .course-btn.loading .course-content {
-    opacity: 0.3;
-    pointer-events: none;
+  opacity: 0.3;
+  pointer-events: none;
 }
 
 /* ============================================
    STUDY INTERFACE
    ============================================ */
-#study-screen .back-btn {
-    background: transparent;
-    border: none;
-    color: var(--text-secondary);
-    font-size: 0.8rem;
-    cursor: pointer;
-    padding: 6px 0;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-family: inherit;
-    transition: var(--transition);
+.study-interface .back-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 6px 0;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: inherit;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-#study-screen .back-btn:hover {
-    color: var(--text-primary);
+.study-interface .back-btn:hover {
+  color: var(--text);
 }
 
 .question-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius);
-    padding: 20px;
-    margin-bottom: 16px;
-    min-height: 200px;
-    position: relative;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 16px;
+  min-height: 200px;
+  position: relative;
 }
 
 .question-card .loading-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(10, 14, 26, 0.6);
-    border-radius: var(--radius);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 10px;
-    color: var(--text-secondary);
-    z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(10, 14, 26, 0.6);
+  border-radius: 16px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  color: var(--text-secondary);
+  z-index: 10;
 }
 body.light-mode .question-card .loading-overlay {
-    background: rgba(240, 244, 255, 0.7);
+  background: rgba(240, 244, 255, 0.7);
 }
 .question-card.loading .loading-overlay {
-    display: flex;
+  display: flex;
 }
 .question-card .loading-overlay i {
-    font-size: 2rem;
-    animation: spin 1s linear infinite;
+  font-size: 2rem;
+  animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .question-text {
-    font-size: 0.95rem;
-    line-height: 1.7;
-    color: var(--text-primary);
-    margin-bottom: 16px;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text);
+  margin-bottom: 16px;
 }
 
 .options-container {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
 }
 
 .option-btn {
-    background: var(--bg-input);
-    border: 2px solid var(--border-color);
-    border-radius: var(--radius-sm);
-    padding: 12px 16px;
-    cursor: pointer;
-    transition: var(--transition);
-    text-align: left;
-    font-family: inherit;
-    font-size: 0.85rem;
-    color: var(--text-primary);
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: left;
+  font-family: inherit;
+  font-size: 0.85rem;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .option-btn:hover:not(.disabled) {
-    border-color: var(--accent);
-    background: var(--bg-card-hover);
+  border-color: var(--primary-light);
+  background: var(--card-2);
 }
 
 .option-btn .letter {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: var(--border-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 0.7rem;
-    flex-shrink: 0;
-    color: var(--text-secondary);
-    transition: var(--transition);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.7rem;
+  flex-shrink: 0;
+  color: var(--text-secondary);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .option-btn.selected {
-    border-color: var(--accent);
-    background: rgba(59, 130, 246, 0.08);
+  border-color: var(--primary-light);
+  background: rgba(59, 130, 246, 0.08);
 }
 
 .option-btn.selected .letter {
-    background: var(--accent);
-    color: #fff;
+  background: var(--primary-light);
+  color: #fff;
 }
 
 .option-btn.correct {
-    border-color: var(--success);
-    background: rgba(16, 185, 129, 0.08);
+  border-color: var(--success);
+  background: rgba(16, 185, 129, 0.08);
 }
 
 .option-btn.correct .letter {
-    background: var(--success);
-    color: #fff;
+  background: var(--success);
+  color: #fff;
 }
 
 .option-btn.wrong {
-    border-color: var(--danger);
-    background: rgba(239, 68, 68, 0.08);
+  border-color: var(--danger);
+  background: rgba(239, 68, 68, 0.08);
 }
 
 .option-btn.wrong .letter {
-    background: var(--danger);
-    color: #fff;
+  background: var(--danger);
+  color: #fff;
 }
 
 .option-btn.disabled {
-    cursor: not-allowed;
-    opacity: 0.7;
+  cursor: not-allowed;
+  opacity: 0.7;
 }
 
 .solution-container {
-    margin-top: 12px;
-    border-top: 1px solid var(--border-color);
-    padding-top: 12px;
+  margin-top: 12px;
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
 }
 
 .toggle-solution-btn {
-    background: transparent;
-    border: 1px solid var(--border-color);
-    border-radius: 30px;
-    padding: 6px 16px;
-    color: var(--text-secondary);
-    cursor: pointer;
-    font-size: 0.75rem;
-    font-family: inherit;
-    transition: var(--transition);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  padding: 6px 16px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-family: inherit;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .toggle-solution-btn:hover {
-    border-color: var(--accent);
-    color: var(--text-primary);
+  border-color: var(--primary-light);
+  color: var(--text);
 }
 
 .solution-text {
-    margin-top: 10px;
-    padding: 12px 16px;
-    background: var(--bg-input);
-    border-radius: var(--radius-sm);
-    font-size: 0.82rem;
-    color: var(--text-secondary);
-    line-height: 1.6;
-    display: none;
-    border-left: 3px solid var(--accent);
+  margin-top: 10px;
+  padding: 12px 16px;
+  background: var(--bg);
+  border-radius: 10px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  display: none;
+  border-left: 3px solid var(--primary-light);
 }
 
 .solution-text.show {
-    display: block;
+  display: block;
 }
 
 .navigation-controls {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
 }
 
 .nav-btn {
-    flex: 1;
-    padding: 12px 20px;
-    border-radius: var(--radius-sm);
-    border: none;
-    font-family: inherit;
-    font-weight: 600;
-    font-size: 0.85rem;
-    cursor: pointer;
-    transition: var(--transition);
-    max-width: 160px;
+  flex: 1;
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: none;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  max-width: 160px;
 }
 
 .nav-btn:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 .nav-btn.prev {
-    background: var(--bg-card);
-    color: var(--text-secondary);
-    border: 1px solid var(--border-color);
+  background: var(--card);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
 }
 
 .nav-btn.prev:hover:not(:disabled) {
-    border-color: var(--accent);
-    color: var(--text-primary);
+  border-color: var(--primary-light);
+  color: var(--text);
 }
 
 .nav-btn.next {
-    background: var(--accent-gradient);
-    color: #fff;
+  background: var(--brand-gradient);
+  color: #fff;
 }
 
 .nav-btn.next:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
 }
 
 /* ============================================
    TOAST
    ============================================ */
 .toast {
-    position: fixed;
-    bottom: 80px;
-    left: 50%;
-    transform: translateX(-50%) translateY(100px);
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 14px;
-    padding: 10px 20px;
-    box-shadow: var(--shadow);
-    z-index: 9999;
-    font-size: 0.82rem;
-    color: var(--text-primary);
-    max-width: 90%;
-    opacity: 0;
-    transition: all 0.4s ease;
-    pointer-events: none;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 10px 20px;
+  box-shadow: var(--shadow);
+  z-index: 9999;
+  font-size: 0.82rem;
+  color: var(--text);
+  max-width: 90%;
+  opacity: 0;
+  transition: all 0.4s ease;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .toast.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-    pointer-events: auto;
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
 }
 
 .toast .toast-icon.success {
-    color: var(--success);
+  color: var(--success);
 }
 .toast .toast-icon.error {
-    color: var(--danger);
+  color: var(--danger);
 }
 .toast .toast-icon.info {
-    color: var(--accent);
-}
-
-/* ============================================
-   EMPTY STATE
-   ============================================ */
-.empty-state {
-    text-align: center;
-    padding: 40px 20px;
-    color: var(--text-secondary);
-}
-
-.empty-state i {
-    font-size: 3rem;
-    display: block;
-    margin-bottom: 12px;
-    opacity: 0.3;
-}
-
-.empty-state h3 {
-    color: var(--text-primary);
-    font-size: 1.1rem;
-    margin-bottom: 4px;
+  color: var(--primary-light);
 }
 
 /* ============================================
    RESPONSIVE
    ============================================ */
 @media (max-width: 480px) {
-    .app-container {
-        padding: 10px 10px 80px;
-    }
+  .study-mode-container {
+    padding: 10px 10px 80px;
+  }
 
-    header {
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 8px;
-    }
+  .study-header {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+  }
 
-    header .header-left .mode-badge {
-        font-size: 0.5rem;
-        padding: 1px 8px;
-    }
+  .study-header .header-left .mode-badge {
+    font-size: 0.5rem;
+    padding: 1px 8px;
+  }
 
-    .course-grid {
-        grid-template-columns: 1fr;
-    }
+  .course-grid {
+    grid-template-columns: 1fr;
+  }
 
-    .question-card {
-        padding: 14px;
-    }
+  .question-card {
+    padding: 14px;
+  }
 
-    .nav-btn {
-        max-width: 120px;
-        font-size: 0.75rem;
-        padding: 10px 12px;
-    }
+  .nav-btn {
+    max-width: 120px;
+    font-size: 0.75rem;
+    padding: 10px 12px;
+  }
 
-    .option-btn {
-        padding: 10px 12px;
-        font-size: 0.8rem;
-    }
+  .option-btn {
+    padding: 10px 12px;
+    font-size: 0.8rem;
+  }
 }
 
 @media (max-width: 380px) {
-    header .header-left .app-name {
-        font-size: 0.7rem;
-    }
-    header .header-left .mode-badge {
-        display: none;
-    }
-    .nav-btn {
-        max-width: 100px;
-        font-size: 0.7rem;
-        padding: 8px 10px;
-    }
+  .study-header .header-left .app-name {
+    font-size: 0.7rem;
+  }
+  .study-header .header-left .mode-badge {
+    display: none;
+  }
+  .nav-btn {
+    max-width: 100px;
+    font-size: 0.7rem;
+    padding: 8px 10px;
+  }
 }
