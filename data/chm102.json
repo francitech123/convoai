@@ -503,5 +503,167 @@
     "question": "The equation which represents the preparation of the most impure diborane is:",
     "options": ["4BF₃ + 3LiAlH₄ → 2B₂H₆ + 3LiF + 3AlF₃", "2NaBH₄ + I₂ → B₂H₆ + 2NaI + H₂", "2BF₃ + 6NaH → B₂H₆ + 6NaF", "2BCl₃ + 6H₂ --[electric discharge]--> B₂H₆ + 6HCl"],
     "solution": "Reaction (c) produces B₂H₆ with 6NaF, which is the most impure preparation due to the byproducts formed.\nCorrect Answer: (c)"
+  },
+   {
+    "id": 85,
+    "question": "What is the IUPAC name for CH₃CH₂CH(CH₃)C(CH₃)₂C(CH₃)₃?",
+    "options": ["5,5-diethyl-2,4,4-trimethylheptane", "3,3-diethyl-4,4,5-trimethylheptane", "3,3-diethyl-3,4,4-trimethylheptane", "5,5-diethyl-3,4,4-trimethylheptane"],
+    "solution": "The longest chain is 7 carbons (heptane). Numbering to give the lowest locants to substituents gives: 3,3-diethyl-4,4,5-trimethylheptane.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 86,
+    "question": "Which of the following compounds on subjection to ozonolysis followed by treatment with Zn/HOAc will give ethanal and 2-butanone as products?",
+    "options": ["3-methyl-2-pentene", "2,3-dimethyl-2-butene", "2-methyl-3-ethyl-3-hexene", "2,3-dimethyl-2-pentene"],
+    "solution": "Ozonolysis cleaves the double bond and forms an ozonide. Reductive workup with Zn/HOAc produces carbonyl compounds corresponding to the carbons of the double bond. 3-methyl-2-pentene gives ethanal and 2-butanone.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 87,
+    "question": "What is the maximum number of stereoisomers you will expect for 5-bromo-4-chloro-3-methyl-2-hexanol?",
+    "options": ["16", "32", "9", "8"],
+    "solution": "The molecule has 4 chiral centers. The maximum number of stereoisomers is 2ⁿ, where n is the number of chiral centers. 2⁴ = 16.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 88,
+    "question": "What is the product of the reaction between iodomethane and sodium methoxide?",
+    "options": ["ethane", "methyl acetate", "methanol", "methoxy methane"],
+    "solution": "Sodium methoxide (NaOCH₃) reacts with iodomethane (CH₃I) in a nucleophilic substitution (Williamson ether synthesis) to produce methoxy methane (dimethyl ether).\nCorrect Answer: (d)"
+  },
+  {
+    "id": 89,
+    "question": "Which of the following compounds will react with CH₃CH₂MgCl to give 3-methyl-3-pentanol on hydrolysis?",
+    "options": ["butanal", "acetone", "2-butanone", "2-pentanone"],
+    "solution": "Grignard reagent (CH₃CH₂MgCl) adds to the carbonyl carbon of 2-pentanone. Hydrolysis yields the tertiary alcohol 3-methyl-3-pentanol.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 90,
+    "question": "Positional isomerism is found in the following compounds except?",
+    "options": ["CH₃CH₂CH(OH)CH₃", "CH₃(CH₂)₃CHO", "CH₃CH₂CH₂NH₂", "CH₃CH₂C≡CCH₃"],
+    "solution": "Positional isomerism occurs when a functional group can be attached to different positions on the carbon chain. Aldehydes (CHO) are always terminal, so they cannot exhibit positional isomerism.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 91,
+    "question": "The highlighted functional group in the structure of acyclovir shown below is: (Structure shows a cyclic amide)",
+    "options": ["an amide", "an amine", "an ether", "a ketone"],
+    "solution": "The structure clearly shows a carbonyl group attached to a nitrogen atom within a ring, which is the defining characteristic of an amide.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 92,
+    "question": "Which of the following has a double bond equivalence of 3?",
+    "options": ["2-pentenal", "cyclohexa-1,4-diene", "benzene", "2-butenoic acid"],
+    "solution": "DBE is calculated using the formula: DBE = (2C + 2 - H)/2. Benzene has 6 carbons and 6 hydrogens: (2*6 + 2 - 6)/2 = 8/2 = 4. Cyclohexa-1,4-diene has 6 carbons and 8 hydrogens: (2*6 + 2 - 8)/2 = 6/2 = 3.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 93,
+    "question": "What is the major product of the dehydration of 2-methylhexan-3-ol?",
+    "options": ["3-methylhexan-3-ene", "2-methylhexan-3-ene", "2-methylhexan-2-ene", "3-methylhexan-2-ene"],
+    "solution": "Dehydration of 2-methylhexan-3-ol (according to Zaitsev's rule) gives the most stable alkene which is the most substituted. 2-methylhexan-2-ene is the major product.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 94,
+    "question": "The intermolecular dehydration of alcohol molecules in the presence of concentrated sulphuric acid gives;",
+    "options": ["Alkene", "Alkoxyalkane", "Alkanal", "Alkanone"],
+    "solution": "Intermolecular dehydration of two alcohol molecules in the presence of concentrated H₂SO₄ produces an ether (alkoxyalkane).\nCorrect Answer: (b)"
+  },
+  {
+    "id": 95,
+    "question": "What are the products of the following reaction in the presence of hydrogen iodide? CH₃CH(CH₃)OCH₂CH₃ + HI → ?",
+    "options": ["Ethanol and 2-iodopropane", "2-propanol and iodoethane", "Propanol and iodomethane", "2-propanol and 2-iodoethane"],
+    "solution": "In the presence of HI, ethers undergo cleavage. The reaction follows: CH₃CH(CH₃)OCH₂CH₃ + HI → CH₃CH(CH₃)OH + CH₃CH₂I. The products are 2-propanol and iodoethane.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 96,
+    "question": "The carbonyl compounds have higher boiling points than hydrocarbons of comparable molecular weights because of _________ force of attraction.",
+    "options": ["Hydrogen bonding", "Permanent dipole", "Van der Waals", "Dative"],
+    "solution": "Carbonyl compounds have a permanent dipole-dipole attraction due to the highly polar C=O bond, which is stronger than the Van der Waals forces found in hydrocarbons.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 97,
+    "question": "Which of the following is not involved in the identification of organic compounds?",
+    "options": ["Quantitative analysis", "Qualitative analysis", "Q test", "Isolation and purification"],
+    "solution": "Identification of organic compounds involves qualitative analysis (element detection), quantitative analysis (element percentages), and isolation/purification. 'Q test' is a statistical outlier test, not part of the chemical identification process.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 98,
+    "question": "An organic compound has a distribution coefficient of 1.0 between water and diethyl ether. What is the mass of the organic compound that will be extracted if 1.0 ml of a solution of 50 mg of the organic compound in water is extracted with a 0.50 ml portion of ether?",
+    "options": ["16.7 mg", "25 mg", "41.7 mg", "10 mg"],
+    "solution": "KD = 1.0. Let x mg be extracted into 0.50 ml ether. Then (50-x) mg remain in 1 ml water. KD = [concentration in ether]/[concentration in water] = (x/0.50) / ((50-x)/1.0) = 1.0. 2x = 50 - x → 3x = 50 → x ≈ 16.7 mg.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 99,
+    "question": "Which is the excited electronic configuration of carbon?",
+    "options": ["1s² 2s² 2pₓ² 2p_y⁰ 2p_z⁰", "1s² 2s¹ 2pₓ¹ 2p_y¹ 2p_z¹", "1s² 2s² 2pₓ¹ 2p_y¹ 2p_z⁰", "1s¹ 2s¹ 2pₓ² 2p_y¹ 2p_z¹"],
+    "solution": "The ground state electronic configuration of carbon is 1s² 2s² 2p². To form 4 bonds (sp³ hybridization), one electron from the 2s orbital is promoted (excited) to the empty 2p orbital, giving 1s² 2s¹ 2pₓ¹ 2p_y¹ 2p_z¹.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 100,
+    "question": "Which of the following compounds would display acidic property? (I) CH₃CHO (II) CH₃COOH (III) CH₃NH₂ (IV) CH₃CHOH",
+    "options": ["I, II, III, & IV", "II & III", "II & IV", "I, III & IV"],
+    "solution": "Acidity is due to the ability to donate protons (H⁺). (I) Acidity is due to the positive inductive effect of the alkyl group (alpha H). (II) Carboxylic acids are acidic due to the -COOH group. (IV) Alcohols can display weak acidity due to the -OH group. (III) Amines are basic, not acidic.\nCorrect Answer: (c) II & IV"
+  },
+  {
+    "id": 101,
+    "question": "Study the equation below: CH₃CH₂CH₂OH --[O]--> A --[O]--> B. What are A and B?",
+    "options": ["A is propanal and B is propanoic acid", "A is propanoic acid while B is propanol", "A is propan-2-ol and B is propan-2-oic acid", "A is propanal and B is propanone"],
+    "solution": "Oxidation of a primary alcohol (CH₃CH₂CH₂OH) under mild conditions first produces an aldehyde (CH₃CH₂CHO = propanal). Further oxidation produces a carboxylic acid (CH₃CH₂COOH = propanoic acid).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 102,
+    "question": "What is the name of the reaction and structure of D in the equation below: CH₃COOH + CH₃CH₂OH → D",
+    "options": ["Saponification and CH₃CH₂COOCH₃", "Saponification and CH₃COOCH₂CH₃", "Esterification and CH₃COOCH₂CH₃", "Esterification and CH₃CH₂COOCH₃"],
+    "solution": "The reaction between a carboxylic acid and an alcohol in the presence of an acid catalyst is called Esterification. The product is an ester. CH₃COOH + CH₃CH₂OH → CH₃COOCH₂CH₃ + H₂O.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 103,
+    "question": "Long chain unsaturated fatty acid, like linoleic acid and glycerol, react to form E. The E is hydrogenated in the presence of a nickel catalyst and at 200 °C to produce F. What are the names of E and F?",
+    "options": ["E is fat, and F is margarine", "E is lipid and F is soap", "E is a fatty acid, and F is glycerine", "E is Margarine and F is lipoproteins"],
+    "solution": "Fatty acid and glycerol react to form fat (E). Hydrogenation of the unsaturated double bonds in the fat produces margarine (F).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 104,
+    "question": "Which of the groups of fatty acids found contains an essential fatty acid alone?",
+    "options": ["Palmitic acid, stearic acid, and oleic acid", "Eicosapentaenoic acid, stearic acid, and linoleic acid", "Docosahexaenoic acid, linoleic acid, and eicosapentaenoic acid", "Linoleic acid, oleic acid, and palmitic acid"],
+    "solution": "Essential fatty acids cannot be synthesized by the body and must be obtained from the diet. Linoleic acid, Linolenic acid, and Arachidonic acid are examples.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 105,
+    "question": "Which of these compounds can be added to oil to prevent rancidity? (I) Butylated hydroxy anisole (II) Tocopherol (III) Ascorbic acid (IV) Alum",
+    "options": ["IV, II & I", "I, II & IV", "I, III & IV", "II, III & I"],
+    "solution": "Butylated hydroxy anisole (BHA), Tocopherol (Vitamin E), and Ascorbic acid (Vitamin C) are all antioxidants used to prevent oxidation and rancidity. Alum is not an antioxidant.\nCorrect Answer: (d) II, III & I"
+  },
+  {
+    "id": 106,
+    "question": "From the equation below, if the reactant is glucose, what are the names of G, H, and I? CHO-(CHOH)₄-CH₂OH + [HOBr, conc. HNO₃, NaHg] → (G, H, I)",
+    "options": ["G is glucuronic acid, H is glucaric acid, and I is glucitol", "G is cyanohydrin, H is glucitol, and I is glucaric acid", "G is sorbitol, H is saccharic acid, and I is osazone", "G is glucitol, H is mannose, and I is galactose"],
+    "solution": "HOBr (mild oxidizing agent) oxidizes the aldehyde group of glucose to gluconic acid (G). Conc. HNO₃ (strong oxidizing agent) oxidizes both ends to glucaric acid (saccharic acid) (H). NaHg (reducing agent) reduces the aldehyde group to an alcohol, producing glucitol (sorbitol) (I).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 107,
+    "question": "Aldose differing only in the configuration of α-carbon are called ...... and examples are those found in ...... sugars.",
+    "options": ["Mutarotation, α-glucose and β-glucose sugars", "Anomers, glucose and fructose", "Epimers, glucose and galactose", "Optical Isomers, glucose and galactose"],
+    "solution": "Epimers are two stereoisomers that differ in the configuration at only one stereogenic center (specifically the α-carbon). Glucose and galactose are classic examples of epimers.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 108,
+    "question": "Which of the statements could best explain the differences between starch and cellulose?",
+    "options": ["The glycosidic bonds in starch is β-1,4 while β-1,6 bonds are found in cellulose", "Starch is made up of amylose and amylopectin, whereas cellulose contains amylopectin only", "The glycosidic bonds in starch are α-1,4, and 1,6, while cellulose contains β-1,4 bonds", "The anomeric carbon in starch and cellulose is oriented through space. Cellulose is more rigid than starch"],
+    "solution": "Cellulose consists of β-D-glucose monomers joined by β-1,4 glycosidic bonds. Starch consists of α-D-glucose monomers joined by α-1,4 and α-1,6 glycosidic bonds.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 109,
+    "question": "The underlisted bonds are found in the tertiary protein structure except:",
+    "options": ["Amide bond", "Disulphide bond", "Glycosidic bond", "Salt bridge"],
+    "solution": "Glycosidic bonds are found in carbohydrates, not in protein structures. Tertiary protein structures are stabilized by disulfide bonds, salt bridges, and hydrogen bonds (amide bonds).\nCorrect Answer: (c)"
+  },
+  {
+    "id": 110,
+    "question": "Denaturation of proteins means:",
+    "options": ["The breaking down of proteins into component amino acids", "The partial disorganization of the three-dimensional structure of the protein", "The disorientation of three-dimensional structure to the secondary structure of proteins acid", "The transformation of primary protein structure to tertiary structure through"],
+    "solution": "Denaturation involves the partial or total disorganization of the 3D (tertiary and quaternary) structure of a protein, typically caused by heat, pH changes, or chemicals.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 111,
+    "question": "Choose from the list (a) aromatic amino acid (b) sulphur containing amino acid (c) polar amino acid, and (d) acidic amino acid. (i. Glycine ii. Alanine iii. Phenylalanine iv. Methionine v. Serine vi. Glutamic acid vii. Lysine viii. Leucine)",
+    "options": ["iii, iv, v & vi", "i, ii, iii & iv", "vii, viii, ii, iv", "ii, v, vi, & viii"],
+    "solution": "Phenylalanine (iii) is aromatic. Methionine (iv) is sulfur-containing. Serine (v) is polar (hydroxyl group). Glutamic acid (vi) is acidic. Glycine, Alanine, and Leucine are non-polar, and Lysine is basic.\nCorrect Answer: (a)"
   }
 ]
