@@ -1,5 +1,6 @@
 // ============================================
 // STUDY MODE - OAU CBE Practice
+// Fully compatible with your JSON format
 // ============================================
 
 // ==================== CONFIGURATION ====================
@@ -25,7 +26,6 @@ let currentCourse = null;
 
 // ==================== DOM REFS ====================
 const $ = (id) => document.getElementById(id);
-const $$ = (sel) => document.querySelectorAll(sel);
 
 const courseScreen = $('course-selection-screen');
 const studyScreen = $('study-screen');
@@ -49,7 +49,7 @@ function showToast(message, type = 'info') {
 
     const toast = document.createElement('div');
     toast.className = 'toast';
-    const icons = { success: '✅', error: '❌', info: 'ℹ️' };
+    const icons = { success: '✅', error: '❌', info: 'ℹ️', warning: '⚠️' };
     toast.innerHTML = `<span class="toast-icon ${type}">${icons[type] || 'ℹ️'}</span> ${message}`;
     document.body.appendChild(toast);
     setTimeout(() => toast.classList.add('show'), 10);
@@ -78,21 +78,21 @@ function toggleTheme() {
 // ==================== PARSE CORRECT ANSWER FROM SOLUTION ====================
 function parseCorrectAnswer(solution) {
     if (!solution) return -1;
-    
-    // Look for "ANSWER: (a)" or "ANSWER: (e)" or "ANSWER: (c)" etc.
+
+    // Look for "ANSWER: (a)" or "ANSWER: (e)" etc.
     const match = solution.match(/ANSWER:\s*\(([a-e])\)/i);
     if (match) {
         const letter = match[1].toLowerCase();
-        return letter.charCodeAt(0) - 97; // a=0, b=1, c=2, d=3, e=4
+        return letter.charCodeAt(0) - 97;
     }
-    
-    // Fallback: look for "ANSWER:" without parentheses
+
+    // Fallback: "ANSWER: a" without parentheses
     const match2 = solution.match(/ANSWER:\s*([a-e])/i);
     if (match2) {
         const letter = match2[1].toLowerCase();
         return letter.charCodeAt(0) - 97;
     }
-    
+
     return -1;
 }
 
@@ -131,36 +131,60 @@ async function selectCourse(courseId) {
         // FETCH FROM JSON FILE - YOUR EXACT FORMAT
         // ============================================
         let questions = null;
-        try {
-            const response = await fetch(`/data/${currentCourse.file}`);
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}`);
-            }
-            const data = await response.json();
-            
-            // Validate: Expecting array of questions with your format
-            if (Array.isArray(data) && data.length > 0) {
-                // Validate each question has required fields
-                const valid = data.every(q => 
-                    q.id !== undefined && 
-                    q.question && 
-                    Array.isArray(q.options) && 
-                    q.options.length >= 4 &&
-                    q.solution
-                );
-                
-                if (valid) {
-                    questions = data;
-                } else {
-                    console.warn('⚠️ Invalid question format in JSON');
+        
+        // Try multiple paths
+        const paths = [
+            `/data/${currentCourse.file}`,
+            `/data/${currentCourse.id}.json`,
+            `${currentCourse.file}`,
+            `./data/${currentCourse.file}`
+        ];
+
+        for (const path of paths) {
+            try {
+                console.log(`📁 Trying to load: ${path}`);
+                const response = await fetch(path);
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    // Check if data is array
+                    if (Array.isArray(data) && data.length > 0) {
+                        // Validate format
+                        const valid = data.every(q => 
+                            q.id !== undefined && 
+                            q.question && 
+                            Array.isArray(q.options) && 
+                            q.options.length >= 4 &&
+                            q.solution
+                        );
+                        
+                        if (valid) {
+                            questions = data;
+                            console.log(`✅ Loaded ${questions.length} questions from ${path}`);
+                            break;
+                        } else {
+                            console.warn(`⚠️ Invalid format in ${path}`);
+                        }
+                    } else if (data && data.questions && Array.isArray(data.questions)) {
+                        // Handle nested format: { questions: [...] }
+                        const nestedData = data.questions;
+                        const valid = nestedData.every(q => 
+                            q.id !== undefined && 
+                            q.question && 
+                            Array.isArray(q.options) && 
+                            q.options.length >= 4 &&
+                            q.solution
+                        );
+                        if (valid) {
+                            questions = nestedData;
+                            console.log(`✅ Loaded ${questions.length} questions from ${path} (nested)`);
+                            break;
+                        }
+                    }
                 }
+            } catch (e) {
+                console.log(`❌ Failed to load ${path}:`, e.message);
             }
-        } catch (e) {
-            console.log('📁 JSON load error:', e.message);
-            showToast(`Could not load ${currentCourse.code} questions`, 'error');
-            btn.classList.remove('loading');
-            btn.disabled = false;
-            return;
         }
 
         if (!questions || !questions.length) {
@@ -176,11 +200,14 @@ async function selectCourse(courseId) {
             correct: parseCorrectAnswer(q.solution)
         }));
 
-        // Filter out questions where correct answer couldn't be parsed
+        // Count invalid questions
         const invalidQuestions = questions.filter(q => q.correct === -1);
         if (invalidQuestions.length > 0) {
             console.warn(`⚠️ ${invalidQuestions.length} questions have no valid ANSWER: in solution`);
         }
+
+        // Filter out questions with invalid answers (optional - keep them with -1)
+        // questions = questions.filter(q => q.correct !== -1);
 
         // Store questions with shuffle
         currentQuestions = shuffleArray(questions);
@@ -373,21 +400,23 @@ function backToMenu() {
 }
 
 // ==================== TOGGLE SOLUTION ====================
-toggleSolutionBtn.addEventListener('click', () => {
-    solutionText.classList.toggle('show');
-    toggleSolutionBtn.textContent = solutionText.classList.contains('show') ? '🙈 Hide Solution' : '💡 Show Solution';
-});
+if (toggleSolutionBtn) {
+    toggleSolutionBtn.addEventListener('click', () => {
+        solutionText.classList.toggle('show');
+        toggleSolutionBtn.textContent = solutionText.classList.contains('show') ? '🙈 Hide Solution' : '💡 Show Solution';
+    });
+}
 
 // ==================== NAVIGATION EVENT LISTENERS ====================
-prevBtn.addEventListener('click', prevQuestion);
-nextBtn.addEventListener('click', nextQuestion);
-backBtn.addEventListener('click', backToMenu);
+if (prevBtn) prevBtn.addEventListener('click', prevQuestion);
+if (nextBtn) nextBtn.addEventListener('click', nextQuestion);
+if (backBtn) backBtn.addEventListener('click', backToMenu);
 
 // ==================== KEYBOARD SHORTCUTS ====================
 document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft' && !prevBtn.disabled) prevQuestion();
     if (e.key === 'ArrowRight' && !nextBtn.disabled) nextQuestion();
-    
+
     // Number keys 1-5 for options
     if (e.key >= '1' && e.key <= '5' && !isAnswered) {
         const idx = parseInt(e.key) - 1;
