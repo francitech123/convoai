@@ -109,14 +109,14 @@ header .header-left {
 }
 
 header .header-left .logo {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     border-radius: 8px;
     background: var(--accent-gradient);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 700;
     color: #fff;
     flex-shrink: 0;
@@ -168,23 +168,6 @@ header .header-actions button:hover {
     background: var(--bg-card-hover);
 }
 
-header .header-actions button .badge {
-    position: absolute;
-    top: -4px;
-    right: -4px;
-    background: var(--danger);
-    color: #fff;
-    font-size: 0.5rem;
-    font-weight: 700;
-    padding: 2px 5px;
-    border-radius: 10px;
-    min-width: 16px;
-    text-align: center;
-}
-header .header-actions button .badge.hidden {
-    display: none;
-}
-
 header .header-actions .back-home {
     background: transparent;
     border: none;
@@ -231,29 +214,6 @@ header .header-actions .back-home:hover {
     border-radius: 4px;
     transition: width 0.4s ease;
     width: 0%;
-}
-
-/* ============================================
-   SCREENS
-   ============================================ */
-.screen {
-    display: block;
-    animation: fadeUp 0.4s ease;
-}
-
-.screen.hidden {
-    display: none !important;
-}
-
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(16px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 /* ============================================
@@ -495,11 +455,6 @@ body.light-mode .question-card .loading-overlay {
     opacity: 0.7;
 }
 
-.option-btn.disabled:hover {
-    border-color: var(--border-color);
-    background: var(--bg-input);
-}
-
 /* Solution Container */
 .solution-container {
     margin-top: 12px;
@@ -587,33 +542,7 @@ body.light-mode .question-card .loading-overlay {
 }
 
 /* ============================================
-   EMPTY STATE
-   ============================================ */
-.empty-state {
-    text-align: center;
-    padding: 40px 20px;
-    color: var(--text-secondary);
-}
-
-.empty-state i {
-    font-size: 3rem;
-    display: block;
-    margin-bottom: 12px;
-    opacity: 0.3;
-}
-
-.empty-state h3 {
-    color: var(--text-primary);
-    font-size: 1.1rem;
-    margin-bottom: 4px;
-}
-
-.empty-state p {
-    font-size: 0.85rem;
-}
-
-/* ============================================
-   TOAST NOTIFICATION
+   TOAST
    ============================================ */
 .toast {
     position: fixed;
@@ -643,9 +572,6 @@ body.light-mode .question-card .loading-overlay {
     pointer-events: auto;
 }
 
-.toast .toast-icon {
-    font-size: 1.1rem;
-}
 .toast .toast-icon.success {
     color: var(--success);
 }
@@ -655,60 +581,27 @@ body.light-mode .question-card .loading-overlay {
 .toast .toast-icon.info {
     color: var(--accent);
 }
-.toast .toast-icon.warning {
-    color: var(--warning);
-}
 
 /* ============================================
-   BOTTOM NAV (Optional - If you want nav)
+   EMPTY STATE
    ============================================ */
-.bottom-nav {
-    position: fixed;
-    bottom: 16px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(10, 14, 26, 0.97);
-    backdrop-filter: blur(16px);
-    padding: 6px 12px;
-    border-radius: 50px;
-    display: flex;
-    gap: 4px;
-    z-index: 98;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-    max-width: 95%;
-    overflow-x: auto;
-}
-body.light-mode .bottom-nav {
-    background: rgba(255, 255, 255, 0.97);
-}
-
-.nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 4px 12px;
-    border-radius: 30px;
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
     color: var(--text-secondary);
-    font-size: 0.55rem;
-    transition: var(--transition);
-    gap: 2px;
-    white-space: nowrap;
-    min-width: 44px;
-    text-decoration: none;
 }
 
-.nav-item i {
-    font-size: 1.1rem;
-    transition: var(--transition);
+.empty-state i {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 12px;
+    opacity: 0.3;
 }
-.nav-item.active {
-    color: #fff;
-    background: var(--accent-gradient);
-}
-.nav-item:hover:not(.active) {
+
+.empty-state h3 {
     color: var(--text-primary);
-    background: rgba(59, 130, 246, 0.08);
+    font-size: 1.1rem;
+    margin-bottom: 4px;
 }
 
 /* ============================================
@@ -725,57 +618,22 @@ body.light-mode .bottom-nav {
         gap: 8px;
     }
 
-    header .header-left .app-name {
-        font-size: 0.75rem;
-    }
-
-    .course-btn {
-        padding: 14px 12px;
+    .course-grid {
+        grid-template-columns: 1fr;
     }
 
     .question-card {
         padding: 14px;
     }
 
-    .question-text {
-        font-size: 0.85rem;
+    .nav-btn {
+        max-width: 120px;
+        font-size: 0.75rem;
+        padding: 10px 12px;
     }
 
     .option-btn {
         padding: 10px 12px;
         font-size: 0.8rem;
-    }
-
-    .nav-btn {
-        font-size: 0.75rem;
-        padding: 10px 12px;
-        max-width: 120px;
-    }
-
-    .bottom-nav {
-        padding: 4px 8px;
-        gap: 2px;
-    }
-    .nav-item {
-        padding: 4px 8px;
-        font-size: 0.5rem;
-        min-width: 36px;
-    }
-    .nav-item i {
-        font-size: 0.9rem;
-    }
-}
-
-@media (max-width: 380px) {
-    .course-grid {
-        grid-template-columns: 1fr;
-    }
-    .navigation-controls {
-        flex-direction: column;
-        align-items: center;
-    }
-    .nav-btn {
-        max-width: 100%;
-        width: 100%;
     }
 }
