@@ -1107,42 +1107,6 @@ import * as app from '/js/app.js';
 // Expose all module functions to window
 Object.assign(window, utils, notifications, dashboard, exam, test, study, profile, ai, faq, leaderboard, chat, submit, results, app);
 
-// Override showPage for study mode to load standalone studymode.js
-const originalShowPage = window.showPage;
-window.showPage = function(page) {
-  if (page === 'study') {
-    // Show the study screen
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    const studyScreen = document.getElementById('studyScreen');
-    if (studyScreen) studyScreen.classList.add('active');
-    
-    // Update bottom nav
-    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-    const studyNav = document.querySelector('[data-page="study"]');
-    if (studyNav) studyNav.classList.add('active');
-    
-    // Initialize study mode from studymode.js
-    const studyContainer = document.getElementById('studyContentContainer');
-    if (studyContainer && window.initStudyMode) {
-      window.initStudyMode(studyContainer);
-    } else if (studyContainer) {
-      studyContainer.innerHTML = '<div class="loading-spin"><i class="fas fa-spinner"></i><p>Loading study mode...</p></div>';
-      // Retry after a short delay
-      setTimeout(() => {
-        if (window.initStudyMode) {
-          window.initStudyMode(studyContainer);
-        }
-      }, 500);
-    }
-    return;
-  }
-  
-  // For all other pages, use the original showPage function
-  if (originalShowPage) {
-    originalShowPage(page);
-  }
-};
-
 // Initialize the app
 initApp();
 </script>
