@@ -34,7 +34,7 @@
         <header>
             <div class="header-left">
                 <div class="logo">
-                    <img src="/logo.svg" alt="OAU CBE Practice" style="width:32px;height:32px;object-fit:contain;">
+                    <img src="/logo.svg" alt="OAU CBE Practice">
                 </div>
                 <div>
                     <div class="app-name">OAU <span>CBE</span> Practice</div>
@@ -52,7 +52,7 @@
         </header>
 
         <!-- ==================== COURSE SELECTION ==================== -->
-        <div id="course-selection-screen" class="screen">
+        <div id="course-selection-screen">
             <h2>📚 Study Mode</h2>
             <p class="subtitle">Select a course to start studying topic by topic.</p>
             <div class="course-grid" id="courseGrid">
@@ -61,7 +61,7 @@
         </div>
 
         <!-- ==================== STUDY INTERFACE ==================== -->
-        <div id="study-screen" class="screen" style="display:none;">
+        <div id="study-screen" style="display:none;">
             <button id="back-to-menu-btn" class="back-btn">← Back to Courses</button>
 
             <div id="question-card" class="question-card">
@@ -81,13 +81,13 @@
                     </div>
                 </div>
 
-                <div id="question-text" class="question-text">Loading question...</div>
+                <div id="question-text" class="question-text mathjax-process">Loading question...</div>
 
                 <div id="options-container" class="options-container"></div>
 
                 <div id="solution-container" class="solution-container" style="display:none;">
                     <button id="toggle-solution-btn" class="toggle-solution-btn">💡 Show Solution</button>
-                    <div id="solution-text" class="solution-text"></div>
+                    <div id="solution-text" class="solution-text mathjax-process"></div>
                 </div>
             </div>
 
