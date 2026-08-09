@@ -1,166 +1,254 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>Study Mode • OAU CBE Practice</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="studymode.css">
+/* ============================================
+   STUDY MODE - OAU CBE Practice
+   ============================================ */
 
-    <script>
-        MathJax = {
-            tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']],
-                displayMath: [['$$', '$$'], ['\\[', '\\]']],
-                processEscapes: true,
-                processEnvironments: true
-            },
-            options: {
-                ignoreHtmlClass: 'no-mathjax',
-                processHtmlClass: 'mathjax-process'
-            }
-        };
-    </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-</head>
-<body>
+:root {
+    --bg-dark: #0f172a;
+    --bg-card: #1e293b;
+    --border: #334155;
+    --text: #f1f5f9;
+    --text-muted: #94a3b8;
+    --blue-accent: #3b82f6;
+    --blue-light: #60a5fa;
+    --radius-lg: 24px;
+    --radius-sm: 12px;
+}
 
-    <div class="app-container">
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', system-ui, sans-serif;
+}
 
-        <!-- ================= HEADER ================= -->
-        <header>
-            <div class="header-left">
-                <div class="logo-circle">
-                    <img src="/logo.svg" alt="OAU CBE" onerror="this.style.display='none';this.parentElement.textContent='OAU'">
-                </div>
-                <div class="header-text">
-                    <h2>Dashboard</h2>
-                    <h1>OAU CBE Practice</h1>
-                </div>
-            </div>
-            <div class="header-actions">
-                <button class="notification-btn"><i class="fas fa-bell"></i></button>
-                <a href="/app" class="back-home">
-                    <i class="fas fa-home"></i> Home
-                </a>
-            </div>
-        </header>
+body {
+    background: var(--bg-dark);
+    color: var(--text);
+}
 
-        <!-- ================= COURSE SELECTION VIEW ================= -->
-        <div id="course-selection">
-            <button id="back-to-dashboard-btn" class="back-link">
-                <i class="fas fa-arrow-left"></i> Back to Dashboard
-            </button>
+.app-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px 16px 40px;
+}
 
-            <div class="section-header">
-                <h3>Select a course</h3>
-            </div>
-            <p class="subtitle">Start studying topic by topic.</p>
-            
-            <div class="course-grid" id="courseGrid">
-                <button class="course-btn" data-code="PHY 102">
-                    <span class="course-code">PHY 102</span>
-                    <span class="course-name">General Physics II (Electricity &amp; Magnetism)</span>
-                    <span class="course-status">Click to start</span>
-                </button>
-                <button class="course-btn" data-code="PHY 104">
-                    <span class="course-code">PHY 104</span>
-                    <span class="course-name">General Physics IV (Waves &amp; Optics)</span>
-                    <span class="course-status">Click to start</span>
-                </button>
-                <button class="course-btn" data-code="CHM 102">
-                    <span class="course-code">CHM 102</span>
-                    <span class="course-name">Organic Chemistry II</span>
-                    <span class="course-status">Click to start</span>
-                </button>
-                <button class="course-btn" data-code="MTH 102">
-                    <span class="course-code">MTH 102</span>
-                    <span class="course-name">Elementary Mathematics II (Calculus)</span>
-                    <span class="course-status">Click to start</span>
-                </button>
-                <button class="course-btn" data-code="MTH 104">
-                    <span class="course-code">MTH 104</span>
-                    <span class="course-name">Elementary Mathematics IV (Matrices)</span>
-                    <span class="course-status">Click to start</span>
-                </button>
-                <button class="course-btn" data-code="BIO 102">
-                    <span class="course-code">BIO 102</span>
-                    <span class="course-name">General Biology II</span>
-                    <span class="course-status">Click to start</span>
-                </button>
-            </div>
-        </div>
+/* ============================================
+   HEADER
+   ============================================ */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
 
-        <!-- ================= STUDY INTERFACE ================= -->
-        <div id="study-screen">
-            <button id="back-to-menu-btn" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Courses</button>
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
 
-            <div id="question-card" class="question-card">
-                <div class="loading-overlay" style="display:none; position:absolute; top:0; left:0; right:0; bottom:0; background:rgba(15,23,42,0.6); border-radius:var(--radius-lg); align-items:center; justify-content:center; flex-direction:column; gap:10px; color:var(--text-muted); z-index:10;">
-                    <i class="fas fa-spinner fa-spin" style="font-size:2rem;"></i>
-                    <span>Loading questions...</span>
-                </div>
+.logo-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(59, 130, 246, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    flex-shrink: 0;
+    overflow: hidden;
+}
 
-                <!-- Progress -->
-                <div class="progress-container">
-                    <div class="progress-top">
-                        <span id="progress-text">Question 1 of 0</span>
-                        <span id="score-display">✅ 0/0</span>
-                    </div>
-                    <div class="progress-bar-bg">
-                        <div id="progress-fill" class="progress-bar-fill" style="width:0%;"></div>
-                    </div>
-                </div>
+.logo-circle img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
 
-                <div id="question-text" class="question-text mathjax-process">Loading question...</div>
+.header-text h2 {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--blue-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
 
-                <div id="options-container" class="options-container"></div>
+.header-text h1 {
+    font-size: 18px;
+    font-weight: 700;
+}
 
-                <div id="solution-container" class="solution-container" style="display:none;">
-                    <button id="toggle-solution-btn" class="toggle-solution-btn" style="background:transparent; border:1px solid var(--border); border-radius:30px; padding:6px 16px; color:var(--text-muted); cursor:pointer; font-size:12px; font-family:inherit; transition:0.2s;">💡 Show Solution</button>
-                    <div id="solution-text" class="solution-text mathjax-process" style="margin-top:10px; padding:12px 16px; background:var(--bg-dark); border-radius:var(--radius-sm); font-size:13px; color:var(--text-muted); line-height:1.6; display:none; border-left:3px solid var(--blue-accent);"></div>
-                </div>
-            </div>
+.header-actions {
+    display: flex;
+    gap: 10px;
+}
 
-            <div class="navigation-controls" style="display:flex; gap:12px;">
-                <button id="prev-btn" class="nav-btn prev" disabled style="flex:1;"><i class="fas fa-chevron-left"></i> Previous</button>
-                <button id="next-btn" class="nav-btn next" style="flex:1;">Next <i class="fas fa-chevron-right"></i></button>
-            </div>
-        </div>
+.btn-icon, .btn-home {
+    height: 40px;
+    border-radius: 30px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
 
-    </div>
+.btn-icon {
+    width: 40px;
+    font-size: 16px;
+}
 
-    <!-- ================= BOTTOM NAV ================= -->
-    <nav class="bottom-nav">
-        <a href="#" class="nav-item active"><i class="fas fa-home"></i> Home</a>
-        <a href="#" class="nav-item"><i class="fas fa-pen"></i> Exam</a>
-        <a href="#" class="nav-item"><i class="fas fa-flask"></i> Test</a>
-        <a href="#" class="nav-item"><i class="fas fa-book-open"></i> Study</a>
-        <a href="#" class="nav-item"><i class="fas fa-user"></i> Me</a>
-    </nav>
+.btn-home {
+    padding: 0 16px;
+    text-decoration: none;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+}
 
-    <!-- ================= STUPID SIMPLE NAVIGATION (No complex JS) ================= -->
-    <script>
-        // Course card clicked
-        document.querySelectorAll('.course-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.getElementById('course-selection').style.display = 'none';
-                document.getElementById('study-screen').style.display = 'block';
-            });
-        });
+.btn-icon:hover, .btn-home:hover {
+    border-color: var(--blue-accent);
+}
 
-        // Back to Courses
-        document.getElementById('back-to-menu-btn').addEventListener('click', function() {
-            document.getElementById('course-selection').style.display = 'block';
-            document.getElementById('study-screen').style.display = 'none';
-        });
+/* ============================================
+   COURSE LIST
+   ============================================ */
+.page-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
 
-        // Back to Dashboard
-        document.getElementById('back-to-dashboard-btn').addEventListener('click', function() {
-            window.location.href = '/app';
-        });
-    </script>
-</body>
-</html>
+.page-subtitle {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.course-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.course-btn {
+    width: 100%;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 18px 16px;
+    text-align: left;
+    cursor: pointer;
+    color: var(--text);
+    font-family: inherit;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+    transition: 0.2s;
+}
+
+.course-btn:hover {
+    border-color: var(--blue-accent);
+    transform: translateY(-2px);
+}
+
+.course-btn .code {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--blue-light);
+}
+
+.course-btn .name {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.course-btn .status {
+    margin-left: auto;
+    font-size: 12px;
+    color: #10b981;
+}
+
+/* ============================================
+   STUDY INTERFACE
+   ============================================ */
+#study-screen { display: none; }
+
+.back-link {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    padding: 0;
+    font-family: inherit;
+}
+.back-link:hover { color: var(--text); }
+
+.question-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+}
+
+.question-text {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.option-btn {
+    background: var(--bg-dark);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 15px;
+    color: var(--text);
+    cursor: pointer;
+    font-family: inherit;
+    transition: 0.2s;
+}
+.option-btn:hover:not(.disabled) { border-color: var(--blue-accent); }
+.option-btn.correct { border-color: #10b981; background: rgba(16,185,129,0.1); }
+.option-btn.wrong { border-color: #ef4444; background: rgba(239,68,68,0.1); }
+
+.nav-controls {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.nav-btn {
+    flex: 1;
+    padding: 12px;
+    border-radius: var(--radius-sm);
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+}
+.nav-btn.next { background: var(--blue-accent); color: #fff; }
+.nav-btn.prev { background: var(--bg-card); border: 1px solid var(--border); color: var(--text); }
+
+/* Progress Bar */
+.progress-top { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-muted); margin-bottom: 6px; }
+.progress-bg { height: 4px; background: var(--border); border-radius: 4px; }
+.progress-fill { height: 100%; background: var(--blue-accent); border-radius: 4px; width: 0%; transition: width 0.3s ease; }
