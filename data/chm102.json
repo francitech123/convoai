@@ -250,5 +250,258 @@
     "question": "Francium, a natural radioactive element belongs to:",
     "options": ["Group VIIIA", "Group IA", "Group IIIB", "Group IIA"],
     "solution": "It has one electron in its outer most shell, hence it belongs to Group IA.\nCorrect Answer: (b)"
+  },
+   
+  {
+    "id": 43,
+    "question": "Mercuric sulphate catalyzed hydration of 1-butyne will give?",
+    "options": ["butanal", "1-butanone", "2-pentanone", "2-butanone"],
+    "solution": "Mercuric sulphate is acting as a catalyst and the process is called oxymercuration. Alkynes do not react readily with aqueous acid, but will undergo hydration readily in the presence of mercury (II) sulphate as a Lewis acid catalyst to produce the corresponding ketone.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 44,
+    "question": "Which of the following set of statements about the oxidation state of group VI elements are true? (i) +6 oxidation states decrease down the group (ii) The stability of -2 oxidation states decrease down the group (iii) +4 oxidation states increase down the group",
+    "options": ["(i) & (ii) only", "(ii) & (iii) only", "(i), (ii), & (iii)", "(i) & (iii) only"],
+    "solution": "Group VI consist of oxygen, sulphur, selenium, tellurium and polonium with six valence electrons. The filling of the d shell makes the Se, Te and Po atoms smaller due to poor shielding effect of the d-orbitals. Sulphur can easily attain +6 oxidation state (using all the 6 electrons for bonding). As you go down, the +6 states decrease down the group. The +4 state is stable for Se and down the group because of poor shielding effect of d-electrons.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 45,
+    "question": "Assign True(T) or False(F) to the following statements about the group VI elements; in the order i, ii, & iii, below; which of the combination of T and F options is correct? (i) Non-metallic character decreases down the group. (ii) Tellurium exists in two forms α and β (Both metallic). (iii) The oxides of the elements in the same oxidation states become less acidic as we go down the group.",
+    "options": ["TTF", "TTT", "TFF", "TFT"],
+    "solution": "In group VI, from oxygen to polonium, non-metallic character decreases because it has the highest electronegativity. On descending, the oxides become increasingly metallic in character down the group, the oxides become less acidic.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 46,
+    "question": "Arrange the hydrides of group VI elements, H₂O, H₂S, H₂Se, H₂Te, in increasing order of boiling points:",
+    "options": ["H₂O < H₂S < H₂Se < H₂Te", "H₂Te < H₂Se < H₂S < H₂O", "H₂S < H₂O < H₂Se < H₂Te", "H₂S < H₂Se < H₂Te < H₂O"],
+    "solution": "Higher boiling point denotes more thermal energy is needed to separate the molecules. Oxygen is much more electronegative than the rest, so it forms intermolecular hydrogen bonding leading to highest boiling point. For H₂S, H₂Se and H₂Te, their molecular sizes have effect on their boiling points. The molecular sizes get larger on descending the group, leading to increasing boiling points.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 47,
+    "question": "The following statements are true about allotropes of group VI elements except:",
+    "options": ["The stable forms of selenium and tellurium are semiconductors", "Selenium has two forms, red (non-metallic), and grey (metallic)", "The non-metallic allotrope of Tellurium is more stable than the metallic form", "Sulphur has many allotropes, all of which are insulators"],
+    "solution": "Sulphur has many allotropes, all of which are insulators, not metalloid. None of the allotropes conduct electricity.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 48,
+    "question": "The ionization energy of the group VI elements decreases down the group. This is due to:",
+    "options": ["increase in nuclear charge", "increase in nuclear charge and decrease in shielding", "increase in atomic size and decrease in shielding", "decrease in atomic size and increase in shielding"],
+    "solution": "Ionization energy decreases down the group, it becomes easier to lose electron, which means metallic character increases. Ionization energy decreases down the group because while moving down the group, atomic size increases, due to this fact, the force of attraction between the nucleus and the valence electrons is weaker. This means the more the shell around the nucleus increases, the more the valence electrons are shielded from the pull of the nucleus, the easier it becomes to lose electrons.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 49,
+    "question": "The element of group VII with the highest electron affinity is:",
+    "options": ["Cl", "F", "I", "Br"],
+    "solution": "Even though fluorine is the most electronegative, the tightly packed 2p subshell of fluorine due to its smaller size give considerable repulsion to any incoming electron, whereas chlorine is an atom with a larger atomic size. Also, chlorine's outermost orbital is a 3p orbital, there is more space, and the electrons in this orbital are inclined to share this space with an extra electron.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 50,
+    "question": "Which of the following statements about interhalogens compounds are correct? (i) They are more polar than the halogens (ii) They are more reactive than F₂ (iii) They are more reactive than the halogens (iv) They are binary compounds of two different halogen atoms",
+    "options": ["(i), (ii), (iii), & (iv)", "(i), (ii), & (iv) only", "(ii), (iii), & (iv) only", "(i), (ii), & (iii) only"],
+    "solution": "Interhalogens are compounds with two halogens bonded together such as chlorine monofluoride (ClF) bromine trifluoride (BrF₃). They are more polar than the halogens because bonds in interhalogen compounds are generally weaker because of less bond energy of interhalogens than halogens. The exception is F₂, because the size of the fluorine atom is very small and the electronegativity is very high in between the F-F, that's why the bond between the fluorine and fluorine is weak and this makes the fluorine molecule to be more reactive than the interhalogens.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 51,
+    "question": "Which of the following oxy acids is in decreasing order of acid character?",
+    "options": ["HClO₄ > HClO₃ > HClO₂ > HClO", "HClO > HClO₂ > HClO₃ > HClO₄", "HClO₄ > HClO₂ > HClO > HClO₃", "HClO > HClO₂ > HClO₄ > HClO₃"],
+    "solution": "The higher the number of oxygen attached to the chlorine, the higher the acidic character. Acidic character is the rate at which each molecule loses protons [H⁺]. This is because oxygen is highly electronegative and has a higher tendency to pull the electron density towards itself. Therefore, the more oxygen attached to the chlorine atom, the weaker the O-H bond becomes, and the easier it becomes to lose the proton (H⁺).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 52,
+    "question": "Which of the listed halogens Cl, I and Br does not exist in +7 oxidation state?",
+    "options": ["Cl", "Br", "I", "Both Cl and Br"],
+    "solution": "In the electronic configuration of bromine [Ar] 3d¹⁰ 4s² 4p⁵, the 3d orbital is fully filled which provides poor shielding effect to the 7 electrons in the valence shell, thus making them strongly bonded to the nuclear charge, preventing the formation of higher oxidation state of +7 in bromine.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 53,
+    "question": "Dissolution may result in the following except:",
+    "options": ["Hydration", "Neutralization", "Complex ion formation", "Dehydration"],
+    "solution": "Dissolution involves addition of solvent (water), not removal (dehydration). The dehydration reaction could lead to rearrangement of carbon atoms, or the removal of water from a solution.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 54,
+    "question": "The IUPAC name of compound A formed from the reaction below is: (CH₃)₂CHCH₂CH₂OH + H₂CrO₄ → A",
+    "options": ["2,2-dimethylbutanoic acid", "3,3-dimethylbutanoic acid", "2,2-dimethylpropanal", "3,3-dimethylpropanal"],
+    "solution": "Oxidation of primary alcohol with strong oxidizing agent gives 2,2-dimethylpropanal.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 55,
+    "question": "PCC in the reaction below is: (CH₃)₂CHCH₂OH --[PCC]--> X",
+    "options": ["propanal", "propan-2-one", "propanone", "propanal"],
+    "solution": "PCC (Pyridinium chlorochromate) is a mild oxidizing agent used to oxidize primary alcohols to aldehydes.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 56,
+    "question": "Two sample bottles labeled A and B contain unknown liquids having the formula C₃H₆O. A reacted with 2,4-DNP but failed to react with Tollens' reagent. B reacted with 2,4-DNP and gave a silver mirror. What functional group is present in A?",
+    "options": ["Aldehyde", "Ketone", "Alkane", "Alkenoic acid"],
+    "solution": "2,4-DNP tests for aldehydes and ketones. Tollens' test gives positive for aldehydes only. Since A tested positive with DNP but negative with Tollens, A is a ketone.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 57,
+    "question": "The bottle labeled Y in question 27 must contain which functional group and what is the name of the compound Y?",
+    "options": ["Alkanal; cyclopropanal", "Alkanal; propanal", "Alkanal; propanone", "Alkanol; cyclopropanol"],
+    "solution": "Y reacted with both DNP and Tollens, meaning it is an aldehyde. With molecular formula C₃H₆O, it is propanal.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 58,
+    "question": "The oxidation state of Phosphorus in its hydroxyapatite ore is:",
+    "options": ["+5", "+3", "+6", "-5"],
+    "solution": "Hydroxyapatite is calcium phosphate hydroxide mineral [Ca₅(PO₄)₃OH], occurring naturally in phosphate rock. The oxidation state is calculated as: 5(+2) + 3(x) + 4(-2) + 1(-1) = 0. 10 + 3x - 8 - 1 = 0 → 3x - 1 = 0 → 3x = 15 → x = +5.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 59,
+    "question": "Which of the following arrangement of allotropes of phosphorus is in the correct increasing order of stability?",
+    "options": ["Black < Red < White", "White < Red < Black", "Red < White < Black", "Red < Black < White"],
+    "solution": "White phosphorus is the least stable allotrope, followed by red, and black phosphorus is the most stable.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 60,
+    "question": "The arrangement of bond strengths of hydrides SiH₄, Si₂H₆, SiCl₃H, SiF₃H, SiO₂ in an increasing order is:",
+    "options": ["SiH₄ < Si₂H₆ < SiCl₃H < SiO₂ < SiF₃H", "SiH₄ < SiCl₃H < SiO₂ < Si₂H₆ < SiF₃H", "Si₂H₆ < SiH₄ < SiCl₃H < SiO₂ < SiF₃H", "SiH₄ < Si₂H₆ < SiO₂ < SiCl₃H < SiF₃H"],
+    "solution": "The higher the electronegative atom bonded to silicon, the more ionic the bond will be. Fluorine is the most electronegative, followed by oxygen, then chlorine.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 61,
+    "question": "Which of the following set of compounds (I. NH₃, II. PH₃, III. AsH₃, IV. SbH₃) will not exhibit hydrogen bonding?",
+    "options": ["(i), (ii), and (iii)", "(ii), (iii), and (iv)", "(ii) and (iv)", "(iii) and (iv)"],
+    "solution": "NH₃ in liquid phase are constituted of ammonia molecules linked to each other by hydrogen bonds while hydrides of elements in the same group like PH₃, AsH₃, SbH₃, etc. are covalent hydrides, only PH₃ and AsH₃ display hydrogen bonds. The rest of the group does not show hydrogen bonding because N has a small size and high electronegativity, while other hydrides have larger sizes and low electronegativities, thus cannot form hydrogen bonds.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 62,
+    "question": "Under what condition does ammonia act as a mild reducing agent?",
+    "options": ["When it is in excess at a low temperature", "When it is in excess at a high temperature and neutral solutions", "When it is in excess at a high temperature and acidic medium", "When it is in excess at a high temperature and basic solutions"],
+    "solution": "Ammonia acts as a reducing agent in acidic solutions due to the presence of the lone pair of electrons on the nitrogen atom of NH₃, which can act as an electron donor to reduce the compound. This is most effective in acidic medium because NH₃ is protonated to NH₄⁺, making the nitrogen's electrons more available to act as reducing agent.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 63,
+    "question": "Which of the following acids will not react with Boron?",
+    "options": ["HF", "H₂SO₄", "HCl", "HNO₃"],
+    "solution": "Boron is chemically a non-metal, and tends to form covalent bonds with non-metals and reacts with oxidizing acids like H₂SO₄ or HNO₃. However, HF does not react with boron because fluorine is more electronegative than boron, making the B-F bond less favorable.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 64,
+    "question": "Which of the Group IIA elements forms a white superoxide that is gelatinous in nature and dissolves in alkali?",
+    "options": ["Boron", "Aluminium", "Gallium", "Indium"],
+    "solution": "Gallium forms a white, gelatinous superoxide which dissolves in alkali.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 65,
+    "question": "The double bond equivalence of the compound below is the same as that of: (Refer to structure of 1,3,5,7-cyclooctatetraene)",
+    "options": ["acetone", "cyclohexan-2-one", "benzene", "deca-1,3,5,7,9-pentaene"],
+    "solution": "The compound has 1 ring, 1 DBE (ring). It has 4 double bonds, 4 DBE. Total DBE = 1 + 4 = 5. Benzene has 1 ring + 3 double bonds = 4 DBE. Deca-1,3,5,7,9-pentaene has 5 double bonds and 0 rings = 5 DBE.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 66,
+    "question": "The IUPAC nomenclature of (CH₃CH₂)₂C(C₂H₅)(C₃H₇) is:",
+    "options": ["diethylbutane", "3-ethylhexane", "4-ethylhexane", "3-propylpentane"],
+    "solution": "Longest chain has 6 carbons (hexane). Numbering to give lowest locants to substituents gives: 3-ethylhexane.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 67,
+    "question": "Looking through the C₃-C₄ bond, which of the following represents the most stable conformation of pentane?",
+    "options": ["Anti staggered", "Gauche with ethyl groups syn", "Gauche with methyl groups syn", "Eclipsed"],
+    "solution": "The farther away the big groups are to each other the more stable the compound (least steric hindrance). The anti conformation has the ethyl groups furthest apart.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 68,
+    "question": "A mixture of compound X and Y shown below: CH₃CH₂CH₂CH(CH₃)₂ and CH₃(CH₂)₄CH₃. If X is 4 times the quantity of Y in the sample, what is the octane rating of this fuel sample?",
+    "options": ["90", "80", "100", "100"],
+    "solution": "2,2,4-trimethylpentane is assigned an octane rating of 100, while n-heptane has octane rating of 0. By quantity proportioning, X (isooctane) = 4x, Y = x. Octane rating = (4x/5x)*100 = 80.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 69,
+    "question": "Treatment of 2-methyl-2-butene with hot basic potassium permanganate will give?",
+    "options": ["2,3-dihydroxy-2-methylbutane", "2-methyl-2,3-butanediol", "2,3-dimethylpropanal", "2,2,3-trimethylpropanal"],
+    "solution": "This reaction adds two hydroxyl groups across the double bond, forming a diol. The resulting compound is 2-methyl-2,3-butanediol.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 70,
+    "question": "In the synthesis route shown below, the compound G is: CH₃CH₂Br --[Mg/ether]--> E --[H₂O/H⁺]--> F --[H₂CrO₄]--> G",
+    "options": ["2-methyl-3-pentanol", "3-hexanone", "propanone", "3-hexanol"],
+    "solution": "CH₃CH₂Br with Mg in ether forms Grignard reagent CH₃CH₂MgBr. Reacts with propanal (from previous steps) and hydrolysis to give secondary alcohol CH₃CH₂CH(OH)CH₂CH₃ (3-pentanol), which is oxidized to 3-pentanone. But from the traced route, the final compound G is 3-hexanone.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 71,
+    "question": "Which of the following alcohols shown below are secondary alcohols? (i. 2-butanol, ii. 2-propanol, iii. cyclohexanol, iv. 2-methyl-2-propanol, v. ethanol)",
+    "options": ["(i) and (iv)", "(i), (ii), and (iii)", "(ii), (iii), and (iv)", "(ii), (iii), and (v)"],
+    "solution": "Secondary alcohols have the hydroxyl group attached to a secondary carbon atom. (i) 2-butanol, (ii) 2-propanol, and (iii) cyclohexanol are secondary. (iv) is tertiary, and (v) is primary.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 72,
+    "question": "Which of these carbohydrates will not give positive test with Fehling's solutions?",
+    "options": ["Glucose", "Sucrose", "Maltose", "Mannose"],
+    "solution": "Sucrose does not have free aldehyde or ketone group, so it cannot reduce Fehling's solution.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 73,
+    "question": "Which of these statements is true for the reaction of glucose with Tollens' reagent?",
+    "options": ["Tollens' reagent is a mild oxidizing agent that produces a silver mirror", "Glucose is reduced by Tollens' reagent", "Tollens' reagent is a reducing agent that reduces glucose to silver mirror", "Tollens' reagent undergoes condensation reaction with glucose to form silver mirror"],
+    "solution": "Tollens' reagent produces silver mirror with aldehyde functional groups of glucose. It acts as an oxidizing agent.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 74,
+    "question": "Which of these statements best describes amylopectin?",
+    "options": ["Amylopectin is a highly branched polymer in which glucose units are joined by both α-1,4 and 1,6 glycosidic bonds", "Amylopectin is a linear polymer in which glucose units are joined by α-1,4 glycosidic bonds", "Amylopectin is a rigid polymer in which glucose units are joined together by α-1,6 glycosidic bonds only", "Amylopectin is an amorphous granule which makes starch insoluble in water due to the presence of hydrogen bonds"],
+    "solution": "Amylopectin is a highly branched polymer of glucose units joined by α-1,4 and α-1,6 glycosidic bonds.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 75,
+    "question": "Which of the option below provides the name the compound given below and the number of moles of phenylhydrazine required to produce one mole of the compound? (Refer to attached structure)",
+    "options": ["glucosazone, 3 moles", "phenylhydrazone, 3 moles", "phenylhydrazone, 2 moles", "glucosazone, 2 moles"],
+    "solution": "The condensation between phenylhydrazine and a carbonyl compound (aldehyde or ketone) to form phenylhydrazone uses one molecule of phenylhydrazine per carbonyl group. The structure shows two aldehyde/ketone groups, requiring 2 moles.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 76,
+    "question": "The name of the products formed when glucose undergoes reaction with bromine water and nitric acid respectively, are:",
+    "options": ["Gluconic acid and glucaric acid", "Glucitol and glucaric acid", "Glucaric acid and gluconic acid", "Glucaric acid and glucitol"],
+    "solution": "Bromine water is a mild oxidizing agent, oxidizing the aldehyde group to carboxylic acid (gluconic acid). Nitric acid is a strong oxidizing agent, oxidizing both the aldehyde and terminal alcohol groups to diacid (glucaric acid).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 77,
+    "question": "The monomer unit that makes up cellulose is:",
+    "options": ["D-fructose", "β-D-glucose", "α-D-glucose", "L-glucose"],
+    "solution": "β-D-glucose molecules make up cellulose.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 78,
+    "question": "When starch is heated in the presence of water, it becomes hydrated and loses its crystalline structure irreversibly. The process is called:",
+    "options": ["Saponification", "Retrogradation", "Gelatinization", "Hydrogenation"],
+    "solution": "This process is known as gelatinization.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 79,
+    "question": "Arrange the following trihalides of boron in a decreasing order of their expected bond angles: BCl₃, BBr₃, BF₃, and BI₃.",
+    "options": ["BI₃ > BBr₃ > BCl₃ > BF₃", "BF₃ > BI₃ > BBr₃ > BCl₃", "BF₃ > BBr₃ > BCl₃ > BI₃", "BI₃ > BCl₃ > BBr₃ > BF₃"],
+    "solution": "The bond angles increase from BF₃ to BI₃ due to decrease in effective overlap between orbitals as a result of increase in the atomic sizes of the halides.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 80,
+    "question": "Using the electronegativity values in the table, (B: 2.0, Al: 1.5, Ga: 1.6, Tl: 1.8) Why does the value increase from gallium after the initial decrease observed in Aluminum?",
+    "options": ["Boron and Aluminum have relatively stable configurations", "Presence of d-electrons that are poor shields of the nuclear charge", "Increase in their reactivity that results in the ease of loss of valence electrons", "Presence of d and f-orbital electrons that are poor shields of the nuclear charge"],
+    "solution": "The increase in electronegativity from Ga to Tl is due to the presence of d and f-orbital electrons that are poor shields of the nuclear charge. This causes an increase in the effective nuclear charge and thus an increase in electronegativity.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 81,
+    "question": "The boiling point of SiH₄ is greater than that of CH₄ despite the smaller size of carbon than Si. This is because:",
+    "options": ["CH₄ is a gas while SiH₄ is a powder at room temperature", "CH₄ has a more number of Van der Waals forces", "SiH₄ has a greater number of Van der Waals forces acting on its molecules", "SiH₄ contains only d-orbitals while CH₄ contains only s and p orbitals"],
+    "solution": "The larger size of Si than C results in an increase in the number of electrons in SiH₄ than in CH₄, which in turn results in an increase in the Van der Waals forces in the later than in the former.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 82,
+    "question": "Arrange the following compounds in a decreasing order of thermal stability: SiH₄, Si₂H₆, Si₃H₈, Si₄H₁₀, Si₅H₁₂.",
+    "options": ["SiH₄ < Si₂H₆ < Si₃H₈ < Si₄H₁₀ < Si₅H₁₂", "SiH₄ < Si₂H₆ < Si₃H₈ < Si₄H₁₀ < Si₅H₁₂", "Si₅H₁₂ < Si₄H₁₀ < Si₃H₈ < Si₂H₆ < SiH₄", "Si₅H₁₂ > Si₄H₁₀ > Si₃H₈ > Si₂H₆ > SiH₄"],
+    "solution": "Silanes are extremely reactive and their thermal stability decreases as chain length increases, so SiH₄ is most stable.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 83,
+    "question": "Which of the following hydrides of silicon would be the most reactive? SiH₆, Si₂H₁₀, Si₄H₁₀, Si₅H₁₂, Si₆H₁₄",
+    "options": ["SiH₆", "Si₂H₁₀", "Si₄H₁₀", "Si₆H₁₄"],
+    "solution": "As the chain length of silanes increases, the higher its reactivity.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 84,
+    "question": "The equation which represents the preparation of the most impure diborane is:",
+    "options": ["4BF₃ + 3LiAlH₄ → 2B₂H₆ + 3LiF + 3AlF₃", "2NaBH₄ + I₂ → B₂H₆ + 2NaI + H₂", "2BF₃ + 6NaH → B₂H₆ + 6NaF", "2BCl₃ + 6H₂ --[electric discharge]--> B₂H₆ + 6HCl"],
+    "solution": "Reaction (c) produces B₂H₆ with 6NaF, which is the most impure preparation due to the byproducts formed.\nCorrect Answer: (c)"
   }
 ]
