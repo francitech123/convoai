@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>Dashboard • OAU CBE Practice</title>
+    <title>Study Mode • OAU CBE Practice</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -33,7 +33,7 @@
         <header>
             <div class="header-left">
                 <div class="logo-circle">
-                    <img src="/logo.svg" alt="OAU CBE" onerror="this.style.display='none';this.parentElement.textContent='O'">
+                    <img src="/logo.svg" alt="OAU CBE" onerror="this.style.display='none';this.parentElement.textContent='OAU'">
                 </div>
                 <div class="header-text">
                     <h2>Dashboard</h2>
@@ -41,122 +41,54 @@
                 </div>
             </div>
             <div class="header-actions">
+                <button class="notification-btn"><i class="fas fa-bell"></i></button>
                 <a href="/app" class="back-home">
                     <i class="fas fa-home"></i> Home
                 </a>
             </div>
         </header>
 
-        <!-- ================= DASHBOARD VIEW ================= -->
-        <div id="dashboard-view">
-            <!-- HERO -->
-            <div class="hero-card">
-                <div class="hero-content">
-                    <h2>Welcome back, Student 👋</h2>
-                    <p>Keep your OAU practice streak alive. Track exams, tests, course progress, and more from one place.</p>
-                    <div class="level-badge">100L • 200L</div>
-                    
-                    <div class="stats-grid">
-                        <div class="stat-box">
-                            <span>Courses active</span>
-                            <strong>—</strong>
-                        </div>
-                        <div class="stat-box">
-                            <span>Average score</span>
-                            <strong>—</strong>
-                        </div>
-                        <div class="stat-box">
-                            <span>Tests + exams</span>
-                            <strong>—</strong>
-                        </div>
-                        <div class="stat-box">
-                            <span>Current streak</span>
-                            <strong>—</strong>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- QUICK ACTIONS -->
-            <div class="section-header">
-                <h3>Quick actions</h3>
-                <a href="#">Open profile</a>
-            </div>
-
-            <div class="actions-grid">
-                <!-- These buttons just lead to the study course selection for demonstration -->
-                <a href="#course-selection" class="action-btn">
-                    <div class="action-icon"><i class="fas fa-clock"></i></div>
-                    <span>Results</span>
-                </a>
-                <a href="#course-selection" class="action-btn">
-                    <div class="action-icon"><i class="fas fa-robot"></i></div>
-                    <span>AI</span>
-                </a>
-                <a href="#course-selection" class="action-btn">
-                    <div class="action-icon"><i class="fas fa-question-circle"></i></div>
-                    <span>FAQ</span>
-                </a>
-                <a href="#course-selection" class="action-btn">
-                    <div class="action-icon"><i class="fas fa-headset"></i></div>
-                    <span>Support</span>
-                </a>
-            </div>
-        </div>
-
         <!-- ================= COURSE SELECTION VIEW ================= -->
-        <div id="course-selection" style="display:none;">
-            <button id="back-to-dashboard-btn" class="back-btn" style="background:transparent; border:none; color:var(--text-muted); font-size:14px; cursor:pointer; margin-bottom:16px; display:flex; align-items:center; gap:8px; font-family:inherit;">
+        <div id="course-selection">
+            <button id="back-to-dashboard-btn" class="back-link">
                 <i class="fas fa-arrow-left"></i> Back to Dashboard
             </button>
 
-            <div class="section-header" style="margin-top:10px;">
+            <div class="section-header">
                 <h3>Select a course</h3>
             </div>
-            <p style="font-size:14px; color:var(--text-muted); margin-bottom:16px;">Start studying topic by topic.</p>
+            <p class="subtitle">Start studying topic by topic.</p>
             
             <div class="course-grid" id="courseGrid">
                 <button class="course-btn" data-code="PHY 102">
-                    <span class="course-content">
-                        <span class="course-code">PHY 102</span>
-                        <span class="course-name">General Physics II (Electricity &amp; Magnetism)</span>
-                        <span class="course-status">Click to start</span>
-                    </span>
+                    <span class="course-code">PHY 102</span>
+                    <span class="course-name">General Physics II (Electricity &amp; Magnetism)</span>
+                    <span class="course-status">Click to start</span>
                 </button>
                 <button class="course-btn" data-code="PHY 104">
-                    <span class="course-content">
-                        <span class="course-code">PHY 104</span>
-                        <span class="course-name">General Physics IV (Waves &amp; Optics)</span>
-                        <span class="course-status">Click to start</span>
-                    </span>
+                    <span class="course-code">PHY 104</span>
+                    <span class="course-name">General Physics IV (Waves &amp; Optics)</span>
+                    <span class="course-status">Click to start</span>
                 </button>
                 <button class="course-btn" data-code="CHM 102">
-                    <span class="course-content">
-                        <span class="course-code">CHM 102</span>
-                        <span class="course-name">Organic Chemistry II</span>
-                        <span class="course-status">Click to start</span>
-                    </span>
+                    <span class="course-code">CHM 102</span>
+                    <span class="course-name">Organic Chemistry II</span>
+                    <span class="course-status">Click to start</span>
                 </button>
                 <button class="course-btn" data-code="MTH 102">
-                    <span class="course-content">
-                        <span class="course-code">MTH 102</span>
-                        <span class="course-name">Elementary Mathematics II (Calculus)</span>
-                        <span class="course-status">Click to start</span>
-                    </span>
+                    <span class="course-code">MTH 102</span>
+                    <span class="course-name">Elementary Mathematics II (Calculus)</span>
+                    <span class="course-status">Click to start</span>
                 </button>
                 <button class="course-btn" data-code="MTH 104">
-                    <span class="course-content">
-                        <span class="course-code">MTH 104</span>
-                        <span class="course-name">Elementary Mathematics IV (Matrices)</span>
-                        <span class="course-status">Click to start</span>
-                    </span>
+                    <span class="course-code">MTH 104</span>
+                    <span class="course-name">Elementary Mathematics IV (Matrices)</span>
+                    <span class="course-status">Click to start</span>
                 </button>
                 <button class="course-btn" data-code="BIO 102">
-                    <span class="course-content">
-                        <span class="course-code">BIO 102</span>
-                        <span class="course-name">General Biology II</span>
-                        <span class="course-status">Click to start</span>
-                    </span>
+                    <span class="course-code">BIO 102</span>
+                    <span class="course-name">General Biology II</span>
+                    <span class="course-status">Click to start</span>
                 </button>
             </div>
         </div>
@@ -166,7 +98,7 @@
             <button id="back-to-menu-btn" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Courses</button>
 
             <div id="question-card" class="question-card">
-                <div class="loading-overlay" style="display:none; position:absolute; top:0; left:0; right:0; bottom:0; background:rgba(15,23,42,0.6); border-radius:var(--radius-lg); display:none; align-items:center; justify-content:center; flex-direction:column; gap:10px; color:var(--text-muted); z-index:10;">
+                <div class="loading-overlay" style="display:none; position:absolute; top:0; left:0; right:0; bottom:0; background:rgba(15,23,42,0.6); border-radius:var(--radius-lg); align-items:center; justify-content:center; flex-direction:column; gap:10px; color:var(--text-muted); z-index:10;">
                     <i class="fas fa-spinner fa-spin" style="font-size:2rem;"></i>
                     <span>Loading questions...</span>
                 </div>
@@ -200,42 +132,26 @@
 
     </div>
 
-    <!-- ================= BOTTOM NAV ================= -->
-    <nav class="bottom-nav">
-        <a href="#" class="nav-item active"><i class="fas fa-home"></i> Home</a>
-        <a href="#" class="nav-item"><i class="fas fa-pen"></i> Exam</a>
-        <a href="#" class="nav-item"><i class="fas fa-flask"></i> Test</a>
-        <a href="#" class="nav-item"><i class="fas fa-book-open"></i> Study</a>
-        <a href="#" class="nav-item"><i class="fas fa-user"></i> Me</a>
-    </nav>
-
-    <!-- ================= SIMPLE NO-JS BROWSER NAVIGATION ================= -->
+  
+    <!-- ================= STUPID SIMPLE NAVIGATION (No complex JS) ================= -->
     <script>
-        // Minimal JS only for internal navigation (keeping it inline so you don't have to edit studymode.js)
-        document.addEventListener('click', function(e) {
-            // If clicked link points to #course-selection
-            if(e.target.closest('a[href="#course-selection"]')) {
-                e.preventDefault();
-                document.getElementById('dashboard-view').style.display = 'none';
-                document.getElementById('course-selection').style.display = 'block';
-                document.getElementById('study-screen').style.display = 'none';
-            }
-            // Back to Dashboard
-            if(e.target.closest('#back-to-dashboard-btn')) {
-                document.getElementById('dashboard-view').style.display = 'block';
-                document.getElementById('course-selection').style.display = 'none';
-                document.getElementById('study-screen').style.display = 'none';
-            }
-            // Course clicked -> Go to Study Screen
-            if(e.target.closest('.course-btn')) {
+        // Course card clicked
+        document.querySelectorAll('.course-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
                 document.getElementById('course-selection').style.display = 'none';
                 document.getElementById('study-screen').style.display = 'block';
-            }
-            // Back to Menu from Study
-            if(e.target.closest('#back-to-menu-btn')) {
-                document.getElementById('course-selection').style.display = 'block';
-                document.getElementById('study-screen').style.display = 'none';
-            }
+            });
+        });
+
+        // Back to Courses
+        document.getElementById('back-to-menu-btn').addEventListener('click', function() {
+            document.getElementById('course-selection').style.display = 'block';
+            document.getElementById('study-screen').style.display = 'none';
+        });
+
+        // Back to Dashboard
+        document.getElementById('back-to-dashboard-btn').addEventListener('click', function() {
+            window.location.href = '/app';
         });
     </script>
 </body>
