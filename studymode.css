@@ -14,6 +14,15 @@
     --radius-sm: 12px;
 }
 
+/* Light Mode Variables */
+body.light-mode {
+    --bg-dark: #f1f5f9;
+    --bg-card: #ffffff;
+    --border: #cbd5e1;
+    --text: #0f172a;
+    --text-muted: #64748b;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -24,12 +33,13 @@
 body {
     background: var(--bg-dark);
     color: var(--text);
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .app-container {
     max-width: 800px;
     margin: 0 auto;
-    padding: 20px 16px 40px;
+    padding: 20px 16px 100px; /* Extra padding for bottom floating button */
 }
 
 /* ============================================
@@ -61,6 +71,10 @@ header {
     overflow: hidden;
 }
 
+body.light-mode .logo-circle {
+    border: 1px solid var(--border);
+}
+
 .logo-circle img {
     width: 30px;
     height: 30px;
@@ -85,33 +99,22 @@ header {
     gap: 10px;
 }
 
-.btn-icon, .btn-home {
+.btn-icon {
+    width: 40px;
     height: 40px;
-    border-radius: 30px;
+    border-radius: 50%;
     border: 1px solid var(--border);
     background: var(--bg-card);
     color: var(--text);
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 16px;
     cursor: pointer;
     transition: 0.2s;
 }
 
-.btn-icon {
-    width: 40px;
-    font-size: 16px;
-}
-
-.btn-home {
-    padding: 0 16px;
-    text-decoration: none;
-    gap: 6px;
-    font-size: 13px;
-    font-weight: 500;
-}
-
-.btn-icon:hover, .btn-home:hover {
+.btn-icon:hover {
     border-color: var(--blue-accent);
 }
 
@@ -200,6 +203,7 @@ header {
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     padding: 20px;
+    margin-bottom: 16px;
 }
 
 .question-text {
@@ -233,7 +237,6 @@ header {
 .nav-controls {
     display: flex;
     gap: 12px;
-    margin-top: 16px;
 }
 
 .nav-btn {
@@ -244,11 +247,53 @@ header {
     font-weight: 600;
     cursor: pointer;
     font-family: inherit;
+    transition: 0.2s;
 }
 .nav-btn.next { background: var(--blue-accent); color: #fff; }
+.nav-btn.next:hover { opacity: 0.9; transform: scale(0.98); }
 .nav-btn.prev { background: var(--bg-card); border: 1px solid var(--border); color: var(--text); }
+.nav-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
 /* Progress Bar */
 .progress-top { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-muted); margin-bottom: 6px; }
 .progress-bg { height: 4px; background: var(--border); border-radius: 4px; }
 .progress-fill { height: 100%; background: var(--blue-accent); border-radius: 4px; width: 0%; transition: width 0.3s ease; }
+
+/* ============================================
+   FLOATING HOME BUTTON (Bottom Center)
+   ============================================ */
+.floating-home-btn {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--blue-accent);
+    color: white;
+    border: none;
+    padding: 16px 48px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 700;
+    font-family: inherit;
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.floating-home-btn:hover {
+    transform: translateX(-50%) translateY(-4px);
+    box-shadow: 0 12px 32px rgba(59, 130, 246, 0.6);
+}
+
+.floating-home-btn:active {
+    transform: translateX(-50%) scale(0.95);
+}
+
+.floating-home-btn i {
+    font-size: 20px;
+}
