@@ -36,6 +36,7 @@ const backBtn = $('back-to-menu-btn');
 const progressText = $('progress-text');
 const progressFill = $('progress-fill');
 const scoreDisplay = $('score-display');
+const questionCard = $('question-card');
 
 // ==================== TOAST ====================
 function showToast(message, type = 'info') {
@@ -120,13 +121,10 @@ async function selectCourse(courseId) {
             return;
         }
 
-        // ============================================
-        // FETCH JSON - WITH DEBUG LOGS
-        // ============================================
         console.log(`📁 Loading: /data/${currentCourse.file}`);
-        
+
         const response = await fetch(`/data/${currentCourse.file}`);
-        
+
         if (!response.ok) {
             console.error(`❌ HTTP ${response.status}: ${response.statusText}`);
             showToast(`Could not load ${currentCourse.code} questions (HTTP ${response.status})`, 'error');
@@ -138,9 +136,6 @@ async function selectCourse(courseId) {
         const data = await response.json();
         console.log(`✅ JSON loaded:`, data.length || Object.keys(data).length, 'items');
 
-        // ============================================
-        // HANDLE DIFFERENT JSON FORMATS
-        // ============================================
         let questions = null;
 
         // Format 1: Direct array [ { id, question, options, solution } ]
@@ -202,7 +197,6 @@ async function selectCourse(courseId) {
             correct: parseCorrectAnswer(q.solution)
         }));
 
-        // Count invalid questions
         const invalid = questions.filter(q => q.correct === -1);
         if (invalid.length > 0) {
             console.warn(`⚠️ ${invalid.length} questions have no valid ANSWER: in solution`);
@@ -219,6 +213,11 @@ async function selectCourse(courseId) {
         document.getElementById('course-selection-screen').style.display = 'none';
         document.getElementById('study-screen').style.display = 'block';
 
+        // HIDE LOADING OVERLAY
+        if (questionCard) {
+            questionCard.classList.remove('loading');
+        }
+
         renderQuestion();
         showToast(`📚 Loaded ${totalQuestions} questions for ${currentCourse.code}`, 'success');
 
@@ -233,6 +232,11 @@ async function selectCourse(courseId) {
 
 // ==================== RENDER QUESTION ====================
 function renderQuestion() {
+    // HIDE LOADING OVERLAY
+    if (questionCard) {
+        questionCard.classList.remove('loading');
+    }
+
     if (!currentQuestions.length || currentIndex >= currentQuestions.length) {
         showComplete();
         return;
@@ -339,9 +343,9 @@ function showComplete() {
     questionText.innerHTML = `
         <div style="text-align:center;padding:20px 0">
             <div style="font-size:3rem;margin-bottom:12px">${emoji}</div>
-            <h2 style="font-size:1.4rem;margin-bottom:4px;color:var(--text-primary)">${grade}</h2>
-            <p style="color:var(--text-secondary);font-size:0.9rem">You got ${score} out of ${totalQuestions} correct</p>
-            <p style="color:var(--accent);font-size:1.6rem;font-weight:700;margin:8px 0">${percentage}%</p>
+            <h2 style="font-size:1.4rem;margin-bottom:4px;color:var(--text)">${grade}</h2>
+            <p style="color:var(--text-muted);font-size:0.9rem">You got ${score} out of ${totalQuestions} correct</p>
+            <p style="color:var(--blue-accent);font-size:1.6rem;font-weight:700;margin:8px 0">${percentage}%</p>
             <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px">
                 <button onclick="restartTopic()" class="nav-btn next" style="max-width:160px">
                     <i class="fas fa-redo"></i> Retry
