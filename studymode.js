@@ -1,6 +1,6 @@
 // ============================================
 // STUDY MODE - OAU CBE Practice
-// FIXED: Solution Display
+// FIXED: Solution with LaTeX delimiters
 // ============================================
 
 // ==================== CONFIGURATION ====================
@@ -105,19 +105,35 @@ function parseCorrectAnswer(solution) {
     return -1;
 }
 
-// ==================== FORMAT SOLUTION ====================
+// ==================== FORMAT SOLUTION - CRITICAL FIX ====================
 function formatSolution(solution) {
     if (!solution) return 'No explanation provided.';
 
+    // First, replace double backslashes with single
+    let formatted = solution.replace(/\\\\/g, '\\');
+
+    // Wrap any LaTeX commands in \(...\) delimiters if not already wrapped
+    // Match common LaTeX patterns: \frac{...}{...}, \sin, \cos, \tan, \sqrt{...}, \int, etc.
+    formatted = formatted.replace(
+        /(\\[a-zA-Z]+(?:\{[^}]*\})*(?:\{[^}]*\})*)/g,
+        '\\($1\\)'
+    );
+
     // Replace newlines with <br>
-    let formatted = solution.replace(/\n/g, '<br>');
+    formatted = formatted.replace(/\n/g, '<br>');
 
     // Bold the step headers
     formatted = formatted.replace(/(Step \d+:)/g, '<strong>$1</strong>');
 
     // Highlight the correct answer line
-    formatted = formatted.replace(/(Correct Answer:.*)/g, '<span style="color: var(--green); font-weight: 600;">$1</span>');
-    formatted = formatted.replace(/(ANSWER:.*)/g, '<span style="color: var(--green); font-weight: 600;">$1</span>');
+    formatted = formatted.replace(
+        /(Correct Answer:.*)/g, 
+        '<span style="color: var(--green, #10b981); font-weight: 600;">$1</span>'
+    );
+    formatted = formatted.replace(
+        /(ANSWER:.*)/g, 
+        '<span style="color: var(--green, #10b981); font-weight: 600;">$1</span>'
+    );
 
     return formatted;
 }
@@ -293,7 +309,7 @@ function selectOption(index) {
         if (i === index) btn.classList.add('selected');
     });
 
-    // SHOW SOLUTION - Format it properly
+    // SHOW SOLUTION with proper formatting
     if (solutionContainer) solutionContainer.style.display = 'block';
     if (solutionText) {
         solutionText.innerHTML = formatSolution(q.solution);
