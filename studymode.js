@@ -37,6 +37,7 @@ const progressText = $('progress-text');
 const progressFill = $('progress-fill');
 const scoreDisplay = $('score-display');
 const questionCard = $('question-card');
+const loadingOverlay = document.querySelector('.loading-overlay');
 
 // ==================== TOAST ====================
 function showToast(message, type = 'info') {
@@ -60,7 +61,8 @@ function initTheme() {
     const saved = localStorage.getItem('theme');
     if (saved === 'light') {
         document.body.classList.add('light-mode');
-        document.getElementById('themeIcon').className = 'fas fa-sun';
+        const themeIcon = document.getElementById('themeIcon');
+        if (themeIcon) themeIcon.className = 'fas fa-sun';
     }
 }
 
@@ -68,32 +70,61 @@ function toggleTheme() {
     document.body.classList.toggle('light-mode');
     const isLight = document.body.classList.contains('light-mode');
     localStorage.setItem('theme', isLight ? 'light' : 'dark');
-    document.getElementById('themeIcon').className = isLight ? 'fas fa-sun' : 'fas fa-moon';
+    const themeIcon = document.getElementById('themeIcon');
+    if (themeIcon) themeIcon.className = isLight ? 'fas fa-sun' : 'fas fa-moon';
 }
 
 // ==================== PARSE CORRECT ANSWER ====================
 function parseCorrectAnswer(solution) {
     if (!solution) return -1;
 
-    // Look for "ANSWER: (a)" or "ANSWER: (e)"
-    const match = solution.match(/ANSWER:\s*\(([a-e])\)/i);
+    // Format 1: "Correct Answer: (a)" or "Correct Answer: (b)"
+    let match = solution.match(/Correct Answer:\s*\(([a-e])\)/i);
+    if (match) {
+        const letter = match[1].toLowerCase();
+        return letter.charCodeAt(0) - 97; // 'a' = 0, 'b' = 1, etc.
+    }
+
+    // Format 2: "ANSWER: (a)" or "ANSWER: (e)"
+    match = solution.match(/ANSWER:\s*\(([a-e])\)/i);
     if (match) {
         const letter = match[1].toLowerCase();
         return letter.charCodeAt(0) - 97;
     }
 
-    // Fallback: "ANSWER: a"
-    const match2 = solution.match(/ANSWER:\s*([a-e])/i);
-    if (match2) {
-        const letter = match2[1].toLowerCase();
+    // Format 3: "Correct Answer: a" or "Correct Answer: b"
+    match = solution.match(/Correct Answer:\s*([a-e])/i);
+    if (match) {
+        const letter = match[1].toLowerCase();
         return letter.charCodeAt(0) - 97;
     }
 
+    // Format 4: "ANSWER: a" or "ANSWER: b" (no parentheses)
+    match = solution.match(/ANSWER:\s*([a-e])/i);
+    if (match) {
+        const letter = match[1].toLowerCase();
+        return letter.charCodeAt(0) - 97;
+    }
+
+    // Format 5: Look for "Answer (b)" or "Answer: b" anywhere
+    match = solution.match(/Answer:?\s*\(?([a-e])\)?/i);
+    if (match) {
+        const letter = match[1].toLowerCase();
+        console.warn('⚠️ Using fallback answer format:', match[0]);
+        return letter.charCodeAt(0) - 97;
+    }
+
+    console.warn('⚠️ No correct answer found in solution:', solution?.substring(0, 100));
     return -1;
 }
 
 // ==================== RENDER COURSES ====================
 function renderCourses() {
+    if (!courseGrid) {
+        console.error('❌ courseGrid element not found');
+        return;
+    }
+    
     courseGrid.innerHTML = COURSES.map(c => `
         <button class="course-btn" data-course="${c.id}" onclick="selectCourse('${c.id}')">
             <div class="course-spinner"><i class="fas fa-spinner fa-spin"></i></div>
@@ -109,6 +140,11 @@ function renderCourses() {
 // ==================== SELECT COURSE ====================
 async function selectCourse(courseId) {
     const btn = document.querySelector(`.course-btn[data-course="${courseId}"]`);
+    if (!btn) {
+        console.error('❌ Course button not found:', courseId);
+        return;
+    }
+    
     btn.classList.add('loading');
     btn.disabled = true;
 
@@ -134,7 +170,7 @@ async function selectCourse(courseId) {
         }
 
         const data = await response.json();
-        console.log(`✅ JSON loaded:`, data.length || Object.keys(data).length, 'items');
+        console.log(`✅ JSON loaded:`, Array.isArray(data) ? data.length : Object.keys(data).length, 'items');
 
         let questions = null;
 
@@ -144,43 +180,29 @@ async function selectCourse(courseId) {
                 q.id !== undefined && 
                 q.question && 
                 Array.isArray(q.options) && 
-                q.options.length >= 4 &&
+                q.options.length >= 2 &&
                 q.solution
             );
             if (valid) {
                 questions = data;
                 console.log('✅ Format: Direct array');
+            } else {
+                console.warn('⚠️ Array format found but some questions are invalid');
+                // Try to use it anyway
+                questions = data;
             }
         }
 
         // Format 2: { questions: [ ... ] }
         if (!questions && data && data.questions && Array.isArray(data.questions) && data.questions.length > 0) {
-            const valid = data.questions.every(q => 
-                q.id !== undefined && 
-                q.question && 
-                Array.isArray(q.options) && 
-                q.options.length >= 4 &&
-                q.solution
-            );
-            if (valid) {
-                questions = data.questions;
-                console.log('✅ Format: { questions: [...] }');
-            }
+            questions = data.questions;
+            console.log('✅ Format: { questions: [...] }');
         }
 
         // Format 3: { data: [ ... ] }
         if (!questions && data && data.data && Array.isArray(data.data) && data.data.length > 0) {
-            const valid = data.data.every(q => 
-                q.id !== undefined && 
-                q.question && 
-                Array.isArray(q.options) && 
-                q.options.length >= 4 &&
-                q.solution
-            );
-            if (valid) {
-                questions = data.data;
-                console.log('✅ Format: { data: [...] }');
-            }
+            questions = data.data;
+            console.log('✅ Format: { data: [...] }');
         }
 
         if (!questions || !questions.length) {
@@ -192,14 +214,22 @@ async function selectCourse(courseId) {
         }
 
         // Parse correct answers from solution
-        questions = questions.map(q => ({
-            ...q,
-            correct: parseCorrectAnswer(q.solution)
-        }));
+        let invalidCount = 0;
+        questions = questions.map(q => {
+            const correct = parseCorrectAnswer(q.solution);
+            if (correct === -1) {
+                invalidCount++;
+                console.warn(`⚠️ Question ${q.id}: No correct answer parsed`);
+            }
+            return {
+                ...q,
+                correct: correct
+            };
+        });
 
-        const invalid = questions.filter(q => q.correct === -1);
-        if (invalid.length > 0) {
-            console.warn(`⚠️ ${invalid.length} questions have no valid ANSWER: in solution`);
+        if (invalidCount > 0) {
+            console.warn(`⚠️ ${invalidCount} questions have no parseable correct answer`);
+            showToast(`⚠️ ${invalidCount} questions missing answer key`, 'warning');
         }
 
         // Store and shuffle
@@ -210,12 +240,18 @@ async function selectCourse(courseId) {
         isAnswered = false;
 
         // Switch screens
-        document.getElementById('course-selection-screen').style.display = 'none';
-        document.getElementById('study-screen').style.display = 'block';
+        const courseScreen = document.getElementById('course-selection-screen');
+        const studyScreen = document.getElementById('study-screen');
+        
+        if (courseScreen) courseScreen.style.display = 'none';
+        if (studyScreen) studyScreen.style.display = 'block';
 
-        // HIDE LOADING OVERLAY
+        // Hide loading overlay
         if (questionCard) {
             questionCard.classList.remove('loading');
+        }
+        if (loadingOverlay) {
+            loadingOverlay.style.display = 'none';
         }
 
         renderQuestion();
@@ -223,7 +259,7 @@ async function selectCourse(courseId) {
 
     } catch (error) {
         console.error('❌ Select course error:', error);
-        showToast('Failed to load course questions', 'error');
+        showToast('Failed to load course questions: ' + error.message, 'error');
     }
 
     btn.classList.remove('loading');
@@ -232,9 +268,12 @@ async function selectCourse(courseId) {
 
 // ==================== RENDER QUESTION ====================
 function renderQuestion() {
-    // HIDE LOADING OVERLAY
+    // Hide loading overlay
     if (questionCard) {
         questionCard.classList.remove('loading');
+    }
+    if (loadingOverlay) {
+        loadingOverlay.style.display = 'none';
     }
 
     if (!currentQuestions.length || currentIndex >= currentQuestions.length) {
@@ -243,33 +282,59 @@ function renderQuestion() {
     }
 
     const q = currentQuestions[currentIndex];
-    const letters = ['A', 'B', 'C', 'D', 'E'];
+    const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
 
     isAnswered = false;
-    solutionContainer.style.display = 'none';
-    solutionText.classList.remove('show');
+    
+    if (solutionContainer) {
+        solutionContainer.style.display = 'block';
+    }
+    if (solutionText) {
+        solutionText.classList.remove('show');
+        solutionText.style.display = 'none';
+    }
+    if (toggleSolutionBtn) {
+        toggleSolutionBtn.textContent = '💡 Show Solution';
+    }
 
-    questionText.innerHTML = q.question;
-    questionText.classList.add('mathjax-process');
+    if (questionText) {
+        questionText.innerHTML = q.question;
+        questionText.classList.add('mathjax-process');
+    }
 
-    optionsContainer.innerHTML = q.options.map((opt, i) => `
-        <button class="option-btn" data-index="${i}" onclick="selectOption(${i})">
-            <span class="letter">${letters[i]}</span>
-            <span class="mathjax-process">${opt}</span>
-        </button>
-    `).join('');
+    if (optionsContainer) {
+        optionsContainer.innerHTML = q.options.map((opt, i) => `
+            <button class="option-btn" data-index="${i}" onclick="selectOption(${i})">
+                <span class="letter">${letters[i] || String.fromCharCode(65 + i)}</span>
+                <span class="mathjax-process">${opt}</span>
+            </button>
+        `).join('');
+    }
 
     const answered = currentQuestions.filter(q => q.userAnswer !== undefined && q.userAnswer !== null).length;
-    progressText.textContent = `Question ${currentIndex + 1} of ${totalQuestions}`;
-    scoreDisplay.textContent = `✅ ${answered}/${totalQuestions}`;
-    progressFill.style.width = `${((currentIndex + 1) / totalQuestions) * 100}%`;
+    
+    if (progressText) {
+        progressText.textContent = `Question ${currentIndex + 1} of ${totalQuestions}`;
+    }
+    if (scoreDisplay) {
+        scoreDisplay.textContent = `✅ ${answered}/${totalQuestions}`;
+    }
+    if (progressFill) {
+        progressFill.style.width = `${((currentIndex + 1) / totalQuestions) * 100}%`;
+    }
 
-    prevBtn.disabled = currentIndex === 0;
-    nextBtn.textContent = currentIndex === totalQuestions - 1 ? '🎯 Finish' : 'Next →';
+    if (prevBtn) prevBtn.disabled = currentIndex === 0;
+    if (nextBtn) {
+        nextBtn.disabled = false;
+        nextBtn.textContent = currentIndex === totalQuestions - 1 ? '🎯 Finish' : 'Next →';
+    }
 
+    // Re-render MathJax
     setTimeout(() => {
         if (window.MathJax && MathJax.typesetPromise) {
-            MathJax.typesetPromise().catch(() => {});
+            MathJax.typesetPromise().catch(err => {
+                console.warn('MathJax typeset error:', err);
+            });
         }
     }, 100);
 }
@@ -277,8 +342,16 @@ function renderQuestion() {
 // ==================== SELECT OPTION ====================
 function selectOption(index) {
     if (isAnswered) return;
+    if (!currentQuestions.length || currentIndex >= currentQuestions.length) return;
 
     const q = currentQuestions[currentIndex];
+    
+    // Check if correct answer is valid
+    if (q.correct === undefined || q.correct === null || q.correct === -1) {
+        showToast('⚠️ Answer key not available for this question', 'warning');
+        return;
+    }
+    
     const isCorrect = index === q.correct;
     q.userAnswer = index;
     isAnswered = true;
@@ -293,12 +366,22 @@ function selectOption(index) {
         if (i === index) btn.classList.add('selected');
     });
 
-    solutionContainer.style.display = 'block';
-    solutionText.innerHTML = q.solution || 'No explanation provided.';
-    solutionText.classList.add('show');
+    if (solutionContainer) {
+        solutionContainer.style.display = 'block';
+    }
+    if (solutionText) {
+        solutionText.innerHTML = q.solution || 'No explanation provided.';
+        solutionText.classList.add('show');
+        solutionText.style.display = 'block';
+    }
+    if (toggleSolutionBtn) {
+        toggleSolutionBtn.textContent = '🙈 Hide Solution';
+    }
 
     const answered = currentQuestions.filter(q => q.userAnswer !== undefined && q.userAnswer !== null).length;
-    scoreDisplay.textContent = `✅ ${answered}/${totalQuestions}`;
+    if (scoreDisplay) {
+        scoreDisplay.textContent = `✅ ${answered}/${totalQuestions}`;
+    }
 
     setTimeout(() => {
         if (window.MathJax && MathJax.typesetPromise) {
@@ -309,8 +392,8 @@ function selectOption(index) {
     if (isCorrect) {
         showToast('✅ Correct! Well done!', 'success');
     } else {
-        const letters = ['A', 'B', 'C', 'D', 'E'];
-        showToast(`❌ Incorrect. The correct answer is ${letters[q.correct]}`, 'error');
+        const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+        showToast(`❌ Incorrect. The correct answer is ${letters[q.correct] || String.fromCharCode(65 + q.correct)}`, 'error');
     }
 }
 
@@ -319,6 +402,10 @@ function prevQuestion() {
     if (currentIndex > 0) {
         currentIndex--;
         renderQuestion();
+        // Scroll to top of question
+        if (questionCard) {
+            questionCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
     }
 }
 
@@ -326,6 +413,10 @@ function nextQuestion() {
     if (currentIndex < totalQuestions - 1) {
         currentIndex++;
         renderQuestion();
+        // Scroll to top of question
+        if (questionCard) {
+            questionCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
     } else {
         showComplete();
     }
@@ -335,35 +426,43 @@ function nextQuestion() {
 function showComplete() {
     const percentage = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
     let grade = '', emoji = '';
+    
     if (percentage >= 90) { grade = 'Excellent!'; emoji = '🏆'; }
-    else if (percentage >= 70) { grade = 'Great Job!'; emoji = '💪'; }
+    else if (percentage >= 80) { grade = 'Great Job!'; emoji = '🎉'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; emoji = '💪'; }
+    else if (percentage >= 60) { grade = 'Not Bad!'; emoji = '👍'; }
     else if (percentage >= 50) { grade = 'Keep Practicing!'; emoji = '📚'; }
     else { grade = 'Review More!'; emoji = '🤔'; }
 
-    questionText.innerHTML = `
-        <div style="text-align:center;padding:20px 0">
-            <div style="font-size:3rem;margin-bottom:12px">${emoji}</div>
-            <h2 style="font-size:1.4rem;margin-bottom:4px;color:var(--text)">${grade}</h2>
-            <p style="color:var(--text-muted);font-size:0.9rem">You got ${score} out of ${totalQuestions} correct</p>
-            <p style="color:var(--blue-accent);font-size:1.6rem;font-weight:700;margin:8px 0">${percentage}%</p>
-            <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px">
-                <button onclick="restartTopic()" class="nav-btn next" style="max-width:160px">
-                    <i class="fas fa-redo"></i> Retry
-                </button>
-                <button onclick="backToMenu()" class="nav-btn prev" style="max-width:160px">
-                    <i class="fas fa-list"></i> Courses
-                </button>
+    if (questionText) {
+        questionText.innerHTML = `
+            <div style="text-align:center;padding:20px 0">
+                <div style="font-size:3rem;margin-bottom:12px">${emoji}</div>
+                <h2 style="font-size:1.4rem;margin-bottom:4px;color:var(--text)">${grade}</h2>
+                <p style="color:var(--text-muted);font-size:0.9rem">You got ${score} out of ${totalQuestions} correct</p>
+                <p style="color:var(--blue-accent);font-size:1.6rem;font-weight:700;margin:8px 0">${percentage}%</p>
+                <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px">
+                    <button onclick="restartTopic()" class="nav-btn next" style="max-width:160px">
+                        <i class="fas fa-redo"></i> Retry
+                    </button>
+                    <button onclick="backToMenu()" class="nav-btn prev" style="max-width:160px">
+                        <i class="fas fa-list"></i> Courses
+                    </button>
+                </div>
             </div>
-        </div>
-    `;
-    optionsContainer.innerHTML = '';
-    solutionContainer.style.display = 'none';
-    progressFill.style.width = '100%';
-    progressText.textContent = '🎯 Complete!';
-    scoreDisplay.textContent = `✅ ${score}/${totalQuestions}`;
-    prevBtn.disabled = true;
-    nextBtn.disabled = true;
-    nextBtn.textContent = '✅ Done';
+        `;
+    }
+    
+    if (optionsContainer) optionsContainer.innerHTML = '';
+    if (solutionContainer) solutionContainer.style.display = 'none';
+    if (progressFill) progressFill.style.width = '100%';
+    if (progressText) progressText.textContent = '🎯 Complete!';
+    if (scoreDisplay) scoreDisplay.textContent = `✅ ${score}/${totalQuestions}`;
+    if (prevBtn) prevBtn.disabled = true;
+    if (nextBtn) {
+        nextBtn.disabled = true;
+        nextBtn.textContent = '✅ Done';
+    }
 }
 
 // ==================== RESTART ====================
@@ -378,8 +477,12 @@ function restartTopic() {
 
 // ==================== BACK TO MENU ====================
 function backToMenu() {
-    document.getElementById('study-screen').style.display = 'none';
-    document.getElementById('course-selection-screen').style.display = 'block';
+    const studyScreen = document.getElementById('study-screen');
+    const courseScreen = document.getElementById('course-selection-screen');
+    
+    if (studyScreen) studyScreen.style.display = 'none';
+    if (courseScreen) courseScreen.style.display = 'block';
+    
     currentQuestions = [];
     currentIndex = 0;
     totalQuestions = 0;
@@ -394,19 +497,48 @@ if (backBtn) backBtn.addEventListener('click', backToMenu);
 
 if (toggleSolutionBtn) {
     toggleSolutionBtn.addEventListener('click', () => {
-        solutionText.classList.toggle('show');
-        toggleSolutionBtn.textContent = solutionText.classList.contains('show') ? '🙈 Hide Solution' : '💡 Show Solution';
+        if (solutionText) {
+            const isVisible = solutionText.style.display !== 'none';
+            if (isVisible) {
+                solutionText.style.display = 'none';
+                solutionText.classList.remove('show');
+                toggleSolutionBtn.textContent = '💡 Show Solution';
+            } else {
+                solutionText.style.display = 'block';
+                solutionText.classList.add('show');
+                toggleSolutionBtn.textContent = '🙈 Hide Solution';
+                
+                // Re-render MathJax for solution
+                setTimeout(() => {
+                    if (window.MathJax && MathJax.typesetPromise) {
+                        MathJax.typesetPromise().catch(() => {});
+                    }
+                }, 100);
+            }
+        }
     });
 }
 
 // Keyboard shortcuts
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft' && !prevBtn.disabled) prevQuestion();
-    if (e.key === 'ArrowRight' && !nextBtn.disabled) nextQuestion();
-    if (e.key >= '1' && e.key <= '5' && !isAnswered) {
+    // Don't trigger shortcuts if user is typing in an input
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    
+    if (e.key === 'ArrowLeft' && prevBtn && !prevBtn.disabled) {
+        e.preventDefault();
+        prevQuestion();
+    }
+    if (e.key === 'ArrowRight' && nextBtn && !nextBtn.disabled) {
+        e.preventDefault();
+        nextQuestion();
+    }
+    if (e.key >= '1' && e.key <= '9' && !isAnswered) {
+        e.preventDefault();
         const idx = parseInt(e.key) - 1;
-        const btns = optionsContainer.querySelectorAll('.option-btn');
-        if (btns[idx]) btns[idx].click();
+        const btns = optionsContainer?.querySelectorAll('.option-btn');
+        if (btns && btns[idx] && !btns[idx].classList.contains('disabled')) {
+            btns[idx].click();
+        }
     }
 });
 
@@ -422,12 +554,29 @@ function shuffleArray(arr) {
 
 // ==================== INIT ====================
 function init() {
+    console.log('🚀 Study Mode initializing...');
+    
+    // Check if all required DOM elements exist
+    const requiredElements = ['courseGrid', 'question-text', 'options-container'];
+    const missing = requiredElements.filter(id => !$(id));
+    
+    if (missing.length > 0) {
+        console.error('❌ Missing required DOM elements:', missing);
+        return;
+    }
+    
     initTheme();
     renderCourses();
     console.log('📚 Study Mode loaded successfully!');
+    console.log('💡 Features:');
+    console.log('  - Multiple answer format support');
+    console.log('  - Keyboard shortcuts (Arrow keys, 1-5)');
+    console.log('  - MathJax rendering');
+    console.log('  - Dark/Light theme');
+    console.log('  - Progress tracking');
 }
 
-// ==================== EXPOSE ====================
+// ==================== EXPOSE GLOBALS ====================
 window.selectCourse = selectCourse;
 window.selectOption = selectOption;
 window.prevQuestion = prevQuestion;
@@ -436,5 +585,10 @@ window.backToMenu = backToMenu;
 window.restartTopic = restartTopic;
 window.toggleTheme = toggleTheme;
 
-// Start
-init();
+// ==================== START ====================
+// Wait for DOM to be fully loaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}
