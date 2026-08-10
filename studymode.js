@@ -1,6 +1,6 @@
 // ============================================
 // STUDY MODE - OAU CBE Practice
-// FIXED: Options LaTeX + Solution Display
+// CRITICAL FIX: Options LaTeX Rendering
 // ============================================
 
 // ==================== CONFIGURATION ====================
@@ -38,6 +38,43 @@ const progressFill = $('progress-fill');
 const scoreDisplay = $('score-display');
 const questionCard = $('question-card');
 const loadingOverlay = document.querySelector('.loading-overlay');
+
+// ==================== MATHJAX HELPER ====================
+function typesetMath() {
+    return new Promise((resolve) => {
+        // Check if MathJax is loaded
+        if (!window.MathJax || !window.MathJax.typesetPromise) {
+            // Wait for MathJax to load
+            const checkInterval = setInterval(() => {
+                if (window.MathJax && window.MathJax.typesetPromise) {
+                    clearInterval(checkInterval);
+                    doTypeset(resolve);
+                }
+            }, 100);
+            
+            // Timeout after 5 seconds
+            setTimeout(() => {
+                clearInterval(checkInterval);
+                console.warn('MathJax not available');
+                resolve();
+            }, 5000);
+        } else {
+            doTypeset(resolve);
+        }
+    });
+}
+
+function doTypeset(resolve) {
+    MathJax.typesetPromise()
+        .then(() => {
+            console.log('✅ MathJax rendered');
+            resolve();
+        })
+        .catch((err) => {
+            console.warn('MathJax error:', err);
+            resolve();
+        });
+}
 
 // ==================== TOAST ====================
 function showToast(message, type = 'info') {
@@ -129,8 +166,6 @@ async function selectCourse(courseId) {
             return;
         }
 
-        console.log(`📁 Loading: /data/${currentCourse.file}`);
-
         const response = await fetch(`/data/${currentCourse.file}`);
 
         if (!response.ok) {
@@ -141,7 +176,6 @@ async function selectCourse(courseId) {
         }
 
         const data = await response.json();
-        console.log('✅ JSON loaded successfully');
 
         let questions = null;
 
@@ -177,7 +211,7 @@ async function selectCourse(courseId) {
         if (questionCard) questionCard.classList.remove('loading');
         if (loadingOverlay) loadingOverlay.style.display = 'none';
 
-        renderQuestion();
+        await renderQuestion();
         showToast(`📚 Loaded ${totalQuestions} questions`, 'success');
 
     } catch (error) {
@@ -190,7 +224,7 @@ async function selectCourse(courseId) {
 }
 
 // ==================== RENDER QUESTION ====================
-function renderQuestion() {
+async function renderQuestion() {
     if (questionCard) questionCard.classList.remove('loading');
     if (loadingOverlay) loadingOverlay.style.display = 'none';
 
@@ -204,26 +238,20 @@ function renderQuestion() {
 
     isAnswered = false;
 
-    // SOLUTION CONTAINER - Always show the container, but hide the text
-    if (solutionContainer) {
-        solutionContainer.style.display = 'block';
-    }
+    // Reset solution
+    if (solutionContainer) solutionContainer.style.display = 'none';
     if (solutionText) {
         solutionText.style.display = 'none';
-        solutionText.classList.remove('show');
         solutionText.innerHTML = '';
     }
-    if (toggleSolutionBtn) {
-        toggleSolutionBtn.textContent = '💡 Show Solution';
-        toggleSolutionBtn.style.display = 'inline-block';
-    }
+    if (toggleSolutionBtn) toggleSolutionBtn.textContent = '💡 Show Solution';
 
-    // QUESTION TEXT
+    // Set question text
     if (questionText) {
         questionText.innerHTML = q.question;
     }
 
-    // OPTIONS - Use innerHTML with proper spacing
+    // Build options using innerHTML so LaTeX is preserved
     if (optionsContainer) {
         optionsContainer.innerHTML = q.options.map((opt, i) => `
             <button class="option-btn" data-index="${i}" onclick="selectOption(${i})">
@@ -233,27 +261,25 @@ function renderQuestion() {
         `).join('');
     }
 
-    // PROGRESS
+    // Update progress
     const answered = currentQuestions.filter(q => q.userAnswer !== undefined && q.userAnswer !== null).length;
     if (progressText) progressText.textContent = `Question ${currentIndex + 1} of ${totalQuestions}`;
     if (scoreDisplay) scoreDisplay.textContent = `✅ ${answered}/${totalQuestions}`;
     if (progressFill) progressFill.style.width = `${((currentIndex + 1) / totalQuestions) * 100}%`;
 
-    // NAVIGATION
+    // Navigation
     if (prevBtn) prevBtn.disabled = currentIndex === 0;
     if (nextBtn) {
         nextBtn.disabled = false;
         nextBtn.textContent = currentIndex === totalQuestions - 1 ? '🎯 Finish' : 'Next →';
     }
 
-    // RENDER MATHJAX
-    if (window.MathJax && MathJax.typesetPromise) {
-        MathJax.typesetPromise().catch(err => console.warn('MathJax error:', err));
-    }
+    // CRITICAL: Render MathJax after all content is in the DOM
+    await typesetMath();
 }
 
 // ==================== SELECT OPTION ====================
-function selectOption(index) {
+async function selectOption(index) {
     if (isAnswered) return;
     if (!currentQuestions.length || currentIndex >= currentQuestions.length) return;
 
@@ -270,7 +296,7 @@ function selectOption(index) {
 
     if (isCorrect) score++;
 
-    // STYLE BUTTONS
+    // Style buttons
     const btns = optionsContainer.querySelectorAll('.option-btn');
     btns.forEach((btn, i) => {
         btn.classList.add('disabled');
@@ -279,34 +305,24 @@ function selectOption(index) {
         if (i === index) btn.classList.add('selected');
     });
 
-    // SHOW SOLUTION
-    if (solutionContainer) {
-        solutionContainer.style.display = 'block';
-    }
+    // Show solution
+    if (solutionContainer) solutionContainer.style.display = 'block';
     if (solutionText) {
-        // Convert newlines to <br> and wrap in paragraphs
         const formattedSolution = q.solution
-            .replace(/\n/g, '<br>')
-            .replace(/Step \d+:/g, '<br><strong>$&</strong>');
-        
+            .replace(/\n/g, '<br>');
         solutionText.innerHTML = formattedSolution || 'No explanation provided.';
         solutionText.style.display = 'block';
-        solutionText.classList.add('show');
     }
-    if (toggleSolutionBtn) {
-        toggleSolutionBtn.textContent = '🙈 Hide Solution';
-    }
+    if (toggleSolutionBtn) toggleSolutionBtn.textContent = '🙈 Hide Solution';
 
-    // UPDATE SCORE
+    // Update score
     const answered = currentQuestions.filter(q => q.userAnswer !== undefined && q.userAnswer !== null).length;
     if (scoreDisplay) scoreDisplay.textContent = `✅ ${answered}/${totalQuestions}`;
 
-    // RENDER MATHJAX FOR SOLUTION
-    if (window.MathJax && MathJax.typesetPromise) {
-        MathJax.typesetPromise().catch(err => console.warn('MathJax error:', err));
-    }
+    // Render MathJax for solution
+    await typesetMath();
 
-    // TOAST
+    // Toast
     const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
     if (isCorrect) {
         showToast('✅ Correct! Well done!', 'success');
@@ -362,7 +378,6 @@ function showComplete() {
 
     if (optionsContainer) optionsContainer.innerHTML = '';
     if (solutionContainer) solutionContainer.style.display = 'none';
-    if (toggleSolutionBtn) toggleSolutionBtn.style.display = 'none';
     if (progressFill) progressFill.style.width = '100%';
     if (progressText) progressText.textContent = '🎯 Complete!';
     if (scoreDisplay) scoreDisplay.textContent = `✅ ${score}/${totalQuestions}`;
@@ -400,28 +415,22 @@ if (nextBtn) nextBtn.addEventListener('click', nextQuestion);
 if (backBtn) backBtn.addEventListener('click', backToMenu);
 
 if (toggleSolutionBtn) {
-    toggleSolutionBtn.addEventListener('click', () => {
+    toggleSolutionBtn.addEventListener('click', async () => {
         if (solutionText) {
             const isVisible = solutionText.style.display === 'block';
             if (isVisible) {
                 solutionText.style.display = 'none';
-                solutionText.classList.remove('show');
                 toggleSolutionBtn.textContent = '💡 Show Solution';
             } else {
                 solutionText.style.display = 'block';
-                solutionText.classList.add('show');
                 toggleSolutionBtn.textContent = '🙈 Hide Solution';
-                
-                // Render MathJax for solution
-                if (window.MathJax && MathJax.typesetPromise) {
-                    MathJax.typesetPromise().catch(err => console.warn('MathJax error:', err));
-                }
+                await typesetMath();
             }
         }
     });
 }
 
-// KEYBOARD SHORTCUTS
+// Keyboard shortcuts
 document.addEventListener('keydown', (e) => {
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
 
