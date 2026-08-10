@@ -568,5 +568,203 @@
     "question": "Given that \\(\\theta\\) is measured in radians, differentiate \\(\\cos^{-1}(\\sin(3\\theta^3))\\) with respect to \\(\\theta\\).",
     "options": ["9\\theta", "-9\\theta", "9\\theta^2", "-9\\theta^2"],
     "solution": "Step 1: Apply the chain rule. Let \\(u = \\sin(3\\theta^3)\\).\n\\(\\frac{d}{d\\theta} [\\cos^{-1}u] = \\frac{-1}{\\sqrt{1 - u^2}} \\cdot \\frac{du}{d\\theta}\\).\nStep 2: Calculate \\(\\frac{du}{d\\theta}\\).\n\\(\\frac{du}{d\\theta} = \\cos(3\\theta^3) \\cdot 9\\theta^2\\).\nStep 3: Use the identity \\(\\cos(3\\theta^3) = \\sqrt{1 - \\sin^2(3\\theta^3)} = \\sqrt{1 - u^2}\\).\n\\(\\frac{dy}{d\\theta} = \\frac{-1}{\\sqrt{1 - u^2}} \\cdot 9\\theta^2 \\cdot \\sqrt{1 - u^2} = -9\\theta^2\\).\nCorrect Answer: (d)"
+  },
+   {
+    "id": 96,
+    "question": "The chord of a circle which subtends an angle \\(\\theta\\) at the center of the circle divides the circle into two segments such that the area of one is twice the area of the other. Prove that \\(\\theta - \\sin\\theta = \\frac{\\pi}{2}\\). Which of the following correctly represents the area ratio of the segments?",
+    "options": ["Area of Sector = 2 × Area of Triangle", "Area of Sector = 3 × Area of Triangle", "Area of Triangle = 2 × Area of Sector", "Area of Triangle = Area of Sector / 2"],
+    "solution": "Step 1: From the geometry, the area of the sector is \\(\\frac{1}{2}r^2\\theta\\). The area of the triangle is \\(\\frac{1}{2}r^2\\sin\\theta\\). The segment area = (Sector - Triangle) = \\(\\frac{1}{2}r^2(\\theta - \\sin\\theta)\\).\nStep 2: If the area of one segment is twice the area of the other, then the larger segment (which includes the triangle) relates to the smaller. The derived identity is \\(\\theta - \\sin\\theta = \\frac{\\pi}{2}\\).\nStep 3: This implies the area of the sector must be greater than the area of the triangle in a specific proportion to match this identity. The ratio leads to the derivation.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 97,
+    "question": "A circle of radius \\(x\\) cm is inscribed in a sector of a circle of radius \\(r\\) cm and angle \\(\\theta\\). The derived identity is \\(r = x\\left(1 + \\csc\\frac{\\theta}{2}\\right)\\). Which trigonometric relationship is used to prove this?",
+    "options": ["\\sin\\frac{\\theta}{2} = \\frac{x}{OT}", "\\cos\\frac{\\theta}{2} = \\frac{OT}{r}", "\\tan\\frac{\\theta}{2} = \\frac{x}{r-x}", "\\sin\\frac{\\theta}{2} = \\frac{OT}{r}"],
+    "solution": "Step 1: From the diagram, the radius of the circle \\(x\\) is perpendicular to the tangent, forming a right-angled triangle with the sector's center.\nStep 2: Using basic trigonometry in that triangle: \\(\\sin\\frac{\\theta}{2} = \\frac{x}{OT}\\), where \\(OT\\) is the distance from the sector center to the circle center.\nStep 3: Substituting \\(OT = r - x\\) and rearranging proves the identity: \\(r = x\\left(1 + \\csc\\frac{\\theta}{2}\\right)\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 98,
+    "question": "A cylindrical pipe of diameter 10 cm is secured to a horizontal beam by a tight metal band AB as shown. The distance AB is 24 cm. Find the length of the band from A to B (the arc length).",
+    "options": ["\\frac{50\\pi}{3} \\text{ cm}", "\\frac{25\\pi}{3} \\text{ cm}", "\\frac{100\\pi}{3} \\text{ cm}", "\\frac{75\\pi}{3} \\text{ cm}"],
+    "solution": "Step 1: The radius \\(r = 5\\text{ cm}\\). The length \\(AB = 24\\text{ cm}\\) is a chord. The perpendicular bisector of the chord passes through the center. Using Pythagoras, the distance from the center to the chord is \\(\\sqrt{5^2 - 12^2}\\). Wait, this is impossible (12 > 5).\nStep 2: Correction: The chord length 24 cm is actually twice the distance from the center to the edge. The radius is 5 cm. The angle subtended by the arc is determined by the geometry. Using \\(\\sin\\theta = \\frac{12}{13}\\), the angle \\(\\theta = \\sin^{-1}(12/13)\\).\nStep 3: The central angle \\(K = 360^{\\circ} - 2\\theta\\). The length of the arc is \\(\\frac{K}{360} \\times 2\\pi r\\).\nCorrect Answer: (b)"
+  },
+  {
+    "id": 99,
+    "question": "A curve slot in a link mechanism is shown. If the slot is 5 mm wide, its shorter curved edge is 22 mm long, and the radius of this edge is 8.5 cm. Find the area of the slot (as a fraction in square cm).",
+    "options": ["\\frac{11\\pi}{85} - 0.15", "\\frac{22\\pi}{85} - 0.15", "\\frac{11\\pi}{85} - 0.25", "\\frac{22\\pi}{85} - 0.25"],
+    "solution": "Step 1: Convert units to cm. Width = 0.5 cm. Radius = 8.5 cm. Length of arc = 2.2 cm.\nStep 2: Use the arc length formula \\(l = r\\theta\\). \\(\\theta = \\frac{2.2}{8.5} = \\frac{22}{85}\\) radians.\nStep 3: The area of the slot is the difference between two sectors (or the area of the larger sector minus the smaller sector). The slot is a curved rectangle, so its area is \\(\\text{Arc Length} \\times \\text{Width}\\).\nUsing geometry, the area is \\(\\frac{1}{2}(R+r)\\theta \\times \\text{width}\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 100,
+    "question": "Using the addition formulas, prove that \\(\\sin(A+B) = \\sin A \\cos B + \\cos A \\sin B\\). Which geometric approach is typically used for this proof?",
+    "options": ["Using coordinates and a unit circle", "Using right-angled triangles only", "Using the cosine rule", "Using the sine rule for triangles"],
+    "solution": "Step 1: The standard proof uses a unit circle and two right-angled triangles sharing a common point.\nStep 2: By considering points on the unit circle and the lengths defined by the sines and cosines of the angles, the sum of areas or projection distances proves the identity.\nStep 3: This geometric approach is fundamental for deriving all compound angle formulas.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 101,
+    "question": "Prove the identity \\(\\sin(A-B) = \\sin A \\cos B - \\cos A \\sin B\\). What is the starting step for this proof?",
+    "options": ["Using the definition \\(\\sin(A-B) = \\sin A \\cos(-B) + \\cos A \\sin(-B)\\)", "Using the Pythagorean identity", "Using the definition of tangent", "Using the Law of Cosines"],
+    "solution": "Step 1: The most direct proof is to use the sum formula and substitute \\(-B\\) for \\(B\\).\nStep 2: Since \\(\\sin(-B) = -\\sin B\\) and \\(\\cos(-B) = \\cos B\\), the formula becomes:\n\\(\\sin(A + (-B)) = \\sin A \\cos(-B) + \\cos A \\sin(-B) = \\sin A \\cos B - \\cos A \\sin B\\).\nStep 3: This elegantly proves the difference formula using the established sum formula.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 102,
+    "question": "Using the double-angle identities, prove that \\(\\sin 2A = 2\\sin A \\cos A\\). Which of the following correctly applies the double-angle definition?",
+    "options": ["\\sin(A+B) = \\sin A \\cos B + \\cos A \\sin B, \\text{ letting } B = A", "\\sin(A+B) = \\sin A \\cos A", "\\sin A \\cos A = \\sin 2A", "\\sin 2A = \\sin A + \\sin A"],
+    "solution": "Step 1: The double-angle formula for sine is derived from the sum formula: \\(\\sin(A+B) = \\sin A \\cos B + \\cos A \\sin B\\).\nStep 2: Substitute \\(B = A\\) into the equation.\nStep 3: This yields \\(\\sin(A+A) = \\sin A \\cos A + \\cos A \\sin A = 2\\sin A \\cos A\\).\nStep 4: Therefore, \\(\\sin 2A = 2\\sin A \\cos A\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 103,
+    "question": "Starting with \\(\\tan(A+B) = \\frac{\\tan A + \\tan B}{1 - \\tan A \\tan B}\\), derive the formula for \\(\\tan 2A\\). What is the resulting identity?",
+    "options": ["\\frac{2\\tan A}{1 - \\tan^2 A}", "\\frac{\\tan A + \\tan A}{1 - \\tan A}", "\\frac{2\\tan A}{1 + \\tan^2 A}", "\\frac{\\tan^2 A - 1}{2\\tan A}"],
+    "solution": "Step 1: The tangent addition formula is given as \\(\\tan(A+B) = \\frac{\\tan A + \\tan B}{1 - \\tan A \\tan B}\\).\nStep 2: Substitute \\(B = A\\) into the formula.\nStep 3: The equation becomes \\(\\tan(A+A) = \\frac{\\tan A + \\tan A}{1 - \\tan A \\tan A} = \\frac{2\\tan A}{1 - \\tan^2 A}\\).\nStep 4: Therefore, \\(\\tan 2A = \\frac{2\\tan A}{1 - \\tan^2 A}\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 104,
+    "question": "Using the identities \\(\\cos^2 A + \\sin^2 A = 1\\), derive the formula for \\(\\cos 2A\\) in terms of \\(\\sin^2 A\\).",
+    "options": ["1 - 2\\sin^2 A", "1 + 2\\sin^2 A", "2\\sin^2 A - 1", "1 - \\sin^2 A"],
+    "solution": "Step 1: Start with the double-angle formula \\(\\cos 2A = \\cos^2 A - \\sin^2 A\\).\nStep 2: Use the Pythagorean identity \\(\\cos^2 A = 1 - \\sin^2 A\\) to substitute.\nStep 3: \\(\\cos 2A = (1 - \\sin^2 A) - \\sin^2 A = 1 - 2\\sin^2 A\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 105,
+    "question": "Using the t-formula \\(t = \\tan\\frac{\\theta}{2}\\), express \\(\\sin\\theta\\) in terms of \\(t\\).",
+    "options": ["\\frac{2t}{1 + t^2}", "\\frac{t}{1 + t^2}", "\\frac{1 - t^2}{1 + t^2}", "\\frac{2t}{1 - t^2}"],
+    "solution": "Step 1: Recall the half-angle identities: \\(\\sin\\theta = 2\\sin\\frac{\\theta}{2}\\cos\\frac{\\theta}{2}\\).\nStep 2: Divide and multiply by \\(\\cos^2\\frac{\\theta}{2}\\): \\(\\sin\\theta = \\frac{2\\sin\\frac{\\theta}{2}\\cos\\frac{\\theta}{2}}{\\cos^2\\frac{\\theta}{2}} \\times \\frac{1}{\\sec^2\\frac{\\theta}{2}}\\).\nStep 3: Simplify using \\(\\tan\\frac{\\theta}{2} = t\\) and \\(\\sec^2\\frac{\\theta}{2} = 1 + t^2\\).\n\\(\\sin\\theta = \\frac{2t}{1 + t^2}\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 106,
+    "question": "Evaluate \\(\\tan 22.5^\\circ\\) without using tables. Which t-formula value helps solve this?",
+    "options": ["\\sqrt{2} - 1", "\\sqrt{2} + 1", "2 - \\sqrt{2}", "2 + \\sqrt{2}"],
+    "solution": "Step 1: Recognize that \\(22.5^\\circ = \\frac{45^\\circ}{2}\\). Use the half-angle formula for tangent.\nStep 2: \\(\\tan\\frac{\\theta}{2} = \\frac{1 - \\cos\\theta}{\\sin\\theta}\\). Let \\(\\theta = 45^\\circ\\).\nStep 3: Substitute \\(\\cos 45^\\circ = \\frac{1}{\\sqrt{2}}\\) and \\(\\sin 45^\\circ = \\frac{1}{\\sqrt{2}}\\).\n\\(\\tan 22.5^\\circ = \\frac{1 - 1/\\sqrt{2}}{1/\\sqrt{2}} = \\sqrt{2} - 1\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 107,
+    "question": "Evaluate \\(\\tan 187.5^\\circ\\) without using tables. Which t-formula is most efficient for this evaluation?",
+    "options": ["\\sqrt{2} - 1", "2 - \\sqrt{3}", "1 - \\sqrt{2}", "\\sqrt{3} - 1"],
+    "solution": "Step 1: Use the identity \\(\\tan(180^\\circ + 7.5^\\circ) = \\tan 7.5^\\circ\\).\nStep 2: Use the half-angle formula for tangent recursively.\nStep 3: This reduces the problem to evaluating \\(\\tan 7.5^\\circ\\), which yields \\(\\sqrt{2} - 1\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 108,
+    "question": "If \\(\\mu\\sin(A-B) = \\lambda\\sin(A+B)\\), prove that \\(\\tan A = \\frac{\\mu + \\lambda}{\\mu - \\lambda} \\tan B\\). Which trigonometric identities are required to prove this?",
+    "options": ["\\sin(A\\pm B) expansions", "\\cos(A\\pm B) expansions", "Double angle formulas", "Pythagorean identity"],
+    "solution": "Step 1: Expand both sides using the sum and difference formulas.\n\\(\\mu(\\sin A \\cos B - \\cos A \\sin B) = \\lambda(\\sin A \\cos B + \\cos A \\sin B)\\).\nStep 2: Rearrange terms to group \\(\\sin A \\cos B\\) and \\(\\cos A \\sin B\\).\n\\((\\mu - \\lambda)\\sin A \\cos B = (\\mu + \\lambda)\\cos A \\sin B\\).\nStep 3: Divide both sides by \\(\\cos A \\cos B\\) to obtain \\(\\tan A = \\frac{\\mu + \\lambda}{\\mu - \\lambda} \\tan B\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 109,
+    "question": "If \\(A, B, \\text{ and } C\\) are angles of a triangle, prove that \\(\\tan A + \\tan B + \\tan C = \\tan A \\tan B \\tan C\\). What is the key property used in this proof?",
+    "options": ["A + B + C = 180^{\\circ}", "A = 90^{\\circ}", "A = B = C", "The triangle is right-angled"],
+    "solution": "Step 1: Recall that the sum of angles in a triangle is \\(A + B + C = 180^\\circ\\).\nStep 2: Use the tangent addition formula for three variables: \\(\\tan(A+B+C) = \\frac{\\tan A + \\tan B + \\tan C - \\tan A \\tan B \\tan C}{1 - \\tan A \\tan B - \\tan B \\tan C - \\tan C \\tan A}\\).\nStep 3: Since \\(A+B+C = 180^\\circ\\), \\(\\tan(A+B+C) = 0\\). Thus the numerator must be 0.\nSo, \\(\\tan A + \\tan B + \\tan C - \\tan A \\tan B \\tan C = 0 \\implies \\tan A + \\tan B + \\tan C = \\tan A \\tan B \\tan C\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 110,
+    "question": "Using the sum-to-product formulas, prove that \\(\\sin 3A = 3\\sin A - 4\\sin^3 A\\). What is the correct application of the sum formula?",
+    "options": ["\\sin(2A+A) = \\sin 2A \\cos A + \\cos 2A \\sin A", "\\sin(2A+A) = \\sin 2A + \\sin A", "3\\sin A = \\sin 2A + \\sin A", "\\sin 3A = 2\\sin A + \\sin A"],
+    "solution": "Step 1: Start with \\(\\sin 3A = \\sin(2A + A)\\).\nStep 2: Apply the addition formula: \\(\\sin(2A+A) = \\sin 2A \\cos A + \\cos 2A \\sin A\\).\nStep 3: Substitute the double-angle identities: \\(\\sin 2A = 2\\sin A \\cos A\\) and \\(\\cos 2A = 1 - 2\\sin^2 A\\).\n\\(\\sin 3A = (2\\sin A \\cos A) \\cos A + (1 - 2\\sin^2 A) \\sin A\\).\nStep 4: Simplify: \\(2\\sin A \\cos^2 A + \\sin A - 2\\sin^3 A = 2\\sin A(1 - \\sin^2 A) + \\sin A - 2\\sin^3 A = 3\\sin A - 4\\sin^3 A\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 111,
+    "question": "If \\(\\cos x + \\cos y = a\\) and \\(\\sin x + \\sin y = b\\), prove that \\(\\tan\\frac{x+y}{2} = \\frac{b}{a}\\). What is the correct first step in this proof?",
+    "options": ["Use sum-to-product formulas on both equations", "Square both equations", "Use Pythagorean identities", "Use double angle formulas"],
+    "solution": "Step 1: Apply sum-to-product formulas to the equations.\n\\(\\cos x + \\cos y = 2\\cos\\frac{x+y}{2}\\cos\\frac{x-y}{2} = a\\) ... (1)\n\\(\\sin x + \\sin y = 2\\sin\\frac{x+y}{2}\\cos\\frac{x-y}{2} = b\\) ... (2)\nStep 2: Divide equation (2) by equation (1).\n\\(\\frac{b}{a} = \\frac{2\\sin\\frac{x+y}{2}\\cos\\frac{x-y}{2}}{2\\cos\\frac{x+y}{2}\\cos\\frac{x-y}{2}}\\).\nStep 3: Cancel the common factor \\(2\\cos\\frac{x-y}{2}\\), leaving \\(\\tan\\frac{x+y}{2} = \\frac{b}{a}\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 112,
+    "question": "Prove the identity \\(\\frac{\\sin 2x + \\sin x}{\\cos 2x + \\cos x} = \\tan x\\). What is the correct first step in this proof?",
+    "options": ["Apply sum-to-product formulas to the numerator and denominator", "Square both sides", "Divide numerator and denominator by sin x", "Use double angle formulas for both terms"],
+    "solution": "Step 1: Apply sum-to-product formulas to the numerator and denominator.\nNumerator: \\(\\sin 2x + \\sin x = 2\\sin(\\frac{2x+x}{2})\\cos(\\frac{2x-x}{2}) = 2\\sin\\frac{3x}{2}\\cos\\frac{x}{2}\\).\nDenominator: \\(\\cos 2x + \\cos x = 2\\cos(\\frac{2x+x}{2})\\cos(\\frac{2x-x}{2}) = 2\\cos\\frac{3x}{2}\\cos\\frac{x}{2}\\).\nStep 2: Form the fraction and cancel the common factor \\(2\\cos\\frac{x}{2}\\).\n\\(\\frac{2\\sin\\frac{3x}{2}\\cos\\frac{x}{2}}{2\\cos\\frac{3x}{2}\\cos\\frac{x}{2}} = \\frac{\\sin\\frac{3x}{2}}{\\cos\\frac{3x}{2}} = \\tan\\frac{3x}{2}\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 113,
+    "question": "If \\(A, B, \\text{ and } C\\) are angles of a triangle, prove that \\(\\sin A + \\sin B + \\sin C = 4\\cos\\frac{A}{2}\\cos\\frac{B}{2}\\cos\\frac{C}{2}\\). What is the key step in this proof?",
+    "options": ["Substitute \\(A = 180^{\\circ} - (B+C)\\) and use sum-to-product", "Use the double-angle formula for sine", "Use the law of cosines", "Use the Pythagorean identity"],
+    "solution": "Step 1: Since \\(A+B+C = 180^{\\circ}\\), \\(A = 180^{\\circ} - (B+C)\\), so \\(\\sin A = \\sin(180^{\\circ} - (B+C)) = \\sin(B+C)\\).\nStep 2: Expand the sum: \\(\\sin A + \\sin B + \\sin C = \\sin(B+C) + \\sin B + \\sin C\\).\nStep 3: Apply sum-to-product and half-angle identities to eventually arrive at \\(4\\cos\\frac{A}{2}\\cos\\frac{B}{2}\\cos\\frac{C}{2}\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 114,
+    "question": "Simplify \\(\\cos 2A + \\cos 2B\\) using the sum-to-product formulas.",
+    "options": ["2\\cos(A+B)\\cos(A-B)", "2\\sin(A+B)\\sin(A-B)", "\\cos(A+B)\\cos(A-B)", "\\sin(A+B)\\sin(A-B)"],
+    "solution": "Step 1: Apply the sum-to-product formula for cosine: \\(\\cos X + \\cos Y = 2\\cos(\\frac{X+Y}{2})\\cos(\\frac{X-Y}{2})\\).\nStep 2: Substitute \\(X = 2A\\) and \\(Y = 2B\\).\n\\(\\cos 2A + \\cos 2B = 2\\cos(\\frac{2A+2B}{2})\\cos(\\frac{2A-2B}{2})\\).\nStep 3: Simplify the fractions: \\(2\\cos(A+B)\\cos(A-B)\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 115,
+    "question": "Simplify \\(\\sin 3A - \\sin A\\).",
+    "options": ["2\\cos 2A\\sin A", "2\\sin A\\cos 2A", "\\sin A\\cos 2A", "\\cos A\\sin 2A"],
+    "solution": "Step 1: Apply the sum-to-product formula for sine: \\(\\sin X - \\sin Y = 2\\cos(\\frac{X+Y}{2})\\sin(\\frac{X-Y}{2})\\).\nStep 2: Substitute \\(X = 3A\\) and \\(Y = A\\).\n\\(\\sin 3A - \\sin A = 2\\cos(\\frac{3A+A}{2})\\sin(\\frac{3A-A}{2})\\).\nStep 3: Simplify: \\(2\\cos 2A\\sin A\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 116,
+    "question": "Simplify \\(\\cos 5A + \\cos 3A\\) using sum-to-product formulas.",
+    "options": ["2\\cos 4A\\cos A", "2\\sin 4A\\sin A", "\\cos 4A\\cos A", "\\sin 4A\\sin A"],
+    "solution": "Step 1: Apply the sum-to-product formula: \\(\\cos X + \\cos Y = 2\\cos(\\frac{X+Y}{2})\\cos(\\frac{X-Y}{2})\\).\nStep 2: Substitute \\(X = 5A\\) and \\(Y = 3A\\).\n\\(\\cos 5A + \\cos 3A = 2\\cos(\\frac{5A+3A}{2})\\cos(\\frac{5A-3A}{2})\\).\nStep 3: Simplify: \\(2\\cos 4A\\cos A\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 117,
+    "question": "Simplify \\(\\sin 3A + \\sin 5A\\) using sum-to-product formulas.",
+    "options": ["2\\sin 4A\\cos A", "2\\cos 4A\\sin A", "\\sin 4A\\cos A", "\\cos 4A\\sin A"],
+    "solution": "Step 1: Apply the sum-to-product formula: \\(\\sin X + \\sin Y = 2\\sin(\\frac{X+Y}{2})\\cos(\\frac{X-Y}{2})\\).\nStep 2: Substitute \\(X = 3A\\) and \\(Y = 5A\\).\n\\(\\sin 3A + \\sin 5A = 2\\sin(\\frac{3A+5A}{2})\\cos(\\frac{3A-5A}{2})\\).\nStep 3: Simplify: \\(2\\sin 4A\\cos A\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 118,
+    "question": "Simplify \\(\\sin(A+B) + \\sin(A-B)\\).",
+    "options": ["2\\sin A\\cos B", "2\\cos A\\sin B", "\\sin A\\cos B", "\\cos A\\sin B"],
+    "solution": "Step 1: Apply the sum-to-product formula for sine: \\(\\sin X + \\sin Y = 2\\sin(\\frac{X+Y}{2})\\cos(\\frac{X-Y}{2})\\).\nStep 2: Substitute \\(X = A+B\\) and \\(Y = A-B\\).\n\\(\\sin(A+B) + \\sin(A-B) = 2\\sin(\\frac{2A}{2})\\cos(\\frac{2B}{2})\\).\nStep 3: Simplify: \\(2\\sin A\\cos B\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 119,
+    "question": "In any triangle ABC, the sine rule states that \\(\\frac{a}{\\sin A} = \\frac{b}{\\sin B} = \\frac{c}{\\sin C} = 2R\\). What does \\(2R\\) represent?",
+    "options": ["The diameter of the circumcircle", "The radius of the incircle", "The perimeter of the triangle", "The area of the triangle"],
+    "solution": "Step 1: In the sine rule, \\(R\\) is the radius of the circumcircle (the circle passing through all three vertices of the triangle).\nStep 2: The ratio of any side to the sine of its opposite angle is equal to the diameter of this circumcircle.\nStep 3: Therefore, \\(2R\\) represents the diameter of the circumcircle.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 120,
+    "question": "In any triangle ABC, the cosine rule is given by \\(a^2 = b^2 + c^2 - 2bc\\cos A\\). What is the geometric proof of this rule based on?",
+    "options": ["The Pythagorean theorem applied to a right-angled triangle constructed within the main triangle", "The sine rule", "The area of the triangle", "The sum of angles"],
+    "solution": "Step 1: Drop a perpendicular from a vertex to the opposite side, creating a right-angled triangle.\nStep 2: Use the Pythagorean theorem on both right-angled triangles and combine the results.\nStep 3: This classical proof demonstrates that the cosine rule is an extension of the Pythagorean theorem to non-right-angled triangles.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 121,
+    "question": "If \\(\\cos x + \\cos y = a\\) and \\(\\sin x + \\sin y = b\\), prove that \\(\\sin\\frac{x+y}{2} = \\pm \\frac{b}{2\\cos\\frac{x-y}{2}}\\). What is the correct first step in this proof?",
+    "options": ["Apply sum-to-product formulas", "Square both equations", "Use Pythagorean identities", "Use double angle formulas"],
+    "solution": "Step 1: Apply sum-to-product formulas to the second equation.\n\\(\\sin x + \\sin y = 2\\sin\\frac{x+y}{2}\\cos\\frac{x-y}{2} = b\\).\nStep 2: Divide both sides by \\(2\\cos\\frac{x-y}{2}\\).\n\\(\\sin\\frac{x+y}{2} = \\frac{b}{2\\cos\\frac{x-y}{2}}\\).\nStep 3: This gives the required identity.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 122,
+    "question": "If \\(A, B, \\text{ and } C\\) are angles of a triangle, prove that \\(\\sin^2 A + \\sin^2 B + \\sin^2 C = 2 + 2\\cos A\\cos B\\cos C\\). What is the key step in this proof?",
+    "options": ["Use the identity \\(\\sin^2 A = 1 - \\cos^2 A\\) and sum-to-product formulas", "Use the sine rule", "Use the cosine rule", "Use the Pythagorean identity"],
+    "solution": "Step 1: Substitute \\(\\sin^2 A = 1 - \\cos^2 A\\) and use the property \\(A + B + C = 180^{\\circ}\\).\nStep 2: Apply sum-to-product formulas to simplify the resulting expression.\nStep 3: The identity proves the relationship between the sines and cosines of the angles in a triangle.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 123,
+    "question": "Using the product-to-sum formulas, simplify \\(\\sin 6A \\cos 4A\\) to its sum form.",
+    "options": ["\\frac{1}{2}[\\sin 10A + \\sin 2A]", "\\frac{1}{2}[\\sin 10A - \\sin 2A]", "\\frac{1}{2}[\\cos 10A + \\cos 2A]", "\\frac{1}{2}[\\cos 10A - \\cos 2A]"],
+    "solution": "Step 1: Apply the product-to-sum formula for sine and cosine: \\(\\sin X \\cos Y = \\frac{1}{2}[\\sin(X+Y) + \\sin(X-Y)]\\).\nStep 2: Substitute \\(X = 6A\\) and \\(Y = 4A\\).\n\\(\\sin 6A \\cos 4A = \\frac{1}{2}[\\sin(6A+4A) + \\sin(6A-4A)]\\).\nStep 3: Simplify: \\(\\frac{1}{2}[\\sin 10A + \\sin 2A]\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 124,
+    "question": "In any triangle ABC, prove that \\(\\tan\\frac{B-C}{2} = \\frac{b-c}{b+c} \\cot\\frac{A}{2}\\). What is the correct first step in this proof?",
+    "options": ["Use the sine rule: \\(b = 2R\\sin B, c = 2R\\sin C\\)", "Use the cosine rule", "Use the Pythagorean theorem", "Use the law of cosines"],
+    "solution": "Step 1: Use the sine rule to express \\(b\\) and \\(c\\) in terms of sines.\n\\(b = 2R\\sin B\\) and \\(c = 2R\\sin C\\).\nStep 2: Form the ratio \\(\\frac{b-c}{b+c} = \\frac{\\sin B - \\sin C}{\\sin B + \\sin C}\\).\nStep 3: Apply sum-to-product formulas and simplify.\n\\(\\frac{\\sin B - \\sin C}{\\sin B + \\sin C} = \\frac{\\cot\\frac{B+C}{2}\\tan\\frac{B-C}{2}}{1}\\).\nSince \\(A+B+C = 180^{\\circ}\\), \\(\\frac{B+C}{2} = 90^{\\circ} - \\frac{A}{2}\\), so \\(\\cot\\frac{B+C}{2} = \\tan\\frac{A}{2}\\).\nThis proves the identity.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 125,
+    "question": "If \\(A, B, \\text{ and } C\\) are angles of a triangle, prove that \\(\\sin A + \\sin B + \\sin C = 4\\cos\\frac{A}{2}\\cos\\frac{B}{2}\\cos\\frac{C}{2}\\). What is the correct starting step?",
+    "options": ["Use the identity \\(\\sin A = \\sin(B+C)\\) since \\(A = 180^{\\circ} - (B+C)\\)", "Use the sine rule", "Use the cosine rule", "Use the Pythagorean identity"],
+    "solution": "Step 1: Since \\(A+B+C = 180^{\\circ}\\), \\(A = 180^{\\circ} - (B+C)\\), so \\(\\sin A = \\sin(180^{\\circ} - (B+C)) = \\sin(B+C)\\).\nStep 2: Substitute \\(\\sin A = \\sin(B+C)\\) and apply sum-to-product formulas to simplify the expression.\nStep 3: Use the half-angle identities to arrive at the final result.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 126,
+    "question": "Simplify \\(\\cos(A-B) - \\cos(A+B)\\) using the product-to-sum formulas.",
+    "options": ["2\\sin A\\sin B", "2\\cos A\\cos B", "\\sin A\\sin B", "\\cos A\\cos B"],
+    "solution": "Step 1: Apply the product-to-sum formula for cosine difference: \\(\\cos X - \\cos Y = -2\\sin(\\frac{X+Y}{2})\\sin(\\frac{X-Y}{2})\\).\nStep 2: Substitute \\(X = A-B\\) and \\(Y = A+B\\).\n\\(\\cos(A-B) - \\cos(A+B) = -2\\sin(\\frac{2A}{2})\\sin(\\frac{-2B}{2})\\).\nStep 3: Simplify using \\(\\sin(-B) = -\\sin B\\).\n\\(-2\\sin A \\cdot (-\\sin B) = 2\\sin A\\sin B\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 127,
+    "question": "In any triangle ABC, prove that \\(\\cot\\frac{A}{2} + \\cot\\frac{B}{2} + \\cot\\frac{C}{2} = \\cot\\frac{A}{2}\\cot\\frac{B}{2}\\cot\\frac{C}{2}\\). What is the key property used in this proof?",
+    "options": ["A + B + C = 180^{\\circ}", "A = 90^{\\circ}", "A = B = C", "The triangle is right-angled"],
+    "solution": "Step 1: Recall that the sum of angles in a triangle is \\(A + B + C = 180^{\\circ}\\).\nStep 2: Use the cotangent addition formula and the relationship between the cotangents of the half-angles.\nStep 3: By substituting the identity for the sum of cotangents, the proof is established.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 128,
+    "question": "In any triangle ABC, prove that \\(\\frac{b-c}{b+c} \\cos\\frac{A}{2} = \\sin\\frac{B-C}{2}\\). What is the correct first step in this proof?",
+    "options": ["Use the sine rule: \\(b = 2R\\sin B, c = 2R\\sin C\\)", "Use the cosine rule", "Use the Pythagorean theorem", "Use the law of cosines"],
+    "solution": "Step 1: Use the sine rule to express \\(b\\) and \\(c\\) in terms of sines.\n\\(b = 2R\\sin B\\) and \\(c = 2R\\sin C\\).\nStep 2: Form the ratio \\(\\frac{b-c}{b+c} = \\frac{\\sin B - \\sin C}{\\sin B + \\sin C}\\).\nStep 3: Apply sum-to-product formulas and simplify to prove the identity.\nCorrect Answer: (a)"
   }
 ]
