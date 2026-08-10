@@ -1,6 +1,6 @@
 /* ============================================
    STUDY MODE - OAU CBE Practice
-   FULLY FIXED - Proper LaTeX Rendering Support
+   COMPLETE FIXED CSS
    ============================================ */
 
 :root {
@@ -17,6 +17,7 @@
     --green-bg: rgba(16, 185, 129, 0.1);
     --red: #ef4444;
     --red-bg: rgba(239, 68, 68, 0.1);
+    --orange: #f59e0b;
     --radius-lg: 24px;
     --radius-md: 16px;
     --radius-sm: 12px;
@@ -458,17 +459,18 @@ body.light-mode .question-card .loading-overlay {
     flex-shrink: 0;
     color: var(--text-muted);
     transition: all var(--transition);
-    margin-top: 1px;
+    margin-top: 2px;
 }
 
 /* Option Text */
 .option-btn .option-text {
     flex: 1;
+    min-width: 0;
     padding-top: 4px;
     word-break: break-word;
 }
 
-/* MathJax inside options */
+/* MathJax inside options - CRITICAL FIX */
 .option-btn .option-text mjx-container {
     display: inline !important;
     vertical-align: middle;
@@ -515,13 +517,13 @@ body.light-mode .question-card .loading-overlay {
 }
 
 /* ============================================
-   SOLUTION SECTION
+   SOLUTION SECTION - FIXED
    ============================================ */
 .solution-container {
     margin-top: 16px;
     border-top: 1px solid var(--border);
     padding-top: 16px;
-    display: none;
+    display: block;
 }
 
 .toggle-solution-btn {
@@ -556,7 +558,7 @@ body.light-mode .question-card .loading-overlay {
     background: var(--bg-option);
     border-radius: var(--radius-sm);
     font-size: 14px;
-    color: var(--text-muted);
+    color: var(--text);
     line-height: 1.7;
     display: none;
     border-left: 3px solid var(--blue-accent);
@@ -564,7 +566,7 @@ body.light-mode .question-card .loading-overlay {
 }
 
 .solution-text.show {
-    display: block;
+    display: block !important;
 }
 
 @keyframes slideDown {
@@ -581,6 +583,12 @@ body.light-mode .question-card .loading-overlay {
 /* MathJax inside solution */
 .solution-text mjx-container {
     display: inline !important;
+}
+
+/* Bold text in solution */
+.solution-text strong {
+    color: var(--blue-light);
+    font-weight: 600;
 }
 
 /* ============================================
@@ -679,7 +687,7 @@ body.light-mode .question-card .loading-overlay {
 .toast .toast-icon.success { color: var(--green); }
 .toast .toast-icon.error { color: var(--red); }
 .toast .toast-icon.info { color: var(--blue-accent); }
-.toast .toast-icon.warning { color: #f59e0b; }
+.toast .toast-icon.warning { color: var(--orange); }
 
 /* ============================================
    FLOATING HOME BUTTON
@@ -751,6 +759,30 @@ body.light-mode .question-card .loading-overlay {
 body.light-mode ::selection {
     background: var(--blue-accent);
     color: #ffffff;
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+.option-btn:focus-visible,
+.nav-btn:focus-visible,
+.course-btn:focus-visible,
+.btn-icon:focus-visible,
+.back-link:focus-visible,
+.toggle-solution-btn:focus-visible,
+.floating-home-btn:focus-visible {
+    outline: 2px solid var(--blue-accent);
+    outline-offset: 2px;
 }
 
 /* ============================================
@@ -877,31 +909,6 @@ body.light-mode ::selection {
 }
 
 /* ============================================
-   ACCESSIBILITY
-   ============================================ */
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-}
-
-/* Focus visible for keyboard navigation */
-.option-btn:focus-visible,
-.nav-btn:focus-visible,
-.course-btn:focus-visible,
-.btn-icon:focus-visible,
-.back-link:focus-visible,
-.toggle-solution-btn:focus-visible,
-.floating-home-btn:focus-visible {
-    outline: 2px solid var(--blue-accent);
-    outline-offset: 2px;
-}
-
-/* ============================================
    PRINT STYLES
    ============================================ */
 @media print {
@@ -914,8 +921,8 @@ body.light-mode ::selection {
     }
 
     body {
-        background: white;
-        color: black;
+        background: white !important;
+        color: black !important;
     }
 
     .question-card {
@@ -926,5 +933,9 @@ body.light-mode ::selection {
 
     .option-btn {
         border: 1px solid #ddd;
+    }
+
+    .solution-text {
+        display: block !important;
     }
 }
