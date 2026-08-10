@@ -82,7 +82,7 @@ function parseCorrectAnswer(solution) {
     let match = solution.match(/Correct Answer:\s*\(([a-e])\)/i);
     if (match) {
         const letter = match[1].toLowerCase();
-        return letter.charCodeAt(0) - 97; // 'a' = 0, 'b' = 1, etc.
+        return letter.charCodeAt(0) - 97;
     }
 
     // Format 2: "ANSWER: (a)" or "ANSWER: (e)"
@@ -176,21 +176,8 @@ async function selectCourse(courseId) {
 
         // Format 1: Direct array [ { id, question, options, solution } ]
         if (Array.isArray(data) && data.length > 0) {
-            const valid = data.every(q => 
-                q.id !== undefined && 
-                q.question && 
-                Array.isArray(q.options) && 
-                q.options.length >= 2 &&
-                q.solution
-            );
-            if (valid) {
-                questions = data;
-                console.log('✅ Format: Direct array');
-            } else {
-                console.warn('⚠️ Array format found but some questions are invalid');
-                // Try to use it anyway
-                questions = data;
-            }
+            questions = data;
+            console.log('✅ Format: Direct array');
         }
 
         // Format 2: { questions: [ ... ] }
@@ -286,6 +273,7 @@ function renderQuestion() {
 
     isAnswered = false;
     
+    // Reset solution display
     if (solutionContainer) {
         solutionContainer.style.display = 'block';
     }
@@ -297,20 +285,40 @@ function renderQuestion() {
         toggleSolutionBtn.textContent = '💡 Show Solution';
     }
 
+    // Set question text
     if (questionText) {
         questionText.innerHTML = q.question;
-        questionText.classList.add('mathjax-process');
     }
 
+    // CRITICAL FIX: Build options with proper structure
     if (optionsContainer) {
-        optionsContainer.innerHTML = q.options.map((opt, i) => `
-            <button class="option-btn" data-index="${i}" onclick="selectOption(${i})">
-                <span class="letter">${letters[i] || String.fromCharCode(65 + i)}</span>
-                <span class="mathjax-process">${opt}</span>
-            </button>
-        `).join('');
+        // Clear existing options
+        optionsContainer.innerHTML = '';
+        
+        // Create each option button
+        q.options.forEach((opt, i) => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.setAttribute('data-index', i);
+            btn.addEventListener('click', () => selectOption(i));
+            
+            // Create letter span
+            const letterSpan = document.createElement('span');
+            letterSpan.className = 'letter';
+            letterSpan.textContent = letters[i] || String.fromCharCode(65 + i);
+            
+            // Create option text span
+            const textSpan = document.createElement('span');
+            textSpan.textContent = opt; // Use textContent to avoid HTML injection
+            
+            // Assemble button
+            btn.appendChild(letterSpan);
+            btn.appendChild(textSpan);
+            optionsContainer.appendChild(btn);
+        });
     }
 
+    // Update progress
     const answered = currentQuestions.filter(q => q.userAnswer !== undefined && q.userAnswer !== null).length;
     
     if (progressText) {
@@ -323,20 +331,21 @@ function renderQuestion() {
         progressFill.style.width = `${((currentIndex + 1) / totalQuestions) * 100}%`;
     }
 
+    // Navigation buttons
     if (prevBtn) prevBtn.disabled = currentIndex === 0;
     if (nextBtn) {
         nextBtn.disabled = false;
         nextBtn.textContent = currentIndex === totalQuestions - 1 ? '🎯 Finish' : 'Next →';
     }
 
-    // Re-render MathJax
+    // Re-render MathJax for the new content
     setTimeout(() => {
         if (window.MathJax && MathJax.typesetPromise) {
             MathJax.typesetPromise().catch(err => {
                 console.warn('MathJax typeset error:', err);
             });
         }
-    }, 100);
+    }, 150);
 }
 
 // ==================== SELECT OPTION ====================
@@ -358,6 +367,7 @@ function selectOption(index) {
 
     if (isCorrect) score++;
 
+    // Update button styles
     const btns = optionsContainer.querySelectorAll('.option-btn');
     btns.forEach((btn, i) => {
         btn.classList.add('disabled');
@@ -366,6 +376,7 @@ function selectOption(index) {
         if (i === index) btn.classList.add('selected');
     });
 
+    // Show solution
     if (solutionContainer) {
         solutionContainer.style.display = 'block';
     }
@@ -378,17 +389,20 @@ function selectOption(index) {
         toggleSolutionBtn.textContent = '🙈 Hide Solution';
     }
 
+    // Update score display
     const answered = currentQuestions.filter(q => q.userAnswer !== undefined && q.userAnswer !== null).length;
     if (scoreDisplay) {
         scoreDisplay.textContent = `✅ ${answered}/${totalQuestions}`;
     }
 
+    // Re-render MathJax for solution
     setTimeout(() => {
         if (window.MathJax && MathJax.typesetPromise) {
             MathJax.typesetPromise().catch(() => {});
         }
-    }, 100);
+    }, 150);
 
+    // Show toast
     if (isCorrect) {
         showToast('✅ Correct! Well done!', 'success');
     } else {
@@ -402,7 +416,6 @@ function prevQuestion() {
     if (currentIndex > 0) {
         currentIndex--;
         renderQuestion();
-        // Scroll to top of question
         if (questionCard) {
             questionCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
@@ -413,7 +426,6 @@ function nextQuestion() {
     if (currentIndex < totalQuestions - 1) {
         currentIndex++;
         renderQuestion();
-        // Scroll to top of question
         if (questionCard) {
             questionCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
@@ -508,7 +520,6 @@ if (toggleSolutionBtn) {
                 solutionText.classList.add('show');
                 toggleSolutionBtn.textContent = '🙈 Hide Solution';
                 
-                // Re-render MathJax for solution
                 setTimeout(() => {
                     if (window.MathJax && MathJax.typesetPromise) {
                         MathJax.typesetPromise().catch(() => {});
@@ -521,7 +532,6 @@ if (toggleSolutionBtn) {
 
 // Keyboard shortcuts
 document.addEventListener('keydown', (e) => {
-    // Don't trigger shortcuts if user is typing in an input
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
     
     if (e.key === 'ArrowLeft' && prevBtn && !prevBtn.disabled) {
@@ -556,7 +566,6 @@ function shuffleArray(arr) {
 function init() {
     console.log('🚀 Study Mode initializing...');
     
-    // Check if all required DOM elements exist
     const requiredElements = ['courseGrid', 'question-text', 'options-container'];
     const missing = requiredElements.filter(id => !$(id));
     
@@ -568,12 +577,6 @@ function init() {
     initTheme();
     renderCourses();
     console.log('📚 Study Mode loaded successfully!');
-    console.log('💡 Features:');
-    console.log('  - Multiple answer format support');
-    console.log('  - Keyboard shortcuts (Arrow keys, 1-5)');
-    console.log('  - MathJax rendering');
-    console.log('  - Dark/Light theme');
-    console.log('  - Progress tracking');
 }
 
 // ==================== EXPOSE GLOBALS ====================
@@ -586,7 +589,6 @@ window.restartTopic = restartTopic;
 window.toggleTheme = toggleTheme;
 
 // ==================== START ====================
-// Wait for DOM to be fully loaded
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
 } else {
