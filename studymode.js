@@ -1,6 +1,6 @@
 // ============================================
 // STUDY MODE - OAU CBE Practice
-// CRITICAL FIX: Options LaTeX Rendering
+// COMPLETE FIXED VERSION
 // ============================================
 
 // ==================== CONFIGURATION ====================
@@ -40,40 +40,16 @@ const questionCard = $('question-card');
 const loadingOverlay = document.querySelector('.loading-overlay');
 
 // ==================== MATHJAX HELPER ====================
-function typesetMath() {
-    return new Promise((resolve) => {
-        // Check if MathJax is loaded
-        if (!window.MathJax || !window.MathJax.typesetPromise) {
-            // Wait for MathJax to load
-            const checkInterval = setInterval(() => {
-                if (window.MathJax && window.MathJax.typesetPromise) {
-                    clearInterval(checkInterval);
-                    doTypeset(resolve);
-                }
-            }, 100);
-            
-            // Timeout after 5 seconds
-            setTimeout(() => {
-                clearInterval(checkInterval);
-                console.warn('MathJax not available');
-                resolve();
-            }, 5000);
-        } else {
-            doTypeset(resolve);
-        }
-    });
-}
-
-function doTypeset(resolve) {
-    MathJax.typesetPromise()
-        .then(() => {
-            console.log('✅ MathJax rendered');
-            resolve();
-        })
-        .catch((err) => {
-            console.warn('MathJax error:', err);
-            resolve();
-        });
+function renderMathElements(elements) {
+    if (!window.MathJax || !window.MathJax.typesetPromise) {
+        console.warn('MathJax not available yet, retrying...');
+        setTimeout(() => renderMathElements(elements), 200);
+        return;
+    }
+    
+    MathJax.typesetPromise(elements)
+        .then(() => console.log('✅ Math rendered'))
+        .catch(err => console.warn('MathJax error:', err));
 }
 
 // ==================== TOAST ====================
@@ -166,6 +142,8 @@ async function selectCourse(courseId) {
             return;
         }
 
+        console.log(`📁 Loading: /data/${currentCourse.file}`);
+
         const response = await fetch(`/data/${currentCourse.file}`);
 
         if (!response.ok) {
@@ -176,6 +154,7 @@ async function selectCourse(courseId) {
         }
 
         const data = await response.json();
+        console.log('✅ JSON loaded');
 
         let questions = null;
 
@@ -211,7 +190,7 @@ async function selectCourse(courseId) {
         if (questionCard) questionCard.classList.remove('loading');
         if (loadingOverlay) loadingOverlay.style.display = 'none';
 
-        await renderQuestion();
+        renderQuestion();
         showToast(`📚 Loaded ${totalQuestions} questions`, 'success');
 
     } catch (error) {
@@ -224,7 +203,7 @@ async function selectCourse(courseId) {
 }
 
 // ==================== RENDER QUESTION ====================
-async function renderQuestion() {
+function renderQuestion() {
     if (questionCard) questionCard.classList.remove('loading');
     if (loadingOverlay) loadingOverlay.style.display = 'none';
 
@@ -251,14 +230,18 @@ async function renderQuestion() {
         questionText.innerHTML = q.question;
     }
 
-    // Build options using innerHTML so LaTeX is preserved
+    // Build options using innerHTML string (this is the FIX)
     if (optionsContainer) {
-        optionsContainer.innerHTML = q.options.map((opt, i) => `
-            <button class="option-btn" data-index="${i}" onclick="selectOption(${i})">
-                <span class="letter">${letters[i]}</span>
-                <span class="option-text">${opt}</span>
-            </button>
-        `).join('');
+        let optionsHTML = '';
+        q.options.forEach((opt, i) => {
+            optionsHTML += `
+                <button class="option-btn" data-index="${i}" onclick="selectOption(${i})">
+                    <span class="letter">${letters[i]}</span>
+                    <span class="option-text">${opt}</span>
+                </button>
+            `;
+        });
+        optionsContainer.innerHTML = optionsHTML;
     }
 
     // Update progress
@@ -274,12 +257,14 @@ async function renderQuestion() {
         nextBtn.textContent = currentIndex === totalQuestions - 1 ? '🎯 Finish' : 'Next →';
     }
 
-    // CRITICAL: Render MathJax after all content is in the DOM
-    await typesetMath();
+    // Render MathJax on question text and options
+    if (questionText && optionsContainer) {
+        renderMathElements([questionText, optionsContainer]);
+    }
 }
 
 // ==================== SELECT OPTION ====================
-async function selectOption(index) {
+function selectOption(index) {
     if (isAnswered) return;
     if (!currentQuestions.length || currentIndex >= currentQuestions.length) return;
 
@@ -308,9 +293,7 @@ async function selectOption(index) {
     // Show solution
     if (solutionContainer) solutionContainer.style.display = 'block';
     if (solutionText) {
-        const formattedSolution = q.solution
-            .replace(/\n/g, '<br>');
-        solutionText.innerHTML = formattedSolution || 'No explanation provided.';
+        solutionText.innerHTML = (q.solution || 'No explanation provided.').replace(/\n/g, '<br>');
         solutionText.style.display = 'block';
     }
     if (toggleSolutionBtn) toggleSolutionBtn.textContent = '🙈 Hide Solution';
@@ -319,8 +302,10 @@ async function selectOption(index) {
     const answered = currentQuestions.filter(q => q.userAnswer !== undefined && q.userAnswer !== null).length;
     if (scoreDisplay) scoreDisplay.textContent = `✅ ${answered}/${totalQuestions}`;
 
-    // Render MathJax for solution
-    await typesetMath();
+    // Render MathJax on solution
+    if (solutionText) {
+        renderMathElements([solutionText]);
+    }
 
     // Toast
     const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
@@ -336,7 +321,7 @@ function prevQuestion() {
     if (currentIndex > 0) {
         currentIndex--;
         renderQuestion();
-        questionCard?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (questionCard) questionCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 }
 
@@ -344,7 +329,7 @@ function nextQuestion() {
     if (currentIndex < totalQuestions - 1) {
         currentIndex++;
         renderQuestion();
-        questionCard?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (questionCard) questionCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else {
         showComplete();
     }
@@ -358,6 +343,7 @@ function showComplete() {
     if (percentage >= 90) { grade = 'Excellent!'; emoji = '🏆'; }
     else if (percentage >= 80) { grade = 'Great Job!'; emoji = '🎉'; }
     else if (percentage >= 70) { grade = 'Good Work!'; emoji = '💪'; }
+    else if (percentage >= 60) { grade = 'Not Bad!'; emoji = '👍'; }
     else if (percentage >= 50) { grade = 'Keep Practicing!'; emoji = '📚'; }
     else { grade = 'Review More!'; emoji = '🤔'; }
 
@@ -415,7 +401,7 @@ if (nextBtn) nextBtn.addEventListener('click', nextQuestion);
 if (backBtn) backBtn.addEventListener('click', backToMenu);
 
 if (toggleSolutionBtn) {
-    toggleSolutionBtn.addEventListener('click', async () => {
+    toggleSolutionBtn.addEventListener('click', () => {
         if (solutionText) {
             const isVisible = solutionText.style.display === 'block';
             if (isVisible) {
@@ -424,7 +410,9 @@ if (toggleSolutionBtn) {
             } else {
                 solutionText.style.display = 'block';
                 toggleSolutionBtn.textContent = '🙈 Hide Solution';
-                await typesetMath();
+                if (solutionText) {
+                    renderMathElements([solutionText]);
+                }
             }
         }
     });
