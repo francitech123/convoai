@@ -1,6 +1,6 @@
 // ============================================
 // STUDY MODE - OAU CBE Practice
-// FULLY WORKING WITH YOUR JSON FORMAT
+// FIXED: Proper LaTeX rendering in options
 // ============================================
 
 // ==================== CONFIGURATION ====================
@@ -78,35 +78,30 @@ function toggleTheme() {
 function parseCorrectAnswer(solution) {
     if (!solution) return -1;
 
-    // Format 1: "Correct Answer: (a)" or "Correct Answer: (b)"
     let match = solution.match(/Correct Answer:\s*\(([a-e])\)/i);
     if (match) {
         const letter = match[1].toLowerCase();
         return letter.charCodeAt(0) - 97;
     }
 
-    // Format 2: "ANSWER: (a)" or "ANSWER: (e)"
     match = solution.match(/ANSWER:\s*\(([a-e])\)/i);
     if (match) {
         const letter = match[1].toLowerCase();
         return letter.charCodeAt(0) - 97;
     }
 
-    // Format 3: "Correct Answer: a" or "Correct Answer: b"
     match = solution.match(/Correct Answer:\s*([a-e])/i);
     if (match) {
         const letter = match[1].toLowerCase();
         return letter.charCodeAt(0) - 97;
     }
 
-    // Format 4: "ANSWER: a" or "ANSWER: b" (no parentheses)
     match = solution.match(/ANSWER:\s*([a-e])/i);
     if (match) {
         const letter = match[1].toLowerCase();
         return letter.charCodeAt(0) - 97;
     }
 
-    // Format 5: Look for "Answer (b)" or "Answer: b" anywhere
     match = solution.match(/Answer:?\s*\(?([a-e])\)?/i);
     if (match) {
         const letter = match[1].toLowerCase();
@@ -174,19 +169,16 @@ async function selectCourse(courseId) {
 
         let questions = null;
 
-        // Format 1: Direct array [ { id, question, options, solution } ]
         if (Array.isArray(data) && data.length > 0) {
             questions = data;
             console.log('✅ Format: Direct array');
         }
 
-        // Format 2: { questions: [ ... ] }
         if (!questions && data && data.questions && Array.isArray(data.questions) && data.questions.length > 0) {
             questions = data.questions;
             console.log('✅ Format: { questions: [...] }');
         }
 
-        // Format 3: { data: [ ... ] }
         if (!questions && data && data.data && Array.isArray(data.data) && data.data.length > 0) {
             questions = data.data;
             console.log('✅ Format: { data: [...] }');
@@ -200,7 +192,6 @@ async function selectCourse(courseId) {
             return;
         }
 
-        // Parse correct answers from solution
         let invalidCount = 0;
         questions = questions.map(q => {
             const correct = parseCorrectAnswer(q.solution);
@@ -219,21 +210,18 @@ async function selectCourse(courseId) {
             showToast(`⚠️ ${invalidCount} questions missing answer key`, 'warning');
         }
 
-        // Store and shuffle
         currentQuestions = shuffleArray(questions);
         currentIndex = 0;
         totalQuestions = currentQuestions.length;
         score = 0;
         isAnswered = false;
 
-        // Switch screens
         const courseScreen = document.getElementById('course-selection-screen');
         const studyScreen = document.getElementById('study-screen');
         
         if (courseScreen) courseScreen.style.display = 'none';
         if (studyScreen) studyScreen.style.display = 'block';
 
-        // Hide loading overlay
         if (questionCard) {
             questionCard.classList.remove('loading');
         }
@@ -255,7 +243,6 @@ async function selectCourse(courseId) {
 
 // ==================== RENDER QUESTION ====================
 function renderQuestion() {
-    // Hide loading overlay
     if (questionCard) {
         questionCard.classList.remove('loading');
     }
@@ -273,7 +260,6 @@ function renderQuestion() {
 
     isAnswered = false;
     
-    // Reset solution display
     if (solutionContainer) {
         solutionContainer.style.display = 'block';
     }
@@ -290,35 +276,16 @@ function renderQuestion() {
         questionText.innerHTML = q.question;
     }
 
-    // CRITICAL FIX: Build options with proper structure
+    // Build options with LaTeX
     if (optionsContainer) {
-        // Clear existing options
-        optionsContainer.innerHTML = '';
-        
-        // Create each option button
-        q.options.forEach((opt, i) => {
-            const btn = document.createElement('button');
-            btn.className = 'option-btn';
-            btn.setAttribute('data-index', i);
-            btn.addEventListener('click', () => selectOption(i));
-            
-            // Create letter span
-            const letterSpan = document.createElement('span');
-            letterSpan.className = 'letter';
-            letterSpan.textContent = letters[i] || String.fromCharCode(65 + i);
-            
-            // Create option text span
-            const textSpan = document.createElement('span');
-            textSpan.textContent = opt; // Use textContent to avoid HTML injection
-            
-            // Assemble button
-            btn.appendChild(letterSpan);
-            btn.appendChild(textSpan);
-            optionsContainer.appendChild(btn);
-        });
+        optionsContainer.innerHTML = q.options.map((opt, i) => `
+            <button class="option-btn" data-index="${i}" onclick="selectOption(${i})">
+                <span class="letter">${letters[i] || String.fromCharCode(65 + i)}</span>
+                <span class="option-text">${opt}</span>
+            </button>
+        `).join('');
     }
 
-    // Update progress
     const answered = currentQuestions.filter(q => q.userAnswer !== undefined && q.userAnswer !== null).length;
     
     if (progressText) {
@@ -331,21 +298,25 @@ function renderQuestion() {
         progressFill.style.width = `${((currentIndex + 1) / totalQuestions) * 100}%`;
     }
 
-    // Navigation buttons
     if (prevBtn) prevBtn.disabled = currentIndex === 0;
     if (nextBtn) {
         nextBtn.disabled = false;
         nextBtn.textContent = currentIndex === totalQuestions - 1 ? '🎯 Finish' : 'Next →';
     }
 
-    // Re-render MathJax for the new content
-    setTimeout(() => {
-        if (window.MathJax && MathJax.typesetPromise) {
-            MathJax.typesetPromise().catch(err => {
+    // CRITICAL FIX: Re-render MathJax properly
+    if (window.MathJax && MathJax.typesetPromise) {
+        // Clear previous math rendering
+        if (questionText) MathJax.typesetClear([questionText]);
+        if (optionsContainer) MathJax.typesetClear([optionsContainer]);
+        
+        // Re-typeset after a small delay
+        setTimeout(() => {
+            MathJax.typesetPromise([questionText, optionsContainer]).catch(err => {
                 console.warn('MathJax typeset error:', err);
             });
-        }
-    }, 150);
+        }, 100);
+    }
 }
 
 // ==================== SELECT OPTION ====================
@@ -355,7 +326,6 @@ function selectOption(index) {
 
     const q = currentQuestions[currentIndex];
     
-    // Check if correct answer is valid
     if (q.correct === undefined || q.correct === null || q.correct === -1) {
         showToast('⚠️ Answer key not available for this question', 'warning');
         return;
@@ -367,7 +337,6 @@ function selectOption(index) {
 
     if (isCorrect) score++;
 
-    // Update button styles
     const btns = optionsContainer.querySelectorAll('.option-btn');
     btns.forEach((btn, i) => {
         btn.classList.add('disabled');
@@ -376,7 +345,6 @@ function selectOption(index) {
         if (i === index) btn.classList.add('selected');
     });
 
-    // Show solution
     if (solutionContainer) {
         solutionContainer.style.display = 'block';
     }
@@ -389,20 +357,17 @@ function selectOption(index) {
         toggleSolutionBtn.textContent = '🙈 Hide Solution';
     }
 
-    // Update score display
     const answered = currentQuestions.filter(q => q.userAnswer !== undefined && q.userAnswer !== null).length;
     if (scoreDisplay) {
         scoreDisplay.textContent = `✅ ${answered}/${totalQuestions}`;
     }
 
-    // Re-render MathJax for solution
     setTimeout(() => {
         if (window.MathJax && MathJax.typesetPromise) {
-            MathJax.typesetPromise().catch(() => {});
+            MathJax.typesetPromise([solutionText]).catch(() => {});
         }
-    }, 150);
+    }, 100);
 
-    // Show toast
     if (isCorrect) {
         showToast('✅ Correct! Well done!', 'success');
     } else {
@@ -522,7 +487,7 @@ if (toggleSolutionBtn) {
                 
                 setTimeout(() => {
                     if (window.MathJax && MathJax.typesetPromise) {
-                        MathJax.typesetPromise().catch(() => {});
+                        MathJax.typesetPromise([solutionText]).catch(() => {});
                     }
                 }, 100);
             }
@@ -530,7 +495,6 @@ if (toggleSolutionBtn) {
     });
 }
 
-// Keyboard shortcuts
 document.addEventListener('keydown', (e) => {
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
     
