@@ -9,10 +9,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome Icons -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
-    <!-- Main Stylesheet -->
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="studymode.css">
 
     <!-- MathJax Configuration -->
@@ -31,16 +31,10 @@
             },
             options: {
                 skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-                ignoreHtmlClass: 'no-mathjax',
-                processHtmlClass: 'mathjax-process',
-                enableMenu: false
+                processHtmlClass: 'mathjax-process'
             },
             startup: {
-                typeset: false  // Don't auto-render - we'll do it manually
-            },
-            chtml: {
-                displayAlign: 'left',
-                displayIndent: '0'
+                typeset: false
             }
         };
     </script>
@@ -104,7 +98,7 @@
                     <div id="progress-fill" class="progress-fill" style="width:0%;"></div>
                 </div>
 
-                <div id="question-text" class="question-text mathjax-process" style="margin-top:16px;">
+                <div id="question-text" class="question-text" style="margin-top:16px;">
                     Loading question...
                 </div>
 
@@ -112,7 +106,7 @@
 
                 <div id="solution-container" class="solution-container" style="display:none;">
                     <button id="toggle-solution-btn" class="toggle-solution-btn">💡 Show Solution</button>
-                    <div id="solution-text" class="solution-text mathjax-process"></div>
+                    <div id="solution-text" class="solution-text"></div>
                 </div>
             </div>
 
@@ -129,7 +123,7 @@
         <i class="fas fa-home"></i> Home
     </button>
 
-    <!-- EXTERNAL JAVASCRIPT FILE -->
+    <!-- JAVASCRIPT -->
     <script src="studymode.js"></script>
 
 </body>
