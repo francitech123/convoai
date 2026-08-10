@@ -12,36 +12,24 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
-    <!-- Stylesheet -->
+    <!-- External CSS -->
     <link rel="stylesheet" href="studymode.css">
 
     <!-- MathJax Configuration -->
     <script>
         MathJax = {
             tex: {
-                inlineMath: [
-                    ['$', '$'],
-                    ['\\(', '\\)']
-                ],
-                displayMath: [
-                    ['$$', '$$'],
-                    ['\\[', '\\]']
-                ],
-                packages: ['base', 'ams']
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
             },
             options: {
-                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-                processHtmlClass: 'mathjax-process'
-            },
-            startup: {
-                typeset: false
+                enableMenu: false
             }
         };
     </script>
     
     <!-- MathJax Library -->
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -72,10 +60,7 @@
         <div id="course-selection-screen">
             <h2 class="page-title">Select a course</h2>
             <p class="page-subtitle">Start studying topic by topic.</p>
-
-            <div class="course-list" id="courseGrid">
-                <!-- Courses rendered by JS -->
-            </div>
+            <div class="course-list" id="courseGrid"></div>
         </div>
 
         <!-- STUDY INTERFACE -->
@@ -98,10 +83,7 @@
                     <div id="progress-fill" class="progress-fill" style="width:0%;"></div>
                 </div>
 
-                <div id="question-text" class="question-text" style="margin-top:16px;">
-                    Loading question...
-                </div>
-
+                <div id="question-text" class="question-text" style="margin-top:16px;"></div>
                 <div id="options-container" class="options-container"></div>
 
                 <div id="solution-container" class="solution-container" style="display:none;">
@@ -123,7 +105,7 @@
         <i class="fas fa-home"></i> Home
     </button>
 
-    <!-- JAVASCRIPT -->
+    <!-- External JavaScript -->
     <script src="studymode.js"></script>
 
 </body>
