@@ -1,6 +1,6 @@
 // ============================================
 // STUDY MODE - OAU CBE Practice
-// FIXED: Proper LaTeX rendering in options
+// FIXED: MathJax LaTeX Rendering
 // ============================================
 
 // ==================== CONFIGURATION ====================
@@ -79,46 +79,26 @@ function parseCorrectAnswer(solution) {
     if (!solution) return -1;
 
     let match = solution.match(/Correct Answer:\s*\(([a-e])\)/i);
-    if (match) {
-        const letter = match[1].toLowerCase();
-        return letter.charCodeAt(0) - 97;
-    }
+    if (match) return match[1].toLowerCase().charCodeAt(0) - 97;
 
     match = solution.match(/ANSWER:\s*\(([a-e])\)/i);
-    if (match) {
-        const letter = match[1].toLowerCase();
-        return letter.charCodeAt(0) - 97;
-    }
+    if (match) return match[1].toLowerCase().charCodeAt(0) - 97;
 
     match = solution.match(/Correct Answer:\s*([a-e])/i);
-    if (match) {
-        const letter = match[1].toLowerCase();
-        return letter.charCodeAt(0) - 97;
-    }
+    if (match) return match[1].toLowerCase().charCodeAt(0) - 97;
 
     match = solution.match(/ANSWER:\s*([a-e])/i);
-    if (match) {
-        const letter = match[1].toLowerCase();
-        return letter.charCodeAt(0) - 97;
-    }
+    if (match) return match[1].toLowerCase().charCodeAt(0) - 97;
 
     match = solution.match(/Answer:?\s*\(?([a-e])\)?/i);
-    if (match) {
-        const letter = match[1].toLowerCase();
-        console.warn('⚠️ Using fallback answer format:', match[0]);
-        return letter.charCodeAt(0) - 97;
-    }
+    if (match) return match[1].toLowerCase().charCodeAt(0) - 97;
 
-    console.warn('⚠️ No correct answer found in solution:', solution?.substring(0, 100));
     return -1;
 }
 
 // ==================== RENDER COURSES ====================
 function renderCourses() {
-    if (!courseGrid) {
-        console.error('❌ courseGrid element not found');
-        return;
-    }
+    if (!courseGrid) return;
     
     courseGrid.innerHTML = COURSES.map(c => `
         <button class="course-btn" data-course="${c.id}" onclick="selectCourse('${c.id}')">
@@ -132,13 +112,26 @@ function renderCourses() {
     `).join('');
 }
 
+// ==================== MATHJAX RENDER HELPER ====================
+function renderMathJax() {
+    if (window.MathJax) {
+        // Use MathJax 3.x typesetPromise
+        if (MathJax.typesetPromise) {
+            return MathJax.typesetPromise();
+        }
+        // Fallback for MathJax 2.x
+        if (MathJax.Hub) {
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+            return Promise.resolve();
+        }
+    }
+    return Promise.resolve();
+}
+
 // ==================== SELECT COURSE ====================
 async function selectCourse(courseId) {
     const btn = document.querySelector(`.course-btn[data-course="${courseId}"]`);
-    if (!btn) {
-        console.error('❌ Course button not found:', courseId);
-        return;
-    }
+    if (!btn) return;
     
     btn.classList.add('loading');
     btn.disabled = true;
@@ -157,58 +150,39 @@ async function selectCourse(courseId) {
         const response = await fetch(`/data/${currentCourse.file}`);
 
         if (!response.ok) {
-            console.error(`❌ HTTP ${response.status}: ${response.statusText}`);
-            showToast(`Could not load ${currentCourse.code} questions (HTTP ${response.status})`, 'error');
+            showToast(`Could not load ${currentCourse.code} questions`, 'error');
             btn.classList.remove('loading');
             btn.disabled = false;
             return;
         }
 
         const data = await response.json();
-        console.log(`✅ JSON loaded:`, Array.isArray(data) ? data.length : Object.keys(data).length, 'items');
+        console.log(`✅ JSON loaded successfully`);
 
         let questions = null;
 
         if (Array.isArray(data) && data.length > 0) {
             questions = data;
-            console.log('✅ Format: Direct array');
         }
-
-        if (!questions && data && data.questions && Array.isArray(data.questions) && data.questions.length > 0) {
+        if (!questions && data?.questions?.length > 0) {
             questions = data.questions;
-            console.log('✅ Format: { questions: [...] }');
         }
-
-        if (!questions && data && data.data && Array.isArray(data.data) && data.data.length > 0) {
+        if (!questions && data?.data?.length > 0) {
             questions = data.data;
-            console.log('✅ Format: { data: [...] }');
         }
 
         if (!questions || !questions.length) {
-            console.error('❌ No valid questions found in JSON');
-            showToast(`No valid questions found in ${currentCourse.code}`, 'error');
+            showToast(`No valid questions found`, 'error');
             btn.classList.remove('loading');
             btn.disabled = false;
             return;
         }
 
-        let invalidCount = 0;
-        questions = questions.map(q => {
-            const correct = parseCorrectAnswer(q.solution);
-            if (correct === -1) {
-                invalidCount++;
-                console.warn(`⚠️ Question ${q.id}: No correct answer parsed`);
-            }
-            return {
-                ...q,
-                correct: correct
-            };
-        });
-
-        if (invalidCount > 0) {
-            console.warn(`⚠️ ${invalidCount} questions have no parseable correct answer`);
-            showToast(`⚠️ ${invalidCount} questions missing answer key`, 'warning');
-        }
+        // Parse correct answers
+        questions = questions.map(q => ({
+            ...q,
+            correct: parseCorrectAnswer(q.solution)
+        }));
 
         currentQuestions = shuffleArray(questions);
         currentIndex = 0;
@@ -216,25 +190,19 @@ async function selectCourse(courseId) {
         score = 0;
         isAnswered = false;
 
-        const courseScreen = document.getElementById('course-selection-screen');
-        const studyScreen = document.getElementById('study-screen');
-        
-        if (courseScreen) courseScreen.style.display = 'none';
-        if (studyScreen) studyScreen.style.display = 'block';
+        // Switch screens
+        $('course-selection-screen').style.display = 'none';
+        $('study-screen').style.display = 'block';
 
-        if (questionCard) {
-            questionCard.classList.remove('loading');
-        }
-        if (loadingOverlay) {
-            loadingOverlay.style.display = 'none';
-        }
+        if (questionCard) questionCard.classList.remove('loading');
+        if (loadingOverlay) loadingOverlay.style.display = 'none';
 
         renderQuestion();
-        showToast(`📚 Loaded ${totalQuestions} questions for ${currentCourse.code}`, 'success');
+        showToast(`📚 Loaded ${totalQuestions} questions`, 'success');
 
     } catch (error) {
-        console.error('❌ Select course error:', error);
-        showToast('Failed to load course questions: ' + error.message, 'error');
+        console.error('❌ Error:', error);
+        showToast('Failed to load questions', 'error');
     }
 
     btn.classList.remove('loading');
@@ -242,13 +210,9 @@ async function selectCourse(courseId) {
 }
 
 // ==================== RENDER QUESTION ====================
-function renderQuestion() {
-    if (questionCard) {
-        questionCard.classList.remove('loading');
-    }
-    if (loadingOverlay) {
-        loadingOverlay.style.display = 'none';
-    }
+async function renderQuestion() {
+    if (questionCard) questionCard.classList.remove('loading');
+    if (loadingOverlay) loadingOverlay.style.display = 'none';
 
     if (!currentQuestions.length || currentIndex >= currentQuestions.length) {
         showComplete();
@@ -260,74 +224,55 @@ function renderQuestion() {
 
     isAnswered = false;
     
-    if (solutionContainer) {
-        solutionContainer.style.display = 'block';
-    }
+    // Reset solution
+    if (solutionContainer) solutionContainer.style.display = 'none';
     if (solutionText) {
-        solutionText.classList.remove('show');
         solutionText.style.display = 'none';
+        solutionText.classList.remove('show');
     }
-    if (toggleSolutionBtn) {
-        toggleSolutionBtn.textContent = '💡 Show Solution';
-    }
+    if (toggleSolutionBtn) toggleSolutionBtn.textContent = '💡 Show Solution';
 
-    // Set question text
+    // Set question text - Use \(...\) delimiters for inline math
     if (questionText) {
         questionText.innerHTML = q.question;
     }
 
-    // Build options with LaTeX
+    // Build options
     if (optionsContainer) {
         optionsContainer.innerHTML = q.options.map((opt, i) => `
             <button class="option-btn" data-index="${i}" onclick="selectOption(${i})">
-                <span class="letter">${letters[i] || String.fromCharCode(65 + i)}</span>
+                <span class="letter">${letters[i]}</span>
                 <span class="option-text">${opt}</span>
             </button>
         `).join('');
     }
 
+    // Update progress
     const answered = currentQuestions.filter(q => q.userAnswer !== undefined && q.userAnswer !== null).length;
-    
-    if (progressText) {
-        progressText.textContent = `Question ${currentIndex + 1} of ${totalQuestions}`;
-    }
-    if (scoreDisplay) {
-        scoreDisplay.textContent = `✅ ${answered}/${totalQuestions}`;
-    }
-    if (progressFill) {
-        progressFill.style.width = `${((currentIndex + 1) / totalQuestions) * 100}%`;
-    }
+    if (progressText) progressText.textContent = `Question ${currentIndex + 1} of ${totalQuestions}`;
+    if (scoreDisplay) scoreDisplay.textContent = `✅ ${answered}/${totalQuestions}`;
+    if (progressFill) progressFill.style.width = `${((currentIndex + 1) / totalQuestions) * 100}%`;
 
+    // Navigation
     if (prevBtn) prevBtn.disabled = currentIndex === 0;
     if (nextBtn) {
         nextBtn.disabled = false;
         nextBtn.textContent = currentIndex === totalQuestions - 1 ? '🎯 Finish' : 'Next →';
     }
 
-    // CRITICAL FIX: Re-render MathJax properly
-    if (window.MathJax && MathJax.typesetPromise) {
-        // Clear previous math rendering
-        if (questionText) MathJax.typesetClear([questionText]);
-        if (optionsContainer) MathJax.typesetClear([optionsContainer]);
-        
-        // Re-typeset after a small delay
-        setTimeout(() => {
-            MathJax.typesetPromise([questionText, optionsContainer]).catch(err => {
-                console.warn('MathJax typeset error:', err);
-            });
-        }, 100);
-    }
+    // CRITICAL: Render MathJax after DOM update
+    await renderMathJax();
 }
 
 // ==================== SELECT OPTION ====================
-function selectOption(index) {
+async function selectOption(index) {
     if (isAnswered) return;
     if (!currentQuestions.length || currentIndex >= currentQuestions.length) return;
 
     const q = currentQuestions[currentIndex];
     
     if (q.correct === undefined || q.correct === null || q.correct === -1) {
-        showToast('⚠️ Answer key not available for this question', 'warning');
+        showToast('⚠️ Answer key not available', 'warning');
         return;
     }
     
@@ -337,6 +282,7 @@ function selectOption(index) {
 
     if (isCorrect) score++;
 
+    // Style buttons
     const btns = optionsContainer.querySelectorAll('.option-btn');
     btns.forEach((btn, i) => {
         btn.classList.add('disabled');
@@ -345,34 +291,28 @@ function selectOption(index) {
         if (i === index) btn.classList.add('selected');
     });
 
-    if (solutionContainer) {
-        solutionContainer.style.display = 'block';
-    }
+    // Show solution
+    if (solutionContainer) solutionContainer.style.display = 'block';
     if (solutionText) {
         solutionText.innerHTML = q.solution || 'No explanation provided.';
-        solutionText.classList.add('show');
         solutionText.style.display = 'block';
+        solutionText.classList.add('show');
     }
-    if (toggleSolutionBtn) {
-        toggleSolutionBtn.textContent = '🙈 Hide Solution';
-    }
+    if (toggleSolutionBtn) toggleSolutionBtn.textContent = '🙈 Hide Solution';
 
+    // Update score
     const answered = currentQuestions.filter(q => q.userAnswer !== undefined && q.userAnswer !== null).length;
-    if (scoreDisplay) {
-        scoreDisplay.textContent = `✅ ${answered}/${totalQuestions}`;
-    }
+    if (scoreDisplay) scoreDisplay.textContent = `✅ ${answered}/${totalQuestions}`;
 
-    setTimeout(() => {
-        if (window.MathJax && MathJax.typesetPromise) {
-            MathJax.typesetPromise([solutionText]).catch(() => {});
-        }
-    }, 100);
+    // Render MathJax for solution
+    await renderMathJax();
 
+    // Show toast
+    const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
     if (isCorrect) {
         showToast('✅ Correct! Well done!', 'success');
     } else {
-        const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
-        showToast(`❌ Incorrect. The correct answer is ${letters[q.correct] || String.fromCharCode(65 + q.correct)}`, 'error');
+        showToast(`❌ Incorrect. Answer is ${letters[q.correct]}`, 'error');
     }
 }
 
@@ -381,9 +321,7 @@ function prevQuestion() {
     if (currentIndex > 0) {
         currentIndex--;
         renderQuestion();
-        if (questionCard) {
-            questionCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+        questionCard?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 }
 
@@ -391,9 +329,7 @@ function nextQuestion() {
     if (currentIndex < totalQuestions - 1) {
         currentIndex++;
         renderQuestion();
-        if (questionCard) {
-            questionCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+        questionCard?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else {
         showComplete();
     }
@@ -407,7 +343,6 @@ function showComplete() {
     if (percentage >= 90) { grade = 'Excellent!'; emoji = '🏆'; }
     else if (percentage >= 80) { grade = 'Great Job!'; emoji = '🎉'; }
     else if (percentage >= 70) { grade = 'Good Work!'; emoji = '💪'; }
-    else if (percentage >= 60) { grade = 'Not Bad!'; emoji = '👍'; }
     else if (percentage >= 50) { grade = 'Keep Practicing!'; emoji = '📚'; }
     else { grade = 'Review More!'; emoji = '🤔'; }
 
@@ -415,16 +350,12 @@ function showComplete() {
         questionText.innerHTML = `
             <div style="text-align:center;padding:20px 0">
                 <div style="font-size:3rem;margin-bottom:12px">${emoji}</div>
-                <h2 style="font-size:1.4rem;margin-bottom:4px;color:var(--text)">${grade}</h2>
-                <p style="color:var(--text-muted);font-size:0.9rem">You got ${score} out of ${totalQuestions} correct</p>
+                <h2 style="font-size:1.4rem;margin-bottom:4px">${grade}</h2>
+                <p style="color:var(--text-muted);font-size:0.9rem">${score} out of ${totalQuestions} correct</p>
                 <p style="color:var(--blue-accent);font-size:1.6rem;font-weight:700;margin:8px 0">${percentage}%</p>
                 <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px">
-                    <button onclick="restartTopic()" class="nav-btn next" style="max-width:160px">
-                        <i class="fas fa-redo"></i> Retry
-                    </button>
-                    <button onclick="backToMenu()" class="nav-btn prev" style="max-width:160px">
-                        <i class="fas fa-list"></i> Courses
-                    </button>
+                    <button onclick="restartTopic()" class="nav-btn next" style="max-width:160px">🔄 Retry</button>
+                    <button onclick="backToMenu()" class="nav-btn prev" style="max-width:160px">📚 Courses</button>
                 </div>
             </div>
         `;
@@ -454,12 +385,8 @@ function restartTopic() {
 
 // ==================== BACK TO MENU ====================
 function backToMenu() {
-    const studyScreen = document.getElementById('study-screen');
-    const courseScreen = document.getElementById('course-selection-screen');
-    
-    if (studyScreen) studyScreen.style.display = 'none';
-    if (courseScreen) courseScreen.style.display = 'block';
-    
+    $('study-screen').style.display = 'none';
+    $('course-selection-screen').style.display = 'block';
     currentQuestions = [];
     currentIndex = 0;
     totalQuestions = 0;
@@ -473,7 +400,7 @@ if (nextBtn) nextBtn.addEventListener('click', nextQuestion);
 if (backBtn) backBtn.addEventListener('click', backToMenu);
 
 if (toggleSolutionBtn) {
-    toggleSolutionBtn.addEventListener('click', () => {
+    toggleSolutionBtn.addEventListener('click', async () => {
         if (solutionText) {
             const isVisible = solutionText.style.display !== 'none';
             if (isVisible) {
@@ -484,17 +411,13 @@ if (toggleSolutionBtn) {
                 solutionText.style.display = 'block';
                 solutionText.classList.add('show');
                 toggleSolutionBtn.textContent = '🙈 Hide Solution';
-                
-                setTimeout(() => {
-                    if (window.MathJax && MathJax.typesetPromise) {
-                        MathJax.typesetPromise([solutionText]).catch(() => {});
-                    }
-                }, 100);
+                await renderMathJax();
             }
         }
     });
 }
 
+// Keyboard shortcuts
 document.addEventListener('keydown', (e) => {
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
     
@@ -529,18 +452,9 @@ function shuffleArray(arr) {
 // ==================== INIT ====================
 function init() {
     console.log('🚀 Study Mode initializing...');
-    
-    const requiredElements = ['courseGrid', 'question-text', 'options-container'];
-    const missing = requiredElements.filter(id => !$(id));
-    
-    if (missing.length > 0) {
-        console.error('❌ Missing required DOM elements:', missing);
-        return;
-    }
-    
     initTheme();
     renderCourses();
-    console.log('📚 Study Mode loaded successfully!');
+    console.log('📚 Study Mode loaded!');
 }
 
 // ==================== EXPOSE GLOBALS ====================
