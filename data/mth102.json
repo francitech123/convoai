@@ -1,67 +1,67 @@
 [
   {
     "id": 1,
-    "question": "If \(\sin\theta = \\frac{4}{5}\) and \(\cos\beta = \\frac{5}{13}\), where \(0^{\\circ} \\leq \\theta \\leq 90^{\\circ}\) and \(0^{\\circ} \\leq \\beta \\leq 90^{\\circ}\), evaluate \(\\tan(\\alpha + \\beta)\).",
+    "question": "If \\(\\sin\\theta = \\frac{4}{5}\\) and \\(\\cos\\beta = \\frac{5}{13}\\), where \\(0^{\\circ} \\leq \\theta \\leq 90^{\\circ}\\) and \\(0^{\\circ} \\leq \\beta \\leq 90^{\\circ}\\), evaluate \\(\\tan(\\theta + \\beta)\\).",
     "options": ["-\\frac{56}{65}", "-\\frac{56}{33}", "0", "-1"],
-    "solution": "Step 1: Find \\tan\\theta and \\tan\\beta.\n\\cos\\theta = \\sqrt{1 - (4/5)^2} = \\frac{3}{5}, so \\tan\\theta = \\frac{4}{3}.\n\\sin\\beta = \\sqrt{1 - (5/13)^2} = \\frac{12}{13}, so \\tan\\beta = \\frac{12}{5}.\nStep 2: Use the addition formula.\n\\tan(\\alpha + \\beta) = \\frac{\\tan\\alpha + \\tan\\beta}{1 - \\tan\\alpha\\tan\\beta}.\n= \\frac{\\frac{4}{3} + \\frac{12}{5}}{1 - (\\frac{4}{3})(\\frac{12}{5})} = \\frac{\\frac{56}{15}}{1 - \\frac{48}{15}} = \\frac{\\frac{56}{15}}{-\\frac{33}{15}} = -\\frac{56}{33}.\nCorrect Answer: (b)"
+    "solution": "Step 1: Find \\tan\\theta and \\tan\\beta.\n\\cos\\theta = \\sqrt{1 - (4/5)^2} = \\frac{3}{5}, so \\tan\\theta = \\frac{4}{3}.\n\\sin\\beta = \\sqrt{1 - (5/13)^2} = \\frac{12}{13}, so \\tan\\beta = \\frac{12}{5}.\nStep 2: Use the addition formula.\n\\tan(\\theta + \\beta) = \\frac{\\tan\\theta + \\tan\\beta}{1 - \\tan\\theta\\tan\\beta}.\n= \\frac{\\frac{4}{3} + \\frac{12}{5}}{1 - (\\frac{4}{3})(\\frac{12}{5})} = \\frac{\\frac{56}{15}}{1 - \\frac{48}{15}} = \\frac{\\frac{56}{15}}{-\\frac{33}{15}} = -\\frac{56}{33}.\nCorrect Answer: (b)"
   },
   {
     "id": 2,
-    "question": "Express \(143^{\\circ}10'\) in radians.",
+    "question": "Express \\(143^{\\circ}10'\\) in radians.",
     "options": ["3.499", "\\frac{62\\pi}{36}", "\\frac{859\\pi}{1080}", "\\frac{7\\pi}{36}"],
-    "solution": "Step 1: Convert degrees to a decimal fraction.\n143^{\\circ}10' = 143^{\\circ} + \\frac{10}{60}^{\\circ} = 143.166^{\\circ}.\nStep 2: Convert to radians using \(1^{\\circ} = \\frac{\\pi}{180}\) radians.\n143.166^{\\circ} \\times \\frac{\\pi}{180} = \\frac{143.166\\pi}{180}.\nSimplify the fraction by dividing numerator and denominator by 6: \n= \\frac{859\\pi}{1080}.\nCorrect Answer: (c)"
+    "solution": "Step 1: Convert degrees to a fraction.\n143^{\\circ}10' = 143^{\\circ} + \\frac{10}{60}^{\\circ} = 143\\frac{1}{6}^{\\circ} = \\frac{859}{6}^{\\circ}.\nStep 2: Convert to radians using \\(1^{\\circ} = \\frac{\\pi}{180}\\) radians.\n\\frac{859}{6} \\times \\frac{\\pi}{180} = \\frac{859\\pi}{1080}.\nCorrect Answer: (c)"
   },
   {
     "id": 3,
-    "question": "Simplify \( \\frac{\\sin^{4}\\theta - \\cos^{4}\\theta}{\\sin^{2}\\theta - \\cos^{2}\\theta} \).",
+    "question": "Simplify \\( \\frac{\\sin^{4}\\theta - \\cos^{4}\\theta}{\\sin^{2}\\theta - \\cos^{2}\\theta} \\).",
     "options": ["0", "2\\sin^{2}\\theta", "\\cos 2\\theta", "1"],
-    "solution": "Step 1: Factor the numerator as a difference of squares.\n\\frac{(\\sin^{2}\\theta - \\cos^{2}\\theta)(\\sin^{2}\\theta + \\cos^{2}\\theta)}{\\sin^{2}\\theta - \\cos^{2}\\theta}.\nStep 2: Cancel out the common factor \((\\sin^{2}\\theta - \\cos^{2}\\theta)\).\nWe are left with: \\(\\sin^{2}\\theta + \\cos^{2}\\theta\\).\nStep 3: Use the Pythagorean identity: \\(\\sin^{2}\\theta + \\cos^{2}\\theta = 1\\).\nCorrect Answer: (d)"
+    "solution": "Step 1: Factor the numerator as a difference of squares.\n\\frac{(\\sin^{2}\\theta - \\cos^{2}\\theta)(\\sin^{2}\\theta + \\cos^{2}\\theta)}{\\sin^{2}\\theta - \\cos^{2}\\theta}.\nStep 2: Cancel out the common factor \\((\\sin^{2}\\theta - \\cos^{2}\\theta)\\).\nWe are left with: \\(\\sin^{2}\\theta + \\cos^{2}\\theta\\).\nStep 3: Use the Pythagorean identity: \\(\\sin^{2}\\theta + \\cos^{2}\\theta = 1\\).\nCorrect Answer: (d)"
   },
   {
     "id": 4,
-    "question": "If \(f(x) = 4\\sin 8x \\cos 8x \\cos 16x\), find the value of \(f'(\\pi/4)\).",
+    "question": "If \\(f(x) = 4\\sin 8x \\cos 8x \\cos 16x\\), find the value of \\(f'(\\pi/4)\\).",
     "options": ["16", "32", "1", "64"],
-    "solution": "Step 1: Simplify \(f(x)\) using the double angle identity \\(\\sin 2\\theta = 2\\sin\\theta\\cos\\theta\\).\n\\(f(x) = 2(2\\sin 8x\\cos 8x)\\cos 16x = 2(\\sin 16x)\\cos 16x\\).\n\\(f(x) = \\sin 32x\\).\nStep 2: Differentiate.\n\\(f'(x) = 32\\cos 32x\\).\nStep 3: Evaluate at \(x = \\frac{\\pi}{4}\).\n\\(f'(\\pi/4) = 32\\cos(32 \\times \\frac{\\pi}{4}) = 32\\cos(8\\pi)\\).\nSince \\(\\cos(8\\pi) = 1\\), \\(f'(\\pi/4) = 32\\).\nCorrect Answer: (b)"
+    "solution": "Step 1: Simplify \\(f(x)\\) using the double angle identity \\(\\sin 2\\theta = 2\\sin\\theta\\cos\\theta\\).\n\\(f(x) = 2(2\\sin 8x\\cos 8x)\\cos 16x = 2(\\sin 16x)\\cos 16x\\).\n\\(f(x) = \\sin 32x\\).\nStep 2: Differentiate.\n\\(f'(x) = 32\\cos 32x\\).\nStep 3: Evaluate at \\(x = \\frac{\\pi}{4}\\).\n\\(f'(\\pi/4) = 32\\cos(32 \\times \\frac{\\pi}{4}) = 32\\cos(8\\pi)\\).\nSince \\(\\cos(8\\pi) = 1\\), \\(f'(\\pi/4) = 32\\).\nCorrect Answer: (b)"
   },
   {
     "id": 5,
-    "question": "Differentiate the function \( \\log_{10}(\\tan x) \), where \(0^{\\circ} \\leq x \\leq 90^{\\circ}\), with respect to \(x\).",
+    "question": "Differentiate the function \\( \\log_{10}(\\tan x) \\), where \\(0^{\\circ} \\leq x \\leq 90^{\\circ}\\), with respect to \\(x\\).",
     "options": ["\\sec 2x", "\\cosec 2x", "2\\csc 2x", "2\\sec 2x"],
     "solution": "Step 1: Use the change of base formula: \\(\\log_{10}(\\tan x) = \\frac{\\ln(\\tan x)}{\\ln 10}\\).\nStep 2: Differentiate using the chain rule.\n\\(\\frac{d}{dx} = \\frac{1}{\\ln 10} \\cdot \\frac{1}{\\tan x} \\cdot \\sec^{2}x\\).\nStep 3: Simplify the trigonometric terms.\n\\(\\frac{\\sec^{2}x}{\\tan x} = \\frac{1/\\cos^{2}x}{\\sin x/\\cos x} = \\frac{1}{\\sin x\\cos x}\\).\nStep 4: Use the double angle identity \\(\\sin 2x = 2\\sin x\\cos x\\).\n\\(\\frac{1}{\\sin x\\cos x} = \\frac{2}{\\sin 2x} = 2\\csc 2x\\).\nCorrect Answer: (c)"
   },
   {
     "id": 6,
-    "question": "Determine the nature of the turning point of the function \(y = 27\\sec\\theta + 64\\cosec\\theta\) at \(\\theta = \\tan^{-1}(\\frac{4}{3})\).",
+    "question": "Determine the nature of the turning point of the function \\(y = 27\\sec\\theta + 64\\cosec\\theta\\) at \\(\\theta = \\tan^{-1}(\\frac{4}{3})\\).",
     "options": ["Maximum point", "Minimum point", "Point of inflection", "No turning point"],
     "solution": "Step 1: Find the first derivative.\n\\(\\frac{dy}{d\\theta} = 27\\sec\\theta\\tan\\theta - 64\\cosec\\theta\\cot\\theta\\).\nStep 2: Set \\(\\frac{dy}{d\\theta} = 0\\) to find stationary points.\n\\(27\\sec\\theta\\tan\\theta = 64\\cosec\\theta\\cot\\theta\\).\n\\(27\\frac{\\sin\\theta}{\\cos^{2}\\theta} = 64\\frac{\\cos\\theta}{\\sin^{2}\\theta}\\).\n\\(\\frac{\\sin^{3}\\theta}{\\cos^{3}\\theta} = \\frac{64}{27} \\implies \\tan^{3}\\theta = (\\frac{4}{3})^{3}\\).\nThus, \\(\\tan\\theta = \\frac{4}{3}\\). This corresponds to the given point.\nStep 3: Check the second derivative or nature. Since the function is positive definite and both terms go to infinity as \\(\\theta\\) approaches asymptotes, the turning point is a Minimum point.\nCorrect Answer: (b)"
   },
   {
     "id": 7,
-    "question": "Let \(y = a\\sin x + b\\cos x\), where \(a\) and \(b\) are constants. Find \(y^{2} + (\\frac{dy}{dx})^{2}\).",
+    "question": "Let \\(y = a\\sin x + b\\cos x\\), where \\(a\\) and \\(b\\) are constants. Find \\(y^{2} + (\\frac{dy}{dx})^{2}\\).",
     "options": ["a^{2} + b^{2}", "2ab + y\\frac{dy}{dx}", "a^{2} + 2ab", "None of the above"],
     "solution": "Step 1: Differentiate \\(y\\).\n\\(\\frac{dy}{dx} = a\\cos x - b\\sin x\\).\nStep 2: Square both \\(y\\) and \\(\\frac{dy}{dx}\\).\n\\(y^{2} = a^{2}\\sin^{2}x + 2ab\\sin x\\cos x + b^{2}\\cos^{2}x\\).\n\\((\\frac{dy}{dx})^{2} = a^{2}\\cos^{2}x - 2ab\\sin x\\cos x + b^{2}\\sin^{2}x\\).\nStep 3: Add them together. The cross terms cancel!\n\\(y^{2} + (\\frac{dy}{dx})^{2} = a^{2}(\\sin^{2}x + \\cos^{2}x) + b^{2}(\\cos^{2}x + \\sin^{2}x)\\).\nUsing \\(\\sin^{2}x + \\cos^{2}x = 1\\), the result is \\(a^{2} + b^{2}\\).\nCorrect Answer: (a)"
   },
   {
     "id": 8,
-    "question": "If \(x = \\cot\\theta\), find \(\\sin\\theta\\cdot\\cos^{2}\\theta\) in terms of \(x\).",
-    "options": ["1/\\sqrt{1+x^{2}}", "\\frac{1}{x^{2}}", "\\frac{x}{(1+x^{2})^{3/2}}", "\\frac{x}{(1+x^{2})^{5/2}}"],
+    "question": "If \\(x = \\cot\\theta\\), find \\(\\sin\\theta\\cdot\\cos^{2}\\theta\\) in terms of \\(x\\).",
+    "options": ["1/\\sqrt{1+x^{2}}", "\\frac{1}{x^{2}}", "\\frac{x^{2}}{(1+x^{2})^{3/2}}", "\\frac{x}{(1+x^{2})^{5/2}}"],
     "solution": "Step 1: Recall that \\(\\cot\\theta = \\frac{\\cos\\theta}{\\sin\\theta} = x\\). So \\(\\cos\\theta = x\\sin\\theta\\).\nStep 2: Square both sides and use \\(\\sin^{2}\\theta + \\cos^{2}\\theta = 1\\).\n\\(\\cos^{2}\\theta = x^{2}\\sin^{2}\\theta\\).\n\\(\\sin^{2}\\theta + x^{2}\\sin^{2}\\theta = 1 \\implies \\sin^{2}\\theta(1+x^{2}) = 1\\).\nThus, \\(\\sin\\theta = \\frac{1}{\\sqrt{1+x^{2}}}\\) (since \\(0 \\le \\theta \\le 90^{\\circ}\\)).\nStep 3: Compute \\(\\sin\\theta\\cdot\\cos^{2}\\theta\\).\n\\(\\cos^{2}\\theta = 1 - \\sin^{2}\\theta = 1 - \\frac{1}{1+x^{2}} = \\frac{x^{2}}{1+x^{2}}\\).\n\\(\\sin\\theta\\cdot\\cos^{2}\\theta = \\frac{1}{\\sqrt{1+x^{2}}} \\cdot \\frac{x^{2}}{1+x^{2}} = \\frac{x^{2}}{(1+x^{2})^{3/2}}\\).\nCorrect Answer: (c)"
   },
   {
     "id": 9,
-    "question": "Simplify the function \\[ \frac{\\sin x}{1 + \\cos x} + \\frac{1 + \\cos x}{\\sin x} .\\]",
+    "question": "Simplify the function \\[ \\frac{\\sin x}{1 + \\cos x} + \\frac{1 + \\cos x}{\\sin x} .\\]",
     "options": ["\\sin x", "2\\sin x\\cos x", "\\cosec x", "2\\cosec x"],
     "solution": "Step 1: Find a common denominator.\n\\(\\frac{\\sin^{2}x + (1 + \\cos x)^{2}}{(\\sin x)(1 + \\cos x)}\\).\nStep 2: Expand the numerator.\n\\(\\frac{\\sin^{2}x + 1 + 2\\cos x + \\cos^{2}x}{(\\sin x)(1 + \\cos x)}\\).\nStep 3: Use \\(\\sin^{2}x + \\cos^{2}x = 1\\).\n\\(\\frac{1 + 1 + 2\\cos x}{(\\sin x)(1 + \\cos x)} = \\frac{2 + 2\\cos x}{(\\sin x)(1 + \\cos x)}\\).\nStep 4: Factor the numerator.\n\\(\\frac{2(1 + \\cos x)}{(\\sin x)(1 + \\cos x)} = \\frac{2}{\\sin x} = 2\\cosec x\\).\nCorrect Answer: (d)"
   },
   {
     "id": 10,
-    "question": "Let \(f(x) = x^{2} - 6x + 8\), where \(2 \\le x \\le 4\). Find the value of \(x\) for which \(f'(x)\) vanishes.",
+    "question": "Let \\(f(x) = x^{2} - 6x + 8\\), where \\(2 \\le x \\le 4\\). Find the value of \\(x\\) for which \\(f'(x)\\) vanishes.",
     "options": ["5", "3", "4", "2"],
     "solution": "Step 1: Find the derivative \\(f'(x)\\).\n\\(f'(x) = 2x - 6\\).\nStep 2: Set the derivative to 0 and solve for \\(x\\).\n\\(2x - 6 = 0 \\implies 2x = 6 \\implies x = 3\\).\nStep 3: Check the range. \\(x=3\\) lies exactly in the middle of the interval [2, 4].\nCorrect Answer: (b)"
   },
   {
     "id": 11,
-    "question": "The equation \(4\\sin\\theta = 3\\cos\\theta + 2.5\) represents the general solution to which of the following equations?",
+    "question": "The equation \\(4\\sin\\theta = 3\\cos\\theta + 2.5\\) represents the general solution to which of the following equations?",
     "options": ["\\theta = n360^{\\circ} - 173.18^{\\circ}", "\\theta = n180^{\\circ} + 33.2^{\\circ}", "\\theta = n360^{\\circ} + 66.52^{\\circ}", "All of the above"],
     "solution": "Step 1: Write the equation in the form \\(R\\sin(\\theta - \\alpha)\\).\n\\(4\\sin\\theta - 3\\cos\\theta = 2.5\\).\n\\(R = \\sqrt{4^{2} + 3^{2}} = 5\\).\n\\(\\alpha = \\tan^{-1}(\\frac{3}{4}) \\approx 36.9^{\\circ}\\).\nSo, \\(5\\sin(\\theta - 36.9^{\\circ}) = 2.5\\).\nStep 2: Solve for \\(\\theta\\).\n\\(\\sin(\\theta - 36.9^{\\circ}) = 0.5\\).\n\\(\\theta - 36.9^{\\circ} = 30^{\\circ}\\) or \\(180^{\\circ} - 30^{\\circ} = 150^{\\circ}\\).\n\\(\\theta = 36.9^{\\circ} + 30^{\\circ} = 66.9^{\\circ}\\).\n\\(\\theta = 36.9^{\\circ} + 150^{\\circ} = 186.9^{\\circ}\\).\nStep 3: The general solution is \\(\\theta = n360^{\\circ} + 66.9^{\\circ}\\).\nCorrect Answer: (c)"
   },
@@ -73,7 +73,7 @@
   },
   {
     "id": 13,
-    "question": "If \(x^{2/3} + y^{2/3} = a^{2/3}\), and \(a\) is a constant, find \(\\frac{dy}{dx}\).",
+    "question": "If \\(x^{2/3} + y^{2/3} = a^{2/3}\\), and \\(a\\) is a constant, find \\(\\frac{dy}{dx}\\).",
     "options": ["(\\frac{y}{x})^{1/3}", "-(\\frac{y}{x})^{1/3}", "-\\sqrt[3]{\\frac{x}{y}}", "\\frac{x}{y}"],
     "solution": "Step 1: Differentiate implicitly with respect to \\(x\\).\n\\(\\frac{2}{3}x^{-1/3} + \\frac{2}{3}y^{-1/3}\\frac{dy}{dx} = 0\\).\nStep 2: Solve for \\(\\frac{dy}{dx}\\).\n\\(x^{-1/3} + y^{-1/3}\\frac{dy}{dx} = 0\\) (multiplied by 3/2).\n\\(y^{-1/3}\\frac{dy}{dx} = -x^{-1/3}\\).\nStep 3: Isolate the derivative.\n\\(\\frac{dy}{dx} = -\\frac{x^{-1/3}}{y^{-1/3}} = -\\frac{y^{1/3}}{x^{1/3}} = -\\sqrt[3]{\\frac{y}{x}}\\).\nCorrect Answer: (b)"
   },
@@ -85,51 +85,51 @@
   },
   {
     "id": 15,
-    "question": "Evaluate \(\\int (11x^{10} + \\frac{1}{2}\\cos 2x) \\, dx\).",
+    "question": "Evaluate \\(\\int (11x^{10} + \\frac{1}{2}\\cos 2x) \\, dx\\).",
     "options": ["x^{11} + \\frac{1}{4}\\sin 2x + C", "11x^{11} + \\frac{1}{2}\\sin 2x + C", "x^{11} + \\frac{1}{2}\\sin 2x + C", "x^{10} + \\frac{1}{4}\\sin 2x + C"],
     "solution": "Step 1: Integrate the first term using the power rule (\\(\\int x^n dx = \\frac{x^{n+1}}{n+1}\\)).\n\\(\\int 11x^{10} dx = 11 \\cdot \\frac{x^{11}}{11} = x^{11}\\).\nStep 2: Integrate the second term using standard trig integrals.\nRecall \\(\\int \\cos(ax) dx = \\frac{\\sin(ax)}{a}\\).\n\\(\\int \\frac{1}{2}\\cos 2x dx = \\frac{1}{2} \\cdot \\frac{\\sin 2x}{2} = \\frac{1}{4}\\sin 2x\\).\nStep 3: Combine results and add the constant of integration \\(C\\).\n\\(x^{11} + \\frac{1}{4}\\sin 2x + C\\).\nCorrect Answer: (a)"
   },
   {
     "id": 16,
-    "question": "The points at which \(f(x) = x^{3} - 3x\) coincide with \(f'(x)\) are:",
+    "question": "The points at which \\(f(x) = x^{3} - 3x\\) coincide with \\(f'(x)\\) are:",
     "options": ["3, -3", "\\frac{-5 \\pm \\sqrt{13}}{2}", "1,2", "0,2"],
     "solution": "Step 1: Find the derivative \\(f'(x)\\).\n\\(f'(x) = 3x^{2} - 3\\).\nStep 2: Set \\(f(x) = f'(x)\\) and solve for \\(x\\).\n\\(x^{3} - 3x = 3x^{2} - 3\\).\nStep 3: Rearrange into a standard cubic equation.\n\\(x^{3} - 3x^{2} - 3x + 3 = 0\\).\nSolve using the quadratic formula for the factored terms gives \\(x = \\frac{-5 \\pm \\sqrt{13}}{2}\\).\nCorrect Answer: (b)"
   },
   {
     "id": 17,
-    "question": "The gradient of the tangent to the curve \(x^{2/3} + y^{2/3} = 1\) is \(-1\) when:",
+    "question": "The gradient of the tangent to the curve \\(x^{2/3} + y^{2/3} = 1\\) is \\(-1\\) when:",
     "options": ["x = 0", "y = x", "x = 1", "y = -2x"],
     "solution": "Step 1: Use implicit differentiation to find \\(\\frac{dy}{dx}\\).\n\\(\\frac{2}{3}x^{-1/3} + \\frac{2}{3}y^{-1/3}\\frac{dy}{dx} = 0\\).\n\\(\\frac{dy}{dx} = - (\\frac{y}{x})^{1/3}\\).\nStep 2: Set the gradient equal to -1.\n\\(-(\\frac{y}{x})^{1/3} = -1 \\implies (\\frac{y}{x})^{1/3} = 1\\).\nStep 3: Cube both sides.\n\\(\\frac{y}{x} = 1 \\implies y = x\\).\nCorrect Answer: (b)"
   },
   {
     "id": 18,
-    "question": "A vehicle moves on a level ground such that when it has covered a distance \(s\) ft, its speed is \(v\) ft/sec. Given that \(s = \\frac{2v^{2}}{60 - v}\), find an expression for the acceleration of the vehicle.",
+    "question": "A vehicle moves on a level ground such that when it has covered a distance \\(s\\) ft, its speed is \\(v\\) ft/sec. Given that \\(s = \\frac{2v^{2}}{60 - v}\\), find an expression for the acceleration of the vehicle.",
     "options": ["(\\frac{2v}{60 - v})^{2}", "\\frac{60v^{2}}{(60 - v)^{3}}", "\\frac{v^{2}}{60 - v}", "\\frac{240v - 2v^{3}}{(60 - v)^{3}}"],
     "solution": "Step 1: Recall acceleration \\(a = v\\frac{dv}{ds}\\). Differentiate \\(s\\) with respect to \\(v\\) using the quotient rule.\n\\(\\frac{ds}{dv} = \\frac{(60-v)(4v) - (2v^{2})(-1)}{(60-v)^{2}} = \\frac{240v - 4v^{2} + 2v^{2}}{(60-v)^{2}} = \\frac{240v - 2v^{2}}{(60-v)^{2}}\\).\nStep 2: Compute acceleration.\n\\(a = v \\cdot \\frac{1}{ds/dv} = v \\cdot \\frac{(60-v)^{2}}{240v - 2v^{2}}\\).\nStep 3: Simplify the expression.\n\\(a = v \\cdot \\frac{(60-v)^{2}}{2v(120-v)} = \\frac{(60-v)^{2}}{2(120-v)}\\). This matches form (d) when expanded.\nCorrect Answer: (d)"
   },
   {
     "id": 19,
     "question": "Which of the following identities is NOT true?",
-    "options": ["\\sec^{2}\\theta = 1 + \\tan^{2}\\theta", "\\cos\\sec^{2}\\theta = 1 + \\cot^{2}\\theta", "\\sin 2\\theta = 2\\sin\\theta\\cos\\theta", "\\sin 2\\theta = 2\\cos^{2}\\theta - 1"],
+    "options": ["\\sec^{2}\\theta = 1 + \\tan^{2}\\theta", "\\csc^{2}\\theta = 1 + \\cot^{2}\\theta", "\\sin 2\\theta = 2\\sin\\theta\\cos\\theta", "\\sin 2\\theta = 2\\cos^{2}\\theta - 1"],
     "solution": "Step 1: Check the double angle identity for sine. \\(\\sin 2\\theta = 2\\sin\\theta\\cos\\theta\\) is true.\nStep 2: Check the Pythagorean identities. \\(\\sec^{2}\\theta = 1 + \\tan^{2}\\theta\\) and \\(\\csc^{2}\\theta = 1 + \\cot^{2}\\theta\\) are both true.\nStep 3: Check the double angle identity for cosine. \\(\\cos 2\\theta = 2\\cos^{2}\\theta - 1\\). Option D states \\(\\sin 2\\theta = 2\\cos^{2}\\theta - 1\\), which is FALSE.\nCorrect Answer: (d)"
   },
   {
     "id": 20,
-    "question": "If \(\\sin(x + \\frac{\\pi}{3}) = \\cos(x - \\frac{\\pi}{3})\), where \(x\) is an acute angle, evaluate \(\\tan^{2}x - 1\).",
+    "question": "If \\(\\sin(x + \\frac{\\pi}{3}) = \\cos(x - \\frac{\\pi}{3})\\), where \\(x\\) is an acute angle, evaluate \\(\\tan^{2}x - 1\\).",
     "options": ["0", "\\frac{\\pi}{4}", "-1", "1"],
     "solution": "Step 1: Use the co-function identity \\(\\cos A = \\sin(90^{\\circ} - A)\\).\n\\(\\sin(x + 60^{\\circ}) = \\sin(90^{\\circ} - (x - 60^{\\circ}))\\).\n\\(\\sin(x + 60^{\\circ}) = \\sin(150^{\\circ} - x)\\).\nStep 2: Equate the angles.\nSince both are sine functions, either the angles are equal, or they are supplementary.\n\\(x + 60^{\\circ} = 150^{\\circ} - x \\implies 2x = 90^{\\circ} \\implies x = 45^{\\circ}\\).\nStep 3: Evaluate \\(\\tan^{2}x - 1\\).\n\\(\\tan(45^{\\circ}) = 1\\). Thus, \\(1^{2} - 1 = 0\\).\nCorrect Answer: (a)"
   },
   {
     "id": 21,
-    "question": "Integrate the function \(f(x) = x\\cos(2x)\) with respect to \(x\).",
-    "options": ["\\frac{1}{2}x\\sin 2x - \\frac{1}{2}\\cos 2x + C", "\\frac{1}{2}x\\sin 2x + \\frac{1}{2}\\cos 2x + C", "x\\sin 2x + \\frac{1}{2}\\cos 2x + C", "x\\sin 2x - \\frac{1}{2}\\cos 2x + C"],
+    "question": "Integrate the function \\(f(x) = x\\cos(2x)\\) with respect to \\(x\\).",
+    "options": ["\\frac{1}{2}x\\sin 2x - \\frac{1}{2}\\cos 2x + C", "\\frac{1}{2}x\\sin 2x + \\frac{1}{4}\\cos 2x + C", "x\\sin 2x + \\frac{1}{2}\\cos 2x + C", "x\\sin 2x - \\frac{1}{2}\\cos 2x + C"],
     "solution": "Step 1: Apply Integration by Parts.\nLet \\(u = x\\), \\(dv = \\cos 2x dx\\).\nThen \\(du = dx\\), \\(v = \\frac{\\sin 2x}{2}\\).\nStep 2: Apply the formula \\(\\int u dv = uv - \\int v du\\).\n\\(\\int x\\cos 2x dx = x \\cdot \\frac{\\sin 2x}{2} - \\int \\frac{\\sin 2x}{2} dx\\).\nStep 3: Integrate the remaining term.\n\\(= \\frac{x\\sin 2x}{2} - \\frac{1}{2} ( -\\frac{\\cos 2x}{2} ) + C\\).\n\\(= \\frac{x\\sin 2x}{2} + \\frac{\\cos 2x}{4} + C\\).\nCorrect Answer: (b)"
   },
   {
     "id": 22,
-    "question": "Which of the following statements are true of the function \(y = \\frac{2x + 1}{x - 1}\)?\nI. There are no turning values.\nII. \\(\\frac{dy}{dx}\\) is always negative.\nIII. \\(y = 2\\) is a vertical asymptote.\nIV. When \\(x \\to \\infty, y \\to 2\\).\nV. \\(x = 1\\) is a horizontal asymptote.",
-    "options": ["I, II and IV only", "II, III and IV only", "I, III and IV only", "III, IV and V only"],
-    "solution": "Step 1: Check for turning points.\n\\(\\frac{dy}{dx} = \\frac{(x-1)(2) - (2x+1)(1)}{(x-1)^2} = \\frac{2x - 2 - 2x - 1}{(x-1)^2} = \\frac{-3}{(x-1)^2}\\).\nSince \\((x-1)^2 > 0\\), \\(\\frac{dy}{dx} < 0\\) always (No turning points). (I and II true).\nStep 2: Check asymptotes.\nAs \\(x \\to \\infty\\), \\(y \\to \\frac{2x}{x} = 2\\). So \\(y=2\\) is a HORIZONTAL asymptote, not vertical. (IV true).\nStep 3: Vertical asymptote is at \\(x=1\\) (where denominator is 0).\nSo I, II, and IV are true.\nCorrect Answer: (a)"
+    "question": "Which of the following statements are true of the function \\(y = \\frac{2x + 1}{x - 1}\\)?\nI. There are no turning values.\nII. \\(\\frac{dy}{dx}\\) is always negative.\nIII. \\(y = 2\\) is a horizontal asymptote.\nIV. When \\(x \\to \\infty, y \\to 2\\).\nV. \\(x = 1\\) is a vertical asymptote.",
+    "options": ["I, II and IV only", "I, II, III and V only", "I, III and IV only", "III, IV and V only"],
+    "solution": "Step 1: Check for turning points.\n\\(\\frac{dy}{dx} = \\frac{(x-1)(2) - (2x+1)(1)}{(x-1)^2} = \\frac{2x - 2 - 2x - 1}{(x-1)^2} = \\frac{-3}{(x-1)^2}\\).\nSince \\((x-1)^2 > 0\\), \\(\\frac{dy}{dx} < 0\\) always (No turning points). (I and II true).\nStep 2: Check asymptotes.\nAs \\(x \\to \\infty\\), \\(y \\to \\frac{2x}{x} = 2\\). So \\(y=2\\) is a HORIZONTAL asymptote. (III and IV true).\nStep 3: Vertical asymptote is at \\(x=1\\) (where denominator is 0). (V true).\nSo I, II, III, IV, and V are true.\nCorrect Answer: (b)"
   },
   {
     "id": 23,
@@ -139,115 +139,115 @@
   },
   {
     "id": 24,
-    "question": "Find the solution to the differential equation \( \\frac{dy}{dx} = 3x^{2} - 4x + e^{-x} \) subject to \(y = 3\) at \(x = 0\).",
+    "question": "Find the solution to the differential equation \\( \\frac{dy}{dx} = 3x^{2} - 4x + e^{-x} \\) subject to \\(y = 3\\) at \\(x = 0\\).",
     "options": ["y = x^{3} - 2x^{2} + e^{-x} - 4", "y = x^{3} - 2x^{2} - e^{-x} + 4", "y = x^{3} - 2x^{2} + e^{-x} + 2", "y = x^{3} - 2x^{2} + e^{-x} + 4"],
     "solution": "Step 1: Integrate the differential equation.\n\\(y = \\int (3x^{2} - 4x + e^{-x}) dx = x^{3} - 2x^{2} - e^{-x} + C\\).\nStep 2: Use the initial condition \\(x=0, y=3\\) to find \\(C\\).\n\\(3 = 0 - 0 - e^{0} + C = -1 + C\\).\n\\(C = 4\\).\nStep 3: Substitute \\(C\\) back into the equation.\n\\(y = x^{3} - 2x^{2} - e^{-x} + 4\\).\nCorrect Answer: (b)"
   },
-   {
+  {
     "id": 25,
-    "question": "Find the area bounded by the curve \(y = x(6 - x)\) and the line \(y = 5\).",
+    "question": "Find the area bounded by the curve \\(y = x(6 - x)\\) and the line \\(y = 5\\).",
     "options": ["\\frac{32}{3} \\text{ square units}", "\\frac{163}{5} \\text{ square units}", "\\frac{125}{32} \\text{ square units}", "\\frac{5}{32} \\text{ square units}"],
     "solution": "Step 1: Find the points of intersection. \\(x(6 - x) = 5 \\implies 6x - x^2 = 5 \\implies x^2 - 6x + 5 = 0\\).\n\\((x - 1)(x - 5) = 0 \\implies x = 1 \\text{ or } x = 5\\).\nStep 2: Set up the definite integral for the area between the curves.\nArea = \\(\\int_{1}^{5} [\\text{Top curve} - \\text{Bottom curve}] \\, dx\\)\n= \\(\\int_{1}^{5} (5 - (6x - x^2)) \\, dx = \\int_{1}^{5} (x^2 - 6x + 5) \\, dx\\).\nStep 3: Evaluate the integral.\n\\([\\frac{x^3}{3} - 3x^2 + 5x]_{1}^{5}\\)\n= \\((\\frac{125}{3} - 75 + 25) - (\\frac{1}{3} - 3 + 5)\\)\n= \\((\\frac{125}{3} - 50) - (\\frac{1}{3} + 2)\\) = \\(\\frac{-25}{3} - \\frac{7}{3} = -\\frac{32}{3}\\).\nTaking the absolute value (since area is positive) gives \\(\\frac{32}{3}\\).\nCorrect Answer: (a)"
   },
   {
     "id": 26,
-    "question": "The turning point of the function \(y = 27\\sec\\theta + 64\\cosec\\theta\), \(\\pi < \\theta < \\frac{3\\pi}{2}\), is at:",
+    "question": "The turning point of the function \\(y = 27\\sec\\theta + 64\\cosec\\theta\\), \\(\\pi < \\theta < \\frac{3\\pi}{2}\\), is at:",
     "options": ["\\theta = \\cos^{-1}(\\frac{4}{5})", "\\theta = \\tan^{-1}(\\frac{4}{3})", "\\theta = \\tan^{-1}(\\frac{3}{4})", "\\theta = \\tan^{-1}(\\frac{5}{4})"],
     "solution": "Step 1: Find the derivative.\n\\(\\frac{dy}{d\\theta} = 27\\sec\\theta\\tan\\theta - 64\\cosec\\theta\\cot\\theta\\).\nStep 2: Set \\(\\frac{dy}{d\\theta} = 0\\).\n\\(27\\sec\\theta\\tan\\theta = 64\\cosec\\theta\\cot\\theta\\).\n\\(27(\\frac{\\sin\\theta}{\\cos^2\\theta}) = 64(\\frac{\\cos\\theta}{\\sin^2\\theta})\\).\n\\(\\frac{\\sin^3\\theta}{\\cos^3\\theta} = \\frac{64}{27} \\implies \\tan^3\\theta = (\\frac{4}{3})^3\\).\nStep 3: Solve for \\(\\theta\\).\n\\(\\tan\\theta = \\frac{4}{3} \\implies \\theta = \\tan^{-1}(\\frac{4}{3})\\).\nCorrect Answer: (b)"
   },
   {
     "id": 27,
-    "question": "A railway curve is to be laid out on a circle. What radius should be used if the track is to change direction by \(25^{\\circ}\) in a distance of 120 m?",
+    "question": "A railway curve is to be laid out on a circle. What radius should be used if the track is to change direction by \\(25^{\\circ}\\) in a distance of 120 m?",
     "options": ["864 m", "865 m", "275 m", "None of the above"],
     "solution": "Step 1: Use the arc length formula: \\(l = r\\theta\\). Here, \\(l = 120\\text{ m}\\), and \\(\\theta = 25^{\\circ}\\).\nStep 2: Convert degrees to radians.\n\\(\\theta = 25 \\times \\frac{\\pi}{180} = \\frac{5\\pi}{36}\\) radians.\nStep 3: Solve for radius \\(r\\).\n\\(r = \\frac{l}{\\theta} = \\frac{120}{5\\pi/36} = \\frac{120 \\times 36}{5\\pi} = \\frac{864}{\\pi} \\approx 275\\text{ m}\\).\nCorrect Answer: (c)"
   },
   {
     "id": 28,
-    "question": "Evaluate \(\\frac{d}{dx} [\\frac{1}{2}\\cot(\\frac{x}{2})] \\) at \(x = \\frac{\\pi}{2}\).",
+    "question": "Evaluate \\(\\frac{d}{dx} [\\frac{1}{2}\\cot(\\frac{x}{2})] \\) at \\(x = \\frac{\\pi}{2}\\).",
     "options": ["3\\cos 3x", "\\cos 3x", "-\\frac{1}{2}\\csc^2(\\frac{x}{2})", "\\sin x"],
     "solution": "Step 1: Differentiate the function.\n\\(\\frac{d}{dx} [\\frac{1}{2}\\cot(\\frac{x}{2})] = \\frac{1}{2} \\times (-\\csc^2(\\frac{x}{2})) \\times \\frac{1}{2}\\).\n\\(= -\\frac{1}{4}\\csc^2(\\frac{x}{2})\\).\nStep 2: Evaluate at \\(x = \\frac{\\pi}{2}\\).\n\\(-\\frac{1}{4}\\csc^2(\\frac{\\pi}{4}) = -\\frac{1}{4}(\\sqrt{2})^2 = -\\frac{1}{4}(2) = -\\frac{1}{2}\\).\nCorrect Answer: (b)"
   },
   {
     "id": 29,
-    "question": "If \(\\sin(\\alpha + \\beta - \\gamma) = \\cos(\\beta + \\gamma - \\alpha) = \\frac{1}{2}\) and \(\\tan(\\gamma + \\alpha - \\beta) = 1\). If \(\\alpha, \\beta, \\gamma\) are positive acute angles, then \(2\\alpha + \\beta\) is:",
+    "question": "If \\(\\sin(\\alpha + \\beta - \\gamma) = \\cos(\\beta + \\gamma - \\alpha) = \\frac{1}{2}\\) and \\(\\tan(\\gamma + \\alpha - \\beta) = 1\\). If \\(\\alpha, \\beta, \\gamma\\) are positive acute angles, then \\(2\\alpha + \\beta\\) is:",
     "options": ["100^{\\circ}", "110^{\\circ}", "75^{\\circ}", "120^{\\circ}"],
     "solution": "Step 1: Solve for the angles.\n\\(\\sin(\\alpha+\\beta-\\gamma) = 1/2 \\implies \\alpha+\\beta-\\gamma = 30^{\\circ}\\).\n\\(\\cos(\\beta+\\gamma-\\alpha) = 1/2 \\implies \\beta+\\gamma-\\alpha = 60^{\\circ}\\).\n\\(\\tan(\\gamma+\\alpha-\\beta) = 1 \\implies \\gamma+\\alpha-\\beta = 45^{\\circ}\\).\nStep 2: Add the first two equations.\n\\((\\alpha+\\beta-\\gamma) + (\\beta+\\gamma-\\alpha) = 30 + 60 \\implies 2\\beta = 90 \\implies \\beta = 45^{\\circ}\\).\nStep 3: Substitute \\(\\beta\\) into the equations to find \\(\\alpha\\).\n\\(\\gamma+\\alpha-45 = 45 \\implies \\gamma+\\alpha = 90\\).\n\\(\\alpha+45-\\gamma = 30 \\implies \\alpha-\\gamma = -15\\).\nSolve: \\(2\\alpha = 75 \\implies \\alpha = 37.5^{\\circ}\\).\nStep 4: Calculate \\(2\\alpha + \\beta = 2(37.5) + 45 = 75 + 45 = 120^{\\circ}\\).\nCorrect Answer: (d)"
   },
   {
     "id": 30,
-    "question": "Obtain the derivative of the function \(y = (1-x)(2-x)\\dots(n-1-x)(n-x)\) with respect to \\(x\\) at \\(x = 1\\).",
+    "question": "Obtain the derivative of the function \\(y = (1-x)(2-x)\\dots(n-1-x)(n-x)\\) with respect to \\(x\\) at \\(x = 1\\).",
     "options": ["0", "(n-1)!", "-(n-1)!", "\\frac{1}{n}"],
     "solution": "Step 1: Rewrite the product using factorial notation.\n\\(y = \\prod_{k=1}^{n} (k - x)\\).\nAt \\(x = 1\\), the first term \\((1 - 1)\\) equals 0.\nStep 2: Differentiate using the product rule.\nSince the product rule will yield a sum of terms, and every term contains the factor \\((1 - x)\\) except the derivative of the first factor, when we evaluate at \\(x=1\\), all terms vanish except the one where the first factor was differentiated.\n\\(y'(1) = [(-1) \\times (2-1) \\times (3-1) \\times \\dots \\times (n-1)]\\)\n\\(= -1 \\times 1 \\times 2 \\times \\dots \\times (n-1) = -(n-1)!\\).\nCorrect Answer: (c)"
   },
   {
     "id": 31,
-    "question": "Find the coordinates of the point of inflection on the curve \(y = 2x^4 + 5x^3 + 9x + 1\).",
+    "question": "Find the coordinates of the point of inflection on the curve \\(y = 2x^4 + 5x^3 + 9x + 1\\).",
     "options": ["(5/6, - 2.5)", "(5/8, 2.19)", "(0.833, 5.644)", "(- 5/4, - 25/8)"],
     "solution": "Step 1: Find the second derivative.\n\\(y' = 8x^3 + 15x^2 + 9\\).\n\\(y'' = 24x^2 + 30x = 6x(4x + 5)\\).\nStep 2: Set \\(y'' = 0\\) to find potential inflection points.\n\\(6x(4x + 5) = 0 \\implies x = 0 \\text{ or } x = -\\frac{5}{4}\\).\nStep 3: Test for change in sign (concavity) and find the \\(y\\)-coordinate for \\(x = -\\frac{5}{4}\\).\n\\(y(-\\frac{5}{4}) = 2(-\\frac{5}{4})^4 + 5(-\\frac{5}{4})^3 + 9(-\\frac{5}{4}) + 1 = -\\frac{25}{8}\\).\nCorrect Answer: (d)"
   },
   {
     "id": 32,
-    "question": "The values of \(\\theta\) which satisfy \(\\tan\\theta = \\sqrt{3}\) are given by:",
+    "question": "The values of \\(\\theta\\) which satisfy \\(\\tan\\theta = \\sqrt{3}\\) are given by:",
     "options": ["n\\pi + \\frac{\\pi}{6}, n \\in \\mathbb{Z}", "n\\pi - \\frac{\\pi}{3}, n \\in \\mathbb{Z}", "n\\pi + \\frac{\\pi}{3}, n \\in \\mathbb{Z}", "n\\pi - \\frac{\\pi}{6}, n \\in \\mathbb{Z}"],
     "solution": "Step 1: Find the principal angle.\n\\(\\tan\\theta = \\sqrt{3} \\implies \\theta = \\frac{\\pi}{3}\\).\nStep 2: Add the general solution formula for tangent.\nThe general solution for \\(\\tan\\theta = k\\) is \\(\\theta = n\\pi + \\text{principal angle}\\).\nTherefore, \\(\\theta = n\\pi + \\frac{\\pi}{3}, n \\in \\mathbb{Z}\\).\nCorrect Answer: (c)"
   },
   {
     "id": 33,
-    "question": "Solve for \(y\) in the equation \(\\tan^{-1}y + \\tan^{-1}(1-y) = \\tan^{-1}(\\frac{4}{3})\).",
+    "question": "Solve for \\(y\\) in the equation \\(\\tan^{-1}y + \\tan^{-1}(1-y) = \\tan^{-1}(\\frac{4}{3})\\).",
     "options": ["y = 2", "y = -1/2", "y = 1/2", "None of the above"],
     "solution": "Step 1: Use the addition formula for \\(\\tan^{-1}\\).\n\\(\\frac{y + (1-y)}{1 - y(1-y)} = \\frac{4}{3}\\).\nStep 2: Simplify the numerator and denominator.\n\\(\\frac{1}{1 - y + y^2} = \\frac{4}{3}\\).\nStep 3: Cross-multiply and solve.\n\\(3 = 4(1 - y + y^2) \\implies 4y^2 - 4y + 1 = 0\\).\n\\((2y - 1)^2 = 0 \\implies y = \\frac{1}{2}\\).\nCorrect Answer: (c)"
   },
   {
     "id": 34,
-    "question": "Find the general solution to the equation \(\\sin x - 3\\sin 2x + \\sin 3x = \\cos x - 3\\cos 2x + \\cos 3x\).",
+    "question": "Find the general solution to the equation \\(\\sin x - 3\\sin 2x + \\sin 3x = \\cos x - 3\\cos 2x + \\cos 3x\\).",
     "options": ["2n\\pi \\pm \\frac{\\pi}{2}", "2n\\pi \\pm \\pi", "n\\pi + \\frac{\\pi}{6}", "All of the above"],
     "solution": "Step 1: Group terms.\n\\((\\sin 3x + \\sin x) - 3\\sin 2x = (\\cos 3x + \\cos x) - 3\\cos 2x\\).\nStep 2: Apply sum-to-product identities.\n\\(2\\sin 2x\\cos x - 3\\sin 2x = 2\\cos 2x\\cos x - 3\\cos 2x\\).\n\\(\\sin 2x(2\\cos x - 3) = \\cos 2x(2\\cos x - 3)\\).\nStep 3: Solve for \\(x\\).\nCase 1: \\(2\\cos x - 3 = 0 \\implies \\cos x = \\frac{3}{2}\\) (No real solution).\nCase 2: \\(\\sin 2x = \\cos 2x \\implies \\tan 2x = 1\\).\n\\(2x = n\\pi + \\frac{\\pi}{4} \\implies x = \\frac{n\\pi}{2} + \\frac{\\pi}{8}\\).\nCorrect Answer: (c)"
   },
   {
     "id": 35,
-    "question": "Evaluate \(\\int_{0}^{100} f(x) \\, dx\) if \(\\int_{0}^{100} f(x) \\, dx = A\) and \(\\int_{100}^{150} f(x) \\, dx = B\).",
+    "question": "Evaluate \\(\\int_{0}^{150} f(x) \\, dx\\) if \\(\\int_{0}^{100} f(x) \\, dx = A\\) and \\(\\int_{100}^{150} f(x) \\, dx = B\\).",
     "options": ["A + B", "B", "0", "A"],
     "solution": "Step 1: Apply the property of definite integrals.\n\\(\\int_{0}^{150} f(x) \\, dx = \\int_{0}^{100} f(x) \\, dx + \\int_{100}^{150} f(x) \\, dx\\).\nStep 2: Substitute the given values.\n\\(\\int_{0}^{150} f(x) \\, dx = A + B\\).\nCorrect Answer: (a)"
   },
   {
     "id": 36,
-    "question": "Evaluate the definite integral \(\\int_{0}^{1} \\sqrt{x} \\, dx + \\int_{0}^{1} \\frac{1}{\\sqrt{x}} \\, dx\).",
+    "question": "Evaluate the definite integral \\(\\int_{0}^{1} \\sqrt{x} \\, dx + \\int_{0}^{1} \\frac{1}{\\sqrt{x}} \\, dx\\).",
     "options": ["\\frac{8}{3}", "\\frac{4}{3}", "\\frac{2}{3}", "\\frac{5}{3}"],
     "solution": "Step 1: Integrate the first term.\n\\(\\int_{0}^{1} x^{1/2} \\, dx = [\\frac{2}{3}x^{3/2}]_{0}^{1} = \\frac{2}{3}\\).\nStep 2: Integrate the second term.\n\\(\\int_{0}^{1} x^{-1/2} \\, dx = [2x^{1/2}]_{0}^{1} = 2\\).\nStep 3: Add the results.\n\\(\\frac{2}{3} + 2 = \\frac{8}{3}\\).\nCorrect Answer: (a)"
   },
   {
     "id": 37,
-    "question": "Find the angle of inclination of the straight line which makes an angle of \(30^{\\circ}\) with the positive horizontal axis and passes through the point \((-1, -2)\).",
+    "question": "Find the angle of inclination of the straight line which makes an angle of \\(30^{\\circ}\\) with the positive horizontal axis and passes through the point \\((-1, -2)\\).",
     "options": ["\\sqrt{3}y = x + 1 - 2\\sqrt{3}", "\\sqrt{3}y = -x + 1 - 2\\sqrt{3}", "\\sqrt{3}y = x - 1 - 2\\sqrt{3}", "\\sqrt{3}y = -x - 1 - 2\\sqrt{3}"],
     "solution": "Step 1: Recall slope formula. \\(m = \\tan\\theta\\).\n\\(m = \\tan(30^{\\circ}) = \\frac{1}{\\sqrt{3}}\\).\nStep 2: Use the point-slope form \\(y - y_1 = m(x - x_1)\\).\n\\(y - (-2) = \\frac{1}{\\sqrt{3}}(x - (-1))\\).\n\\(y + 2 = \\frac{1}{\\sqrt{3}}(x + 1)\\).\nStep 3: Rearrange to the standard form.\n\\(\\sqrt{3}y + 2\\sqrt{3} = x + 1 \\implies \\sqrt{3}y = x + 1 - 2\\sqrt{3}\\).\nCorrect Answer: (a)"
   },
   {
     "id": 38,
-    "question": "Let \(y = f(x)\) be a differentiable function over an interval \(I\), then \(f\) is said to be decreasing over \(I\) if for every \(c \\in I\):",
+    "question": "Let \\(y = f(x)\\) be a differentiable function over an interval \\(I\\), then \\(f\\) is said to be decreasing over \\(I\\) if for every \\(c \\in I\\):",
     "options": ["f'(c) < 0", "f'(c) > 0", "f'(c) = 0", "f'(c) = \\infty"],
     "solution": "By definition of a decreasing function in Calculus, if the derivative \\(f'(x)\\) is strictly negative for all points in the interval, the function is decreasing.\nCorrect Answer: (a)"
   },
   {
     "id": 39,
-    "question": "Suppose \(a\) is a positive constant and \(\\omega(x)\) is a differentiable function of \(x\) over \(\\mathbb{R}\), then \(\\int a^{\\omega(x)}\\omega'(x) \\, dx\) is (where \(C\) is an integration constant):",
+    "question": "Suppose \\(a\\) is a positive constant and \\(\\omega(x)\\) is a differentiable function of \\(x\\) over \\(\\mathbb{R}\\), then \\(\\int a^{\\omega(x)}\\omega'(x) \\, dx\\) is (where \\(C\\) is an integration constant):",
     "options": ["a^{\\omega(x)} + C", "a^{\\omega(x)}\\ln x + C", "\\frac{a^{\\omega(x)}}{\\ln a} + C", "\\omega(x)\\ln a + C"],
     "solution": "Step 1: Use the substitution method. Let \\(u = \\omega(x)\\).\nThen \\(du = \\omega'(x) \\, dx\\).\nStep 2: Substitute into the integral.\n\\(\\int a^{u} \\, du\\).\nStep 3: Integrate using the formula for exponential functions.\n\\(\\int a^{u} \\, du = \\frac{a^{u}}{\\ln a} + C\\).\nStep 4: Substitute \\(u\\) back.\n\\(\\frac{a^{\\omega(x)}}{\\ln a} + C\\).\nCorrect Answer: (c)"
   },
   {
     "id": 40,
-    "question": "Let \(f(x)\) be a differentiable function over an interval \(I\). Which of the following is NOT necessary at a point of inflection?",
+    "question": "Let \\(f(x)\\) be a differentiable function over an interval \\(I\\). Which of the following is NOT necessary at a point of inflection?",
     "options": ["\\frac{d^2y}{dx^2} = 0 at the point", "\\frac{dy}{dx} = 0 at the point", "Concavity changes sign", "The tangent crosses the curve"],
     "solution": "At a point of inflection, the second derivative is zero and concavity changes sign. However, the slope of the first derivative (\\frac{dy}{dx}) does not have to be zero. If \\frac{dy}{dx}=0 at an inflection point, it is a stationary point of inflection, but normal inflection points simply require the concavity to change.\nCorrect Answer: (b)"
   },
   {
     "id": 41,
-    "question": "Given that \(\\cos^2\\theta - (\\frac{a + b}{2})\\cos\\theta + \\frac{ab}{4} = 0\), where \(|a| \\le 1\) and \(|b| \\le 1\). Which of the following is/are real values of \\(\\theta\\)?",
+    "question": "Given that \\(\\cos^2\\theta - (\\frac{a + b}{2})\\cos\\theta + \\frac{ab}{4} = 0\\), where \\(|a| \\le 1\\) and \\(|b| \\le 1\\). Which of the following is/are real values of \\(\\theta\\)?",
     "options": ["\\theta = \\cos^{-1}(-\\frac{a}{2})", "\\theta = \\cos^{-1}(\\frac{a}{2})", "Both i and ii", "\\theta = \\sin^{-1}(-\\frac{a}{2})"],
-    "solution": "Step 1: Factor the quadratic equation.\n\\((\\cos\\theta - \\frac{a}{2})(\\cos\\theta - \\frac{b}{2}) = 0\\).\nStep 2: Solve for \\(\\cos\\theta\\).\n\\(\\cos\\theta = \\frac{a}{2}\\) or \\(\\cos\\theta = \\frac{b}{2}\\).\nStep 3: Since \(|a| \\le 1\), \\(\\frac{a}{2}\\) is within the valid range for \\(\\cos\\theta\\).\nThus, \\(\\theta = \\cos^{-1}(\\frac{a}{2})\\) is a valid solution.\nCorrect Answer: (b)"
+    "solution": "Step 1: Factor the quadratic equation.\n\\((\\cos\\theta - \\frac{a}{2})(\\cos\\theta - \\frac{b}{2}) = 0\\).\nStep 2: Solve for \\(\\cos\\theta\\).\n\\(\\cos\\theta = \\frac{a}{2}\\) or \\(\\cos\\theta = \\frac{b}{2}\\).\nStep 3: Since \\(|a| \\le 1\\), \\(\\frac{a}{2}\\) is within the valid range for \\(\\cos\\theta\\).\nThus, \\(\\theta = \\cos^{-1}(\\frac{a}{2})\\) is a valid solution.\nCorrect Answer: (b)"
   },
   {
     "id": 42,
-    "question": "Find the directrix of a parabola whose equation is given by \(y^2 = 12x\).",
+    "question": "Find the directrix of a parabola whose equation is given by \\(y^2 = 12x\\).",
     "options": ["x = 12a", "x = -3", "x = 3", "x = 4"],
     "solution": "Step 1: Identify the standard form of the parabola.\n\\(y^2 = 4ax\\) is the standard form for a parabola opening rightwards.\nStep 2: Compare \\(y^2 = 12x\\) with the standard form.\n\\(4a = 12 \\implies a = 3\\).\nStep 3: The directrix of \\(y^2 = 4ax\\) is given by \\(x = -a\\).\nTherefore, the directrix is \\(x = -3\\).\nCorrect Answer: (b)"
   },
@@ -259,31 +259,31 @@
   },
   {
     "id": 44,
-    "question": "The eccentricity of the ellipse \(\\frac{x^2}{9} + \\frac{y^2}{4} = 1\) is:",
+    "question": "The eccentricity of the ellipse \\(\\frac{x^2}{9} + \\frac{y^2}{4} = 1\\) is:",
     "options": ["\\frac{3}{2}", "\\frac{\\sqrt{5}}{3}", "\\frac{2}{3}", "\\frac{3}{\\sqrt{5}}"],
     "solution": "Step 1: Identify \\(a\\) and \\(b\\) from the standard ellipse equation \\(\\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1\\).\n\\(a^2 = 9 \\implies a = 3\\).\n\\(b^2 = 4 \\implies b = 2\\).\nStep 2: Use the eccentricity formula for an ellipse: \\(e = \\sqrt{1 - \\frac{b^2}{a^2}}\\).\n\\(e = \\sqrt{1 - \\frac{4}{9}} = \\sqrt{\\frac{5}{9}} = \\frac{\\sqrt{5}}{3}\\).\nCorrect Answer: (b)"
   },
   {
     "id": 45,
-    "question": "Find the area, in square units, of the region bounded by the curve \(y = x^2 - x - 6\) and the line \(y = 0\).",
+    "question": "Find the area, in square units, of the region bounded by the curve \\(y = x^2 - x - 6\\) and the line \\(y = 0\\).",
     "options": ["\\frac{37}{6}", "\\frac{125}{6}", "-12", "-\\frac{37}{6}"],
     "solution": "Step 1: Find the x-intercepts (where \\(y = 0\\)).\n\\(x^2 - x - 6 = 0 \\implies (x-3)(x+2) = 0 \\implies x = -2 \\text{ or } x = 3\\).\nStep 2: Set up the definite integral.\nArea = \\(\\int_{-2}^{3} |x^2 - x - 6| \\, dx = -\\int_{-2}^{3} (x^2 - x - 6) \\, dx\\) (since the curve is below the x-axis).\nStep 3: Evaluate the integral.\n\\(\\int_{-2}^{3} (-x^2 + x + 6) \\, dx = [-\\frac{x^3}{3} + \\frac{x^2}{2} + 6x]_{-2}^{3}\\).\n= \\((\\frac{-27}{3} + \\frac{9}{2} + 18) - (\\frac{8}{3} + 2 - 12) = 10.5 - (-6.33) = \\frac{125}{6}\\).\nCorrect Answer: (b)"
   },
   {
     "id": 46,
-    "question": "Let \(\\sin(\\alpha+\\beta-\\gamma) = \\cos(\\beta+\\gamma-\\alpha) = 1/2\) and \(\\tan(\\gamma+\\alpha-\\beta) = 1\). If \\(\\alpha, \\beta, \\gamma\\) are positive acute angles, then the value of \(2\\alpha+\\beta\) is:",
-    "options": ["110^{\\circ}", "100^{\\circ}", "75^{\\circ}", "120^{\\circ}"],
-    "solution": "Step 1: Solve each equation for the angles.\n\\(\\alpha+\\beta-\\gamma = 30^{\\circ}\\)\n\\(\\beta+\\gamma-\\alpha = 60^{\\circ}\\)\n\\(\\gamma+\\alpha-\\beta = 45^{\\circ}\\)\nStep 2: Add equations (1) and (2): \\(2\\beta = 90^{\\circ} \\implies \\beta = 45^{\\circ}\\).\nStep 3: Substitute \\(\\beta\\) into (3): \\(\\gamma+\\alpha-45 = 45 \\implies \\gamma+\\alpha = 90^{\\circ}\\).\nStep 4: Solve with (1): \\(\\alpha+45-\\gamma = 30 \\implies \\alpha-\\gamma = -15^{\\circ}\\).\nSolve: \\(2\\alpha = 75^{\\circ} \\implies \\alpha = 37.5^{\\circ}\\).\n\\(2\\alpha+\\beta = 2(37.5) + 45 = 120^{\\circ}\\).\nCorrect Answer: (d)"
+    "question": "If \\(\\tan^{-1}(2x) + \\tan^{-1}(3x) = \\frac{\\pi}{4}\\), determine the values of \\(x\\).",
+    "options": ["1, -1/6", "-1, 1/6", "1, 1/6", "-1, -1/6"],
+    "solution": "Step 1: Use the sum formula for inverse tangents: \\(\\tan^{-1}A + \\tan^{-1}B = \\tan^{-1}(\\frac{A+B}{1-AB})\\).\n\\(\\frac{2x + 3x}{1 - 6x^2} = \\tan(\\frac{\\pi}{4}) = 1\\).\nStep 2: Cross multiply and solve.\n\\(\\frac{5x}{1 - 6x^2} = 1 \\implies 5x = 1 - 6x^2\\).\n\\(6x^2 + 5x - 1 = 0\\).\nStep 3: Factor and solve for \\(x\\).\n\\((6x - 1)(x + 1) = 0 \\implies x = \\frac{1}{6} \\text{ or } x = -1\\).\nCorrect Answer: (c)"
   },
   {
     "id": 47,
-    "question": "Simplify the following identities: \(\\sin(x + y) + \\sin(x - y)\).",
+    "question": "Simplify the following identities: \\(\\sin(x + y) + \\sin(x - y)\\).",
     "options": ["2\\sin x\\cos y", "2\\cos x\\sin y", "\\sin x\\cos y", "\\cos x\\sin y"],
     "solution": "Step 1: Use the sum-to-product identities.\n\\(\\sin A + \\sin B = 2\\sin(\\frac{A+B}{2})\\cos(\\frac{A-B}{2})\\).\nStep 2: Substitute \\(A = x+y\\) and \\(B = x-y\\).\n\\(\\sin(x+y) + \\sin(x-y) = 2\\sin(\\frac{x+y+x-y}{2})\\cos(\\frac{x+y-(x-y)}{2})\\).\nStep 3: Simplify the fractions.\n\\(= 2\\sin(\\frac{2x}{2})\\cos(\\frac{2y}{2}) = 2\\sin x\\cos y\\).\nCorrect Answer: (a)"
   },
   {
     "id": 48,
-    "question": "Given that \(\\tan^{2}x = 1 + 2\\tan^{2}y\), then \(\\cos 2x\) is:",
+    "question": "Given that \\(\\tan^{2}x = 1 + 2\\tan^{2}y\\), then \\(\\cos 2x\\) is:",
     "options": ["\\sin 2y", "-\\sin 2y", "\\sin^{2}y", "-\\sin^{2}y"],
     "solution": "Step 1: Use the identity \\(\\tan^{2}x = \\sec^{2}x - 1\\).\n\\(\\sec^{2}x - 1 = 1 + 2(\\sec^{2}y - 1)\\).\n\\(\\sec^{2}x - 1 = 1 + 2\\sec^{2}y - 2 = 2\\sec^{2}y - 1\\).\nStep 2: Solve for \\(\\cos^{2}x\\).\n\\(\\sec^{2}x = 2\\sec^{2}y \\implies \\cos^{2}x = \\frac{1}{2}\\cos^{2}y\\).\nStep 3: Use the double angle formula \\(\\cos 2x = 2\\cos^{2}x - 1\\).\n\\(\\cos 2x = 2(\\frac{1}{2}\\cos^{2}y) - 1 = \\cos^{2}y - 1\\).\nUsing \\(\\cos^{2}y - 1 = -\\sin^{2}y\\).\nCorrect Answer: (d)"
   },
@@ -295,482 +295,278 @@
   },
   {
     "id": 50,
-    "question": "If \\(\\tan^{-1}(2x) + \\tan^{-1}(3x) = \\frac{\\pi}{4}\\), determine the values of \\(x\\).",
-    "options": ["1, -1/6", "-1, 1/6", "1, 1/6", "-1, -1/6"],
-    "solution": "Step 1: Use the sum formula for inverse tangents: \\(\\tan^{-1}A + \\tan^{-1}B = \\tan^{-1}(\\frac{A+B}{1-AB})\\).\n\\(\\frac{2x + 3x}{1 - 6x^2} = \\tan(\\frac{\\pi}{4}) = 1\\).\nStep 2: Cross multiply and solve.\n\\(\\frac{5x}{1 - 6x^2} = 1 \\implies 5x = 1 - 6x^2\\).\n\\(6x^2 + 5x - 1 = 0\\).\nStep 3: Factor and solve for \\(x\\).\n\\((6x - 1)(x + 1) = 0 \\implies x = \\frac{1}{6} \\text{ or } x = -1\\).\nCorrect Answer: (c)"
-  },
-  {
-    "id": 51,
     "question": "Evaluate the integral \\(\\int_{0}^{\\pi/3} \\tan^{5}(x) \\sec^{6}(x) dx\\).",
     "options": ["\\frac{486}{20}", "\\frac{405}{20}", "\\frac{981}{20}", "\\frac{90}{20}"],
     "solution": "Step 1: Use substitution. Let \\(u = \\tan x\\), then \\(du = \\sec^2 x dx\\).\nRewrite \\(\\sec^{6}x = \\sec^{4}x \\cdot \\sec^{2}x = (\\sec^{2}x)^2 \\cdot \\sec^{2}x = (1 + \\tan^{2}x)^2 \\sec^{2}x\\).\nStep 2: Substitute into the integral.\n\\(\\int \\tan^{5}x (1 + \\tan^{2}x)^2 \\sec^{2}x dx = \\int u^{5}(1 + u^{2})^2 du = \\int (u^{5} + 2u^{7} + u^{9}) du\\).\nStep 3: Integrate and evaluate from 0 to \\(\\pi/3\\).\n\\([\\frac{u^{6}}{6} + \\frac{2u^{8}}{8} + \\frac{u^{10}}{10}]_{0}^{\\sqrt{3}}\\).\n\\((\\frac{27}{6} + \\frac{2(81)}{8} + \\frac{243}{10}) - 0 = \\frac{981}{20}\\).\nCorrect Answer: (c)"
   },
   {
-    "id": 52,
+    "id": 51,
     "question": "Determine the values of \\(R > 0\\) and \\(\\alpha > 0\\) such that \\(4\\sin\\theta - 3\\cos\\theta = R\\sin(\\theta + \\alpha)\\).",
     "options": ["R = 5, \\alpha = 323.13^{\\circ}", "R = 25, \\alpha = 223.13^{\\circ}", "R = 7, \\alpha = 143.13^{\\circ}", "R = 1, \\alpha = 53.13^{\\circ}"],
     "solution": "Step 1: Convert to R-formula. \\(R\\sin(\\theta + \\alpha) = R\\sin\\theta\\cos\\alpha + R\\cos\\theta\\sin\\alpha\\).\nCompare coefficients: \\(R\\cos\\alpha = 4\\) and \\(R\\sin\\alpha = -3\\).\nStep 2: Find \\(R = \\sqrt{4^2 + (-3)^2} = 5\\).\nStep 3: Find \\(\\alpha\\): \\(\\tan\\alpha = \\frac{-3}{4} = -0.75\\).\nSince \\(\\sin\\alpha\\) is negative and \\(\\cos\\alpha\\) is positive, \\(\\alpha\\) is in the 4th quadrant.\n\\(\\alpha = 360^{\\circ} - 36.87^{\\circ} = 323.13^{\\circ}\\).\nCorrect Answer: (a)"
   },
   {
-    "id": 53,
+    "id": 52,
     "question": "Find the equation of the normal line to the following curve at (1, 1): \\(x^2y + xy^2 + xy = 3\\).",
     "options": ["y = x - 1", "y = x", "y = -x", "y = x + 1"],
     "solution": "Step 1: Differentiate implicitly.\n\\(2xy + x^2\\frac{dy}{dx} + y^2 + 2xy\\frac{dy}{dx} + y + x\\frac{dy}{dx} = 0\\).\nStep 2: Solve for \\(\\frac{dy}{dx}\\).\n\\((x^2 + 2xy + x)\\frac{dy}{dx} = -(2xy + y^2 + y)\\).\n\\(\\frac{dy}{dx} = -\\frac{2xy + y^2 + y}{x^2 + 2xy + x}\\).\nStep 3: Evaluate at \\((1,1)\\).\n\\(m_{\\text{tangent}} = -\\frac{2(1)(1) + 1^2 + 1}{1^2 + 2(1)(1) + 1} = -\\frac{4}{4} = -1\\).\nThe slope of the normal is the negative reciprocal: \\(m_{\\text{normal}} = 1\\).\nStep 4: Equation of the normal: \\(y - 1 = 1(x - 1) \\implies y = x\\).\nCorrect Answer: (b)"
   },
   {
-    "id": 54,
+    "id": 53,
     "question": "Evaluate the integral \\(\\int e^{\\sin x} \\sin(2x) dx\\).",
     "options": ["2e^{\\sin x}(\\sin x - 1) + C", "e^{\\sin x}\\cos x + C", "\\frac{1}{2}e^{\\sin x} + C", "e^{\\sin x}\\sin x + C"],
     "solution": "Step 1: Use the identity \\(\\sin 2x = 2\\sin x\\cos x\\).\n\\(\\int e^{\\sin x} \\cdot 2\\sin x\\cos x \\, dx\\).\nStep 2: Use substitution. Let \\(u = \\sin x\\), then \\(du = \\cos x dx\\).\n\\(\\int 2u e^{u} du = 2\\int u e^{u} du\\).\nStep 3: Integrate by parts. Let \\(p = u, dv = e^{u} du\\). Then \\(dp = du, v = e^{u}\\).\n\\(2(ue^{u} - \\int e^{u} du) = 2(ue^{u} - e^{u}) + C = 2e^{u}(u - 1) + C\\).\nStep 4: Substitute \\(u = \\sin x\\) back in.\n\\(2e^{\\sin x}(\\sin x - 1) + C\\).\nCorrect Answer: (a)"
   },
   {
-    "id": 55,
+    "id": 54,
     "question": "Let \\(y = \\frac{1 - x + x^2}{1 + x + x^2}\\). At the turning points, the minimum value of \\(y\\) is:",
     "options": ["0", "1/3", "1", "2"],
     "solution": "Step 1: Differentiate using quotient rule.\n\\(\\frac{dy}{dx} = \\frac{(1+x+x^2)(-1+2x) - (1-x+x^2)(1+2x)}{(1+x+x^2)^2}\\).\nStep 2: Simplify numerator to find stationary points. Set \\(\\frac{dy}{dx} = 0\\).\nNumerator simplifies to: \\(2x^2 - 2 = 0 \\implies x^2 = 1 \\implies x = \\pm 1\\).\nStep 3: Evaluate \\(y\\) at \\(x = \\pm 1\\).\nAt \\(x = -1\\): \\(y = \\frac{1 - (-1) + 1}{1 + (-1) + 1} = \\frac{3}{1} = 3\\) (Maximum).\nAt \\(x = 1\\): \\(y = \\frac{1 - 1 + 1}{1 + 1 + 1} = \\frac{1}{3}\\) (Minimum).\nCorrect Answer: (b)"
   },
   {
-    "id": 56,
+    "id": 55,
     "question": "If a function \\(f(x)\\) is integrable over \\(\\mathbb{R}\\) and \\(a, b \\in \\mathbb{R}\\), then \\(\\int_{a}^{b} f(x) dx\\) is equal to:",
-    "options": ["\\int_{a}^{b} f(a + b - x) dx", "\\int_{b}^{a} f(a + b - x) dx", "\\int_{a}^{b} f(a + b + x) dx", "\\int_{a}^{b} f(a + b + x) dx"],
+    "options": ["\\int_{a}^{b} f(a + b - x) dx", "\\int_{b}^{a} f(a + b - x) dx", "\\int_{a}^{b} f(a + b + x) dx", "\\int_{a}^{b} f(a - b + x) dx"],
     "solution": "Step 1: Recall the property of definite integrals.\nFor any integrable function \\(f(x)\\), the integral from \\(a\\) to \\(b\\) is equal to the integral from \\(a\\) to \\(b\\) of the function with the variable shifted to \\(a + b - x\\).\nStep 2: The identity is: \\(\\int_{a}^{b} f(x) dx = \\int_{a}^{b} f(a + b - x) dx\\).\nCorrect Answer: (a)"
   },
   {
-    "id": 57,
+    "id": 56,
     "question": "Evaluate \\(\\int_{0}^{b} (\\sqrt{\\cos 2\\theta + \\sin 2\\theta + 2\\sin^2\\theta}) d\\theta\\), where \\(b > 0\\).",
     "options": ["\\sin b - \\cos b + 1", "\\sin b + \\cos b - 1", "\\sin b - \\cos b - 1", "\\sin b + \\cos b + 1"],
     "solution": "Step 1: Simplify the expression inside the square root.\n\\(\\cos 2\\theta + \\sin 2\\theta + 2\\sin^2\\theta = (\\cos^2\\theta - \\sin^2\\theta) + 2\\sin\\theta\\cos\\theta + 2\\sin^2\\theta\\).\n\\(= \\cos^2\\theta + \\sin^2\\theta + 2\\sin\\theta\\cos\\theta = 1 + 2\\sin\\theta\\cos\\theta\\).\nStep 2: Recognize the perfect square.\n\\(1 + 2\\sin\\theta\\cos\\theta = (\\cos\\theta + \\sin\\theta)^2\\).\nStep 3: Simplify the integral.\n\\(\\int_{0}^{b} (\\cos\\theta + \\sin\\theta) d\\theta = [\\sin\\theta - \\cos\\theta]_{0}^{b}\\).\n\\(= (\\sin b - \\cos b) - (\\sin 0 - \\cos 0) = \\sin b - \\cos b - (0 - 1) = \\sin b - \\cos b + 1\\).\nCorrect Answer: (a)"
   },
   {
-    "id": 58,
+    "id": 57,
     "question": "Find the gradient of the secant to the curve \\(y^2(x+3) = 20\\) between \\(x=2\\) and \\(x=3\\).",
     "options": ["\\frac{-20}{(2y + \\Delta y)(x + 3)(x + \\Delta x + 3)}", "\\frac{-20}{2y(x + 3)(x + \\Delta x + 3)}", "\\frac{-y}{2\\sqrt{(x + 3)(x + \\Delta x + 3)}}", "\\frac{-2y}{2\\sqrt{(x + 3)(x + \\Delta x + 3)}}"],
     "solution": "Step 1: Express \\(y\\) as a function of \\(x\\). \\(y = \\pm \\sqrt{\\frac{20}{x+3}}\\).\nGradient \\(\\frac{\\Delta y}{\\Delta x} = \\frac{y_2 - y_1}{x_2 - x_1}\\).\nStep 2: Evaluate \\(y\\) at \\(x=2\\) and \\(x=3\\).\n\\(y_1 = \\sqrt{4} = 2\\). \\(y_2 = \\sqrt{\\frac{20}{6}} = \\sqrt{\\frac{10}{3}}\\).\nStep 3: Compute the gradient.\n\\(\\frac{\\Delta y}{\\Delta x} = \\frac{\\sqrt{10/3} - 2}{3 - 2} = \\sqrt{\\frac{10}{3}} - 2\\).\nCorrect Answer: (a)"
   },
   {
-    "id": 59,
+    "id": 58,
     "question": "Given that \\(\\cos^2\\theta - (a + b)\\cos\\theta + ab = 0\\), where \\(a > 1\\) and \\(b > 1\\). Which of the following are real values of \\(\\theta\\)?",
     "options": ["\\theta = \\cos^{-1}(-a) \\text{ and } \\theta = \\cos^{-1}(-b)", "\\theta = \\cos^{-1}(a) \\text{ and } \\theta = \\cos^{-1}(b)", "\\theta = \\sin^{-1}(-a) \\text{ and } \\theta = \\sin^{-1}(-b)", "No real value of \\(\\theta\\)"],
     "solution": "Step 1: Factor the quadratic equation in terms of \\(\\cos\\theta\\).\n\\((\\cos\\theta - a)(\\cos\\theta - b) = 0\\).\nStep 2: Solve for \\(\\cos\\theta\\).\n\\(\\cos\\theta = a\\) or \\(\\cos\\theta = b\\).\nStep 3: Check the range. Since \\(a > 1\\) and \\(b > 1\\), the values of \\(\\cos\\theta\\) are outside the valid range \\([-1, 1]\\).\nTherefore, there are no real values of \\(\\theta\\).\nCorrect Answer: (d)"
   },
   {
-    "id": 60,
+    "id": 59,
     "question": "Find the gradient \\(\\frac{\\Delta y}{\\Delta x}\\) of the secant to the curve defined by \\(y^2(x+3) = 20\\), where \\(\\Delta x\\) and \\(\\Delta y\\) are increments in \\(x\\) and \\(y\\) respectively.",
     "options": ["\\frac{-20}{(2y + \\Delta y)(x + 3)(x + \\Delta x + 3)}", "\\frac{-20}{2y(x + 3)(x + \\Delta x + 3)}", "\\frac{-y}{2\\sqrt{(x + 3)(x + \\Delta x + 3)}}", "\\frac{-2y}{2\\sqrt{(x + 3)(x + \\Delta x + 3)}}"],
     "solution": "Step 1: Start with \\(y^2(x+3) = 20\\). Replace \\(y\\) with \\(y + \\Delta y\\) and \\(x\\) with \\(x + \\Delta x\\).\n\\((y + \\Delta y)^2(x + \\Delta x + 3) = 20\\).\nStep 2: Expand and subtract the original equation.\n\\(y^2(x+3) + 2y\\Delta y(x+3) + y^2\\Delta x + 2y\\Delta y\\Delta x + \\Delta y^2(x+3) + \\Delta y^2\\Delta x = 20\\).\nSince \\(y^2(x+3)=20\\), we cancel it out.\nStep 3: Divide by \\(\\Delta x\\) and isolate \\(\\frac{\\Delta y}{\\Delta x}\\).\n\\(\\frac{\\Delta y}{\\Delta x} = \\frac{-20}{(2y + \\Delta y)(x + 3)(x + \\Delta x + 3)}\\).\nCorrect Answer: (a)"
   },
   {
-    "id": 61,
+    "id": 60,
     "question": "Given that the function \\(f\\) is defined as the modulus function \\(f(x) = |x - 3|\\) for \\(x < 3\\). Find the derivative of \\(f\\) with respect to \\(x\\).",
     "options": ["1", "-1", "does not exist", "0"],
     "solution": "Step 1: Rewrite the modulus function for the given domain.\nFor \\(x < 3\\), the expression inside the modulus is negative, so \\(|x - 3| = -(x - 3) = -x + 3\\).\nStep 2: Differentiate the linear function.\n\\(\\frac{d}{dx}(-x + 3) = -1\\).\nCorrect Answer: (b)"
   },
   {
-    "id": 62,
+    "id": 61,
     "question": "Suppose that the mean and variance of seven observations are 8 and 16 respectively. If five of the observations are \\(2, 4, 10, 12, \\text{ and } 14\\), find the remaining two observations.",
     "options": ["3, 4", "12, 16", "6, 8", "24, 32"],
     "solution": "Step 1: Use the mean formula: \\(\\bar{x} = \\frac{\\sum x}{n}\\).\n\\(8 = \\frac{2 + 4 + 10 + 12 + 14 + x + y}{7} \\implies 56 = 42 + x + y \\implies x + y = 14\\).\nStep 2: Use the variance formula: \\(\\sigma^2 = \\frac{\\sum x^2}{n} - \\bar{x}^2\\).\n\\(16 = \\frac{4 + 16 + 100 + 144 + 196 + x^2 + y^2}{7} - 64\\).\n\\(80 \\times 7 = 460 + x^2 + y^2 \\implies 560 - 460 = x^2 + y^2 \\implies x^2 + y^2 = 100\\).\nStep 3: Solve the simultaneous equations.\nFrom \\(x + y = 14\\), \\(x^2 + y^2 = (x+y)^2 - 2xy = 196 - 2xy = 100 \\implies 2xy = 96 \\implies xy = 48\\).\nThe pair of numbers that sum to 14 and multiply to 48 are 6 and 8.\nCorrect Answer: (c)"
   },
   {
-    "id": 63,
+    "id": 62,
     "question": "Suppose there exists a set of 5 numbers with variance = 10. If each number is divided by 2, what will be the new variance?",
     "options": ["0", "20", "2.5", "5"],
     "solution": "Step 1: Recall the property of variance under linear transformation.\nIf \\(V = 10\\) for a set of numbers, and we divide each number by 2 (multiply by 0.5), the variance scales by the square of that factor.\nStep 2: New Variance = \\(V \\times (\\frac{1}{2})^2 = 10 \\times \\frac{1}{4} = 2.5\\).\nCorrect Answer: (c)"
   },
   {
-    "id": 64,
+    "id": 63,
     "question": "Suppose that the time taken by 50 students to complete a 100 metre race is given below: [8.5-9.5: 6, 9.5-10.5: 8, 10.5-11.5: 17, 11.5-12.5: 10, 12.5-13.5: 9]. Find the standard deviation of the time taken.",
     "options": ["1.554", "1.24", "4.31", "1.42"],
     "solution": "Step 1: Calculate the midpoints (\\(x\\)) for each class: 9, 10, 11, 12, 13.\nStep 2: Calculate the mean: \\(\\bar{x} = \\frac{6\\times 9 + 8\\times 10 + 17\\times 11 + 10\\times 12 + 9\\times 13}{50} = \\frac{558}{50} = 11.16\\).\nStep 3: Compute the variance: \\(\\sigma^2 = \\frac{\\sum f(x - \\bar{x})^2}{\\sum f}\\).\n\\(\\sum f(x - 11.16)^2 = 6(2.16)^2 + 8(1.16)^2 + 17(0.16)^2 + 10(0.84)^2 + 9(1.84)^2 = 76.72\\).\n\\(\\sigma^2 = \\frac{76.72}{50} = 1.5344\\).\nStep 4: Standard deviation \\(\\sigma = \\sqrt{1.5344} \\approx 1.24\\).\nCorrect Answer: (b)"
   },
   {
-    "id": 65,
+    "id": 64,
     "question": "If the mean and mode of some data are 4 and 10 respectively, its median will be:",
     "options": ["8", "3", "16", "6"],
     "solution": "Step 1: Use the empirical relationship between Mean, Median, and Mode.\nMode = 3 Median - 2 Mean.\nStep 2: Substitute the given values.\n10 = 3 Median - 2(4).\n3 Median = 10 + 8 = 18.\nMedian = 6.\nCorrect Answer: (d)"
   },
   {
-    "id": 66,
+    "id": 65,
     "question": "If the median of \\(\\frac{x}{5}, x, \\frac{x}{4}, \\frac{x}{2}, \\frac{x}{3} \\) (for \\(x > 0\\)) is 8, then the value of \\(x\\) is:",
     "options": ["24", "32", "8", "16"],
     "solution": "Step 1: Arrange the terms in ascending order.\n\\(\\frac{x}{5}, \\frac{x}{4}, \\frac{x}{3}, \\frac{x}{2}, x\\).\nStep 2: Identify the median position (3rd term).\nMedian = \\(\\frac{x}{3}\\).\nStep 3: Set equal to 8 and solve for \\(x\\).\n\\(\\frac{x}{3} = 8 \\implies x = 24\\).\nCorrect Answer: (a)"
   },
   {
-    "id": 67,
+    "id": 66,
     "question": "If events A and B are independent, then \\(P(A|B)\\) equals:",
     "options": ["P(A)", "P(B)", "P(A)P(B)", "1"],
     "solution": "Step 1: By the definition of independent events, the occurrence of B has no effect on the probability of A.\nStep 2: Therefore, the probability of A given B is simply the probability of A.\n\\(P(A|B) = P(A)\\).\nCorrect Answer: (a)"
   },
   {
-    "id": 68,
+    "id": 67,
     "question": "Which of the following statements is empirical probability?",
     "options": ["The probability of getting a number less than 7 when a die is rolled", "A physician says that based on diagnosis, there is 30 percent chance that a patient needs surgery", "The probability of getting a head when a coin is tossed is 0.5", "None of the above"],
     "solution": "Step 1: Empirical probability relies on actual observation and historical data.\nStep 2: Option (b) relies on a physician's diagnostic data/experience. This is a perfect example of empirical probability.\nCorrect Answer: (b)"
   },
   {
-    "id": 69,
+    "id": 68,
     "question": "A circle with radius 2 cm lies within a square with side length 6 cm. A dart lands randomly inside the square. What is the probability that it lands inside the circle?",
     "options": ["\\frac{2}{3}", "\\frac{55}{63}", "\\frac{22}{63}", "\\frac{44}{99}"],
     "solution": "Step 1: Find the area of the square and the circle.\nArea of Square = \\(6^2 = 36\\text{ cm}^2\\).\nArea of Circle = \\(\\pi \\times 2^2 = 4\\pi\\text{ cm}^2\\).\nStep 2: Use the formula: Probability = \\(\\frac{\\text{Area of Circle}}{\\text{Area of Square}}\\).\nProbability = \\(\\frac{4\\pi}{36} = \\frac{\\pi}{9}\\).\nUsing \\(\\pi \\approx \\frac{22}{7}\\), Probability = \\(\\frac{22}{7 \\times 9} = \\frac{22}{63}\\).\nCorrect Answer: (c)"
   },
   {
-    "id": 70,
+    "id": 69,
     "question": "In a sample of 50 people, 21 had type O blood, 22 had type A, 5 had type B, and 2 had type AB. Find the probability that a person has neither type A nor type O blood.",
     "options": ["\\frac{43}{50}", "\\frac{23}{50}", "\\frac{9}{50}", "\\frac{7}{50}"],
     "solution": "Step 1: Determine the number of people who have type A or type O.\nn(A or O) = 21 (Type O) + 22 (Type A) = 43.\nStep 2: People with neither type A nor O = Total - n(A or O).\n= 50 - 43 = 7.\nStep 3: Probability = \\(\\frac{7}{50}\\).\nCorrect Answer: (d)"
   },
   {
-    "id": 71,
+    "id": 70,
     "question": "Find the eccentricity of the conic section \\(\\frac{x^2}{25} + \\frac{y^2}{16} = 1\\).",
     "options": ["\\frac{1}{5}", "\\frac{2}{5}", "\\frac{3}{5}", "\\frac{4}{5}"],
     "solution": "Step 1: Identify \\(a\\) and \\(b\\) from the standard ellipse equation \\(\\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1\\).\n\\(a^2 = 25 \\implies a = 5\\).\n\\(b^2 = 16 \\implies b = 4\\).\nStep 2: Use the eccentricity formula for an ellipse: \\(e = \\sqrt{1 - \\frac{b^2}{a^2}}\\).\n\\(e = \\sqrt{1 - \\frac{16}{25}} = \\sqrt{\\frac{9}{25}} = \\frac{3}{5}\\).\nCorrect Answer: (c)"
   },
   {
-    "id": 72,
+    "id": 71,
     "question": "Find the equation of the circle with \\(P_1 = (-1, 2)\\) and \\(P_2 = (2, -3)\\) as diameter.",
     "options": ["x^2 + y^2 + x - y - 8 = 0", "x^2 + y^2 - x + y - 8 = 0", "x^2 + y^2 + x + y - 8 = 0", "x^2 + y^2 - x - y - 8 = 0"],
     "solution": "Step 1: Find the center \\((h, k)\\) which is the midpoint of the diameter.\n\\(h = \\frac{-1 + 2}{2} = 0.5\\). \\(k = \\frac{2 + (-3)}{2} = -0.5\\).\nStep 2: Find the radius squared \\(r^2\\) using the distance formula from center to \\(P_1\\).\n\\(r^2 = (-1 - 0.5)^2 + (2 - (-0.5))^2 = (-1.5)^2 + (2.5)^2 = 2.25 + 6.25 = 8.5\\).\nStep 3: Write the equation \\((x - h)^2 + (y - k)^2 = r^2\\).\n\\((x - 0.5)^2 + (y + 0.5)^2 = 8.5\\).\nExpand: \\(x^2 - x + 0.25 + y^2 + y + 0.25 = 8.5\\).\n\\(x^2 + y^2 - x + y - 8 = 0\\).\nCorrect Answer: (b)"
   },
   {
-    "id": 73,
+    "id": 72,
     "question": "If \\(a, b, \\text{ and } c\\) are the lengths of the sides of a triangle, prove that \\(\\tan(\\frac{A - B}{2}) = \\frac{a - b}{a + b} \\cot(\\frac{C}{2})\\). Which of the following steps correctly starts this proof?",
     "options": ["Using the Sine Rule: a = 2R sin A, b = 2R sin B", "Using the Cosine Rule: a² = b² + c² - 2bc cos A", "Using \\(\\tan(A-B) = \\frac{\\tan A - \\tan B}{1 + \\tan A \\tan B}\\)", "Using the Law of Sines directly to substitute a and b"],
     "solution": "Step 1: The standard proof starts with the Sine Rule. \\(\\frac{a}{\\sin A} = \\frac{b}{\\sin B} = 2R\\).\nStep 2: Substitute \\(a = 2R\\sin A\\) and \\(b = 2R\\sin B\\) into \\(\\frac{a - b}{a + b}\\).\n\\(\\frac{a - b}{a + b} = \\frac{2R\\sin A - 2R\\sin B}{2R\\sin A + 2R\\sin B} = \\frac{\\sin A - \\sin B}{\\sin A + \\sin B}\\).\nStep 3: Apply the sum-to-product formulas.\n\\(= \\frac{2\\cos(\\frac{A+B}{2})\\sin(\\frac{A-B}{2})}{2\\sin(\\frac{A+B}{2})\\cos(\\frac{A-B}{2})} = \\cot(\\frac{A+B}{2})\\tan(\\frac{A-B}{2})\\).\nSince \\(A+B+C = 180^{\\circ}\\), then \\(\\frac{A+B}{2} = 90^{\\circ} - \\frac{C}{2}\\).\nThus, \\(\\cot(90^{\\circ} - \\frac{C}{2}) = \\tan(\\frac{C}{2})\\).\nThe identity is proven.\nCorrect Answer: (a)"
   },
   {
-    "id": 74,
+    "id": 73,
     "question": "Which of the following is NOT a common feature of all conic sections?",
     "options": ["Focus", "Directrix", "Vertex", "Axis of symmetry"],
     "solution": "Step 1: Recall the standard definitions of conic sections (Circle, Ellipse, Parabola, Hyperbola).\nStep 2: All conic sections are defined as the locus of points that satisfy a specific relationship to a fixed point (Focus) and a fixed line (Directrix).\nAll conic sections have vertices and axes of symmetry.\nStep 3: However, the value of the eccentricity \\(e\\) varies depending on the conic (Circle \\(e=0\\), Ellipse \\(e<1\\), Parabola \\(e=1\\), Hyperbola \\(e>1\\)). The directrix is not a feature of a circle based on its definition.\nCorrect Answer: (b)"
   },
   {
-    "id": 75,
+    "id": 74,
     "question": "Evaluate \\(\\int \\frac{1}{\\sqrt{a^2 - b^2 x^2}} \\, dx\\) where \\(a > 1\\) and \\(b\\) are real constants.",
     "options": ["-\\frac{1}{b}\\sin^{-1}(\\frac{b x}{a}) + C", "\\frac{1}{b}\\sin^{-1}(\\frac{b x}{a}) + C", "\\frac{1}{b}\\sin^{-1}(\\frac{a x}{b}) + C", "\\sin^{-1}(\\frac{b x}{a}) + C"],
     "solution": "Step 1: Use trigonometric substitution. Let \\(bx = a\\sin\\theta\\).\nThen \\(b \\, dx = a\\cos\\theta \\, d\\theta \\implies dx = \\frac{a}{b}\\cos\\theta \\, d\\theta\\).\nStep 2: Substitute into the integral.\n\\(\\int \\frac{1}{\\sqrt{a^2 - a^2\\sin^2\\theta}} \\cdot \\frac{a}{b}\\cos\\theta \\, d\\theta\\).\n\\(\\int \\frac{1}{a\\cos\\theta} \\cdot \\frac{a}{b}\\cos\\theta \\, d\\theta = \\int \\frac{1}{b} \\, d\\theta = \\frac{1}{b}\\theta + C\\).\nStep 3: Substitute \\(\\theta\\) back.\n\\(\\theta = \\sin^{-1}(\\frac{bx}{a})\\). Therefore, integral = \\(\\frac{1}{b}\\sin^{-1}(\\frac{b x}{a}) + C\\).\nCorrect Answer: (b)"
   },
   {
-    "id": 76,
+    "id": 75,
     "question": "Given that \\(\\theta\\) is measured in radians, differentiate \\(\\tan^{-1}(3\\theta^3)\\) with respect to \\(\\theta\\).",
     "options": ["\\frac{9\\theta}{1 + 9\\theta^6}", "\\frac{9\\theta^2}{1 + 9\\theta^6}", "\\frac{9\\theta}{1 + 9\\theta^2}", "\\frac{9\\theta^2}{1 + 9\\theta^2}"],
     "solution": "Step 1: Recall the chain rule for inverse trigonometric functions.\n\\(\\frac{d}{d\\theta}[\\tan^{-1}(u)] = \\frac{1}{1 + u^2} \\cdot \\frac{du}{d\\theta}\\).\nStep 2: Let \\(u = 3\\theta^3\\). Then \\(\\frac{du}{d\\theta} = 9\\theta^2\\).\nStep 3: Substitute \\(u\\) and \\(\\frac{du}{d\\theta}\\).\n\\(\\frac{d}{d\\theta}[\\tan^{-1}(3\\theta^3)] = \\frac{1}{1 + (3\\theta^3)^2} \\times 9\\theta^2 = \\frac{9\\theta^2}{1 + 9\\theta^6}\\).\nCorrect Answer: (b)"
   },
   {
-    "id": 77,
+    "id": 76,
     "question": "Suppose \\(y = (\\sin x)^x\\) is differentiable in the interval \\(0 < x < \\pi/2\\). Obtain \\(\\frac{dy}{dx}\\).",
     "options": ["x(\\sin x)^{x-1}", "(\\ln(\\sin x) + \\frac{x}{\\cos x})(\\sin x)^x", "(\\ln(\\sin x) + \\frac{x}{\\tan x})(\\sin x)^x", "x(\\sin x)^{x-1}\\cos x"],
     "solution": "Step 1: Take the natural log of both sides.\n\\(\\ln y = x \\ln(\\sin x)\\).\nStep 2: Differentiate implicitly with respect to \\(x\\).\n\\(\\frac{1}{y} \\frac{dy}{dx} = x \\cdot \\frac{1}{\\sin x} \\cdot \\cos x + \\ln(\\sin x) \\cdot 1\\).\n\\(\\frac{1}{y} \\frac{dy}{dx} = \\frac{x}{\\tan x} + \\ln(\\sin x)\\).\nStep 3: Solve for \\(\\frac{dy}{dx}\\).\n\\(\\frac{dy}{dx} = y (\\ln(\\sin x) + \\frac{x}{\\tan x}) = (\\sin x)^x (\\ln(\\sin x) + \\frac{x}{\\tan x})\\).\nCorrect Answer: (c)"
   },
   {
-    "id": 78,
+    "id": 77,
     "question": "Simplify \\(\\cos(A+B)\\cos(A-B)\\).",
     "options": ["\\cos^2 A - \\sin^2 B", "\\cos^2 A + \\cos^2 B - 1", "\\frac{1}{2}(\\cos 2A + \\cos 2B)", "All of the above"],
     "solution": "Step 1: Use the product-to-sum formulas.\n\\(\\cos A \\cos B = \\frac{1}{2}[\\cos(A+B) + \\cos(A-B)]\\).\nBut here we have \\(\\cos(A+B)\\cos(A-B)\\).\nLet \\(u = A+B\\) and \\(v = A-B\\).\nThen \\(\\cos u \\cos v = \\frac{1}{2}[\\cos(u+v) + \\cos(u-v)]\\).\nStep 2: Substitute back \\(u\\) and \\(v\\).\n\\(u+v = 2A\\), \\(u-v = 2B\\).\n\\(\\frac{1}{2}[\\cos 2A + \\cos 2B]\\).\nUsing \\(\\cos 2A = 2\\cos^2 A - 1\\), this expands to all the above forms.\nCorrect Answer: (d)"
   },
   {
-    "id": 79,
+    "id": 78,
     "question": "Suppose \\(y = \\cos^{-1}(1 - 2x^2)\\), find \\(\\frac{dy}{dx}\\).",
     "options": ["\\frac{4x}{\\sqrt{1-x^2}}", "\\frac{4x}{\\sin(\\cos^{-1}(1-2x^2))}", "\\frac{4x}{\\sqrt{1-(1-2x^2)^2}}", "\\frac{-4x}{\\sin(\\cos^{-1}(1-2x^2))}"],
     "solution": "Step 1: Let \\(u = 1 - 2x^2\\). Then \\(y = \\cos^{-1}u\\).\n\\(\\frac{dy}{du} = \\frac{-1}{\\sqrt{1-u^2}}\\) and \\(\\frac{du}{dx} = -4x\\).\nStep 2: Apply the chain rule.\n\\(\\frac{dy}{dx} = \\frac{-1}{\\sqrt{1-(1-2x^2)^2}} \\times (-4x) = \\frac{4x}{\\sqrt{1-(1-2x^2)^2}}\\).\nCorrect Answer: (c)"
   },
   {
-    "id": 80,
+    "id": 79,
     "question": "Integrate \\(\\int \\cos(4x+1) \\, dx\\) by substitution.",
     "options": ["\\frac{\\sin(4x+1)}{4} + C", "\\frac{\\sin(4x+1)}{1} + C", "\\frac{\\sin(4x+1)}{3} + C", "4\\sin(4x+1) + C"],
     "solution": "Step 1: Let \\(u = 4x+1\\). Then \\(du = 4 \\, dx\\), so \\(dx = \\frac{du}{4}\\).\nStep 2: Substitute into the integral.\n\\(\\int \\cos u \\cdot \\frac{du}{4} = \\frac{1}{4} \\int \\cos u \\, du\\).\nStep 3: Integrate and substitute back.\n\\(\\frac{1}{4} \\sin u + C = \\frac{\\sin(4x+1)}{4} + C\\).\nCorrect Answer: (a)"
   },
   {
-    "id": 81,
+    "id": 80,
     "question": "Evaluate the integral \\(\\int \\frac{x}{x^2 + 4} \\, dx\\).",
     "options": ["\\ln(x^2 + 4) + C", "\\frac{1}{2}\\ln(x^2 + 4) + C", "\\ln|x^2 + 4| + C", "\\frac{1}{x^2+4} + C"],
     "solution": "Step 1: Use substitution. Let \\(u = x^2 + 4\\).\nThen \\(du = 2x \\, dx\\), so \\(x \\, dx = \\frac{du}{2}\\).\nStep 2: Substitute into the integral.\n\\(\\int \\frac{1}{u} \\cdot \\frac{du}{2} = \\frac{1}{2} \\int \\frac{1}{u} \\, du\\).\nStep 3: Integrate and substitute back.\n\\(\\frac{1}{2} \\ln|u| + C = \\frac{1}{2} \\ln(x^2 + 4) + C\\).\nCorrect Answer: (b)"
   },
   {
-    "id": 82,
+    "id": 81,
     "question": "Determine the value of \\(\\frac{dy}{dx}\\) at \\(x=0\\) if \\(y = \\prod_{n=0}^{5}(1 + x^{2^n}) = (1+x)(1+x^2)\\dots(1+x^{32})\\).",
     "options": ["5", "1", "32", "0"],
     "solution": "Step 1: Differentiate the product using the product rule.\n\\(\\frac{dy}{dx} = 1\\times(1+x^2)(1+x^4)...(1+x^{32}) + (1+x)[2x(1+x^4)...] + ...\\).\nStep 2: Evaluate at \\(x=0\\).\n\\(\\frac{dy}{dx}\\bigg|_{x=0} = 1\\times(1+0)(1+0)... + (1+0)\\times 0 \\times ...\\)\nAll terms after the first become zero because they are multiplied by \\(x\\) or powers of \\(x\\).\nThus, \\(\\frac{dy}{dx}\\big|_{x=0} = 1\\).\nCorrect Answer: (b)"
   },
   {
-    "id": 83,
+    "id": 82,
     "question": "Differentiate \\(y = e^x\\cos x\\) with respect to \\(e^{-x}\\sin x\\).",
     "options": ["e^x(\\cos x - \\sin x)", "e^{-2x}", "e^{2x}", "e^{-2x} + e^{2x}"],
     "solution": "Step 1: Let \\(u = e^x\\cos x\\) and \\(v = e^{-x}\\sin x\\). We need to find \\(\\frac{du}{dv}\\).\nStep 2: Find \\(\\frac{du}{dx}\\) and \\(\\frac{dv}{dx}\\).\n\\(\\frac{du}{dx} = e^x(\\cos x - \\sin x)\\).\n\\(\\frac{dv}{dx} = e^{-x}(\\cos x - \\sin x)\\).\nStep 3: Use the chain rule: \\(\\frac{du}{dv} = \\frac{du/dx}{dv/dx}\\).\n\\(\\frac{du}{dv} = \\frac{e^x(\\cos x - \\sin x)}{e^{-x}(\\cos x - \\sin x)} = e^{x - (-x)} = e^{2x}\\).\nCorrect Answer: (c)"
   },
   {
-    "id": 84,
+    "id": 83,
     "question": "Find the equation of the normal to the curve \\(y = x + \\frac{1}{x}\\) at point \\((\\frac{1}{2}, \\frac{5}{2})\\).",
     "options": ["3y = x - 7", "3y = -x + 7", "3y = x + 7", "3y = -x - 7"],
     "solution": "Step 1: Find the gradient of the tangent.\n\\(\\frac{dy}{dx} = 1 - \\frac{1}{x^2}\\).\nAt \\(x = \\frac{1}{2}\\), \\(m_{\\text{tangent}} = 1 - \\frac{1}{(1/4)} = 1 - 4 = -3\\).\nStep 2: Gradient of normal is \\(m_{\\text{normal}} = \\frac{1}{3}\\).\nStep 3: Use the point-slope formula.\n\\(y - \\frac{5}{2} = \\frac{1}{3}(x - \\frac{1}{2})\\).\nMultiply through by 6: \\(6y - 15 = 2x - 1 \\implies 6y = 2x + 14 \\implies 3y = x + 7\\).\nCorrect Answer: (c)"
   },
   {
-    "id": 85,
+    "id": 84,
     "question": "If \\(\\tan^2 x = 1 + 2\\tan^2 y\\), then \\(\\cos 2x\\) is:",
     "options": ["\\sin 2y", "-\\sin 2y", "\\sin^2 y", "-\\sin^2 y"],
     "solution": "Step 1: Use the identity \\(\\tan^2 x = \\sec^2 x - 1\\).\n\\(\\sec^2 x - 1 = 1 + 2\\sec^2 y - 2\\).\n\\(\\sec^2 x = 2\\sec^2 y\\).\nStep 2: Convert to cosines. \\(\\frac{1}{\\cos^2 x} = \\frac{2}{\\cos^2 y} \\implies \\cos^2 x = \\frac{1}{2} \\cos^2 y\\).\nStep 3: Use double angle formula for \\(\\cos 2x = 2\\cos^2 x - 1\\).\n\\(\\cos 2x = 2(\\frac{1}{2} \\cos^2 y) - 1 = \\cos^2 y - 1 = -(1 - \\cos^2 y) = -\\sin^2 y\\).\nCorrect Answer: (d)"
   },
   {
-    "id": 86,
-    "question": "Suppose \(x > 0\) and \(y = \\sqrt{x - \\sqrt{x}}\). Find \\(4\\frac{dy}{dx} y\\sqrt{x}\\).",
+    "id": 85,
+    "question": "Suppose \\(x > 0\\) and \\(y = \\sqrt{x - \\sqrt{x}}\\). Find \\(4\\frac{dy}{dx} y\\sqrt{x}\\).",
     "options": ["2\\sqrt{x} - 1", "2\\sqrt{x} + 1", "\\sqrt{x}", "x"],
     "solution": "Step 1: Differentiate \\(y\\) with respect to \\(x\\).\n\\(y = (x - \\sqrt{x})^{1/2}\\).\n\\(\\frac{dy}{dx} = \\frac{1}{2}(x - \\sqrt{x})^{-1/2} \\times (1 - \\frac{1}{2\\sqrt{x}})\\).\nStep 2: Multiply the expression by \\(4y\\sqrt{x}\\).\n\\(4\\frac{dy}{dx} y\\sqrt{x} = 4(\\frac{1}{2y}) (\\frac{2\\sqrt{x} - 1}{2\\sqrt{x}}) y\\sqrt{x}\\).\nThe \\(y\\) cancels, the 4 cancels with the 2s, and \\(\\sqrt{x}\\) cancels.\nResult = \\(2\\sqrt{x} - 1\\).\nCorrect Answer: (a)"
   },
   {
-    "id": 87,
-    "question": "Suppose \(x > 0\) and \(y = \\sqrt{x + \\sqrt{x}}\). Find \\(4\\frac{dy}{dx} y\\sqrt{x} - 1\\).",
+    "id": 86,
+    "question": "Suppose \\(x > 0\\) and \\(y = \\sqrt{x + \\sqrt{x}}\\). Find \\(4\\frac{dy}{dx} y\\sqrt{x} - 1\\).",
     "options": ["\\sqrt{x}", "2\\sqrt{x}", "3\\sqrt{x}", "x"],
     "solution": "Step 1: Differentiate \\(y\\).\n\\(y = (x + \\sqrt{x})^{1/2}\\).\n\\(\\frac{dy}{dx} = \\frac{1}{2}(x + \\sqrt{x})^{-1/2} \\times (1 + \\frac{1}{2\\sqrt{x}})\\).\nStep 2: Substitute \\(y\\) and multiply by \\(4\\sqrt{x}\\).\n\\(4\\frac{dy}{dx} y\\sqrt{x} = 4\\sqrt{x} \\times (\\frac{2\\sqrt{x}+1}{2\\sqrt{x}}) = 2\\sqrt{x} + 1\\).\nStep 3: Subtract 1 as per the expression in the question.\n\\((2\\sqrt{x} + 1) - 1 = 2\\sqrt{x}\\).\nCorrect Answer: (b)"
   },
   {
-    "id": 88,
-    "question": "Evaluate \(\\int_{0}^{\\ln 2} (e^x + 2e^{-x})^2 \\, dx\).",
+    "id": 87,
+    "question": "Evaluate \\(\\int_{0}^{\\ln 2} (e^x + 2e^{-x})^2 \\, dx\\).",
     "options": ["3 + 4\\ln 2", "4 + 3\\ln 2", "3 - 4(\\ln 2)^2", "4\\ln 2"],
     "solution": "Step 1: Expand the integrand.\n\\((e^x + 2e^{-x})^2 = e^{2x} + 4 + 4e^{-2x}\\).\nStep 2: Integrate term by term.\n\\(\\int_{0}^{\\ln 2} e^{2x} \\, dx = [\\frac{e^{2x}}{2}]_0^{\\ln 2} = \\frac{4}{2} - \\frac{1}{2} = \\frac{3}{2}\\).\n\\(\\int_{0}^{\\ln 2} 4 \\, dx = 4[\\ln 2 - 0] = 4\\ln 2\\).\n\\(\\int_{0}^{\\ln 2} 4e^{-2x} \\, dx = 4[\\frac{e^{-2x}}{-2}]_0^{\\ln 2} = -2(\\frac{1}{4} - 1) = \\frac{3}{2}\\).\nStep 3: Sum the results.\n\\(\\frac{3}{2} + 4\\ln 2 + \\frac{3}{2} = 3 + 4\\ln 2\\).\nCorrect Answer: (a)"
   },
   {
-    "id": 89,
-    "question": "Find the area bounded by the curve \(y = xe^{-x}\), the x-axis, and the ordinates \(x = 0\) and \(x = 4\).",
+    "id": 88,
+    "question": "Find the area bounded by the curve \\(y = xe^{-x}\\), the x-axis, and the ordinates \\(x = 0\\) and \\(x = 4\\).",
     "options": ["5e^{-4} - 1", "-5e^{-4} + 1", "e^{-4} + 1", "-e^{-4} + 1"],
     "solution": "Step 1: Set up the definite integral.\nArea = \\(\\int_{0}^{4} xe^{-x} \\, dx\\).\nStep 2: Integrate by parts. Let \\(u = x, dv = e^{-x} dx\\). Then \\(du = dx, v = -e^{-x}\\).\n\\(\\int xe^{-x} dx = -xe^{-x} - \\int -e^{-x} dx = -xe^{-x} - e^{-x}\\).\nStep 3: Evaluate from 0 to 4.\n\\([-xe^{-x} - e^{-x}]_{0}^{4} = (-4e^{-4} - e^{-4}) - (0 - 1) = -5e^{-4} + 1\\).\nCorrect Answer: (b)"
   },
   {
-    "id": 90,
-    "question": "Evaluate \(\\int_{0}^{b} (\\sqrt{1 - \\sin 2\\theta}) \\, d\\theta\), where \(b > 0\).",
+    "id": 89,
+    "question": "Evaluate \\(\\int_{0}^{b} (\\sqrt{1 - \\sin 2\\theta}) \\, d\\theta\\), where \\(b > 0\\).",
     "options": ["1 + \\sin b - \\cos b", "-1 + \\sin b + \\cos b", "1 - \\sin b - \\cos b", "1 + \\sin b + \\cos b"],
     "solution": "Step 1: Simplify the expression inside the square root.\n\\(1 - \\sin 2\\theta = 1 - 2\\sin\\theta\\cos\\theta = \\sin^2\\theta + \\cos^2\\theta - 2\\sin\\theta\\cos\\theta = (\\cos\\theta - \\sin\\theta)^2\\).\nStep 2: Take the square root.\n\\(\\sqrt{(\\cos\\theta - \\sin\\theta)^2} = |\\cos\\theta - \\sin\\theta|\\).\nStep 3: Integrate.\n\\(\\int_{0}^{b} (\\cos\\theta - \\sin\\theta) \\, d\\theta = [\\sin\\theta + \\cos\\theta]_{0}^{b}\\).\n\\(= (\\sin b + \\cos b) - (\\sin 0 + \\cos 0) = \\sin b + \\cos b - 1\\).\nCorrect Answer: (b)"
   },
   {
-    "id": 91,
-    "question": "A particle moves in a straight line with speed \(v(t) = \\sin(wt)\\cos^2(wt)\). Find its position function \(x = f(t)\) if \(f(0) = 0\).",
-    "options": ["-\\frac{\\sin^3(wt)}{3w} + \\frac{1}{3w}", "-\\frac{\\sin^3(wt)}{3w} - \\frac{1}{3w}", "\\frac{\\cos^3(wt)}{3w} - \\frac{1}{3w}", "\\frac{\\cos^3(wt)}{3w} + \\frac{1}{3w}"],
+    "id": 90,
+    "question": "A particle moves in a straight line with speed \\(v(t) = \\sin(wt)\\cos^2(wt)\\). Find its position function \\(x = f(t)\\) if \\(f(0) = 0\\).",
+    "options": ["-\\frac{\\sin^3(wt)}{3w} + \\frac{1}{3w}", "-\\frac{\\sin^3(wt)}{3w} - \\frac{1}{3w}", "-\\frac{\\cos^3(wt)}{3w} + \\frac{1}{3w}", "\\frac{\\cos^3(wt)}{3w} + \\frac{1}{3w}"],
     "solution": "Step 1: Integrate the velocity to get displacement.\n\\(x(t) = \\int \\sin(wt)\\cos^2(wt) \\, dt\\).\nStep 2: Use substitution. Let \\(u = \\cos(wt)\\). Then \\(du = -w\\sin(wt) dt\\), so \\(\\sin(wt) dt = -\\frac{du}{w}\\).\n\\(x(t) = \\int u^2 \\cdot (-\\frac{du}{w}) = -\\frac{1}{w} \\int u^2 \\, du = -\\frac{u^3}{3w} + C\\).\nStep 3: Substitute \\(u\\) back and find \\(C\\) using \\(f(0)=0\\).\n\\(x(t) = -\\frac{\\cos^3(wt)}{3w} + C\\).\nAt \\(t=0\\), \\(0 = -\\frac{1}{3w} + C \\implies C = \\frac{1}{3w}\\).\nSo, \\(x(t) = -\\frac{\\cos^3(wt)}{3w} + \\frac{1}{3w}\\).\nCorrect Answer: (c)"
   },
   {
-    "id": 92,
-    "question": "Evaluate \(\\int \\sin^3(x)\\cos^2(x) \\, dx\).",
-    "options": ["-\\frac{1}{3}\\cos^3 x + \\frac{1}{5}\\sin^5 x + C", "\\frac{1}{3}\\sin^3 x + \\frac{1}{5}\\sin^5 x + C", "\\frac{1}{3}\\cos^3 x - \\frac{1}{5}\\cos^5 x + C", "-\\frac{1}{3}\\sin^3 x - \\frac{1}{5}\\cos^5 x + C"],
-    "solution": "Step 1: Separate a \\(\\sin x\\) from the \\(\\sin^3 x\\).\n\\(\\int \\sin^2 x \\cos^2 x \\cdot \\sin x \\, dx\\).\nStep 2: Use \\(\\sin^2 x = 1 - \\cos^2 x\\).\n\\(\\int (1 - \\cos^2 x) \\cos^2 x \\cdot \\sin x \\, dx\\).\nStep 3: Substitute \\(u = \\cos x\\), so \\(du = -\\sin x \\, dx\\).\n\\(-\\int (1 - u^2)u^2 \\, du = -\\int (u^2 - u^4) \\, du = -\\frac{u^3}{3} + \\frac{u^5}{5} + C\\).\nStep 4: Substitute \\(u\\) back.\n\\(-\\frac{\\cos^3 x}{3} + \\frac{\\cos^5 x}{5} + C = \\frac{1}{5}\\cos^5 x - \\frac{1}{3}\\cos^3 x + C\\).\nCorrect Answer: (c)"
+    "id": 91,
+    "question": "Evaluate \\(\\int \\sin^3(x)\\cos^2(x) \\, dx\\).",
+    "options": ["-\\frac{1}{3}\\cos^3 x + \\frac{1}{5}\\sin^5 x + C", "\\frac{1}{3}\\sin^3 x + \\frac{1}{5}\\sin^5 x + C", "-\\frac{1}{3}\\cos^3 x + \\frac{1}{5}\\cos^5 x + C", "-\\frac{1}{3}\\sin^3 x - \\frac{1}{5}\\cos^5 x + C"],
+    "solution": "Step 1: Separate a \\(\\sin x\\) from the \\(\\sin^3 x\\).\n\\(\\int \\sin^2 x \\cos^2 x \\cdot \\sin x \\, dx\\).\nStep 2: Use \\(\\sin^2 x = 1 - \\cos^2 x\\).\n\\(\\int (1 - \\cos^2 x) \\cos^2 x \\cdot \\sin x \\, dx\\).\nStep 3: Substitute \\(u = \\cos x\\), so \\(du = -\\sin x \\, dx\\).\n\\(-\\int (1 - u^2)u^2 \\, du = -\\int (u^2 - u^4) \\, du = -\\frac{u^3}{3} + \\frac{u^5}{5} + C\\).\nStep 4: Substitute \\(u\\) back.\n\\(-\\frac{\\cos^3 x}{3} + \\frac{\\cos^5 x}{5} + C = -\\frac{1}{3}\\cos^3 x + \\frac{1}{5}\\cos^5 x + C\\).\nCorrect Answer: (c)"
   },
   {
-    "id": 93,
-    "question": "Find \(\\lim_{x \\to -4} (x + 3)^{250 + 1}\).",
+    "id": 92,
+    "question": "Find \\(\\lim_{x \\to -4} (x + 3)^{250 + 1}\\).",
     "options": ["-1", "+1", "-\\infty", "+\\infty"],
     "solution": "Step 1: Substitute \\(x = -4\\) directly into the expression.\n\\((x + 3) = -4 + 3 = -1\\).\nStep 2: Raise to the power.\n\\((-1)^{251}\\).\nStep 3: Since 251 is odd, \\((-1)^{\\text{odd}} = -1\\).\nCorrect Answer: (a)"
   },
   {
-    "id": 94,
-    "question": "If \(f(x) = \\sum_{n=0}^{20} \\frac{x^n}{n!}\), then \(f^{(19)}(x) - 1\) is equal to:",
-    "options": ["0", "1", "x", "1 + x"],
+    "id": 93,
+    "question": "If \\(f(x) = \\sum_{n=0}^{20} \\frac{x^n}{n!}\\), then \\(f^{(19)}(x) - 1\\) is equal to:",
+    "options": ["0", "1", "\\frac{x}{20}", "1 + x"],
     "solution": "Step 1: Recall the expansion of the series.\n\\(f(x) = 1 + x + \\frac{x^2}{2!} + \\frac{x^3}{3!} + ... + \\frac{x^{19}}{19!} + \\frac{x^{20}}{20!}\\).\nStep 2: Differentiate 19 times.\nWhen you differentiate 19 times, the first 19 terms (from \\(1\\) to \\(\\frac{x^{18}}{18!}\\)) vanish.\nThe \\(19^{\\text{th}}\\) term \\(\\frac{x^{19}}{19!}\\) becomes 1.\nThe \\(20^{\\text{th}}\\) term \\(\\frac{x^{20}}{20!}\\) becomes \\(\\frac{x}{20}\\).\nStep 3: Apply the formula.\n\\(f^{(19)}(x) = 1 + \\frac{x}{20}\\).\n\\(f^{(19)}(x) - 1 = (1 + \\frac{x}{20}) - 1 = \\frac{x}{20}\\).\nCorrect Answer: (c)"
   },
   {
-    "id": 95,
-    "question": "If \(y = (4x)^{-4x}\), then \(\\frac{dy}{dx}\) equals:",
+    "id": 94,
+    "question": "If \\(y = (4x)^{-4x}\\), then \\(\\frac{dy}{dx}\\) equals:",
     "options": ["x(\\frac{\\log x}{y} - 4)", "y(\\frac{\\log y}{x} + 4)", "y(\\frac{\\log y}{x} - 4)", "x(\\frac{\\log x}{y} + 4)"],
     "solution": "Step 1: Take the natural log of both sides.\n\\(\\ln y = -4x \\ln(4x)\\).\nStep 2: Differentiate with respect to \\(x\\).\n\\(\\frac{1}{y} \\frac{dy}{dx} = -4[\\ln(4x) + 1]\\).\nStep 3: Solve for \\(\\frac{dy}{dx}\\).\n\\(\\frac{dy}{dx} = y[-4\\ln(4x) - 4]\\).\nRewrite \\(\\ln(4x)\\) as \\(\\ln(4) + \\ln x\\). The expression simplifies to \\(y(\\frac{\\log y}{x} - 4)\\).\nCorrect Answer: (c)"
   },
   {
-    "id": 96,
-    "question": "Given that \(\\theta\) is measured in radians, differentiate \(\\cos^{-1}(\\sin(3\\theta^3))\) with respect to \\(\\theta\\).",
+    "id": 95,
+    "question": "Given that \\(\\theta\\) is measured in radians, differentiate \\(\\cos^{-1}(\\sin(3\\theta^3))\\) with respect to \\(\\theta\\).",
     "options": ["9\\theta", "-9\\theta", "9\\theta^2", "-9\\theta^2"],
     "solution": "Step 1: Apply the chain rule. Let \\(u = \\sin(3\\theta^3)\\).\n\\(\\frac{d}{d\\theta} [\\cos^{-1}u] = \\frac{-1}{\\sqrt{1 - u^2}} \\cdot \\frac{du}{d\\theta}\\).\nStep 2: Calculate \\(\\frac{du}{d\\theta}\\).\n\\(\\frac{du}{d\\theta} = \\cos(3\\theta^3) \\cdot 9\\theta^2\\).\nStep 3: Use the identity \\(\\cos(3\\theta^3) = \\sqrt{1 - \\sin^2(3\\theta^3)} = \\sqrt{1 - u^2}\\).\n\\(\\frac{dy}{d\\theta} = \\frac{-1}{\\sqrt{1 - u^2}} \\cdot 9\\theta^2 \\cdot \\sqrt{1 - u^2} = -9\\theta^2\\).\nCorrect Answer: (d)"
-  },
-  {
-    "id": 97,
-    "question": "The chord of a circle which subtends an angle \\(\\theta\\) at the center of the circle divides the circle into two segments such that the area of one is twice the area of the other. Prove that \\(\\theta - \\sin\\theta = \\frac{\\pi}{2}\\). Which of the following correctly represents the area ratio of the segments?",
-    "options": ["Area of Sector = 2 × Area of Triangle", "Area of Sector = 3 × Area of Triangle", "Area of Triangle = 2 × Area of Sector", "Area of Triangle = Area of Sector / 2"],
-    "solution": "Step 1: From the geometry, the area of the sector is \\(\\frac{1}{2}r^2\\theta\\). The area of the triangle is \\(\\frac{1}{2}r^2\\sin\\theta\\). The segment area = (Sector - Triangle) = \\(\\frac{1}{2}r^2(\\theta - \\sin\\theta)\\).\nStep 2: If the area of one segment is twice the area of the other, then the larger segment (which includes the triangle) relates to the smaller. The derived identity is \\(\\theta - \\sin\\theta = \\frac{\\pi}{2}\\).\nStep 3: This implies the area of the sector must be greater than the area of the triangle in a specific proportion to match this identity. The ratio leads to the derivation.\nCorrect Answer: (a)"
-  },
-  {
-    "id": 98,
-    "question": "A circle of radius \\(x\\) cm is inscribed in a sector of a circle of radius \\(r\\) cm and angle \\(\\theta\\). The derived identity is \\(r = x\\left(1 + \\csc\\frac{\\theta}{2}\\right)\\). Which trigonometric relationship is used to prove this?",
-    "options": ["\\sin\\frac{\\theta}{2} = \\frac{x}{OT}", "\\cos\\frac{\\theta}{2} = \\frac{OT}{r}", "\\tan\\frac{\\theta}{2} = \\frac{x}{r-x}", "\\sin\\frac{\\theta}{2} = \\frac{OT}{r}"],
-    "solution": "Step 1: From the diagram, the radius of the circle \\(x\\) is perpendicular to the tangent, forming a right-angled triangle with the sector's center.\nStep 2: Using basic trigonometry in that triangle: \\(\\sin\\frac{\\theta}{2} = \\frac{x}{OT}\\), where \\(OT\\) is the distance from the sector center to the circle center.\nStep 3: Substituting \\(OT = r - x\\) and rearranging proves the identity: \\(r = x\\left(1 + \\csc\\frac{\\theta}{2}\\right)\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 99,
-    "question": "A cylindrical pipe of diameter 10 cm is secured to a horizontal beam by a tight metal band AB as shown. The distance AB is 24 cm. Find the length of the band from A to B (the arc length).",
-    "options": ["\\frac{50\\pi}{3} \\text{ cm}", "\\frac{25\\pi}{3} \\text{ cm}", "\\frac{100\\pi}{3} \\text{ cm}", "\\frac{75\\pi}{3} \\text{ cm}"],
-    "solution": "Step 1: The radius \\(r = 5\\text{ cm}\\). The length \\(AB = 24\\text{ cm}\\) is a chord. The perpendicular bisector of the chord passes through the center. Using Pythagoras, the distance from the center to the chord is \\(\\sqrt{5^2 - 12^2}\\). Wait, this is impossible (12 > 5).\nStep 2: Correction: The chord length 24 cm is actually twice the distance from the center to the edge. The radius is 5 cm. The angle subtended by the arc is determined by the geometry. Using \\(\\sin\\theta = \\frac{12}{13}\\), the angle \\(\\theta = \\sin^{-1}(12/13)\\).\nStep 3: The central angle \\(K = 360^{\\circ} - 2\\theta\\). The length of the arc is \\(\\frac{K}{360} \\times 2\\pi r\\).\nCorrect Answer: (b)"
-  },
-  {
-    "id": 100,
-    "question": "A curve slot in a link mechanism is shown. If the slot is 5 mm wide, its shorter curved edge is 22 mm long, and the radius of this edge is 8.5 cm. Find the area of the slot (as a fraction in square cm).",
-    "options": ["\\frac{11\\pi}{85} - 0.15", "\\frac{22\\pi}{85} - 0.15", "\\frac{11\\pi}{85} - 0.25", "\\frac{22\\pi}{85} - 0.25"],
-    "solution": "Step 1: Convert units to cm. Width = 0.5 cm. Radius = 8.5 cm. Length of arc = 2.2 cm.\nStep 2: Use the arc length formula \\(l = r\\theta\\). \\(\\theta = \\frac{2.2}{8.5} = \\frac{22}{85}\\) radians.\nStep 3: The area of the slot is the difference between two sectors (or the area of the larger sector minus the smaller sector). The slot is a curved rectangle, so its area is \\(\\text{Arc Length} \\times \\text{Width}\\).\nUsing geometry, the area is \\(\\frac{1}{2}(R+r)\\theta \\times \\text{width}\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 101,
-    "question": "Using the addition formulas, prove that \\(\\sin(A+B) = \\sin A \\cos B + \\cos A \\sin B\\). Which geometric approach is typically used for this proof?",
-    "options": ["Using coordinates and a unit circle", "Using right-angled triangles only", "Using the cosine rule", "Using the sine rule for triangles"],
-    "solution": "Step 1: The standard proof uses a unit circle and two right-angled triangles sharing a common point.\nStep 2: By considering points on the unit circle and the lengths defined by the sines and cosines of the angles, the sum of areas or projection distances proves the identity.\nStep 3: This geometric approach is fundamental for deriving all compound angle formulas.\nCorrect Answer: (a)"
-  },
-  {
-    "id": 102,
-    "question": "Prove the identity \\(\\sin(A-B) = \\sin A \\cos B - \\cos A \\sin B\\). What is the starting step for this proof?",
-    "options": ["Using the definition \\(\\sin(A-B) = \\sin A \\cos(-B) + \\cos A \\sin(-B)\\)", "Using the Pythagorean identity", "Using the definition of tangent", "Using the Law of Cosines"],
-    "solution": "Step 1: The most direct proof is to use the sum formula and substitute \\(-B\\) for \\(B\\).\nStep 2: Since \\(\\sin(-B) = -\\sin B\\) and \\(\\cos(-B) = \\cos B\\), the formula becomes:\n\\(\\sin(A + (-B)) = \\sin A \\cos(-B) + \\cos A \\sin(-B) = \\sin A \\cos B - \\cos A \\sin B\\).\nStep 3: This elegantly proves the difference formula using the established sum formula.\nCorrect Answer: (a)"
-  },
-  {
-    "id": 103,
-    "question": "Using the double-angle identities, prove that \\(\\sin 2A = 2\\sin A \\cos A\\). Which of the following correctly applies the double-angle definition?",
-    "options": ["\\sin(A+B) = \\sin A \\cos B + \\cos A \\sin B, \\text{ letting } B = A", "\\sin(A+B) = \\sin A \\cos A", "\\sin A \\cos A = \\sin 2A", "\\sin 2A = \\sin A + \\sin A"],
-    "solution": "Step 1: The double-angle formula for sine is derived from the sum formula: \\(\\sin(A+B) = \\sin A \\cos B + \\cos A \\sin B\\).\nStep 2: Substitute \\(B = A\\) into the equation.\nStep 3: This yields \\(\\sin(A+A) = \\sin A \\cos A + \\cos A \\sin A = 2\\sin A \\cos A\\).\nStep 4: Therefore, \\(\\sin 2A = 2\\sin A \\cos A\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 104,
-    "question": "Starting with \\(\\tan(A+B) = \\frac{\\tan A + \\tan B}{1 - \\tan A \\tan B}\\), derive the formula for \\(\\tan 2A\\). What is the resulting identity?",
-    "options": ["\\frac{2\\tan A}{1 - \\tan^2 A}", "\\frac{\\tan A + \\tan A}{1 - \\tan A}", "\\frac{2\\tan A}{1 + \\tan^2 A}", "\\frac{\\tan^2 A - 1}{2\\tan A}"],
-    "solution": "Step 1: The tangent addition formula is given as \\(\\tan(A+B) = \\frac{\\tan A + \\tan B}{1 - \\tan A \\tan B}\\).\nStep 2: Substitute \\(B = A\\) into the formula.\nStep 3: The equation becomes \\(\\tan(A+A) = \\frac{\\tan A + \\tan A}{1 - \\tan A \\tan A} = \\frac{2\\tan A}{1 - \\tan^2 A}\\).\nStep 4: Therefore, \\(\\tan 2A = \\frac{2\\tan A}{1 - \\tan^2 A}\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 105,
-    "question": "Using the identities \\(\\cos^2 A + \\sin^2 A = 1\\), derive the formula for \\(\\cos 2A\\) in terms of \\(\\sin^2 A\\).",
-    "options": ["1 - 2\\sin^2 A", "1 + 2\\sin^2 A", "2\\sin^2 A - 1", "1 - \\sin^2 A"],
-    "solution": "Step 1: Start with the double-angle formula \\(\\cos 2A = \\cos^2 A - \\sin^2 A\\).\nStep 2: Use the Pythagorean identity \\(\\cos^2 A = 1 - \\sin^2 A\\) to substitute.\nStep 3: \\(\\cos 2A = (1 - \\sin^2 A) - \\sin^2 A = 1 - 2\\sin^2 A\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 106,
-    "question": "Using the t-formula \\(t = \\tan\\frac{\\theta}{2}\\), express \\(\\sin\\theta\\) in terms of \\(t\\).",
-    "options": ["\\frac{2t}{1 + t^2}", "\\frac{t}{1 + t^2}", "\\frac{1 - t^2}{1 + t^2}", "\\frac{2t}{1 - t^2}"],
-    "solution": "Step 1: Recall the half-angle identities: \\(\\sin\\theta = 2\\sin\\frac{\\theta}{2}\\cos\\frac{\\theta}{2}\\).\nStep 2: Divide and multiply by \\(\\cos^2\\frac{\\theta}{2}\\): \\(\\sin\\theta = \\frac{2\\sin\\frac{\\theta}{2}\\cos\\frac{\\theta}{2}}{\\cos^2\\frac{\\theta}{2}} \\times \\frac{1}{\\sec^2\\frac{\\theta}{2}}\\).\nStep 3: Simplify using \\(\\tan\\frac{\\theta}{2} = t\\) and \\(\\sec^2\\frac{\\theta}{2} = 1 + t^2\\).\n\\(\\sin\\theta = \\frac{2t}{1 + t^2}\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 107,
-    "question": "Evaluate \\(\\tan 22.5^\\circ\\) without using tables. Which t-formula value helps solve this?",
-    "options": ["\\sqrt{2} - 1", "\\sqrt{2} + 1", "2 - \\sqrt{2}", "2 + \\sqrt{2}"],
-    "solution": "Step 1: Recognize that \\(22.5^\\circ = \\frac{45^\\circ}{2}\\). Use the half-angle formula for tangent.\nStep 2: \\(\\tan\\frac{\\theta}{2} = \\frac{1 - \\cos\\theta}{\\sin\\theta}\\). Let \\(\\theta = 45^\\circ\\).\nStep 3: Substitute \\(\\cos 45^\\circ = \\frac{1}{\\sqrt{2}}\\) and \\(\\sin 45^\\circ = \\frac{1}{\\sqrt{2}}\\).\n\\(\\tan 22.5^\\circ = \\frac{1 - 1/\\sqrt{2}}{1/\\sqrt{2}} = \\sqrt{2} - 1\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 108,
-    "question": "Evaluate \\(\\tan 187.5^\\circ\\) without using tables. Which t-formula is most efficient for this evaluation?",
-    "options": ["\\sqrt{2} - 1", "2 - \\sqrt{3}", "1 - \\sqrt{2}", "\\sqrt{3} - 1"],
-    "solution": "Step 1: Use the identity \\(\\tan(180^\\circ + 7.5^\\circ) = \\tan 7.5^\\circ\\).\nStep 2: Use the half-angle formula for tangent recursively.\nStep 3: This reduces the problem to evaluating \\(\\tan 7.5^\\circ\\), which yields \\(\\sqrt{2} - 1\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 109,
-    "question": "If \\(\\mu\\sin(A-B) = \\lambda\\sin(A+B)\\), prove that \\(\\tan A = \\frac{\\mu + \\lambda}{\\mu - \\lambda} \\tan B\\). Which trigonometric identities are required to prove this?",
-    "options": ["\\sin(A\\pm B) expansions", "\\cos(A\\pm B) expansions", "Double angle formulas", "Pythagorean identity"],
-    "solution": "Step 1: Expand both sides using the sum and difference formulas.\n\\(\\mu(\\sin A \\cos B - \\cos A \\sin B) = \\lambda(\\sin A \\cos B + \\cos A \\sin B)\\).\nStep 2: Rearrange terms to group \\(\\sin A \\cos B\\) and \\(\\cos A \\sin B\\).\n\\((\\mu - \\lambda)\\sin A \\cos B = (\\mu + \\lambda)\\cos A \\sin B\\).\nStep 3: Divide both sides by \\(\\cos A \\cos B\\) to obtain \\(\\tan A = \\frac{\\mu + \\lambda}{\\mu - \\lambda} \\tan B\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 110,
-    "question": "If \\(A, B, \\text{ and } C\\) are angles of a triangle, prove that \\(\\tan A + \\tan B + \\tan C = \\tan A \\tan B \\tan C\\). What is the key property used in this proof?",
-    "options": ["A + B + C = 180^\\circ", "A = 90^\\circ", "A = B = C", "The triangle is right-angled"],
-    "solution": "Step 1: Recall that the sum of angles in a triangle is \\(A + B + C = 180^\\circ\\).\nStep 2: Use the tangent addition formula for three variables: \\(\\tan(A+B+C) = \\frac{\\tan A + \\tan B + \\tan C - \\tan A \\tan B \\tan C}{1 - \\tan A \\tan B - \\tan B \\tan C - \\tan C \\tan A}\\).\nStep 3: Since \\(A+B+C = 180^\\circ\\), \\(\\tan(A+B+C) = 0\\). Thus the numerator must be 0.\nSo, \\(\\tan A + \\tan B + \\tan C - \\tan A \\tan B \\tan C = 0 \\implies \\tan A + \\tan B + \\tan C = \\tan A \\tan B \\tan C\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 111,
-    "question": "Using the sum-to-product formulas, prove that \\(\\sin 3A = 3\\sin A - 4\\sin^3 A\\). What is the correct application of the sum formula?",
-    "options": ["\\sin(2A+A) = \\sin 2A \\cos A + \\cos 2A \\sin A", "\\sin(2A+A) = \\sin 2A + \\sin A", "3\\sin A = \\sin 2A + \\sin A", "\\sin 3A = 2\\sin A + \\sin A"],
-    "solution": "Step 1: Start with \\(\\sin 3A = \\sin(2A + A)\\).\nStep 2: Apply the addition formula: \\(\\sin(2A+A) = \\sin 2A \\cos A + \\cos 2A \\sin A\\).\nStep 3: Substitute the double-angle identities: \\(\\sin 2A = 2\\sin A \\cos A\\) and \\(\\cos 2A = 1 - 2\\sin^2 A\\).\n\\(\\sin 3A = (2\\sin A \\cos A) \\cos A + (1 - 2\\sin^2 A) \\sin A\\).\nStep 4: Simplify: \\(2\\sin A \\cos^2 A + \\sin A - 2\\sin^3 A = 2\\sin A(1 - \\sin^2 A) + \\sin A - 2\\sin^3 A = 3\\sin A - 4\\sin^3 A\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 112,
-    "question": "If \\(\\cos x + \\cos y = a\\) and \\(\\sin x + \\sin y = b\\), prove that \\(\\tan\\frac{x+y}{2} = \\frac{b}{a}\\). What is the correct first step in this proof?",
-    "options": ["Use sum-to-product formulas on both equations", "Square both equations", "Use Pythagorean identities", "Use double angle formulas"],
-    "solution": "Step 1: Apply sum-to-product formulas to the equations.\n\\(\\cos x + \\cos y = 2\\cos\\frac{x+y}{2}\\cos\\frac{x-y}{2} = a\\) ... (1)\n\\(\\sin x + \\sin y = 2\\sin\\frac{x+y}{2}\\cos\\frac{x-y}{2} = b\\) ... (2)\nStep 2: Divide equation (2) by equation (1).\n\\(\\frac{b}{a} = \\frac{2\\sin\\frac{x+y}{2}\\cos\\frac{x-y}{2}}{2\\cos\\frac{x+y}{2}\\cos\\frac{x-y}{2}}\\).\nStep 3: Cancel the common factor \\(2\\cos\\frac{x-y}{2}\\), leaving \\(\\tan\\frac{x+y}{2} = \\frac{b}{a}\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 113,
-    "question": "Prove the identity \\(\\frac{\\sin 2x + \\sin x}{\\cos 2x + \\cos x} = \\tan x\\). What is the correct first step in this proof?",
-    "options": ["Apply sum-to-product formulas to the numerator and denominator", "Square both sides", "Divide numerator and denominator by sin x", "Use double angle formulas for both terms"],
-    "solution": "Step 1: Apply sum-to-product formulas to the numerator and denominator.\nNumerator: \\(\\sin 2x + \\sin x = 2\\sin(\\frac{2x+x}{2})\\cos(\\frac{2x-x}{2}) = 2\\sin\\frac{3x}{2}\\cos\\frac{x}{2}\\).\nDenominator: \\(\\cos 2x + \\cos x = 2\\cos(\\frac{2x+x}{2})\\cos(\\frac{2x-x}{2}) = 2\\cos\\frac{3x}{2}\\cos\\frac{x}{2}\\).\nStep 2: Form the fraction and cancel the common factor \\(2\\cos\\frac{x}{2}\\).\n\\(\\frac{2\\sin\\frac{3x}{2}\\cos\\frac{x}{2}}{2\\cos\\frac{3x}{2}\\cos\\frac{x}{2}} = \\frac{\\sin\\frac{3x}{2}}{\\cos\\frac{3x}{2}} = \\tan\\frac{3x}{2}\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 114,
-    "question": "If \\(A, B, \\text{ and } C\\) are angles of a triangle, prove that \\(\\sin A + \\sin B + \\sin C = 4\\cos\\frac{A}{2}\\cos\\frac{B}{2}\\cos\\frac{C}{2}\\). What is the key step in this proof?",
-    "options": ["Substitute \\(A = 180^{\\circ} - (B+C)\\) and use sum-to-product", "Use the double-angle formula for sine", "Use the law of cosines", "Use the Pythagorean identity"],
-    "solution": "Step 1: Since \\(A+B+C = 180^{\\circ}\\), \\(A = 180^{\\circ} - (B+C)\\), so \\(\\sin A = \\sin(180^{\\circ} - (B+C)) = \\sin(B+C)\\).\nStep 2: Expand the sum: \\(\\sin A + \\sin B + \\sin C = \\sin(B+C) + \\sin B + \\sin C\\).\nStep 3: Apply sum-to-product and half-angle identities to eventually arrive at \\(4\\cos\\frac{A}{2}\\cos\\frac{B}{2}\\cos\\frac{C}{2}\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 115,
-    "question": "Simplify \\(\\cos 2A + \\cos 2B\\) using the sum-to-product formulas.",
-    "options": ["2\\cos(A+B)\\cos(A-B)", "2\\sin(A+B)\\sin(A-B)", "\\cos(A+B)\\cos(A-B)", "\\sin(A+B)\\sin(A-B)"],
-    "solution": "Step 1: Apply the sum-to-product formula for cosine: \\(\\cos X + \\cos Y = 2\\cos(\\frac{X+Y}{2})\\cos(\\frac{X-Y}{2})\\).\nStep 2: Substitute \\(X = 2A\\) and \\(Y = 2B\\).\n\\(\\cos 2A + \\cos 2B = 2\\cos(\\frac{2A+2B}{2})\\cos(\\frac{2A-2B}{2})\\).\nStep 3: Simplify the fractions: \\(2\\cos(A+B)\\cos(A-B)\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 116,
-    "question": "Simplify \\(\\sin 3A - \\sin A\\).",
-    "options": ["2\\sin A\\cos 2A", "2\\cos 2A\\sin A", "\\sin A\\cos 2A", "\\cos A\\sin 2A"],
-    "solution": "Step 1: Apply the sum-to-product formula for sine: \\(\\sin X - \\sin Y = 2\\cos(\\frac{X+Y}{2})\\sin(\\frac{X-Y}{2})\\).\nStep 2: Substitute \\(X = 3A\\) and \\(Y = A\\).\n\\(\\sin 3A - \\sin A = 2\\cos(\\frac{3A+A}{2})\\sin(\\frac{3A-A}{2})\\).\nStep 3: Simplify: \\(2\\cos 2A\\sin A\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 117,
-    "question": "Simplify \\(\\cos 5A + \\cos 3A\\) using sum-to-product formulas.",
-    "options": ["2\\cos 4A\\cos A", "2\\sin 4A\\sin A", "\\cos 4A\\cos A", "\\sin 4A\\sin A"],
-    "solution": "Step 1: Apply the sum-to-product formula: \\(\\cos X + \\cos Y = 2\\cos(\\frac{X+Y}{2})\\cos(\\frac{X-Y}{2})\\).\nStep 2: Substitute \\(X = 5A\\) and \\(Y = 3A\\).\n\\(\\cos 5A + \\cos 3A = 2\\cos(\\frac{5A+3A}{2})\\cos(\\frac{5A-3A}{2})\\).\nStep 3: Simplify: \\(2\\cos 4A\\cos A\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 118,
-    "question": "Simplify \\(\\sin 3A + \\sin 5A\\) using sum-to-product formulas.",
-    "options": ["2\\sin 4A\\cos A", "2\\cos 4A\\sin A", "\\sin 4A\\cos A", "\\cos 4A\\sin A"],
-    "solution": "Step 1: Apply the sum-to-product formula: \\(\\sin X + \\sin Y = 2\\sin(\\frac{X+Y}{2})\\cos(\\frac{X-Y}{2})\\).\nStep 2: Substitute \\(X = 3A\\) and \\(Y = 5A\\).\n\\(\\sin 3A + \\sin 5A = 2\\sin(\\frac{3A+5A}{2})\\cos(\\frac{3A-5A}{2})\\).\nStep 3: Simplify: \\(2\\sin 4A\\cos A\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 119,
-    "question": "Simplify \\(\\sin(A+B) + \\sin(A-B)\\).",
-    "options": ["2\\sin A\\cos B", "2\\cos A\\sin B", "\\sin A\\cos B", "\\cos A\\sin B"],
-    "solution": "Step 1: Apply the sum-to-product formula for sine: \\(\\sin X + \\sin Y = 2\\sin(\\frac{X+Y}{2})\\cos(\\frac{X-Y}{2})\\).\nStep 2: Substitute \\(X = A+B\\) and \\(Y = A-B\\).\n\\(\\sin(A+B) + \\sin(A-B) = 2\\sin(\\frac{2A}{2})\\cos(\\frac{2B}{2})\\).\nStep 3: Simplify: \\(2\\sin A\\cos B\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 120,
-    "question": "In any triangle ABC, the sine rule states that \\(\\frac{a}{\\sin A} = \\frac{b}{\\sin B} = \\frac{c}{\\sin C} = 2R\\). What does \\(2R\\) represent?",
-    "options": ["The diameter of the circumcircle", "The radius of the incircle", "The perimeter of the triangle", "The area of the triangle"],
-    "solution": "Step 1: In the sine rule, \\(R\\) is the radius of the circumcircle (the circle passing through all three vertices of the triangle).\nStep 2: The ratio of any side to the sine of its opposite angle is equal to the diameter of this circumcircle.\nStep 3: Therefore, \\(2R\\) represents the diameter of the circumcircle.\nCorrect Answer: (a)"
-  },
-  {
-    "id": 121,
-    "question": "In any triangle ABC, the cosine rule is given by \\(a^2 = b^2 + c^2 - 2bc\\cos A\\). What is the geometric proof of this rule based on?",
-    "options": ["The Pythagorean theorem applied to a right-angled triangle constructed within the main triangle", "The sine rule", "The area of the triangle", "The sum of angles"],
-    "solution": "Step 1: Drop a perpendicular from a vertex to the opposite side, creating a right-angled triangle.\nStep 2: Use the Pythagorean theorem on both right-angled triangles and combine the results.\nStep 3: This classical proof demonstrates that the cosine rule is an extension of the Pythagorean theorem to non-right-angled triangles.\nCorrect Answer: (a)"
-  },
-  {
-    "id": 122,
-    "question": "If \\(\\cos x + \\cos y = a\\) and \\(\\sin x + \\sin y = b\\), prove that \\(\\sin\\frac{x+y}{2} = \\pm \\frac{b}{2\\cos\\frac{x-y}{2}}\\). What is the correct first step in this proof?",
-    "options": ["Apply sum-to-product formulas", "Square both equations", "Use Pythagorean identities", "Use double angle formulas"],
-    "solution": "Step 1: Apply sum-to-product formulas to the second equation.\n\\(\\sin x + \\sin y = 2\\sin\\frac{x+y}{2}\\cos\\frac{x-y}{2} = b\\).\nStep 2: Divide both sides by \\(2\\cos\\frac{x-y}{2}\\).\n\\(\\sin\\frac{x+y}{2} = \\frac{b}{2\\cos\\frac{x-y}{2}}\\).\nStep 3: This gives the required identity.\nCorrect Answer: (a)"
-  },
-  {
-    "id": 123,
-    "question": "If \\(A, B, \\text{ and } C\\) are angles of a triangle, prove that \\(\\sin^2 A + \\sin^2 B + \\sin^2 C = 2 + 2\\cos A\\cos B\\cos C\\). What is the key step in this proof?",
-    "options": ["Use the identity \\(\\sin^2 A = 1 - \\cos^2 A\\) and sum-to-product formulas", "Use the sine rule", "Use the cosine rule", "Use the Pythagorean identity"],
-    "solution": "Step 1: Substitute \\(\\sin^2 A = 1 - \\cos^2 A\\) and use the property \\(A + B + C = 180^{\\circ}\\).\nStep 2: Apply sum-to-product formulas to simplify the resulting expression.\nStep 3: The identity proves the relationship between the sines and cosines of the angles in a triangle.\nCorrect Answer: (a)"
-  },
-  {
-    "id": 124,
-    "question": "Using the product-to-sum formulas, simplify \\(\\sin 6A \\cos 4A\\) to its sum form.",
-    "options": ["\\frac{1}{2}[\\sin 10A + \\sin 2A]", "\\frac{1}{2}[\\sin 10A - \\sin 2A]", "\\frac{1}{2}[\\cos 10A + \\cos 2A]", "\\frac{1}{2}[\\cos 10A - \\cos 2A]"],
-    "solution": "Step 1: Apply the product-to-sum formula for sine and cosine: \\(\\sin X \\cos Y = \\frac{1}{2}[\\sin(X+Y) + \\sin(X-Y)]\\).\nStep 2: Substitute \\(X = 6A\\) and \\(Y = 4A\\).\n\\(\\sin 6A \\cos 4A = \\frac{1}{2}[\\sin(6A+4A) + \\sin(6A-4A)]\\).\nStep 3: Simplify: \\(\\frac{1}{2}[\\sin 10A + \\sin 2A]\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 125,
-    "question": "In any triangle ABC, prove that \\(\\tan\\frac{B-C}{2} = \\frac{b-c}{b+c} \\cot\\frac{A}{2}\\). What is the correct first step in this proof?",
-    "options": ["Use the sine rule: \\(b = 2R\\sin B, c = 2R\\sin C\\)", "Use the cosine rule", "Use the Pythagorean theorem", "Use the law of cosines"],
-    "solution": "Step 1: Use the sine rule to express \\(b\\) and \\(c\\) in terms of sines.\n\\(b = 2R\\sin B\\) and \\(c = 2R\\sin C\\).\nStep 2: Form the ratio \\(\\frac{b-c}{b+c} = \\frac{\\sin B - \\sin C}{\\sin B + \\sin C}\\).\nStep 3: Apply sum-to-product formulas and simplify.\n\\(\\frac{\\sin B - \\sin C}{\\sin B + \\sin C} = \\frac{\\cot\\frac{B+C}{2}\\tan\\frac{B-C}{2}}{1}\\).\nSince \\(A+B+C = 180^{\\circ}\\), \\(\\frac{B+C}{2} = 90^{\\circ} - \\frac{A}{2}\\), so \\(\\cot\\frac{B+C}{2} = \\tan\\frac{A}{2}\\).\nThis proves the identity.\nCorrect Answer: (a)"
-  },
-  {
-    "id": 126,
-    "question": "If \\(A, B, \\text{ and } C\\) are angles of a triangle, prove that \\(\\sin A + \\sin B + \\sin C = 4\\cos\\frac{A}{2}\\cos\\frac{B}{2}\\cos\\frac{C}{2}\\). What is the correct starting step?",
-    "options": ["Use the identity \\(\\sin A = \\sin(B+C)\\) since \\(A = 180^{\\circ} - (B+C)\\)", "Use the sine rule", "Use the cosine rule", "Use the Pythagorean identity"],
-    "solution": "Step 1: Since \\(A+B+C = 180^{\\circ}\\), \\(A = 180^{\\circ} - (B+C)\\), so \\(\\sin A = \\sin(180^{\\circ} - (B+C)) = \\sin(B+C)\\).\nStep 2: Substitute \\(\\sin A = \\sin(B+C)\\) and apply sum-to-product formulas to simplify the expression.\nStep 3: Use the half-angle identities to arrive at the final result.\nCorrect Answer: (a)"
-  },
-  {
-    "id": 127,
-    "question": "Simplify \\(\\cos(A-B) - \\cos(A+B)\\) using the product-to-sum formulas.",
-    "options": ["2\\sin A\\sin B", "2\\cos A\\cos B", "\\sin A\\sin B", "\\cos A\\cos B"],
-    "solution": "Step 1: Apply the product-to-sum formula for cosine difference: \\(\\cos X - \\cos Y = -2\\sin(\\frac{X+Y}{2})\\sin(\\frac{X-Y}{2})\\).\nStep 2: Substitute \\(X = A-B\\) and \\(Y = A+B\\).\n\\(\\cos(A-B) - \\cos(A+B) = -2\\sin(\\frac{2A}{2})\\sin(\\frac{-2B}{2})\\).\nStep 3: Simplify using \\(\\sin(-B) = -\\sin B\\).\n\\(-2\\sin A \\cdot (-\\sin B) = 2\\sin A\\sin B\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 128,
-    "question": "In any triangle ABC, prove that \\(\\cot\\frac{A}{2} + \\cot\\frac{B}{2} + \\cot\\frac{C}{2} = \\cot\\frac{A}{2}\\cot\\frac{B}{2}\\cot\\frac{C}{2}\\). What is the key property used in this proof?",
-    "options": ["A + B + C = 180^{\\circ}", "A = 90^{\\circ}", "A = B = C", "The triangle is right-angled"],
-    "solution": "Step 1: Recall that the sum of angles in a triangle is \\(A + B + C = 180^{\\circ}\\).\nStep 2: Use the cotangent addition formula and the relationship between the cotangents of the half-angles.\nStep 3: By substituting the identity for the sum of cotangents, the proof is established.\nCorrect Answer: (a)"
-  },
-  {
-    "id": 129,
-    "question": "In any triangle ABC, prove that \\(\\frac{b-c}{b+c} \\cos\\frac{A}{2} = \\sin\\frac{B-C}{2}\\). What is the correct first step in this proof?",
-    "options": ["Use the sine rule: \\(b = 2R\\sin B, c = 2R\\sin C\\)", "Use the cosine rule", "Use the Pythagorean theorem", "Use the law of cosines"],
-    "solution": "Step 1: Use the sine rule to express \\(b\\) and \\(c\\) in terms of sines.\n\\(b = 2R\\sin B\\) and \\(c = 2R\\sin C\\).\nStep 2: Form the ratio \\(\\frac{b-c}{b+c} = \\frac{\\sin B - \\sin C}{\\sin B + \\sin C}\\).\nStep 3: Apply sum-to-product formulas and simplify to prove the identity.\nCorrect Answer: (a)"
   }
 ]
