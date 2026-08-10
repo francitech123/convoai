@@ -1,57 +1,6 @@
 [
     {
         "id": 1,
-        "question": "What is \\(\\frac{1}{2} + \\frac{1}{3}\\)?",
-        "options": [
-            "\\(\\frac{5}{6}\\)",
-            "\\(\\frac{2}{5}\\)",
-            "\\(\\frac{1}{6}\\)",
-            "\\(\\frac{3}{5}\\)"
-        ],
-        "solution": "Step 1: Find a common denominator of 6.\n\\(\\frac{1}{2} = \\frac{3}{6}\\) and \\(\\frac{1}{3} = \\frac{2}{6}\\)\nStep 2: Add the fractions.\n\\(\\frac{3}{6} + \\frac{2}{6} = \\frac{5}{6}\\)\nCorrect Answer: (a)"
-    },
-    {
-        "id": 2,
-        "question": "Solve for x: \\(2x + 5 = 13\\)",
-        "options": [
-            "\\(x = 4\\)",
-            "\\(x = 5\\)",
-            "\\(x = 3\\)",
-            "\\(x = 8\\)"
-        ],
-        "solution": "Step 1: Subtract 5 from both sides.\n\\(2x + 5 - 5 = 13 - 5\\)\n\\(2x = 8\\)\nStep 2: Divide both sides by 2.\n\\(x = 4\\)\nCorrect Answer: (a)"
-    },
-    {
-        "id": 3,
-        "question": "What is the derivative of \\(\\sin x\\)?",
-        "options": [
-            "\\(\\cos x\\)",
-            "\\(-\\cos x\\)",
-            "\\(\\sin x\\)",
-            "\\(-\\sin x\\)"
-        ],
-        "solution": "Step 1: Recall the derivative formula.\n\\(\\frac{d}{dx}\\sin x = \\cos x\\)\nCorrect Answer: (a)"
-    },
-    {
-        "id": 4,
-        "question": "Simplify \\(\\sqrt{16} + \\sqrt{9}\\)",
-        "options": [
-            "7",
-            "5",
-            "25",
-            "12"
-        ],
-        "solution": "Step 1: Evaluate each square root.\n\\(\\sqrt{16} = 4\\) and \\(\\sqrt{9} = 3\\)\nStep 2: Add them.\n\\(4 + 3 = 7\\)\nCorrect Answer: (a)"
-    },
-    {
-        "id": 5,
-        "question": "What is the value of \\(\\pi\\) rounded to 2 decimal places?",
-        "options": [
-            "3.14",
-            "3.16",
-            "3.12",
-            "3.18"
-        ],
-        "solution": "Step 1: Recall the value of π.\n\\(\\pi \\approx 3.14159...\\)\nStep 2: Round to 2 decimal places.\n\\(\\pi \\approx 3.14\\)\nCorrect Answer: (a)"
+        "question": "No Questions Available Check Back Later"
     }
 ]
