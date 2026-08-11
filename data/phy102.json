@@ -610,5 +610,23 @@
     "question": "Given the constant r₀ = 1.4 fm, calculate the radius of the ²³⁸U atom.",
     "options": ["8.64×10⁻¹⁵ m", "6.25×10⁻¹⁵ m", "1.89×10⁻¹⁵ m", "7.52×10⁻¹⁵ m"],
     "solution": "Radius R = r₀ * A^(1/3).\nR = 1.4 fm * (238)^(1/3) = 1.4 * 6.197 = 8.676 fm = 8.68×10⁻¹⁵ m.\nCorrect Answer: (a)"
+  },
+   {
+    "id": 103,
+    "question": "An AC circuit contains a resistor of 30 Ω and an inductor of inductive reactance 40 Ω in series. Calculate the total impedance (Z) of this circuit.",
+    "options": ["1200 Ω", "50 Ω", "70 Ω", "10 Ω"],
+    "solution": "Step 1: For a series RL circuit, use the impedance formula: \\(Z = \\sqrt{R^2 + X_L^2}\\).\nStep 2: Substitute the given values: \\(R = 30\\, \\Omega\\) and \\(X_L = 40\\, \\Omega\\).\n\\(Z = \\sqrt{30^2 + 40^2} = \\sqrt{900 + 1600} = \\sqrt{2500}\\).\nStep 3: Solve for Z: \\(Z = 50\\, \\Omega\\).\nCorrect Answer: (b)"
+  },
+  {
+    "id": 104,
+    "question": "An AC voltage source given by \\(v(t) = 141.4 \\sin(100\\pi t) \\text{ V}\\) is connected to a purely resistive load of 10 Ω. What is the average power dissipated in the resistor?",
+    "options": ["1414 W", "1000 W", "2000 W", "1000\\pi \\text{ W}"],
+    "solution": "Step 1: Identify the peak voltage \\(V_m = 141.4\\, \\text{V}\\). Find the RMS voltage: \\(V_{rms} = \\frac{V_m}{\\sqrt{2}} = \\frac{141.4}{\\sqrt{2}} \\approx 100\\, \\text{V}\\).\nStep 2: Since the load is purely resistive, use the power formula \\(P = \\frac{V_{rms}^2}{R}\\).\nStep 3: Substitute values: \\(P = \\frac{100^2}{10} = \\frac{10000}{10} = 1000\\, \\text{W}\\).\nCorrect Answer: (b)"
+  },
+  {
+    "id": 105,
+    "question": "A series RLC circuit has a resistance of 40 Ω, an inductive reactance of 100 Ω, and a capacitive reactance of 70 Ω. What is the power factor of this circuit?",
+    "options": ["1.00", "0.60", "0.80", "0.50"],
+    "solution": "Step 1: Calculate total reactance: \\(X = X_L - X_C = 100\\, \\Omega - 70\\, \\Omega = 30\\, \\Omega\\).\nStep 2: Calculate impedance: \\(Z = \\sqrt{R^2 + X^2} = \\sqrt{40^2 + 30^2} = \\sqrt{1600 + 900} = \\sqrt{2500} = 50\\, \\Omega\\).\nStep 3: Power factor = \\(\\cos\\phi = \\frac{R}{Z} = \\frac{40}{50} = 0.80\\).\nCorrect Answer: (c)"
   }
 ]
