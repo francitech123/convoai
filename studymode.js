@@ -11,7 +11,8 @@ const COURSES = [
     { id: 'mth102', code: 'MTH 102', name: 'Elementary Mathematics II', file: 'mth102.json', icon: '∫' },
     { id: 'mth104', code: 'MTH 104', name: 'Elementary Mathematics IV', file: 'mth104.json', icon: '📐' },
     { id: 'bio102', code: 'BIO 102', name: 'General Biology II', file: 'bio102.json', icon: '🧬' },
-    { id: 'gst112', code: 'GST 112', name: 'Nigerian People and Culture', file: 'gst112.json', icon: '🇳🇬' }
+    { id: 'gst112', code: 'GST 112', name: 'Nigerian People and Culture', file: 'gst112.json', icon: '🇳🇬' },
+    { id: 'sta112', code: 'STA 112', name: 'Probability I', file: 'sta112.json', icon: '🎲' }
 ];
 
 // ==================== STATE ====================
