@@ -1650,5 +1650,1107 @@
       "Telophase I"
     ],
     "solution": "Step 1: Prophase I of meiosis is subdivided into stages where homologous chromosomes pair up (synapsis) and exchange genetic material at chiasmata (crossing over), generating recombinant chromatids.\n\nCorrect Answer: (a)"
+  },
+  
+  {
+    "id": 151,
+    "question": "Which of the following is a key characteristic of organisms belonging to the Phylum Cnidaria?",
+    "options": [
+      "Presence of a complete digestive tract with mouth and anus",
+      "Presence of stinging cells called nematocysts",
+      "Bilateral symmetry in adult forms",
+      "Triploblastic tissue organization"
+    ],
+    "solution": "Step 1: Cnidarians are diploblastic and radially symmetric.\nStep 2: They possess a blind-sac gastrovascular cavity with only one opening.\nStep 3: A defining characteristic of Cnidarians is the presence of specialized stinging cells called cnidocytes containing nematocysts used for defense and prey capture.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 152,
+    "question": "In the human heart, which chamber has the thickest muscular wall because it pumps blood into the systemic circuit?",
+    "options": [
+      "Right atrium",
+      "Right ventricle",
+      "Left atrium",
+      "Left ventricle"
+    ],
+    "solution": "Step 1: Atria have thin walls compared to ventricles.\nStep 2: The right ventricle pumps blood to nearby lungs.\nStep 3: The left ventricle must generate high pressure to force blood through the entire systemic circulation (to the body), resulting in a significantly thicker muscular wall.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 153,
+    "question": "What is the primary function of the root cap in plant roots?",
+    "options": [
+      "Absorption of water and mineral ions",
+      "Protection of the delicate apical meristem as the root pushes through soil",
+      "Storage of excess photosynthetic starch",
+      "Secondary growth and girth expansion"
+    ],
+    "solution": "Step 1: Water absorption occurs via root hairs.\nStep 2: The root cap is a protective thimble-like structure of cells covering the root tip, shielding the root apical meristem from abrasive soil particles.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 154,
+    "question": "Which genetic phenomenon occurs when the expression of one gene masks or modifies the phenotypic expression of another non-allelic gene?",
+    "options": [
+      "Pleiotropy",
+      "Epistasis",
+      "Codominance",
+      "Incomplete dominance"
+    ],
+    "solution": "Step 1: Pleiotropy is one gene affecting multiple traits.\nStep 2: Codominance is both alleles being fully expressed.\nStep 3: Epistasis is a form of gene interaction where an allele at one locus alters or masks the phenotypic expression of alleles at a separate locus.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 155,
+    "question": "Which aquatic biome zone receives sufficient sunlight for photosynthesis to occur?",
+    "options": [
+      "Aphotic zone",
+      "Photic zone",
+      "Benthic zone",
+      "Abyssal zone"
+    ],
+    "solution": "Step 1: The aphotic and abyssal zones are dark and lack sufficient light for photosynthesis.\nStep 2: The benthic zone refers to the ocean floor.\nStep 3: The phototic zone is the upper layer of aquatic ecosystems penetrated by sufficient sunlight to support photosynthetic primary producers.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 156,
+    "question": "During human cellular respiration, what is the ultimate fate of the oxygen ($\text{O}_2$) inhaled into the lungs?",
+    "options": [
+      "It is converted directly into carbon dioxide in the lungs.",
+      "It acts as the final electron acceptor in the electron transport chain, forming water.",
+      "It combines with glucose to form ATP in the cytoplasm.",
+      "It serves as an enzyme cofactor in the Krebs cycle."
+    ],
+    "solution": "Step 1: Glucose is broken down during glycolysis and the Krebs cycle.\nStep 2: In the electron transport chain located on the inner mitochondrial membrane, oxygen accepts low-energy electrons and hydrogen ions to produce water molecules.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 157,
+    "question": "Which group of plants represents non-vascular land plants that lack true roots, stems, and leaves?",
+    "options": [
+      "Pteridophytes",
+      "Gymnosperms",
+      "Bryophytes",
+      "Angiosperms"
+    ],
+    "solution": "Step 1: Pteridophytes, gymnosperms, and angiosperms are vascular plants.\nStep 2: Bryophytes (mosses, liverworts, hornworts) lack specialized xylem and phloem, classifying them as non-vascular plants.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 158,
+    "question": "What is the primary role of surfactant in mammalian alveoli?",
+    "options": [
+      "To increase surface tension and collapse alveoli during expiration",
+      "To reduce surface tension of the fluid lining alveoli, preventing alveolar collapse",
+      "To bind directly to carbon dioxide for quick elimination",
+      "To act as a phagocytic defense against pathogens"
+    ],
+    "solution": "Step 1: Alveolar fluid creates high surface tension that tends to collapse air sacs.\nStep 2: Pulmonary surfactant lowers this surface tension, stabilizing alveoli and reducing the muscular effort required to inflate lungs.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 159,
+    "question": "Which ecological pyramid depicts the rate of energy flow or productivity through successive trophic levels per unit time?",
+    "options": [
+      "Pyramid of numbers",
+      "Pyramid of biomass",
+      "Pyramid of energy",
+      "Pyramid of standing crop"
+    ],
+    "solution": "Step 1: Pyramids of numbers and biomass represent standing crop at a given instant.\nStep 2: A pyramid of energy expresses the rate of energy production or transfer per unit area over a specific time period.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 160,
+    "question": "What type of mutation results from the insertion or deletion of nucleotides not in multiples of three, shifting the reading frame of the genetic code?",
+    "options": [
+      "Point mutation",
+      "Silent mutation",
+      "Frameshift mutation",
+      "Missense mutation"
+    ],
+    "solution": "Step 1: A point mutation involves a single nucleotide change.\nStep 2: A frameshift mutation is caused by insertions or deletions of nucleotides that shift the triplet grouping (reading frame), completely altering downstream amino acid translation.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 161,
+    "question": "Which plant tissue consists of living cells with thin primary walls and is responsible for photosynthesis, storage, and secretion?",
+    "options": [
+      "Collenchyma",
+      "Parenchyma",
+      "Sclerenchyma",
+      "Xylem tracheids"
+    ],
+    "solution": "Step 1: Collenchyma provides flexible support.\nStep 2: Sclerenchyma provides rigid structural support with thick secondary walls.\nStep 3: Parenchyma is the most abundant, versatile ground tissue composed of living cells with thin primary walls that handle metabolic duties, storage, and photosynthesis.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 162,
+    "question": "Which organ in the human excretory system is responsible for filtering metabolic wastes from the blood to form urine?",
+    "options": [
+      "Liver",
+      "Kidney",
+      "Spleen",
+      "Gallbladder"
+    ],
+    "solution": "Step 1: The liver breaks down toxins and amino acids into urea.\nStep 2: The kidneys filter the blood, adjusting water and electrolyte balance, and produce urine containing nitrogenous wastes via nephrons.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 163,
+    "question": "What is the primary ecological consequence of biological magnification (biomagnification)?",
+    "options": [
+      "Nutrients become more concentrated at the bottom of the food chain.",
+      "Toxic synthetic chemicals or heavy metals accumulate in increasingly higher concentrations at higher trophic levels.",
+      "Energy transfer efficiency increases exponentially at top trophic tiers.",
+      "Primary producers experience massive population booms."
+    ],
+    "solution": "Step 1: Biomagnification refers to the process where persistent toxins (e.g., DDT, mercury) multiply in concentration as they move up the food chain, severely affecting top carnivores.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 164,
+    "question": "Which plant hormone induces fruit ripening, leaf abscission, and interacts with other hormones to regulate growth responses?",
+    "options": [
+      "Auxin",
+      "Gibberellin",
+      "Ethylene",
+      "Cytokinin"
+    ],
+    "solution": "Step 1: Ethylene is a unique gaseous plant hormone that promotes fruit ripening, flower fading, and leaf abscission.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 165,
+    "question": "Which of the following is a characteristic feature of arthropods?",
+    "options": [
+      "Closed circulatory system with hemoglobin in red blood cells",
+      "Segmented body, jointed appendages, and a chitinous exoskeleton",
+      "Radially symmetric body plan with a water vascular system",
+      "Soft unsegmented body protected by a muscular mantle"
+    ],
+    "solution": "Step 1: Arthropods are characterized by segmented bodies, paired jointed appendages, and a hard exoskeleton made of chitin that undergoes molting (ecdysis).\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 166,
+    "question": "What is the primary function of the human cerebellum?",
+    "options": [
+      "Regulation of core body temperature and hunger",
+      "Control of autonomic cardiac and respiratory reflexes",
+      "Coordination of voluntary motor movement, posture, and balance",
+      "Processing of visual sensory input from the optic nerve"
+    ],
+    "solution": "Step 1: The hypothalamus regulates body temperature and hunger.\nStep 2: The medulla oblongata handles autonomic reflexes.\nStep 3: The cerebellum fine-tunes motor activity, maintains muscle tone, and coordinates balance and equilibrium.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 167,
+    "question": "In genetics, what does a recombination frequency of 50% between two linked genes indicate?",
+    "options": [
+      "The genes are located very close together on the same chromosome.",
+      "The genes are either located on different chromosomes or are very far apart on the same chromosome.",
+      "The genes exhibit complete linkage without any crossing over.",
+      "The genes undergo lethal mutations during meiosis."
+    ],
+    "solution": "Step 1: Genes close together have low recombination frequencies (under 50%).\nStep 2: A recombination frequency of 50% means independent assortment occurs, indicating that the genes are either on separate chromosomes or so far apart on the same chromosome that crossing over occurs constantly between them.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 168,
+    "question": "Which phase of cellular aerobic respiration takes place in the mitochondrial matrix and produces $\text{NADH}$, $\text{FADH}_2$, and carbon dioxide?",
+    "options": [
+      "Glycolysis",
+      "Krebs cycle (Citric Acid Cycle)",
+      "Electron Transport Chain",
+      "Chemiosmosis"
+    ],
+    "solution": "Step 1: Glycolysis occurs in the cytoplasm.\nStep 2: The Electron Transport Chain occurs on the inner membrane.\nStep 3: The Krebs cycle takes place in the mitochondrial matrix, breaking down acetyl-CoA derivatives to release carbon dioxide and high-energy electron carriers.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 169,
+    "question": "What structural adaptation do desert plants (xerophytes) possess to minimize transpirational water loss?",
+    "options": [
+      "Thin, broad leaves with large surface areas",
+      "Sunken stomata located in protective epidermal crypts",
+      "Absence of any vascular tissue",
+      "Root systems restricted to the top soil layer"
+    ],
+    "solution": "Step 1: Xerophytes feature thick cuticles, reduced leaves, and stomata sunken into pits or crypts to trap moist air and reduce transpiration.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 170,
+    "question": "Which organelle is responsible for packaging proteins into vesicles for secretion outside the cell?",
+    "options": [
+      "Rough Endoplasmic Reticulum",
+      "Golgi apparatus",
+      "Lysosome",
+      "Ribosome"
+    ],
+    "solution": "Step 1: Ribosomes synthesize proteins, and rough ER folds them.\nStep 2: The Golgi apparatus receives proteins from the ER, modifies them, sorts them, and packages them into secretory vesicles for transport.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 171,
+    "question": "What is the primary function of antidiuretic hormone (ADH) in the human body?",
+    "options": [
+      "To increase urine output by blocking water reabsorption",
+      "To promote water reabsorption in the kidney collecting ducts, reducing urine volume",
+      "To stimulate sodium excretion across the distal tubule",
+      "To raise blood pressure by constricting systemic veins directly"
+    ],
+    "solution": "Step 1: ADH (vasopressin) is released by the posterior pituitary when blood osmolarity is high.\nStep 2: It increases the water permeability of the kidney's collecting ducts, allowing more water to be reabsorbed into the blood and producing concentrated urine.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 172,
+    "question": "Which phylum includes flatworms that are dorsoventrally flattened, acoelomate, and possess bilateral symmetry?",
+    "options": [
+      "Nematoda",
+      "Annelida",
+      "Platyhelminthes",
+      "Cnidaria"
+    ],
+    "solution": "Step 1: Nematodes are pseudocoelomate roundworms.\nStep 2: Annelids are coelomate segmented worms.\nStep 3: Platyhelminthes (flatworms like tapeworms and planarians) are acoelomate, unsegmented animals with bilateral symmetry.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 173,
+    "question": "In an ecosystem, which group of organisms constitutes the detritivore and decomposer guild?",
+    "options": [
+      "Green plants and algae",
+      "Herbivorous insects and grazing mammals",
+      "Fungi and bacteria breaking down organic debris",
+      "Top apex carnivores"
+    ],
+    "solution": "Step 1: Decomposers (saprotrophic fungi and bacteria) feed on dead organic matter (detritus), breaking down complex molecules into simple inorganic nutrients.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 174,
+    "question": "Which mammalian heart valve prevents backflow of blood from the left ventricle into the left atrium during ventricular contraction?",
+    "options": [
+      "Tricuspid valve",
+      "Bicuspid (mitral) valve",
+      "Aortic semilunar valve",
+      "Pulmonary semilunar valve"
+    ],
+    "solution": "Step 1: The tricuspid valve guards the right atrioventricular opening.\nStep 2: The bicuspid or mitral valve is situated between the left atrium and left ventricle, closing during systole to prevent backflow into the atrium.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 175,
+    "question": "What is the key difference between plant and animal cytokinesis during cell division?",
+    "options": [
+      "Plants form a cleavage furrow, while animals form a cell plate.",
+      "Plants form a cell plate via Golgi vesicle fusion, while animals form a contractile ring cleavage furrow.",
+      "Animals undergo meiosis instead of mitosis.",
+      "Plant cells do not divide their cytoplasm."
+    ],
+    "solution": "Step 1: Animal cells pinch inward via a cleavage furrow produced by microfilaments.\nStep 2: Plant cells have a rigid cell wall, so cytokinesis occurs by vesicles from the Golgi apparatus fusing along the equatorial plane to form a cell plate that develops into a new cell wall.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 176,
+    "question": "Which type of ecological interaction is characterized by one species benefiting while the other is negatively affected?",
+    "options": [
+      "Mutualism",
+      "Commensalism",
+      "Parasitism / Predation",
+      "Competition"
+    ],
+    "solution": "Step 1: Mutualism benefits both species.\nStep 2: Commensalism benefits one with no effect on the other.\nStep 3: Parasitism and predation involve one organism benefiting at the expense or harm of another.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 177,
+    "question": "What is the primary function of the endodermis in plant roots?",
+    "options": [
+      "Photosynthesis in deep subterranean tissue",
+      "Regulating water and mineral entry into the vascular cylinder via the Casparian strip",
+      "Producing lateral roots",
+      "Anchoring the plant stem to soil"
+    ],
+    "solution": "Step 1: The endodermis surrounds the vascular stele.\nStep 2: Its Casparian strip forces water and solutes to pass through selective cell membranes, regulating what enters the vascular cylinder.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 178,
+    "question": "Which hormone prepares the female uterine lining for embryo implantation and maintains pregnancy?",
+    "options": [
+      "Estrogen",
+      "Progesterone",
+      "Oxytocin",
+      "Prolactin"
+    ],
+    "solution": "Step 1: Progesterone is secreted by the corpus luteum and placenta, stimulating the development and maintenance of the vascularized secretory endometrium.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 179,
+    "question": "What genetic term describes when two alleles at a locus are both fully expressed in the heterozygote phenotype (e.g., AB blood type)?",
+    "options": [
+      "Incomplete dominance",
+      "Codominance",
+      "Complete dominance",
+      "Epistasis"
+    ],
+    "solution": "Step 1: Incomplete dominance yields an intermediate blend.\nStep 2: Codominance occurs when both alleles are simultaneously and fully expressed in the heterozygote without blending (such as AB blood group antigens).\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 180,
+    "question": "Which organelle contains its own circular DNA and prokaryotic-like ribosomes, supporting the endosymbiotic theory?",
+    "options": [
+      "Golgi apparatus",
+      "Mitochondrion",
+      "Lysosome",
+      "Endoplasmic reticulum"
+    ],
+    "solution": "Step 1: Mitochondria and chloroplasts contain independent circular DNA molecules, divide by binary fission, and possess 70S ribosomes, supporting their evolutionary origin as engulfed prokaryotes.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 181,
+    "question": "Which class of vertebrates is characterized by amniotic eggs, dry scaly skin, and cold-blooded (ectothermic) metabolism?",
+    "options": [
+      "Amphibia",
+      "Reptilia",
+      "Aves",
+      "Mammalia"
+    ],
+    "solution": "Step 1: Amphibians have moist skin and lack amniotic eggs.\nStep 2: Reptiles possess epidermal scales of keratin and lay amniotic eggs, freeing them from aquatic reproduction.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 182,
+    "question": "What is the primary role of nitrogen-fixing bacteria in the nitrogen cycle?",
+    "options": [
+      "To break down proteins into ammonia",
+      "To convert atmospheric nitrogen gas ($\text{N}_2$) into ammonia ($\text{NH}_3$) usable by plants",
+      "To oxidize nitrates into nitrogen gas",
+      "To absorb organic nitrogen directly from soil particles"
+    ],
+    "solution": "Step 1: Atmospheric nitrogen ($\text{N}_2$) cannot be used directly by plants.\nStep 2: Nitrogen-fixing bacteria (e.g., *Rhizobium*, *Azotobacter*) reduce $\text{N}_2$ into ammonia, which can be assimilated into amino acids.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 183,
+    "question": "Which structure in the human eye controls the amount of light entering by adjusting the size of the pupil?",
+    "options": [
+      "Cornea",
+      "Lens",
+      "Iris",
+      "Retina"
+    ],
+    "solution": "Step 1: The cornea refracts light, and the lens focuses it.\nStep 2: The retina contains photoreceptors.\nStep 3: The iris is the pigmented muscular diaphragm that dilates or constricts the pupil to regulate light entry.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 184,
+    "question": "In population genetics, what does the Hardy-Weinberg equation term $2pq$ represent?",
+    "options": [
+      "Frequency of the homozygous dominant genotype",
+      "Frequency of the homozygous recessive genotype",
+      "Frequency of the heterozygous genotype",
+      "Frequency of the dominant allele"
+    ],
+    "solution": "Step 1: $p^2$ is homozygous dominant frequency.\nStep 2: $q^2$ is homozygous recessive frequency.\nStep 3: $2pq$ represents the frequency of the heterozygous genotype in a population at Hardy-Weinberg equilibrium.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 185,
+    "question": "Which plant tissue is responsible for secondary thickening of stems and roots, producing wood and bark?",
+    "options": [
+      "Apical meristem",
+      "Lateral meristem (vascular and cork cambium)",
+      "Intercalary meristem",
+      "Ground parenchyma"
+    ],
+    "solution": "Step 1: Apical meristems control primary length.\nStep 2: Lateral meristems (vascular cambium and cork cambium) drive secondary growth, producing secondary xylem (wood) and cork (bark).\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 186,
+    "question": "What is the primary function of bile during fat digestion in the human small intestine?",
+    "options": [
+      "Enzymatic hydrolysis of triglycerides into fatty acids",
+      "Physical emulsification of large fat globules into tiny micelles",
+      "Direct absorption of fatty acids into lacteals",
+      "Neutralization of intestinal enzymes"
+    ],
+    "solution": "Step 1: Bile salts lack digestive enzymes.\nStep 2: They act as detergents to emulsify large fat drops, increasing the surface area for pancreatic lipase action.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 187,
+    "question": "Which phylum contains organisms with a water vascular system, tube feet, and secondary radial symmetry?",
+    "options": [
+      "Mollusca",
+      "Arthropoda",
+      "Echinodermata",
+      "Annelida"
+    ],
+    "solution": "Step 1: Echinoderms (starfish, sea urchins, sea cucumbers) are marine invertebrates characterized by a water vascular system operating tube feet and a pentamerous radial symmetry.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 188,
+    "question": "What type of ecological succession starts in an area where an existing community has been removed by a disturbance (such as a fire), leaving soil intact?",
+    "options": [
+      "Primary succession",
+      "Secondary succession",
+      "Climax succession",
+      "Autogenic succession"
+    ],
+    "solution": "Step 1: Primary succession starts on bare, lifeless rock.\nStep 2: Secondary succession occurs on pre-existing soil after a disturbance (fire, flood, farming), allowing faster recovery.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 189,
+    "question": "Which enzyme unwinds the DNA double helix during DNA replication by breaking hydrogen bonds between base pairs?",
+    "options": [
+      "DNA polymerase",
+      "DNA ligase",
+      "Helicase",
+      "RNA primase"
+    ],
+    "solution": "Step 1: DNA polymerase builds new strands.\nStep 2: DNA ligase seals nicks in the backbone.\nStep 3: Helicase is the enzyme that unzips the DNA double helix by breaking hydrogen bonds at replication forks.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 190,
+    "question": "Which structure in flowering plants produces the male gametophytes (pollen grains)?",
+    "options": [
+      "Stigma",
+      "Ovary",
+      "Anther",
+      "Style"
+    ],
+    "solution": "Step 1: Stigma, style, and ovary comprise the female carpel.\nStep 2: The stamen consists of a filament and an anther, where microspores develop into pollen grains (male gametophytes).\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 191,
+    "question": "Which human endocrine gland produces hormones regulating basal metabolic rate, such as thyroxine?",
+    "options": [
+      "Adrenal gland",
+      "Thyroid gland",
+      "Pancreas",
+      "Pineal gland"
+    ],
+    "solution": "Step 1: The thyroid gland in the neck secretes thyroxine ($\text{T}_4$) and triiodothyronine ($\text{T}_3$), which govern metabolic rate, oxygen consumption, and development.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 192,
+    "question": "What is the primary function of villi and microvilli in the human small intestine?",
+    "options": [
+      "To secrete strong acids for protein denaturation",
+      "To maximize the surface area available for absorption of digested nutrients",
+      "To move food along via rhythmic peristaltic contractions",
+      "To produce bile salts for lipid emulsification"
+    ],
+    "solution": "Step 1: Villi and microvilli form a brush border that vastly expands the internal surface area of the small intestine to optimize nutrient absorption into blood and lymph vessels.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 193,
+    "question": "Which term describes the evolutionary history and relationship of a group of organisms?",
+    "options": [
+      "Ontogeny",
+      "Phylogeny",
+      "Morphology",
+      "Ecology"
+    ],
+    "solution": "Step 1: Ontogeny is the development of an individual organism.\nStep 2: Morphology deals with form and structure.\nStep 3: Phylogeny refers to the evolutionary relationships and ancestral descent lineage of a species or group.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 194,
+    "question": "Which vitamin functions as a coenzyme in amino acid metabolism and red blood cell formation, and its deficiency causes neural tube defects (spina bifida)?",
+    "options": [
+      "Vitamin B1 (Thiamine)",
+      "Vitamin B9 (Folic acid / Folate)",
+      "Vitamin B12 (Cobalamin)",
+      "Vitamin C"
+    ],
+    "solution": "Step 1: Folate (Vitamin B9) is critical for nucleic acid synthesis and cell division, and adequate intake during early pregnancy prevents neural tube defects.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 195,
+    "question": "What type of tropism causes plant stems to grow toward a unidirectional light source?",
+    "options": [
+      "Gravitropism",
+      "Thigmotropism",
+      "Phototropism",
+      "Hydrotropism"
+    ],
+    "solution": "Step 1: Phototropism is the directional growth of plants in response to light, with stems exhibiting positive phototropism due to auxin redistribution away from light.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 196,
+    "question": "Which of the following is a characteristic of prokaryotic cells?",
+    "options": [
+      "Presence of a membrane-bound nucleus",
+      "Presence of 80S ribosomes",
+      "Presence of circular DNA free in the cytoplasm without a nuclear envelope",
+      "Presence of multiple linear chromosomes"
+    ],
+    "solution": "Step 1: Prokaryotes lack a nuclear envelope and membrane-bound organelles.\nStep 2: Their genetic material consists of a single circular DNA molecule located in a nucleoid region.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 197,
+    "question": "Which mammalian organ is responsible for destroying old red blood cells and acts as a blood reservoir in the immune system?",
+    "options": [
+      "Liver",
+      "Pancreas",
+      "Spleen",
+      "Thymus"
+    ],
+    "solution": "Step 1: The spleen is a secondary lymphoid organ that filters blood, removes aged or damaged erythrocytes, and mounts immune responses against blood-borne pathogens.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 198,
+    "question": "What is the primary function of the nephridium in annelids like earthworms?",
+    "options": [
+      "Gas exchange",
+      "Excretion of metabolic nitrogenous wastes and osmoregulation",
+      "Digestion of cellulose",
+      "Locomotion via hydrostatic skeleton"
+    ],
+    "solution": "Step 1: Nephridia are tubular excretory organs in annelids that collect coelomic fluid and filter out nitrogenous wastes for expulsion.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 199,
+    "question": "In plant anatomy, what is the function of the companion cells associated with sieve-tube elements in phloem?",
+    "options": [
+      "To provide rigid structural support against bending",
+      "To manage metabolic activities and load/unload sugars into sieve tubes",
+      "To transport water upward from roots",
+      "To form a protective bark layer"
+    ],
+    "solution": "Step 1: Sieve-tube elements lack nuclei and many organelles at maturity.\nStep 2: Adjacent companion cells are intimately connected via plasmodesmata to supply metabolic support and drive active loading of sugars into the phloem.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 200,
+    "question": "Which evolutionary force consistently adapts populations to their local environment by favoring advantageous traits?",
+    "options": [
+      "Genetic drift",
+      "Gene flow",
+      "Natural selection",
+      "Mutation pressure"
+    ],
+    "solution": "Step 1: Genetic drift and mutation are random.\nStep 2: Natural selection is the non-random differential survival and reproduction of genotypes, driving adaptive evolution.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 201,
+    "question": "Which plant tissue type is primarily responsible for transporting water and dissolved inorganic minerals from roots to leaves?",
+    "options": [
+      "Phloem",
+      "Xylem",
+      "Cortex",
+      "Epidermis"
+    ],
+    "solution": "Step 1: Phloem transports organic nutrients like sucrose.\nStep 2: Xylem consists of tracheids and vessel elements dedicated to the unidirectional transport of water and mineral ions.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 202,
+    "question": "What is the primary role of the hormone calcitonin in human physiology?",
+    "options": [
+      "To raise blood calcium levels by stimulating bone resorption",
+      "To lower blood calcium levels by inhibiting osteoclast activity and promoting bone deposition",
+      "To stimulate calcium reabsorption in the renal tubules",
+      "To increase intestinal absorption of dietary calcium"
+    ],
+    "solution": "Step 1: Parathyroid hormone raises blood calcium.\nStep 2: Calcitonin, secreted by thyroid parafollicular cells, decreases blood calcium concentrations by suppressing osteoclast bone breakdown.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 203,
+    "question": "Which taxonomic category directly follows Family in the hierarchical classification of organisms?",
+    "options": [
+      "Order",
+      "Genus",
+      "Species",
+      "Class"
+    ],
+    "solution": "Step 1: The hierarchical classification ranks are: Domain, Kingdom, Phylum, Class, Order, Family, Genus, Species.\nStep 2: Genus comes directly below Family.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 204,
+    "question": "In mammalian lungs, how is the majority of carbon dioxide transported in the blood from tissues to the lungs?",
+    "options": [
+      "Dissolved directly as a gas in blood plasma",
+      "Bound reversibly to hemoglobin molecules",
+      "Converted into bicarbonate ions ($\text{HCO}_3^-$) dissolved in plasma",
+      "Precipitated as calcium carbonate crystals"
+    ],
+    "solution": "Step 1: Only a small fraction of $\text{CO}_2$ is dissolved or bound to hemoglobin.\nStep 2: The vast majority (about 70%) is converted inside red blood cells by carbonic anhydrase into bicarbonate ions ($\text{HCO}_3^-$) for transport in plasma.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 205,
+    "question": "Which organism group is characterized by chitinous cell walls, heterotrophic nutrition by absorption, and reproduction via spores?",
+    "options": [
+      "Plantae",
+      "Fungi",
+      "Protista",
+      "Monera"
+    ],
+    "solution": "Step 1: Plants have cellulose cell walls and perform photosynthesis.\nStep 2: Fungi possess cell walls made of chitin, absorb nutrients externally (saprotrophic), and reproduce using sexual and asexual spores.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 206,
+    "question": "What is the principal nitrogenous waste product of freshwater bony fish?",
+    "options": [
+      "Urea",
+      "Uric acid",
+      "Ammonia",
+      "Creatine"
+    ],
+    "solution": "Step 1: Freshwater fish live in abundant water, allowing them to continuously excrete highly toxic ammonia directly across their gill membranes into the surrounding water by passive diffusion.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 207,
+    "question": "Which phase of mitosis involves chromosomes coiling tightly, nuclear envelope breakdown, and mitotic spindle fibers forming?",
+    "options": [
+      "Prophase",
+      "Metaphase",
+      "Anaphase",
+      "Telophase"
+    ],
+    "solution": "Step 1: Prophase is the initial stage of mitosis where chromatin condenses into visible chromosomes, the nucleolus disappears, and the mitotic spindle starts to form.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 208,
+    "question": "What term is used to describe the ecological role filled by a species, encompassing all biotic and abiotic conditions necessary for its survival and reproduction?",
+    "options": [
+      "Habitat",
+      "Niche",
+      "Biotope",
+      "Biome"
+    ],
+    "solution": "Step 1: Habitat is the physical place where a species lives.\nStep 2: Niche represents its ecological role, including habitat utilization, feeding behavior, and environmental tolerances.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 209,
+    "question": "Which genetic disorder is caused by trisomy of chromosome 21 in humans?",
+    "options": [
+      "Turner syndrome",
+      "Klinefelter syndrome",
+      "Down syndrome",
+      "Sickle-cell anemia"
+    ],
+    "solution": "Step 1: Turner syndrome involves monosomy X.\nStep 2: Klinefelter is XXY.\nStep 3: Down syndrome is caused by the presence of an extra copy of chromosome 21 (trisomy 21).\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 210,
+    "question": "Which plant organelle is the site of the light-independent reactions (Calvin Cycle) of photosynthesis?",
+    "options": [
+      "Thylakoid membrane",
+      "Stroma",
+      "Outer chloroplast membrane",
+      "Cristae matrix"
+    ],
+    "solution": "Step 1: Light-dependent reactions occur on thylakoid membranes.\nStep 2: The stroma is the fluid-filled interior of the chloroplast where the enzymes of the Calvin cycle fix carbon dioxide into sugars.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 211,
+    "question": "Which group of invertebrates includes jellyfish, corals, and sea anemones?",
+    "options": [
+      "Porifera",
+      "Cnidaria",
+      "Ctenophora",
+      "Platyhelminthes"
+    ],
+    "solution": "Step 1: Porifera are sponges.\nStep 2: Cnidaria includes radially symmetrical aquatic animals equipped with stinging nematocysts, such as jellyfish, corals, and hydras.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 212,
+    "question": "What is the primary function of the Loop of Henle in mammalian nephrons?",
+    "options": [
+      "Filtration of large blood proteins",
+      "Secretion of hydrogen ions for acid-base balance",
+      "Creation of an osmotic gradient in the renal medulla to concentrate urine",
+      "Complete reabsorption of all plasma glucose"
+    ],
+    "solution": "Step 1: The Loop of Henle uses a countercurrent multiplier system to establish a hypertonic salt gradient in the renal medulla, enabling the kidney to produce concentrated urine.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 213,
+    "question": "Which hormone is responsible for triggering the 'fight-or-flight' response, increasing heart rate and blood sugar levels?",
+    "options": [
+      "Insulin",
+      "Thyroxine",
+      "Adrenaline (Epinephrine)",
+      "Melatonin"
+    ],
+    "solution": "Step 1: Adrenaline (epinephrine) is released by the adrenal medulla during acute stress, elevating heart rate, dilating airways, and increasing blood glucose availability.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 214,
+    "question": "What type of chromosomal aberration involves a segment of a chromosome breaking off and attaching to a non-homologous chromosome?",
+    "options": [
+      "Deletion",
+      "Inversion",
+      "Translocation",
+      "Duplication"
+    ],
+    "solution": "Step 1: Translocation is a chromosomal mutation where a broken segment joins a non-homologous chromosome.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 215,
+    "question": "Which plant cell type provides rigid structural support and has thick, lignified secondary walls, often being dead at maturity?",
+    "options": [
+      "Parenchyma",
+      "Collenchyma",
+      "Sclerenchyma",
+      "Companion cell"
+    ],
+    "solution": "Step 1: Parenchyma and collenchyma are living and thin-walled.\nStep 2: Sclerenchyma cells possess rigid secondary walls impregnated with lignin and lack living protoplasts at maturity.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 216,
+    "question": "What is the main function of red blood cells (erythrocytes) in vertebrates?",
+    "options": [
+      "Defense against bacterial infections",
+      "Transport of oxygen from lungs to body tissues via hemoglobin",
+      "Initiation of blood clotting cascades",
+      "Production of antibodies"
+    ],
+    "solution": "Step 1: Erythrocytes are packed with hemoglobin to reversibly bind and transport oxygen from respiratory organs to respiring systemic tissues.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 217,
+    "question": "Which biome is characterized by low rainfall, extreme temperature fluctuations between day and night, and specialized xerophytic vegetation?",
+    "options": [
+      "Savanna",
+      "Desert",
+      "Chaparral",
+      "Taiga"
+    ],
+    "solution": "Step 1: Deserts receive minimal precipitation (< 25 cm/year) and feature extreme temperature variations and drought-adapted succulent plants.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 218,
+    "question": "During DNA replication, which enzyme is responsible for sealing nicks in the sugar-phosphate backbone by joining Okazaki fragments?",
+    "options": [
+      "DNA polymerase III",
+      "RNA primase",
+      "DNA ligase",
+      "Helicase"
+    ],
+    "solution": "Step 1: DNA polymerase builds strands, and helicase unzips DNA.\nStep 2: DNA ligase catalyzes the formation of phosphodiester bonds to stitch lagging strand Okazaki fragments together.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 219,
+    "question": "Which organ in the human digestive system is primarily responsible for the absorption of digested water, minerals, and vitamin production by resident bacteria?",
+    "options": [
+      "Stomach",
+      "Duodenum",
+      "Large intestine (Colon)",
+      "Liver"
+    ],
+    "solution": "Step 1: The large intestine absorbs remaining water and electrolytes from indigestible waste, while gut flora synthesize helpful vitamins like Vitamin K.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 220,
+    "question": "What evolutionary term describes the rapid diversification of a single ancestral lineage into multiple diverse species filling different ecological niches?",
+    "options": [
+      "Convergent evolution",
+      "Adaptive radiation",
+      "Coevolution",
+      "Genetic drift"
+    ],
+    "solution": "Step 1: Adaptive radiation occurs when ancestral species colonize new environments and rapidly diversify into various forms adapted to distinct niches (e.g., Darwin's finches).\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 221,
+    "question": "Which group of algae is characterized by the presence of fucoxanthin pigment, giving them a brownish color, and includes giant kelps?",
+    "options": [
+      "Chlorophyta (Green algae)",
+      "Rhodophyta (Red algae)",
+      "Phaeophyta (Brown algae)",
+      "Bacillariophyta (Diatoms)"
+    ],
+    "solution": "Step 1: Green algae contain chlorophyll a and b.\nStep 2: Phaeophyta (brown algae) contain the accessory pigment fucoxanthin along with chlorophyll, comprising seaweeds and massive kelps.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 222,
+    "question": "What is the primary function of the contractile vacuole in freshwater amoebas?",
+    "options": [
+      "Intracellular digestion of food",
+      "Osmoregulation by expelling excess water",
+      "Storage of lipid droplets",
+      "Respiration and gas exchange"
+    ],
+    "solution": "Step 1: Freshwater is hypotonic to amoeba cytoplasm.\nStep 2: Water enters continuously via osmosis, and contractile vacuoles collect and pump this excess water out to prevent lysis.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 223,
+    "question": "Which blood vessel in the human body carries oxygenated blood away from the left ventricle to the systemic circulation?",
+    "options": [
+      "Pulmonary artery",
+      "Superior vena cava",
+      "Aorta",
+      "Pulmonary vein"
+    ],
+    "solution": "Step 1: Pulmonary vessels serve the lungs.\nStep 2: The aorta is the largest systemic artery, emerging from the left ventricle to distribute oxygenated blood to all body organs.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 224,
+    "question": "In Mendelian genetics, what is the expected phenotypic ratio in the F2 generation of a dihybrid cross involving two independently assorting traits?",
+    "options": [
+      "3:1",
+      "1:2:1",
+      "9:3:3:1",
+      "1:1:1:1"
+    ],
+    "solution": "Step 1: A monohybrid cross yields 3:1.\nStep 2: A dihybrid cross of heterozygous parents for two traits yields the classic 9:3:3:1 phenotypic ratio in the F2 generation.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 225,
+    "question": "Which of the following describes a mutualistic relationship?",
+    "options": [
+      "A tick feeding on the blood of a dog",
+      "Mycorrhizal fungi exchanging soil minerals for plant sugars",
+      "A lion hunting and killing a zebra",
+      "Barnacles growing on the shell of a sea turtle"
+    ],
+    "solution": "Step 1: Tick and dog is parasitism.\nStep 2: Lion and zebra is predation.\nStep 3: Barnacle and turtle is commensalism.\nStep 4: Mycorrhizae represent a classic mutualistic symbiosis where both fungi and host plants benefit.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 226,
+    "question": "What is the primary function of stomatal guard cells in plant leaves?",
+    "options": [
+      "To anchor the leaf to the stem",
+      "To control the opening and closing of stomatal pores for gas exchange and transpiration",
+      "To produce chlorophyll for photosynthesis",
+      "To transport water from roots"
+    ],
+    "solution": "Step 1: Guard cells swell or shrink by altering turgor pressure, opening or closing stomata to regulate $\text{CO}_2$ intake and water loss.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 227,
+    "question": "Which stage of meiosis involves homologous chromosomes separating and moving toward opposite poles of the cell?",
+    "options": [
+      "Anaphase I",
+      "Anaphase II",
+      "Metaphase I",
+      "Telophase I"
+    ],
+    "solution": "Step 1: Sister chromatids separate in Anaphase II and mitosis.\nStep 2: During Anaphase I of meiosis, homologous chromosome pairs are pulled apart toward opposite poles, reducing chromosome number by half.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 228,
+    "question": "Which human endocrine gland secretes melatonin, a hormone regulating sleep-wake cycles and circadian rhythms?",
+    "options": [
+      "Thyroid gland",
+      "Adrenal gland",
+      "Pineal gland",
+      "Thymus gland"
+    ],
+    "solution": "Step 1: The pineal gland, located in the brain, secretes melatonin in response to darkness to promote sleep and govern circadian rhythms.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 229,
+    "question": "What is the ecological term for the sequence of organisms through which energy and nutrients pass as one organism eats another?",
+    "options": [
+      "Food web",
+      "Food chain",
+      "Ecological pyramid",
+      "Biogeochemical cycle"
+    ],
+    "solution": "Step 1: A food web is a complex network of interconnected feeding relationships.\nStep 2: A food chain represents a linear, single pathway sequence of organisms showing who eats whom in an ecosystem.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 230,
+    "question": "Which enzyme digests proteins into smaller peptides in the acidic environment of the human stomach?",
+    "options": [
+      "Amylase",
+      "Trypsin",
+      "Pepsin",
+      "Lipase"
+    ],
+    "solution": "Step 1: Amylase digests starch, and lipase digests fats.\nStep 2: Pepsin is activated by hydrochloric acid in the stomach to break down proteins into smaller peptide chains.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 231,
+    "question": "Which plant tissue is responsible for secondary growth, resulting in the formation of annual growth rings in woody trees?",
+    "options": [
+      "Apical meristem",
+      "Vascular cambium",
+      "Ground parenchyma",
+      "Epidermis"
+    ],
+    "solution": "Step 1: The vascular cambium is a lateral meristem that produces secondary xylem inward and secondary phloem outward each year, creating seasonal growth rings.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 232,
+    "question": "What is the primary function of helper T-cells ($\text{CD4}^+$ cells) in the adaptive immune system?",
+    "options": [
+      "To produce and secrete massive quantities of antibodies",
+      "To engulf and destroy extracellular pathogens via phagocytosis",
+      "To coordinate immune responses by activating B-cells and cytotoxic T-cells",
+      "To directly lyse virus-infected host cells"
+    ],
+    "solution": "Step 1: Cytotoxic T-cells lyse infected cells, and B-cells produce antibodies.\nStep 2: Helper T-cells act as master coordinators of adaptive immunity, releasing cytokines to stimulate both B-cell antibody production and cytotoxic T-cell activation.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 233,
+    "question": "Which phylum includes roundworms that are unsegmented, pseudocoelomate, and covered by a tough flexible cuticle?",
+    "options": [
+      "Platyhelminthes",
+      "Annelida",
+      "Nematoda",
+      "Mollusca"
+    ],
+    "solution": "Step 1: Nematoda includes unsegmented roundworms with a pseudocoelom and a collagenous cuticle that must be shed during growth.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 234,
+    "question": "What type of nitrogenous waste requires the least amount of water for excretion, making it ideal for terrestrial egg-laying animals?",
+    "options": [
+      "Ammonia",
+      "Urea",
+      "Uric acid",
+      "Creatine"
+    ],
+    "solution": "Step 1: Uric acid is virtually insoluble in water and precipitates out as a paste, allowing birds and reptiles to excrete waste with minimal water loss inside shelled eggs.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 235,
+    "question": "Which organelle is primarily responsible for the synthesis of lipids and phospholipids in eukaryotic cells?",
+    "options": [
+      "Rough Endoplasmic Reticulum",
+      "Smooth Endoplasmic Reticulum",
+      "Golgi apparatus",
+      "Nucleolus"
+    ],
+    "solution": "Step 1: Rough ER synthesizes proteins.\nStep 2: Smooth ER lacks ribosomes and synthesizes lipids, membrane phospholipids, and steroid hormones.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 236,
+    "question": "In an ecosystem, what term describes the total mass of living biological matter per unit area at a given time?",
+    "options": [
+      "Biotic potential",
+      "Biomass",
+      "Productivity",
+      "Carrying capacity"
+    ],
+    "solution": "Step 1: Biomass refers to the total dry weight or mass of living organisms present in a specific trophic level or ecosystem.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 237,
+    "question": "Which human blood type is considered the universal recipient because serum antibodies lack anti-A and anti-B?",
+    "options": [
+      "Type O",
+      "Type A",
+      "Type B",
+      "Type AB"
+    ],
+    "solution": "Step 1: Type O has no antigens and is a universal donor.\nStep 2: Type AB red blood cells carry both A and B antigens, and recipient plasma lacks antibodies against A or B, making it the universal recipient.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 238,
+    "question": "What evolutionary process explains why marsupials in Australia and placental mammals in other continents developed similar physical forms due to similar ecological pressures?",
+    "options": [
+      "Divergent evolution",
+      "Convergent evolution",
+      "Adaptive radiation",
+      "Genetic drift"
+    ],
+    "solution": "Step 1: Convergent evolution occurs when unrelated or distantly related lineages independently evolve similar traits because they adapt to comparable ecological niches.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 239,
+    "question": "Which plant hormone promotes seed dormancy, inhibits growth, and mediates stomatal closure during water stress?",
+    "options": [
+      "Auxin",
+      "Gibberellin",
+      "Abscisic acid (ABA)",
+      "Cytokinin"
+    ],
+    "solution": "Step 1: Abscisic acid (ABA) acts as a stress hormone, inducing stomatal closure during drought and maintaining seed dormancy until favorable conditions arrive.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 240,
+    "question": "Which part of the human brain acts as the primary relay and integration center for sensory information en route to the cerebrum?",
+    "options": [
+      "Cerebellum",
+      "Thalamus",
+      "Medulla oblongata",
+      "Hypothalamus"
+    ],
+    "solution": "Step 1: The thalamus acts as the major sensory relay station, filtering and routing signals from sensory pathways to the appropriate areas of the cerebral cortex.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 241,
+    "question": "Which phylum contains segmented worms possessing parapodia or setae and a true coelom?",
+    "options": [
+      "Nematoda",
+      "Platyhelminthes",
+      "Annelida",
+      "Arthropoda"
+    ],
+    "solution": "Step 1: Annelids (earthworms, leeches, polychaetes) exhibit metameric segmentation, true coeloms, and chitinous bristles called setae.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 242,
+    "question": "What is the primary function of the epiglottis in human respiration and digestion?",
+    "options": [
+      "To produce vocal sounds during speech",
+      "To cover the laryngeal opening during swallowing, preventing food aspiration into the trachea",
+      "To warm and filter incoming air in the nasal cavity",
+      "To secrete mucus lubricating the esophagus"
+    ],
+    "solution": "Step 1: The epiglottis is a flexible cartilage flap that folds down over the glottis during swallowing to divert food safely into the esophagus.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 243,
+    "question": "In genetics, what is a pedigree chart used to analyze?",
+    "options": [
+      "The chromosome number of a somatic cell",
+      "The inheritance patterns of specific traits or disorders through generations of a family",
+      "The rate of mutations induced by radiation",
+      "The physical mapping of genes on a DNA molecule"
+    ],
+    "solution": "Step 1: A pedigree is a family tree diagram tracking the occurrence and phenotypic inheritance of genetic traits across multiple generations.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 244,
+    "question": "Which aquatic biome features stagnant, nutrient-rich, oxygen-depleted waters often choked with plant growth and algal blooms?",
+    "options": [
+      "Oligotrophic lake",
+      "Eutrophic lake",
+      "Estuary",
+      "Coral reef"
+    ],
+    "solution": "Step 1: Oligotrophic lakes are nutrient-poor and oxygen-rich.\nStep 2: Eutrophic lakes are enriched with minerals and nutrients, stimulating heavy plant and algal growth that leads to oxygen depletion upon decomposition.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 245,
+    "question": "Which enzyme is responsible for synthesizing a short RNA primer required for DNA polymerase to initiate replication?",
+    "options": [
+      "DNA ligase",
+      "RNA primase",
+      "Helicase",
+      "Topoisomerase"
+    ],
+    "solution": "Step 1: DNA polymerases cannot start synthesis de novo; they require a free 3'-OH group provided by a short RNA primer synthesized by RNA primase.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 246,
+    "question": "Which plant tissue transports manufactured sugars and organic compounds bidirectionally throughout the plant body?",
+    "options": [
+      "Xylem",
+      "Phloem",
+      "Collenchyma",
+      "Cortex"
+    ],
+    "solution": "Step 1: Xylem transports water and minerals upward.\nStep 2: Phloem tissue (comprising sieve tubes and companion cells) distributes organic photosynthates bidirectionally between sources and sinks.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 247,
+    "question": "What is the primary function of the human large intestine?",
+    "options": [
+      "Digestion of dietary lipids",
+      "Absorption of remaining water and electrolytes, and formation of solid feces",
+      "Production of digestive enzymes like pepsin",
+      "Secretion of bile for fat emulsification"
+    ],
+    "solution": "Step 1: The colon reabsorbs water and mineral ions from leftover indigestible food matter, compacting it into feces for elimination.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 248,
+    "question": "Which type of speciation occurs when a population is divided by a physical geographic barrier, leading to reproductive isolation?",
+    "options": [
+      "Sympatric speciation",
+      "Allopatric speciation",
+      "Parapatric speciation",
+      "Stasipatric speciation"
+    ],
+    "solution": "Step 1: Sympatric speciation occurs without physical separation.\nStep 2: Allopatric speciation happens when geographical barriers split a single population, halting gene flow and driving independent evolutionary divergence.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 249,
+    "question": "Which organelle in eukaryotic cells generates hydrogen peroxide as a byproduct and breaks down fatty acids via oxidation?",
+    "options": [
+      "Lysosome",
+      "Peroxisome",
+      "Ribosome",
+      "Centrosome"
+    ],
+    "solution": "Step 1: Peroxisomes are metabolic organelles containing oxidative enzymes that break down fatty acids and detoxify harmful compounds, producing hydrogen peroxide as a byproduct.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 250,
+    "question": "What is the ecological term for the maximum population density that a specific environment can sustain indefinitely?",
+    "options": [
+      "Biotic potential",
+      "Carrying capacity",
+      "Environmental resistance",
+      "Reproductive rate"
+    ],
+    "solution": "Step 1: Carrying capacity ($K$) is the upper limit of population size that can be supported by available environmental resources without long-term habitat degradation.\n\nCorrect Answer: (b)"
   }
 ]
+
