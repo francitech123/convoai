@@ -1,6 +1,3903 @@
-[
+  [
     {
-        "id": 1,
-        "question": "No Questions Available Check Back Later"
+      "question_number": 1,
+      "topic": "Microbiology - Viruses",
+      "question": "Which of the following describes the general nature and structural composition of viruses?",
+      "options": [
+        "A) Living prokaryotic cells with a peptidoglycan cell wall and independent metabolic machinery",
+        "A) Living prokaryotic cells with a peptidoglycan cell wall and independent metabolic machinery",
+        "B) Acellular biological particles lacking cellular structures, cytoplasm, and independent metabolism, possessing either DNA or RNA",
+        "C) Eukaryotic single-celled organisms that replicate exclusively through binary fission",
+        "D"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Viruses are non-living, acellular pathogens that lack cellular structures like cytoplasm, a true nucleus, and organelles. They cannot convert food into energy independently and must replicate inside a living host cell, containing either DNA or RNA, but never both."
+    },
+    {
+      "question_number": 2,
+      "topic": "Microbiology - Viruses",
+      "question": "Which of the following viral genomic characteristics distinguishes negative-sense single-stranded RNA viruses from positive-sense single-stranded RNA viruses?",
+      "options": [
+        "A) Negative-sense RNA can be directly translated into viral proteins by host cell ribosomes without any preliminary steps.",
+        "B) Negative-sense RNA requires specialized viral enzymes (such as RNA-dependent RNA polymerase) to synthesize a positive-sense template before translation can occur.",
+        "C) Negative-sense RNA always exists as a double-stranded circular configuration inside an envelope.",
+        "D) Negative-sense RNA viruses never infect animal cells, whereas positive-sense viruses exclusively infect plants."
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Positive-sense RNA can be used directly as mRNA to make viral proteins. Conversely, negative-sense RNA is complementary to mRNA and requires special viral enzymes to create a positive-sense RNA strand before translation and replication can proceed."
+    },
+    {
+      "question_number": 3,
+      "topic": "Microbiology - Viruses",
+      "question": "What structural protein complex protects the viral nucleic acid core and is composed of individual protein subunits called capsomeres?",
+      "options": [
+        "A) Peptidoglycan layer",
+        "B) Lipoprotein envelope",
+        "C) Capsid",
+        "D) Sporangiphore"
+      ],
+      "correct_answer": "C",
+      "detailed_explanation": "The capsid is the protein coat that protects the viral genetic material. It is structurally built from smaller repeating protein subunits known as capsomeres."
+    },
+    {
+      "question_number": 4,
+      "topic": "Microbiology - Viruses",
+      "question": "According to the Baltimore classification and lecture notes, which group represents retroviruses possessing RNA with reverse transcriptase?",
+      "options": [
+        "A) Group III",
+        "B) Group IV",
+        "C) Group VI",
+        "D) Group VII"
+      ],
+      "correct_answer": "C",
+      "detailed_explanation": "Group VI viruses are retroviruses characterized by single-stranded RNA genomes that replicate via a DNA intermediate using the enzyme reverse transcriptase."
+    },
+    {
+      "question_number": 5,
+      "topic": "Microbiology - Viruses",
+      "question": "Which of the following viral transmission routes is correctly matched with its specific example from the syllabus?",
+      "options": [
+        "A) Air-borne infection: Hepatitis A virus",
+        "B) Faecal-Oral route: Polio virus and rotavirus",
+        "C) Transfusion transmitted infection: Rhino virus",
+        "D) Zoonoses: Human papillomavirus"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "The faecal-oral route involves transmission via contaminated water or food, with classic examples including hepatitis A virus, polio virus, and rotavirus. Rhino virus and swine flu are air-borne, while hepatitis B and HIV are transfusion/blood-borne."
+    },
+    {
+      "question_number": 6,
+      "topic": "Microbiology - Viruses",
+      "question": "What is the primary agricultural and ecological significance of insect viruses such as Ascovirus and Entomopox virus?",
+      "options": [
+        "A) They act as powerful bio-control agents to manage insect populations.",
+        "B) They fix atmospheric nitrogen in the root nodules of legumes.",
+        "C) They cause severe mosaic disease in tobacco plants.",
+        "D) They ferment sugars into ethanol and carbon dioxide."
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Insect viruses (viral pathogens of insects like Ascovirus and Entomopox virus) serve as powerful bio-control agents in modern agriculture to manage pest insect populations."
+    },
+    {
+      "question_number": 7,
+      "topic": "Microbiology - Bacteria",
+      "question": "Which of the following structural and cytological characteristics is completely absent in bacterial cells?",
+      "options": [
+        "A) A cell wall composed of peptidoglycan",
+        "B) Free-floating DNA localized in a nucleoid region",
+        "C) Membrane-bound organelles such as mitochondria and endoplasmic reticulum",
+        "D) Unicellular prokaryotic organization"
+      ],
+      "correct_answer": "C",
+      "detailed_explanation": "Bacteria are prokaryotes, meaning they lack true membrane-bound organelles like mitochondria, Golgi bodies, and endoplasmic reticulum, and they lack a true membrane-bound nucleus."
+    },
+    {
+      "question_number": 8,
+      "topic": "Microbiology - Bacteria",
+      "question": "How are bacterial cells arranged when they form clusters resembling bunches of grapes, as seen in Staphylococcus?",
+      "options": [
+        "A) Strepto-",
+        "B) Staphylo-",
+        "C) Diplo-",
+        "D) Spirilla"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "The prefix 'staphylo-' refers to clusters (e.g., Staphylococcus), whereas 'strepto-' refers to chains, and 'diplo-' refers to pairs."
+    },
+    {
+      "question_number": 9,
+      "topic": "Microbiology - Bacteria",
+      "question": "Which laboratory technique is fundamentally used to differentiate bacteria into Gram-positive and Gram-negative groups based on cell wall properties?",
+      "options": [
+        "A) Endospore staining",
+        "B) Acid-fast staining",
+        "C) Gram staining technique",
+        "D) Sugar fermentation test"
+      ],
+      "correct_answer": "C",
+      "detailed_explanation": "The Gram staining technique is the primary differential staining method used in bacteriology to distinguish between Gram-positive and Gram-negative bacteria based on the thickness of their peptidoglycan cell walls."
+    },
+    {
+      "question_number": 10,
+      "topic": "Microbiology - Bacteria",
+      "question": "Which group of bacteria grows optimally within moderate temperature ranges and includes the majority of human bacterial pathogens?",
+      "options": [
+        "A) Psychrophiles",
+        "B) Mesophiles",
+        "C) Thermophiles",
+        "D) Halophiles"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Mesophiles are moderate-temperature-loving bacteria, and the majority of bacterial pathogens fall into this classification range."
+    },
+    {
+      "question_number": 11,
+      "topic": "Microbiology - Bacteria",
+      "question": "What is the specific ecological function of Rhizobium bacteria found in the root nodules of leguminous plants?",
+      "options": [
+        "A) Converting ammonia into nitrites in the soil",
+        "B) Converting nitrites into nitrates to enrich soil nutrients",
+        "C) Converting atmospheric molecular nitrogen into a usable form to improve soil fertility",
+        "D) Decomposing dead organic matter via extracellular enzymes"
+      ],
+      "correct_answer": "C",
+      "detailed_explanation": "Rhizobium species form a mutualistic association in the root nodules of legumes, fixing atmospheric nitrogen into usable nitrogenous compounds that enhance soil fertility."
+    },
+    {
+      "question_number": 12,
+      "topic": "Microbiology - Bacteria",
+      "question": "Which bacterial genus is responsible for converting ammonia into nitrites as part of the nitrogen cycle?",
+      "options": [
+        "A) Nitrobacter",
+        "B) Nitrosomonas",
+        "C) Clostridium",
+        "D) Lactobacillus"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Nitrosomonas bacteria oxidize ammonia (NH3) into nitrites in the soil, playing a critical role in the nitrogen cycle, while Nitrobacter subsequently converts nitrites into nitrates."
+    },
+    {
+      "question_number": 13,
+      "topic": "Microbiology - Fungi",
+      "question": "What is the primary chemical component that gives rigidity and structural strength to the cell walls of fungi?",
+      "options": [
+        "A) Cellulose",
+        "B) Peptidoglycan",
+        "C) Chitin",
+        "D) Lignin"
+      ],
+      "correct_answer": "C",
+      "detailed_explanation": "Unlike plants which have cellulose cell walls, fungal cell walls are rigid and primarily composed of chitin, a nitrogenous polysaccharide."
+    },
+    {
+      "question_number": 14,
+      "topic": "Microbiology - Fungi",
+      "question": "What term describes the interconnected network or mass of thread-like hyphae that constitutes the body structure of multicellular fungi?",
+      "options": [
+        "A) Mycelium",
+        "B) Sporangium",
+        "C) Thallus",
+        "D) Prothallus"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "A collective mass or group of fungal hyphae is referred to as a mycelium. The individual filaments are called hyphae."
+    },
+    {
+      "question_number": 15,
+      "topic": "Microbiology - Fungi",
+      "question": "How do fungi store their reserve carbohydrate food material, distinguishing them from green plants?",
+      "options": [
+        "A) As starch grains inside chloroplasts",
+        "B) As glycogen and oil droplets",
+        "C) As cellulose microfibrils",
+        "D) As sucrose dissolved in vacuoles"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Fungi store their reserve food as glycogen and oil droplets, mirroring animals, whereas true plants store carbohydrates primarily as starch."
+    },
+    {
+      "question_number": 16,
+      "topic": "Microbiology - Fungi",
+      "question": "Which phylum/group of fungi includes bread moulds such as Rhizopus stolonifer and Mucor, characterized by aseptate hyphae?",
+      "options": [
+        "A) Ascomycota",
+        "B) Basidiomycota",
+        "C) Zygomycota",
+        "D) Deuteromycota"
+      ],
+      "correct_answer": "C",
+      "detailed_explanation": "Zygomycetes (such as Rhizopus and Mucor) feature coenocytic or aseptate hyphae and reproduce sexually by forming zygospores and asexually via sporangiospores."
+    },
+    {
+      "question_number": 17,
+      "topic": "Microbiology - Fungi",
+      "question": "Which fungal species is famously known as the source of the first breakthrough antibiotic, penicillin?",
+      "options": [
+        "A) Aspergillus niger",
+        "B) Penicillium notatum",
+        "C) Saccharomyces cerevisiae",
+        "D) Candida albicans"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Penicillium notatum is the classic mold species historically recognized as the original source of the antibiotic penicillin."
+    },
+    {
+      "question_number": 18,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "Who is credited with developing the modern binomial system of nomenclature and taxonomic classification based on natural relationships and structural homologies?",
+      "options": [
+        "A) R.H. Whittaker",
+        "B) Carolus Linnaeus",
+        "C) Charles Darwin",
+        "D) Gregor Mendel"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Carolus Linnaeus (Carl von Linné) developed the modern hierarchical classification system and binomial nomenclature in his works published in 1753 and 1758."
+    },
+    {
+      "question_number": 19,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What is the smallest fundamental unit of classification in the Linnaean hierarchy?",
+      "options": [
+        "A) Genus",
+        "B) Family",
+        "C) Species",
+        "D) Phylum"
+      ],
+      "correct_answer": "C",
+      "detailed_explanation": "The species is the lowest and most basic unit in the taxonomic hierarchy, consisting of individuals that can interbreed to produce fertile offspring."
+    },
+    {
+      "question_number": 20,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "Which major group of non-vascular land plants lacks true roots, stems, and leaves, and depends on external water for sexual reproduction because their sperm cells must swim to reach the egg?",
+      "options": [
+        "A) Tracheophytes",
+        "B) Bryophytes",
+        "C) Gymnosperms",
+        "D) Angiosperms"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Bryophytes (such as mosses and liverworts) are small non-vascular land plants lacking true roots, stems, and leaves, and they strictly depend on water for their flagellated sperm to swim to the egg during fertilization."
+    },
+    {
+      "question_number": 21,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What is the heart-shaped, multicellular gametophyte stage produced when fern spores germinate on the soil surface?",
+      "options": [
+        "A) Protonema",
+        "B) Prothallus",
+        "C) Sporophyll",
+        "D) Sporangium"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "In ferns (seedless vascular plants), spores land on the soil and develop into a small heart-shaped gametophyte stage known as a prothallus, which bears both male and female reproductive organs."
+    },
+    {
+      "question_number": 22,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What key evolutionary advancement distinguishes gymnosperms from ferns and bryophytes regarding seed dispersal and reproduction?",
+      "options": [
+        "A) Gymnosperms possess swimming sperm that require standing water for fertilization.",
+        "B) Gymnosperm seeds are enclosed within a fleshy ovary wall that forms a fruit.",
+        "C) Gymnosperms produce exposed seeds not enclosed in an ovary, and their reproduction does not require external water.",
+        "D) Gymnosperms lack vascular conducting tissues entirely."
+      ],
+      "correct_answer": "C",
+      "detailed_explanation": "Gymnosperms (conifers) produce naked seeds that are not enclosed within an ovary wall (often carried on sporophylls), and their fertilization mechanism via pollen tubes eliminates the need for external water."
+    },
+    {
+      "question_number": 23,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "How can monocotyledons be reliably distinguished from dicotyledons based on leaf venation and floral parts?",
+      "options": [
+        "A) Monocots have net-like leaf veins and floral parts in fours or fives.",
+        "B) Monocots have parallel leaf veins and floral parts in threes or multiples of three.",
+        "C) Monocots have two cotyledons and a central vascular cylinder.",
+        "D) Monocots lack vascular bundles entirely in their stems."
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Monocotyledons typically possess parallel leaf venation, scattered stem vascular bundles, and floral parts in threes or multiples of three, whereas dicots feature net-like veins and parts in fours or fives."
+    },
+    {
+      "question_number": 24,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "Which primitive invertebrate phylum consists of simple aquatic animals with a cellular grade of organization, pore-bearing body walls, and body symmetry that is largely asymmetrical?",
+      "options": [
+        "A) Coelenterata (Cnidaria)",
+        "B) Porifera (Sponges)",
+        "C) Platyhelminthes",
+        "D) Echinodermata"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Sponges belong to Phylum Porifera, representing simple aquatic multicellular organisms with porous body walls and no true tissue differentiation or fixed symmetry."
+    },
+    {
+      "question_number": 25,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "What specialized stinging cells (nematocysts) are characteristic of Coelenterates (Cnidarians) and are used to paralyze prey?",
+      "options": [
+        "A) Choanocytes",
+        "B) Cnidocytes",
+        "C) Flame cells",
+        "D) Nephridia"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Coelenterates possess tentacles equipped with specialized stinging cells called cnidocytes (containing nematocysts) used to paralyze prey."
+    },
+    {
+      "question_number": 26,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "Why are coelenterates described as possessing radial symmetry?",
+      "options": [
+        "A) Their body can be divided into identical halves along only one single sagittal plane.",
+        "B) Their body can be divided into two equal halves by passing a cut in any direction across the central axis.",
+        "C) They lack any form of organized body axis or mouth structure.",
+        "D) They display bilateral symmetry during their larval stage only."
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Radial symmetry means the body can be cut into two equal halves from multiple planes passing through a central longitudinal axis, which is characteristic of coelenterates like sea anemones and hydra."
+    },
+    {
+      "question_number": 27,
+      "topic": "Ecology & Adaptation",
+      "question": "What term describes the structural or behavioral modifications that enable an organism to survive and thrive within its specific ecological niche and habitat?",
+      "options": [
+        "A) Metabolic regulation",
+        "B) Ecological adaptation",
+        "C) Genetic drift",
+        "D) Taxonomic differentiation"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Ecological adaptations refer to the various morphological, physiological, and behavioral adjustments organisms undergo or possess to suit their environmental conditions."
+    },
+    {
+      "question_number": 28,
+      "topic": "Physiology - Nutrition",
+      "question": "Which of the following defines the primary biological purposes of nutrition in living organisms?",
+      "options": [
+        "A) Provision of energy for life activities, synthesis of new protoplasm, repair of damaged tissues, and protection against diseases via vitamins and minerals.",
+        "B) Elimination of metabolic urea and maintenance of internal osmotic pressure only.",
+        "C) Conversion of solar radiation directly into mechanical muscle contraction without intermediate ATP.",
+        "D) Storage of excess atmospheric gases inside vascular bundles."
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Nutrition provides energy for daily activities, raw materials for synthesizing protoplasm and biomolecules, building blocks for tissue repair, and protective micronutrients (vitamins/minerals)."
+    },
+    {
+      "question_number": 29,
+      "topic": "Physiology - Nutrition",
+      "question": "What distinguishes chemo-autotrophs from photo-autotrophs in how they acquire energy for carbon fixation?",
+      "options": [
+        "A) Photo-autotrophs use sunlight energy, whereas chemo-autotrophs derive energy from the oxidation of inorganic compounds.",
+        "B) Chemo-autotrophs depend entirely on feeding on dead organic matter, whereas photo-autotrophs are parasitic.",
+        "C) Photo-autotrophs lack chlorophyll entirely, while chemo-autotrophs rely on bacteriochlorophyll exclusively.",
+        "D) There is no functional difference; both rely on glucose breakdown."
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Photo-autotrophs utilize sunlight and chlorophyll for photosynthesis, whereas chemo-autotrophs derive energy from the chemical oxidation of inorganic molecules (such as sulfur or iron compounds)."
+    },
+    {
+      "question_number": 30,
+      "topic": "Physiology - Nutrition",
+      "question": "Which heterotrophic mode of nutrition involves secreting digestive enzymes onto dead and decaying organic matter externally, dissolving nutrients, and absorbing them across the cell membrane?",
+      "options": [
+        "A) Holozoic nutrition",
+        "B) Parasitic nutrition",
+        "C) Saprophytic nutrition",
+        "D) Insectivorous nutrition"
+      ],
+      "correct_answer": "C",
+      "detailed_explanation": "Saprophytic organisms (like decomposer fungi and bacteria) release extracellular digestive enzymes onto dead organic matter and absorb the resulting dissolved nutrients."
+    },
+    {
+      "question_number": 31,
+      "topic": "Physiology - Nutrition",
+      "question": "What specialized parasitic structures do parasitic angiosperms like Cuscuta use to penetrate the host plant's tissues and extract water and organic nutrients?",
+      "options": [
+        "A) Root hairs",
+        "B) Haustoria",
+        "C) Sporangiophores",
+        "D) Lenticels"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Cuscuta (dodder) lacks chlorophyll and roots at maturity, utilizing specialized sucking organs called haustoria to tap into the host plant's vascular system."
+    },
+    {
+      "question_number": 32,
+      "topic": "Physiology - Growth & Development",
+      "question": "How is biological growth formally defined in plant and animal physiology?",
+      "options": [
+        "A) A temporary, reversible change in cellular coloration due to environmental stress",
+        "B) An irreversible, permanent increase in size, volume, or mass of a cell, organ, or organism, accompanied by an increase in dry weight",
+        "C) The rapid degradation of protoplasm during senescence",
+        "D) The passive absorption of water into plant vacuoles without metabolic expenditure"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Growth is defined as an irreversible and permanent increase in size, volume, or mass, fundamentally driven by the production of new protoplasm and reflected by an increase in dry weight."
+    },
+    {
+      "question_number": 33,
+      "topic": "Physiology - Growth & Development",
+      "question": "What are the three sequential stages of cellular growth in plants?",
+      "options": [
+        "A) Fertilization, Cleavage, Gastrulation",
+        "B) Cell division, Cell enlargement/elongation, Cell maturation",
+        "C) Differentiation, Dedifferentiation, Senescence",
+        "D) Absorption, Transpiration, Respiration"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Plant growth proceeds through three core phases: cell division (meristematic activity), cell enlargement/elongation (vacuolation and water intake), and cell maturation (tissue differentiation and wall thickening)."
+    },
+    {
+      "question_number": 34,
+      "topic": "Physiology - Growth & Development",
+      "question": "What instrument is specifically used to measure the rate of growth in plants?",
+      "options": [
+        "A) Thermometer",
+        "B) Barometer",
+        "C) Auxanometer",
+        "D) Spectrophotometer"
+      ],
+      "correct_answer": "C",
+      "detailed_explanation": "An auxanometer is a scientific instrument used to measure linear growth or growth rates in plant shoots and stems."
+    },
+    {
+      "question_number": 35,
+      "topic": "Physiology - Growth & Development",
+      "question": "What is the physiological phenomenon known as dedifferentiation in plants?",
+      "options": [
+        "A) The permanent loss of cell walls in mature xylem vessels",
+        "B) A situation whereby previously differentiated, specialized cells revert to an undifferentiated state and regain the capacity to divide",
+        "C) The process by which meristematic cells transform into permanent cork cells",
+        "D) The premature shedding of leaves during seasonal drought"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Dedifferentiation occurs when mature, specialized cells lose their specialized functions, become undifferentiated, and resume mitotic cell division (e.g., during secondary meristem formation)."
+    },
+    {
+      "question_number": 36,
+      "topic": "Physiology - Growth & Development",
+      "question": "Which plant hormone is widely known as the 'stress hormone' and plays a major role in seed dormancy and stomatal closure?",
+      "options": [
+        "A) Auxin",
+        "B) Gibberellin",
+        "C) Cytokinin",
+        "D) Abscisic acid"
+      ],
+      "correct_answer": "D",
+      "detailed_explanation": "Abscisic acid (ABA) is referred to as the stress hormone because it mediates plant responses to environmental stress, inhibits growth, and helps maintain seed dormancy."
+    },
+    {
+      "question_number": 37,
+      "topic": "Physiology - Growth & Development",
+      "question": "What physiological term describes the requirement of a cold temperature period to trigger flowering in certain temperate plant varieties?",
+      "options": [
+        "A) Photoperiodism",
+        "B) Vernalisation",
+        "C) Scarification",
+        "D) Thigmotropism"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Vernalisation is the induction of a plant's flowering process by exposure to a prolonged period of low winter temperatures."
+    },
+    {
+      "question_number": 38,
+      "topic": "Physiology - Growth & Development",
+      "question": "How do short-day plants respond to photoperiodic lighting conditions to induce flowering?",
+      "options": [
+        "A) They require a continuous dark period that is equal to or longer than a critical threshold (e.g., at least 12 hours).",
+        "B) They require continuous illumination for 24 hours without interruption.",
+        "C) They flower exclusively when daylight exceeds 16 hours.",
+        "D) They are completely unaffected by day length or light interruption."
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Short-day plants require a continuous dark period longer than a critical length to flower; interrupting this dark period with light prevents flowering."
+    },
+    {
+      "question_number": 39,
+      "topic": "Physiology - Growth & Development",
+      "question": "What insect developmental pattern involves complete metamorphosis (holometabolism) passing through four distinct stages: egg, larva, pupa, and adult?",
+      "options": [
+        "A) Ametabolism",
+        "B) Hemimetabolism",
+        "C) Holometabolism",
+        "D) Direct development"
+      ],
+      "correct_answer": "C",
+      "detailed_explanation": "Holometabolism (complete metamorphosis) consists of egg, active feeding larva, inactive resting pupa, and adult (imago), involving dramatic internal reorganization."
+    },
+    {
+      "question_number": 40,
+      "topic": "Physiology - Growth & Development",
+      "question": "Which hormone secreted by the prothoracic gland in insects is responsible for stimulating moulting (ecdysis)?",
+      "options": [
+        "A) Thyroxine",
+        "B) Ecdysone",
+        "C) Florigen",
+        "D) Auxin"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Ecdysone is the insect molting hormone secreted by the prothoracic gland that triggers ecdysis (shedding of the exoskeleton)."
+    },
+    {
+      "question_number": 41,
+      "topic": "Physiology - Embryology",
+      "question": "What is the hollow spherical embryonic body composed of numerous smaller cells called blastomeres, formed as a result of cleavage?",
+      "options": [
+        "A) Morula",
+        "B) Blastula",
+        "C) Gastrula",
+        "D) Zygote"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Cleavage results in numerous blastomeres forming a hollow spherical structure known as the blastula."
+    },
+    {
+      "question_number": 42,
+      "topic": "Physiology - Embryology",
+      "question": "During embryonic development, which stage establishes the three primary germ layers (ectoderm, mesoderm, and endoderm)?",
+      "options": [
+        "A) Fertilization",
+        "B) Neurulation",
+        "C) Gastrulation",
+        "D) Organogenesis"
+      ],
+      "correct_answer": "C",
+      "detailed_explanation": "Gastrulation is the developmental process where the single-layered blastula is reorganized into a multilayered structure containing the three primary germ layers: ectoderm, mesoderm, and endoderm."
+    },
+    {
+      "question_number": 43,
+      "topic": "Physiology - Respiration",
+      "question": "What is the primary cellular function of respiration across living organisms?",
+      "options": [
+        "A) Direct synthesis of glucose from carbon dioxide and water using solar photons",
+        "B) Breaking down complex organic molecules (respiratory substrates) in step-wise enzymatic reactions to release energy and synthesize ATP",
+        "C) Eliminating excess nitrogenous waste products via the Malpighian tubules",
+        "D) Maintaining permanent seed dormancy under extreme environmental conditions"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Cellular respiration involves oxidizing complex carbon compounds (respiratory substrates) in a controlled, stepwise manner to capture released energy in the form of ATP."
+    },
+    {
+      "question_number": 44,
+      "topic": "Physiology - Respiration",
+      "question": "Why do higher plants not require complex, specialized respiratory organs like lungs or gills?",
+      "options": [
+        "A) Plant cells do not respire or consume oxygen under any circumstances.",
+        "B) Each plant part takes care of its own gas exchange, diffusion distances are short due to loose parenchyma air spaces, and metabolic rates are lower than in animals.",
+        "C) Plants rely entirely on anaerobic fermentation for all cellular energy needs.",
+        "D) Oxygen is exclusively produced inside mitochondria by photolysis."
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Plants manage gas exchange efficiently without specialized organs because every living cell is close to the surface, lenticels and stomata provide entry points, and respiration rates are lower than in animals."
+    },
+    {
+      "question_number": 45,
+      "topic": "Physiology - Respiration",
+      "question": "What specialized respiratory structure do insects use for gaseous exchange, connecting external spiracles to internal tissues?",
+      "options": [
+        "A) Book lungs",
+        "B) Tracheal tubes (Trachea)",
+        "C) Moist skin capillaries",
+        "D) Lamellar gills"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Insects utilize external openings called spiracles that connect to a branching network of air tubes known as tracheae for internal gas exchange."
+    },
+    {
+      "question_number": 46,
+      "topic": "Physiology - Respiration",
+      "question": "In aerobic respiration, where does the Krebs cycle (Citric Acid Cycle) take place inside eukaryotic cells?",
+      "options": [
+        "A) Cytoplasm",
+        "B) Mitochondrial matrix",
+        "C) Inner mitochondrial membrane",
+        "D) Thylakoid lumen"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Glycolysis occurs in the cytoplasm, whereas the Krebs cycle takes place in the mitochondrial matrix, and oxidative phosphorylation occurs along the inner mitochondrial membrane."
+    },
+    {
+      "question_number": 47,
+      "topic": "Physiology - Respiration",
+      "question": "What is the final electron acceptor at the end of the electron transport chain in aerobic respiration?",
+      "options": [
+        "A) Carbon dioxide",
+        "B) Pyruvate",
+        "C) Oxygen",
+        "D) Ethanol"
+      ],
+      "correct_answer": "C",
+      "detailed_explanation": "Molecular oxygen serves as the final electron acceptor in the electron transport chain, combining with electrons and hydrogen ions to form water."
+    },
+    {
+      "question_number": 48,
+      "topic": "Physiology - Respiration",
+      "question": "What are the primary end-products of anaerobic respiration (alcoholic fermentation) in yeast cells?",
+      "options": [
+        "A) Lactic acid and water",
+        "B) Ethanol, carbon dioxide, and a net yield of 2 ATP",
+        "C) Pyruvic acid and 38 ATP molecules",
+        "D) Ammonia and oxygen gas"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "In alcoholic fermentation (carried out by yeast in the absence of oxygen), pyruvate is broken down into ethanol and carbon dioxide, yielding a net 2 ATP per glucose molecule from glycolysis."
+    },
+    {
+      "question_number": 49,
+      "topic": "Microbiology - Viruses",
+      "question": "Which viral group utilizes double-stranded DNA (dsDNA) as its genetic material according to the viral classification table?",
+      "options": [
+        "A) Group I",
+        "B) Group III",
+        "C) Group IV",
+        "D) Group VI"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Group I viruses are characterized by double-stranded DNA (dsDNA) genomes."
+    },
+    {
+      "question_number": 50,
+      "topic": "Microbiology - Bacteria",
+      "question": "What is the typical microscopic size range of bacterial cells?",
+      "options": [
+        "A) 100 to 500 nm",
+        "B) 0.5 to 5 micrometers (μm)",
+        "C) 50 to 100 millimeters",
+        "D) 10 to 50 centimeters"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Bacteria are microscopic organisms typically ranging between 0.5 and 5 micrometers in size."
+    },
+    {
+      "question_number": 51,
+      "topic": "Microbiology - Bacteria",
+      "question": "Which bacterial shape describes comma-shaped cells, such as Vibrio cholerae?",
+      "options": [
+        "A) Cocci",
+        "B) Bacilli",
+        "C) Spirillae",
+        "D) Vibrios"
+      ],
+      "correct_answer": "D",
+      "detailed_explanation": "Vibrios are comma-shaped bacterial cells, with Vibrio cholerae (the causative agent of cholera) being the prime example."
+    },
+    {
+      "question_number": 52,
+      "topic": "Microbiology - Bacteria",
+      "question": "Which bacterial disease is correctly matched with its causative organism?",
+      "options": [
+        "A) Tuberculosis — Salmonella typhi",
+        "B) Cholera — Vibrio cholerae",
+        "C) Tetanus — Bordetella pertussis",
+        "D) Typhoid fever — Mycobacterium tuberculosis"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Cholera is caused by Vibrio cholerae. Tuberculosis is caused by Mycobacterium tuberculosis, typhoid by Salmonella typhi, and tetanus by Clostridium tetani."
+    },
+    {
+      "question_number": 53,
+      "topic": "Microbiology - Fungi",
+      "question": "What is the scientific study of fungi called?",
+      "options": [
+        "A) Virology",
+        "B) Bacteriology",
+        "C) Mycology",
+        "D) Phycology"
+      ],
+      "correct_answer": "C",
+      "detailed_explanation": "Mycology is the dedicated scientific study of fungi, including molds, yeasts, and mushrooms."
+    },
+    {
+      "question_number": 54,
+      "topic": "Microbiology - Fungi",
+      "question": "Which unicellular fungus is widely utilized in baking and brewing due to its ability to ferment sugars?",
+      "options": [
+        "A) Aspergillus niger",
+        "B) Saccharomyces cerevisiae",
+        "C) Candida albicans",
+        "D) Amanita muscaria"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Saccharomyces cerevisiae is the common baker's or brewer's yeast utilized in industrial baking and brewing processes."
+    },
+    {
+      "question_number": 55,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What are the two major divisions or groups comprising the vascular plants (Tracheophytes)?",
+      "options": [
+        "A) Bryophytes and Pteridophytes",
+        "B) Ferns/seedless vascular plants and Seed plants (Gymnosperms and Angiosperms)",
+        "C) Monocots and Lichens",
+        "D) Algae and Fungi"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Tracheophytes are divided into seedless vascular plants (like ferns and horsetails) and seed-bearing vascular plants (gymnosperms and angiosperms)."
+    },
+    {
+      "question_number": 56,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What are the three primary functions of roots in flowering plants?",
+      "options": [
+        "A) Photosynthesis, transpiration, and pollen production",
+        "B) Anchorage of the plant in the soil, storage of food, and absorption of water and mineral salts",
+        "C) Production of floral nectar and seed dispersal",
+        "D) Gaseous exchange via lenticels"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Roots function primarily to anchor the plant firmly, absorb water and dissolved mineral salts from the soil, and frequently serve as storage organs for food."
+    },
+    {
+      "question_number": 57,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "What fundamental structural feature separates animals into the two major groups: Invertebrata and Vertebrata?",
+      "options": [
+        "A) Presence or absence of chloroplasts",
+        "B) Presence or absence of a vertebral column (backbone)",
+        "C) Unicellular versus multicellular cellular organization",
+        "D) Presence of chitinous cell walls"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "The animal kingdom is broadly divided based on the vertebral column: Invertebrates lack a backbone, whereas Vertebrates possess one."
+    },
+    {
+      "question_number": 58,
+      "topic": "Physiology - Nutrition",
+      "question": "Which mineral nutrient or vitamin class acts primarily as biological co-factors or bio-catalysts in cellular metabolic reactions?",
+      "options": [
+        "A) Bulk carbohydrates",
+        "B) Triglycerides and fats",
+        "C) Vitamins and trace minerals",
+        "D) Cellulose polymers"
+      ],
+      "correct_answer": "C",
+      "detailed_explanation": "While required in trace amounts, vitamins and minerals play critical roles as co-factors and bio-catalysts regulating metabolic processes within cells."
+    },
+    {
+      "question_number": 59,
+      "topic": "Physiology - Growth & Development",
+      "question": "What type of plant growth results from the activity of apical meristems, leading to an increase in the length of the plant?",
+      "options": [
+        "A) Secondary growth",
+        "B) Primary growth",
+        "C) Geometric growth",
+        "D) Intercalary senescence"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Primary growth is driven by apical meristems and results in an increase in plant length, whereas secondary growth (via cambium) increases stem diameter."
+    },
+    {
+      "question_number": 60,
+      "topic": "Physiology - Respiration",
+      "question": "What is the net approximate yield of ATP molecules generated from the complete aerobic respiration of a single glucose molecule?",
+      "options": [
+        "A) 2 ATP",
+        "B) 4 ATP",
+        "C) 38 ATP",
+        "D) 100 ATP"
+      ],
+      "correct_answer": "C",
+      "detailed_explanation": "Complete aerobic oxidation of one glucose molecule through glycolysis, the Krebs cycle, and oxidative phosphorylation yields approximately 38 ATP molecules."
+    },
+    {
+      "question_number": 61,
+      "topic": "Microbiology - Viruses",
+      "question": "Which of the following viral replication sites is typical for all DNA viruses except poxviruses?",
+      "options": [
+        "A) Cytoplasm of the host cell",
+        "B) Nucleus of the host cell",
+        "C) Extracellular matrix",
+        "D) Ribosomal subunits"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Nearly all DNA viruses replicate within the nucleus of the host cell, with the notable exception of poxviruses which replicate in the cytoplasm."
+    },
+    {
+      "question_number": 62,
+      "topic": "Microbiology - Bacteria",
+      "question": "Which class of bacteria requires oxygen for survival and metabolic respiration?",
+      "options": [
+        "A) Obligate anaerobes",
+        "B) Aerobic bacteria",
+        "C) Facultative anaerobes",
+        "D) Psychrophilic saprophytes"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Aerobic bacteria strictly require oxygen to carry out respiration and survive, unlike anaerobes or facultative anaerobes."
+    },
+    {
+      "question_number": 63,
+      "topic": "Microbiology - Fungi",
+      "question": "Which fungal structure produces asexual spores borne on long vertical stalks known as sporangiophores?",
+      "options": [
+        "A) Hyphal mycelium",
+        "B) Sporangia",
+        "C) Haustoria",
+        "D) Prothallus"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "In moulds like Rhizopus, asexual spores are produced inside spherical sporangia that are borne on elongated stalks called sporangiophores."
+    },
+    {
+      "question_number": 64,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What vascular plant tissue is responsible for conducting water, mineral salts, and dissolved nutrients upward from the roots?",
+      "options": [
+        "A) Phloem",
+        "B) Cambium",
+        "C) Xylem",
+        "D) Cortex"
+      ],
+      "correct_answer": "C",
+      "detailed_explanation": "Xylem is the specialized vascular tissue in tracheophytes responsible for conducting water and mineral salts throughout the plant."
+    },
+    {
+      "question_number": 65,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "Which animal group is characterized by having a soft, unsegmented body often protected by a calcareous shell, though some groups like slugs and squids have modified or absent shells?",
+      "options": [
+        "A) Arthropoda",
+        "B) Mollusca",
+        "C) Annelida",
+        "D) Echinodermata"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Molluscs are characterized by soft, unsegmented bodies, often enclosed in a calcium carbonate shell secreted by a mantle."
+    },
+    {
+      "question_number": 66,
+      "topic": "Physiology - Nutrition",
+      "question": "What term describes organisms that synthesize organic food from inorganic raw materials using carbon dioxide and external energy sources?",
+      "options": [
+        "A) Heterotrophs",
+        "B) Autotrophs",
+        "C) Saprophytes",
+        "D) Parasites"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Autotrophs ('self-feeders') synthesize their own organic molecules from inorganic substances using light or chemical energy."
+    },
+    {
+      "question_number": 67,
+      "topic": "Physiology - Growth & Development",
+      "question": "What growth curve is typically exhibited by multicellular organisms (such as plants and animals) growing in a natural environment under limiting resources?",
+      "options": [
+        "A) Linear curve",
+        "B) Sigmoid (S-shaped) curve",
+        "C) Exponential J-curve",
+        "D) Inverse logarithmic curve"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Geometric and natural population/organism growth typically follows a sigmoid (S-shaped) curve characterized by lag, log, and stationary phases."
+    },
+    {
+      "question_number": 68,
+      "topic": "Physiology - Respiration",
+      "question": "What physiological condition occurs in human muscle cells during strenuous physical exercise when oxygen supply cannot keep pace with metabolic demand?",
+      "options": [
+        "A) Shift to alcoholic fermentation producing ethanol",
+        "B) Complete cessation of glycolysis",
+        "C) Shift to lactic acid fermentation producing lactate",
+        "D) Massive proliferation of chloroplasts"
+      ],
+      "correct_answer": "C",
+      "detailed_explanation": "During oxygen deficit in heavy exercise, animal muscles undergo lactic acid fermentation, converting pyruvate into lactic acid to regenerate NAD+ for glycolysis."
+    },
+    {
+      "question_number": 69,
+      "topic": "Microbiology - Viruses",
+      "question": "What are bacteriophages?",
+      "options": [
+        "A) Viruses that infect bacterial cells",
+        "B) Bacteria that parasitize viral capsids",
+        "C) Fungal spores resistant to radiation",
+        "D) Plant pathogens causing yellow leaf curl"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Bacteriophages are specialized viruses that exclusively infect and parasitize bacterial cells."
+    },
+    {
+      "question_number": 70,
+      "topic": "Microbiology - Bacteria",
+      "question": "Which bacterial staining method is used to identify acid-fast organisms such as Mycobacterium tuberculosis?",
+      "options": [
+        "A) Gram staining",
+        "B) Acid-fast staining",
+        "C) Endospore staining",
+        "D) Negative capsule staining"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Acid-fast staining is a differential staining protocol specifically used to identify acid-fast bacteria like Mycobacterium tuberculosis, which resist decolorization due to mycolic acid in their cell walls."
+    },
+    {
+      "question_number": 71,
+      "topic": "Microbiology - Fungi",
+      "question": "Which fungus is classified under Basidiomycota (club fungi) and represents the common edible mushroom?",
+      "options": [
+        "A) Rhizopus stolonifer",
+        "B) Mucor mucedo",
+        "C) Agaricus bisporus (or Agaricus campestris)",
+        "D) Saccharomyces cerevisiae"
+      ],
+      "correct_answer": "C",
+      "detailed_explanation": "Agaricus bisporus and Agaricus campestris are macrofungi belonging to Basidiomycota, commonly known as edible mushrooms."
+    },
+    {
+      "question_number": 72,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What evolutionary feature allowed gymnosperms and angiosperms to dominate terrestrial ecosystems over bryophytes and ferns?",
+      "options": [
+        "A) Complete reliance on swimming sperm and damp aquatic habitats",
+        "B) Independence from external water for fertilization through pollen tubes and seed protection",
+        "C) Absence of any vascular tissue or cuticle",
+        "D) Unicellular thallus organization"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Seed plants achieved immense terrestrial success because their reproduction is independent of external water (using pollen tubes) and embryos are protected inside seeds."
+    },
+    {
+      "question_number": 73,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "Which invertebrate phylum includes segmented worms such as earthworms (Lumbricus) and leeches?",
+      "options": [
+        "A) Nematoda",
+        "B) Annelida",
+        "C) Arthropoda",
+        "D) Platyhelminthes"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Annelids are characterized by metameric segmentation, including earthworms and leeches."
+    },
+    {
+      "question_number": 74,
+      "topic": "Physiology - Nutrition",
+      "question": "What term describes the type of holozoic nutrition where an organism feeds exclusively on plant matter?",
+      "options": [
+        "A) Carnivorous",
+        "B) Herbivorous",
+        "C) Omnivorous",
+        "D) Saprophytic"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Herbivores are animals that obtain their holozoic nutrition by feeding directly on plants."
+    },
+    {
+      "question_number": 75,
+      "topic": "Physiology - Growth & Development",
+      "question": "What is arithmetic growth in plant tissues?",
+      "options": [
+        "A) Both daughter cells continue to divide indefinitely in an exponential manner.",
+        "B) Following mitotic division, only one daughter cell continues to divide while the other differentiates into a permanent cell, producing a linear growth curve.",
+        "C) Cell division stops entirely after embryonic development.",
+        "D) Random cell elongation without preceding mitosis."
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "In arithmetic growth, one daughter cell keeps dividing while the other differentiates, resulting in a linear, steady increase in growth (e.g., root elongation)."
+    },
+    {
+      "question_number": 76,
+      "topic": "Physiology - Respiration",
+      "question": "What role do respiratory pigments like hemoglobin play in multicellular animals?",
+      "options": [
+        "A) They synthesize glucose from sunlight in the bloodstream.",
+        "B) They reversibly bind to oxygen molecules, greatly enhancing the oxygen-carrying capacity of the blood from respiratory surfaces to body tissues.",
+        "C) They digest complex proteins in the stomach.",
+        "D) They act as hormones controlling metamorphosis."
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Respiratory pigments like hemoglobin bind oxygen reversibly to transport it efficiently from respiratory organs to metabolically active tissues."
+    },
+    {
+      "question_number": 77,
+      "topic": "Microbiology - Viruses",
+      "question": "Which of the following describes animal viruses?",
+      "options": [
+        "A) Viruses that exclusively infect bacterial cells in aquatic environments",
+        "B) Viruses that invade and parasitize cells of animals, including humans (e.g., influenza, rabies, polio, and herpes)",
+        "C) Plant pathogens like tobacco mosaic virus",
+        "D) Free-living saprophytic viral particles"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Animal viruses infect animal and human cells, with prominent examples including influenza, rabies, polio, and herpes viruses."
+    },
+    {
+      "question_number": 78,
+      "topic": "Microbiology - Bacteria",
+      "question": "What arrangement describes spherical bacteria (cocci) growing in chains?",
+      "options": [
+        "A) Staphylococci",
+        "B) Streptococci",
+        "C) Diplococci",
+        "D) Sarcina"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "The prefix 'strepto-' denotes chain arrangements, making streptococci spherical bacteria arranged in chains."
+    },
+    {
+      "question_number": 79,
+      "topic": "Microbiology - Fungi",
+      "question": "Which fungal group is often referred to as 'imperfect fungi' because sexual reproduction has not been observed in them?",
+      "options": [
+        "A) Zygomycota",
+        "B) Ascomycota",
+        "C) Basidiomycota",
+        "D) Deuteromycota"
+      ],
+      "correct_answer": "D",
+      "detailed_explanation": "Deuteromycota are known as imperfect fungi because their life cycle lacks a known sexual reproductive stage."
+    },
+    {
+      "question_number": 80,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What are the two primary parts of a typical flowering plant body?",
+      "options": [
+        "A) Thallus and Mycelium",
+        "B) The root system (underground) and the shoot system (above ground)",
+        "C) Polyp and Medusa phases",
+        "D) Gametophyte and Sporophyte thalli"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "A typical flowering plant is anatomically divided into an underground root system and an above-ground shoot system (stem, leaves, and flowers)."
+    },
+    {
+      "question_number": 81,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "Which insect-free phylum represents arthropods, characterized by jointed appendages and an exoskeleton made of chitin?",
+      "options": [
+        "A) Annelida",
+        "B) Arthropoda",
+        "C) Mollusca",
+        "D) Echinodermata"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Phylum Arthropoda includes insects, arachnids, and crustaceans, defined by jointed appendages and chitinous exoskeletons."
+    },
+    {
+      "question_number": 82,
+      "topic": "Physiology - Nutrition",
+      "question": "What is the key characteristic of insectivorous plants such as Nepenthes (pitcher plant) and Drosera (sundew)?",
+      "options": [
+        "A) They completely lack roots and live as obligate parasites on tree trunks.",
+        "B) They grow in nitrogen-deficient soils and supplement their nutritional protein requirements by trapping and digesting insects.",
+        "C) They rely exclusively on chemosynthetic oxidation of hydrogen sulfide.",
+        "D) They are marine phytoplankton forming symbiotic coral reefs."
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Insectivorous plants inhabit nitrogen-deficient soils and trap insects using specialized leaf modifications, digesting them to acquire necessary nitrogen and proteins."
+    },
+    {
+      "question_number": 83,
+      "topic": "Physiology - Growth & Development",
+      "question": "What term describes the ability of a plant structure (such as leaves) to alter its form in response to environmental developmental changes?",
+      "options": [
+        "A) Photoperiodism",
+        "B) Plasticity",
+        "C) Vernalisation",
+        "D) Ecdysis"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Plant plasticity refers to the capacity of plant organs, such as leaves (heterophylly), to change morphology during development based on environmental cues."
+    },
+    {
+      "question_number": 84,
+      "topic": "Physiology - Respiration",
+      "question": "Which aquatic animals utilize gills as their primary respiratory organs to extract dissolved oxygen from water?",
+      "options": [
+        "A) Earthworms and leeches",
+        "B) Insects and grasshoppers",
+        "C) Fishes, prawns, and mussels",
+        "D) Adult amphibians and mammals"
+      ],
+      "correct_answer": "C",
+      "detailed_explanation": "Fishes, prawns, and mussels utilize specialized vascularized gills adapted for extracting dissolved oxygen from aquatic environments."
+    },
+    {
+      "question_number": 85,
+      "topic": "Microbiology - Viruses",
+      "question": "What are plant viruses?",
+      "options": [
+        "A) Viruses that infect mammalian neural tissue exclusively",
+        "B) Pathogens that infect plant cells, such as tobacco mosaic virus (TMV) and potato virus",
+        "C) Beneficial microorganisms that fix nitrogen in root nodules",
+        "D) Saprophytic fungi forming mycorrhizae"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Plant viruses are obligate intracellular pathogens that invade plant cells, with classic examples including tobacco mosaic virus (TMV), potato virus, and beet yellow virus."
+    },
+    {
+      "question_number": 86,
+      "topic": "Microbiology - Bacteria",
+      "question": "What are spiral-shaped bacteria known as?",
+      "options": [
+        "A) Bacilli",
+        "B) Cocci",
+        "C) Spirillae (or Spirochetes)",
+        "D) Vibrios"
+      ],
+      "correct_answer": "C",
+      "detailed_explanation": "Spiral-shaped bacteria are classified morphologically as spirillae (e.g., Spirillum)."
+    },
+    {
+      "question_number": 87,
+      "topic": "Microbiology - Fungi",
+      "question": "Which fungal division includes sac fungi such as yeasts (Saccharomyces) and penicillium?",
+      "options": [
+        "A) Zygomycota",
+        "B) Ascomycota",
+        "C) Basidiomycota",
+        "D) Oomycota"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Ascomycota (sac fungi) are characterized by the production of sexual spores within a sac-like structure called an ascus, including yeasts and Penicillium."
+    },
+    {
+      "question_number": 88,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What are gymnosperm seeds notably characterized by?",
+      "options": [
+        "A) Being enclosed within a thick, fleshy fruit wall",
+        "B) Being naked (not enclosed in an ovary) and carried on modified leaves called sporophylls",
+        "C) Lacking any embryonic seed coat or stored food",
+        "D) Floating freely in aquatic marine currents"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Gymnosperm seeds are exposed or 'naked' because they are not enclosed within an ovary, typically borne on exposed sporophyll structures like cone scales."
+    },
+    {
+      "question_number": 89,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "What respiratory and circulatory characteristic defines vertebrates compared to invertebrate groups?",
+      "options": [
+        "A) Complete absence of a closed blood circulatory system",
+        "B) Presence of a well-developed internal bony or cartilaginous vertebral column and advanced organ systems",
+        "C) Exclusive reliance on epidermal diffusion across the skin",
+        "D) External digestion without a gut cavity"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Vertebrates possess a dorsal vertebral column, complex organ systems, and sophisticated circulatory and respiratory mechanisms."
+    },
+    {
+      "question_number": 90,
+      "topic": "Physiology - Nutrition",
+      "question": "What is the primary difference between autotrophic and heterotrophic modes of nutrition?",
+      "options": [
+        "A) Autotrophs synthesize their own organic food from inorganic substances, whereas heterotrophs depend directly or indirectly on autotrophs for pre-formed organic nutrients.",
+        "B) Heterotrophs use chlorophyll to fix carbon dioxide, whereas autotrophs feed exclusively on animal tissue.",
+        "C) Autotrophs lack all metabolic enzymes, while heterotrophs perform photosynthesis.",
+        "D) There is no fundamental difference in carbon source utilization."
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Autotrophs manufacture their food using inorganic molecules and energy sources, while heterotrophs must consume organic matter produced by other organisms."
+    },
+    {
+      "question_number": 91,
+      "topic": "Physiology - Growth & Development",
+      "question": "What is the function of plant growth regulators (hormones) such as auxins and gibberellins?",
+      "options": [
+        "A) They inhibit all cellular division indefinitely.",
+        "B) They act as endogenous chemical messengers controlling processes like cell elongation, root growth, flowering, and dormancy breaking.",
+        "C) They replace the need for water and mineral absorption in roots.",
+        "D) They function solely as waste products excreted through lenticels."
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Endogenous plant hormones like auxins and gibberellins regulate key developmental pathways including cell elongation, root initiation, stem growth, and seed germination."
+    },
+    {
+      "question_number": 92,
+      "topic": "Physiology - Respiration",
+      "question": "What role does glycolysis play in cellular respiration?",
+      "options": [
+        "A) It breaks down glucose into pyruvate in the cytoplasm, yielding a small amount of ATP without requiring oxygen.",
+        "B) It fully oxidizes carbon dioxide into glucose inside chloroplast grana.",
+        "C) It pumps electrons across the inner mitochondrial membrane using sunlight.",
+        "D) It converts lactic acid directly into atmospheric nitrogen."
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Glycolysis is the initial universal metabolic pathway taking place in the cytoplasm where a 6-carbon glucose is split into two 3-carbon pyruvate molecules, generating a net gain of ATP independently of oxygen."
+    },
+    {
+      "question_number": 93,
+      "topic": "Microbiology - Viruses",
+      "question": "What feature do enveloped viruses possess that non-enveloped viruses lack?",
+      "options": [
+        "A) A capsid made of capsomeres",
+        "B) A lipoprotein outer layer derived from the host cell membrane",
+        "C) A double-stranded DNA core",
+        "D) Independent metabolic respiration"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Enveloped viruses possess an outer lipoprotein membrane acquired from the host cell during viral exit, surrounding their protein capsid."
+    },
+    {
+      "question_number": 94,
+      "topic": "Microbiology - Bacteria",
+      "question": "Which bacteria are classified as psychrophiles based on their temperature preferences?",
+      "options": [
+        "A) Heat-loving bacteria",
+        "B) Cold-loving bacteria",
+        "C) Moderate temperature-loving pathogens",
+        "D) Barophilic deep-sea bacteria"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Psychrophiles are cold-loving bacteria that thrive in low-temperature environments."
+    },
+    {
+      "question_number": 95,
+      "topic": "Microbiology - Fungi",
+      "question": "What are septate hyphae?",
+      "options": [
+        "A) Hyphae that lack cross-walls entirely, forming multinucleate coenocytic structures",
+        "B) Hyphae divided into individual cells by cross-walls called septa (e.g., Penicillium)",
+        "C) Unicellular fungal spores lacking any filamentous structure",
+        "D) Specialized root nodules containing nitrogen-fixing bacteria"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Septate hyphae feature internal cross-walls (septa) dividing the hyphal strand into distinct cellular compartments, as found in Penicillium."
+    },
+    {
+      "question_number": 96,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What are the two major classes of angiosperms based on seed leaf structure?",
+      "options": [
+        "A) Bryophytes and Tracheophytes",
+        "B) Monocotyledons and Dicotyledons",
+        "C) Gymnosperms and Pteridophytes",
+        "D) Thallophytes and Embryophytes"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Angiosperms (flowering plants) are subdivided into monocotyledons (one seed leaf) and dicotyledons (two seed leaves)."
+    },
+    {
+      "question_number": 97,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "What are the two major developmental patterns observed in animals with respect to juvenile body form?",
+      "options": [
+        "A) Autotrophic and heterotrophic development",
+        "B) Direct development (young resembles adult) and indirect development (involving larval metamorphosis)",
+        "C) Viviparous and oviparous external brooding",
+        "D) Ametabolous and hemimetabolous fungal growth"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Animal development occurs either directly (offspring mirror adults) or indirectly (offspring hatch as distinct larvae undergoing metamorphosis)."
+    },
+    {
+      "question_number": 98,
+      "topic": "Physiology - Nutrition",
+      "question": "What is saprophytic nutrition?",
+      "options": [
+        "A) Feeding on live host tissues and causing disease",
+        "B) Absorbing dissolved nutrients from dead and decaying organic matter following external enzymatic digestion",
+        "C) Manufacturing glucose via sunlit chloroplasts",
+        "D) Consuming whole animal prey via internal digestive tracts"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Saprophytic nutrition involves obtaining nutrients from dead organic matter by external digestion and absorption."
+    },
+    {
+      "question_number": 99,
+      "topic": "Physiology - Growth & Development",
+      "question": "What is geometric growth in plants?",
+      "options": [
+        "A) Cell division where both daughter cells continue to divide actively, resulting in an exponential growth rate often represented by a sigmoid curve",
+        "B) A linear increase in stem length due to single-cell division",
+        "C) The immediate cessation of mitotic activity after germination",
+        "D) Uncontrolled cancerous tumor formation"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "In geometric growth, both daughter cells remain mitotic and continue dividing, leading to exponential growth typical of early plant tissue development."
+    },
+    {
+      "question_number": 100,
+      "topic": "Physiology - Respiration",
+      "question": "What distinguishes aerobic respiration from anaerobic respiration?",
+      "options": [
+        "A) Aerobic respiration requires oxygen and completely oxidizes glucose into carbon dioxide and water, yielding high ATP; anaerobic respiration occurs without oxygen, partially breaking down glucose into by-products like ethanol or lactic acid with low ATP yield.",
+        "B) Aerobic respiration occurs only in prokaryotes, while anaerobic respiration occurs only in flowering plants.",
+        "C) Anaerobic respiration produces more ATP than aerobic respiration.",
+        "D) There is no chemical difference in end-products."
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Aerobic respiration uses oxygen for complete glucose breakdown and high ATP output (~38 ATP), whereas anaerobic respiration operates without oxygen with incomplete breakdown and minimal ATP (~2 ATP)."
+    },
+    {
+      "question_number": 101,
+      "topic": "Microbiology - Viruses",
+      "question": "Which of the following describes viral host specificity?",
+      "options": [
+        "A) Viruses can infect any living cell regardless of species or kingdom barriers.",
+        "B) Viruses are highly specific regarding the particular host cells or species they can infect and parasitize.",
+        "C) Viruses exclusively infect mineral substrates in soil.",
+        "D) Viruses lack any interaction with host cell surface receptors."
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Viruses exhibit strict host specificity, meaning a given virus can typically infect only specific host cells whose surface receptors match viral attachment proteins."
+    },
+    {
+      "question_number": 102,
+      "topic": "Microbiology - Bacteria",
+      "question": "What is the primary chemical substance forming the bacterial cell wall?",
+      "options": [
+        "A) Chitin",
+        "B) Cellulose",
+        "C) Peptidoglycan (murein)",
+        "D) Lignin"
+      ],
+      "correct_answer": "C",
+      "detailed_explanation": "The characteristic structural polymer of bacterial cell walls is peptidoglycan."
+    },
+    {
+      "question_number": 103,
+      "topic": "Microbiology - Fungi",
+      "question": "Which plant disease-causing fungus or mould is commonly studied in laboratories and agriculture?",
+      "options": [
+        "A) Rhizopus and Mucor",
+        "B) Escherichia coli",
+        "C) Bacteriophage lambda",
+        "D) Lactobacillus bulgaricus"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Rhizopus and Mucor are classic fungal moulds frequently studied as representative zygomycetes."
+    },
+    {
+      "question_number": 104,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What is the primary function of stomata in plant leaves?",
+      "options": [
+        "A) Absorption of soil minerals and water",
+        "B) Gaseous exchange (carbon dioxide uptake and oxygen release) and transpiration",
+        "C) Anchorage of roots in the substrate",
+        "D) Storage of reserve starch granules"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Stomata are microscopic epidermal pores that regulate gaseous exchange and transpirational water loss in plant leaves."
+    },
+    {
+      "question_number": 105,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "What term describes animals that develop from an embryo inside the mother's body where nourishment is received directly, such as placental mammals?",
+      "options": [
+        "A) Oviparous",
+        "B) Viviparous",
+        "C) Hermaphroditic",
+        "D) Ametabolous"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Viviparous animals give birth to live young whose embryonic development occurs inside the maternal body."
+    },
+    {
+      "question_number": 106,
+      "topic": "Physiology - Nutrition",
+      "question": "What are macro-nutrients in plant and animal nutrition?",
+      "options": [
+        "A) Nutrients required in bulk/large amounts (such as carbohydrates, proteins, and fats)",
+        "B) Micronutrients required only in trace catalytic quantities",
+        "C) Vitamins that act as enzyme co-factors",
+        "D) Heavy metal pollutants in industrial soil"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Macronutrients (carbohydrates, proteins, fats) are required in large bulk amounts to supply energy and structural building blocks."
+    },
+    {
+      "question_number": 107,
+      "topic": "Physiology - Growth & Development",
+      "question": "What is the role of auxins in plant growth?",
+      "options": [
+        "A) Promoting root growth, cell elongation, and apical dominance",
+        "B) Inducing female flower production exclusively and leaf abscission",
+        "C) Halting all metabolic activity during drought",
+        "D) Transforming starch into cellulose cell walls"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Auxins are primary plant hormones that promote cell elongation, root development, and apical dominance."
+    },
+    {
+      "question_number": 108,
+      "topic": "Physiology - Respiration",
+      "question": "Why is ATP referred to as the 'energy currency' of the cell?",
+      "options": [
+        "A) Because it is stored in bank vaults as mineral wealth.",
+        "B) Because energy released during cellular respiration is trapped in ATP bonds, which can be readily broken down to power cellular work whenever needed.",
+        "C) Because it is synthesized exclusively by sunlight in animal muscles.",
+        "D) Because it acts as a hormone regulating heartbeat."
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "ATP captures metabolic energy and acts as the immediate chemical currency driving cellular energy-requiring processes."
+    },
+    {
+      "question_number": 109,
+      "topic": "Microbiology - Viruses",
+      "question": "What genetic material configuration is found in retroviruses?",
+      "options": [
+        "A) Double-stranded circular DNA only",
+        "B) Single-stranded RNA that replicates via a DNA intermediate using reverse transcriptase",
+        "C) Naked protein particles lacking any nucleic acid",
+        "D) Triple-stranded ribosomal RNA"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Retroviruses possess single-stranded RNA genomes and use reverse transcriptase to synthesize DNA within the host cell."
+    },
+    {
+      "question_number": 110,
+      "topic": "Microbiology - Bacteria",
+      "question": "What are facultative anaerobes?",
+      "options": [
+        "A) Bacteria that die immediately upon exposure to oxygen",
+        "B) Bacteria that can live and grow with or without oxygen",
+        "C) Bacteria that exclusively perform photosynthesis in deep sea vents",
+        "D) Parasites requiring living human tissue for every metabolic step"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Facultative anaerobes are versatile bacteria capable of surviving and metabolizing in both aerobic (oxygen-present) and anaerobic (oxygen-absent) environments."
+    },
+    {
+      "question_number": 111,
+      "topic": "Microbiology - Fungi",
+      "question": "What is Aspergillus niger used for in industry?",
+      "options": [
+        "A) Industrial production of certain organic acids and enzymes, though it can occasionally cause opportunistic infections",
+        "B) Manufacturing broad-spectrum penicillin antibiotics",
+        "C) Nitrogen fixation in legume root nodules",
+        "D) Brewing palm wine and baking bread"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Aspergillus niger is widely utilized in industrial fermentation and biotechnology for producing organic acids, though some strains are opportunistic pathogens."
+    },
+    {
+      "question_number": 112,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What are the two primary mechanisms by which plants disperse their reproductive propagules (seeds and spores)?",
+      "options": [
+        "A) Active locomotion using flagella and pseudopodia",
+        "B) Wind, water, animal agents, and explosive dehiscence",
+        "C) Parasitic attachment to mammalian bloodstreams",
+        "D) Binary fission across meristematic zones"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Plant seeds and spores are dispersed across ecosystems through agents such as wind, water, animals, and mechanical mechanisms."
+    },
+    {
+      "question_number": 113,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "What is the biological significance of metamorphosis in animals with indirect development?",
+      "options": [
+        "A) It ensures that adults and larvae occupy different ecological niches and food sources, reducing resource competition within the species.",
+        "B) It eliminates the need for any embryonic germ layers.",
+        "C) It converts cold-blooded animals into warm-blooded homeotherms instantly.",
+        "D) It stops all growth permanently at the larval stage."
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Metamorphosis allows larvae and adults to inhabit different ecological niches and consume different diets, eliminating direct competition for resources between generations."
+    },
+    {
+      "question_number": 114,
+      "topic": "Physiology - Nutrition",
+      "question": "What is symbiotic nutrition, as seen in legume-Rhizobium associations?",
+      "options": [
+        "A) A parasitic relationship where one organism destroys the other for food.",
+        "B) A mutually beneficial association where both organisms derive nutritional benefits without harming each other.",
+        "C) Independent autotrophic synthesis without environmental interaction.",
+        "D) Feeding exclusively on decaying animal carrion."
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Symbiosis is a mutually advantageous interaction where both participating organisms derive nutritional or ecological benefits."
+    },
+    {
+      "question_number": 115,
+      "topic": "Physiology - Growth & Development",
+      "question": "What is the role of cytokinin in plant growth and development?",
+      "options": [
+        "A) Promoting cell division, delaying leaf senescence, and promoting shoot development",
+        "B) Causing immediate wilting and leaf abscission",
+        "C) Inhibiting seed germination under all conditions",
+        "D) Replacing water in xylem vessels during drought"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Cytokinins are plant hormones that stimulate cell division (cytokinesis), promote lateral bud growth, and delay cellular senescence in leaves."
+    },
+    {
+      "question_number": 116,
+      "topic": "Physiology - Respiration",
+      "question": "What common structural features are shared by all effective respiratory organs (skin, gills, trachea, and lungs)?",
+      "options": [
+        "A) Thick chitinous outer shells and dry waterproof surfaces",
+        "B) Large surface area, thin walls for easy diffusion, and rich vascular blood supply",
+        "C) Complete absence of cellular membranes",
+        "D) Exclusively anaerobic metabolic pathways"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "All respiratory organs share three key adaptations: a large surface area, extremely thin walls to facilitate gas diffusion, and high vascularity (rich blood supply)."
+    },
+    {
+      "question_number": 117,
+      "topic": "Microbiology - Viruses",
+      "question": "How do viruses reproduce?",
+      "options": [
+        "A) By independent binary fission in nutrient agar",
+        "B) By infecting a living host cell and hijacking its metabolic and synthetic machinery to replicate viral components",
+        "C) By sexual conjugation between viral particles",
+        "D) By spontaneous generation from non-living proteins"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Viruses are obligate intracellular parasites that cannot replicate independently; they must infect a host cell and commandeer its cellular machinery to manufacture new viral particles."
+    },
+    {
+      "question_number": 118,
+      "topic": "Microbiology - Bacteria",
+      "question": "What is the process of asexual reproduction commonly observed in bacteria?",
+      "options": [
+        "A) Mitotic spindle formation",
+        "B) Binary fission",
+        "C) Sporulation into ascospores",
+        "D) Budding"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Bacteria reproduce asexually primarily through binary fission, where a single cell divides into two identical daughter cells."
+    },
+    {
+      "question_number": 119,
+      "topic": "Microbiology - Fungi",
+      "question": "What ecological role do fungi predominantly play in natural ecosystems alongside bacteria?",
+      "options": [
+        "A) Primary producers generating glucose via photosynthesis",
+        "B) Decomposers breaking down dead organic matter and recycling nutrients",
+        "C) Obligate predators hunting small insects",
+        "D) Nitrogen-fixing root nodule symbionts"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Fungi act as vital decomposers in ecosystems, breaking down complex organic matter and returning essential nutrients to the soil."
+    },
+    {
+      "question_number": 120,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What distinguishes angiosperms from gymnosperms?",
+      "options": [
+        "A) Angiosperms produce flowers and enclose their seeds within a fruit (ovary), whereas gymnosperms produce naked seeds on cones.",
+        "B) Angiosperms lack vascular tissues entirely.",
+        "C) Gymnosperms produce showy petals and nectar for insect pollination.",
+        "D) Angiosperms reproduce only via swimming sperm in water."
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Angiosperms are flowering plants that enclose their seeds within fruits, whereas gymnosperms produce unenclosed or naked seeds."
+    },
+    {
+      "question_number": 121,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "What is the characteristic body symmetry of adult echinoderms (such as starfishes and sea urchins)?",
+      "options": [
+        "A) Asymmetrical",
+        "B) Bilateral symmetry",
+        "C) Pentamerous radial symmetry",
+        "D) Spherical symmetry"
+      ],
+      "correct_answer": "C",
+      "detailed_explanation": "Adult echinoderms typically exhibit secondary pentamerous radial symmetry (though their larvae are bilaterally symmetrical)."
+    },
+    {
+      "question_number": 122,
+      "topic": "Physiology - Nutrition",
+      "question": "What is holozoic nutrition?",
+      "options": [
+        "A) Ingesting complex organic food (plants or animals as a whole), digesting it internally using enzymes, and absorbing the products",
+        "B) Absorbing pre-dissolved organic molecules across cell walls from dead matter",
+        "C) Synthesizing glucose from solar photons",
+        "D) Living attached to a host plant as a total parasite"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Holozoic nutrition involves ingestion of solid or liquid food, internal digestion, absorption, and assimilation, typical of most animals."
+    },
+    {
+      "question_number": 123,
+      "topic": "Physiology - Growth & Development",
+      "question": "What factors influence animal growth and development?",
+      "options": [
+        "A) Genotype, nervous system, hormones, nutrition, temperature, and environment",
+        "B) Exclusively solar ultraviolet radiation and soil pH",
+        "C) Only bacterial infection rates",
+        "D) Absence of any genetic framework"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Animal growth and development are governed by a complex interplay of internal factors (genetics, hormones, nervous coordination) and external factors (nutrition, temperature, hygiene, light)."
+    },
+    {
+      "question_number": 124,
+      "topic": "Physiology - Respiration",
+      "question": "Where does glycolysis take place in cellular respiration?",
+      "options": [
+        "A) Mitochondrial matrix",
+        "B) Cytoplasm of the cell",
+        "C) Inner mitochondrial membrane",
+        "D) Chloroplast stroma"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Glycolysis is the initial stage of glucose breakdown, occurring entirely within the cell cytoplasm for both aerobic and anaerobic pathways."
+    },
+    {
+      "question_number": 125,
+      "topic": "Microbiology - Viruses",
+      "question": "What are structural proteins of a virus responsible for?",
+      "options": [
+        "A) Forming the protective capsid coat around the viral genome",
+        "B) Conducting independent photosynthetic carbon fixation",
+        "C) Forming peptidoglycan cell walls",
+        "D) Digesting host cell bone tissue"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Structural proteins in viruses assemble to form the capsid that encases and protects the nucleic acid core."
+    },
+    {
+      "question_number": 126,
+      "topic": "Microbiology - Bacteria",
+      "question": "What are thermophiles?",
+      "options": [
+        "A) Cold-loving bacteria",
+        "B) Heat-loving bacteria thriving in high-temperature environments",
+        "C) Bacteria that require freezing conditions",
+        "D) Photosynthetic marine plankton"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Thermophiles are heat-adapted bacteria that thrive at high temperatures (such as hot springs)."
+    },
+    {
+      "question_number": 127,
+      "topic": "Microbiology - Fungi",
+      "question": "What is Candida albicans?",
+      "options": [
+        "A) A beneficial nitrogen-fixing soil bacterium",
+        "B) A yeast-like fungus capable of causing opportunistic infections (candidiasis) in humans",
+        "C) An edible mushroom found in tropical forests",
+        "D) A plant virus infecting tobacco crops"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Candida albicans is a dimorphic fungus/yeast that can cause infections (such as thrush) in humans under certain conditions."
+    },
+    {
+      "question_number": 128,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What is secondary growth in woody plants responsible for?",
+      "options": [
+        "A) Increasing the stem diameter/thickness via cambial activity",
+        "B) Increasing the primary length of the shoot apex",
+        "C) Producing root hairs for water absorption",
+        "D) Opening and closing stomatal guard cells"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Secondary growth is driven by lateral meristems (cambium), resulting in increased stem girth and wood production in woody plants."
+    },
+    {
+      "question_number": 129,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "What is direct development in animals?",
+      "options": [
+        "A) A developmental cycle where the newborn or hatching juvenile closely resembles the adult in body form without undergoing metamorphosis",
+        "B) A cycle passing through distinct ciliated larval stages and pupal transformation",
+        "C) Reproduction without fertilization or gamete fusion",
+        "D) Rapid regeneration of lost limbs"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "In direct development, young animals hatch or are born as miniature versions of the adult, bypassing larval metamorphosis."
+    },
+    {
+      "question_number": 130,
+      "topic": "Physiology - Nutrition",
+      "question": "Why do green plants require inorganic minerals and water absorbed from the soil?",
+      "options": [
+        "A) To synthesize essential organic compounds, pigments (chlorophyll), enzymes, and growth regulators",
+        "B) To act as direct energy sources without undergoing photosynthesis",
+        "C) To form chitinous cell walls",
+        "D) To undergo complete anaerobic fermentation"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Plants absorb water and inorganic soil minerals to synthesize organic molecules, pigments, enzymes, and hormones necessary for growth."
+    },
+    {
+      "question_number": 131,
+      "topic": "Physiology - Growth & Development",
+      "question": "What is senescence in biological organisms?",
+      "options": [
+        "A) The rapid embryonic cleavage stage",
+        "B) The programmed sequence of aging events leading to structural deterioration and death in cells, organs, or whole plants/animals",
+        "C) The sudden breaking of seed dormancy by gibberellin",
+        "D) The transition from nymph to adult during ecdysis"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Senescence refers to the programmed aging process resulting in structural degradation and eventual death of plant parts or entire organisms."
+    },
+    {
+      "question_number": 132,
+      "topic": "Physiology - Respiration",
+      "question": "What are respiratory substrates?",
+      "options": [
+        "A) Complex organic molecules (such as glucose, carbohydrates, fats) that are oxidized during cellular respiration to release energy",
+        "B) Inorganic mineral salts absorbed exclusively by roots",
+        "C) Atmospheric gases like nitrogen and argon",
+        "D) Stored chlorophyll pigments in chloroplast grana"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Respiratory substrates are organic molecules broken down via oxidation within cells to release chemical energy."
+    },
+    {
+      "question_number": 133,
+      "topic": "Microbiology - Viruses",
+      "question": "Which of the following viral examples is correctly associated with air-borne transmission?",
+      "options": [
+        "A) Hepatitis A virus",
+        "B) Swine flu and Rhino virus",
+        "C) Human papillomavirus",
+        "D) Rabies virus"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Swine flu and Rhino viruses are classic examples of air-borne respiratory viral infections."
+    },
+    {
+      "question_number": 134,
+      "topic": "Microbiology - Bacteria",
+      "question": "What are rod-shaped bacteria called?",
+      "options": [
+        "A) Cocci",
+        "B) Bacilli (e.g., Escherichia coli)",
+        "C) Spirillae",
+        "D) Vibrios"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Rod-shaped bacteria are classified as bacilli, with Escherichia coli being a prominent example."
+    },
+    {
+      "question_number": 135,
+      "topic": "Microbiology - Fungi",
+      "question": "What type of nutrition is exhibited by all fungi?",
+      "options": [
+        "A) Autotrophic photosynthesis",
+        "B) Heterotrophic (absorptive saprophytic or parasitic)",
+        "C) Holozoic ingestion of solid prey",
+        "D) Chemolithoautotrophic oxidation"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Fungi are entirely heterotrophic organisms lacking chlorophyll, obtaining nutrients through absorption of organic matter."
+    },
+    {
+      "question_number": 136,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What is the primary distinguishing feature of Bryophytes compared to Tracheophytes?",
+      "options": [
+        "A) Bryophytes possess true xylem and phloem vessels.",
+        "B) Bryophytes lack vascular tissue (non-vascular), whereas tracheophytes possess vascular conducting tubes.",
+        "C) Bryophytes produce flowers and seeds.",
+        "D) Bryophytes are exclusively tall woody trees."
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Bryophytes are non-vascular plants lacking xylem and phloem, whereas tracheophytes possess dedicated vascular tissues."
+    },
+    {
+      "question_number": 137,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "What are coelenterates (Cnidarians) characterized by structurally?",
+      "options": [
+        "A) A sac-like body plan composed of two cell layers, possessing tentacles with stinging cells",
+        "B) A segmented coelom with metameric nephridia",
+        "C) A hard bony endoskeleton and vertebral column",
+        "D) Absence of any tissue organization"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Coelenterates feature a diploblastic sac-like body plan organized into two layers with stinging tentacles."
+    },
+    {
+      "question_number": 138,
+      "topic": "Physiology - Nutrition",
+      "question": "What is parasitic nutrition?",
+      "options": [
+        "A) An association where an organism lives on or inside a host organism, deriving food and shelter at the host's expense",
+        "B) Manufacturing organic food from sunlight independently",
+        "C) Decomposing dead organic matter on forest floors",
+        "D) Mutualistic exchange of nitrogen and carbohydrates"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Parasitic nutrition involves a parasite depending entirely on a living host for nutrients and shelter, often causing harm."
+    },
+    {
+      "question_number": 139,
+      "topic": "Physiology - Growth & Development",
+      "question": "What is the role of ethylene in plant physiology?",
+      "options": [
+        "A) Promoting female flower production and fruit ripening",
+        "B) Inhibiting all cell division permanently",
+        "C) Inducing root dormancy in winter",
+        "D) Acting as a structural component of xylem walls"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Ethylene is a gaseous plant hormone that promotes fruit ripening, female flower induction, and abscission."
+    },
+    {
+      "question_number": 140,
+      "topic": "Physiology - Respiration",
+      "question": "How do single-celled organisms like Amoeba perform gas exchange?",
+      "options": [
+        "A) Through specialized pulmonary lungs",
+        "B) Through simple diffusion of gases across their cell membrane",
+        "C) Through branched tracheal spiracles",
+        "D) Through vascularized gill filaments"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Unicellular organisms rely on simple diffusion of oxygen and carbon dioxide directly across their cell membrane."
+    },
+    {
+      "question_number": 141,
+      "topic": "Microbiology - Viruses",
+      "question": "Which viral transmission category includes rabies virus, transmitted through animal bites?",
+      "options": [
+        "A) Air-borne infections",
+        "B) Faecal-Oral route",
+        "C) Zoonoses",
+        "D) Transfusion transmitted infections"
+      ],
+      "correct_answer": "C",
+      "detailed_explanation": "Zoonoses involve virus transmission from infected animals, birds, or insects to humans, such as through rabid animal bites."
+    },
+    {
+      "question_number": 142,
+      "topic": "Microbiology - Bacteria",
+      "question": "What is the function of bacterial flagella?",
+      "options": [
+        "A) Sexual reproduction and conjugation",
+        "B) Locomotion and motility",
+        "C) Endospore formation under stress",
+        "D) Peptidoglycan synthesis"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Many bacteria possess flagella, which serve as whip-like appendages providing cellular motility."
+    },
+    {
+      "question_number": 143,
+      "topic": "Microbiology - Fungi",
+      "question": "What is the primary structural difference between yeasts and mould fungi?",
+      "options": [
+        "A) Yeasts are unicellular fungi, whereas most moulds are multicellular and filamentous.",
+        "B) Yeasts possess chloroplasts, while moulds lack them.",
+        "C) Yeasts have peptidoglycan cell walls, while moulds have cellulose walls.",
+        "D) Yeasts reproduce exclusively by binary fission like bacteria."
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Yeasts are uniquely unicellular fungi, whereas typical moulds form multicellular filamentous hyphal networks."
+    },
+    {
+      "question_number": 144,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What is the function of xylem vessels in tracheophytes?",
+      "options": [
+        "A) Transporting manufactured sugars and organic food from leaves to roots",
+        "B) Conducting water and dissolved mineral salts from roots upward throughout the plant",
+        "C) Producing pollen grains for wind pollination",
+        "D) Storing excess starch in underground tubers"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Xylem is specialized for upward conduction of water and dissolved mineral nutrients."
+    },
+    {
+      "question_number": 145,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "What are sponges (Porifera) characterized by in terms of body organization?",
+      "options": [
+        "A) True organ systems and bilateral symmetry",
+        "B) Simple aquatic cellular grade of organization with porous body walls and no true tissues",
+        "C) Chitinous exoskeletons and jointed legs",
+        "D) Vertebral columns and dorsal nerve cords"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Sponges represent the simplest multicellular animals, displaying a cellular grade of organization with pores and canals but lacking true tissues."
+    },
+    {
+      "question_number": 146,
+      "topic": "Physiology - Nutrition",
+      "question": "What distinguishes chemoautotrophic bacteria from photosynthetic autotrophs?",
+      "options": [
+        "A) Chemoautotrophs derive energy for carbon fixation from oxidizing inorganic chemical compounds rather than sunlight.",
+        "B) Chemoautotrophs depend entirely on feeding on living host tissue.",
+        "C) Chemoautotrophs possess chloroplasts in their cytoplasm.",
+        "D) There is no difference in energy source."
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Chemoautotrophs utilize chemical energy from oxidizing inorganic compounds to fix carbon, whereas photoautotrophs use solar energy."
+    },
+    {
+      "question_number": 147,
+      "topic": "Physiology - Growth & Development",
+      "question": "What is the role of apical meristems in plants?",
+      "options": [
+        "A) Driving primary growth and increasing the length of roots and shoots",
+        "B) Increasing stem diameter and wood production",
+        "C) Producing flowers and seeds exclusively",
+        "D) Digesting organic matter in the soil"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Apical meristems are localized zones of active cell division at root and shoot tips responsible for primary growth in length."
+    },
+    {
+      "question_number": 148,
+      "topic": "Physiology - Respiration",
+      "question": "What are the three main stages of aerobic cellular respiration?",
+      "options": [
+        "A) Glycolysis, Krebs Cycle (Citric Acid Cycle), and Electron Transport Chain / Oxidative Phosphorylation",
+        "B) Light reaction, Dark reaction, and Photolysis",
+        "C) Cleavage, Gastrulation, and Neurulation",
+        "D) Binary fission, Spore formation, and Conjugation"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Aerobic respiration proceeds through glycolysis, the Krebs cycle, and oxidative phosphorylation along the electron transport chain."
+    },
+    {
+      "question_number": 149,
+      "topic": "Microbiology - Viruses",
+      "question": "What is the size category of viruses relative to human body cells?",
+      "options": [
+        "A) Viruses are larger than human body cells.",
+        "B) Viruses are ultramicroscopic, typically 100–1000 times smaller than human body cells.",
+        "C) Viruses are equal in size to bacterial cells.",
+        "D) Viruses can be easily seen with the naked eye."
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Viruses are ultramicroscopic particles, roughly 100 to 1000 times smaller than typical human body cells."
+    },
+    {
+      "question_number": 150,
+      "topic": "Microbiology - Bacteria",
+      "question": "Which beneficial bacteria are found in human gut and milk, used in yoghurt production?",
+      "options": [
+        "A) Rhizobium",
+        "B) Lactobacillus",
+        "C) Nitrosomonas",
+        "D) Clostridium tetani"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Lactobacillus species are beneficial bacteria found in milk and the human gut, widely used in producing yoghurt and cheese."
+    },
+    {
+      "question_number": 151,
+      "topic": "Microbiology - Fungi",
+      "question": "What is the body structure of moulds made of?",
+      "options": [
+        "A) Thread-like hyphae forming a mycelium",
+        "B) Unicellular flagellated cells",
+        "C) Vascular bundles and stomata",
+        "D) Peptidoglycan cell walls"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Moulds are filamentous fungi whose vegetative bodies consist of thread-like hyphae aggregated into a mycelium."
+    },
+    {
+      "question_number": 152,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What are monocotyledons characterized by regarding their vascular bundle arrangement in stems?",
+      "options": [
+        "A) Vascular bundles arranged in a neat ring forming a central cylinder",
+        "B) Vascular bundles scattered throughout the stem ground tissue",
+        "C) Complete absence of vascular bundles",
+        "D) Exclusive presence of secondary cambium rings"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "In monocot stems, vascular bundles are scattered throughout the ground tissue rather than arranged in a single ring."
+    },
+    {
+      "question_number": 153,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "What respiratory organ is utilized by adult terrestrial amphibians such as frogs?",
+      "options": [
+        "A) Gills exclusively",
+        "B) Lungs and moist skin",
+        "C) Book lungs and tracheal tubes",
+        "D) Malpighian tubules"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Adult amphibians use both lungs and their thin, moist skin for cutaneous and pulmonary respiration."
+    },
+    {
+      "question_number": 154,
+      "topic": "Physiology - Nutrition",
+      "question": "Why do organisms require carbohydrates, proteins, and fats in bulk?",
+      "options": [
+        "A) They serve as the primary macronutrients providing energy and structural building blocks.",
+        "B) They act solely as catalytic enzyme co-factors in trace quantities.",
+        "C) They prevent transpirational water loss.",
+        "D) They form the viral capsid protein coat."
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Carbohydrates, proteins, and fats are macronutrients consumed in bulk quantities to supply energy and structural materials for growth."
+    },
+    {
+      "question_number": 155,
+      "topic": "Physiology - Growth & Development",
+      "question": "What is vernalisation?",
+      "options": [
+        "A) The promotion of flowering by a period of low chilling temperatures",
+        "B) The breaking of seed coats by concentrated sulfuric acid",
+        "C) The measurement of plant stem growth using an auxanometer",
+        "D) The shedding of insect exoskeletons"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Vernalisation refers to the cold-temperature requirement needed by certain plants to trigger floral development."
+    },
+    {
+      "question_number": 156,
+      "topic": "Physiology - Respiration",
+      "question": "What role does oxygen play in the electron transport chain of aerobic respiration?",
+      "options": [
+        "A) It acts as the final electron acceptor, combining with protons to form water.",
+        "B) It serves as a respiratory substrate broken down into glucose.",
+        "C) It initiates glycolysis in the cytoplasm.",
+        "D) It converts ethanol into carbon dioxide during fermentation."
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Oxygen functions as the terminal electron acceptor in oxidative phosphorylation, enabling continuous electron transport and maximal ATP generation."
+    },
+    {
+      "question_number": 157,
+      "topic": "Microbiology - Viruses",
+      "question": "Which virus classification group comprises double-stranded RNA (dsRNA) viruses?",
+      "options": [
+        "A) Group I",
+        "B) Group III",
+        "C) Group V",
+        "D) Group VI"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Group III viruses in the Baltimore classification system possess double-stranded RNA (dsRNA) genomes."
+    },
+    {
+      "question_number": 158,
+      "topic": "Microbiology - Bacteria",
+      "question": "What is the purpose of biochemical tests such as sugar fermentation and catalase tests in bacteriology?",
+      "options": [
+        "A) Determining the metabolic and enzymatic properties of bacterial strains for identification",
+        "B) Visualizing viral capsomeres under an electron microscope",
+        "C) Measuring the auxanometric growth rate of plant shoots",
+        "D) Inducing sporulation in zygomycetes moulds"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Biochemical tests assess specific metabolic enzymes produced by bacteria, aiding in their laboratory identification and classification."
+    },
+    {
+      "question_number": 159,
+      "topic": "Microbiology - Fungi",
+      "question": "What is the primary method of general reproduction in fungi?",
+      "options": [
+        "A) Binary fission like prokaryotes",
+        "B) Production of spores (sexual and asexual)",
+        "C) Seed formation inside ovaries",
+        "D) Budding exclusively in all multicellular species"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Fungi generally reproduce by producing spores, which can be generated asexually or sexually depending on environmental conditions."
+    },
+    {
+      "question_number": 160,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What are the two major divisions of the plant kingdom recognized in traditional surveys?",
+      "options": [
+        "A) Monera and Protista",
+        "B) Bryophyta (non-vascular) and Tracheophyta (vascular plants)",
+        "C) Invertebrata and Vertebrata",
+        "D) Zygomycota and Basidiomycota"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "The plant kingdom is broadly surveyed under Bryophyta (non-vascular) and Tracheophyta (vascular plants)."
+    },
+    {
+      "question_number": 161,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "What is the defining characteristic of Arthropoda?",
+      "options": [
+        "A) Soft unsegmented bodies with a mantle shell",
+        "B) Jointed appendages and a chitinous exoskeleton",
+        "C) Radial symmetry and water-vascular systems",
+        "D) Complete lack of body cavity or coelom"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Arthropods are distinguished by jointed legs/appendages and an external chitinous exoskeleton that undergoes periodic molting."
+    },
+    {
+      "question_number": 162,
+      "topic": "Physiology - Nutrition",
+      "question": "What is the role of nitrogen-fixing bacteria like Rhizobium in legume root nodules?",
+      "options": [
+        "A) Converting atmospheric nitrogen gas into nitrates/ammonia usable by the plant",
+        "B) Digesting dead organic matter on the soil surface",
+        "C) Synthesizing glucose via photosynthesis",
+        "D) Parasitizing host xylem vessels"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Rhizobium fixes atmospheric nitrogen into chemical forms that nourish the host leguminous plant."
+    },
+    {
+      "question_number": 163,
+      "topic": "Physiology - Growth & Development",
+      "question": "What is photoperiodism?",
+      "options": [
+        "A) The physiological response of plants to the relative lengths of light and dark periods, influencing flowering",
+        "B) The bending of plant shoots toward a light source",
+        "C) The measurement of plant growth velocity over time",
+        "D) The chilling requirement for seed germination"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Photoperiodism is the developmental response (such as flowering) of plants to the duration of day and night cycles."
+    },
+    {
+      "question_number": 164,
+      "topic": "Physiology - Respiration",
+      "question": "What is the primary difference between aerobic and anaerobic respiration in terms of energy yield?",
+      "options": [
+        "A) Aerobic respiration yields significantly more ATP (~38 ATP) because glucose is fully oxidized, whereas anaerobic respiration yields only a net 2 ATP from partial glycolysis.",
+        "B) Anaerobic respiration yields more energy than aerobic respiration.",
+        "C) Both yield identical amounts of ATP.",
+        "D) Aerobic respiration produces no ATP."
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Complete aerobic oxidation extracts much more energy (~38 ATP) than anaerobic fermentation, which only captures the net 2 ATP from glycolysis."
+    },
+    {
+      "question_number": 165,
+      "topic": "Microbiology - Viruses",
+      "question": "What is viral symmetry characterized by in viral morphology?",
+      "options": [
+        "A) Icosahedral/polyhedral, helical, spherical, or complex symmetries",
+        "B) Bilateral segmentation like annelids",
+        "C) Pentamerous radial symmetry",
+        "D) Asymmetrical amoeboid movement"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Viruses exhibit various morphological symmetries including icosahedral, helical, spherical, and complex structures."
+    },
+    {
+      "question_number": 166,
+      "topic": "Microbiology - Bacteria",
+      "question": "What is the genetic material arrangement in bacterial cells?",
+      "options": [
+        "A) Contained within a true double-membrane nucleus",
+        "B) Localized as free-floating DNA in a nucleoid region without a nuclear membrane",
+        "C) Enclosed in a viral protein capsid",
+        "D) Organized into multiple linear chromosomes with histones"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Bacteria are prokaryotes possessing a single circular DNA molecule located in an unmembrane-bound nucleoid region."
+    },
+    {
+      "question_number": 167,
+      "topic": "Microbiology - Fungi",
+      "question": "What are Zygomycetes characterized by?",
+      "options": [
+        "A) Septate hyphae and swimming flagellated spores",
+        "B) Aseptate (coenocytic) hyphae and zygospore formation during sexual reproduction (e.g., Rhizopus)",
+        "C) Unicellular budding yeast forms exclusively",
+        "D) Club-shaped basidia bearing mushrooms"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Zygomycetes feature coenocytic (aseptate) hyphae and form resistant zygospores during sexual reproduction."
+    },
+    {
+      "question_number": 168,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What are the two major groups of seed plants (spermatophytes)?",
+      "options": [
+        "A) Bryophytes and Pteridophytes",
+        "B) Gymnosperms (conifers) and Angiosperms (flowering plants)",
+        "C) Monocots and Lichens",
+        "D) Algae and Fungi"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Seed plants are divided into gymnosperms (naked seeds) and angiosperms (enclosed seeds/flowering plants)."
+    },
+    {
+      "question_number": 169,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "What is the key characteristic of mammalian reproduction?",
+      "options": [
+        "A) External fertilization in aquatic water bodies",
+        "B) Viviparous development where the embryo develops inside the mother's womb",
+        "C) Laying large numbers of microlecithal eggs with hard shells",
+        "D) Complete reliance on larval metamorphosis"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Mammals are typically viviparous, nourishing the developing embryo internally within the mother's womb."
+    },
+    {
+      "question_number": 170,
+      "topic": "Physiology - Nutrition",
+      "question": "What is the role of digestive enzymes in holozoic and saprophytic nutrition?",
+      "options": [
+        "A) Breaking down complex organic food molecules into simpler, absorbable units",
+        "B) Synthesizing glucose from carbon dioxide",
+        "C) Pumping oxygen across respiratory membranes",
+        "D) Regulating floral photoperiodism"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Digestive enzymes catalyze the breakdown of complex ingested or extracellular organic molecules into smaller, soluble molecules that can be absorbed."
+    },
+    {
+      "question_number": 171,
+      "topic": "Physiology - Growth & Development",
+      "question": "What is seed dormancy?",
+      "options": [
+        "A) The immediate germination of a seed upon contact with water",
+        "B) A state where a viable seed fails to germinate even under favorable environmental conditions due to internal or coat-imposed barriers",
+        "C) The death of the embryo during senescence",
+        "D) The process of secondary cambial thickening"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Seed dormancy is a temporary suspension of germination in viable seeds caused by factors like impermeable seed coats or immature embryos."
+    },
+    {
+      "question_number": 172,
+      "topic": "Physiology - Respiration",
+      "question": "What is alcoholic fermentation?",
+      "options": [
+        "A) An anaerobic pathway in yeast and some plants where pyruvate is converted into ethanol and carbon dioxide",
+        "B) The complete aerobic breakdown of glucose into water in mitochondria",
+        "C) The conversion of lactic acid into glucose in human muscles",
+        "D) The fixation of nitrogen in legume root nodules"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Alcoholic fermentation is an anaerobic process where yeast converts pyruvate into ethanol and carbon dioxide, releasing a small amount of ATP."
+    },
+    {
+      "question_number": 173,
+      "topic": "Microbiology - Viruses",
+      "question": "Which of the following describes the genetic core of viruses?",
+      "options": [
+        "A) They contain both DNA and RNA simultaneously in all species.",
+        "B) They contain either DNA or RNA, but never both, which can be single-stranded or double-stranded.",
+        "C) They lack any nucleic acid, consisting purely of carbohydrates.",
+        "D) They contain free ribosomal RNA."
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Viral genomes consist of either DNA or RNA (never both), existing in single-stranded or double-stranded linear or circular configurations."
+    },
+    {
+      "question_number": 174,
+      "topic": "Microbiology - Bacteria",
+      "question": "What is the function of bacterial endospores?",
+      "options": [
+        "A) Rapid sexual reproduction and conjugation",
+        "B) Survival under harsh, unfavorable environmental conditions (heat, desiccation, chemicals)",
+        "C) Photosynthetic carbon fixation",
+        "D) Locomotion in aquatic habitats"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Endospores are highly resistant, dormant structures formed by certain bacteria to survive extreme environmental stress."
+    },
+    {
+      "question_number": 175,
+      "topic": "Microbiology - Fungi",
+      "question": "What is the fungal structure responsible for producing spores in mushrooms (Basidiomycota)?",
+      "options": [
+        "A) Ascus",
+        "B) Basidium",
+        "C) Sporangium",
+        "D) Prothallus"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Basidiomycetes produce sexual spores externally on club-shaped structures called basidia."
+    },
+    {
+      "question_number": 176,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What is the function of the root cap in plant roots?",
+      "options": [
+        "A) Absorbing mineral salts and water",
+        "B) Protecting the delicate apical meristem as the root pushes through abrasive soil particles",
+        "C) Producing flowers and seeds",
+        "D) Conducting food to the leaves"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "The root cap protects the root apical meristem from damage as it forces its way through the soil."
+    },
+    {
+      "question_number": 177,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "What is the defining feature of flatworms (Platyhelminthes)?",
+      "options": [
+        "A) Segmented coelomic body cavities",
+        "B) Bilaterally symmetrical, dorsoventrally flattened bodies without a true coelom (acoelomate)",
+        "C) Hard calcareous shells and muscular feet",
+        "D) Jointed exoskeleton and compound eyes"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Platyhelminthes are unsegmented, acoelomate worms with flat, bilateral body plans."
+    },
+    {
+      "question_number": 178,
+      "topic": "Physiology - Nutrition",
+      "question": "How do autotrophs differ from heterotrophs in carbon utilization?",
+      "options": [
+        "A) Autotrophs fix inorganic carbon dioxide into organic molecules, whereas heterotrophs consume organic carbon compounds.",
+        "B) Heterotrophs synthesize all their biomolecules from sunlight alone.",
+        "C) Autotrophs require pre-formed protein molecules from other organisms.",
+        "D) There is no difference in carbon source."
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Autotrophs assimilate inorganic carbon (CO2) into organic matter, while heterotrophs rely on ingested organic carbon."
+    },
+    {
+      "question_number": 179,
+      "topic": "Physiology - Growth & Development",
+      "question": "What is the role of gibberellins in plant development?",
+      "options": [
+        "A) Stimulating stem elongation, breaking seed dormancy, and initiating flowering",
+        "B) Inducing leaf abscission and stomatal closure",
+        "C) Halting all meristematic cell division",
+        "D) Promoting root cap formation"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Gibberellins promote stem elongation, trigger seed germination by breaking dormancy, and assist in flowering."
+    },
+    {
+      "question_number": 180,
+      "topic": "Physiology - Respiration",
+      "question": "Where does oxidative phosphorylation and the electron transport chain occur in eukaryotes?",
+      "options": [
+        "A) Cytoplasm",
+        "B) Inner mitochondrial membrane",
+        "C) Mitochondrial matrix",
+        "D) Chloroplast stroma"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "The electron transport chain and ATP synthase enzymes are embedded in the inner mitochondrial membrane."
+    },
+    {
+      "question_number": 181,
+      "topic": "Microbiology - Viruses",
+      "question": "Which viral transmission mode involves sexual contact with an infected partner?",
+      "options": [
+        "A) Air-borne infection",
+        "B) Sexually transmitted disease (e.g., Retroviruses, human papillomavirus)",
+        "C) Faecal-Oral route",
+        "D) Zoonotic insect bite"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Sexually transmitted viruses, such as HIV (retrovirus) and human papillomavirus (HPV), are transmitted through sexual contact."
+    },
+    {
+      "question_number": 182,
+      "topic": "Microbiology - Bacteria",
+      "question": "What are beneficial nitrogen-fixing bacteria associated with legume roots called?",
+      "options": [
+        "A) Nitrosomonas",
+        "B) Rhizobium",
+        "C) Clostridium tetani",
+        "D) Mycobacterium tuberculosis"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Rhizobium species form symbiotic associations in legume root nodules to fix atmospheric nitrogen."
+    },
+    {
+      "question_number": 183,
+      "topic": "Microbiology - Fungi",
+      "question": "What is the fungal relationship found in lichens?",
+      "options": [
+        "A) Mutualistic association between a fungus and a photosynthetic algae or cyanobacterium",
+        "B) Parasitic infection of plant roots by mold",
+        "C) Predatory trapping of soil nematodes",
+        "D) Saprophytic decay of dead wood"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Lichens represent a classic mutualistic symbiosis between a fungal partner (mycobiont) and a photosynthetic partner (phycobiont)."
+    },
+    {
+      "question_number": 184,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What are the reproductive organs of flowering plants (angiosperms)?",
+      "options": [
+        "A) Cones and sporophylls",
+        "B) Flowers containing stamens (male) and carpels/pistils (female)",
+        "C) Prothalli and sporangia",
+        "D) Rhizoids and gemma cups"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Angiosperms produce flowers housing male stamens and female carpels for sexual reproduction."
+    },
+    {
+      "question_number": 185,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "What distinguishes vertebrates from invertebrates?",
+      "options": [
+        "A) Presence of a vertebral column and internal bony/cartilaginous skeleton",
+        "B) Absence of any nervous system",
+        "C) Unicellular cellular organization",
+        "D) Photosynthetic capabilities"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Vertebrates are distinguished by their spinal column (backbone) and internal skeleton."
+    },
+    {
+      "question_number": 186,
+      "topic": "Physiology - Nutrition",
+      "question": "What is the primary role of vitamins in animal nutrition?",
+      "options": [
+        "A) Acting as essential co-factors and catalysts in metabolic and biochemical reactions",
+        "B) Serving as the primary bulk energy source replacing carbohydrates",
+        "C) Forming rigid skeletal bone structures",
+        "D) Constructing viral capsids"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Vitamins function as crucial co-enzymes and metabolic regulators despite being required in trace amounts."
+    },
+    {
+      "question_number": 187,
+      "topic": "Physiology - Growth & Development",
+      "question": "What is the difference between primary and secondary plant growth?",
+      "options": [
+        "A) Primary growth increases plant length via apical meristems; secondary growth increases stem diameter/girth via cambium.",
+        "B) Primary growth occurs in roots only; secondary growth occurs in flowers.",
+        "C) Primary growth is driven by auxins; secondary growth is driven by sunlight.",
+        "D) There is no structural difference."
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Primary growth elongates the plant body, while secondary growth adds thickness and wood via lateral cambial meristems."
+    },
+    {
+      "question_number": 188,
+      "topic": "Physiology - Respiration",
+      "question": "Why is anaerobic respiration less energetically efficient than aerobic respiration?",
+      "options": [
+        "A) Because glucose is only partially broken down (leaving energy trapped in products like ethanol or lactic acid), yielding only 2 ATP instead of ~38 ATP.",
+        "B) Because it requires excessive amounts of oxygen.",
+        "C) Because mitochondria multiply uncontrollably.",
+        "D) Because it produces toxic levels of carbon dioxide gas."
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Anaerobic respiration halts after glycolysis/fermentation, leaving most chemical energy locked in organic by-products rather than fully oxidized."
+    },
+    {
+      "question_number": 189,
+      "topic": "Microbiology - Viruses",
+      "question": "What are viral capsomeres?",
+      "options": [
+        "A) Protein subunits that assemble to form the viral capsid",
+        "B) Lipid envelope layers derived from host membranes",
+        "C) Single-stranded RNA genomic strands",
+        "D) Bacterial cell wall peptidoglycan units"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Capsomeres are the individual protein subunits that aggregate to form the protective viral capsid."
+    },
+    {
+      "question_number": 190,
+      "topic": "Microbiology - Bacteria",
+      "question": "What is the Gram staining reaction of bacteria with thick peptidoglycan cell walls?",
+      "options": [
+        "A) Gram-negative (staining pink/red)",
+        "B) Gram-positive (staining purple/violet)",
+        "C) Acid-fast (staining bright red)",
+        "D) Endospore green"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Gram-positive bacteria possess thick peptidoglycan layers that retain the crystal violet stain, appearing purple under a microscope."
+    },
+    {
+      "question_number": 191,
+      "topic": "Microbiology - Fungi",
+      "question": "What are mycorrhizae?",
+      "options": [
+        "A) Parasitic fungal infections destroying plant roots",
+        "B) Mutualistic associations between fungi and the roots of vascular plants, enhancing nutrient absorption",
+        "C) Unicellular yeasts used in baking bread",
+        "D) Bacterial colonies fixing atmospheric nitrogen"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Mycorrhizae are beneficial symbiotic associations between fungi and plant roots that significantly improve water and mineral uptake."
+    },
+    {
+      "question_number": 192,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What are the distinguishing features of gymnosperm leaves?",
+      "options": [
+        "A) Broad flat lamina with net-like veins",
+        "B) Needle-shaped, scale-like, or narrow linear leaves adapted to reduce water loss",
+        "C) Complete absence of vascular veins",
+        "D) Fleshy insect-trapping pitchers"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Gymnosperm leaves (such as pine needles) are frequently needle-like or scale-like, adapted for water conservation."
+    },
+    {
+      "question_number": 193,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "What is the water-vascular system characteristic of?",
+      "options": [
+        "A) Annelid earthworms",
+        "B) Echinoderms (such as starfishes) used for locomotion, feeding, and respiration",
+        "C) Arthropod insect tracheae",
+        "D) Poriferan sponge canals"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Echinoderms possess a unique hydraulic water-vascular system operating tube feet for locomotion and food capture."
+    },
+    {
+      "question_number": 194,
+      "topic": "Physiology - Nutrition",
+      "question": "What is the role of the hepatic portal system or internal transport in animal nutrition?",
+      "options": [
+        "A) Transporting absorbed digested nutrients from the digestive tract to body tissues for utilization",
+        "B) Synthesizing solar photons into ATP",
+        "C) Excreting solid feces via muscular ecdysis",
+        "D) Producing viral capsomeres"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Internal transport and circulatory systems distribute absorbed nutrients from digestion throughout the animal's body."
+    },
+    {
+      "question_number": 195,
+      "topic": "Physiology - Growth & Development",
+      "question": "What is indeterminate (unlimited) growth in plants?",
+      "options": [
+        "A) Growth that continues throughout the plant's life cycle, typical of root and shoot apexes in perennials",
+        "B) Growth that stops permanently after fruit formation",
+        "C) The immediate senescence of leaves",
+        "D) Unicellular binary fission in bacteria"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Indeterminate or unlimited growth means the organism continues to grow indefinitely throughout its lifespan, as seen in plant roots and shoots."
+    },
+    {
+      "question_number": 196,
+      "topic": "Physiology - Respiration",
+      "question": "What is the overall chemical word equation for aerobic cellular respiration?",
+      "options": [
+        "A) Carbon dioxide + Water + Light energy → Glucose + Oxygen",
+        "B) Glucose + Oxygen → Carbon dioxide + Water + Energy (ATP)",
+        "C) Glucose → Ethanol + Carbon dioxide + 2 ATP",
+        "D) Nitrogen + Hydrogen → Ammonia"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Aerobic respiration oxidizes glucose using oxygen to produce carbon dioxide, water, and ATP energy."
+    },
+    {
+      "question_number": 197,
+      "topic": "Microbiology - Viruses",
+      "question": "What is a complex virus structure example?",
+      "options": [
+        "A) Tobacco mosaic rod virus",
+        "B) Bacteriophage or Poxvirus",
+        "C) Simple spherical influenza virus",
+        "D) Picornavirus icosahedron"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Complex viruses possess intricate symmetries combining multiple structural elements, such as bacteriophages and poxviruses."
+    },
+    {
+      "question_number": 198,
+      "topic": "Microbiology - Bacteria",
+      "question": "What is the primary role of nitrifying bacteria in soil ecosystems?",
+      "options": [
+        "A) Converting ammonia into nitrites and nitrates, making nitrogen available to plants",
+        "B) Fixing atmospheric nitrogen gas into organic protein",
+        "C) Decomposing cellulose cell walls",
+        "D) Causing epidemic cholera infections"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Nitrifying bacteria (like Nitrosomonas and Nitrobacter) oxidize ammonia into nitrites and nitrates in the nitrogen cycle."
+    },
+    {
+      "question_number": 199,
+      "topic": "Microbiology - Fungi",
+      "question": "What is Rhizopus stolonifer commonly known as?",
+      "options": [
+        "A) Brewer's yeast",
+        "B) Black bread mould",
+        "C) Death cap poisonous mushroom",
+        "D) Penicillin-producing mould"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Rhizopus stolonifer is the common black bread mould frequently studied in introductory biology laboratories."
+    },
+    {
+      "question_number": 200,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What are the key structural differences between monocotyledonous and dicotyledonous leaves?",
+      "options": [
+        "A) Monocots have parallel leaf veins and floral parts in threes; dicots have net-like veins and floral parts in fours or fives.",
+        "B) Monocots have net-like veins; dicots have parallel veins.",
+        "C) Monocots possess woody secondary cambium rings; dicots lack them entirely.",
+        "D) Monocots are exclusively non-vascular mosses."
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Monocots feature parallel leaf venation and trimerous flowers, whereas dicots display reticulate (net-like) venation and tetramerous/pentamerous flowers."
+    },
+    {
+      "question_number": 201,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "What is the primary characteristic of arthropod growth and development?",
+      "options": [
+        "A) Continuous smooth increase in body size without shedding",
+        "B) Periodic shedding of the chitinous exoskeleton (ecdysis or molting) to allow size increases",
+        "C) Complete absence of larval stages",
+        "D) Internal viviparous placental nourishment exclusively"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Because arthropods possess a rigid chitinous exoskeleton, they must periodically shed it (ecdysis) to grow."
+    },
+    {
+      "question_number": 202,
+      "topic": "Physiology - Nutrition",
+      "question": "What is the function of haustoria in parasitic plants like Cuscuta?",
+      "options": [
+        "A) Photosynthesizing glucose in sunlight",
+        "B) Penetrating the host plant's tissues to absorb water, minerals, and organic nutrients",
+        "C) Fixing atmospheric nitrogen in root nodules",
+        "D) Dispersing seeds via wind currents"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Haustoria are specialized parasitic roots that tap into the host's vascular bundles to extract sustenance."
+    },
+    {
+      "question_number": 203,
+      "topic": "Physiology - Growth & Development",
+      "question": "What is the role of the pituitary gland's somatotrophic hormone in animal growth?",
+      "options": [
+        "A) Regulating general somatic growth and skeletal development",
+        "B) Inducing complete larval metamorphosis",
+        "C) Regulating blood glucose levels via insulin",
+        "D) Controlling skin pigmentation"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Somatotrophic hormone (growth hormone) secreted by the pituitary gland is vital for controlling somatic growth and skeletal elongation in animals."
+    },
+    {
+      "question_number": 204,
+      "topic": "Physiology - Respiration",
+      "question": "What role do lenticels play in woody plant stems?",
+      "options": [
+        "A) Absorbing water from soil like root hairs",
+        "B) Serving as porous openings in bark that facilitate internal gaseous exchange",
+        "C) Storing excess starch reserves",
+        "D) Producing floral nectar"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Lenticels are raised porous openings on woody stems and bark that permit gas exchange between internal tissues and the atmosphere."
+    },
+    {
+      "question_number": 205,
+      "topic": "Microbiology - Viruses",
+      "question": "What are insect viruses used for in modern agriculture?",
+      "options": [
+        "A) Powerful bio-control agents to manage pest insect populations",
+        "B) Fertilizers enriching soil nitrogen content",
+        "C) Antibiotics curing bacterial blight in crops",
+        "D) Growth promoters increasing fruit size"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Insect-pathogenic viruses (like Ascovirus) serve as effective bio-control agents in agriculture."
+    },
+    {
+      "question_number": 206,
+      "topic": "Microbiology - Bacteria",
+      "question": "What is the morphological arrangement of bacilli bacteria growing in chains?",
+      "options": [
+        "A) Streptobacilli",
+        "B) Staphylobacilli",
+        "C) Diplobacilli",
+        "D) Sarcina"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Rod-shaped bacilli arranged in chain formations are termed streptobacilli."
+    },
+    {
+      "question_number": 207,
+      "topic": "Microbiology - Fungi",
+      "question": "What is Saccharomyces cerevisiae commonly referred to as?",
+      "options": [
+        "A) Bread mould",
+        "B) Baker's or brewer's yeast",
+        "C) Penicillin mould",
+        "D) Death cap mushroom"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Saccharomyces cerevisiae is the well-known yeast utilized in baking and brewing industries."
+    },
+    {
+      "question_number": 208,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What are the two major categories of vascular transport tissue in tracheophytes?",
+      "options": [
+        "A) Cortex and Pith",
+        "B) Xylem (water/minerals) and Phloem (organic food/sugars)",
+        "C) Epidermis and Periderm",
+        "D) Spores and Seeds"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Tracheophytes possess xylem for water/mineral transport and phloem for distributing organic nutrients."
+    },
+    {
+      "question_number": 209,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "What is the primary habitat and characteristic of sponges (Porifera)?",
+      "options": [
+        "A) Terrestrial dry deserts",
+        "B) Aquatic environments (mostly marine), sessile filter-feeders with porous bodies",
+        "C) Parasitic endoparasites in mammalian bloodstreams",
+        "D) Aerial flying insects"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Sponges are predominantly aquatic, sessile benthic organisms that filter water through pores to capture food particles."
+    },
+    {
+      "question_number": 210,
+      "topic": "Physiology - Nutrition",
+      "question": "What is the role of chemosynthesis in chemo-autotrophic organisms?",
+      "options": [
+        "A) Deriving energy from oxidizing inorganic compounds to fix carbon dioxide into organic food",
+        "B) Absorbing sunlight via chlorophyll pigments",
+        "C) Digesting animal tissue holozoically",
+        "D) Decomposing dead organic matter saprophytically"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Chemosynthesis uses energy released from chemical oxidation of inorganic molecules to synthesize organic food without sunlight."
+    },
+    {
+      "question_number": 211,
+      "topic": "Physiology - Growth & Development",
+      "question": "What instrument measures plant growth?",
+      "options": [
+        "A) Auxanometer",
+        "B) Barometer",
+        "C) Calorimeter",
+        "D) Spirometer"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "An auxanometer records linear plant growth rates over time."
+    },
+    {
+      "question_number": 212,
+      "topic": "Physiology - Respiration",
+      "question": "What occurs during the Krebs cycle in aerobic respiration?",
+      "options": [
+        "A) Pyruvate is fully oxidized, releasing carbon dioxide and generating electron carriers (NADH and FADH2) for the electron transport chain.",
+        "B) Glucose is split into pyruvate in the cytoplasm.",
+        "C) Oxygen is converted directly into glucose.",
+        "D) Ethanol is fermented into lactic acid."
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "The Krebs cycle processes pyruvate within the mitochondrial matrix, releasing carbon dioxide and producing high-energy electron carriers."
+    },
+    {
+      "question_number": 213,
+      "topic": "Microbiology - Viruses",
+      "question": "Which Baltimore group includes double-stranded DNA (dsDNA) viruses?",
+      "options": [
+        "A) Group I",
+        "B) Group IV",
+        "C) Group VI",
+        "D) Group VII"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Group I consists of double-stranded DNA viruses."
+    },
+    {
+      "question_number": 214,
+      "topic": "Microbiology - Bacteria",
+      "question": "What is the Bergey's Manual of Systematic Bacteriology used for?",
+      "options": [
+        "A) Modern genetic and taxonomic classification of bacteria",
+        "B) Cataloging plant virus transmission routes",
+        "C) Identifying fungal spore types in mushrooms",
+        "D) Classifying vertebrate animal phyla"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Bergey's Manual provides the authoritative system for modern gene-based taxonomy and classification of bacteria."
+    },
+    {
+      "question_number": 215,
+      "topic": "Microbiology - Fungi",
+      "question": "What is the cell wall composition of fungi?",
+      "options": [
+        "A) Cellulose",
+        "B) Chitin",
+        "C) Peptidoglycan",
+        "D) Lignin"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Fungal cell walls are characteristically composed of rigid chitin."
+    },
+    {
+      "question_number": 216,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What is the prothallus in ferns?",
+      "options": [
+        "A) The dominant sporophyte plant body",
+        "B) A small, heart-shaped gametophyte stage bearing reproductive organs",
+        "C) The root cap protecting apical meristems",
+        "D) A woody secondary growth cambium ring"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "The prothallus is the heart-shaped gametophyte generation in ferns that produces gametes."
+    },
+    {
+      "question_number": 217,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "What is the main feature of Coelenterates (Cnidarians)?",
+      "options": [
+        "A) Segmented coelomic body",
+        "B) Radial symmetry, diploblastic tissue layers, and stinging cells (nematocysts/cnidocytes)",
+        "C) Hard chitinous exoskeleton and jointed legs",
+        "D) Vertebral spinal column"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Coelenterates exhibit radial symmetry, two cell layers, and specialized stinging cells."
+    },
+    {
+      "question_number": 218,
+      "topic": "Physiology - Nutrition",
+      "question": "What is the role of insulin and pancreatic secretions in animal metabolism?",
+      "options": [
+        "A) Regulating blood glucose levels and energy storage",
+        "B) Producing fungal chitin walls",
+        "C) Fixing atmospheric nitrogen gas",
+        "D) Driving transpirational water pull"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Insulin regulates glucose uptake and carbohydrate metabolism in animals."
+    },
+    {
+      "question_number": 219,
+      "topic": "Physiology - Growth & Development",
+      "question": "What is heterophylly?",
+      "options": [
+        "A) The occurrence of different leaf shapes on the same plant during different developmental stages or environmental conditions (an example of plant plasticity)",
+        "B) The complete absence of leaves",
+        "C) The parallel venation of monocots",
+        "D) The autumnal shedding of bark"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Heterophylly is the manifestation of different leaf morphologies within a single plant, demonstrating developmental plasticity."
+    },
+    {
+      "question_number": 220,
+      "topic": "Physiology - Respiration",
+      "question": "What is the role of mitochondria in cellular respiration?",
+      "options": [
+        "A) Serving as the primary site for aerobic respiration (Krebs cycle and oxidative phosphorylation)",
+        "B) Synthesizing glucose via sunlight absorption",
+        "C) Digesting food particles via extracellular enzymes",
+        "D) Storing cellular water vacuoles"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Mitochondria are the intracellular powerhouses where aerobic respiration generates ATP."
+    },
+    {
+      "question_number": 221,
+      "topic": "Microbiology - Viruses",
+      "question": "What are retroviruses?",
+      "options": [
+        "A) RNA viruses that use reverse transcriptase to synthesize DNA inside host cells (e.g., HIV)",
+        "B) DNA viruses that replicate in the cytoplasm without host cells",
+        "C) Plant viruses that cause tobacco mosaic disease",
+        "D) Bacteriophages infecting soil bacteria"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Retroviruses are RNA viruses equipped with reverse transcriptase to convert their RNA genome into DNA upon infecting a host."
+    },
+    {
+      "question_number": 222,
+      "topic": "Microbiology - Bacteria",
+      "question": "What is the Gram-staining characteristic of bacteria with thin peptidoglycan walls surrounded by an outer membrane?",
+      "options": [
+        "A) Gram-positive (purple)",
+        "B) Gram-negative (pink/red)",
+        "C) Acid-fast (red)",
+        "D) Endospore green"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Gram-negative bacteria possess thin peptidoglycan layers and an outer membrane, losing crystal violet and staining pink/red with safranin."
+    },
+    {
+      "question_number": 223,
+      "topic": "Microbiology - Fungi",
+      "question": "What is Penicillium notatum famous for?",
+      "options": [
+        "A) Causing systemic candidiasis in humans",
+        "B) Producing the antibiotic penicillin",
+        "C) Forming mycorrhizal partnerships with pine trees",
+        "D) Fermenting palm wine into ethanol"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Penicillium notatum is the mold species from which penicillin was discovered and extracted."
+    },
+    {
+      "question_number": 224,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What are bryophytes?",
+      "options": [
+        "A) Tall woody trees with vascular xylem and phloem",
+        "B) Small non-vascular land plants (mosses and liverworts) lacking true roots, stems, and leaves",
+        "C) Flowering angiosperms with enclosed seeds",
+        "D) Marine kelps with silica cell walls"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Bryophytes are primitive non-vascular land plants dependent on water for reproduction."
+    },
+    {
+      "question_number": 225,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "What is the primary feature of annelids?",
+      "options": [
+        "A) Jointed legs and chitinous exoskeletons",
+        "B) Segmented worm bodies (metamerism) with a true coelom",
+        "C) Radial symmetry and stinging tentacles",
+        "D) Unsegmented soft bodies with mantle shells"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Annelids are characterized by segmented body rings (metameric segmentation) and internal coelomic cavities."
+    },
+    {
+      "question_number": 226,
+      "topic": "Physiology - Nutrition",
+      "question": "What is insectivorous nutrition in angiosperms?",
+      "options": [
+        "A) Parasitizing host roots for water",
+        "B) Trapping and digesting insects to obtain vital nitrogen in nutrient-deficient soils",
+        "C) Synthesizing glucose via chemosynthesis",
+        "D) Absorbing dissolved organic matter from dead wood"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Insectivorous plants capture insects to compensate for nitrogen deficiencies in their soil habitats."
+    },
+    {
+      "question_number": 227,
+      "topic": "Physiology - Growth & Development",
+      "question": "What is the role of abscisic acid (ABA) in plants?",
+      "options": [
+        "A) Promoting cell elongation and root growth",
+        "B) Acting as a stress hormone inducing stomatal closure and maintaining seed dormancy",
+        "C) Inducing female flower production",
+        "D) Stimulating fruit ripening"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Abscisic acid regulates stress responses like drought-induced stomatal closure and enforces seed dormancy."
+    },
+    {
+      "question_number": 228,
+      "topic": "Physiology - Respiration",
+      "question": "What is the end-product of glycolysis entering aerobic respiration?",
+      "options": [
+        "A) Pyruvate (pyruvic acid)",
+        "B) Ethanol and carbon dioxide",
+        "C) Lactic acid",
+        "D) Glucose-6-phosphate"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Glycolysis converts one glucose molecule into two molecules of pyruvate."
+    },
+    {
+      "question_number": 229,
+      "topic": "Microbiology - Viruses",
+      "question": "What is tobacco mosaic virus (TMV)?",
+      "options": [
+        "A) A classic plant virus infecting tobacco plants and causing mosaic-like mottling on leaves",
+        "B) An animal retrovirus infecting human T-cells",
+        "C) A bacteriophage parasitizing E. coli",
+        "D) A fungal mould producing penicillin"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "TMV is a well-studied helical plant virus that infects tobacco and related solanaceous plants."
+    },
+    {
+      "question_number": 230,
+      "topic": "Microbiology - Bacteria",
+      "question": "What are Spirillae?",
+      "options": [
+        "A) Spherical cocci bacteria",
+        "B) Rod-shaped bacilli bacteria",
+        "C) Spiral-shaped bacteria (e.g., Spirillum)",
+        "D) Comma-shaped vibrios"
+      ],
+      "correct_answer": "C",
+      "detailed_explanation": "Spirillae are rigid spiral-shaped bacterial cells."
+    },
+    {
+      "question_number": 231,
+      "topic": "Microbiology - Fungi",
+      "question": "What are Basidiomycetes?",
+      "options": [
+        "A) Club fungi that produce sexual spores externally on basidia, including mushrooms and bracket fungi",
+        "B) Unicellular yeasts reproducing by binary fission",
+        "C) Moulds with coenocytic hyphae and zygospores",
+        "D) Imperfect fungi lacking sexual stages"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Basidiomycetes are club fungi producing spores on basidia, exemplified by edible and poisonous mushrooms."
+    },
+    {
+      "question_number": 232,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What is the distinction between monocots and dicots regarding flower part multiples?",
+      "options": [
+        "A) Monocots have parts in threes; dicots have parts in fours or fives.",
+        "B) Monocots have parts in tens; dicots have parts in twos.",
+        "C) Monocots lack flowers entirely.",
+        "D) Dicot flowers are always wind-pollinated."
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Floral symmetry in monocots is typically trimerous (multiples of 3), whereas dicots are tetramerous or pentamerous (multiples of 4 or 5)."
+    },
+    {
+      "question_number": 233,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "What is the defining characteristic of arthropods?",
+      "options": [
+        "A) Soft unsegmented bodies with mantle shells",
+        "B) Jointed appendages and a chitinous exoskeleton",
+        "C) Radial water-vascular systems",
+        "D) Vertebral backbones"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Arthropods possess jointed limbs and an external chitinous exoskeleton."
+    },
+    {
+      "question_number": 234,
+      "topic": "Physiology - Nutrition",
+      "question": "What is saprophytic nutrition in decomposers?",
+      "options": [
+        "A) Secretion of digestive enzymes onto dead organic matter and absorption of dissolved products",
+        "B) Ingestion of live animal prey into internal stomachs",
+        "C) Parasitic attachment to living plant xylem",
+        "D) Photosynthetic light trapping"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Saprophytic decomposers digest dead organic matter externally and absorb the resulting soluble nutrients."
+    },
+    {
+      "question_number": 235,
+      "topic": "Physiology - Growth & Development",
+      "question": "What is dedifferentiation in plant biology?",
+      "options": [
+        "A) The reversion of mature specialized cells to an undifferentiated meristematic state capable of division",
+        "B) The permanent death of plant tissues during senescence",
+        "C) The elongation of cells via water vacuolation",
+        "D) The primary growth of shoot apexes"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Dedifferentiation occurs when specialized permanent cells regain meristematic division capability."
+    },
+    {
+      "question_number": 236,
+      "topic": "Physiology - Respiration",
+      "question": "Why do plants need oxygen for respiration?",
+      "options": [
+        "A) To act as the terminal electron acceptor during aerobic respiration in mitochondria, releasing ATP energy from glucose",
+        "B) To synthesize glucose during daylight photosynthesis",
+        "C) To maintain root turgor pressure in soils",
+        "D) To open and close stoma guard cells"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Oxygen is required as the final electron acceptor in mitochondrial aerobic respiration to produce ATP."
+    },
+    {
+      "question_number": 237,
+      "topic": "Microbiology - Viruses",
+      "question": "What is viral host range?",
+      "options": [
+        "A) The spectrum of host species or cell types a specific virus can infect",
+        "B) The geographic distribution of viral outbreaks across continents",
+        "C) The temperature range required for viral crystal formation",
+        "D) The molecular weight of viral capsomeres"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Host range refers to the specific range of hosts and cell types susceptible to infection by a given virus."
+    },
+    {
+      "question_number": 238,
+      "topic": "Microbiology - Bacteria",
+      "question": "What are autotrophic bacteria?",
+      "options": [
+        "A) Bacteria capable of synthesizing their own organic food via photosynthesis or chemosynthesis",
+        "B) Bacteria that rely exclusively on pre-formed host organic tissues",
+        "C) Parasitic pathogens causing human disease",
+        "D) Fungal decomposers of dead wood"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Autotrophic bacteria manufacture organic nutrients independently using light or chemical oxidation."
+    },
+    {
+      "question_number": 239,
+      "topic": "Microbiology - Fungi",
+      "question": "What are the common features of fungal reproduction?",
+      "options": [
+        "A) Spore production via sporangia, conidiophores, or fruiting bodies, as well as budding in yeasts",
+        "B) Binary fission exclusively like bacteria",
+        "C) Seed formation inside true carpels",
+        "D) Flagellated swimming gametes in dry air"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Fungi reproduce primarily through various spore-forming structures or vegetative budding (in yeasts)."
+    },
+    {
+      "question_number": 240,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What are angiosperms?",
+      "options": [
+        "A) Flowering plants that produce seeds enclosed within fruits",
+        "B) Non-vascular mosses lacking xylem",
+        "C) Gymnosperms bearing exposed seeds on cones",
+        "D) Seedless vascular ferns reproducing via prothalli"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Angiosperms are flowering seed plants whose seeds are enclosed within fruit ovaries."
+    },
+    {
+      "question_number": 241,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "What is indirect development in animals?",
+      "options": [
+        "A) Development involving a larval stage that undergoes drastic metamorphosis into the adult form",
+        "B) Direct birth of miniature adults resembling parents",
+        "C) Embryonic development inside maternal wombs",
+        "D) Asexual budding without fertilization"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Indirect development features a distinct larval stage that transforms into an adult via metamorphosis."
+    },
+    {
+      "question_number": 242,
+      "topic": "Physiology - Nutrition",
+      "question": "What is the primary role of autotrophic green plants in global ecosystems?",
+      "options": [
+        "A) Acting as primary producers that convert solar energy and inorganic matter into organic food for all other heterotrophic life",
+        "B) Decomposing dead animal carrion on forest floors",
+        "C) Fixing atmospheric nitrogen into soil ammonia exclusively",
+        "D) Parasitizing mammalian hosts"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Green plants serve as primary producers supporting nearly all heterotrophic food webs through photosynthesis."
+    },
+    {
+      "question_number": 243,
+      "topic": "Physiology - Growth & Development",
+      "question": "What is redifferentiation in plants?",
+      "options": [
+        "A) The process where dedifferentiated meristematic cells redifferentiate into specialized permanent tissues to perform specific functions",
+        "B) The initial embryonic cell division stage",
+        "C) The programmed death of cells during senescence",
+        "D) The elongation of cells via water absorption"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Redifferentiation occurs when dedifferentiated cells specialize once again into permanent functional tissues."
+    },
+    {
+      "question_number": 244,
+      "topic": "Physiology - Respiration",
+      "question": "What is the role of respiratory surfaces in animals?",
+      "options": [
+        "A) Providing specialized vascularized areas with thin walls and large surface areas for efficient gas exchange with the environment",
+        "B) Synthesizing glucose from sunlight",
+        "C) Digesting food proteins in stomachs",
+        "D) Pumping blood through circulatory vessels"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Respiratory surfaces facilitate rapid gas exchange between the organism and its environment."
+    },
+    {
+      "question_number": 245,
+      "topic": "Microbiology - Viruses",
+      "question": "What is viral genetic material diversity?",
+      "options": [
+        "A) Viruses can contain DNA or RNA, single-stranded or double-stranded, linear or circular.",
+        "B) Viruses always contain double-stranded circular DNA and RNA simultaneously.",
+        "C) Viruses lack nucleic acids entirely.",
+        "D) Viruses contain triple-stranded ribosomal RNA."
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Viral genomes exhibit immense diversity, appearing as single or double-stranded DNA or RNA in various configurations."
+    },
+    {
+      "question_number": 246,
+      "topic": "Microbiology - Bacteria",
+      "question": "What are heterotrophic bacteria?",
+      "options": [
+        "A) Bacteria that obtain carbon and energy from pre-formed organic matter (saprophytic or parasitic)",
+        "B) Bacteria that manufacture food via sunlight photosynthesis",
+        "C) Chemolithotrophs oxidizing inorganic sulfur",
+        "D) Nitrogen-fixing plant symbionts exclusively"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Heterotrophic bacteria rely on organic carbon sources for nutrition."
+    },
+    {
+      "question_number": 247,
+      "topic": "Microbiology - Fungi",
+      "question": "What are Ascomycetes characterized by?",
+      "options": [
+        "A) Sac-like reproductive structures ( asci ) containing sexual ascospores",
+        "B) Club-shaped basidia bearing mushrooms",
+        "C) Aseptate hyphae and zygospores",
+        "D) Unicellular prokaryotic organization"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Ascomycetes (sac fungi) produce sexual spores inside microscopic sac-like asci."
+    },
+    {
+      "question_number": 248,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What is the function of root systems in flowering plants?",
+      "options": [
+        "A) Anchorage, water/mineral absorption, and food storage",
+        "B) Photosynthesis and transpirational gas exchange",
+        "C) Producing showy floral petals and nectar",
+        "D) Dispersing pollen grains via wind"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Roots anchor the plant, absorb water and minerals, and store reserve nutrients."
+    },
+    {
+      "question_number": 249,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "What is the key characteristic of molluscs?",
+      "options": [
+        "A) Segmented body rings with nephridia",
+        "B) Soft unsegmented bodies usually protected by a calcium carbonate shell secreted by a mantle",
+        "C) Jointed chitinous exoskeletons",
+        "D) Radial water-vascular systems"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Molluscs feature soft unsegmented bodies often housed within protective shells."
+    },
+    {
+      "question_number": 250,
+      "topic": "Physiology - Nutrition",
+      "question": "What is the nutritional role of minerals and vitamins in organisms?",
+      "options": [
+        "A) Acting as essential co-factors, catalysts, and regulators in metabolic pathways",
+        "B) Serving as primary bulk energy fuels",
+        "C) Forming structural viral capsids",
+        "D) Driving plant stem elongation"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Vitamins and minerals regulate vital metabolic and enzymatic reactions as co-factors."
+    },
+    {
+      "question_number": 251,
+      "topic": "Physiology - Growth & Development",
+      "question": "What are the stages of plant growth?",
+      "options": [
+        "A) Cell division, cell enlargement/elongation, and cell maturation",
+        "B) Fertilization, cleavage, and gastrulation",
+        "C) Glycolysis, Krebs cycle, and electron transport",
+        "D) Spore germination and prothallus formation"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Plant growth progresses through cell division, elongation, and maturation/differentiation."
+    },
+    {
+      "question_number": 252,
+      "topic": "Physiology - Respiration",
+      "question": "What is cellular respiration?",
+      "options": [
+        "A) The enzymatic breakdown of complex organic molecules within cells to release energy and synthesize ATP",
+        "B) The uptake of solar photons by chloroplasts to manufacture glucose",
+        "C) The mechanical movement of air into animal lungs",
+        "D) The mitotic division of bacterial cells"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Cellular respiration is the intracellular catabolism of organic molecules to release energy trapped as ATP."
+    },
+    {
+      "question_number": 253,
+      "topic": "Microbiology - Viruses",
+      "question": "What are viral envelopes composed of?",
+      "options": [
+        "A) Peptidoglycan and chitin",
+        "B) A lipoprotein layer derived from the host cell membrane surrounding the capsid",
+        "C) Cellulose microfibrils",
+        "D) Pure nucleic acid strands"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Viral envelopes consist of host-derived lipoprotein membranes encasing the capsid."
+    },
+    {
+      "question_number": 254,
+      "topic": "Microbiology - Bacteria",
+      "question": "What is binary fission in bacteria?",
+      "options": [
+        "A) Asexual reproduction where a single bacterial cell divides into two identical daughter cells",
+        "B) Sexual conjugation exchanging plasmid DNA",
+        "C) Spore formation under extreme heat stress",
+        "D) Budding of unicellular yeast cells"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Binary fission is the primary asexual reproduction mechanism in bacteria resulting in two identical cells."
+    },
+    {
+      "question_number": 255,
+      "topic": "Microbiology - Fungi",
+      "question": "What is Mycology?",
+      "options": [
+        "A) The scientific study of fungi",
+        "B) The study of viral pathogens",
+        "C) The classification of bacterial strains",
+        "D) The physiology of plant leaves"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Mycology is the scientific study of fungi."
+    },
+    {
+      "question_number": 256,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What is the distinction between gymnosperm and angiosperm seeds?",
+      "options": [
+        "A) Gymnosperm seeds are naked on cones; angiosperm seeds are enclosed within fruit ovaries.",
+        "B) Gymnosperm seeds have two cotyledons; angiosperms have none.",
+        "C) Angiosperm seeds lack seed coats entirely.",
+        "D) Gymnosperm seeds are dispersed by animal digestion of fleshy fruits."
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Gymnosperm seeds are unenclosed (naked), whereas angiosperm seeds are enclosed inside fruits."
+    },
+    {
+      "question_number": 257,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "What is the body plan of Coelenterates?",
+      "options": [
+        "A) Diploblastic sac-like body with radial symmetry and stinging tentacles",
+        "B) Triploblastic segmented coelomate body",
+        "C) Asymmetrical cellular aggregate without tissues",
+        "D) Vertebrate bony endoskeleton"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Coelenterates feature a two-layered radial body plan with tentacles."
+    },
+    {
+      "question_number": 258,
+      "topic": "Physiology - Nutrition",
+      "question": "What is holozoic nutrition characterized by?",
+      "options": [
+        "A) Ingestion of whole food items, internal digestion, and absorption",
+        "B) Absorption of dissolved dead organic matter",
+        "C) Parasitic attachment to host xylem",
+        "D) Photosynthetic carbon fixation"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Holozoic nutrition involves ingesting and internally digesting solid or liquid food."
+    },
+    {
+      "question_number": 259,
+      "topic": "Physiology - Growth & Development",
+      "question": "What is the function of auxins in plants?",
+      "options": [
+        "A) Promoting cell elongation, root initiation, and apical dominance",
+        "B) Inhibiting all cellular division permanently",
+        "C) Inducing fruit drop and senescence",
+        "D) Synthesizing peptidoglycan walls"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Auxins stimulate cell elongation and root growth while maintaining apical dominance."
+    },
+    {
+      "question_number": 260,
+      "topic": "Physiology - Respiration",
+      "question": "What is the net ATP yield of glycolysis per glucose molecule?",
+      "options": [
+        "A) Net 2 ATP",
+        "B) Net 38 ATP",
+        "C) Net 36 ATP",
+        "D) Zero ATP"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Glycolysis consumes 2 ATP and produces 4 ATP, yielding a net gain of 2 ATP."
+    },
+    {
+      "question_number": 261,
+      "topic": "Microbiology - Viruses",
+      "question": "What are bacteriophages?",
+      "options": [
+        "A) Viruses that infect bacterial cells",
+        "B) Fungal spores found in bread mould",
+        "C) Bacteria that parasitize plant leaves",
+        "D) Parasitic roundworms in animal intestines"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Bacteriophages are viruses that specifically target and infect bacteria."
+    },
+    {
+      "question_number": 262,
+      "topic": "Microbiology - Bacteria",
+      "question": "What are the common bacterial morphological shapes?",
+      "options": [
+        "A) Cocci, bacilli, spirillae, and vibrios",
+        "B) Hyphae, mycelium, and spores",
+        "C) Polyp and medusa forms",
+        "D) Monocots and dicots"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Bacteria are categorized morphologically into cocci, bacilli, spirillae, and vibrios."
+    },
+    {
+      "question_number": 263,
+      "topic": "Microbiology - Fungi",
+      "question": "What is the food storage reserve in fungi?",
+      "options": [
+        "A) Starch",
+        "B) Glycogen and oil droplets",
+        "C) Cellulose microfibrils",
+        "D) Peptidoglycan"
+      ],
+      "correct_answer": "B",
+      "detailed_explanation": "Fungi store reserve carbohydrates as glycogen rather than starch."
+    },
+    {
+      "question_number": 264,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What are the two major classes of angiosperms?",
+      "options": [
+        "A) Monocotyledons and Dicotyledons",
+        "B) Bryophytes and Pteridophytes",
+        "C) Gymnosperms and Conifers",
+        "D) Thallophytes and Lichens"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Angiosperms are divided into monocots and dicots."
+    },
+    {
+      "question_number": 265,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "What are the two primary divisions of the animal kingdom based on backbones?",
+      "options": [
+        "A) Invertebrata and Vertebrata",
+        "B) Porifera and Coelenterata",
+        "C) Arthropoda and Annelida",
+        "D) Monotremes and Marsupials"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Animals are broadly divided into invertebrates (no backbone) and vertebrates (with backbone)."
+    },
+    {
+      "question_number": 266,
+      "topic": "Physiology - Nutrition",
+      "question": "What is the role of Rhizobium bacteria in legumes?",
+      "options": [
+        "A) Symbiotic nitrogen fixation in root nodules",
+        "B) Saprophytic decay of leaf litter",
+        "C) Parasitic destruction of xylem vessels",
+        "D) Photosynthetic sugar production"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Rhizobium fixes atmospheric nitrogen within legume root nodules."
+    },
+    {
+      "question_number": 267,
+      "topic": "Physiology - Growth & Development",
+      "question": "What is photoperiodism?",
+      "options": [
+        "A) The plant's physiological developmental response to day/night lengths (flowering)",
+        "B) The Auxanometer measurement of stem growth",
+        "C) The cold-temperature vernalisation requirement",
+        "D) The opening of stomata in sunlight"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Photoperiodism governs flowering based on critical day/night light durations."
+    },
+    {
+      "question_number": 268,
+      "topic": "Physiology - Respiration",
+      "question": "Where does the Krebs cycle occur in eukaryotic cells?",
+      "options": [
+        "A) Mitochondrial matrix",
+        "B) Cell cytoplasm",
+        "C) Inner mitochondrial membrane",
+        "D) Chloroplast stroma"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "The Krebs cycle takes place within the mitochondrial matrix."
+    },
+    {
+      "question_number": 269,
+      "topic": "Microbiology - Viruses",
+      "question": "What is an obligate intracellular parasite?",
+      "options": [
+        "A) An organism or particle (like a virus) that cannot reproduce or survive metabolically outside a living host cell",
+        "B) A free-living saprophytic soil bacterium",
+        "C) An autotrophic green alga",
+        "D) A decomposer fungus on dead wood"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Viruses are obligate intracellular parasites, completely dependent on host cellular machinery for replication."
+    },
+    {
+      "question_number": 270,
+      "topic": "Microbiology - Bacteria",
+      "question": "What are psychrophilic bacteria?",
+      "options": [
+        "A) Cold-loving bacteria",
+        "B) Moderate temperature pathogens",
+        "C) Heat-loving hot spring bacteria",
+        "D) Barophilic deep-sea microbes"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Psychrophiles thrive in cold temperature environments."
+    },
+    {
+      "question_number": 271,
+      "topic": "Microbiology - Fungi",
+      "question": "What is Rhizopus stolonifer?",
+      "options": [
+        "A) Bread mould",
+        "B) Brewer's yeast",
+        "C) Penicillin antibiotic source",
+        "D) Poisonous toadstool"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Rhizopus stolonifer is the common bread mould."
+    },
+    {
+      "question_number": 272,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What are the conducting vessels in tracheophytes?",
+      "options": [
+        "A) Xylem and Phloem",
+        "B) Stomata and Lenticels",
+        "C) Rhizoids and Prothalli",
+        "D) Sporangia and Basidia"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Tracheophytes possess xylem and phloem conducting tissues."
+    },
+    {
+      "question_number": 273,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "What is the defining feature of Arthropods?",
+      "options": [
+        "A) Jointed appendages and chitinous exoskeleton",
+        "B) Soft unsegmented bodies with shells",
+        "C) Radial water-vascular systems",
+        "D) Dorsal vertebral columns"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Arthropods have jointed legs and external chitinous exoskeletons."
+    },
+    {
+      "question_number": 274,
+      "topic": "Physiology - Nutrition",
+      "question": "What are macronutrients?",
+      "options": [
+        "A) Nutrients required in bulk amounts (carbohydrates, proteins, fats)",
+        "B) Trace vitamins acting as co-factors",
+        "C) Inorganic heavy metal ions",
+        "D) Viral structural capsomeres"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Macronutrients are bulk dietary components providing energy and structure."
+    },
+    {
+      "question_number": 275,
+      "topic": "Physiology - Growth & Development",
+      "question": "What is primary plant growth?",
+      "options": [
+        "A) Growth in plant length driven by apical meristems",
+        "B) Growth in stem thickness driven by cambium",
+        "C) Fruit ripening driven by ethylene",
+        "D) Seed dormancy maintained by abscisic acid"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Primary growth elongates the plant via apical meristem activity."
+    },
+    {
+      "question_number": 276,
+      "topic": "Physiology - Respiration",
+      "question": "What is the final electron acceptor in aerobic respiration?",
+      "options": [
+        "A) Oxygen",
+        "B) Carbon dioxide",
+        "C) Pyruvate",
+        "D) Ethanol"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Oxygen accepts terminal electrons in the electron transport chain."
+    },
+    {
+      "question_number": 277,
+      "topic": "Microbiology - Viruses",
+      "question": "What is an icosahedral viral symmetry example?",
+      "options": [
+        "A) Reovirus / Picornavirus",
+        "B) Tobacco mosaic rod virus",
+        "C) Complex poxvirus",
+        "D) Helical paramyxovirus"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Picornaviruses and reoviruses exhibit icosahedral/cubical symmetry."
+    },
+    {
+      "question_number": 278,
+      "topic": "Microbiology - Bacteria",
+      "question": "What are gram-positive bacteria?",
+      "options": [
+        "A) Bacteria with thick peptidoglycan walls retaining crystal violet and staining purple",
+        "B) Bacteria with thin walls staining pink",
+        "C) Acid-fast bacteria staining red",
+        "D) Spore-forming green bacteria"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Gram-positive bacteria retain crystal violet due to thick peptidoglycan walls."
+    },
+    {
+      "question_number": 279,
+      "topic": "Microbiology - Fungi",
+      "question": "What is Saccharomyces cerevisiae?",
+      "options": [
+        "A) Unicellular yeast used in baking and brewing",
+        "B) Filamentous bread mould",
+        "C) Poisonous toadstool",
+        "D) Antibiotic penicillin producer"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Saccharomyces cerevisiae is commercial baker's/brewer's yeast."
+    },
+    {
+      "question_number": 280,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What are bryophytes?",
+      "options": [
+        "A) Non-vascular land plants like mosses lacking true xylem and phloem",
+        "B) Vascular seed plants like conifers",
+        "C) Flowering angiosperms with fruits",
+        "D) Seedless vascular ferns"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Bryophytes are non-vascular land plants."
+    },
+    {
+      "question_number": 281,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "What is viviparous reproduction?",
+      "options": [
+        "A) Giving birth to live young whose embryonic development occurs inside the mother's body",
+        "B) Laying eggs externally with hard shells",
+        "C) Asexual budding without fertilization",
+        "D) Larval metamorphosis in water"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Viviparous animals nourish embryos internally and give birth to live offspring."
+    },
+    {
+      "question_number": 282,
+      "topic": "Physiology - Nutrition",
+      "question": "What is autotrophic nutrition?",
+      "options": [
+        "A) Synthesizing organic food from inorganic substances using light or chemical energy",
+        "B) Consuming pre-formed organic matter from other organisms",
+        "C) Decomposing dead organic matter saprophytically",
+        "D) Parasitizing living host plant tissues"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Autotrophs manufacture their own organic food from inorganic raw materials."
+    },
+    {
+      "question_number": 283,
+      "topic": "Physiology - Growth & Development",
+      "question": "What is senescence?",
+      "options": [
+        "A) Programmed biological aging leading to structural degradation and death",
+        "B) Rapid embryonic cell cleavage",
+        "C) The breaking of seed dormancy",
+        "D) Secondary stem thickening"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Senescence represents the programmed aging and death of cells or organs."
+    },
+    {
+      "question_number": 284,
+      "topic": "Physiology - Respiration",
+      "question": "What is anaerobic respiration?",
+      "options": [
+        "A) Respiration occurring without oxygen, yielding minimal ATP and partial breakdown products like ethanol or lactic acid",
+        "B) Complete oxidation of glucose into water in mitochondria using oxygen",
+        "C) Photosynthetic light reaction",
+        "D) Nitrogen fixation in root nodules"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Anaerobic respiration operates without oxygen, partially breaking down glucose with low ATP output."
+    },
+    {
+      "question_number": 285,
+      "topic": "Microbiology - Viruses",
+      "question": "What is viral host specificity?",
+      "options": [
+        "A) The restriction of a virus to infect only specific host cell types or species",
+        "B) The ability of a virus to infect all living kingdoms indiscriminately",
+        "C) The geographic habitat range of viral particles",
+        "D) The thermal stability of viral capsids"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Host specificity dictates that viruses infect only specific compatible host cells."
+    },
+    {
+      "question_number": 286,
+      "topic": "Microbiology - Bacteria",
+      "question": "What are thermophilic bacteria?",
+      "options": [
+        "A) Heat-loving bacteria thriving at high temperatures",
+        "B) Cold-loving psychrophiles",
+        "C) Moderate temperature pathogens",
+        "D) Photosynthetic marine plankton"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Thermophiles thrive in high-temperature environments."
+    },
+    {
+      "question_number": 287,
+      "topic": "Microbiology - Fungi",
+      "question": "What are the thread-like structures of fungi called?",
+      "options": [
+        "A) Hyphae",
+        "B) Sporangiophores",
+        "C) Haustoria",
+        "D) Prothalli"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Individual fungal filaments are known as hyphae."
+    },
+    {
+      "question_number": 288,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What are gymnosperms?",
+      "options": [
+        "A) Vascular seed plants producing naked seeds on cones",
+        "B) Flowering plants with fruits",
+        "C) Non-vascular mosses",
+        "D) Seedless ferns with prothalli"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Gymnosperms produce unenclosed (naked) seeds on sporophyll cones."
+    },
+    {
+      "question_number": 289,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "What is the primary characteristic of Echinoderms?",
+      "options": [
+        "A) Pentamerous radial symmetry in adults and a water-vascular system",
+        "B) Segmented coelomic body rings",
+        "C) Chitinous exoskeletons and jointed legs",
+        "D) Soft unsegmented mantle shells"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Echinoderms feature radial symmetry and hydraulic water-vascular systems."
+    },
+    {
+      "question_number": 290,
+      "topic": "Physiology - Nutrition",
+      "question": "What is parasitic nutrition?",
+      "options": [
+        "A) Obtaining nutrients by living on or inside a host organism at its expense",
+        "B) Manufacturing organic food from sunlight independently",
+        "C) Decomposing dead organic matter saprophytically",
+        "D) Ingesting whole prey via holozoic digestion"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Parasites exploit living hosts for nutrition and shelter."
+    },
+    {
+      "question_number": 291,
+      "topic": "Physiology - Growth & Development",
+      "question": "What is secondary plant growth?",
+      "options": [
+        "A) Increase in stem diameter/girth driven by cambial activity",
+        "B) Increase in plant length driven by apical meristems",
+        "C) Seed germination breaking dormancy",
+        "D) Leaf senescence and abscission"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Secondary growth expands stem girth through lateral cambium meristems."
+    },
+    {
+      "question_number": 292,
+      "topic": "Physiology - Respiration",
+      "question": "Where does glycolysis take place?",
+      "options": [
+        "A) Cell cytoplasm",
+        "B) Mitochondrial matrix",
+        "C) Inner mitochondrial membrane",
+        "D) Chloroplast stroma"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Glycolysis occurs in the cytoplasm of cells."
+    },
+    {
+      "question_number": 293,
+      "topic": "Microbiology - Viruses",
+      "question": "What is the function of the viral capsid?",
+      "options": [
+        "A) Protecting the viral genetic material core",
+        "B) Conducting independent cellular metabolism",
+        "C) Synthesizing ATP energy currency",
+        "D) Forming peptidoglycan cell walls"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "The protein capsid encases and protects the viral nucleic acid."
+    },
+    {
+      "question_number": 294,
+      "topic": "Microbiology - Bacteria",
+      "question": "What is Vibrio cholerae?",
+      "options": [
+        "A) Comma-shaped bacterium causing cholera",
+        "B) Spiral-shaped spirochete causing syphilis",
+        "C) Rod-shaped bacillus causing tuberculosis",
+        "D) Spherical coccus causing staph infection"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Vibrio cholerae is a comma-shaped bacterium responsible for cholera."
+    },
+    {
+      "question_number": 295,
+      "topic": "Microbiology - Fungi",
+      "question": "What is the ecological role of fungi?",
+      "options": [
+        "A) Decomposers recycling organic nutrients in ecosystems",
+        "B) Primary producers generating glucose via photosynthesis",
+        "C) Nitrogen-fixing root nodule symbionts",
+        "D) Obligate predators of vertebrate animals"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Fungi function primarily as ecosystem decomposers."
+    },
+    {
+      "question_number": 296,
+      "topic": "Kingdom Survey - Plant Kingdom",
+      "question": "What are stomata?",
+      "options": [
+        "A) Microscopic epidermal pores regulating gaseous exchange and transpiration in leaves",
+        "B) Underground root absorption hairs",
+        "C) Woody stem bark lenticels",
+        "D) Vascular xylem conducting tubes"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Stomata are leaf pores controlling gas exchange and water transpiration."
+    },
+    {
+      "question_number": 297,
+      "topic": "Kingdom Survey - Animal Kingdom",
+      "question": "What are mammals?",
+      "options": [
+        "A) Viviparous vertebrate animals that nurse young with milk",
+        "B) Oviparous reptiles with hard-shelled eggs",
+        "C) Invertebrate arthropods with jointed legs",
+        "D) Aquatic coelenterates with stinging tentacles"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Mammals are viviparous vertebrates characterized by mammary glands."
+    },
+    {
+      "question_number": 298,
+      "topic": "Physiology - Nutrition",
+      "question": "What is saprophytic nutrition?",
+      "options": [
+        "A) Absorbing dissolved nutrients from dead and decaying organic matter",
+        "B) Synthesizing organic food from sunlight",
+        "C) Ingesting live whole prey animals",
+        "D) Living as an obligate parasite on a host"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "Saprophytes absorb nutrients from dead organic matter."
+    },
+    {
+      "question_number": 299,
+      "topic": "Physiology - Growth & Development",
+      "question": "What is an auxanometer used for?",
+      "options": [
+        "A) Measuring plant growth rates",
+        "B) Measuring respiratory oxygen consumption",
+        "C) Measuring animal body condition scores",
+        "D) Measuring soil nitrogen concentration"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "An auxanometer measures linear plant growth."
+    },
+    {
+      "question_number": 300,
+      "topic": "Physiology - Respiration",
+      "question": "What is the primary energy currency produced during cellular respiration?",
+      "options": [
+        "A) Adenosine Triphosphate (ATP)",
+        "B) Glucose",
+        "C) Cellulose",
+        "D) Pyruvic acid"
+      ],
+      "correct_answer": "A",
+      "detailed_explanation": "ATP is the primary energy currency synthesized during cellular respiration to power biological work."
     }
-]
+  ]
