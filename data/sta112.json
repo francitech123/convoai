@@ -9,7 +9,7 @@
     "id": 2,
     "question": "Temperature measured in degrees Celsius belongs to which level of measurement?",
     "options": ["Nominal", "Ordinal", "Interval", "Ratio"],
-    "solution": "Step 1: Evaluate if temperature values have order and equal intervals. In Celsius, $20^\\circ\\text{C} - 10^\\circ\\text{C} = 10^\\circ\\text{C} - 0^\\circ\\text{C}$, so intervals are equal.\nStep 2: Determine if there is a true absolute zero. $0^\\circ\\text{C}$ does not mean the complete absence of heat.\nStep 3: Since equal intervals exist without a true zero point, it is an interval scale.\nCorrect Answer: (c)"
+    "solution": "Step 1: Evaluate if temperature values have order and equal intervals. In Celsius, \\(20^\\circ\\text{C} - 10^\\circ\\text{C} = 10^\\circ\\text{C} - 0^\\circ\\text{C}\\), so intervals are equal.\nStep 2: Determine if there is a true absolute zero. \\(0^\\circ\\text{C}\\) does not mean the complete absence of heat.\nStep 3: Since equal intervals exist without a true zero point, it is an interval scale.\nCorrect Answer: (c)"
   },
   {
     "id": 3,
@@ -39,7 +39,7 @@
     "id": 7,
     "question": "What key property distinguishes a ratio scale from an interval scale?",
     "options": ["Ability to order data", "Presence of equal unit spacing", "Presence of a true absolute zero point", "Ability to categorize data"],
-    "solution": "Step 1: Both interval and ratio scales have order and equal unit spacing.\nStep 2: A ratio scale possesses an absolute zero point where 0 indicates the total absence of the variable, enabling valid ratio calculations ($a/b$).\nCorrect Answer: (c)"
+    "solution": "Step 1: Both interval and ratio scales have order and equal unit spacing.\nStep 2: A ratio scale possesses an absolute zero point where 0 indicates the total absence of the variable, enabling valid ratio calculations (\\(a/b\\)).\nCorrect Answer: (c)"
   },
   {
     "id": 8,
@@ -57,31 +57,31 @@
     "id": 10,
     "question": "Which measurement scale allows for addition and subtraction of values, but not meaningful ratio comparisons?",
     "options": ["Nominal", "Ordinal", "Interval", "Ratio"],
-    "solution": "Step 1: Addition and subtraction require equal interval spacing between units.\nStep 2: Ratio comparisons require a true zero point.\nStep 3: An interval scale lacks a true absolute zero, so $40^\\circ\\text{F} - 20^\\circ\\text{F} = 20^\\circ\\text{F}$, but $40^\\circ\\text{F}$ is not twice as warm as $20^\\circ\\text{F}$.\nCorrect Answer: (c)"
+    "solution": "Step 1: Addition and subtraction require equal interval spacing between units.\nStep 2: Ratio comparisons require a true zero point.\nStep 3: An interval scale lacks a true absolute zero, so \\(40^\\circ\\text{F} - 20^\\circ\\text{F} = 20^\\circ\\text{F}\\), but \\(40^\\circ\\text{F}\\) is not twice as warm as \\(20^\\circ\\text{F}\\).\nCorrect Answer: (c)"
   },
   {
     "id": 11,
-    "question": "What is the sample mean formula for a dataset containing $n$ observations $x_1, x_2, \\dots, x_n$?",
+    "question": "What is the sample mean formula for a dataset containing \\(n\\) observations \\(x_1, x_2, \\dots, x_n\\)?",
     "options": ["\\(\\bar{x} = \\frac{\\sum x_i}{n}\\)", "\\(\\bar{x} = \\frac{\\sum x_i}{n - 1}\\)", "\\(\\bar{x} = \\sqrt{\\frac{\\sum x_i}{n}}\\)", "\\(\\bar{x} = \\frac{\\max(x) + \\min(x)}{2}\\)"],
-    "solution": "Step 1: Define the sample mean as the sum of all sample values divided by the number of observations $n$.\nStep 2: Express mathematically: $\\bar{x} = \\frac{\\sum x_i}{n}$.\nCorrect Answer: (a)"
+    "solution": "Step 1: Define the sample mean as the sum of all sample values divided by the number of observations \\(n\\).\nStep 2: Express mathematically: \\(\\bar{x} = \\frac{\\sum x_i}{n}\\).\nCorrect Answer: (a)"
   },
   {
     "id": 12,
     "question": "Calculate the mean of the dataset: 4, 8, 6, 10, 12.",
     "options": ["6", "7", "8", "10"],
-    "solution": "Step 1: Sum the numbers: $4 + 8 + 6 + 10 + 12 = 40$.\nStep 2: Count the observations: $n = 5$.\nStep 3: Divide sum by $n$: $\\bar{x} = \\frac{40}{5} = 8$.\nCorrect Answer: (c)"
+    "solution": "Step 1: Sum the numbers: \\(4 + 8 + 6 + 10 + 12 = 40\\).\nStep 2: Count the observations: \\(n = 5\\).\nStep 3: Divide sum by \\(n\\): \\(\\bar{x} = \\frac{40}{5} = 8\\).\nCorrect Answer: (c)"
   },
   {
     "id": 13,
     "question": "Find the median of the dataset: 3, 7, 2, 9, 5.",
     "options": ["3", "5", "5.2", "7"],
-    "solution": "Step 1: Sort the dataset in ascending order: 2, 3, 5, 7, 9.\nStep 2: Identify the middle value for $n = 5$ (odd position $(5+1)/2 = 3\\text{rd}$ value).\nStep 3: The 3rd value is 5.\nCorrect Answer: (b)"
+    "solution": "Step 1: Sort the dataset in ascending order: 2, 3, 5, 7, 9.\nStep 2: Identify the middle value for \\(n = 5\\) (odd position \\((5+1)/2 = 3\\text{rd}\\) value).\nStep 3: The 3rd value is 5.\nCorrect Answer: (b)"
   },
   {
     "id": 14,
     "question": "Find the median of the dataset: 10, 20, 30, 40.",
     "options": ["20", "25", "30", "35"],
-    "solution": "Step 1: The dataset is already ordered: 10, 20, 30, 40.\nStep 2: Since $n = 4$ (even), the median is the average of the two middle observations (2nd and 3rd values).\nStep 3: Compute $\\frac{20 + 30}{2} = 25$.\nCorrect Answer: (b)"
+    "solution": "Step 1: The dataset is already ordered: 10, 20, 30, 40.\nStep 2: Since \\(n = 4\\) (even), the median is the average of the two middle observations (2nd and 3rd values).\nStep 3: Compute \\(\\frac{20 + 30}{2} = 25\\).\nCorrect Answer: (b)"
   },
   {
     "id": 15,
@@ -99,13 +99,13 @@
     "id": 17,
     "question": "In a positively (right) skewed distribution, what is the relative order of the measures of central tendency?",
     "options": ["Mean < Median < Mode", "Mode < Median < Mean", "Median < Mean < Mode", "Mean = Median = Mode"],
-    "solution": "Step 1: In a right-skewed distribution, the long right tail drags the arithmetic mean upward toward extreme values.\nStep 2: The mode remains under the peak, while the median falls between the mode and mean.\nStep 3: The relationship is $\\text{Mode} < \\text{Median} < \\text{Mean}$.\nCorrect Answer: (b)"
+    "solution": "Step 1: In a right-skewed distribution, the long right tail drags the arithmetic mean upward toward extreme values.\nStep 2: The mode remains under the peak, while the median falls between the mode and mean.\nStep 3: The relationship is \\(\\text{Mode} < \\text{Median} < \\text{Mean}\\).\nCorrect Answer: (b)"
   },
   {
     "id": 18,
     "question": "In a negatively (left) skewed distribution, which relation typically holds true?",
     "options": ["Mean < Median < Mode", "Mode < Median < Mean", "Mean = Median = Mode", "Mode < Mean < Median"],
-    "solution": "Step 1: In a left-skewed distribution, extreme low values in the left tail pull the mean downward.\nStep 2: The median is less affected than the mean, and the mode remains at the peak on the right.\nStep 3: The relationship is $\\text{Mean} < \\text{Median} < \\text{Mode}$.\nCorrect Answer: (a)"
+    "solution": "Step 1: In a left-skewed distribution, extreme low values in the left tail pull the mean downward.\nStep 2: The median is less affected than the mean, and the mode remains at the peak on the right.\nStep 3: The relationship is \\(\\text{Mean} < \\text{Median} < \\text{Mode}\\).\nCorrect Answer: (a)"
   },
   {
     "id": 19,
@@ -115,33 +115,33 @@
   },
   {
     "id": 20,
-    "question": "If a constant $c$ is added to every data value in a dataset, how does the mean change?",
-    "options": ["It remains unchanged", "It is multiplied by c", "It increases by c", "It increases by c^2"],
-    "solution": "Step 1: Let $x_i' = x_i + c$.\nStep 2: New mean $\\bar{x}' = \\frac{\\sum (x_i + c)}{n} = \\frac{\\sum x_i + n c}{n} = \\bar{x} + c$.\nStep 3: The mean increases by $c$.\nCorrect Answer: (c)"
+    "question": "If a constant \\(c\\) is added to every data value in a dataset, how does the mean change?",
+    "options": ["It remains unchanged", "It is multiplied by c", "It increases by c", "It increases by \\(c^2\\)"],
+    "solution": "Step 1: Let \\(x_i' = x_i + c\\).\nStep 2: New mean \\(\\bar{x}' = \\frac{\\sum (x_i + c)}{n} = \\frac{\\sum x_i + n c}{n} = \\bar{x} + c\\).\nStep 3: The mean increases by \\(c\\).\nCorrect Answer: (c)"
   },
   {
     "id": 21,
     "question": "If every value in a dataset is multiplied by 3, what happens to the mean?",
     "options": ["Increases by 3", "Multiplied by 3", "Multiplied by 9", "Remains unchanged"],
-    "solution": "Step 1: Let $x_i' = 3 x_i$.\nStep 2: New mean $\\bar{x}' = \\frac{\\sum 3 x_i}{n} = 3 \\left(\\frac{\\sum x_i}{n}\\right) = 3 \\bar{x}$.\nStep 3: The original mean is multiplied by 3.\nCorrect Answer: (b)"
+    "solution": "Step 1: Let \\(x_i' = 3 x_i\\).\nStep 2: New mean \\(\\bar{x}' = \\frac{\\sum 3 x_i}{n} = 3 \\left(\\frac{\\sum x_i}{n}\\right) = 3 \\bar{x}\\).\nStep 3: The original mean is multiplied by 3.\nCorrect Answer: (b)"
   },
   {
     "id": 22,
     "question": "How is a 10% trimmed mean calculated?",
     "options": ["By dropping the top 10% and bottom 10% of ordered observations before computing the mean", "By removing 10 total values randomly", "By reducing each data value by 10%", "By dropping only the top 10% of values"],
-    "solution": "Step 1: Order the data points from lowest to highest.\nStep 2: Remove $10\\%$ of the smallest observations and $10\\%$ of the largest observations.\nStep 3: Calculate the mean of the remaining $80\\%$ of the data.\nCorrect Answer: (a)"
+    "solution": "Step 1: Order the data points from lowest to highest.\nStep 2: Remove \\(10\\%\\) of the smallest observations and \\(10\\%\\) of the largest observations.\nStep 3: Calculate the mean of the remaining \\(80\\%\\) of the data.\nCorrect Answer: (a)"
   },
   {
     "id": 23,
-    "question": "What is the formula for the weighted mean of values $x_i$ with corresponding weights $w_i$?",
+    "question": "What is the formula for the weighted mean of values \\(x_i\\) with corresponding weights \\(w_i\\)?",
     "options": ["\\(\\bar{x}_w = \\frac{\\sum (w_i x_i)}{\\sum w_i}\\)", "\\(\\bar{x}_w = \\frac{\\sum x_i}{\\sum w_i}\\)", "\\(\\bar{x}_w = \\sum (w_i x_i)\\)", "\\(\\bar{x}_w = \\frac{\\sum w_i}{n}\\)"],
-    "solution": "Step 1: The weighted mean gives each value weight $w_i$.\nStep 2: Sum the product of each value and its weight: $\\sum (w_i x_i)$.\nStep 3: Divide by the sum of all weights: $\\bar{x}_w = \\frac{\\sum (w_i x_i)}{\\sum w_i}$.\nCorrect Answer: (a)"
+    "solution": "Step 1: The weighted mean gives each value weight \\(w_i\\).\nStep 2: Sum the product of each value and its weight: \\(\\sum (w_i x_i)\\).\nStep 3: Divide by the sum of all weights: \\(\\bar{x}_w = \\frac{\\sum (w_i x_i)}{\\sum w_i}\\).\nCorrect Answer: (a)"
   },
   {
     "id": 24,
     "question": "In a perfectly symmetric, unimodal distribution, what is the relative position of the mean, median, and mode?",
     "options": ["Mean > Median > Mode", "Mean < Median < Mode", "Mean = Median = Mode", "Mode > Mean > Median"],
-    "solution": "Step 1: Symmetry implies that the left and right halves of the distribution are mirror images.\nStep 2: For a unimodal symmetric curve, the central peak is simultaneously the highest point (mode), the exact middle value (median), and the balance point (mean).\nStep 3: Therefore, $\\text{Mean} = \\text{Median} = \\text{Mode}$.\nCorrect Answer: (c)"
+    "solution": "Step 1: Symmetry implies that the left and right halves of the distribution are mirror images.\nStep 2: For a unimodal symmetric curve, the central peak is simultaneously the highest point (mode), the exact middle value (median), and the balance point (mean).\nStep 3: Therefore, \\(\\text{Mean} = \\text{Median} = \\text{Mode}\\).\nCorrect Answer: (c)"
   },
   {
     "id": 25,
@@ -153,91 +153,91 @@
     "id": 26,
     "question": "What is the range of the dataset: 12, 5, 22, 30, 8, 17?",
     "options": ["17", "22", "25", "30"],
-    "solution": "Step 1: Identify maximum value: $\\max = 30$.\nStep 2: Identify minimum value: $\\min = 5$.\nStep 3: Range = $\\max - \\min = 30 - 5 = 25$.\nCorrect Answer: (c)"
+    "solution": "Step 1: Identify maximum value: \\(\\max = 30\\).\nStep 2: Identify minimum value: \\(\\min = 5\\).\nStep 3: Range = \\(\\max - \\min = 30 - 5 = 25\\).\nCorrect Answer: (c)"
   },
   {
     "id": 27,
     "question": "How is the Interquartile Range (IQR) defined?",
     "options": ["\\(Q_3 - Q_1\\)", "\\(Q_3 + Q_1\\)", "\\(\\frac{Q_3 - Q_1}{2}\\)", "\\(\\text{Max} - \\text{Min}\\)"],
-    "solution": "Step 1: Identify the third quartile ($Q_3$) and first quartile ($Q_1$).\nStep 2: The Interquartile Range measures the span of the middle 50% of ordered observations.\nStep 3: $\\text{IQR} = Q_3 - Q_1$.\nCorrect Answer: (a)"
+    "solution": "Step 1: Identify the third quartile (\\(Q_3\\)) and first quartile (\\(Q_1\\)).\nStep 2: The Interquartile Range measures the span of the middle 50% of ordered observations.\nStep 3: \\(\\text{IQR} = Q_3 - Q_1\\).\nCorrect Answer: (a)"
   },
   {
     "id": 28,
-    "question": "Why is $n - 1$ used in the denominator of the sample variance formula $s^2 = \\frac{\\sum (x_i - \\bar{x})^2}{n - 1}$?",
-    "options": ["To increase the sample mean", "To make $s^2$ an unbiased estimator of population variance $\\sigma^2$", "To ensure variance is always integer-valued", "To adjust for population sample sizes greater than 100"],
-    "solution": "Step 1: Using $n$ in the denominator underestimates the true population variance on average.\nStep 2: Bessel's correction replaces $n$ with $n - 1$ to correct for degree-of-freedom loss from estimating the mean.\nStep 3: This makes $s^2$ an unbiased estimator of $\\sigma^2$.\nCorrect Answer: (b)"
+    "question": "Why is \\(n - 1\\) used in the denominator of the sample variance formula \\(s^2 = \\frac{\\sum (x_i - \\bar{x})^2}{n - 1}\\)?",
+    "options": ["To increase the sample mean", "To make \\(s^2\\) an unbiased estimator of population variance \\(\\sigma^2\\)", "To ensure variance is always integer-valued", "To adjust for population sample sizes greater than 100"],
+    "solution": "Step 1: Using \\(n\\) in the denominator underestimates the true population variance on average.\nStep 2: Bessel's correction replaces \\(n\\) with \\(n - 1\\) to correct for degree-of-freedom loss from estimating the mean.\nStep 3: This makes \\(s^2\\) an unbiased estimator of \\(\\sigma^2\\).\nCorrect Answer: (b)"
   },
   {
     "id": 29,
-    "question": "What is the mathematical relationship between standard deviation ($s$) and variance ($s^2$)?",
+    "question": "What is the mathematical relationship between standard deviation (\\(s\\)) and variance (\\(s^2\\))?",
     "options": ["\\(s = (s^2)^2\\)", "\\(s = \\sqrt{s^2}\\)", "\\(s^2 = \\sqrt{s}\\)", "\\(s = 2 \\times s^2\\)"],
-    "solution": "Step 1: Variance is measured in squared units of the original data.\nStep 2: Taking the positive square root returns the measure to the original units.\nStep 3: Standard deviation $s = \\sqrt{s^2}$.\nCorrect Answer: (b)"
+    "solution": "Step 1: Variance is measured in squared units of the original data.\nStep 2: Taking the positive square root returns the measure to the original units.\nStep 3: Standard deviation \\(s = \\sqrt{s^2}\\).\nCorrect Answer: (b)"
   },
   {
     "id": 30,
     "question": "What is the variance of a constant dataset: 7, 7, 7, 7, 7?",
     "options": ["0", "1", "7", "35"],
-    "solution": "Step 1: Calculate mean: $\\bar{x} = 7$.\nStep 2: Calculate deviations from mean: $(7 - 7) = 0$ for all points.\nStep 3: Variance $s^2 = \\frac{\\sum 0^2}{n - 1} = 0$.\nCorrect Answer: (a)"
+    "solution": "Step 1: Calculate mean: \\(\\bar{x} = 7\\).\nStep 2: Calculate deviations from mean: \\((7 - 7) = 0\\) for all points.\nStep 3: Variance \\(s^2 = \\frac{\\sum 0^2}{n - 1} = 0\\).\nCorrect Answer: (a)"
   },
   {
     "id": 31,
     "question": "If a constant value of 5 is added to all items in a dataset, what happens to the standard deviation?",
     "options": ["It increases by 5", "It increases by \\(\\sqrt{5}\\)", "It remains unchanged", "It is multiplied by 5"],
-    "solution": "Step 1: Adding a constant shifts all data points by the same distance, keeping relative distances between points identical.\nStep 2: The mean increases by 5, so $(x_i + 5) - (\\bar{x} + 5) = x_i - \\bar{x}$.\nStep 3: Deviations are unchanged, so standard deviation remains unchanged.\nCorrect Answer: (c)"
+    "solution": "Step 1: Adding a constant shifts all data points by the same distance, keeping relative distances between points identical.\nStep 2: The mean increases by 5, so \\((x_i + 5) - (\\bar{x} + 5) = x_i - \\bar{x}\\).\nStep 3: Deviations are unchanged, so standard deviation remains unchanged.\nCorrect Answer: (c)"
   },
   {
     "id": 32,
     "question": "If every value in a dataset is multiplied by 4, how is the standard deviation affected?",
     "options": ["Unchanged", "Multiplied by 2", "Multiplied by 4", "Multiplied by 16"],
-    "solution": "Step 1: Let $x_i' = 4 x_i$, then $\\bar{x}' = 4 \\bar{x}$.\nStep 2: $(x_i' - \\bar{x}')^2 = (4 x_i - 4 \\bar{x})^2 = 16 (x_i - \\bar{x})^2$.\nStep 3: Variance is multiplied by 16, so standard deviation $\\sqrt{16 s^2} = 4 s$ is multiplied by 4.\nCorrect Answer: (c)"
+    "solution": "Step 1: Let \\(x_i' = 4 x_i\\), then \\(\\bar{x}' = 4 \\bar{x}\\).\nStep 2: \\((x_i' - \\bar{x}')^2 = (4 x_i - 4 \\bar{x})^2 = 16 (x_i - \\bar{x})^2\\).\nStep 3: Variance is multiplied by 16, so standard deviation \\(\\sqrt{16 s^2} = 4 s\\) is multiplied by 4.\nCorrect Answer: (c)"
   },
   {
     "id": 33,
     "question": "What is the formula for the Coefficient of Variation (CV)?",
     "options": ["\\(CV = \\frac{s}{\\bar{x}} \\times 100\\%\\)", "\\(CV = \\frac{\\bar{x}}{s} \\times 100\\%\\)", "\\(CV = \\frac{s^2}{\\bar{x}} \\times 100\\%\\)", "\\(CV = (s \\times \\bar{x}) \\times 100\\%\\)"],
-    "solution": "Step 1: The Coefficient of Variation expresses dispersion relative to the mean.\nStep 2: Divide standard deviation $s$ by mean $\\bar{x}$ and multiply by 100%.\nStep 3: $CV = \\frac{s}{\\bar{x}} \\times 100\\%$.\nCorrect Answer: (a)"
+    "solution": "Step 1: The Coefficient of Variation expresses dispersion relative to the mean.\nStep 2: Divide standard deviation \\(s\\) by mean \\(\\bar{x}\\) and multiply by 100%.\nStep 3: \\(CV = \\frac{s}{\\bar{x}} \\times 100\\%\\).\nCorrect Answer: (a)"
   },
   {
     "id": 34,
     "question": "Why is the Coefficient of Variation useful in statistical comparison?",
     "options": ["It measures skewness independent of mean", "It compares relative variability between datasets measured in different units or with vastly different scales", "It identifies outliers without using boxplots", "It calculates exact median position"],
-    "solution": "Step 1: Standard deviation is bound to the measurement unit of the data.\nStep 2: $CV$ is a unitless percentage ratio.\nStep 3: This allows direct, fair comparison of relative variability across different scales or units.\nCorrect Answer: (b)"
+    "solution": "Step 1: Standard deviation is bound to the measurement unit of the data.\nStep 2: \\(CV\\) is a unitless percentage ratio.\nStep 3: This allows direct, fair comparison of relative variability across different scales or units.\nCorrect Answer: (b)"
   },
   {
     "id": 35,
-    "question": "The First Quartile ($Q_1$) corresponds to which percentile?",
+    "question": "The First Quartile (\\(Q_1\\)) corresponds to which percentile?",
     "options": ["10th percentile", "25th percentile", "50th percentile", "75th percentile"],
-    "solution": "Step 1: Quartiles divide ordered data into 4 equal quarters.\nStep 2: $Q_1$ marks the lower $25\\%$ cutoff point.\nStep 3: Thus, $Q_1$ corresponds to $P_{25}$ (25th percentile).\nCorrect Answer: (b)"
+    "solution": "Step 1: Quartiles divide ordered data into 4 equal quarters.\nStep 2: \\(Q_1\\) marks the lower \\(25\\%\\) cutoff point.\nStep 3: Thus, \\(Q_1\\) corresponds to \\(P_{25}\\) (25th percentile).\nCorrect Answer: (b)"
   },
   {
     "id": 36,
-    "question": "The Third Quartile ($Q_3$) corresponds to which percentile?",
+    "question": "The Third Quartile (\\(Q_3\\)) corresponds to which percentile?",
     "options": ["25th percentile", "50th percentile", "75th percentile", "90th percentile"],
-    "solution": "Step 1: Quartiles divide data into quarters: 25%, 50%, 75%, 100%.\nStep 2: $Q_3$ separates the lower 75% of data from the upper 25%.\nStep 3: Thus, $Q_3$ corresponds to $P_{75}$ (75th percentile).\nCorrect Answer: (c)"
+    "solution": "Step 1: Quartiles divide data into quarters: 25%, 50%, 75%, 100%.\nStep 2: \\(Q_3\\) separates the lower 75% of data from the upper 25%.\nStep 3: Thus, \\(Q_3\\) corresponds to \\(P_{75}\\) (75th percentile).\nCorrect Answer: (c)"
   },
   {
     "id": 37,
     "question": "Which set of statistical summary values constitutes the five-number summary?",
-    "options": ["Mean, Median, Mode, Variance, Standard Deviation", "Minimum, $Q_1$, Median, $Q_3$, Maximum", "Minimum, Mean, Median, Range, Maximum", "$Q_1$, $Q_2$, $Q_3$, IQR, Range"],
-    "solution": "Step 1: Recall the definition of five-number summary.\nStep 2: It consists of Minimum, First Quartile ($Q_1$), Median ($Q_2$), Third Quartile ($Q_3$), and Maximum.\nCorrect Answer: (b)"
+    "options": ["Mean, Median, Mode, Variance, Standard Deviation", "Minimum, \\(Q_1\\), Median, \\(Q_3\\), Maximum", "Minimum, Mean, Median, Range, Maximum", "\\(Q_1\\), \\(Q_2\\), \\(Q_3\\), IQR, Range"],
+    "solution": "Step 1: Recall the definition of five-number summary.\nStep 2: It consists of Minimum, First Quartile (\\(Q_1\\)), Median (\\(Q_2\\)), Third Quartile (\\(Q_3\\)), and Maximum.\nCorrect Answer: (b)"
   },
   {
     "id": 38,
-    "question": "According to Tukey's $1.5 \\times \\text{IQR}$ rule, a value $x$ is identified as an outlier if:",
+    "question": "According to Tukey's \\(1.5 \\times \\text{IQR}\\) rule, a value \\(x\\) is identified as an outlier if:",
     "options": ["\\(x < Q_1 - 1.5(IQR)\\) or \\(x > Q_3 + 1.5(IQR)\\)", "\\(x < Q_1 - 3(IQR)\\) or \\(x > Q_3 + 3(IQR)\\)", "\\(x < \\bar{x} - 1.5(s)\\) or \\(x > \\bar{x} + 1.5(s)\\)", "\\(x < Q_3 - 1.5(IQR)\\) or \\(x > Q_1 + 1.5(IQR)\\)"],
-    "solution": "Step 1: Compute inner fences: $\\text{Lower Fence} = Q_1 - 1.5(IQR)$ and $\\text{Upper Fence} = Q_3 + 1.5(IQR)$.\nStep 2: Values falling below lower fence or above upper fence are flagged as outliers.\nCorrect Answer: (a)"
+    "solution": "Step 1: Compute inner fences: \\(\\text{Lower Fence} = Q_1 - 1.5(IQR)\\) and \\(\\text{Upper Fence} = Q_3 + 1.5(IQR)\\).\nStep 2: Values falling below lower fence or above upper fence are flagged as outliers.\nCorrect Answer: (a)"
   },
   {
     "id": 39,
     "question": "What is the formula for Mean Absolute Deviation (MAD)?",
     "options": ["\\(\\text{MAD} = \\frac{\\sum |x_i - \\bar{x}|}{n}\\)", "\\(\\text{MAD} = \\frac{\\sum (x_i - \\bar{x})^2}{n}\\)", "\\(\\text{MAD} = \\sqrt{\\frac{\\sum |x_i - \\bar{x}|}{n}}\\)", "\\(\\text{MAD} = \\frac{\\sum x_i}{n}\\)"],
-    "solution": "Step 1: Calculate absolute deviation of each point from mean: $|x_i - \\bar{x}|$.\nStep 2: Sum absolute deviations and divide by $n$.\nStep 3: $\\text{MAD} = \\frac{\\sum |x_i - \\bar{x}|}{n}$.\nCorrect Answer: (a)"
+    "solution": "Step 1: Calculate absolute deviation of each point from mean: \\(|x_i - \\bar{x}|\\).\nStep 2: Sum absolute deviations and divide by \\(n\\).\nStep 3: \\(\\text{MAD} = \\frac{\\sum |x_i - \\bar{x}|}{n}\\).\nCorrect Answer: (a)"
   },
   {
     "id": 40,
-    "question": "Given $Q_1 = 25$ and $Q_3 = 65$, calculate the Interquartile Range (IQR).",
+    "question": "Given \\(Q_1 = 25\\) and \\(Q_3 = 65\\), calculate the Interquartile Range (IQR).",
     "options": ["25", "40", "45", "90"],
-    "solution": "Step 1: Use formula $\\text{IQR} = Q_3 - Q_1$.\nStep 2: Substitute given values: $65 - 25 = 40$.\nCorrect Answer: (b)"
+    "solution": "Step 1: Use formula \\(\\text{IQR} = Q_3 - Q_1\\).\nStep 2: Substitute given values: \\(65 - 25 = 40\\).\nCorrect Answer: (b)"
   },
   {
     "id": 41,
@@ -279,55 +279,55 @@
     "id": 47,
     "question": "What is the excess kurtosis value of a Standard Normal Distribution?",
     "options": ["3", "0", "-3", "1"],
-    "solution": "Step 1: Normal distribution has absolute kurtosis = 3.\nStep 2: Excess Kurtosis = $\\text{Kurtosis} - 3 = 3 - 3 = 0$.\nCorrect Answer: (b)"
+    "solution": "Step 1: Normal distribution has absolute kurtosis = 3.\nStep 2: Excess Kurtosis = \\(\\text{Kurtosis} - 3 = 3 - 3 = 0\\).\nCorrect Answer: (b)"
   },
   {
     "id": 48,
-    "question": "According to Chebyshev's Theorem, what proportion of data lies within $k$ standard deviations ($k > 1$) of the mean for ANY arbitrary distribution?",
+    "question": "According to Chebyshev's Theorem, what proportion of data lies within \\(k\\) standard deviations (\\(k > 1\\)) of the mean for ANY arbitrary distribution?",
     "options": ["At least \\(1 - \\frac{1}{k}\\)", "At least \\(1 - \\frac{1}{k^2}\\)", "Exactly 68%", "At most \\(\\frac{1}{k^2}\\)"],
-    "solution": "Step 1: Chebyshev's Theorem applies regardless of distribution shape.\nStep 2: It guarantees that at least $1 - \\frac{1}{k^2}$ of data values lie within $k$ standard deviations of the mean.\nCorrect Answer: (b)"
+    "solution": "Step 1: Chebyshev's Theorem applies regardless of distribution shape.\nStep 2: It guarantees that at least \\(1 - \\frac{1}{k^2}\\) of data values lie within \\(k\\) standard deviations of the mean.\nCorrect Answer: (b)"
   },
   {
     "id": 49,
-    "question": "Using Chebyshev's Theorem, at least what percentage of observations fall within $k = 2$ standard deviations of the mean?",
+    "question": "Using Chebyshev's Theorem, at least what percentage of observations fall within \\(k = 2\\) standard deviations of the mean?",
     "options": ["50%", "68%", "75%", "88.9%"],
-    "solution": "Step 1: Apply formula: $1 - \\frac{1}{k^2}$ for $k = 2$.\nStep 2: $1 - \\frac{1}{2^2} = 1 - \\frac{1}{4} = 0.75$.\nStep 3: Convert to percentage: $75\\%$.\nCorrect Answer: (c)"
+    "solution": "Step 1: Apply formula: \\(1 - \\frac{1}{k^2}\\) for \\(k = 2\\).\nStep 2: \\(1 - \\frac{1}{2^2} = 1 - \\frac{1}{4} = 0.75\\).\nStep 3: Convert to percentage: \\(75\\%\\).\nCorrect Answer: (c)"
   },
   {
     "id": 50,
     "question": "According to the Empirical Rule (for bell-shaped symmetric distributions), approximately what percentage of data falls within 1 standard deviation of the mean?",
     "options": ["50%", "68%", "95%", "99.7%"],
-    "solution": "Step 1: Empirical Rule (68-95-99.7 rule) states:\nStep 2: $\\mu \\pm 1\\sigma$ contains approx 68% of data.\nCorrect Answer: (b)"
+    "solution": "Step 1: Empirical Rule (68-95-99.7 rule) states:\nStep 2: \\(\\mu \\pm 1\\sigma\\) contains approx 68% of data.\nCorrect Answer: (b)"
   },
   {
     "id": 51,
     "question": "Under the Empirical Rule, approximately what percentage of data falls within 3 standard deviations of the mean in a bell-shaped distribution?",
     "options": ["68%", "95%", "99.7%", "100%"],
-    "solution": "Step 1: Under 68-95-99.7 rule:\nStep 2: $\\mu \\pm 3\\sigma$ covers approximately 99.7% of observations.\nCorrect Answer: (c)"
+    "solution": "Step 1: Under 68-95-99.7 rule:\nStep 2: \\(\\mu \\pm 3\\sigma\\) covers approximately 99.7% of observations.\nCorrect Answer: (c)"
   },
   {
     "id": 52,
     "question": "What is Pearson's coefficient of skewness formula based on mean and median?",
     "options": ["\\(SK = \\frac{3(\\bar{x} - \\text{Median})}{s}\\)", "\\(SK = \\frac{\\bar{x} - \\text{Mode}}{3s}\\)", "\\(SK = \\frac{\\text{Median} - \\bar{x}}{s}\\)", "\\(SK = \\frac{s}{3(\\bar{x} - \\text{Median})}\\)"],
-    "solution": "Step 1: Pearson's second coefficient of skewness uses the difference between mean and median.\nStep 2: Formula is $SK = \\frac{3(\\bar{x} - \\text{Median})}{s}$.\nCorrect Answer: (a)"
+    "solution": "Step 1: Pearson's second coefficient of skewness uses the difference between mean and median.\nStep 2: Formula is \\(SK = \\frac{3(\\bar{x} - \\text{Median})}{s}\\).\nCorrect Answer: (a)"
   },
   {
     "id": 53,
     "question": "A negative value for Pearson's coefficient of skewness indicates:",
     "options": ["Mean is greater than median", "Distribution is symmetric", "Mean is less than median", "Standard deviation is negative"],
-    "solution": "Step 1: Formula $SK = \\frac{3(\\bar{x} - \\text{Median})}{s}$.\nStep 2: Standard deviation $s$ is always positive.\nStep 3: For $SK < 0$, $(\\bar{x} - \\text{Median}) < 0 \\implies \\bar{x} < \\text{Median}$.\nCorrect Answer: (c)"
+    "solution": "Step 1: Formula \\(SK = \\frac{3(\\bar{x} - \\text{Median})}{s}\\).\nStep 2: Standard deviation \\(s\\) is always positive.\nStep 3: For \\(SK < 0\\), \\((\\bar{x} - \\text{Median}) < 0 \\implies \\bar{x} < \\text{Median}\\).\nCorrect Answer: (c)"
   },
   {
     "id": 54,
-    "question": "What does a standardized $Z$-score represent?",
+    "question": "What does a standardized \\(Z\\)-score represent?",
     "options": ["Distance of a data point from median in IQRs", "Number of standard deviations an observation lies above or below the mean", "Percentage of data higher than the observation", "Square root of variance"],
-    "solution": "Step 1: Z-score is defined as $Z = \\frac{x - \\mu}{\\sigma}$.\nStep 2: It measures distance between observation $x$ and mean $\\mu$ in standard deviation units.\nCorrect Answer: (b)"
+    "solution": "Step 1: Z-score is defined as \\(Z = \\frac{x - \\mu}{\\sigma}\\).\nStep 2: It measures distance between observation \\(x\\) and mean \\(\\mu\\) in standard deviation units.\nCorrect Answer: (b)"
   },
   {
     "id": 55,
-    "question": "If an observation equals the sample mean, what is its $Z$-score?",
+    "question": "If an observation equals the sample mean, what is its \\(Z\\)-score?",
     "options": ["-1", "0", "1", "Undefined"],
-    "solution": "Step 1: Substitute $x = \\bar{x}$ into Z-score formula $Z = \\frac{x - \\bar{x}}{s}$.\nStep 2: $Z = \\frac{\\bar{x} - \\bar{x}}{s} = \\frac{0}{s} = 0$.\nCorrect Answer: (b)"
+    "solution": "Step 1: Substitute \\(x = \\bar{x}\\) into Z-score formula \\(Z = \\frac{x - \\bar{x}}{s}\\).\nStep 2: \\(Z = \\frac{\\bar{x} - \\bar{x}}{s} = \\frac{0}{s} = 0\\).\nCorrect Answer: (b)"
   },
   {
     "id": 56,
@@ -338,8 +338,8 @@
   {
     "id": 57,
     "question": "Which set of statistical measures is explicitly depicted in a standard box-and-whisker plot?",
-    "options": ["Mean, Variance, Standard Deviation", "Five-number summary (Min, $Q_1$, Median, $Q_3$, Max) and outliers", "Mode, Frequency, Bin Width", "Z-scores and regression lines"],
-    "solution": "Step 1: A box-and-whisker plot displays a box from $Q_1$ to $Q_3$, line at median, whiskers to min/max non-outliers, and points for outliers.\nStep 2: This represents the Five-number summary and outliers.\nCorrect Answer: (b)"
+    "options": ["Mean, Variance, Standard Deviation", "Five-number summary (Min, \\(Q_1\\), Median, \\(Q_3\\), Max) and outliers", "Mode, Frequency, Bin Width", "Z-scores and regression lines"],
+    "solution": "Step 1: A box-and-whisker plot displays a box from \\(Q_1\\) to \\(Q_3\\), line at median, whiskers to min/max non-outliers, and points for outliers.\nStep 2: This represents the Five-number summary and outliers.\nCorrect Answer: (b)"
   },
   {
     "id": 58,
@@ -351,7 +351,7 @@
     "id": 59,
     "question": "Which visualization is specifically designed to display potential relationships between two continuous quantitative variables?",
     "options": ["Boxplot", "Scatter plot", "Stem-and-leaf plot", "Pie chart"],
-    "solution": "Step 1: Bivariate continuous data is represented as ordered pairs $(x_i, y_i)$.\nStep 2: Plotting these pairs as points on a Cartesian plane produces a scatter plot.\nCorrect Answer: (b)"
+    "solution": "Step 1: Bivariate continuous data is represented as ordered pairs \\((x_i, y_i)\\).\nStep 2: Plotting these pairs as points on a Cartesian plane produces a scatter plot.\nCorrect Answer: (b)"
   },
   {
     "id": 60,
@@ -375,37 +375,37 @@
     "id": 63,
     "question": "Which plot is ideal for illustrating proportional parts of a categorical whole?",
     "options": ["Pie chart", "Scatter plot", "Ogive", "Boxplot"],
-    "solution": "Step 1: Proportional parts of a whole add up to 100% or 1.\nStep 2: A pie chart partitions a $360^\\circ$ circle into sector slices proportional to category percentage.\nCorrect Answer: (a)"
+    "solution": "Step 1: Proportional parts of a whole add up to 100% or 1.\nStep 2: A pie chart partitions a \\(360^\\circ\\) circle into sector slices proportional to category percentage.\nCorrect Answer: (a)"
   },
   {
     "id": 64,
     "question": "In a frequency polygon, class frequencies are plotted against:",
     "options": ["Lower limits only", "Upper limits only", "Class midpoints", "Cumulative frequencies"],
-    "solution": "Step 1: A frequency polygon places points at $(x, y)$ coordinates.\nStep 2: $y$-axis is class frequency, and $x$-axis is the midpoint of each class interval.\nCorrect Answer: (c)"
+    "solution": "Step 1: A frequency polygon places points at \\((x, y)\\) coordinates.\nStep 2: \\(y\\)-axis is class frequency, and \\(x\\)-axis is the midpoint of each class interval.\nCorrect Answer: (c)"
   },
   {
     "id": 65,
-    "question": "If the median line in a boxplot is positioned noticeably closer to $Q_1$ than to $Q_3$, the distribution shape is:",
+    "question": "If the median line in a boxplot is positioned noticeably closer to \\(Q_1\\) than to \\(Q_3\\), the distribution shape is:",
     "options": ["Symmetric", "Right-skewed (positively skewed)", "Left-skewed (negatively skewed)", "Uniform"],
-    "solution": "Step 1: Distance from $Q_1$ to median represents spread of lower middle quarter.\nStep 2: Distance from median to $Q_3$ represents spread of upper middle quarter.\nStep 3: When median is closer to $Q_1$, upper tail/quarter is longer, indicating right skewness.\nCorrect Answer: (b)"
+    "solution": "Step 1: Distance from \\(Q_1\\) to median represents spread of lower middle quarter.\nStep 2: Distance from median to \\(Q_3\\) represents spread of upper middle quarter.\nStep 3: When median is closer to \\(Q_1\\), upper tail/quarter is longer, indicating right skewness.\nCorrect Answer: (b)"
   },
   {
     "id": 66,
     "question": "Which metric quantifies the strength and direction of a linear relationship between two continuous variables?",
-    "options": ["Interquartile range", "Pearson correlation coefficient ($r$)", "Coefficient of variation", "Kurtosis"],
-    "solution": "Step 1: Pearson's correlation coefficient $r$ measures bivariate linear association.\nStep 2: Sign indicates direction (+ or -), absolute value indicates strength.\nCorrect Answer: (b)"
+    "options": ["Interquartile range", "Pearson correlation coefficient (\\(r\\))", "Coefficient of variation", "Kurtosis"],
+    "solution": "Step 1: Pearson's correlation coefficient \\(r\\) measures bivariate linear association.\nStep 2: Sign indicates direction (+ or -), absolute value indicates strength.\nCorrect Answer: (b)"
   },
   {
     "id": 67,
-    "question": "What is the numerical range for Pearson's correlation coefficient $r$?",
+    "question": "What is the numerical range for Pearson's correlation coefficient \\(r\\)?",
     "options": ["\\(0 \\le r \\le 1\\)", "\\(-1 \\le r \\le +1\\)", "\\(-\\infty \\le r \\le +\\infty\\)", "\\(-100 \\le r \\le +100\\)"],
-    "solution": "Step 1: Pearson's $r$ is normalized by product of standard deviations.\nStep 2: Cauchy-Schwarz inequality guarantees $-1 \\le r \\le +1$.\nCorrect Answer: (b)"
+    "solution": "Step 1: Pearson's \\(r\\) is normalized by product of standard deviations.\nStep 2: Cauchy-Schwarz inequality guarantees \\(-1 \\le r \\le +1\\).\nCorrect Answer: (b)"
   },
   {
     "id": 68,
-    "question": "If two variables $X$ and $Y$ are completely independent, their linear covariance will be:",
+    "question": "If two variables \\(X\\) and \\(Y\\) are completely independent, their linear covariance will be:",
     "options": ["-1", "0", "+1", "Infinite"],
-    "solution": "Step 1: Independent variables share no linear or non-linear dependency.\nStep 2: Expected value $E[(X - \\mu_X)(Y - \\mu_Y)] = 0$.\nStep 3: Thus, covariance equals 0.\nCorrect Answer: (b)"
+    "solution": "Step 1: Independent variables share no linear or non-linear dependency.\nStep 2: Expected value \\(E[(X - \\mu_X)(Y - \\mu_Y)] = 0\\).\nStep 3: Thus, covariance equals 0.\nCorrect Answer: (b)"
   },
   {
     "id": 69,
@@ -417,426 +417,426 @@
     "id": 70,
     "question": "How do extreme univariate outliers affect the Pearson correlation coefficient?",
     "options": ["They have zero impact on correlation", "They can drastically distort (artificially inflate or deflate) the correlation coefficient", "They automatically force correlation to equal 0", "They convert correlation into covariance"],
-    "solution": "Step 1: Pearson's $r$ depends on mean and sample variance.\nStep 2: Means and variances are non-resistant to extreme values.\nStep 3: A single extreme outlier can heavily distort $r$.\nCorrect Answer: (b)"
+    "solution": "Step 1: Pearson's \\(r\\) depends on mean and sample variance.\nStep 2: Means and variances are non-resistant to extreme values.\nStep 3: A single extreme outlier can heavily distort \\(r\\).\nCorrect Answer: (b)"
   },
-{
-"id": 71,
-"question": "What is the set of all possible outcomes of a random experiment called?",
-"options": ["Event", "Sample space", "Population", "Probability density"],
-"solution": "Step 1: Recall statistical definitions related to probability experiments.\nStep 2: The sample space (denoted by \(S\) or \(\Omega\)) is defined as the set containing all possible outcomes of an experiment.\nCorrect Answer: (b)"
-},
-{
-"id": 72,
-"question": "Which approach to assigning probability relies on assuming all outcomes in a sample space are equally likely?",
-"options": ["Empirical probability", "Classical (Theoretical) probability", "Subjective probability", "Conditional probability"],
-"solution": "Step 1: Classical probability calculates P(A) = \frac{N(A)}{N(S)} under the assumption that all elementary outcomes are equally likely.\nStep 2: Empirical probability relies on observed historical data, while subjective probability relies on personal belief.\nCorrect Answer: (b)"
-},
-{
-"id": 73,
-"question": "Which of the following statements satisfies Kolmogorov's Axioms of Probability?",
-"options": ["\(P(A) = -0.25\)", "\(P(S) = 1\) for sample space \(S\)", "\(P(A) = 1.5\)", "\(P(A \cup B) = P(A) \times P(B)\) for all events"],
-"solution": "Step 1: Kolmogorov's axioms state: (1) 0 \le P(A) \le 1 for any event A, (2) P(S) = 1 for the entire sample space, and (3) Additivity for mutually exclusive events.\nStep 2: Therefore, P(S) = 1 is a fundamental probability axiom.\nCorrect Answer: (b)"
-},
-{
-"id": 74,
-"question": "If the probability of event A occurring is 0.35, what is the probability of the complement event A'?",
-"options": ["0.65", "0.35", "-0.35", "0.00"],
-"solution": "Step 1: Apply the complement rule: P(A') = 1 - P(A).\nStep 2: Substitute P(A) = 0.35: P(A') = 1 - 0.35 = 0.65.\nCorrect Answer: (a)"
-},
-{
-"id": 75,
-"question": "Two events A and B are said to be mutually exclusive if:",
-"options": ["\(P(A \cap B) = P(A) P(B)\)", "\(P(A \cap B) = 0\)", "\(P(A \cup B) = 1\)", "\(P(A|B) = P(A)\)"],
-"solution": "Step 1: Mutually exclusive (disjoint) events cannot happen at the same time.\nStep 2: Consequently, their intersection is empty, so P(A \cap B) = 0.\nCorrect Answer: (b)"
-},
-{
-"id": 76,
-"question": "What is the general Addition Rule for the probability of the union of any two events A and B?",
-"options": ["\(P(A \cup B) = P(A) + P(B) - P(A \cap B)\)", "\(P(A \cup B) = P(A) + P(B)\)", "\(P(A \cup B) = P(A) \times P(B)\)", "\(P(A \cup B) = P(A) - P(B) + P(A \cap B)\)"],
-"solution": "Step 1: To find the total probability of event A or B occurring, sum their individual probabilities.\nStep 2: Subtract the overlapping intersection P(A \cap B) to prevent double counting.\nStep 3: Thus, P(A \cup B) = P(A) + P(B) - P(A \cap B).\nCorrect Answer: (a)"
-},
-{
-"id": 77,
-"question": "Given P(A) = 0.5, P(B) = 0.4, and P(A \cap B) = 0.2, find P(A \cup B).",
-"options": ["0.9", "0.8", "0.7", "0.3"],
-"solution": "Step 1: Use the general addition rule: P(A \cup B) = P(A) + P(B) - P(A \cap B).\nStep 2: Substitute values: P(A \cup B) = 0.5 + 0.4 - 0.2 = 0.7.\nCorrect Answer: (c)"
-},
-{
-"id": 78,
-"question": "An expert estimating an 80% chance that a new startup company will succeed based on intuition and experience is using which probability assessment approach?",
-"options": ["Classical probability", "Empirical probability", "A priori probability", "Subjective probability"],
-"solution": "Step 1: Identify the source of probability evaluation.\nStep 2: When probability estimates are based on personal judgment, expert belief, or intuition rather than direct empirical counts or formal symmetric counting, it is subjective probability.\nCorrect Answer: (d)"
-},
-{
-"id": 79,
-"question": "If the probability of an event E is \frac{3}{5}, what are the odds in favor of event E?",
-"options": ["3 to 2", "3 to 5", "2 to 3", "5 to 3"],
-"solution": "Step 1: P(E) = 3/5, so P(E') = 1 - 3/5 = 2/5.\nStep 2: Odds in favor are defined as the ratio P(E) : P(E').\nStep 3: \frac{3/5}{2/5} = \frac{3}{2}, which represents odds of 3 to 2.\nCorrect Answer: (a)"
-},
-{
-"id": 80,
-"question": "In probability theory, any subset of a sample space is termed an:",
-"options": ["Element", "Event", "Experiment", "Outcome"],
-"solution": "Step 1: The sample space S contains all possible individual outcomes.\nStep 2: Any collection or subset of outcomes from S is mathematically defined as an event.\nCorrect Answer: (b)"
-},
-{
-"id": 81,
-"question": "What is the formal definition of conditional probability P(A|B) given that P(B) > 0?",
-"options": ["\(P(A|B) = \frac{P(A \cap B)}{P(B)}\)", "\(P(A|B) = \frac{P(A \cap B)}{P(A)}\)", "\(P(A|B) = P(A) \times P(B)\)", "\(P(A|B) = \frac{P(A \cup B)}{P(B)}\)"],
-"solution": "Step 1: Conditional probability measures the probability of event A given that event B has occurred.\nStep 2: The sample space is reduced to B, yielding P(A|B) = \frac{P(A \cap B)}{P(B)}.\nCorrect Answer: (a)"
-},
-{
-"id": 82,
-"question": "Given P(A \cap B) = 0.15 and P(B) = 0.50, calculate P(A|B).",
-"options": ["0.075", "0.30", "0.35", "0.65"],
-"solution": "Step 1: Apply formula: P(A|B) = \frac{P(A \cap B)}{P(B)}.\nStep 2: Substitute given values: P(A|B) = \frac{0.15}{0.50} = 0.30.\nCorrect Answer: (b)"
-},
-{
-"id": 83,
-"question": "Two events A and B are defined as independent if and only if:",
-"options": ["\(P(A \cap B) = 0\)", "\(P(A \cap B) = P(A) P(B)\)", "\(P(A \cup B) = P(A) + P(B)\)", "\(P(A|B) = 0\)"],
-"solution": "Step 1: Independence means the occurrence of event B does not alter the probability of event A, i.e., P(A|B) = P(A).\nStep 2: Substituting into the conditional probability formula gives P(A \cap B) = P(A) P(B).\nCorrect Answer: (b)"
-},
-{
-"id": 84,
-"question": "If A and B are independent events with P(A) = 0.4 and P(B) = 0.5, what is P(A \cap B)?",
-"options": ["0.9", "0.2", "0.1", "0.0"],
-"solution": "Step 1: Since A and B are independent, use P(A \cap B) = P(A) \times P(B).\nStep 2: Compute 0.4 \times 0.5 = 0.2.\nCorrect Answer: (b)"
-},
-{
-"id": 85,
-"question": "What is the general Multiplication Rule for dependent events A and B?",
-"options": ["\(P(A \cap B) = P(A) P(B|A)\)", "\(P(A \cap B) = P(A) + P(B|A)\)", "\(P(A \cap B) = \frac{P(A)}{P(B|A)}\)", "\(P(A \cap B) = P(A) P(B)\)"],
-"solution": "Step 1: Rearrange the conditional probability definition P(B|A) = \frac{P(A \cap B)}{P(A)}.\nStep 2: Solve for intersection: P(A \cap B) = P(A) P(B|A).\nCorrect Answer: (a)"
-},
-{
-"id": 86,
-"question": "If events B_1, B_2, \dots, B_k partition the sample space S, the Law of Total Probability states that for any event A:",
-"options": ["\(P(A) = \sum_{i=1}^k P(A \cap B_i) = \sum_{i=1}^k P(A|B_i) P(B_i)\)", "\(P(A) = \sum_{i=1}^k P(A|B_i)\)", "\(P(A) = \prod_{i=1}^k P(A|B_i)\)", "\(P(A) = \sum_{i=1}^k P(B_i)\)"],
-"solution": "Step 1: Event A can be expressed as the union of mutually exclusive intersections (A \cap B_i).\nStep 2: P(A) = \sum P(A \cap B_i) = \sum P(A|B_i) P(B_i).\nCorrect Answer: (a)"
-},
-{
-"id": 87,
-"question": "Which fundamental probability theorem updates prior probabilities using observed conditional evidence?",
-"options": ["Central Limit Theorem", "Bayes' Theorem", "Chebyshev's Inequality", "Law of Large Numbers"],
-"solution": "Step 1: Identify probability theorems related to conditional updating.\nStep 2: Bayes' Theorem provides a mathematical method for revising existing probabilities (prior probabilities) based on new empirical evidence to obtain posterior probabilities.\nCorrect Answer: (b)"
-},
-{
-"id": 88,
-"question": "Given prior P(B_1) = 0.6, P(B_2) = 0.4, and likelihoods P(A|B_1) = 0.1, P(A|B_2) = 0.2, calculate posterior P(B_1|A).",
-"options": ["0.429", "0.571", "0.600", "0.140"],
-"solution": "Step 1: Compute total probability P(A) = P(A|B_1)P(B_1) + P(A|B_2)P(B_2) = (0.1)(0.6) + (0.2)(0.4) = 0.06 + 0.08 = 0.14.\nStep 2: Apply Bayes' Theorem: P(B_1|A) = \frac{P(A|B_1)P(B_1)}{P(A)} = \frac{0.06}{0.14} = \frac{3}{7} \approx 0.429.\nCorrect Answer: (a)"
-},
-{
-"id": 89,
-"question": "In medical screening, if a diagnostic test produces a positive result for a healthy individual, this is known as a:",
-"options": ["True positive", "False positive (Type I Error equivalent)", "True negative", "False negative"],
-"solution": "Step 1: True status is negative (healthy), but test output is positive.\nStep 2: An incorrect positive classification is defined as a false positive.\nCorrect Answer: (b)"
-},
-{
-"id": 90,
-"question": "If three events A, B, C are mutually independent, which condition must hold in addition to pairwise independence?",
-"options": ["\(P(A \cap B \cap C) = P(A) P(B) P(C)\)", "\(P(A \cup B \cup C) = 1\)", "\(P(A|B \cap C) = 0\)", "\(P(A \cap B \cap C) = 0\)"],
-"solution": "Step 1: Mutual independence requires both pairwise independence and joint independence across all combinations.\nStep 2: Thus, the joint product rule P(A \cap B \cap C) = P(A) P(B) P(C) must strictly hold.\nCorrect Answer: (a)"
-},
-{
-"id": 91,
-"question": "According to the Fundamental Counting Principle, if task 1 can be done in m ways and task 2 can be done in n ways, in how many ways can both tasks be performed together?",
-"options": ["\(m + n\)", "\(m \times n\)", "\(m^n\)", "\(\frac{m!}{n!}\)"],
-"solution": "Step 1: The Fundamental Counting Principle states that sequential independent decisions combine multiplicatively.\nStep 2: Total combined outcomes = m \times n.\nCorrect Answer: (b)"
-},
-{
-"id": 92,
-"question": "What is the formula for calculating permutations of n distinct objects taken r at a time, P(n,r)?",
-"options": ["\(P(n,r) = \frac{n!}{(n-r)!}\)", "\(P(n,r) = \frac{n!}{r!(n-r)!}\)", "\(P(n,r) = \frac{(n-r)!}{n!}\)", "\(P(n,r) = n! \times r!\)"],
-"solution": "Step 1: Permutations account for arrangements where order matters.\nStep 2: The standard formula is P(n,r) = \frac{n!}{(n-r)!}.\nCorrect Answer: (a)"
-},
-{
-"id": 93,
-"question": "Evaluate P(5, 2).",
-"options": ["10", "20", "60", "120"],
-"solution": "Step 1: Use permutation formula: P(5,2) = \frac{5!}{(5-2)!} = \frac{5!}{3!}.\nStep 2: Calculate \frac{5 \times 4 \times 3!}{3!} = 5 \times 4 = 20.\nCorrect Answer: (b)"
-},
-{
-"id": 94,
-"question": "What is the formula for calculating combinations of n distinct objects taken r at a time, C(n,r)?",
-"options": ["\(C(n,r) = \frac{n!}{(n-r)!}\)", "\(C(n,r) = \frac{n!}{r!(n-r)!}\)", "\(C(n,r) = \frac{r!}{(n-r)!}\)", "\(C(n,r) = n! - r!\)"],
-"solution": "Step 1: Combinations select subsets where order does not matter.\nStep 2: Formula is C(n,r) = \frac{n!}{r!(n-r)!}.\nCorrect Answer: (b)"
-},
-{
-"id": 95,
-"question": "Evaluate C(6, 3).",
-"options": ["20", "120", "18", "720"],
-"solution": "Step 1: Use combination formula C(6,3) = \frac{6!}{3!(6-3)!} = \frac{6!}{3! 3!}.\nStep 2: 6! = 720, 3! = 6, so 3! 3! = 36.\nStep 3: \frac{720}{36} = 20.\nCorrect Answer: (a)"
-},
-{
-"id": 96,
-"question": "A real-valued function defined on the sample space of a random experiment is called a:",
-"options": ["Parameter", "Random variable", "Statistic", "Cumulative frequency"],
-"solution": "Step 1: Recall mathematical definitions.\nStep 2: A random variable X maps each outcome in a sample space S to a real numerical value X(e) \in \mathbb{R}.\nCorrect Answer: (b)"
-},
-{
-"id": 97,
-"question": "Which of the following random variables is continuous?",
-"options": ["Number of defective products in a shipment", "Time taken to complete an exam", "Count of customer calls received per hour", "Number of heads in 10 coin flips"],
-"solution": "Step 1: Discrete variables assume countable values (0, 1, 2, ...).\nStep 2: Continuous variables take any real value on an interval continuum.\nStep 3: Time taken to complete an exam can take infinite fractional continuous values.\nCorrect Answer: (b)"
-},
-{
-"id": 98,
-"question": "For a discrete random variable X, what two conditions must its probability mass function (PMF) p(x) satisfy?",
-"options": ["\(p(x) \ge 0\) for all \(x\), and \(\sum_{x} p(x) = 1\)", "\(p(x) > 1\) for all \(x\), and \(\sum_{x} p(x) = 0\)", "\(p(x) \le 0\) for all \(x\), and \(\sum_{x} p(x) = 100\)", "\(\int_{-\infty}^{\infty} p(x) dx = 0\)"],
-"solution": "Step 1: Axioms of PMF dictate non-negativity for every value: p(x) \ge 0.\nStep 2: Total probability across all possible discrete outcomes must sum to unity: \sum_{x} p(x) = 1.\nCorrect Answer: (a)"
-},
-{
-"id": 99,
-"question": "What is the formula for the Expected Value E(X) of a discrete random variable X?",
-"options": ["\(E(X) = \sum x \cdot p(x)\)", "\(E(X) = \sum x^2 \cdot p(x)\)", "\(E(X) = \frac{\sum x}{n}\)", "\(E(X) = \sum [x - p(x)]^2\)"],
-"solution": "Step 1: Expected value represents the long-run weighted average outcome.\nStep 2: Each outcome x is weighted by its probability p(x): E(X) = \sum x \cdot p(x).\nCorrect Answer: (a)"
-},
-{
-"id": 100,
-"question": "Given the discrete PMF: P(X=1)=0.2, P(X=2)=0.5, P(X=3)=0.3, compute E(X).",
-"options": ["2.0", "2.1", "2.3", "2.5"],
-"solution": "Step 1: Compute E(X) = \sum x \cdot P(X=x).\nStep 2: E(X) = (1)(0.2) + (2)(0.5) + (3)(0.3) = 0.2 + 1.0 + 0.9 = 2.1.\nCorrect Answer: (b)"
-},
-{
-"id": 101,
-"question": "What is the standard variance formula Var(X) for a discrete random variable?",
-"options": ["\(Var(X) = E(X^2) - [E(X)]^2\)", "\(Var(X) = [E(X)]^2 - E(X^2)\)", "\(Var(X) = E(X^2) + E(X)\)", "\(Var(X) = \sqrt{E(X)}\)"],
-"solution": "Step 1: Variance is defined as E[(X - \mu)^2].\nStep 2: Expanding this yields E(X^2 - 2X\mu + \mu^2) = E(X^2) - 2\mu^2 + \mu^2 = E(X^2) - [E(X)]^2.\nCorrect Answer: (a)"
-},
-{
-"id": 102,
-"question": "Given E(X) = 4 and E(X^2) = 25, calculate Var(X).",
-"options": ["9", "16", "21", "29"],
-"solution": "Step 1: Apply formula Var(X) = E(X^2) - [E(X)]^2.\nStep 2: Substitute E(X^2) = 25 and E(X) = 4: Var(X) = 25 - (4)^2 = 25 - 16 = 9.\nCorrect Answer: (a)"
-},
-{
-"id": 103,
-"question": "If a and b are constants, what is E(aX + b)?",
-"options": ["\(a E(X) + b\)", "\(a^2 E(X) + b\)", "\(a E(X)\)", "\(E(X) + a + b\)"],
-"solution": "Step 1: Expectation is a linear operator.\nStep 2: E(aX + b) = a E(X) + E(b) = a E(X) + b.\nCorrect Answer: (a)"
-},
-{
-"id": 104,
-"question": "If a and b are constants, what is Var(aX + b)?",
-"options": ["\(a Var(X) + b\)", "\(a^2 Var(X)\)", "\(a^2 Var(X) + b^2\)", "\(a Var(X)\)"],
-"solution": "Step 1: Adding a constant b shifts the distribution without affecting spread, so Var(b) = 0.\nStep 2: Multiplying X by constant a scales variance by a^2.\nStep 3: Var(aX + b) = a^2 Var(X).\nCorrect Answer: (b)"
-},
-{
-"id": 105,
-"question": "The Cumulative Distribution Function (CDF) F(x) of a random variable X is defined as:",
-"options": ["\(F(x) = P(X = x)\)", "\(F(x) = P(X \le x)\)", "\(F(x) = P(X > x)\)", "\(F(x) = P(X \ge x)\)"],
-"solution": "Step 1: CDF accumulates probability from negative infinity up to x.\nStep 2: By definition, F(x) = P(X \le x).\nCorrect Answer: (b)"
-},
-{
-"id": 106,
-"question": "A single trial that yields only two mutually exclusive outcomes (Success or Failure) is called a:",
-"options": ["Poisson process", "Bernoulli trial", "Continuous trial", "Gaussian experiment"],
-"solution": "Step 1: A random experiment with exactly two possible outcomes (labeled 1/success and 0/failure) is a Bernoulli trial.\nCorrect Answer: (b)"
-},
-{
-"id": 107,
-"question": "Which condition is NOT required for a Binomial distribution setup?",
-"options": ["Fixed number of trials n", "Trials are independent", "Probability of success changes continuously from trial to trial", "Each trial has only two outcomes"],
-"solution": "Step 1: Review Binomial requirements: fixed n, independent trials, binary outcomes, and CONSTANT probability of success p.\nStep 2: A changing probability of success violates Binomial assumptions.\nCorrect Answer: (c)"
-},
-{
-"id": 108,
-"question": "What is the probability mass function for a Binomial variable X \sim \text{Bin}(n, p)?",
-"options": ["\(P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}\)", "\(P(X=k) = \frac{\lambda^k e^{-\lambda}}{k!}\)", "\(P(X=k) = p(1-p)^{k-1}\)", "\(P(X=k) = \binom{n}{k} p^{n-k} (1-p)^k\)"],
-"solution": "Step 1: Number of ways to choose k successes in n trials is \binom{n}{k}.\nStep 2: Probability of k successes is p^k and n-k failures is (1-p)^{n-k}.\nStep 3: Combine: P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}.\nCorrect Answer: (a)"
-},
-{
-"id": 109,
-"question": "What is the theoretical mean \mu of a Binomial distribution X \sim \text{Bin}(n, p)?",
-"options": ["\(np\)", "\(np(1-p)\)", "\(\sqrt{np(1-p)}\)", "\(\frac{p}{n}\)"],
-"solution": "Step 1: Sum expected values of n independent Bernoulli trials, each with mean p.\nStep 2: \mu = n \times p = np.\nCorrect Answer: (a)"
-},
-{
-"id": 110,
-"question": "What is the theoretical variance \sigma^2 of a Binomial distribution X \sim \text{Bin}(n, p)?",
-"options": ["\(np\)", "\(np(1-p)\)", "\(\sqrt{np}\)", "\(n^2 p (1-p)\)"],
-"solution": "Step 1: Sum variance of n independent Bernoulli trials, each with variance p(1-p).\nStep 2: \sigma^2 = np(1-p).\nCorrect Answer: (b)"
-},
-{
-"id": 111,
-"question": "If X \sim \text{Bin}(n = 20, p = 0.3), calculate the standard deviation \sigma.",
-"options": ["6", "4.2", "2.05", "1.44"],
-"solution": "Step 1: Compute variance \sigma^2 = np(1-p) = 20 \times 0.3 \times (1 - 0.3) = 20 \times 0.3 \times 0.7 = 4.2.\nStep 2: Take square root: \sigma = \sqrt{4.2} \approx 2.05.\nCorrect Answer: (c)"
-},
-{
-"id": 112,
-"question": "For a Binomial distribution with n = 4 and p = 0.5, calculate P(X = 2).",
-"options": ["0.25", "0.375", "0.50", "0.625"],
-"solution": "Step 1: Apply formula: P(X=2) = \binom{4}{2} (0.5)^2 (0.5)^{4-2}.\nStep 2: \binom{4}{2} = \frac{4 \times 3}{2} = 6.\nStep 3: Compute 6 \times (0.5)^4 = 6 \times 0.0625 = 0.375.\nCorrect Answer: (b)"
-},
-{
-"id": 113,
-"question": "Under what condition is the Binomial distribution perfectly symmetric?",
-"options": ["When n \to \infty", "When p = 0.5", "When p = 0.1", "When n = 1"],
-"solution": "Step 1: Skewness depends on p.\nStep 2: When success and failure probabilities are equal (p = 1-p = 0.5), the distribution shape is perfectly symmetric around its mean.\nCorrect Answer: (b)"
-},
-{
-"id": 114,
-"question": "Which discrete probability distribution models the number of events occurring within a fixed interval of time or space?",
-"options": ["Binomial distribution", "Poisson distribution", "Hypergeometric distribution", "Continuous Uniform distribution"],
-"solution": "Step 1: Recall random count models over fixed continua (time/area/volume).\nStep 2: The Poisson distribution models independent event occurrences over a specified unit interval.\nCorrect Answer: (b)"
-},
-{
-"id": 115,
-"question": "What is the probability mass function of a Poisson random variable X with average rate parameter \lambda?",
-"options": ["\(P(X=k) = \frac{\lambda^k e^{-\lambda}}{k!}\)", "\(P(X=k) = \frac{e^k \lambda^{-\lambda}}{k!}\)", "\(P(X=k) = \binom{n}{k} \lambda^k\)", "\(P(X=k) = \lambda (1-\lambda)^k\)"],
-"solution": "Step 1: Recall the standard Poisson PMF formula.\nStep 2: P(X=k) = \frac{\lambda^k e^{-\lambda}}{k!} for k = 0, 1, 2, \dots.\nCorrect Answer: (a)"
-},
-{
-"id": 116,
-"question": "What unique property links the mean \mu and variance \sigma^2 of a Poisson distribution?",
-"options": ["\(\mu = 2 \sigma^2\)", "\(\mu = \sigma^2 = \lambda\)", "\(\sigma^2 = \sqrt{\mu}\)", "\(\mu = 1 - \sigma^2\)"],
-"solution": "Step 1: Examine parameters of the Poisson distribution.\nStep 2: A core property of Poisson distribution is that both its mean and variance are equal to rate parameter \lambda.\nCorrect Answer: (b)"
-},
-{
-"id": 117,
-"question": "If call center arrivals follow a Poisson process with average rate \lambda = 2 calls per minute, what is P(X = 0) calls in a minute?",
-"options": ["\(e^{-2}\)", "\(2 e^{-2}\)", "\(1 - e^{-2}\)", "0"],
-"solution": "Step 1: Substitute k = 0 and \lambda = 2 into P(X=k) = \frac{\lambda^k e^{-\lambda}}{k!}.\nStep 2: P(X=0) = \frac{2^0 e^{-2}}{0!} = \frac{1 \cdot e^{-2}}{1} = e^{-2}.\nCorrect Answer: (a)"
-},
-{
-"id": 118,
-"question": "The Poisson distribution serves as an effective approximation to the Binomial distribution when:",
-"options": ["n is small and p is large", "n is large (n \ge 100) and p is small (p \le 0.05)", "p = 0.50 and n = 10", "n = p"],
-"solution": "Step 1: Poisson approximation applies for rare events in large sample sizes.\nStep 2: Rule of thumb: n \ge 100 and p \le 0.05, with \lambda = np.\nCorrect Answer: (b)"
-},
-{
-"id": 119,
-"question": "If a Poisson process has average rate \lambda = 3 occurrences per hour, what is the expected count parameter \lambda' over a 4-hour time frame?",
-"options": ["3", "7", "12", "81"],
-"solution": "Step 1: Rate parameters scale linearly with interval size.\nStep 2: \lambda' = 3 \text{ per hour} \times 4 \text{ hours} = 12.\nCorrect Answer: (c)"
-},
-{
-"id": 120,
-"question": "If X \sim \text{Poisson}(\lambda_1 = 2) and Y \sim \text{Poisson}(\lambda_2 = 5) are independent, what is the distribution of Z = X + Y?",
-"options": ["\(\text{Poisson}(\lambda = 2.5)\)", "\(\text{Poisson}(\lambda = 7)\)", "\(\text{Poisson}(\lambda = 10)\)", "\(\text{Binomial}(7, 0.5)\)"],
-"solution": "Step 1: The sum of independent Poisson variables is also Poisson distributed.\nStep 2: Combine rate parameters: \lambda_Z = \lambda_1 + \lambda_2 = 2 + 5 = 7.\nCorrect Answer: (b)"
-},
-{
-"id": 121,
-"question": "Which discrete probability distribution must be used instead of Binomial when sampling WITHOUT replacement from a finite population?",
-"options": ["Poisson distribution", "Hypergeometric distribution", "Geometric distribution", "Normal distribution"],
-"solution": "Step 1: Sampling without replacement causes trial outcomes to be dependent, altering success probability.\nStep 2: The Hypergeometric distribution accounts for non-replacement in finite populations.\nCorrect Answer: (b)"
-},
-{
-"id": 122,
-"question": "Which probability distribution models the number of independent Bernoulli trials required to achieve the FIRST success?",
-"options": ["Geometric distribution", "Binomial distribution", "Poisson distribution", "Uniform distribution"],
-"solution": "Step 1: Identify trial counting distributions.\nStep 2: The Geometric distribution calculates probability for the trial number on which the first success occurs.\nCorrect Answer: (a)"
-},
-{
-"id": 123,
-"question": "If X follows a Geometric distribution with success probability p, what is P(X = k)?",
-"options": ["\(P(X=k) = (1-p)^{k-1} p\)", "\(P(X=k) = p^k (1-p)\)", "\(P(X=k) = \binom{n}{k} p^k\)", "\(P(X=k) = \frac{p}{k}\)"],
-"solution": "Step 1: First success at trial k requires k-1 consecutive failures followed by 1 success.\nStep 2: Probability = (1-p)^{k-1} \times p.\nCorrect Answer: (a)"
-},
-{
-"id": 124,
-"question": "What is the expected value E(X) of a Geometric random variable with success probability p?",
-"options": ["\(\frac{1}{p}\)", "\(\frac{1 - p}{p}\)", "\(\frac{1}{p^2}\)", "\(p\)"],
-"solution": "Step 1: Derive expectation of Geometric variable.\nStep 2: E(X) = \sum_{k=1}^{\infty} k (1-p)^{k-1} p = \frac{1}{p}.\nCorrect Answer: (a)"
-},
-{
-"id": 125,
-"question": "The Geometric distribution possesses which unique mathematical property?",
-"options": ["Memoryless property", "Symmetry about zero", "Equal mean and variance", "Bounded support"],
-"solution": "Step 1: Memoryless property means P(X > s + t \mid X > s) = P(X > t).\nStep 2: Among discrete distributions, only the Geometric distribution is memoryless.\nCorrect Answer: (a)"
-},
-{
-"id": 126,
-"question": "For any continuous probability density function (PDF) f(x), what must the total integral \int_{-\infty}^{\infty} f(x) dx equal?",
-"options": ["0", "0.5", "1", "Infinity"],
-"solution": "Step 1: Total area under a valid PDF curve represents cumulative sample space probability.\nStep 2: Thus, \int_{-\infty}^{\infty} f(x) dx = 1.\nCorrect Answer: (c)"
-},
-{
-"id": 127,
-"question": "If X is a continuous random variable, what is the exact point probability P(X = c) for any specific constant c?",
-"options": ["0", "0.5", "1", "\(f(c)\)"],
-"solution": "Step 1: Probability for continuous variables is computed as area under PDF curve over an interval [a, b].\nStep 2: For a single exact point, interval width is 0, so \int_c^c f(x) dx = 0.\nCorrect Answer: (a)"
-},
-{
-"id": 128,
-"question": "A continuous random variable X uniformly distributed on interval [a, b] has probability density function $f(x) = $",
-"options": ["\(\frac{1}{b - a}\) for \(a \le x \le b\)", "\(\frac{1}{b + a}\)", "\(b - a\)", "\(\frac{x - a}{b - a}\)"],
-"solution": "Step 1: Uniform density is flat/constant c over interval [a, b].\nStep 2: Total area = (b - a) \times c = 1 \implies c = \frac{1}{b - a}.\nCorrect Answer: (a)"
-},
-{
-"id": 129,
-"question": "What continuous probability distribution is commonly used to model time elapsed between consecutive Poisson occurrences?",
-"options": ["Exponential distribution", "Uniform distribution", "Normal distribution", "Student's t-distribution"],
-"solution": "Step 1: Poisson measures counts per unit time.\nStep 2: Waiting time between consecutive arrivals in a Poisson process follows an Exponential distribution.\nCorrect Answer: (a)"
-},
-{
-"id": 130,
-"question": "Which continuous distribution is the ONLY continuous distribution that possesses the memoryless property?",
-"options": ["Exponential distribution", "Normal distribution", "Weibull distribution", "Beta distribution"],
-"solution": "Step 1: Memoryless property in continuous domain means P(T > s+t \mid T > s) = P(T > t).\nStep 2: The Exponential distribution is uniquely memoryless among continuous distributions.\nCorrect Answer: (a)"
-},
-{
-"id": 131,
-"question": "Which statement correctly describes the continuous Normal (Gaussian) distribution curve?",
-"options": ["It is symmetric and bell-shaped with Mean = Median = Mode", "It is heavily right-skewed with Mean > Mode", "It has finite lower and upper bound endpoints", "Its total area equals 0.5"],
-"solution": "Step 1: The Gaussian curve is unimodal, perfectly symmetric about \mu.\nStep 2: Due to symmetry, the mean, median, and mode coincide at the central peak.\nCorrect Answer: (a)"
-},
-{
-"id": 132,
-"question": "What proportion of total probability density lies below the mean \mu in any Normal distribution?",
-"options": ["25%", "50%", "68%", "100%"],
-"solution": "Step 1: Normal distribution is symmetric about mean \mu.\nStep 2: Exactly half (50%) of total probability area lies to the left of \mu.\nCorrect Answer: (b)"
-},
-{
-"id": 133,
-"question": "What are the parameter values for the Standard Normal Distribution Z?",
-"options": ["Mean \mu = 0 and Standard Deviation \sigma = 1", "Mean \mu = 1 and Variance \sigma^2 = 0", "Mean \mu = 100 and Standard Deviation \sigma = 15", "Mean \mu = 0 and Variance \sigma^2 = 0"],
-"solution": "Step 1: Standard normal variable Z is defined by standardizing X.\nStep 2: Parameter values are mean \mu = 0 and variance \sigma^2 = 1 (hence \sigma = 1).\nCorrect Answer: (a)"
-},
-{
-"id": 134,
-"question": "What standardizing formula converts a normal value X \sim N(\mu, \sigma^2) into standard normal score Z?",
-"options": ["\(Z = \frac{X - \mu}{\sigma}\)", "\(Z = \frac{\mu - X}{\sigma^2}\)", "\(Z = \frac{X - \sigma}{\mu}\)", "\(Z = (X - \mu) \cdot \sigma\)"],
-"solution": "Step 1: Subtract mean to center at 0.\nStep 2: Divide by standard deviation to scale spread to 1.\nStep 3: Formula is Z = \frac{X - \mu}{\sigma}.\nCorrect Answer: (a)"
-},
-{
-"id": 135,
-"question": "Given X \sim N(\mu = 100, \sigma^2 = 25), calculate the Z-score for X = 110.",
-"options": ["0.4", "2.0", "4.0", "10.0"],
-"solution": "Step 1: Identify standard deviation \sigma = \sqrt{25} = 5.\nStep 2: Calculate Z = \frac{110 - 100}{5} = \frac{10}{5} = 2.0.\nCorrect Answer: (b)"
-},
-{
-"id": 136,
-"question": "When approximating a discrete Binomial distribution using a continuous Normal distribution, what correction factor is applied?",
-"options": ["Bessel's correction factor", "Continuity correction factor (+0.5 or -0.5)", "Finite population multiplier", "Yates' Chi-Square correction"],
-"solution": "Step 1: Discrete integer values are adjusted to cover continuous intervals [k - 0.5, k + 0.5].\nStep 2: This adjustment is called the continuity correction factor.\nCorrect Answer: (b)"
-},
-{
-"id": 137,
-"question": "A numerical descriptive measure calculated from a sample (such as sample mean \bar{x}) is called a:",
-"options": ["Parameter", "Statistic", "Population metric", "Standard error"],
-"solution": "Step 1: Differentiate population vs sample metrics.\nStep 2: A population measure is a parameter, whereas a numerical value computed from sample data is a statistic.\nCorrect Answer: (b)"
-},
-{
-"id": 138,
-"question": "The probability distribution of a sample statistic across all possible random samples of size n is known as a:",
-"options": ["Population distribution", "Sampling distribution", "Empirical density", "Joint probability function"],
-"solution": "Step 1: Sampling statistics vary across drawn sample repetitions.\nStep 2: The probability distribution formed by these sample statistic values is its sampling distribution.\nCorrect Answer: (b)"
-},
-{
-"id": 139,
-"question": "What is the Standard Error of the sample mean \sigma_{\bar{x}} when sampling from a population with standard deviation \sigma?",
-"options": ["\(\sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}}\)", "\(\sigma_{\bar{x}} = \frac{\sigma}{n}\)", "\(\sigma_{\bar{x}} = \sigma \sqrt{n}\)", "\(\sigma_{\bar{x}} = \frac{\sigma^2}{n}\)"],
-"solution": "Step 1: Variance of sample mean Var(\bar{X}) = \frac{\sigma^2}{n}.\nStep 2: Standard error is positive square root of variance: SE = \sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}}.\nCorrect Answer: (a)"
-},
-{
-"id": 140,
-"question": "According to the Central Limit Theorem (CLT), as sample size n grows large (n \ge 30), the sampling distribution of the sample mean \bar{x} approaches:",
-"options": ["A uniform distribution", "A normal distribution regardless of underlying population shape", "A Poisson distribution", "The exact shape of population distribution"],
-"solution": "Step 1: The Central Limit Theorem is a foundational limit theorem in statistics.\nStep 2: It states that regardless of population shape, the sampling distribution of sample mean \bar{x} converges to a normal distribution as n \to \infty (typically n \ge 30).\nCorrect Answer: (b)"
-}
+  {
+    "id": 71,
+    "question": "What is the set of all possible outcomes of a random experiment called?",
+    "options": ["Event", "Sample space", "Population", "Probability density"],
+    "solution": "Step 1: Recall statistical definitions related to probability experiments.\nStep 2: The sample space (denoted by \\(S\\) or \\(\\Omega\\)) is defined as the set containing all possible outcomes of an experiment.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 72,
+    "question": "Which approach to assigning probability relies on assuming all outcomes in a sample space are equally likely?",
+    "options": ["Empirical probability", "Classical (Theoretical) probability", "Subjective probability", "Conditional probability"],
+    "solution": "Step 1: Classical probability calculates \\(P(A) = \\frac{N(A)}{N(S)}\\) under the assumption that all elementary outcomes are equally likely.\nStep 2: Empirical probability relies on observed historical data, while subjective probability relies on personal belief.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 73,
+    "question": "Which of the following statements satisfies Kolmogorov's Axioms of Probability?",
+    "options": ["\\(P(A) = -0.25\\)", "\\(P(S) = 1\\) for sample space \\(S\\)", "\\(P(A) = 1.5\\)", "\\(P(A \\cup B) = P(A) \\times P(B)\\) for all events"],
+    "solution": "Step 1: Kolmogorov's axioms state: (1) \\(0 \\le P(A) \\le 1\\) for any event A, (2) \\(P(S) = 1\\) for the entire sample space, and (3) Additivity for mutually exclusive events.\nStep 2: Therefore, \\(P(S) = 1\\) is a fundamental probability axiom.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 74,
+    "question": "If the probability of event A occurring is 0.35, what is the probability of the complement event A'?",
+    "options": ["0.65", "0.35", "-0.35", "0.00"],
+    "solution": "Step 1: Apply the complement rule: \\(P(A') = 1 - P(A)\\).\nStep 2: Substitute \\(P(A) = 0.35\\): \\(P(A') = 1 - 0.35 = 0.65\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 75,
+    "question": "Two events A and B are said to be mutually exclusive if:",
+    "options": ["\\(P(A \\cap B) = P(A) P(B)\\)", "\\(P(A \\cap B) = 0\\)", "\\(P(A \\cup B) = 1\\)", "\\(P(A|B) = P(A)\\)"],
+    "solution": "Step 1: Mutually exclusive (disjoint) events cannot happen at the same time.\nStep 2: Consequently, their intersection is empty, so \\(P(A \\cap B) = 0\\).\nCorrect Answer: (b)"
+  },
+  {
+    "id": 76,
+    "question": "What is the general Addition Rule for the probability of the union of any two events A and B?",
+    "options": ["\\(P(A \\cup B) = P(A) + P(B) - P(A \\cap B)\\)", "\\(P(A \\cup B) = P(A) + P(B)\\)", "\\(P(A \\cup B) = P(A) \\times P(B)\\)", "\\(P(A \\cup B) = P(A) - P(B) + P(A \\cap B)\\)"],
+    "solution": "Step 1: To find the total probability of event A or B occurring, sum their individual probabilities.\nStep 2: Subtract the overlapping intersection \\(P(A \\cap B)\\) to prevent double counting.\nStep 3: Thus, \\(P(A \\cup B) = P(A) + P(B) - P(A \\cap B)\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 77,
+    "question": "Given \\(P(A) = 0.5\\), \\(P(B) = 0.4\\), and \\(P(A \\cap B) = 0.2\\), find \\(P(A \\cup B)\\).",
+    "options": ["0.9", "0.8", "0.7", "0.3"],
+    "solution": "Step 1: Use the general addition rule: \\(P(A \\cup B) = P(A) + P(B) - P(A \\cap B)\\).\nStep 2: Substitute values: \\(P(A \\cup B) = 0.5 + 0.4 - 0.2 = 0.7\\).\nCorrect Answer: (c)"
+  },
+  {
+    "id": 78,
+    "question": "An expert estimating an 80% chance that a new startup company will succeed based on intuition and experience is using which probability assessment approach?",
+    "options": ["Classical probability", "Empirical probability", "A priori probability", "Subjective probability"],
+    "solution": "Step 1: Identify the source of probability evaluation.\nStep 2: When probability estimates are based on personal judgment, expert belief, or intuition rather than direct empirical counts or formal symmetric counting, it is subjective probability.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 79,
+    "question": "If the probability of an event E is \\(\\frac{3}{5}\\), what are the odds in favor of event E?",
+    "options": ["3 to 2", "3 to 5", "2 to 3", "5 to 3"],
+    "solution": "Step 1: \\(P(E) = 3/5\\), so \\(P(E') = 1 - 3/5 = 2/5\\).\nStep 2: Odds in favor are defined as the ratio \\(P(E) : P(E')\\).\nStep 3: \\(\\frac{3/5}{2/5} = \\frac{3}{2}\\), which represents odds of 3 to 2.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 80,
+    "question": "In probability theory, any subset of a sample space is termed an:",
+    "options": ["Element", "Event", "Experiment", "Outcome"],
+    "solution": "Step 1: The sample space \\(S\\) contains all possible individual outcomes.\nStep 2: Any collection or subset of outcomes from \\(S\\) is mathematically defined as an event.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 81,
+    "question": "What is the formal definition of conditional probability \\(P(A|B)\\) given that \\(P(B) > 0\\)?",
+    "options": ["\\(P(A|B) = \\frac{P(A \\cap B)}{P(B)}\\)", "\\(P(A|B) = \\frac{P(A \\cap B)}{P(A)}\\)", "\\(P(A|B) = P(A) \\times P(B)\\)", "\\(P(A|B) = \\frac{P(A \\cup B)}{P(B)}\\)"],
+    "solution": "Step 1: Conditional probability measures the probability of event A given that event B has occurred.\nStep 2: The sample space is reduced to B, yielding \\(P(A|B) = \\frac{P(A \\cap B)}{P(B)}\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 82,
+    "question": "Given \\(P(A \\cap B) = 0.15\\) and \\(P(B) = 0.50\\), calculate \\(P(A|B)\\).",
+    "options": ["0.075", "0.30", "0.35", "0.65"],
+    "solution": "Step 1: Apply formula: \\(P(A|B) = \\frac{P(A \\cap B)}{P(B)}\\).\nStep 2: Substitute given values: \\(P(A|B) = \\frac{0.15}{0.50} = 0.30\\).\nCorrect Answer: (b)"
+  },
+  {
+    "id": 83,
+    "question": "Two events A and B are defined as independent if and only if:",
+    "options": ["\\(P(A \\cap B) = 0\\)", "\\(P(A \\cap B) = P(A) P(B)\\)", "\\(P(A \\cup B) = P(A) + P(B)\\)", "\\(P(A|B) = 0\\)"],
+    "solution": "Step 1: Independence means the occurrence of event B does not alter the probability of event A, i.e., \\(P(A|B) = P(A)\\).\nStep 2: Substituting into the conditional probability formula gives \\(P(A \\cap B) = P(A) P(B)\\).\nCorrect Answer: (b)"
+  },
+  {
+    "id": 84,
+    "question": "If A and B are independent events with \\(P(A) = 0.4\\) and \\(P(B) = 0.5\\), what is \\(P(A \\cap B)\\)?",
+    "options": ["0.9", "0.2", "0.1", "0.0"],
+    "solution": "Step 1: Since A and B are independent, use \\(P(A \\cap B) = P(A) \\times P(B)\\).\nStep 2: Compute \\(0.4 \\times 0.5 = 0.2\\).\nCorrect Answer: (b)"
+  },
+  {
+    "id": 85,
+    "question": "What is the general Multiplication Rule for dependent events A and B?",
+    "options": ["\\(P(A \\cap B) = P(A) P(B|A)\\)", "\\(P(A \\cap B) = P(A) + P(B|A)\\)", "\\(P(A \\cap B) = \\frac{P(A)}{P(B|A)}\\)", "\\(P(A \\cap B) = P(A) P(B)\\)"],
+    "solution": "Step 1: Rearrange the conditional probability definition \\(P(B|A) = \\frac{P(A \\cap B)}{P(A)}\\).\nStep 2: Solve for intersection: \\(P(A \\cap B) = P(A) P(B|A)\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 86,
+    "question": "If events \\(B_1, B_2, \\dots, B_k\\) partition the sample space S, the Law of Total Probability states that for any event A:",
+    "options": ["\\(P(A) = \\sum_{i=1}^k P(A \\cap B_i) = \\sum_{i=1}^k P(A|B_i) P(B_i)\\)", "\\(P(A) = \\sum_{i=1}^k P(A|B_i)\\)", "\\(P(A) = \\prod_{i=1}^k P(A|B_i)\\)", "\\(P(A) = \\sum_{i=1}^k P(B_i)\\)"],
+    "solution": "Step 1: Event A can be expressed as the union of mutually exclusive intersections \\((A \\cap B_i)\\).\nStep 2: \\(P(A) = \\sum P(A \\cap B_i) = \\sum P(A|B_i) P(B_i)\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 87,
+    "question": "Which fundamental probability theorem updates prior probabilities using observed conditional evidence?",
+    "options": ["Central Limit Theorem", "Bayes' Theorem", "Chebyshev's Inequality", "Law of Large Numbers"],
+    "solution": "Step 1: Identify probability theorems related to conditional updating.\nStep 2: Bayes' Theorem provides a mathematical method for revising existing probabilities (prior probabilities) based on new empirical evidence to obtain posterior probabilities.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 88,
+    "question": "Given prior \\(P(B_1) = 0.6\\), \\(P(B_2) = 0.4\\), and likelihoods \\(P(A|B_1) = 0.1\\), \\(P(A|B_2) = 0.2\\), calculate posterior \\(P(B_1|A)\\).",
+    "options": ["0.429", "0.571", "0.600", "0.140"],
+    "solution": "Step 1: Compute total probability \\(P(A) = P(A|B_1)P(B_1) + P(A|B_2)P(B_2) = (0.1)(0.6) + (0.2)(0.4) = 0.06 + 0.08 = 0.14\\).\nStep 2: Apply Bayes' Theorem: \\(P(B_1|A) = \\frac{P(A|B_1)P(B_1)}{P(A)} = \\frac{0.06}{0.14} = \\frac{3}{7} \\approx 0.429\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 89,
+    "question": "In medical screening, if a diagnostic test produces a positive result for a healthy individual, this is known as a:",
+    "options": ["True positive", "False positive (Type I Error equivalent)", "True negative", "False negative"],
+    "solution": "Step 1: True status is negative (healthy), but test output is positive.\nStep 2: An incorrect positive classification is defined as a false positive.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 90,
+    "question": "If three events A, B, C are mutually independent, which condition must hold in addition to pairwise independence?",
+    "options": ["\\(P(A \\cap B \\cap C) = P(A) P(B) P(C)\\)", "\\(P(A \\cup B \\cup C) = 1\\)", "\\(P(A|B \\cap C) = 0\\)", "\\(P(A \\cap B \\cap C) = 0\\)"],
+    "solution": "Step 1: Mutual independence requires both pairwise independence and joint independence across all combinations.\nStep 2: Thus, the joint product rule \\(P(A \\cap B \\cap C) = P(A) P(B) P(C)\\) must strictly hold.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 91,
+    "question": "According to the Fundamental Counting Principle, if task 1 can be done in m ways and task 2 can be done in n ways, in how many ways can both tasks be performed together?",
+    "options": ["\\(m + n\\)", "\\(m \\times n\\)", "\\(m^n\\)", "\\(\\frac{m!}{n!}\\)"],
+    "solution": "Step 1: The Fundamental Counting Principle states that sequential independent decisions combine multiplicatively.\nStep 2: Total combined outcomes = \\(m \\times n\\).\nCorrect Answer: (b)"
+  },
+  {
+    "id": 92,
+    "question": "What is the formula for calculating permutations of n distinct objects taken r at a time, \\(P(n,r)\\)?",
+    "options": ["\\(P(n,r) = \\frac{n!}{(n-r)!}\\)", "\\(P(n,r) = \\frac{n!}{r!(n-r)!}\\)", "\\(P(n,r) = \\frac{(n-r)!}{n!}\\)", "\\(P(n,r) = n! \\times r!\\)"],
+    "solution": "Step 1: Permutations account for arrangements where order matters.\nStep 2: The standard formula is \\(P(n,r) = \\frac{n!}{(n-r)!}\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 93,
+    "question": "Evaluate \\(P(5, 2)\\).",
+    "options": ["10", "20", "60", "120"],
+    "solution": "Step 1: Use permutation formula: \\(P(5,2) = \\frac{5!}{(5-2)!} = \\frac{5!}{3!}\\).\nStep 2: Calculate \\(\\frac{5 \\times 4 \\times 3!}{3!} = 5 \\times 4 = 20\\).\nCorrect Answer: (b)"
+  },
+  {
+    "id": 94,
+    "question": "What is the formula for calculating combinations of n distinct objects taken r at a time, \\(C(n,r)\\)?",
+    "options": ["\\(C(n,r) = \\frac{n!}{(n-r)!}\\)", "\\(C(n,r) = \\frac{n!}{r!(n-r)!}\\)", "\\(C(n,r) = \\frac{r!}{(n-r)!}\\)", "\\(C(n,r) = n! - r!\\)"],
+    "solution": "Step 1: Combinations select subsets where order does not matter.\nStep 2: Formula is \\(C(n,r) = \\frac{n!}{r!(n-r)!}\\).\nCorrect Answer: (b)"
+  },
+  {
+    "id": 95,
+    "question": "Evaluate \\(C(6, 3)\\).",
+    "options": ["20", "120", "18", "720"],
+    "solution": "Step 1: Use combination formula \\(C(6,3) = \\frac{6!}{3!(6-3)!} = \\frac{6!}{3! 3!}\\).\nStep 2: 6! = 720, 3! = 6, so 3! 3! = 36.\nStep 3: \\(\\frac{720}{36} = 20\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 96,
+    "question": "A real-valued function defined on the sample space of a random experiment is called a:",
+    "options": ["Parameter", "Random variable", "Statistic", "Cumulative frequency"],
+    "solution": "Step 1: Recall mathematical definitions.\nStep 2: A random variable X maps each outcome in a sample space S to a real numerical value \\(X(e) \\in \\mathbb{R}\\).\nCorrect Answer: (b)"
+  },
+  {
+    "id": 97,
+    "question": "Which of the following random variables is continuous?",
+    "options": ["Number of defective products in a shipment", "Time taken to complete an exam", "Count of customer calls received per hour", "Number of heads in 10 coin flips"],
+    "solution": "Step 1: Discrete variables assume countable values (0, 1, 2, ...).\nStep 2: Continuous variables take any real value on an interval continuum.\nStep 3: Time taken to complete an exam can take infinite fractional continuous values.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 98,
+    "question": "For a discrete random variable X, what two conditions must its probability mass function (PMF) \\(p(x)\\) satisfy?",
+    "options": ["\\(p(x) \\ge 0\\) for all \\(x\\), and \\(\\sum_{x} p(x) = 1\\)", "\\(p(x) > 1\\) for all \\(x\\), and \\(\\sum_{x} p(x) = 0\\)", "\\(p(x) \\le 0\\) for all \\(x\\), and \\(\\sum_{x} p(x) = 100\\)", "\\(\\int_{-\\infty}^{\\infty} p(x) dx = 0\\)"],
+    "solution": "Step 1: Axioms of PMF dictate non-negativity for every value: \\(p(x) \\ge 0\\).\nStep 2: Total probability across all possible discrete outcomes must sum to unity: \\(\\sum_{x} p(x) = 1\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 99,
+    "question": "What is the formula for the Expected Value \\(E(X)\\) of a discrete random variable X?",
+    "options": ["\\(E(X) = \\sum x \\cdot p(x)\\)", "\\(E(X) = \\sum x^2 \\cdot p(x)\\)", "\\(E(X) = \\frac{\\sum x}{n}\\)", "\\(E(X) = \\sum [x - p(x)]^2\\)"],
+    "solution": "Step 1: Expected value represents the long-run weighted average outcome.\nStep 2: Each outcome x is weighted by its probability \\(p(x)\\): \\(E(X) = \\sum x \\cdot p(x)\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 100,
+    "question": "Given the discrete PMF: \\(P(X=1)=0.2\\), \\(P(X=2)=0.5\\), \\(P(X=3)=0.3\\), compute \\(E(X)\\).",
+    "options": ["2.0", "2.1", "2.3", "2.5"],
+    "solution": "Step 1: Compute \\(E(X) = \\sum x \\cdot P(X=x)\\).\nStep 2: \\(E(X) = (1)(0.2) + (2)(0.5) + (3)(0.3) = 0.2 + 1.0 + 0.9 = 2.1\\).\nCorrect Answer: (b)"
+  },
+  {
+    "id": 101,
+    "question": "What is the standard variance formula \\(Var(X)\\) for a discrete random variable?",
+    "options": ["\\(Var(X) = E(X^2) - [E(X)]^2\\)", "\\(Var(X) = [E(X)]^2 - E(X^2)\\)", "\\(Var(X) = E(X^2) + E(X)\\)", "\\(Var(X) = \\sqrt{E(X)}\\)"],
+    "solution": "Step 1: Variance is defined as \\(E[(X - \\mu)^2]\\).\nStep 2: Expanding this yields \\(E(X^2 - 2X\\mu + \\mu^2) = E(X^2) - 2\\mu^2 + \\mu^2 = E(X^2) - [E(X)]^2\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 102,
+    "question": "Given \\(E(X) = 4\\) and \\(E(X^2) = 25\\), calculate \\(Var(X)\\).",
+    "options": ["9", "16", "21", "29"],
+    "solution": "Step 1: Apply formula \\(Var(X) = E(X^2) - [E(X)]^2\\).\nStep 2: Substitute \\(E(X^2) = 25\\) and \\(E(X) = 4\\): \\(Var(X) = 25 - (4)^2 = 25 - 16 = 9\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 103,
+    "question": "If a and b are constants, what is \\(E(aX + b)\\)?",
+    "options": ["\\(a E(X) + b\\)", "\\(a^2 E(X) + b\\)", "\\(a E(X)\\)", "\\(E(X) + a + b\\)"],
+    "solution": "Step 1: Expectation is a linear operator.\nStep 2: \\(E(aX + b) = a E(X) + E(b) = a E(X) + b\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 104,
+    "question": "If a and b are constants, what is \\(Var(aX + b)\\)?",
+    "options": ["\\(a Var(X) + b\\)", "\\(a^2 Var(X)\\)", "\\(a^2 Var(X) + b^2\\)", "\\(a Var(X)\\)"],
+    "solution": "Step 1: Adding a constant b shifts the distribution without affecting spread, so \\(Var(b) = 0\\).\nStep 2: Multiplying X by constant a scales variance by \\(a^2\\).\nStep 3: \\(Var(aX + b) = a^2 Var(X)\\).\nCorrect Answer: (b)"
+  },
+  {
+    "id": 105,
+    "question": "The Cumulative Distribution Function (CDF) \\(F(x)\\) of a random variable X is defined as:",
+    "options": ["\\(F(x) = P(X = x)\\)", "\\(F(x) = P(X \\le x)\\)", "\\(F(x) = P(X > x)\\)", "\\(F(x) = P(X \\ge x)\\)"],
+    "solution": "Step 1: CDF accumulates probability from negative infinity up to x.\nStep 2: By definition, \\(F(x) = P(X \\le x)\\).\nCorrect Answer: (b)"
+  },
+  {
+    "id": 106,
+    "question": "A single trial that yields only two mutually exclusive outcomes (Success or Failure) is called a:",
+    "options": ["Poisson process", "Bernoulli trial", "Continuous trial", "Gaussian experiment"],
+    "solution": "Step 1: A random experiment with exactly two possible outcomes (labeled 1/success and 0/failure) is a Bernoulli trial.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 107,
+    "question": "Which condition is NOT required for a Binomial distribution setup?",
+    "options": ["Fixed number of trials n", "Trials are independent", "Probability of success changes continuously from trial to trial", "Each trial has only two outcomes"],
+    "solution": "Step 1: Review Binomial requirements: fixed n, independent trials, binary outcomes, and CONSTANT probability of success p.\nStep 2: A changing probability of success violates Binomial assumptions.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 108,
+    "question": "What is the probability mass function for a Binomial variable \\(X \\sim \\text{Bin}(n, p)\\)?",
+    "options": ["\\(P(X=k) = \\binom{n}{k} p^k (1-p)^{n-k}\\)", "\\(P(X=k) = \\frac{\\lambda^k e^{-\\lambda}}{k!}\\)", "\\(P(X=k) = p(1-p)^{k-1}\\)", "\\(P(X=k) = \\binom{n}{k} p^{n-k} (1-p)^k\\)"],
+    "solution": "Step 1: Number of ways to choose k successes in n trials is \\(\\binom{n}{k}\\).\nStep 2: Probability of k successes is \\(p^k\\) and n-k failures is \\((1-p)^{n-k}\\).\nStep 3: Combine: \\(P(X=k) = \\binom{n}{k} p^k (1-p)^{n-k}\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 109,
+    "question": "What is the theoretical mean \\(\\mu\\) of a Binomial distribution \\(X \\sim \\text{Bin}(n, p)\\)?",
+    "options": ["\\(np\\)", "\\(np(1-p)\\)", "\\(\\sqrt{np(1-p)}\\)", "\\(\\frac{p}{n}\\)"],
+    "solution": "Step 1: Sum expected values of n independent Bernoulli trials, each with mean p.\nStep 2: \\(\\mu = n \\times p = np\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 110,
+    "question": "What is the theoretical variance \\(\\sigma^2\\) of a Binomial distribution \\(X \\sim \\text{Bin}(n, p)\\)?",
+    "options": ["\\(np\\)", "\\(np(1-p)\\)", "\\(\\sqrt{np}\\)", "\\(n^2 p (1-p)\\)"],
+    "solution": "Step 1: Sum variance of n independent Bernoulli trials, each with variance \\(p(1-p)\\).\nStep 2: \\(\\sigma^2 = np(1-p)\\).\nCorrect Answer: (b)"
+  },
+  {
+    "id": 111,
+    "question": "If \\(X \\sim \\text{Bin}(n = 20, p = 0.3)\\), calculate the standard deviation \\(\\sigma\\).",
+    "options": ["6", "4.2", "2.05", "1.44"],
+    "solution": "Step 1: Compute variance \\(\\sigma^2 = np(1-p) = 20 \\times 0.3 \\times (1 - 0.3) = 20 \\times 0.3 \\times 0.7 = 4.2\\).\nStep 2: Take square root: \\(\\sigma = \\sqrt{4.2} \\approx 2.05\\).\nCorrect Answer: (c)"
+  },
+  {
+    "id": 112,
+    "question": "For a Binomial distribution with \\(n = 4\\) and \\(p = 0.5\\), calculate \\(P(X = 2)\\).",
+    "options": ["0.25", "0.375", "0.50", "0.625"],
+    "solution": "Step 1: Apply formula: \\(P(X=2) = \\binom{4}{2} (0.5)^2 (0.5)^{4-2}\\).\nStep 2: \\(\\binom{4}{2} = \\frac{4 \\times 3}{2} = 6\\).\nStep 3: Compute \\(6 \\times (0.5)^4 = 6 \\times 0.0625 = 0.375\\).\nCorrect Answer: (b)"
+  },
+  {
+    "id": 113,
+    "question": "Under what condition is the Binomial distribution perfectly symmetric?",
+    "options": ["When \\(n \\to \\infty\\)", "When \\(p = 0.5\\)", "When \\(p = 0.1\\)", "When \\(n = 1\\)"],
+    "solution": "Step 1: Skewness depends on p.\nStep 2: When success and failure probabilities are equal (\\(p = 1-p = 0.5\\)), the distribution shape is perfectly symmetric around its mean.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 114,
+    "question": "Which discrete probability distribution models the number of events occurring within a fixed interval of time or space?",
+    "options": ["Binomial distribution", "Poisson distribution", "Hypergeometric distribution", "Continuous Uniform distribution"],
+    "solution": "Step 1: Recall random count models over fixed continua (time/area/volume).\nStep 2: The Poisson distribution models independent event occurrences over a specified unit interval.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 115,
+    "question": "What is the probability mass function of a Poisson random variable X with average rate parameter \\(\\lambda\\)?",
+    "options": ["\\(P(X=k) = \\frac{\\lambda^k e^{-\\lambda}}{k!}\\)", "\\(P(X=k) = \\frac{e^k \\lambda^{-\\lambda}}{k!}\\)", "\\(P(X=k) = \\binom{n}{k} \\lambda^k\\)", "\\(P(X=k) = \\lambda (1-\\lambda)^k\\)"],
+    "solution": "Step 1: Recall the standard Poisson PMF formula.\nStep 2: \\(P(X=k) = \\frac{\\lambda^k e^{-\\lambda}}{k!}\\) for \\(k = 0, 1, 2, \\dots\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 116,
+    "question": "What unique property links the mean \\(\\mu\\) and variance \\(\\sigma^2\\) of a Poisson distribution?",
+    "options": ["\\(\\mu = 2 \\sigma^2\\)", "\\(\\mu = \\sigma^2 = \\lambda\\)", "\\(\\sigma^2 = \\sqrt{\\mu}\\)", "\\(\\mu = 1 - \\sigma^2\\)"],
+    "solution": "Step 1: Examine parameters of the Poisson distribution.\nStep 2: A core property of Poisson distribution is that both its mean and variance are equal to rate parameter \\(\\lambda\\).\nCorrect Answer: (b)"
+  },
+  {
+    "id": 117,
+    "question": "If call center arrivals follow a Poisson process with average rate \\(\\lambda = 2\\) calls per minute, what is \\(P(X = 0)\\) calls in a minute?",
+    "options": ["\\(e^{-2}\\)", "\\(2 e^{-2}\\)", "\\(1 - e^{-2}\\)", "0"],
+    "solution": "Step 1: Substitute \\(k = 0\\) and \\(\\lambda = 2\\) into \\(P(X=k) = \\frac{\\lambda^k e^{-\\lambda}}{k!}\\).\nStep 2: \\(P(X=0) = \\frac{2^0 e^{-2}}{0!} = \\frac{1 \\cdot e^{-2}}{1} = e^{-2}\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 118,
+    "question": "The Poisson distribution serves as an effective approximation to the Binomial distribution when:",
+    "options": ["n is small and p is large", "n is large (n \\(\\ge 100\\)) and p is small (p \\(\\le 0.05\\))", "p = 0.50 and n = 10", "n = p"],
+    "solution": "Step 1: Poisson approximation applies for rare events in large sample sizes.\nStep 2: Rule of thumb: \\(n \\ge 100\\) and \\(p \\le 0.05\\), with \\(\\lambda = np\\).\nCorrect Answer: (b)"
+  },
+  {
+    "id": 119,
+    "question": "If a Poisson process has average rate \\(\\lambda = 3\\) occurrences per hour, what is the expected count parameter \\(\\lambda'\\) over a 4-hour time frame?",
+    "options": ["3", "7", "12", "81"],
+    "solution": "Step 1: Rate parameters scale linearly with interval size.\nStep 2: \\(\\lambda' = 3 \\text{ per hour} \\times 4 \\text{ hours} = 12\\).\nCorrect Answer: (c)"
+  },
+  {
+    "id": 120,
+    "question": "If \\(X \\sim \\text{Poisson}(\\lambda_1 = 2)\\) and \\(Y \\sim \\text{Poisson}(\\lambda_2 = 5)\\) are independent, what is the distribution of \\(Z = X + Y\\)?",
+    "options": ["\\(\\text{Poisson}(\\lambda = 2.5)\\)", "\\(\\text{Poisson}(\\lambda = 7)\\)", "\\(\\text{Poisson}(\\lambda = 10)\\)", "\\(\\text{Binomial}(7, 0.5)\\)"],
+    "solution": "Step 1: The sum of independent Poisson variables is also Poisson distributed.\nStep 2: Combine rate parameters: \\(\\lambda_Z = \\lambda_1 + \\lambda_2 = 2 + 5 = 7\\).\nCorrect Answer: (b)"
+  },
+  {
+    "id": 121,
+    "question": "Which discrete probability distribution must be used instead of Binomial when sampling WITHOUT replacement from a finite population?",
+    "options": ["Poisson distribution", "Hypergeometric distribution", "Geometric distribution", "Normal distribution"],
+    "solution": "Step 1: Sampling without replacement causes trial outcomes to be dependent, altering success probability.\nStep 2: The Hypergeometric distribution accounts for non-replacement in finite populations.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 122,
+    "question": "Which probability distribution models the number of independent Bernoulli trials required to achieve the FIRST success?",
+    "options": ["Geometric distribution", "Binomial distribution", "Poisson distribution", "Uniform distribution"],
+    "solution": "Step 1: Identify trial counting distributions.\nStep 2: The Geometric distribution calculates probability for the trial number on which the first success occurs.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 123,
+    "question": "If X follows a Geometric distribution with success probability p, what is \\(P(X = k)\\)?",
+    "options": ["\\(P(X=k) = (1-p)^{k-1} p\\)", "\\(P(X=k) = p^k (1-p)\\)", "\\(P(X=k) = \\binom{n}{k} p^k\\)", "\\(P(X=k) = \\frac{p}{k}\\)"],
+    "solution": "Step 1: First success at trial k requires k-1 consecutive failures followed by 1 success.\nStep 2: Probability = \\((1-p)^{k-1} \\times p\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 124,
+    "question": "What is the expected value \\(E(X)\\) of a Geometric random variable with success probability p?",
+    "options": ["\\(\\frac{1}{p}\\)", "\\(\\frac{1 - p}{p}\\)", "\\(\\frac{1}{p^2}\\)", "\\(p\\)"],
+    "solution": "Step 1: Derive expectation of Geometric variable.\nStep 2: \\(E(X) = \\sum_{k=1}^{\\infty} k (1-p)^{k-1} p = \\frac{1}{p}\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 125,
+    "question": "The Geometric distribution possesses which unique mathematical property?",
+    "options": ["Memoryless property", "Symmetry about zero", "Equal mean and variance", "Bounded support"],
+    "solution": "Step 1: Memoryless property means \\(P(X > s + t \\mid X > s) = P(X > t)\\).\nStep 2: Among discrete distributions, only the Geometric distribution is memoryless.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 126,
+    "question": "For any continuous probability density function (PDF) \\(f(x)\\), what must the total integral \\(\\int_{-\\infty}^{\\infty} f(x) dx\\) equal?",
+    "options": ["0", "0.5", "1", "Infinity"],
+    "solution": "Step 1: Total area under a valid PDF curve represents cumulative sample space probability.\nStep 2: Thus, \\(\\int_{-\\infty}^{\\infty} f(x) dx = 1\\).\nCorrect Answer: (c)"
+  },
+  {
+    "id": 127,
+    "question": "If X is a continuous random variable, what is the exact point probability \\(P(X = c)\\) for any specific constant c?",
+    "options": ["0", "0.5", "1", "\\(f(c)\\)"],
+    "solution": "Step 1: Probability for continuous variables is computed as area under PDF curve over an interval [a, b].\nStep 2: For a single exact point, interval width is 0, so \\(\\int_c^c f(x) dx = 0\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 128,
+    "question": "A continuous random variable X uniformly distributed on interval [a, b] has probability density function \\(f(x) = \\)",
+    "options": ["\\(\\frac{1}{b - a}\\) for \\(a \\le x \\le b\\)", "\\(\\frac{1}{b + a}\\)", "\\(b - a\\)", "\\(\\frac{x - a}{b - a}\\)"],
+    "solution": "Step 1: Uniform density is flat/constant c over interval [a, b].\nStep 2: Total area = \\((b - a) \\times c = 1 \\implies c = \\frac{1}{b - a}\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 129,
+    "question": "What continuous probability distribution is commonly used to model time elapsed between consecutive Poisson occurrences?",
+    "options": ["Exponential distribution", "Uniform distribution", "Normal distribution", "Student's t-distribution"],
+    "solution": "Step 1: Poisson measures counts per unit time.\nStep 2: Waiting time between consecutive arrivals in a Poisson process follows an Exponential distribution.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 130,
+    "question": "Which continuous distribution is the ONLY continuous distribution that possesses the memoryless property?",
+    "options": ["Exponential distribution", "Normal distribution", "Weibull distribution", "Beta distribution"],
+    "solution": "Step 1: Memoryless property in continuous domain means \\(P(T > s+t \\mid T > s) = P(T > t)\\).\nStep 2: The Exponential distribution is uniquely memoryless among continuous distributions.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 131,
+    "question": "Which statement correctly describes the continuous Normal (Gaussian) distribution curve?",
+    "options": ["It is symmetric and bell-shaped with Mean = Median = Mode", "It is heavily right-skewed with Mean > Mode", "It has finite lower and upper bound endpoints", "Its total area equals 0.5"],
+    "solution": "Step 1: The Gaussian curve is unimodal, perfectly symmetric about \\(\\mu\\).\nStep 2: Due to symmetry, the mean, median, and mode coincide at the central peak.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 132,
+    "question": "What proportion of total probability density lies below the mean \\(\\mu\\) in any Normal distribution?",
+    "options": ["25%", "50%", "68%", "100%"],
+    "solution": "Step 1: Normal distribution is symmetric about mean \\(\\mu\\).\nStep 2: Exactly half (50%) of total probability area lies to the left of \\(\\mu\\).\nCorrect Answer: (b)"
+  },
+  {
+    "id": 133,
+    "question": "What are the parameter values for the Standard Normal Distribution Z?",
+    "options": ["Mean \\(\\mu = 0\\) and Standard Deviation \\(\\sigma = 1\\)", "Mean \\(\\mu = 1\\) and Variance \\(\\sigma^2 = 0\\)", "Mean \\(\\mu = 100\\) and Standard Deviation \\(\\sigma = 15\\)", "Mean \\(\\mu = 0\\) and Variance \\(\\sigma^2 = 0\\)"],
+    "solution": "Step 1: Standard normal variable Z is defined by standardizing X.\nStep 2: Parameter values are mean \\(\\mu = 0\\) and variance \\(\\sigma^2 = 1\\) (hence \\(\\sigma = 1\\)).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 134,
+    "question": "What standardizing formula converts a normal value \\(X \\sim N(\\mu, \\sigma^2)\\) into standard normal score Z?",
+    "options": ["\\(Z = \\frac{X - \\mu}{\\sigma}\\)", "\\(Z = \\frac{\\mu - X}{\\sigma^2}\\)", "\\(Z = \\frac{X - \\sigma}{\\mu}\\)", "\\(Z = (X - \\mu) \\cdot \\sigma\\)"],
+    "solution": "Step 1: Subtract mean to center at 0.\nStep 2: Divide by standard deviation to scale spread to 1.\nStep 3: Formula is \\(Z = \\frac{X - \\mu}{\\sigma}\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 135,
+    "question": "Given \\(X \\sim N(\\mu = 100, \\sigma^2 = 25)\\), calculate the Z-score for \\(X = 110\\).",
+    "options": ["0.4", "2.0", "4.0", "10.0"],
+    "solution": "Step 1: Identify standard deviation \\(\\sigma = \\sqrt{25} = 5\\).\nStep 2: Calculate \\(Z = \\frac{110 - 100}{5} = \\frac{10}{5} = 2.0\\).\nCorrect Answer: (b)"
+  },
+  {
+    "id": 136,
+    "question": "When approximating a discrete Binomial distribution using a continuous Normal distribution, what correction factor is applied?",
+    "options": ["Bessel's correction factor", "Continuity correction factor (+0.5 or -0.5)", "Finite population multiplier", "Yates' Chi-Square correction"],
+    "solution": "Step 1: Discrete integer values are adjusted to cover continuous intervals \\([k - 0.5, k + 0.5]\\).\nStep 2: This adjustment is called the continuity correction factor.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 137,
+    "question": "A numerical descriptive measure calculated from a sample (such as sample mean \\(\\bar{x}\\)) is called a:",
+    "options": ["Parameter", "Statistic", "Population metric", "Standard error"],
+    "solution": "Step 1: Differentiate population vs sample metrics.\nStep 2: A population measure is a parameter, whereas a numerical value computed from sample data is a statistic.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 138,
+    "question": "The probability distribution of a sample statistic across all possible random samples of size n is known as a:",
+    "options": ["Population distribution", "Sampling distribution", "Empirical density", "Joint probability function"],
+    "solution": "Step 1: Sampling statistics vary across drawn sample repetitions.\nStep 2: The probability distribution formed by these sample statistic values is its sampling distribution.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 139,
+    "question": "What is the Standard Error of the sample mean \\(\\sigma_{\\bar{x}}\\) when sampling from a population with standard deviation \\(\\sigma\\)?",
+    "options": ["\\(\\sigma_{\\bar{x}} = \\frac{\\sigma}{\\sqrt{n}}\\)", "\\(\\sigma_{\\bar{x}} = \\frac{\\sigma}{n}\\)", "\\(\\sigma_{\\bar{x}} = \\sigma \\sqrt{n}\\)", "\\(\\sigma_{\\bar{x}} = \\frac{\\sigma^2}{n}\\)"],
+    "solution": "Step 1: Variance of sample mean \\(Var(\\bar{X}) = \\frac{\\sigma^2}{n}\\).\nStep 2: Standard error is positive square root of variance: SE = \\(\\sigma_{\\bar{x}} = \\frac{\\sigma}{\\sqrt{n}}\\).\nCorrect Answer: (a)"
+  },
+  {
+    "id": 140,
+    "question": "According to the Central Limit Theorem (CLT), as sample size n grows large (n \\(\\ge 30\\)), the sampling distribution of the sample mean \\(\\bar{x}\\) approaches:",
+    "options": ["A uniform distribution", "A normal distribution regardless of underlying population shape", "A Poisson distribution", "The exact shape of population distribution"],
+    "solution": "Step 1: The Central Limit Theorem is a foundational limit theorem in statistics.\nStep 2: It states that regardless of population shape, the sampling distribution of sample mean \\(\\bar{x}\\) converges to a normal distribution as \\(n \\to \\infty\\) (typically \\(n \\ge 30\\)).\nCorrect Answer: (b)"
+  }
 ]
