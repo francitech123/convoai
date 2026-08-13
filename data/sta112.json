@@ -1,422 +1,982 @@
 [
   {
-    "id": 1,
-    "question": "Evaluate \\(6!\\).",
-    "options": ["720", "120", "24", "360"],
-    "solution": "Step 1: Recall the definition of factorial: \\(n! = n \\times (n-1) \\times (n-2) \\times \\dots \\times 2 \\times 1\\).\nStep 2: \\(6! = 6 \\times 5 \\times 4 \\times 3 \\times 2 \\times 1\\).\nStep 3: \\(6 \\times 5 = 30\\), then \\(30 \\times 4 = 120\\), then \\(120 \\times 3 = 360\\), then \\(360 \\times 2 = 720\\), finally \\(720 \\times 1 = 720\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 2,
-    "question": "Simplify the expression \\(\\frac{10!}{8!}\\).",
-    "options": ["90", "10", "9", "80"],
-    "solution": "Step 1: Write out the factorials to see the cancellation. \\(\\frac{10 \\times 9 \\times 8 \\times 7 \\times \\dots \\times 1}{8 \\times 7 \\times \\dots \\times 1}\\).\nStep 2: Cancel out the \\(8!\\) from the numerator and denominator.\nStep 3: You are left with \\(10 \\times 9 = 90\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 3,
-    "question": "Simplify \\(\\frac{12!}{9! \\cdot 3!}\\).",
-    "options": ["220", "440", "120", "660"],
-    "solution": "Step 1: Expand \\(12!\\) only down to \\(9!\\). \\(\\frac{12 \\times 11 \\times 10 \\times 9!}{9! \\times 3!}\\).\nStep 2: Cancel the \\(9!\\). We are left with \\(\\frac{12 \\times 11 \\times 10}{3!}\\).\nStep 3: Expand \\(3! = 3 \\times 2 \\times 1 = 6\\).\nStep 4: Divide the numerator and denominator by 6. \\(12/6 = 2\\). So \\(2 \\times 11 \\times 10 = 220\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 4,
-    "question": "Factorise the expression \\(n! + (n-1)!\\).",
-    "options": ["n!", "(n+1)(n-1)!", "n(n-1)!", "2n!"],
-    "solution": "Step 1: Recall that \\(n! = n \\times (n-1)!\\).\nStep 2: Rewrite the expression: \\([n \\times (n-1)!] + [(n-1)!]\\).\nStep 3: Factor out the common term \\((n-1)!\\).\nStep 4: You get \\((n-1)! \\times (n + 1)\\).\nCorrect Answer: (b)"
-  },
-  {
-    "id": 5,
-    "question": "What is the value of \\(0!\\)?",
-    "options": ["0", "1", "Undefined", "10"],
-    "solution": "Step 1: By definition, the product of no numbers is 1. \\(0!\\) is defined as 1 to make formulas in probability and permutations work perfectly.\nCorrect Answer: (b)"
-  },
-  {
-    "id": 6,
-    "question": "How many arrangements of the letters in the word 'GROUP' are possible?",
-    "options": ["24", "60", "120", "720"],
-    "solution": "Step 1: 'GROUP' has 5 distinct letters. \\(n = 5\\).\nStep 2: The number of arrangements of \\(n\\) distinct objects is \\(n!\\).\nStep 3: \\(5! = 5 \\times 4 \\times 3 \\times 2 \\times 1 = 120\\).\nCorrect Answer: (c)"
-  },
-  {
-    "id": 7,
-    "question": "How many different 3-digit numbers can be formed from the digits {2, 3, 4, 5, 6} if the digits are all different?",
-    "options": ["60", "125", "120", "30"],
-    "solution": "Step 1: We are choosing and arranging 3 digits from a set of 5 different digits. Order matters (345 is different from 543).\nStep 2: This is a permutation problem. Use the formula \\(^nP_r = \\frac{n!}{(n-r)!}\\).\nStep 3: \\(n=5\\), \\(r=3\\). \\(^5P_3 = \\frac{5!}{(5-3)!} = \\frac{5!}{2!}\\).\nStep 4: \\(\\frac{5 \\times 4 \\times 3 \\times 2 \\times 1}{2 \\times 1} = 5 \\times 4 \\times 3 = 60\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 8,
-    "question": "How many different 3-digit numbers can be formed from the digits {2, 3, 4, 5, 6} if repetition of digits is allowed?",
-    "options": ["125", "60", "120", "216"],
-    "solution": "Step 1: Here, the same digit can be used multiple times.\nStep 2: For the 1st position, there are 5 choices. For the 2nd position, there are 5 choices. For the 3rd position, there are 5 choices.\nStep 3: By the fundamental counting principle, multiply the choices: \\(5 \\times 5 \\times 5 = 125\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 9,
-    "question": "In how many ways can 7 different trophies be arranged on a shelf?",
-    "options": ["720", "5040", "2520", "40320"],
-    "solution": "Step 1: There are 7 distinct items. The number of arrangements of \\(n\\) distinct objects is \\(n!\\).\nStep 2: \\(7! = 7 \\times 6 \\times 5 \\times 4 \\times 3 \\times 2 \\times 1 = 5040\\).\nCorrect Answer: (b)"
-  },
-  {
-    "id": 10,
-    "question": "How many odd numbers between 2000 and 3000 can be formed from the digits 1, 2, 3, 4, 5, 6 (all digits used only once)?",
-    "options": ["24", "36", "48", "12"],
-    "solution": "Step 1: The number must be between 2000 and 3000, so the 1st digit (thousands place) must be 2.\nStep 2: The number must be odd, so the last digit must be chosen from {1, 3, 5}. That's 3 choices.\nStep 3: The 2nd digit (hundreds) can be any of the remaining 4 digits. The 3rd digit (tens) can be any of the remaining 3 digits.\nStep 4: Multiply: 1 (first digit) × 4 × 3 × 3 (last digit) = 36.\nCorrect Answer: (b)"
-  },
-  {
-    "id": 11,
-    "question": "In how many ways can 6 different books be placed in a rack?",
-    "options": ["120", "720", "24", "5040"],
-    "solution": "Step 1: 6 different items are to be arranged in a straight line.\nStep 2: The number of arrangements of \\(n\\) distinct objects is \\(n!\\).\nStep 3: \\(6! = 6 \\times 5 \\times 4 \\times 3 \\times 2 \\times 1 = 720\\).\nCorrect Answer: (b)"
-  },
-  {
-    "id": 12,
-    "question": "How many numbers greater than 4000 can be formed from the integers 1, 3, 5, 7, using each of them only once in each number?",
-    "options": ["24", "48", "12", "72"],
-    "solution": "Step 1: Since there are only 4 given integers (1, 3, 5, 7) and each digit can be used at most once, all possible numbers are 4-digit numbers.\nStep 2: For a 4-digit number to be greater than 4000, the first digit must be 5 or 7 (2 choices).\nStep 3: The remaining 3 positions can be arranged using the remaining 3 digits in \\(3! = 6\\) ways.\nStep 4: Total numbers = \\(2 \\times 6 = 12\\).\nCorrect Answer: (c)"
-  },
-  {
-    "id": 13,
-    "question": "In how many ways can 8 people be seated at a round table?",
-    "options": ["40320", "5040", "720", "20160"],
-    "solution": "Step 1: For circular permutations, the number of arrangements of \\(n\\) distinct objects is \\((n-1)!\\).\nStep 2: \\(n = 8\\). \\((8-1)! = 7!\\).\nStep 3: \\(7! = 7 \\times 6 \\times 5 \\times 4 \\times 3 \\times 2 \\times 1 = 5040\\).\nCorrect Answer: (b)"
-  },
-  {
-    "id": 14,
-    "question": "In how many ways can 5 people stand in a circle?",
-    "options": ["120", "24", "60", "12"],
-    "solution": "Step 1: Use the formula for circular permutations: \\((n-1)!\\).\nStep 2: \\(n = 5\\). \\((5-1)! = 4!\\).\nStep 3: \\(4! = 4 \\times 3 \\times 2 \\times 1 = 24\\).\nCorrect Answer: (b)"
-  },
-  {
-    "id": 15,
-    "question": "In how many ways can a committee of 4 people be formed from a class of 10 students?",
-    "options": ["5040", "210", "120", "720"],
-    "solution": "Step 1: The order in which committee members are chosen does not matter. This is a combination problem.\nStep 2: Use the formula \\(^nC_r = \\frac{n!}{r!(n-r)!}\\).\nStep 3: \\(n=10, r=4\\). \\(^{10}C_4 = \\frac{10!}{4!(10-4)!} = \\frac{10 \\times 9 \\times 8 \\times 7}{4 \\times 3 \\times 2 \\times 1}\\).\nStep 4: Simplify the fraction. \\(\\frac{10 \\times 9 \\times 8 \\times 7}{24} = 10 \\times 3 \\times 7 = 210\\).\nCorrect Answer: (b)"
-  },
-  {
-    "id": 16,
-    "question": "Calculate \\(^5C_2\\).",
-    "options": ["20", "10", "5", "15"],
-    "solution": "Step 1: Use the combination formula: \\(^nC_r = \\frac{n!}{r!(n-r)!}\\).\nStep 2: \\(^5C_2 = \\frac{5!}{2!(5-2)!} = \\frac{5!}{2! \\cdot 3!}\\).\nStep 3: \\(\\frac{5 \\times 4 \\times 3 \\times 2 \\times 1}{(2 \\times 1) \\times (3 \\times 2 \\times 1)} = \\frac{120}{2 \\times 6} = \\frac{120}{12} = 10\\).\nCorrect Answer: (b)"
-  },
-  {
-    "id": 17,
-    "question": "Which of the following is equal to \\(^nC_r\\)?",
-    "options": ["\\(^nP_r\\)", "\\(^nC_{n-r}\\)", "\\(\\frac{n!}{r!}\\)", "\\(^nP_{n-r}\\)"],
-    "solution": "Step 1: Let's test the property of combinations. \\(^nC_r = \\frac{n!}{r!(n-r)!}\\).\nStep 2: Let's check \\(^nC_{n-r} = \\frac{n!}{(n-r)!(n-(n-r))!} = \\frac{n!}{(n-r)!r!}\\).\nStep 3: Since the formulas are identical, \\(^nC_r = ^nC_{n-r}\\).\nCorrect Answer: (b)"
-  },
-  {
-    "id": 18,
-    "question": "Find the value of \\(^{10}C_8\\).",
-    "options": ["90", "45", "10", "80"],
-    "solution": "Step 1: Use the property \\(^nC_r = ^nC_{n-r}\\).\nStep 2: \\(^{10}C_8 = ^{10}C_{10-8} = ^{10}C_2\\).\nStep 3: Calculate \\(^{10}C_2 = \\frac{10!}{2!(10-2)!} = \\frac{10 \\times 9}{2 \\times 1} = 45\\).\nCorrect Answer: (b)"
-  },
-  {
-    "id": 19,
-    "question": "In how many ways can a cricket team of 11 players be chosen from 14 players?",
-    "options": ["364", "720", "120", "5040"],
-    "solution": "Step 1: This is a combination problem because the order of selecting players does not matter.\nStep 2: Use \\(^{14}C_{11}\\).\nStep 3: Using the property \\(^{14}C_{11} = ^{14}C_{14-11} = ^{14}C_3\\).\nStep 4: Calculate \\(^{14}C_3 = \\frac{14 \\times 13 \\times 12}{3 \\times 2 \\times 1} = 14 \\times 13 \\times 2 = 364\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 20,
-    "question": "From the cricket team selection in question 19, how many of the teams will include a specific captain?",
-    "options": ["364", "286", "128", "720"],
-    "solution": "Step 1: If the captain is ALWAYS included, we have already chosen 1 person. We need to choose the remaining 10 players.\nStep 2: We now have 13 players left to choose from (14 total - 1 captain).\nStep 3: This is \\(^{13}C_{10}\\).\nStep 4: \\(^{13}C_{10} = ^{13}C_3 = \\frac{13 \\times 12 \\times 11}{3 \\times 2 \\times 1} = 13 \\times 2 \\times 11 = 286\\).\nCorrect Answer: (b)"
-  },
-  {
-    "id": 21,
-    "question": "How many distinct arrangements can be made from the letters of the word 'DIGIT'?",
-    "options": ["120", "60", "30", "24"],
-    "solution": "Step 1: The word 'DIGIT' has 5 letters, but the letter 'I' appears twice.\nStep 2: Formula for permutations with identical items: \\(\\frac{n!}{p!q!r!...}\\), where \\(p, q, r\\) are the counts of identical items.\nStep 3: \\(n=5\\), and 'I' appears 2 times. So, \\(\\frac{5!}{2!} = \\frac{120}{2} = 60\\).\nCorrect Answer: (b)"
-  },
-  {
-    "id": 22,
-    "question": "How many distinct arrangements can be made from the letters of the word 'STATISTICS'?",
-    "options": ["50400", "720", "3628800", "40320"],
-    "solution": "Step 1: Word 'STATISTICS' has 10 letters. S=3, T=3, A=1, I=2, C=1.\nStep 2: Use the formula \\(\\frac{n!}{p!q!r!...}\\).\nStep 3: \\(\\frac{10!}{3! \\cdot 3! \\cdot 1! \\cdot 2! \\cdot 1!}\\).\nStep 4: Simplify the big division. \\(\\frac{3628800}{6 \\times 6 \\times 2} = \\frac{3628800}{72} = 50400\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 23,
-    "question": "In how many ways can 3 French books, 2 History books, and 5 Maths books be arranged on a shelf if the books in each subject must stay together?",
-    "options": ["8640", "17280", "51840", "207360"],
-    "solution": "Step 1: Treat the books in each subject as a single block. So we have 3 blocks: French, History, Maths.\nStep 2: The number of ways to arrange these 3 blocks is \\(3! = 6\\).\nStep 3: Now, arrange the books inside each block. French books: \\(3! = 6\\). History books: \\(2! = 2\\). Maths books: \\(5! = 120\\).\nStep 4: Multiply everything together: \\(3! \\times 3! \\times 2! \\times 5! = 6 \\times 6 \\times 2 \\times 120 = 8640\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 24,
-    "question": "Evaluate \\(\\frac{7!}{4! \\cdot 3!}\\).",
-    "options": ["35", "140", "210", "70"],
-    "solution": "Step 1: Expand the numerator. \\(\\frac{7 \\times 6 \\times 5 \\times 4 \\times 3 \\times 2 \\times 1}{(4 \\times 3 \\times 2 \\times 1) \\times (3 \\times 2 \\times 1)}\\).\nStep 2: Cancel the common \\(4!\\) from the top and bottom. \\(\\frac{7 \\times 6 \\times 5}{3 \\times 2 \\times 1}\\).\nStep 3: Simplify the numbers. \\(\\frac{7 \\times 6 \\times 5}{6} = 7 \\times 5 = 35\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 25,
-    "question": "How many numbers are possible with the digits 1, 2, 3, 4, 5, 6 if all are used at once and the number is a 6-digit number?",
-    "options": ["720", "120", "360", "5040"],
-    "solution": "Step 1: Since we are using all 6 digits at once to form a 6-digit number, it is just an arrangement of 6 distinct items.\nStep 2: The number of arrangements is \\(6! = 6 \\times 5 \\times 4 \\times 3 \\times 2 \\times 1 = 720\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 26,
-    "question": "Find the number of ways in which 3 contestants can be chosen from 10 participants for a quiz competition.",
-    "options": ["720", "120", "210", "5040"],
-    "solution": "Step 1: The order of choosing contestants does not matter (it is a group selection). This is a combination.\nStep 2: \\(^{10}C_3 = \\frac{10!}{3!(10-3)!} = \\frac{10 \\times 9 \\times 8}{3 \\times 2 \\times 1}\\).\nStep 3: Simplify: \\(\\frac{720}{6} = 120\\).\nCorrect Answer: (b)"
-  },
-  {
-    "id": 27,
-    "question": "Calculate \\(^4P_2\\).",
-    "options": ["12", "6", "24", "8"],
-    "solution": "Step 1: Permutation formula: \\(^4P_2 = \\frac{4!}{(4-2)!} = \\frac{4!}{2!}\\).\nStep 2: \\(\\frac{4 \\times 3 \\times 2 \\times 1}{2 \\times 1} = 4 \\times 3 = 12\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 28,
-    "question": "In how many ways can 5 people be arranged in a row if 2 specific people must sit together?",
-    "options": ["48", "120", "12", "24"],
-    "solution": "Step 1: Treat the 2 specific people as a single unit. Now we have 4 items to arrange (3 individuals + 1 combined unit).\nStep 2: The number of ways to arrange 4 items is \\(4! = 24\\).\nStep 3: The 2 people inside the unit can be arranged in \\(2! = 2\\) ways.\nStep 4: Total ways = \\(24 \\times 2 = 48\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 29,
-    "question": "In how many ways can 5 distinct objects be arranged in a circle?",
-    "options": ["120", "24", "60", "12"],
-    "solution": "Step 1: Use the circular permutation formula: \\((n-1)!\\).\nStep 2: \\((5-1)! = 4! = 24\\).\nCorrect Answer: (b)"
-  },
-  {
-    "id": 30,
-    "question": "How many ways can 10 people be arranged in a straight line?",
-    "options": ["3628800", "362880", "40320", "5040"],
-    "solution": "Step 1: This is a standard straight-line arrangement.\nStep 2: The number of ways is \\(10!\\).\nStep 3: \\(10! = 10 \\times 9 \\times 8 \\times 7 \\times 6 \\times 5 \\times 4 \\times 3 \\times 2 \\times 1 = 3,628,800\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 31,
-    "question": "How many distinct words can be formed from the letters of the word 'BOOK'?",
-    "options": ["12", "24", "6", "10"],
-    "solution": "Step 1: The word 'BOOK' has 4 letters, with the letter 'O' appearing twice.\nStep 2: Use the formula \\(\\frac{n!}{p!}\\), where \\(n=4\\) and \\(p=2\\) (the number of duplicate O's).\nStep 3: \\(\\frac{4!}{2!} = \\frac{24}{2} = 12\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 32,
-    "question": "How many distinct 5-digit numbers can be formed from the digits 1, 2, 3, 4, 5 if no digit is repeated?",
-    "options": ["120", "60", "24", "12"],
-    "solution": "Step 1: Since we are forming a 5-digit number using all 5 distinct digits, it's simply arranging 5 distinct items.\nStep 2: Number of arrangements = \\(5! = 120\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 33,
-    "question": "Evaluate \\(^{100}C_{98}\\).",
-    "options": ["4950", "9900", "10000", "5050"],
-    "solution": "Step 1: Use the property \\(^nC_r = ^nC_{n-r}\\). \\(^{100}C_{98} = ^{100}C_{100-98} = ^{100}C_2\\).\nStep 2: \\(^{100}C_2 = \\frac{100 \\times 99}{2 \\times 1} = 50 \\times 99 = 4950\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 34,
-    "question": "In how many ways can 3 men and 3 women be arranged in a row if the men must stay together?",
-    "options": ["720", "144", "36", "24"],
-    "solution": "Step 1: Treat the 3 men as a single block. Now we have 3 women + 1 block = 4 items to arrange.\nStep 2: Arrangements = \\(4! = 24\\).\nStep 3: The 3 men inside the block can be arranged in \\(3! = 6\\) ways.\nStep 4: Total = \\(24 \\times 6 = 144\\).\nCorrect Answer: (b)"
-  },
-  {
-    "id": 35,
-    "question": "In a class of 12 students, how many ways can a President and a Vice-President be elected?",
-    "options": ["66", "132", "144", "24"],
-    "solution": "Step 1: The order matters because President and VP are different positions.\nStep 2: This is a permutation: \\(^{12}P_2 = \\frac{12!}{(12-2)!} = 12 \\times 11 = 132\\).\nCorrect Answer: (b)"
-  },
-  {
-    "id": 36,
-    "question": "How many ways can a student select 5 questions from a set of 8 questions?",
-    "options": ["56", "28", "112", "40"],
-    "solution": "Step 1: The order of selection does not matter. This is a combination.\nStep 2: \\(^8C_5 = ^8C_3 = \\frac{8 \\times 7 \\times 6}{3 \\times 2 \\times 1} = 56\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 37,
-    "question": "Evaluate \\(\\frac{5!}{3! \\cdot 2!}\\).",
-    "options": ["10", "20", "5", "12"],
-    "solution": "Step 1: Expand the factorials: \\(\\frac{5 \\times 4 \\times 3 \\times 2 \\times 1}{(3 \\times 2 \\times 1) \\times (2 \\times 1)}\\).\nStep 2: Cancel the \\(3!\\) from the top and bottom. \\(\\frac{5 \\times 4}{2 \\times 1} = \\frac{20}{2} = 10\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 38,
-    "question": "A bag contains 10 red, 5 blue, and 3 green balls. In how many ways can a person pick 2 red balls and 1 green ball?",
-    "options": ["135", "45", "60", "90"],
-    "solution": "Step 1: Choose 2 red balls from 10: \\(^{10}C_2 = \\frac{10 \\times 9}{2} = 45\\).\nStep 2: Choose 1 green ball from 3: \\(^3C_1 = 3\\).\nStep 3: Multiply: \\(45 \\times 3 = 135\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 39,
-    "question": "How many words can be formed using all letters of the word 'MATH'?",
-    "options": ["24", "12", "6", "36"],
-    "solution": "Step 1: All letters in 'MATH' are distinct. There are 4 letters.\nStep 2: The number of arrangements is \\(4! = 24\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 40,
-    "question": "In how many ways can a teacher choose a group of 4 students from a class of 20 students?",
-    "options": ["4845", "5040", "720", "120"],
-    "solution": "Step 1: The order does not matter, so it is a combination.\nStep 2: \\(^{20}C_4 = \\frac{20 \\times 19 \\times 18 \\times 17}{4 \\times 3 \\times 2 \\times 1}\\).\nStep 3: Simplify: \\(\\frac{20 \\times 19 \\times 18 \\times 17}{24}\\). \\(20/4=5\\), \\(18/6=3\\). \\(5 \\times 19 \\times 3 \\times 17 = 4845\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 41,
-    "question": "In how many ways can 4 students be arranged in a row for a photograph?",
-    "options": ["24", "12", "6", "36"],
-    "solution": "Step 1: Straight line arrangement of 4 distinct objects.\nStep 2: \\(4! = 4 \\times 3 \\times 2 \\times 1 = 24\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 42,
-    "question": "How many 4-digit PINs can be formed using digits 0 to 9 if repetition is allowed?",
-    "options": ["5040", "10000", "1000", "50400"],
-    "solution": "Step 1: Each of the 4 positions can be filled with any of the 10 digits.\nStep 2: Number of ways = \\(10 \\times 10 \\times 10 \\times 10 = 10^4 = 10000\\).\nCorrect Answer: (b)"
-  },
-  {
-    "id": 43,
-    "question": "In how many ways can a committee of 3 be selected from 8 people if 1 person refuses to serve?",
-    "options": ["35", "56", "21", "28"],
-    "solution": "Step 1: If 1 person refuses to serve, we remove them from the pool.\nStep 2: We now need to select 3 from 7 people.\nStep 3: \\(^7C_3 = \\frac{7 \\times 6 \\times 5}{3 \\times 2 \\times 1} = 35\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 44,
-    "question": "Calculate the value of \\(^{15}P_4\\).",
-    "options": ["32760", "1365", "2730", "3276"],
-    "solution": "Step 1: Permutation formula: \\(\\frac{15!}{(15-4)!} = 15 \\times 14 \\times 13 \\times 12\\).\nStep 2: Multiply: \\(15 \\times 14 = 210\\). \\(13 \\times 12 = 156\\).\nStep 3: \\(210 \\times 156 = 32760\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 45,
-    "question": "How many different ways can 5 distinct beads be arranged on a circular string (where flipping the string over gives the same arrangement)?",
-    "options": ["12", "24", "6", "60"],
-    "solution": "Step 1: For an arrangement on a circular string (necklace) where clockwise and anticlockwise are considered the same (flipping over): \\(\\frac{(n-1)!}{2}\\).\nStep 2: \\(\\frac{(5-1)!}{2} = \\frac{4!}{2} = \\frac{24}{2} = 12\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 46,
-    "question": "How many ways can 5 books be arranged on a shelf if 2 specific books must NOT be next to each other?",
-    "options": ["72", "96", "120", "48"],
-    "solution": "Step 1: Total arrangements without any restrictions: \\(5! = 120\\).\nStep 2: Arrangements where the 2 books ARE together: Treat them as 1 block. 4 items total. \\(4! \\times 2! = 24 \\times 2 = 48\\).\nStep 3: Arrangements where they are NOT together = Total - Together = \\(120 - 48 = 72\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 47,
-    "question": "How many 5-digit numbers can be formed using the digits 1, 2, 3, 4, 5, 6, 7, 8, 9 if the digits are all different and the number is greater than 60,000?",
-    "options": ["6720", "15120", "3024", "12096"],
-    "solution": "Step 1: For the number to be > 60,000, the first digit must be 6, 7, 8, or 9. That's 4 choices.\nStep 2: The remaining 4 digits can be chosen from the remaining 8 digits.\nStep 3: \\(4 \\times ^8P_4 = 4 \\times (8 \\times 7 \\times 6 \\times 5) = 4 \\times 1680 = 6720\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 48,
-    "question": "Evaluate \\(^8C_6\\).",
-    "options": ["28", "56", "48", "16"],
-    "solution": "Step 1: Use \\(^8C_6 = ^8C_2\\) (since \\(n-r = 2\\)).\nStep 2: \\(^8C_2 = \\frac{8 \\times 7}{2 \\times 1} = 28\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 49,
-    "question": "In how many ways can a student choose 2 courses from a list of 5 courses?",
-    "options": ["10", "20", "15", "5"],
-    "solution": "Step 1: Selection, not arrangement, so it's a combination.\nStep 2: \\(^5C_2 = \\frac{5 \\times 4}{2 \\times 1} = 10\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 50,
-    "question": "Calculate the number of ways to arrange the letters of the word 'MISSISSIPPI'.",
-    "options": ["34650", "50400", "720", "40320"],
-    "solution": "Step 1: Word has 11 letters. M=1, I=4, S=4, P=2.\nStep 2: Formula: \\(\\frac{11!}{1! \\cdot 4! \\cdot 4! \\cdot 2!}\\).\nStep 3: \\(\\frac{39916800}{24 \\times 24 \\times 2} = \\frac{39916800}{1152} = 34650\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 51,
-    "question": "How many ways can 6 people be seated in a row if 3 specific people must sit together?",
-    "options": ["144", "720", "120", "36"],
-    "solution": "Step 1: Treat the 3 specific people as a single block. Now you have 4 items to arrange (the block + the remaining 3 individuals).\nStep 2: Number of ways = \\(4! \\times 3! = 24 \\times 6 = 144\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 52,
-    "question": "In how many ways can a team of 5 be selected from a group of 8 players?",
-    "options": ["56", "336", "720", "120"],
-    "solution": "Step 1: A team is a selection, not an arrangement.\nStep 2: \\(^8C_5 = \\frac{8 \\times 7 \\times 6}{3 \\times 2 \\times 1} = 56\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 53,
-    "question": "How many different arrangements of the letters of 'LEVEL' are possible?",
-    "options": ["30", "60", "120", "24"],
-    "solution": "Step 1: 'LEVEL' has 5 letters. L=2, E=2, V=1.\nStep 2: Formula: \\(\\frac{5!}{2! \\cdot 2!} = \\frac{120}{4} = 30\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 54,
-    "question": "How many words can be formed using all letters of the word 'RADAR'?",
-    "options": ["30", "60", "20", "120"],
-    "solution": "Step 1: 'RADAR' has 5 letters. R=2, A=2, D=1.\nStep 2: Formula: \\(\\frac{5!}{2! \\cdot 2!} = \\frac{120}{4} = 30\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 55,
-    "question": "In how many ways can a committee of 2 men and 2 women be chosen from 5 men and 6 women?",
-    "options": ["150", "300", "120", "180"],
-    "solution": "Step 1: Choose 2 men from 5: \\(^5C_2 = 10\\).\nStep 2: Choose 2 women from 6: \\(^6C_2 = 15\\).\nStep 3: Multiply: \\(10 \\times 15 = 150\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 56,
-    "question": "How many ways can you select a President and a Treasurer from a club of 12 members?",
-    "options": ["132", "66", "144", "12"],
-    "solution": "Step 1: Order matters because President and Treasurer are different offices.\nStep 2: Permutation: \\(^{12}P_2 = 12 \\times 11 = 132\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 57,
-    "question": "Calculate \\(^{8}P_{3}\\).",
-    "options": ["336", "56", "112", "720"],
-    "solution": "Step 1: \\(^{8}P_{3} = \\frac{8!}{(8-3)!} = \\frac{8!}{5!} = 8 \\times 7 \\times 6 = 336\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 58,
-    "question": "How many 3-letter words can be formed from the letters of 'TRIANGLE' if repetition is NOT allowed?",
-    "options": ["336", "56", "720", "120"],
-    "solution": "Step 1: 'TRIANGLE' has 8 distinct letters. We choose 3 and arrange them.\nStep 2: \\(^{8}P_{3} = 8 \\times 7 \\times 6 = 336\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 59,
-    "question": "In how many ways can 6 people be seated around a circular table if 2 particular people must sit next to each other?",
-    "options": ["48", "24", "120", "12"],
-    "solution": "Step 1: Treat the 2 people as 1 block. Now arrange 5 units in a circle: \\((5-1)! = 4! = 24\\).\nStep 2: The 2 people inside the block can be swapped: \\(2! = 2\\).\nStep 3: Total ways = \\(24 \\times 2 = 48\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 60,
-    "question": "Which of the following is the formula for permutations of \\(n\\) distinct objects taken \\(r\\) at a time?",
-    "options": ["\\(\\frac{n!}{(n-r)!}\\)", "\\(\\frac{n!}{r!(n-r)!}\\)", "\\(n^r\\)", "\\((n-1)!\\)"],
-    "solution": "Step 1: The formula for permutations is \\(^nP_r = \\frac{n!}{(n-r)!}\\).\nStep 2: Option (b) is the formula for combinations. Option (c) is for permutations with repetition.\nCorrect Answer: (a)"
-  },
-  {
-    "id": 61,
-    "question": "How many ways can 5 red balls and 3 blue balls be arranged in a row if balls of the same color are indistinguishable?",
-    "options": ["56", "336", "720", "120"],
-    "solution": "Step 1: Total balls = 8. Red = 5, Blue = 3.\nStep 2: Formula: \\(\\frac{8!}{5! \\cdot 3!} = \\frac{40320}{120 \\times 6} = \\frac{40320}{720} = 56\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 62,
-    "question": "How many different ways can 4 letters be chosen from the alphabet if the order does not matter?",
-    "options": ["14950", "358800", "456", "2600"],
-    "solution": "Step 1: Choosing 4 from 26 letters where order does not matter is \\(^{26}C_4\\).\nStep 2: \\(\\frac{26 \\times 25 \\times 24 \\times 23}{4 \\times 3 \\times 2 \\times 1} = \\frac{358800}{24} = 14950\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 63,
-    "question": "In how many ways can 5 men and 4 women be arranged in a row if no two women sit together?",
-    "options": ["43200", "2880", "120", "40320"],
-    "solution": "Step 1: First arrange the 5 men: \\(5! = 120\\). This creates 6 gaps (including ends) where women can be placed.\nStep 2: Choose 4 gaps out of 6 for the women: \\(^6P_4 = 6 \\times 5 \\times 4 \\times 3 = 360\\).\nStep 3: Total = \\(120 \\times 360 = 43200\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 64,
-    "question": "How many ways can 8 students be arranged in a row?",
-    "options": ["40320", "5040", "720", "50400"],
-    "solution": "Step 1: 8 distinct objects arranged in a line is \\(8!\\).\nStep 2: \\(8! = 8 \\times 7 \\times 6 \\times 5 \\times 4 \\times 3 \\times 2 \\times 1 = 40320\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 65,
-    "question": "How many different ways can a 4-member committee be selected from 10 students?",
-    "options": ["210", "5040", "720", "120"],
-    "solution": "Step 1: Order does not matter, so it is a combination.\nStep 2: \\(^{10}C_4 = \\frac{10 \\times 9 \\times 8 \\times 7}{4 \\times 3 \\times 2 \\times 1} = 210\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 66,
-    "question": "In how many ways can 4 people be seated on a bench if only 6 seats are available?",
-    "options": ["360", "720", "120", "5040"],
-    "solution": "Step 1: We are arranging 4 people into specific seats out of 6. Order matters.\nStep 2: \\(^6P_4 = 6 \\times 5 \\times 4 \\times 3 = 360\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 67,
-    "question": "Which of the following is the formula for combinations of \\(n\\) objects taken \\(r\\) at a time?",
-    "options": ["\\(\\frac{n!}{(n-r)!}\\)", "\\(\\frac{n!}{r!(n-r)!}\\)", "\\(n^r\\)", "\\((n-1)!\\)"],
-    "solution": "Step 1: The formula for combinations is \\(^nC_r = \\frac{n!}{r!(n-r)!}\\).\nCorrect Answer: (b)"
-  },
-  {
-    "id": 68,
-    "question": "How many ways can 5 students choose 3 questions from a list of 10 questions?",
-    "options": ["120", "720", "252", "210"],
-    "solution": "Step 1: Choosing 3 questions from 10 where order does not matter is \\(^{10}C_3\\).\nStep 2: \\(\\frac{10 \\times 9 \\times 8}{3 \\times 2 \\times 1} = 120\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 69,
-    "question": "How many 4-letter arrangements can be made from the word 'APPLE'?",
-    "options": ["60", "120", "24", "48"],
-    "solution": "Step 1: 'APPLE' has 5 letters: A, P, P, L, E (4 distinct letters, with P repeating twice).\nStep 2: Case 1 - 4 distinct letters (A, P, L, E): \\(4! = 24\\) ways.\nStep 3: Case 2 - 2 'P's and 2 other distinct letters from {A, L, E}: Choose 2 other letters in \\(^3C_2 = 3\\) ways, and arrange the 4 letters (P, P, X, Y) in \\(\\frac{4!}{2!} = 12\\) ways. So, \\(3 \\times 12 = 36\\) ways.\nStep 4: Total 4-letter arrangements = \\(24 + 36 = 60\\).\nCorrect Answer: (a)"
-  },
-  {
-    "id": 70,
-    "question": "In how many ways can 3 different books be arranged on a shelf?",
-    "options": ["6", "24", "12", "3"],
-    "solution": "Step 1: Arrangement of 3 distinct books is \\(3! = 6\\).\nCorrect Answer: (a)"
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 1,
+    "question": "What scale of measurement is used when classifying eye colors into categories such as Blue, Brown, and Green?",
+    "options": {
+      "A": "Nominal",
+      "B": "Ordinal",
+      "C": "Interval",
+      "D": "Ratio"
+    },
+    "answer": "A",
+    "explanation": "Nominal scale consists of mutually exclusive categories with no inherent order or numeric ranking."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 2,
+    "question": "Temperature measured in degrees Celsius belongs to which level of measurement?",
+    "options": {
+      "A": "Nominal",
+      "B": "Ordinal",
+      "C": "Interval",
+      "D": "Ratio"
+    },
+    "answer": "C",
+    "explanation": "Celsius temperature has equal intervals between units, but lacks a true absolute zero (0°C does not mean total absence of heat)."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 3,
+    "question": "Annual income measured in US Dollars is an example of which scale of measurement?",
+    "options": {
+      "A": "Nominal",
+      "B": "Ordinal",
+      "C": "Interval",
+      "D": "Ratio"
+    },
+    "answer": "D",
+    "explanation": "Annual income has meaningful differences, equal intervals, and a true absolute zero point ($0 means no income)."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 4,
+    "question": "Finish rankings in a marathon (1st place, 2nd place, 3rd place) represent which scale of measurement?",
+    "options": {
+      "A": "Nominal",
+      "B": "Ordinal",
+      "C": "Interval",
+      "D": "Ratio"
+    },
+    "answer": "B",
+    "explanation": "Ordinal scale orders observations, but the distance or difference between ranks is not necessarily uniform."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 5,
+    "question": "The number of cars sold by a dealership in a day is what type of variable?",
+    "options": {
+      "A": "Qualitative continuous",
+      "B": "Quantitative discrete",
+      "C": "Quantitative continuous",
+      "D": "Qualitative nominal"
+    },
+    "answer": "B",
+    "explanation": "It is numerical (quantitative) and countable in distinct whole numbers (discrete)."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 6,
+    "question": "Which of the following is a continuous quantitative variable?",
+    "options": {
+      "A": "Number of pages in a textbook",
+      "B": "Student height in centimeters",
+      "C": "Count of defective bulbs in a batch",
+      "D": "Number of goals scored in a soccer match"
+    },
+    "answer": "B",
+    "explanation": "Height can take any real value within a continuum, making it a continuous variable."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 7,
+    "question": "What key property distinguishes a ratio scale from an interval scale?",
+    "options": {
+      "A": "Ability to order data",
+      "B": "Presence of equal unit spacing",
+      "C": "Presence of a true absolute zero point",
+      "D": "Ability to categorize data"
+    },
+    "answer": "C",
+    "explanation": "Only ratio scales possess a true absolute zero point where 0 indicates the complete absence of the measured attribute."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 8,
+    "question": "Customer satisfaction ratings recorded as 'Poor', 'Fair', 'Good', and 'Excellent' are best categorized as:",
+    "options": {
+      "A": "Discrete quantitative",
+      "B": "Nominal qualitative",
+      "C": "Ordinal qualitative",
+      "D": "Continuous quantitative"
+    },
+    "answer": "C",
+    "explanation": "The ratings are non-numeric categories that possess a natural, meaningful rank order."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 9,
+    "question": "Blood types (A, B, AB, O) represent which type of data?",
+    "options": {
+      "A": "Qualitative nominal",
+      "B": "Qualitative ordinal",
+      "C": "Quantitative discrete",
+      "D": "Quantitative ratio"
+    },
+    "answer": "A",
+    "explanation": "Blood types are non-numerical categorical labels with no intrinsic ordering."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 10,
+    "question": "Which measurement scale allows for addition and subtraction of values, but not meaningful multiplication or division ratios?",
+    "options": {
+      "A": "Nominal",
+      "B": "Ordinal",
+      "C": "Interval",
+      "D": "Ratio"
+    },
+    "answer": "C",
+    "explanation": "Interval scale has arbitrary zero (e.g., 20°C is not 'twice as hot' as 10°C), making ratios meaningless, though differences are valid."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 11,
+    "question": "What is the sample mean formula for a dataset $x_1, x_2, \\dots, x_n$?",
+    "options": {
+      "A": "$\\bar{x} = \\frac{\\sum x_i}{n}$",
+      "B": "$\\bar{x} = \\frac{\\sum x_i}{n - 1}$",
+      "C": "$\\bar{x} = \\sqrt{\\frac{\\sum x_i}{n}}$",
+      "D": "$\\bar{x} = \\frac{\\max(x) + \\min(x)}{2}$"
+    },
+    "answer": "A",
+    "explanation": "The sample mean is the sum of all sample values divided by the total number of sample observations $n$."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 12,
+    "question": "Calculate the mean of the dataset: 4, 8, 6, 10, 12.",
+    "options": {
+      "A": "6",
+      "B": "7",
+      "C": "8",
+      "D": "10"
+    },
+    "answer": "C",
+    "explanation": "Sum = 4 + 8 + 6 + 10 + 12 = 40. Mean = 40 / 5 = 8."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 13,
+    "question": "What is the median of the dataset: 3, 7, 2, 9, 5?",
+    "options": {
+      "A": "3",
+      "B": "5",
+      "C": "5.2",
+      "D": "7"
+    },
+    "answer": "B",
+    "explanation": "Ordering the dataset gives: 2, 3, 5, 7, 9. The middle value (3rd position) is 5."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 14,
+    "question": "Find the median of the dataset: 10, 20, 30, 40.",
+    "options": {
+      "A": "20",
+      "B": "25",
+      "C": "30",
+      "D": "35"
+    },
+    "answer": "B",
+    "explanation": "For an even number of observations, median is the average of the two central values: (20 + 30) / 2 = 25."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 15,
+    "question": "What is the mode of the dataset: 2, 4, 4, 5, 7, 9?",
+    "options": {
+      "A": "4",
+      "B": "5",
+      "C": "5.17",
+      "D": "7"
+    },
+    "answer": "A",
+    "explanation": "The mode is the value that appears most frequently in the dataset, which is 4."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 16,
+    "question": "A dataset with two distinct modes is described as:",
+    "options": {
+      "A": "Unimodal",
+      "B": "Bimodal",
+      "C": "Multimodal",
+      "D": "Amodal"
+    },
+    "answer": "B",
+    "explanation": "A distribution with exactly two peaks or modes is called bimodal."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 17,
+    "question": "In a positively (right) skewed distribution, what is the typical order of central tendency measures?",
+    "options": {
+      "A": "Mean < Median < Mode",
+      "B": "Mode < Median < Mean",
+      "C": "Median < Mean < Mode",
+      "D": "Mean = Median = Mode"
+    },
+    "answer": "B",
+    "explanation": "In positive skewness, extreme high values pull the mean to the right, placing Mode < Median < Mean."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 18,
+    "question": "In a negatively (left) skewed distribution, which relation usually holds?",
+    "options": {
+      "A": "Mean < Median < Mode",
+      "B": "Mode < Median < Mean",
+      "C": "Mean = Median = Mode",
+      "D": "Mode < Mean < Median"
+    },
+    "answer": "A",
+    "explanation": "In negative skewness, extreme low values drag the mean down, so Mean < Median < Mode."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 19,
+    "question": "Which measure of central tendency is most robust against extreme values or outliers?",
+    "options": {
+      "A": "Mean",
+      "B": "Median",
+      "C": "Midrange",
+      "D": "Variance"
+    },
+    "answer": "B",
+    "explanation": "The median relies on order position rather than raw magnitude, making it unaffected by extreme outliers."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 20,
+    "question": "If a constant $c$ is added to every data value in a dataset, how does the mean change?",
+    "options": {
+      "A": "It remains unchanged",
+      "B": "It is multiplied by $c$",
+      "C": "It increases by $c$",
+      "D": "It increases by $c^2$"
+    },
+    "answer": "C",
+    "explanation": "By linearity of expectations, adding $c$ to every data point adds $c$ to the sample mean."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 21,
+    "question": "If every value in a dataset is multiplied by 3, what happens to the mean?",
+    "options": {
+      "A": "Increases by 3",
+      "B": "Multiplied by 3",
+      "C": "Multiplied by 9",
+      "D": "Remains unchanged"
+    },
+    "answer": "B",
+    "explanation": "Scaling all observations by a factor $k$ scales the mean by the same factor $k$."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 22,
+    "question": "How is a 10% trimmed mean computed?",
+    "options": {
+      "A": "By dropping the top 10% and bottom 10% of ordered observations before taking the mean",
+      "B": "By removing 10 total values randomly",
+      "C": "By reducing each data value by 10%",
+      "D": "By dropping only the top 10% of values"
+    },
+    "answer": "A",
+    "explanation": "A $p\\%$ trimmed mean removes the $p\\%$ smallest and $p\\%$ largest values to reduce outlier influence."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 23,
+    "question": "What is the formula for the weighted mean of values $x_i$ with weights $w_i$?",
+    "options": {
+      "A": "$\\bar{x}_w = \\frac{\\sum (w_i x_i)}{\\sum w_i}$",
+      "B": "$\\bar{x}_w = \\frac{\\sum x_i}{\\sum w_i}$",
+      "C": "$\\bar{x}_w = \\sum (w_i x_i)$",
+      "D": "$\\bar{x}_w = \\frac{\\sum w_i}{n}$"
+    },
+    "answer": "A",
+    "explanation": "The weighted mean sums each value multiplied by its respective weight, divided by the total sum of weights."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 24,
+    "question": "In a symmetric, unimodal distribution, what is the relative position of mean, median, and mode?",
+    "options": {
+      "A": "Mean > Median > Mode",
+      "B": "Mean < Median < Mode",
+      "C": "Mean = Median = Mode",
+      "D": "Mode > Mean > Median"
+    },
+    "answer": "C",
+    "explanation": "For perfectly symmetric unimodal distributions, the central peak is the mean, median, and mode simultaneously."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 25,
+    "question": "Which measure of central tendency is appropriate for qualitative nominal data?",
+    "options": {
+      "A": "Mean",
+      "B": "Median",
+      "C": "Mode",
+      "D": "Geometric Mean"
+    },
+    "answer": "C",
+    "explanation": "Nominal data lacks numeric magnitude or order, so only the mode (most frequent category) can be identified."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 26,
+    "question": "What is the range of the dataset: 12, 5, 22, 30, 8, 17?",
+    "options": {
+      "A": "17",
+      "B": "22",
+      "C": "25",
+      "D": "30"
+    },
+    "answer": "C",
+    "explanation": "Range = Maximum - Minimum = 30 - 5 = 25."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 27,
+    "question": "How is the Interquartile Range (IQR) defined?",
+    "options": {
+      "A": "$Q_3 - Q_1$",
+      "B": "$Q_3 + Q_1$",
+      "C": "$\\frac{Q_3 - Q_1}{2}$",
+      "D": "$\\text{Max} - \\text{Min}$"
+    },
+    "answer": "A",
+    "explanation": "IQR measures the spread of the middle 50% of data and is calculated as $Q_3 - Q_1$."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 28,
+    "question": "Why is $n - 1$ used in the denominator of the sample variance formula $s^2 = \\frac{\\sum (x_i - \\bar{x})^2}{n - 1}$?",
+    "options": {
+      "A": "To increase the sample mean",
+      "B": "To make $s^2$ an unbiased estimator of population variance $\\sigma^2$",
+      "C": "To ensure variance is always integer-valued",
+      "D": "To adjust for population sample sizes greater than 100"
+    },
+    "answer": "B",
+    "explanation": "Dividing by $n - 1$ (Bessel's correction) corrects the downward bias in estimating population variance from a sample."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 29,
+    "question": "What is the relationship between standard deviation ($s$) and variance ($s^2$)?",
+    "options": {
+      "A": "$s = (s^2)^2$",
+      "B": "$s = \\sqrt{s^2}$",
+      "C": "$s^2 = \\sqrt{s}$",
+      "D": "$s = 2 \\times s^2$"
+    },
+    "answer": "B",
+    "explanation": "Standard deviation is the non-negative square root of variance."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 30,
+    "question": "What is the variance of a constant dataset: 7, 7, 7, 7, 7?",
+    "options": {
+      "A": "0",
+      "B": "1",
+      "C": "7",
+      "D": "35"
+    },
+    "answer": "A",
+    "explanation": "There is no variation among data points; all deviations from the mean are zero, so variance is 0."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 31,
+    "question": "If a constant value of 5 is added to all items in a dataset, what happens to the standard deviation?",
+    "options": {
+      "A": "It increases by 5",
+      "B": "It increases by $\\sqrt{5}$",
+      "C": "It remains unchanged",
+      "D": "It is multiplied by 5"
+    },
+    "answer": "C",
+    "explanation": "Adding a constant shifts the distribution without changing its spread or dispersion."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 32,
+    "question": "If every value in a dataset is multiplied by 4, how is the standard deviation affected?",
+    "options": {
+      "A": "Unchanged",
+      "B": "Multiplied by 2",
+      "C": "Multiplied by 4",
+      "D": "Multiplied by 16"
+    },
+    "answer": "C",
+    "explanation": "Scaling data by factor $k$ scales standard deviation by $|k|$. Here $4 \\times s$."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 33,
+    "question": "What is the formula for the Coefficient of Variation (CV)?",
+    "options": {
+      "A": "$CV = \\frac{s}{\\bar{x}} \\times 100\\%$",
+      "B": "$CV = \\frac{\\bar{x}}{s} \\times 100\\%$",
+      "C": "$CV = \\frac{s^2}{\\bar{x}} \\times 100\\%$",
+      "D": "$CV = (s \\times \\bar{x}) \\times 100\\%$"
+    },
+    "answer": "A",
+    "explanation": "Coefficient of Variation expresses standard deviation as a percentage of the mean."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 34,
+    "question": "Why is the Coefficient of Variation useful in data analysis?",
+    "options": {
+      "A": "It measures skewness independent of mean",
+      "B": "It compares relative variability between datasets with different units or scales",
+      "C": "It identifies outliers without using boxplots",
+      "D": "It calculates exact median position"
+    },
+    "answer": "B",
+    "explanation": "Because CV is dimensionless (unitless), it allows relative dispersion comparison across different units."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 35,
+    "question": "The First Quartile ($Q_1$) corresponds to which percentile?",
+    "options": {
+      "A": "10th percentile",
+      "B": "25th percentile",
+      "C": "50th percentile",
+      "D": "75th percentile"
+    },
+    "answer": "B",
+    "explanation": "$Q_1$ marks the lowest 25% boundary of an ordered dataset."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 36,
+    "question": "The Third Quartile ($Q_3$) corresponds to which percentile?",
+    "options": {
+      "A": "25th percentile",
+      "B": "50th percentile",
+      "C": "75th percentile",
+      "D": "90th percentile"
+    },
+    "answer": "C",
+    "explanation": "$Q_3$ separates the lower 75% of data from the upper 25%."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 37,
+    "question": "Which set of values constitutes the five-number summary?",
+    "options": {
+      "A": "Mean, Median, Mode, Variance, Standard Deviation",
+      "B": "Minimum, $Q_1$, Median, $Q_3$, Maximum",
+      "C": "Minimum, Mean, Median, Range, Maximum",
+      "D": "$Q_1$, $Q_2$, $Q_3$, IQR, Range"
+    },
+    "answer": "B",
+    "explanation": "The five-number summary consists of Min, $Q_1$, Median ($Q_2$), $Q_3$, and Max."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 38,
+    "question": "According to the $1.5 \\times IQR$ rule, a data value $x$ is considered an outlier if:",
+    "options": {
+      "A": "$x < Q_1 - 1.5(IQR)$ or $x > Q_3 + 1.5(IQR)$",
+      "B": "$x < Q_1 - 3(IQR)$ or $x > Q_3 + 3(IQR)$",
+      "C": "$x < \\bar{x} - 1.5(s)$ or $x > \\bar{x} + 1.5(s)$",
+      "D": "$x < Q_3 - 1.5(IQR)$ or $x > Q_1 + 1.5(IQR)$"
+    },
+    "answer": "A",
+    "explanation": "The standard rule flags points outside the interval $[Q_1 - 1.5(IQR), Q_3 + 1.5(IQR)]$ as outliers."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 39,
+    "question": "What is the formula for Mean Absolute Deviation (MAD)?",
+    "options": {
+      "A": "$\\text{MAD} = \\frac{\\sum |x_i - \\bar{x}|}{n}$",
+      "B": "$\\text{MAD} = \\frac{\\sum (x_i - \\bar{x})^2}{n}$",
+      "C": "$\\text{MAD} = \\sqrt{\\frac{\\sum |x_i - \\bar{x}|}{n}}$",
+      "D": "$\\text{MAD} = \\frac{\\sum x_i}{n}$"
+    },
+    "answer": "A",
+    "explanation": "MAD calculates the arithmetic mean of absolute differences between data points and the sample mean."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 40,
+    "question": "If $Q_1 = 25$ and $Q_3 = 65$, what is the Interquartile Range (IQR)?",
+    "options": {
+      "A": "25",
+      "B": "40",
+      "C": "45",
+      "D": "90"
+    },
+    "answer": "B",
+    "explanation": "$IQR = Q_3 - Q_1 = 65 - 25 = 40$."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 41,
+    "question": "What does skewness measure in a dataset?",
+    "options": {
+      "A": "Degree of peakness",
+      "B": "Asymmetry of distribution around its mean",
+      "C": "Total spread of data",
+      "D": "Number of modes"
+    },
+    "answer": "B",
+    "explanation": "Skewness quantifies how asymmetric a probability distribution or dataset is relative to its mean."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 42,
+    "question": "A right-skewed distribution is characterized by:",
+    "options": {
+      "A": "A long tail extending toward higher positive values",
+      "B": "A long tail extending toward lower negative values",
+      "C": "Two identical peaks on both sides",
+      "D": "A completely flat distribution"
+    },
+    "answer": "A",
+    "explanation": "Right (positive) skewness means the right tail is longer or fatter than the left tail."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 43,
+    "question": "A left-skewed distribution is characterized by:",
+    "options": {
+      "A": "A long tail extending toward higher positive values",
+      "B": "A long tail extending toward lower negative values",
+      "C": "Mean greater than Mode",
+      "D": "No outliers"
+    },
+    "answer": "B",
+    "explanation": "Left (negative) skewness means the left tail extends further toward smaller or negative values."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 44,
+    "question": "What structural feature of a distribution does Kurtosis primarily evaluate?",
+    "options": {
+      "A": "Location of median",
+      "B": "Direction of asymmetry",
+      "C": "Tail-heaviness and peakedness relative to a normal distribution",
+      "D": "Range between maximum and minimum"
+    },
+    "answer": "C",
+    "explanation": "Kurtosis measures the concentration of values in tails versus the center compared to a normal distribution."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 45,
+    "question": "A distribution with a high sharp peak and heavy tails compared to normal distribution is described as:",
+    "options": {
+      "A": "Platykurtic",
+      "B": "Mesokurtic",
+      "C": "Leptokurtic",
+      "D": "Symmetric"
+    },
+    "answer": "C",
+    "explanation": "Leptokurtic distributions have high excess kurtosis (> 0), featuring fat tails and a tall central peak."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 46,
+    "question": "A flat-topped distribution with light tails compared to normal distribution is:",
+    "options": {
+      "A": "Leptokurtic",
+      "B": "Platykurtic",
+      "C": "Mesokurtic",
+      "D": "Bimodal"
+    },
+    "answer": "B",
+    "explanation": "Platykurtic distributions have negative excess kurtosis (< 0), exhibiting flatter tops and lighter tails."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 47,
+    "question": "What is the excess kurtosis value for a standard Normal Distribution?",
+    "options": {
+      "A": "3",
+      "B": "0",
+      "C": "-3",
+      "D": "1"
+    },
+    "answer": "B",
+    "explanation": "Normal distribution has kurtosis = 3, so excess kurtosis (Kurtosis - 3) equals 0 (Mesokurtic)."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 48,
+    "question": "According to Chebyshev's Theorem, what proportion of data lies within $k$ standard deviations ($k > 1$) of the mean for ANY distribution?",
+    "options": {
+      "A": "At least $1 - \\frac{1}{k}$",
+      "B": "At least $1 - \\frac{1}{k^2}$",
+      "C": "Exactly $68\\%$",
+      "D": "At most $\\frac{1}{k^2}$"
+    },
+    "answer": "B",
+    "explanation": "Chebyshev's inequality guarantees that at least $1 - 1/k^2$ of values fall within $k$ standard deviations of mean."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 49,
+    "question": "Using Chebyshev's Theorem, at least what percentage of observations fall within $k = 2$ standard deviations of the mean?",
+    "options": {
+      "A": "50%",
+      "B": "68%",
+      "C": "75%",
+      "D": "88.9%"
+    },
+    "answer": "C",
+    "explanation": "For $k = 2$: $1 - 1/2^2 = 1 - 1/4 = 0.75$ or $75\\%$."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 50,
+    "question": "According to the Empirical Rule (for bell-shaped normal distributions), approximately what percentage of data falls within 1 standard deviation of the mean?",
+    "options": {
+      "A": "50%",
+      "B": "68%",
+      "C": "95%",
+      "D": "99.7%"
+    },
+    "answer": "B",
+    "explanation": "The Empirical Rule states $\\mu \\pm 1\\sigma$ contains approx. 68% of data."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 51,
+    "question": "Under the Empirical Rule, approximately what percentage of data falls within 3 standard deviations of the mean in a normal distribution?",
+    "options": {
+      "A": "68%",
+      "B": "95%",
+      "C": "99.7%",
+      "D": "100%"
+    },
+    "answer": "C",
+    "explanation": "The Empirical Rule states $\\mu \\pm 3\\sigma$ covers approximately 99.7% of data."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 52,
+    "question": "What is Pearson's coefficient of skewness formula based on mean and median?",
+    "options": {
+      "A": "$SK = \\frac{3(\\bar{x} - \\text{Median})}{s}$",
+      "B": "$SK = \\frac{\\bar{x} - \\text{Mode}}{3s}$",
+      "C": "$SK = \\frac{\\text{Median} - \\bar{x}}{s}$",
+      "D": "$SK = \\frac{s}{3(\\bar{x} - \\text{Median})}$"
+    },
+    "answer": "A",
+    "explanation": "Pearson's non-parametric skewness coefficient is given by $3(\\text{Mean} - \\text{Median}) / s$."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 53,
+    "question": "A negative value for Pearson's coefficient of skewness indicates:",
+    "options": {
+      "A": "Mean is greater than median",
+      "B": "Distribution is symmetric",
+      "C": "Mean is less than median",
+      "D": "Standard deviation is negative"
+    },
+    "answer": "C",
+    "explanation": "If Mean < Median, $(\\text{Mean} - \\text{Median}) < 0$, producing negative skewness."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 54,
+    "question": "What does a standardized $Z$-score measure?",
+    "options": {
+      "A": "Distance of a data point from the median in IQRs",
+      "B": "Number of standard deviations an observation lies from the mean",
+      "C": "Percentage of data higher than the observation",
+      "D": "Square root of variance"
+    },
+    "answer": "B",
+    "explanation": "The $Z$-score formula $Z = (x - \\bar{x})/s$ expresses distance from mean in standard deviation units."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 55,
+    "question": "If an observation equals the sample mean, what is its $Z$-score?",
+    "options": {
+      "A": "-1",
+      "B": "0",
+      "C": "1",
+      "D": "Undefined"
+    },
+    "answer": "B",
+    "explanation": "When $x = \\bar{x}$, $Z = (\\bar{x} - \\bar{x})/s = 0$."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 56,
+    "question": "Which visual tool is best suited for displaying the frequency distribution of a continuous quantitative variable?",
+    "options": {
+      "A": "Bar chart",
+      "B": "Pie chart",
+      "C": "Histogram",
+      "D": "Pareto chart"
+    },
+    "answer": "C",
+    "explanation": "Histograms display continuous numerical data divided into adjacent bin intervals."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 57,
+    "question": "Which summary values are explicitly displayed in a standard box-and-whisker plot?",
+    "options": {
+      "A": "Mean, Variance, Standard Deviation",
+      "B": "Five-number summary ($Min, Q_1, Median, Q_3, Max$) and outliers",
+      "C": "Mode, Frequency, Bin Width",
+      "D": "Z-scores and regression lines"
+    },
+    "answer": "B",
+    "explanation": "Boxplots visually represent the 5-number summary alongside potential outliers."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 58,
+    "question": "What primary feature graphically distinguishes a histogram from a bar chart?",
+    "options": {
+      "A": "Histogram bars touch without gaps, representing continuous data",
+      "B": "Bar chart bars touch without gaps",
+      "C": "Histograms only use circular slices",
+      "D": "Bar charts display cumulative percentage lines"
+    },
+    "answer": "A",
+    "explanation": "Histogram bars touch because class intervals are contiguous; bar charts have gaps separating discrete categories."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 59,
+    "question": "Which visualization is specifically used to inspect potential relationships or patterns between two continuous variables?",
+    "options": {
+      "A": "Boxplot",
+      "B": "Scatter plot",
+      "C": "Stem-and-leaf plot",
+      "D": "Pie chart"
+    },
+    "answer": "B",
+    "explanation": "Scatter plots map paired continuous observations $(x, y)$ to display bivariate relationships."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 60,
+    "question": "An advantage of a stem-and-leaf display over a histogram is that it:",
+    "options": {
+      "A": "Displays cumulative percentages directly",
+      "B": "Retains individual actual data values while showing shape",
+      "C": "Works better for million-record datasets",
+      "D": "Eliminates all outliers automatically"
+    },
+    "answer": "B",
+    "explanation": "Stem-and-leaf plots show distribution shape while retaining exact numerical digits of raw data."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 61,
+    "question": "A cumulative frequency polygon is also commonly referred to as an:",
+    "options": {
+      "A": "Ogive",
+      "B": "Histogram",
+      "C": "Isotherm",
+      "D": "Boxplot"
+    },
+    "answer": "A",
+    "explanation": "An ogive is a line graph plotting cumulative frequencies against class upper boundaries."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 62,
+    "question": "A Pareto chart combines which two visual elements to highlight the 'vital few' categories?",
+    "options": {
+      "A": "Scatter plot and boxplot",
+      "B": "Bar chart sorted descending by frequency and a cumulative percentage line",
+      "C": "Histogram and stem-and-leaf display",
+      "D": "Pie chart and normal distribution curve"
+    },
+    "answer": "B",
+    "explanation": "Pareto charts order category frequencies from high to low with a cumulative percentage line overlaid."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 63,
+    "question": "Which plot is ideal for illustrating proportional parts of a categorical whole?",
+    "options": {
+      "A": "Pie chart",
+      "B": "Scatter plot",
+      "C": "Ogive",
+      "D": "Boxplot"
+    },
+    "answer": "A",
+    "explanation": "Pie charts visually represent categorical proportions as slices of a 360-degree circle."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 64,
+    "question": "In a frequency polygon, class frequencies are plotted against:",
+    "options": {
+      "A": "Lower limits only",
+      "B": "Upper limits only",
+      "C": "Class midpoints",
+      "D": "Cumulative frequencies"
+    },
+    "answer": "C",
+    "explanation": "Frequency polygons connect points positioned at (class midpoint, class frequency)."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 65,
+    "question": "If the median line in a boxplot lies closer to $Q_1$ than to $Q_3$, the distribution shape is:",
+    "options": {
+      "A": "Symmetric",
+      "B": "Right-skewed (positively skewed)",
+      "C": "Left-skewed (negatively skewed)",
+      "D": "Uniform"
+    },
+    "answer": "B",
+    "explanation": "When $Q_3 - \\text{Median} > \\text{Median} - Q_1$, the upper 25% is more stretched, indicating right skewness."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 66,
+    "question": "Which metric quantifies the direction and strength of a linear relationship between two continuous variables?",
+    "options": {
+      "A": "Interquartile range",
+      "B": "Pearson correlation coefficient ($r$)",
+      "C": "Coefficient of variation",
+      "D": "Kurtosis"
+    },
+    "answer": "B",
+    "explanation": "Pearson's $r$ measures the linear association between two quantitative variables."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 67,
+    "question": "What is the numerical range for Pearson's correlation coefficient $r$?",
+    "options": {
+      "A": "$0 \\le r \\le 1$",
+      "B": "$-1 \\le r \\le +1$",
+      "C": "$-\\infty \\le r \\le +\\infty$",
+      "D": "$-100 \\le r \\le +100$"
+    },
+    "answer": "B",
+    "explanation": "Correlation values are bounded strictly between -1 (perfect negative linear relationship) and +1 (perfect positive)."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 68,
+    "question": "If two variables $X$ and $Y$ are completely independent, their linear sample covariance will be near:",
+    "options": {
+      "A": "-1",
+      "B": "0",
+      "C": "+1",
+      "D": "Infinite"
+    },
+    "answer": "B",
+    "explanation": "Independent variables display no systematic linear co-variation, yielding zero covariance."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 69,
+    "question": "What is the primary function of a crosstabulation (contingency table)?",
+    "options": {
+      "A": "To compare two continuous variables via scatter points",
+      "B": "To record combined frequency distributions of two categorical variables",
+      "C": "To compute sample standard deviation",
+      "D": "To plot time-series data trends"
+    },
+    "answer": "B",
+    "explanation": "Contingency tables display joint distributions and frequencies for two qualitative/categorical variables."
+  },
+  {
+    "chapter_id": 1,
+    "chapter_title": "Exploratory Data Analysis",
+    "question_id": 70,
+    "question": "How do extreme univariate outliers affect the Pearson correlation coefficient?",
+    "options": {
+      "A": "They have zero impact on correlation",
+      "B": "They can drastically distort (artificially increase or decrease) the correlation coefficient",
+      "C": "They automatically make correlation equal to 0",
+      "D": "They change correlation into covariance"
+    },
+    "answer": "B",
+    "explanation": "Pearson's $r$ uses means and standard deviations, making it sensitive to extreme outliers."
   }
 ]
