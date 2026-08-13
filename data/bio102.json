@@ -1,602 +1,1102 @@
 [
   {
     "id": 1,
-    "question": "What is the primary measure of central tendency that is most sensitive to extreme outliers?",
-    "options": ["Mean", "Median", "Mode", "Interquartile range"],
-    "solution": "Step 1: The mean incorporates every data point in its calculation.\nStep 2: Extreme values disproportionately pull the arithmetic mean toward them.\nCorrect Answer: (a)"
+    "question": "What is Supervised Learning?",
+    "options": [
+      "A machine learning paradigm where models are trained using labeled input-output pairs",
+      "A machine learning approach where models discover hidden patterns in unlabeled data",
+      "A reinforcement strategy where agents maximize cumulative rewards through trial and error",
+      "An evaluation method used exclusively to measure out-of-sample generalization errors"
+    ],
+    "solution": "Step 1: Supervised learning requires explicit target labels for training.\nStep 2: The model learns the mapping function from inputs to known outputs.\nCorrect Answer: (a)"
   },
   {
     "id": 2,
-    "question": "Which statistical measure represents the square root of the variance?",
-    "options": ["Standard deviation", "Coefficient of variation", "Mean absolute deviation", "Standard error"],
-    "solution": "Step 1: Variance is the average squared deviation from the mean.\nStep 2: Taking the square root yields the standard deviation in original units.\nCorrect Answer: (a)"
+    "question": "What is Unsupervised Learning?",
+    "options": [
+      "A machine learning paradigm where models discover hidden structures or patterns in unlabeled data",
+      "A machine learning approach where models are trained using explicitly labeled input-output pairs",
+      "A reinforcement strategy where agents maximize cumulative rewards through environmental interaction",
+      "An evaluation framework designed specifically to test model robustness against adversarial noise"
+    ],
+    "solution": "Step 1: Unsupervised learning operates on data without pre-existing response labels.\nStep 2: Focuses on clustering, dimensionality reduction, and density estimation.\nCorrect Answer: (a)"
   },
   {
     "id": 3,
-    "question": "What does a correlation coefficient ($r$) of -1.0 indicate?",
-    "options": ["A perfect negative linear relationship", "No linear relationship", "A perfect positive linear relationship", "Non-linear association"],
-    "solution": "Step 1: Pearson correlation ranges from -1 to +1.\nStep 2: Exactly -1.0 indicates a strict downward-sloping linear line.\nCorrect Answer: (a)"
+    "question": "What is Reinforcement Learning?",
+    "options": [
+      "A machine learning approach where an agent learns to make decisions by performing actions to maximize cumulative rewards",
+      "A supervised paradigm where models are trained using explicitly labeled input-output pair sequences",
+      "An unsupervised method where algorithms discover hidden clustering structures in raw data",
+      "A statistical technique used solely to impute missing numerical values in tabular datasets"
+    ],
+    "solution": "Step 1: Reinforcement learning involves an agent interacting with an environment.\nStep 2: Optimization is driven by sparse or dense reward feedback signals.\nCorrect Answer: (a)"
   },
   {
     "id": 4,
-    "question": "In a positively skewed distribution, what is the typical relationship between the mean, median, and mode?",
-    "options": ["Mean > Median > Mode", "Mode > Median > Mean", "Mean = Median = Mode", "Median > Mean > Mode"],
-    "solution": "Step 1: Positive skew pulls the tail to the right.\nStep 2: The mean is pulled highest, followed by the median, with the mode remaining lowest.\nCorrect Answer: (a)"
+    "question": "What is Overfitting?",
+    "options": [
+      "When a model learns the training data too well, including noise and random fluctuations, leading to poor generalization",
+      "When a model fails to capture the underlying trend of the data, resulting in high training and test errors",
+      "When a model utilizes too few features, causing excessive bias in regression and classification tasks",
+      "When a model processes training batches too quickly due to an excessively high learning rate"
+    ],
+    "solution": "Step 1: Overfitting occurs when model complexity is too high relative to sample size.\nStep 2: High training accuracy contrasts with poor validation or test performance.\nCorrect Answer: (a)"
   },
   {
     "id": 5,
-    "question": "What is the sum of probabilities of all possible mutually exclusive and exhaustive outcomes in a discrete probability distribution?",
-    "options": ["1.0", "0.0", "Infinity", "Sample size n"],
-    "solution": "Step 1: Axioms of probability state total probability equals 1.\nStep 2: Mutually exclusive and exhaustive outcomes sum to exactly one.\nCorrect Answer: (a)"
+    "question": "What is Underfitting?",
+    "options": [
+      "When a model is too simple to capture the underlying structure of the data, resulting in poor training and test performance",
+      "When a model learns training noise too closely, leading to excellent training performance but poor generalization",
+      "When a model suffers from excessive variance across different cross-validation training folds",
+      "When a model exhibits unstable weight updates caused by vanishing gradients during backpropagation"
+    ],
+    "solution": "Step 1: Underfitting reflects high structural bias and insufficient model capacity.\nStep 2: Both training and test errors remain unacceptably high.\nCorrect Answer: (a)"
   },
   {
     "id": 6,
-    "question": "What does the Central Limit Theorem state about the sampling distribution of the sample mean?",
-    "options": ["It becomes approximately normally distributed as the sample size increases, regardless of the population's underlying distribution", "It is always uniform", "It requires the population to be normal", "It has a variance equal to the population variance"],
-    "solution": "Step 1: CLT applies for sufficiently large sample sizes ($n \\ge 30$).\nStep 2: The distribution of sample means approximates a normal distribution.\nCorrect Answer: (a)"
+    "question": "What is Cross-Validation?",
+    "options": [
+      "A resampling technique used to evaluate machine learning models by partitioning data into training and testing subsets across multiple iterations",
+      "A method for transforming categorical variables into numerical matrices using one-hot encoding schemes",
+      "A regularization technique that adds penalty terms to regression loss functions to prevent large weights",
+      "An imputation strategy designed to replace missing tabular entries with column median values"
+    ],
+    "solution": "Step 1: Cross-validation ensures robust performance estimates by testing on unseen folds.\nStep 2: K-fold cross-validation is the standard implementation approach.\nCorrect Answer: (a)"
   },
   {
     "id": 7,
-    "question": "What is a Type I error in hypothesis testing?",
-    "options": ["Rejecting the null hypothesis when it is actually true (False Positive)", "Failing to reject the null hypothesis when it is false (False Negative)", "Accepting the alternative hypothesis when false", "Calculating incorrect standard errors"],
-    "solution": "Step 1: Type I error rate is denoted by alpha.\nStep 2: Occurs when a true null hypothesis is incorrectly rejected.\nCorrect Answer: (a)"
+    "question": "What is Precision in classification evaluation?",
+    "options": [
+      "The ratio of correctly predicted positive observations to the total predicted positive observations",
+      "The ratio of correctly predicted positive observations to all actual observations in the positive class",
+      "The harmonic mean of model recall values and overall dataset accuracy metrics",
+      "The proportion of true negative samples correctly identified out of all negative samples"
+    ],
+    "solution": "Step 1: Precision measures exactness: TP / (TP + FP).\nStep 2: High precision indicates low false positive rates.\nCorrect Answer: (a)"
   },
   {
     "id": 8,
-    "question": "What is a Type II error in hypothesis testing?",
-    "options": ["Failing to reject the null hypothesis when it is actually false (False Negative)", "Rejecting a true null hypothesis", "Selecting an improper significance level", "Using a non-parametric test"],
-    "solution": "Step 1: Type II error rate is denoted by beta.\nStep 2: Occurs when a false null hypothesis is not detected.\nCorrect Answer: (a)"
+    "question": "What is Recall in classification evaluation?",
+    "options": [
+      "The ratio of correctly predicted positive observations to all actual observations in the positive class",
+      "The ratio of correctly predicted positive observations to the total predicted positive observations",
+      "The proportion of true negative samples correctly identified out of all negative samples",
+      "The overall percentage of correct predictions made across all available classes"
+    ],
+    "solution": "Step 1: Recall measures completeness: TP / (TP + FN).\nStep 2: High recall indicates low false negative rates.\nCorrect Answer: (a)"
   },
   {
     "id": 9,
-    "question": "What does statistical power represent in hypothesis testing?",
-    "options": ["The probability of correctly rejecting a false null hypothesis ($1 - \\beta$)", "The probability of committing a Type I error", "The significance level alpha", "The sample correlation coefficient"],
-    "solution": "Step 1: Power measures a test's ability to detect an effect when it exists.\nStep 2: Calculated as 1 minus the probability of a Type II error.\nCorrect Answer: (a)"
+    "question": "What is the F1-Score?",
+    "options": [
+      "The harmonic mean of precision and recall, providing a balanced evaluation metric for skewed datasets",
+      "The arithmetic mean of model precision and overall classification accuracy percentages",
+      "The ratio of true positives to false positives calculated across decision thresholds",
+      "The cumulative area underneath the receiver operating characteristic curve"
+    ],
+    "solution": "Step 1: F1-score combines precision and recall into a single metric.\nStep 2: Formula: $2 \\times \\frac{\\text{Precision} \\times \\text{Recall}}{\\text{Precision} + \\text{Recall}}$.\nCorrect Answer: (a)"
   },
   {
     "id": 10,
-    "question": "What is the p-value in hypothesis testing?",
-    "options": ["The probability of obtaining test results at least as extreme as the observed results, assuming the null hypothesis is true", "The probability that the null hypothesis is true", "The fixed significance threshold", "The power of the test"],
-    "solution": "Step 1: P-values measure evidence strength against the null hypothesis.\nStep 2: Calculated under the assumption that $H_0$ is correct.\nCorrect Answer: (a)"
+    "question": "What is a ROC curve?",
+    "options": [
+      "A graphical plot illustrating the diagnostic ability of a binary classifier system across all possible classification thresholds",
+      "A bar chart displaying feature importance scores derived from random forest impurity reductions",
+      "A loss function curve showing training error decrease over successive gradient descent epochs",
+      "A scatter plot matrix depicting bivariate correlations between continuous predictor variables"
+    ],
+    "solution": "Step 1: ROC curves plot True Positive Rate against False Positive Rate.\nStep 2: Evaluates model performance independent of classification threshold choices.\nCorrect Answer: (a)"
   },
   {
     "id": 11,
-    "question": "What is the primary assumption of Ordinary Least Squares (OLS) regression regarding error terms?",
-    "options": ["Errors have a mean of zero, are homoscedastic, and are uncorrelated with each other (no autocorrelation)", "Errors must be perfectly collinear", "Errors must follow a Poisson distribution", "Errors must be non-zero"],
-    "solution": "Step 1: Gauss-Markov theorem assumptions require zero mean, homoscedasticity, and independence of errors.\nStep 2: Ensures OLS estimators are BLUE (Best Linear Unbiased Estimators).\nCorrect Answer: (a)"
+    "question": "What is AUC-ROC?",
+    "options": [
+      "The area under the receiver operating characteristic curve, measuring overall model ranking quality across thresholds",
+      "The average squared error computed between predicted continuous targets and true label values",
+      "The total proportion of correctly classified instances divided by total sample size",
+      "The maximum likelihood estimation score calculated during logistic regression training"
+    ],
+    "solution": "Step 1: AUC-ROC quantifies the overall discriminative capacity of a classifier.\nStep 2: A value of 1.0 represents a perfect model, while 0.5 represents random guessing.\nCorrect Answer: (a)"
   },
   {
     "id": 12,
-    "question": "What does heteroscedasticity refer to in regression analysis?",
-    "options": ["Non-constant variance of error terms across levels of the independent variables", "Constant residual variance", "Autocorrelation across time lags", "High multicollinearity"],
-    "solution": "Step 1: Heteroscedasticity means residual spread changes systematically.\nStep 2: Violates standard OLS assumptions and invalidates standard error estimates.\nCorrect Answer: (a)"
+    "question": "What is L1 Regularization (Lasso)?",
+    "options": [
+      "A regularization technique that adds a penalty proportional to the absolute value of regression coefficients",
+      "A regularization method that adds a penalty proportional to the squared value of regression coefficients",
+      "A data preprocessing technique that normalizes feature ranges to have zero mean and unit variance",
+      "An optimization algorithm that updates model weights using stochastic gradient descent momentum"
+    ],
+    "solution": "Step 1: L1 regularization encourages sparsity by driving coefficients to exact zero.\nStep 2: Useful for automatic feature selection in high-dimensional settings.\nCorrect Answer: (a)"
   },
   {
     "id": 13,
-    "question": "Which test is commonly used to detect first-order autocorrelation in regression residuals?",
-    "options": ["Durbin-Watson test", "Shapiro-Wilk test", "Chi-Square test", "Levene's test"],
-    "solution": "Step 1: Durbin-Watson statistic tests for serial correlation in residuals.\nStep 2: Values near 2 indicate no autocorrelation.\nCorrect Answer: (a)"
+    "question": "What is L2 Regularization (Ridge)?",
+    "options": [
+      "A regularization technique that adds a penalty proportional to the squared value of regression coefficients",
+      "A regularization method that adds a penalty proportional to the absolute value of regression coefficients",
+      "A data transformation method that scales input features into a bounded range between zero and one",
+      "An iterative optimization strategy designed to eliminate multicollinearity among categorical columns"
+    ],
+    "solution": "Step 1: L2 regularization shrinks coefficients smoothly toward zero without eliminating them.\nStep 2: Helps prevent multicollinearity issues in linear models.\nCorrect Answer: (a)"
   },
   {
     "id": 14,
-    "question": "What is the purpose of the Shapiro-Wilk test?",
-    "options": ["To test for normality of a distribution or regression residuals", "To test for homogeneity of variance", "To check for multicollinearity", "To evaluate time series stationarity"],
-    "solution": "Step 1: Shapiro-Wilk evaluates whether sample data come from a normal distribution.\nStep 2: Small p-values reject normality.\nCorrect Answer: (a)"
+    "question": "What is Linear Regression?",
+    "options": [
+      "A supervised learning algorithm used to predict a continuous target variable by fitting a linear equation to observed data",
+      "A classification technique that estimates categorical probabilities using the logistic sigmoid function",
+      "An unsupervised clustering method that groups data points based on Euclidean distance centroids",
+      "A tree-based ensemble method that combines multiple weak learners via gradient boosting"
+    ],
+    "solution": "Step 1: Linear regression models the relationship between dependent and independent variables.\nStep 2: Estimated typically via ordinary least squares (OLS) minimization.\nCorrect Answer: (a)"
   },
   {
     "id": 15,
-    "question": "What is Levene's test used for?",
-    "options": ["Testing equality of variances across two or more groups (homogeneity of variance)", "Testing regression linearity", "Detecting outliers", "Evaluating logistic model fit"],
-    "solution": "Step 1: Levene's test assesses variance homogeneity across independent groups.\nStep 2: Less sensitive to non-normality than Bartlett's test.\nCorrect Answer: (a)"
+    "question": "What is Logistic Regression?",
+    "options": [
+      "A supervised classification algorithm used to predict the probability of a categorical binary outcome",
+      "A supervised regression algorithm used to estimate continuous numeric target values directly",
+      "An unsupervised clustering model that partitions data into spherical Voronoi cells",
+      "A dimensionality reduction technique that projects features onto orthogonal eigenvectors"
+    ],
+    "solution": "Step 1: Logistic regression applies the sigmoid function to linear combinations of features.\nStep 2: Outputs bounded probability values between zero and one.\nCorrect Answer: (a)"
   },
   {
     "id": 16,
-    "question": "What is the main objective of Principal Component Analysis (PCA)?",
-    "options": ["To reduce dimensionality by transforming correlated variables into a smaller set of uncorrelated orthogonal components", "To classify binary outcomes", "To impute missing data points", "To test time series cointegration"],
-    "solution": "Step 1: PCA projects high-dimensional data onto principal axes.\nStep 2: Maximizes variance retention while reducing dimensions.\nCorrect Answer: (a)"
+    "question": "What is a Decision Tree?",
+    "options": [
+      "A non-parametric supervised learning model that splits data into subsets based on feature threshold rules",
+      "A linear parametric model that estimates continuous target variables using weighted input sums",
+      "An unsupervised clustering algorithm that iteratively updates cluster centroid coordinates",
+      "A deep neural network architecture utilizing convolutional filters for image classification"
+    ],
+    "solution": "Step 1: Decision trees use tree structures with decision nodes and leaf nodes.\nStep 2: Splits are chosen using criteria like Gini impurity or Information Gain.\nCorrect Answer: (a)"
   },
   {
     "id": 17,
-    "question": "What does Ridge Regression add to the standard OLS loss function?",
-    "options": ["L2 regularization penalty (squared magnitude of coefficients)", "L1 regularization penalty (absolute magnitude of coefficients)", "No penalty", "An autoregressive time lag"],
-    "solution": "Step 1: Ridge regression penalizes large coefficients using L2 norm.\nStep 2: Shrinks coefficients toward zero to reduce overfitting.\nCorrect Answer: (a)"
+    "question": "What is Random Forest?",
+    "options": [
+      "An ensemble learning method that constructs multiple decision trees during training and outputs the mode or mean prediction",
+      "A single deep decision tree trained with extensive L1 regularization penalties to avoid overfitting",
+      "A linear regression model enhanced with bootstrap aggregating of residual error terms",
+      "An unsupervised clustering algorithm that builds hierarchical tree structures of data points"
+    ],
+    "solution": "Step 1: Random forest builds diverse decision trees using bagging and random feature subsets.\nStep 2: Reduces variance and improves generalization compared to individual trees.\nCorrect Answer: (a)"
   },
   {
     "id": 18,
-    "question": "What is a distinctive feature of Lasso Regression compared to Ridge Regression?",
-    "options": ["Lasso uses L1 regularization, which can drive coefficient estimates exactly to zero for feature selection", "Lasso never shrinks coefficients", "Lasso uses L2 regularization", "Lasso cannot handle collinearity"],
-    "solution": "Step 1: L1 penalty introduces sparsity.\nStep 2: Effectively performs automatic feature selection by setting unimportant coefficients to zero.\nCorrect Answer: (a)"
+    "question": "What is Gradient Boosting?",
+    "options": [
+      "An ensemble technique that builds models sequentially, where each new model corrects errors made by previous ones",
+      "An ensemble method that trains multiple independent models in parallel using bootstrap sample bags",
+      "A single deep neural network trained with stochastic gradient descent and momentum optimizers",
+      "An unsupervised dimensionality reduction algorithm based on singular value decomposition"
+    ],
+    "solution": "Step 1: Gradient boosting optimizes an arbitrary differentiable loss function iteratively.\nStep 2: New weak learners fit the gradient residuals of the composite model.\nCorrect Answer: (a)"
   },
   {
     "id": 19,
-    "question": "What is Elastic Net regression?",
-    "options": ["A regularization technique that combines both L1 (Lasso) and L2 (Ridge) penalty terms", "A non-parametric classification algorithm", "A survival analysis model", "A spatial weighting matrix"],
-    "solution": "Step 1: Elastic Net blends L1 and L2 penalties.\nStep 2: Useful when multiple correlated features exist, grouping them together like Ridge while selecting variables like Lasso.\nCorrect Answer: (a)"
+    "question": "What is Support Vector Machine (SVM)?",
+    "options": [
+      "A supervised learning algorithm that finds an optimal hyperplane maximizing the margin between different classes",
+      "An unsupervised clustering algorithm that groups data points using density-based connectivity graphs",
+      "A probabilistic classification model that applies Bayes' theorem with strong independence assumptions",
+      "A linear regression technique optimized using ordinary least squares coefficient minimization"
+    ],
+    "solution": "Step 1: SVMs identify support vectors that define the maximum-margin decision boundary.\nStep 2: Can utilize kernel tricks to handle non-linearly separable data.\nCorrect Answer: (a)"
   },
   {
     "id": 20,
-    "question": "What is the primary evaluation metric for logistic regression classification performance?",
-    "options": ["Area Under the ROC Curve (AUC-ROC)", "Mean Squared Error", "Durbin-Watson statistic", "Variance Inflation Factor"],
-    "solution": "Step 1: Logistic regression outputs probabilities for binary classification.\nStep 2: ROC-AUC evaluates discrimination threshold performance across all levels.\nCorrect Answer: (a)"
+    "question": "What is K-Means Clustering?",
+    "options": [
+      "An unsupervised algorithm that partitions data into K distinct clusters by iteratively assigning points to nearest centroids",
+      "A supervised classification algorithm that classifies query points based on their K nearest training neighbors",
+      "An ensemble tree method that aggregates predictions across K randomly constructed decision trees",
+      "A dimensionality reduction technique that projects high-dimensional data onto K principal axes"
+    ],
+    "solution": "Step 1: K-means minimizes within-cluster sum of squares variance.\nStep 2: Requires specifying the number of clusters $K$ in advance.\nCorrect Answer: (a)"
   },
   {
     "id": 21,
-    "question": "What is a Decision Tree classifier based on?",
-    "options": ["Recursive binary splitting of feature space based on impurity measures like Gini impurity or Information Gain", "Linear regression coefficient maximization", "Euclidean distance matrix inversion", "Markov chain state transitions"],
-    "solution": "Step 1: Decision trees partition data into homogeneous subsets.\nStep 2: Uses criteria like Gini impurity or entropy reduction at each split.\nCorrect Answer: (a)"
+    "question": "What is K-Nearest Neighbors (KNN)?",
+    "options": [
+      "A non-parametric supervised algorithm that classifies data points based on the majority vote of their K closest training examples",
+      "An unsupervised clustering method that partitions feature spaces into K Voronoi diagram cells",
+      "An iterative optimization algorithm that updates K cluster centroids until convergence is reached",
+      "A regression technique that fits K linear equations across segmented subsets of input features"
+    ],
+    "solution": "Step 1: KNN is a lazy learning algorithm that stores training data for inference time.\nStep 2: Distance metrics like Euclidean or Manhattan determine neighborhood proximity.\nCorrect Answer: (a)"
   },
   {
     "id": 22,
-    "question": "What is Random Forest?",
-    "options": ["An ensemble learning method consisting of multiple randomized decision trees trained with bootstrapping and feature subsampling, combined by majority vote", "A single deep decision tree", "A linear regression model with L1 penalty", "A time series smoothing technique"],
-    "solution": "Step 1: Random Forest uses bagging and random feature selection.\nStep 2: Reduces variance and prevents overfitting compared to single trees.\nCorrect Answer: (a)"
+    "question": "What is Principal Component Analysis (PCA)?",
+    "options": [
+      "An unsupervised linear dimensionality reduction technique that transforms data into orthogonal principal components",
+      "A supervised classification algorithm that maximizes class separation margins using hyperplanes",
+      "An iterative clustering method that groups data observations based on centroid distance metrics",
+      "A regularization technique that adds penalty terms to linear regression cost functions"
+    ],
+    "solution": "Step 1: PCA identifies axes of maximal variance via eigenvalue decomposition of covariance matrices.\nStep 2: Reduces feature dimensionality while retaining maximum informational variance.\nCorrect Answer: (a)"
   },
   {
     "id": 23,
-    "question": "How does Gradient Boosting (e.g., XGBoost, Gradient Boosting Machines) build trees?",
-    "options": ["Sequentially, where each new tree is trained to predict the residual errors of the previous sequence of trees", "Independently in parallel using bootstrap samples", "Randomly without loss optimization", "Using linear regression coefficients"],
-    "solution": "Step 1: Boosting builds trees iteratively.\nStep 2: Each subsequent model corrects residuals of prior models via gradient descent.\nCorrect Answer: (a)"
+    "question": "What is the Curse of Dimensionality?",
+    "options": [
+      "The various phenomena that arise when analyzing data in high-dimensional spaces that do not occur in low-dimensional settings",
+      "The exponential increase in training time when fitting deep neural networks with millions of parameters",
+      "The degradation of model performance caused by severe class imbalance in binary classification tasks",
+      "The difficulty of gathering sufficient labeled training samples for supervised machine learning projects"
+    ],
+    "solution": "Step 1: High dimensional spaces become extremely sparse, increasing distance metrics distances.\nStep 2: Requires significantly more data or dimensionality reduction techniques to overcome.\nCorrect Answer: (a)"
   },
   {
     "id": 24,
-    "question": "What is K-Means Clustering?",
-    "options": ["An unsupervised clustering algorithm that partitions data into $K$ clusters by minimizing within-cluster variance around centroid means", "A supervised classification method", "A time series autoregressive model", "A survival analysis technique"],
-    "solution": "Step 1: K-Means assigns points to nearest centroid.\nStep 2: Iteratively updates centroids until convergence.\nCorrect Answer: (a)"
+    "question": "What is Bias-Variance Tradeoff?",
+    "options": [
+      "The conflict in trying to simultaneously minimize two sources of error that prevent supervised learning algorithms from generalizing",
+      "The balance between training speed and inference latency when deploying models to production servers",
+      "The trade-off between model interpretability and predictive accuracy in complex ensemble algorithms",
+      "The optimization balance between L1 sparsity penalties and L2 coefficient shrinkage constraints"
+    ],
+    "solution": "Step 1: High bias causes underfitting while high variance causes overfitting.\nStep 2: Finding the optimal model complexity balances these competing error sources.\nCorrect Answer: (a)"
   },
   {
     "id": 25,
-    "question": "What is Hierarchical Clustering?",
-    "options": ["A clustering technique that builds a hierarchy of nested clusters either agglomeratively (bottom-up) or divisively (top-down)", "A flat partitioning method requiring pre-specified $K$", "A linear regression diagnostic", "A spatial autocorrelation index"],
-    "solution": "Step 1: Hierarchical clustering constructs a dendrogram.\nStep 2: Does not require pre-determining the number of clusters $K$.\nCorrect Answer: (a)"
+    "question": "What is Gradient Descent?",
+    "options": [
+      "An iterative optimization algorithm used to find the minimum of a cost function by moving in the direction of steepest descent",
+      "A data preprocessing technique used to scale continuous numerical features to a standard normal distribution",
+      "An evaluation metric used to measure classification error rates across decision tree split nodes",
+      "A regularization method that prevents model overfitting by randomly dropping neural network neurons"
+    ],
+    "solution": "Step 1: Gradient descent updates parameters using the negative gradient of the loss function.\nStep 2: The step size is controlled by the hyperparameter known as the learning rate.\nCorrect Answer: (a)"
   },
   {
     "id": 26,
-    "question": "What is Support Vector Machine (SVM) classification?",
-    "options": ["A supervised algorithm that finds an optimal hyperplane maximizing the margin between different classes", "An unsupervised cluster algorithm", "A linear regression model with random errors", "A time series forecasting technique"],
-    "solution": "Step 1: SVM finds decision boundaries with maximum margin.\nStep 2: Can handle non-linear boundaries using kernel tricks.\nCorrect Answer: (a)"
+    "question": "What is Stochastic Gradient Descent (SGD)?",
+    "options": [
+      "A variant of gradient descent that computes gradient updates using a single randomly selected training sample at a time",
+      "An optimization method that calculates exact gradients using the entire training dataset simultaneously",
+      "A gradient update strategy that averages loss gradients across fixed mini-batches of training records",
+      "An adaptive learning rate optimizer that scales weight updates using squared historical gradients"
+    ],
+    "solution": "Step 1: SGD introduces noise into gradient estimates by evaluating single samples per step.\nStep 2: Helps models escape local minima and accelerates training on large datasets.\nCorrect Answer: (a)"
   },
   {
     "id": 27,
-    "question": "What is the Kernel Trick in Support Vector Machines?",
-    "options": ["A method of implicitly mapping non-linear input data into a higher-dimensional space where it becomes linearly separable", "A technique to eliminate missing values", "A method for testing autocorrelation", "A feature scaling normalization rule"],
-    "solution": "Step 1: Kernels compute dot products in high-dimensional spaces without explicit coordinate transformation.\nStep 2: Solves non-linear classification efficiently.\nCorrect Answer: (a)"
+    "question": "What is Mini-Batch Gradient Descent?",
+    "options": [
+      "An optimization algorithm that computes gradient updates using small subsets of training data per iteration",
+      "An optimization method that updates model parameters using only one randomly chosen training sample",
+      "A batch optimization technique that processes the entire training dataset before every single parameter update",
+      "A second-order optimization approach that calculates full Hessian matrix inversions for loss minimization"
+    ],
+    "solution": "Step 1: Mini-batch gradient descent balances computational efficiency and gradient stability.\nStep 2: Standard approach used across deep learning and machine learning training pipelines.\nCorrect Answer: (a)"
   },
   {
     "id": 28,
-    "question": "What is Naive Bayes Classifier based on?",
-    "options": ["Bayes' theorem with strong (naive) independence assumptions between features given the class label", "Linear regression coefficient estimates", "Euclidean distance centroid matching", "Time series cointegration tests"],
-    "solution": "Step 1: Naive Bayes applies conditional probability rules.\nStep 2: Assumes feature independence to simplify joint probability computations.\nCorrect Answer: (a)"
+    "question": "What is Feature Scaling?",
+    "options": [
+      "The process of normalizing or standardizing the range of independent input features in a dataset",
+      "The task of removing irrelevant or redundant predictor variables to reduce model complexity",
+      "The method of generating synthetic training records to balance skewed classification class distributions",
+      "The procedure of splitting continuous numerical targets into discrete categorical bins"
+    ],
+    "solution": "Step 1: Feature scaling ensures all variables contribute equally to distance and gradient calculations.\nStep 2: Common methods include min-max normalization and standard scaling.\nCorrect Answer: (a)"
   },
   {
     "id": 29,
-    "question": "What is K-Nearest Neighbors (KNN) classification?",
-    "options": ["A non-parametric lazy learning algorithm that classifies data points based on the majority vote of their $K$ closest training neighbors", "A parametric linear model", "An unsupervised hierarchical tree", "A time series smoothing filter"],
-    "solution": "Step 1: KNN stores training data and evaluates distance at prediction time.\nStep 2: Classifies based on nearest neighbor labels.\nCorrect Answer: (a)"
+    "question": "What is One-Hot Encoding?",
+    "options": [
+      "A process of converting categorical string variables into binary vector representations with a single active bit",
+      "A method of scaling numerical features to binary values between zero and one exclusively",
+      "An imputation technique that replaces missing categorical values with the mode category",
+      "A dimensionality reduction approach that projects categorical features onto orthogonal axes"
+    ],
+    "solution": "Step 1: One-hot encoding creates binary dummy columns for each categorical category.\nStep 2: Prevents algorithms from assuming false ordinal relationships between categories.\nCorrect Answer: (a)"
   },
   {
     "id": 30,
-    "question": "What is a Confusion Matrix used for?",
-    "options": ["Summarizing classification performance by comparing predicted classes against true actual classes", "Calculating regression residual variance", "Testing time series stationarity", "Measuring spatial autocorrelation"],
-    "solution": "Step 1: Confusion matrix tabulates True Positives, False Positives, True Negatives, and False Negatives.\nStep 2: Forms the basis for accuracy, precision, and recall metrics.\nCorrect Answer: (a)"
+    "question": "What is Label Encoding?",
+    "options": [
+      "A technique that converts categorical text labels into sequential integer values ranging from zero to class count minus one",
+      "A method that expands categorical variables into sparse binary matrices with independent indicator columns",
+      "An imputation strategy designed to substitute missing feature values with encoded statistical summaries",
+      "A normalization process that scales continuous target variables into standard normal distributions"
+    ],
+    "solution": "Step 1: Label encoding maps categories to integer identifiers.\nStep 2: Suitable for tree-based models but can mislead distance-based algorithms.\nCorrect Answer: (a)"
   },
   {
     "id": 31,
-    "question": "What is Precision in classification metrics?",
-    "options": ["The proportion of positive predictions that were actually correct ($TP / (TP + FP)$)", "The proportion of actual positives correctly identified", "The overall correct classification rate", "The false positive rate"],
-    "solution": "Step 1: Precision measures exactness of positive predictions.\nStep 2: Formula: $TP / (TP + FP)$.\nCorrect Answer: (a)"
+    "question": "What is Imputation in data preprocessing?",
+    "options": [
+      "The process of replacing missing data values with substituted statistical estimates or predicted values",
+      "The technique of removing entire rows containing missing data points from training sets",
+      "The procedure of scaling continuous feature values to have zero mean and unit variance",
+      "The method of converting categorical strings into numerical integer label representations"
+    ],
+    "solution": "Step 1: Imputation preserves sample size by filling in missing entries.\nStep 2: Common strategies include mean, median, mode, or model-based imputation.\nCorrect Answer: (a)"
   },
   {
     "id": 32,
-    "question": "What is Recall (Sensitivity) in classification metrics?",
-    "options": ["The proportion of actual positive cases correctly identified by the model ($TP / (TP + FN)$)", "The proportion of positive predictions that are correct", "The specificity rate", "The false discovery rate"],
-    "solution": "Step 1: Recall measures completeness of actual positive detection.\nStep 2: Formula: $TP / (TP + FN)$.\nCorrect Answer: (a)"
+    "question": "What is Data Leakage?",
+    "options": [
+      "When information from outside the training dataset is improperly used to create or validate a machine learning model",
+      "When training data files are accidentally deleted or corrupted during distributed cluster execution",
+      "When production models suffer from performance degradation due to environmental data drift",
+      "When neural network gradients become excessively large and destabilize weight optimization updates"
+    ],
+    "solution": "Step 1: Data leakage causes overly optimistic performance estimates during cross-validation.\nStep 2: Occurs when test information contaminates the training feature pipeline.\nCorrect Answer: (a)"
   },
   {
     "id": 33,
-    "question": "What is the F1-Score?",
-    "options": ["The harmonic mean of precision and recall", "The arithmetic mean of accuracy and specificity", "The ratio of true positives to false positives", "The area under the ROC curve"],
-    "solution": "Step 1: F1-score balances precision and recall.\nStep 2: Formula: $2 \\times (Precision \\times Recall) / (Precision + Recall)$.\nCorrect Answer: (a)"
+    "question": "What is Hyperparameter Tuning?",
+    "options": [
+      "The process of choosing a set of optimal configuration parameters for a machine learning algorithm",
+      "The iterative optimization process of updating model weight coefficients via gradient descent",
+      "The data preprocessing step of scaling continuous features to standard normal distributions",
+      "The task of selecting relevant input variables to reduce dataset dimensionality"
+    ],
+    "solution": "Step 1: Hyperparameters cannot be learned directly from training data optimization.\nStep 2: Common search strategies include grid search, random search, and Bayesian optimization.\nCorrect Answer: (a)"
   },
   {
     "id": 34,
-    "question": "What does a Receiver Operating Characteristic (ROC) curve plot?",
-    "options": ["True Positive Rate against False Positive Rate across various classification thresholds", "Precision against Recall", "Training loss against epoch iterations", "Residual errors against fitted values"],
-    "solution": "Step 1: ROC curve visualizes classification performance across thresholds.\nStep 2: Plots sensitivity (TPR) versus 1-specificity (FPR).\nCorrect Answer: (a)"
+    "question": "What is Grid Search?",
+    "options": [
+      "An exhaustive hyperparameter optimization technique that evaluates every possible combination of specified parameter values",
+      "A random sampling strategy that explores hyperparameter spaces using probabilistic probability distributions",
+      "An iterative gradient-based optimization method used to minimize neural network loss functions",
+      "A cross-validation partitioning technique that splits datasets into stratified training folds"
+    ],
+    "solution": "Step 1: Grid search systematically tests a predefined grid of hyperparameter values.\nStep 2: Computationally expensive but guarantees finding the best combination within the grid.\nCorrect Answer: (a)"
   },
   {
     "id": 35,
-    "question": "What is Mean Squared Error (MSE) used for in regression?",
-    "options": ["Measuring the average squared difference between estimated values and actual values", "Evaluating classification accuracy", "Testing for heteroscedasticity", "Calculating VIF multicollinearity"],
-    "solution": "Step 1: MSE formula: $\\frac{1}{n} \\sum (y_i - \\hat{y}_i)^2$.\nStep 2: Penalizes larger deviations heavily through squaring.\nCorrect Answer: (a)"
+    "question": "What is Random Search in hyperparameter optimization?",
+    "options": [
+      "A hyperparameter tuning technique that evaluates randomly selected combinations from specified parameter distributions",
+      "An exhaustive search algorithm that tests every possible permutation of hyperparameters in a grid",
+      "An automated gradient descent method that optimizes model learning rates and batch sizes",
+      "A cross-validation method that randomly re-samples training datasets across multiple iterations"
+    ],
+    "solution": "Step 1: Random search samples hyperparameter combinations randomly from defined distributions.\nStep 2: Often more efficient than grid search when only a few parameters significantly impact performance.\nCorrect Answer: (a)"
   },
   {
     "id": 36,
-    "question": "What is Root Mean Squared Error (RMSE)?",
-    "options": ["The square root of the mean squared error, expressed in the same units as the target variable", "The absolute error average", "The coefficient of determination", "The median absolute deviation"],
-    "solution": "Step 1: RMSE is $\\sqrt{MSE}$.\nStep 2: Provides interpretability in original data units.\nCorrect Answer: (a)"
+    "question": "What is Bagging (Bootstrap Aggregating)?",
+    "options": [
+      "An ensemble meta-algorithm designed to improve the stability and accuracy of machine learning algorithms via bootstrap samples",
+      "A sequential boosting technique that trains models iteratively to correct previous residual errors",
+      "An unsupervised clustering algorithm that groups data observations based on density connectivity",
+      "A dimensionality reduction method that projects features onto orthogonal principal component axes"
+    ],
+    "solution": "Step 1: Bagging trains multiple models in parallel on bootstrapped subsets of data.\nStep 2: Reduces variance and prevents overfitting, as seen in Random Forests.\nCorrect Answer: (a)"
   },
   {
     "id": 37,
-    "question": "What is Mean Absolute Error (MAE)?",
-    "options": ["The average absolute difference between predicted and actual values", "The average squared error", "The maximum residual error", "The sum of squared residuals"],
-    "solution": "Step 1: MAE formula: $\\frac{1}{n} \\sum |y_i - \\hat{y}_i|$.\nStep 2: Less sensitive to extreme outliers than MSE.\nCorrect Answer: (a)"
+    "question": "What is Boosting?",
+    "options": [
+      "An ensemble technique that builds models sequentially, assigning higher weights to difficult or misclassified instances",
+      "An ensemble method that trains independent models in parallel using bootstrap sample bags",
+      "A regularization technique that penalizes large coefficient values in linear regression models",
+      "A data augmentation strategy that artificially expands training set diversity via transformations"
+    ],
+    "solution": "Step 1: Boosting converts a set of weak learners into a strong composite model.\nStep 2: Examples include AdaBoost, Gradient Boosting, and XGBoost.\nCorrect Answer: (a)"
   },
   {
     "id": 38,
-    "question": "What is Cross-Validation used for?",
-    "options": ["Evaluating out-of-sample generalization performance by partitioning data into training and validation folds iteratively", "Imputing missing data", "Eliminating multicollinearity", "Testing time series unit roots"],
-    "solution": "Step 1: Cross-validation prevents overfitting evaluation.\nStep 2: Provides robust estimates of model performance on unseen data.\nCorrect Answer: (a)"
+    "question": "What is Stacking (Stacked Generalization)?",
+    "options": [
+      "An ensemble machine learning technique that trains a meta-model to combine predictions from multiple base models",
+      "An ensemble method that averages predictions across multiple independently trained decision trees",
+      "A sequential boosting technique that fits subsequent models to gradient residual error terms",
+      "A data preprocessing pipeline that chains multiple feature scaling and imputation transformers together"
+    ],
+    "solution": "Step 1: Stacking uses predictions of multiple diverse base models as inputs for a meta-learner.\nStep 2: Learns how to best combine predictions to maximize overall generalization accuracy.\nCorrect Answer: (a)"
   },
   {
     "id": 39,
-    "question": "What is K-Fold Cross-Validation?",
-    "options": ["Splitting data into $K$ subsets, training on $K-1$ folds, and validating on the remaining fold, repeating $K$ times", "Leaving out one sample at a time", "Bootstrapping with replacement", "Stratified random sampling of classes"],
-    "solution": "Step 1: K-fold cross-validation uses all data for training and validation.\nStep 2: Averages performance across all $K$ iterations.\nCorrect Answer: (a)"
+    "question": "What is Voting Classifier?",
+    "options": [
+      "An ensemble model that combines predictions from multiple different machine learning classifiers via majority vote or average probability",
+      "A sequential boosting algorithm that trains models iteratively based on residual error weights",
+      "A tree-based ensemble method that builds independent decision trees using bootstrap sample bags",
+      "A neural network architecture that utilizes multiple output layers for multi-label classification"
+    ],
+    "solution": "Step 1: Voting classifiers aggregate predictions from distinct base models.\nStep 2: Can use hard voting (majority class) or soft voting (averaged predicted probabilities).\nCorrect Answer: (a)"
   },
   {
     "id": 40,
-    "question": "What is the Bias-Variance Tradeoff?",
-    "options": ["The balance where simpler models have high bias and low variance, while complex models have low bias and high variance", "The trade-off between sample size and statistical power", "The balance between Type I and Type II errors", "The relation between AIC and BIC penalties"],
-    "solution": "Step 1: Total error decomposes into bias squared, variance, and irreducible error.\nStep 2: Tuning complexity requires balancing underfitting (bias) and overfitting (variance).\nCorrect Answer: (a)"
+    "question": "What is Mean Squared Error (MSE)?",
+    "options": [
+      "A regression loss metric that calculates the average squared difference between estimated values and actual values",
+      "A classification evaluation score measuring the average absolute difference between predicted and true classes",
+      "An optimization metric that computes the square root of variance across cross-validation folds",
+      "A regularization penalty term proportional to the sum of absolute regression coefficients"
+    ],
+    "solution": "Step 1: MSE heavily penalizes larger errors due to the squaring operation.\nStep 2: Formula: $\\frac{1}{n} \\sum (y_i - \\hat{y}_i)^2$.\nCorrect Answer: (a)"
   },
   {
     "id": 41,
-    "question": "What is Overfitting?",
-    "options": ["When a model learns training data noise and quirks too well, resulting in poor generalization on test data", "When a model is too simple to capture patterns", "When sample size is too large", "When error variance is homoscedastic"],
-    "solution": "Step 1: Overly complex models memorize training specifics.\nStep 2: Results in low training error but high test error.\nCorrect Answer: (a)"
+    "question": "What is Root Mean Squared Error (RMSE)?",
+    "options": [
+      "The square root of the average squared differences between predicted continuous values and actual target values",
+      "The average absolute difference between predicted continuous values and actual target values",
+      "The sum of squared residuals divided by the degrees of freedom in linear regression",
+      "The logarithmic ratio of predicted probabilities to true binary classification labels"
+    ],
+    "solution": "Step 1: RMSE puts the error metric back into the original units of the target variable.\nStep 2: Widely used to evaluate regression model performance.\nCorrect Answer: (a)"
   },
   {
     "id": 42,
-    "question": "What is Underfitting?",
-    "options": ["When a model is too simple to capture the underlying structure of the data, showing high error on both training and test sets", "When a model memorizes training noise", "When multicollinearity is excessive", "When cross-validation folds are too high"],
-    "solution": "Step 1: Simple models lack capacity to represent data patterns.\nStep 2: High bias leads to poor performance everywhere.\nCorrect Answer: (a)"
+    "question": "What is Mean Absolute Error (MAE)?",
+    "options": [
+      "A regression loss metric that calculates the average absolute difference between predicted and actual values",
+      "A regression evaluation metric that squares error residuals before averaging them across samples",
+      "A classification metric measuring the proportion of incorrect predictions made by a model",
+      "A regularization penalty proportional to the squared sum of linear regression coefficients"
+    ],
+    "solution": "Step 1: MAE is less sensitive to outliers compared to Mean Squared Error.\nStep 2: Formula: $\\frac{1}{n} \\sum |y_i - \\hat{y}_i|$.\nCorrect Answer: (a)"
   },
   {
     "id": 43,
-    "question": "What is Feature Scaling (Standardization)?",
-    "options": ["Rescaling features to have a mean of 0 and a standard deviation of 1", "Converting text categories to integers", "Removing missing data records", "Calculating principal components"],
-    "solution": "Step 1: Standardization uses Z-score formula: $(x - \\mu) / \\sigma$.\nStep 2: Ensures features contribute equally to distance-based and regularized models.\nCorrect Answer: (a)"
+    "question": "What is R-squared ($R^2$) in regression?",
+    "options": [
+      "A statistical measure representing the proportion of variance for a target variable that is explained by independent features",
+      "The ratio of true positive predictions to total positive observations in a classification confusion matrix",
+      "The square root of the mean squared error divided by the standard deviation of target values",
+      "The maximum likelihood estimation score calculated during logistic regression training iterations"
+    ],
+    "solution": "Step 1: R-squared values range from 0 to 1 for unadjusted standard linear models.\nStep 2: Higher values indicate that the model explains a larger proportion of target variance.\nCorrect Answer: (a)"
   },
   {
     "id": 44,
-    "question": "What is One-Hot Encoding?",
-    "options": ["Converting categorical variables with $k$ categories into $k$ binary indicator columns", "Replacing missing values with the mode", "Normalizing continuous distributions", "Reducing dimensions via PCA"],
-    "solution": "Step 1: Machine learning algorithms require numerical inputs.\nStep 2: One-hot encoding creates binary 0/1 columns for each category level.\nCorrect Answer: (a)"
+    "question": "What is Adjusted R-squared?",
+    "options": [
+      "A modified version of R-squared that adjusts for the number of predictor variables in a regression model",
+      "The absolute mean error adjusted for sample size and outlier presence in regression datasets",
+      "The cross-validation score modified to account for severe class imbalance in classification tasks",
+      "The regularization penalty adjusted to prevent multicollinearity in high-dimensional feature spaces"
+    ],
+    "solution": "Step 1: Adjusted R-squared penalizes the addition of non-significant predictor variables.\nStep 2: Only increases if a new feature improves the model more than expected by chance.\nCorrect Answer: (a)"
   },
   {
     "id": 45,
-    "question": "What is Imputation?",
-    "options": ["The process of replacing missing data values with substituted estimated values", "Removing incomplete rows entirely", "Transforming continuous data into ranks", "Calculating regression coefficients"],
-    "solution": "Step 1: Imputation fills gaps in incomplete datasets.\nStep 2: Ranges from simple mean/median filling to advanced KNN or MICE imputation.\nCorrect Answer: (a)"
+    "question": "What is Multicollinearity?",
+    "options": [
+      "A phenomenon where independent predictor variables in a regression model are highly correlated with each other",
+      "When regression residual errors exhibit non-constant variance across different fitted value ranges",
+      "When time series data points show high correlation with their own lagged past values",
+      "When training and test datasets exhibit divergent probability distributions over time"
+    ],
+    "solution": "Step 1: Multicollinearity destabilizes coefficient estimates in linear regression models.\nStep 2: Measured commonly using the Variance Inflation Factor (VIF).\nCorrect Answer: (a)"
   },
   {
     "id": 46,
-    "question": "What is Multicollinearity?",
-    "options": ["High correlation among predictor variables in a regression model, inflating standard errors", "Heteroscedastic residual variance", "Non-normal error distribution", "First-order autocorrelation"],
-    "solution": "Step 1: Multicollinearity occurs when predictors share linear relationships.\nStep 2: Increases coefficient standard errors and reduces statistical significance test stability.\nCorrect Answer: (a)"
+    "question": "What is Heteroscedasticity?",
+    "options": [
+      "When the residual variance of a regression model is non-constant across levels of independent predictor variables",
+      "When predictor variables in a regression model exhibit high linear correlation with each other",
+      "When time series data points fail to exhibit stationarity across consecutive temporal periods",
+      "When classification datasets suffer from severe class imbalance across target categories"
+    ],
+    "solution": "Step 1: Heteroscedasticity violates standard ordinary least squares regression assumptions.\nStep 2: Leads to unreliable standard error estimates for model coefficients.\nCorrect Answer: (a)"
   },
   {
     "id": 47,
-    "question": "What is the Variance Inflation Factor (VIF)?",
-    "options": ["A measure of the severity of multicollinearity in regression analysis", "A test for residual autocorrelation", "A measure of cluster separation", "A survival analysis hazard ratio"],
-    "solution": "Step 1: VIF quantifies how much regression coefficient variance is inflated by collinearity.\nStep 2: VIF values above 5 or 10 generally indicate problematic multicollinearity.\nCorrect Answer: (a)"
+    "question": "What is Autocorrelation in time series data?",
+    "options": [
+      "The correlation of a time series signal with a delayed copy of itself across sequential time lags",
+      "The correlation between two completely different feature variables measured at the same time",
+      "The correlation between training set features and target labels caused by data leakage",
+      "The correlation of regression residual errors with model intercept terms"
+    ],
+    "solution": "Step 1: Autocorrelation violates the assumption of independent and identically distributed errors.\nStep 2: Common in financial, economic, and sequential temporal datasets.\nCorrect Answer: (a)"
   },
   {
     "id": 48,
-    "question": "What is Cook's Distance?",
-    "options": ["A measure used in regression to identify influential data points that heavily sway parameter estimates", "A test for error normality", "An autocorrelation lag metric", "A cluster silhouette score"],
-    "solution": "Step 1: Cook's distance combines residual size and leverage.\nStep 2: Values greater than 1.0 flag influential outliers.\nCorrect Answer: (a)"
+    "question": "What is Stationarity in time series analysis?",
+    "options": [
+      "A property where a time series has statistical properties such as mean and variance that remain constant over time",
+      "A condition where time series values remain completely unchanged across successive temporal lags",
+      "When a time series exhibits strong seasonal trends and cyclical repeating patterns",
+      "When regression residual errors show constant homoscedastic variance across all periods"
+    ],
+    "solution": "Step 1: Stationary time series are much easier to model and forecast accurately.\nStep 2: Tested formally using unit root tests like the Augmented Dickey-Fuller test.\nCorrect Answer: (a)"
   },
   {
     "id": 49,
-    "question": "What is Time Series Stationarity?",
-    "options": ["The property where statistical properties like mean, variance, and autocorrelation remain constant over time", "A trend growing exponentially over time", "Seasonal fluctuation patterns", "High autocorrelation"],
-    "solution": "Step 1: Stationary series have time-invariant statistical moments.\nStep 2: Required for many standard time series forecasting models.\nCorrect Answer: (a)"
+    "question": "What is an ARIMA model?",
+    "options": [
+      "A popular time series forecasting model combining Autoregressive, Integrated, and Moving Average components",
+      "An artificial neural network architecture designed specifically for processing sequential text data",
+      "A supervised classification algorithm that constructs optimal hyperplanes for binary separation",
+      "An unsupervised clustering method that partitions data observations into hierarchical trees"
+    ],
+    "solution": "Step 1: ARIMA models capture temporal structures by differencing and combining AR and MA terms.\nStep 2: Widely used for univariate time series forecasting applications.\nCorrect Answer: (a)"
   },
   {
     "id": 50,
-    "question": "Which test is standard for testing time series stationarity (unit roots)?",
-    "options": ["Augmented Dickey-Fuller (ADF) test", "Chi-Square test", "Shapiro-Wilk test", "Mann-Whitney U test"],
-    "solution": "Step 1: ADF test evaluates the null hypothesis that a unit root is present (non-stationary).\nStep 2: Rejecting null indicates stationarity.\nCorrect Answer: (a)"
+    "question": "What is Principal Component Regression (PCR)?",
+    "options": [
+      "A regression analysis technique that uses principal component analysis scores as predictors instead of raw features",
+      "A classification algorithm that combines support vector machines with principal component projections",
+      "An unsupervised clustering method that applies principal components to identify cluster centroids",
+      "A time series forecasting model that extracts principal components from lagged autocorrelation matrices"
+    ],
+    "solution": "Step 1: PCR addresses multicollinearity by transforming correlated features into orthogonal components.\nStep 2: Regression is then performed on a selected subset of top principal components.\nCorrect Answer: (a)"
   },
   {
     "id": 51,
-    "question": "What is Autoregressive (AR) model in time series?",
-    "options": ["A model where the current value is expressed as a linear function of its own past lagged values", "A model based on moving average errors", "A cross-sectional regression", "A logistic classification model"],
-    "solution": "Step 1: AR(p) models regress current values on $p$ past lags.\nStep 2: Captures inertial momentum in time series data.\nCorrect Answer: (a)"
+    "question": "What is Partial Least Squares (PLS) regression?",
+    "options": [
+      "A regression method that finds a linear subspace identifying multidimensional directions explaining maximum variance while considering target variables",
+      "An unsupervised dimensionality reduction technique that projects features using only independent variable covariance matrices",
+      "A classification algorithm that maximizes the margin between different classes using kernelized hyperplanes",
+      "An iterative optimization strategy that updates neural network weights using stochastic gradient descent"
+    ],
+    "solution": "Step 1: Unlike PCA, PLS considers both predictor and response variables during dimensionality reduction.\nStep 2: Highly effective when predictor variables outnumber observations significantly.\nCorrect Answer: (a)"
   },
   {
     "id": 52,
-    "question": "What is Moving Average (MA) model in time series?",
-    "options": ["A model where the current value is expressed as a linear function of past white noise error terms", "A model using past lagged dependent variables", "A spatial lag regression", "A clustering algorithm"],
-    "solution": "Step 1: MA(q) models represent current values via past shock errors.\nStep 2: Captures short-term shock persistence.\nCorrect Answer: (a)"
+    "question": "What is Elastic Net regularization?",
+    "options": [
+      "A regularization technique that linearly combines both L1 (Lasso) and L2 (Ridge) penalty terms",
+      "A data scaling method that normalizes input features to elastic ranges between zero and one",
+      "An ensemble boosting algorithm that dynamically adjusts tree depths based on residual errors",
+      "A neural network architecture featuring flexible activation functions and dynamic skip connections"
+    ],
+    "solution": "Step 1: Elastic Net overcomes limitations of Lasso when dealing with correlated groups of features.\nStep 2: Controlled by mixing parameters balancing L1 and L2 penalties.\nCorrect Answer: (a)"
   },
   {
     "id": 53,
-    "question": "What does ARIMA stand for in time series forecasting?",
-    "options": ["Autoregressive Integrated Moving Average", "Average Regression Intermediate Moving Algorithm", "Autoregressive Internal Matrix Analysis", "Applied Residual Integrated Model Association"],
-    "solution": "Step 1: ARIMA combines autoregression (AR), differencing integration (I), and moving average (MA).\nStep 2: Standard framework for non-stationary time series modeling.\nCorrect Answer: (a)"
+    "question": "What is Naive Bayes classification?",
+    "options": [
+      "A probabilistic classifier based on Bayes' theorem with an assumption of independence between feature variables",
+      "A non-parametric classification algorithm based on the majority vote of K nearest training neighbors",
+      "A linear regression model that estimates categorical class probabilities using sigmoid activation functions",
+      "An unsupervised clustering algorithm that groups data points using spherical centroid distance metrics"
+    ],
+    "solution": "Step 1: Naive Bayes classifiers assume features are conditionally independent given the class.\nStep 2: Despite this simplifying assumption, it performs exceptionally well in text classification.\nCorrect Answer: (a)"
   },
   {
     "id": 54,
-    "question": "What is Exponential Smoothing (e.g., Holt-Winters)?",
-    "options": ["A time series forecasting method that applies exponentially decreasing weights to past observations", "A regression regularization penalty", "A non-parametric rank test", "A spatial weighting matrix"],
-    "solution": "Step 1: Exponential smoothing weights recent observations heavier than distant ones.\nStep 2: Handles level, trend, and seasonal components effectively.\nCorrect Answer: (a)"
+    "question": "What is Linear Discriminant Analysis (LDA)?",
+    "options": [
+      "A supervised dimensionality reduction and classification method that finds linear combinations of features maximizing class separation",
+      "An unsupervised dimensionality reduction technique that projects features onto orthogonal principal component axes",
+      "A non-parametric classification algorithm that identifies optimal hyperplanes maximizing margins between classes",
+      "A probabilistic regression model that estimates binary outcomes using logistic sigmoid activation functions"
+    ],
+    "solution": "Step 1: LDA maximizes between-class variance relative to within-class variance.\nStep 2: Can be used for both classification and supervised dimensionality reduction.\nCorrect Answer: (a)"
   },
   {
     "id": 55,
-    "question": "What is Survival Analysis used for?",
-    "options": ["Analyzing time-duration data until a specific event of interest (e.g., failure, death, churn) occurs", "Classifying binary categories", "Clustering spatial points", "Imputing missing data"],
-    "solution": "Step 1: Survival analysis accounts for censored data where events are unobserved for some subjects.\nStep 2: Models hazard and survival probabilities over time.\nCorrect Answer: (a)"
+    "question": "What is Quadratic Discriminant Analysis (QDA)?",
+    "options": [
+      "A supervised classification variant of LDA that allows for non-linear quadratic decision boundaries between classes",
+      "An unsupervised clustering algorithm that partitions feature spaces into quadratic Voronoi cell regions",
+      "A regression technique that fits second-order polynomial equations to continuous target variables",
+      "A deep learning activation function that outputs quadratic curves instead of linear threshold steps"
+    ],
+    "solution": "Step 1: Unlike LDA, QDA does not assume equal covariance matrices across all classes.\nStep 2: Results in quadratic decision boundaries rather than linear hyperplanes.\nCorrect Answer: (a)"
   },
   {
     "id": 56,
-    "question": "What is the Kaplan-Meier estimator?",
-    "options": ["A non-parametric statistic used to estimate the survival function from lifetime data", "A parametric linear regression model", "An unsupervised clustering algorithm", "A time series stationarity test"],
-    "solution": "Step 1: Kaplan-Meier curves compute non-parametric survival probabilities over time.\nStep 2: Accounts for right-censored observations.\nCorrect Answer: (a)"
+    "question": "What is DBSCAN clustering?",
+    "options": [
+      "A density-based unsupervised clustering algorithm that identifies clusters of arbitrary shapes and flags noise points",
+      "An iterative centroid-based clustering method that partitions data into K spherical Voronoi regions",
+      "A hierarchical clustering approach that builds agglomerative tree structures based on linkage distances",
+      "A supervised classification algorithm that constructs maximum-margin hyperplanes between classes"
+    ],
+    "solution": "Step 1: DBSCAN groups points based on neighborhood density thresholds (Eps and MinPts).\nStep 2: Successfully identifies outliers as noise without requiring preset cluster counts.\nCorrect Answer: (a)"
   },
   {
     "id": 57,
-    "question": "What is the Cox Proportional Hazards Model?",
-    "options": ["A semi-parametric regression model that assesses the effect of covariates on survival hazard rates over time without requiring baseline hazard specification", "A fully parametric linear regression", "A logistic classification model", "A vector autoregression model"],
-    "solution": "Step 1: Cox model assumes hazard ratios are constant over time across groups.\nStep 2: Estimates covariate effects without baseline hazard function assumptions.\nCorrect Answer: (a)"
+    "question": "What is Hierarchical Clustering?",
+    "options": [
+      "An unsupervised clustering technique that builds a nested hierarchy of clusters using agglomerative or divisive approaches",
+      "An iterative centroid-based algorithm that partitions data observations into K distinct clusters",
+      "A density-based clustering method that identifies arbitrary shapes and filters out noise points",
+      "A tree-based supervised learning model that splits features using Gini impurity criteria"
+    ],
+    "solution": "Step 1: Hierarchical clustering produces a tree-like diagram known as a dendrogram.\nStep 2: Agglomerative methods start bottom-up, while divisive methods start top-down.\nCorrect Answer: (a)"
   },
   {
     "id": 58,
-    "question": "What is Censoring in survival analysis?",
-    "options": ["When the exact survival time of an observation is unknown because the study ended or the subject dropped out before the event occurred", "Removing outlier data points", "Imputing missing values", "Truncating regression residuals"],
-    "solution": "Step 1: Censoring occurs when subjects leave studies event-free or studies terminate.\nStep 2: Essential feature handled by survival analysis methods.\nCorrect Answer: (a)"
+    "question": "What is Silhouette Score in clustering evaluation?",
+    "options": [
+      "A metric used to calculate how similar an object is to its own cluster compared to other clusters",
+      "The sum of squared Euclidean distances between data points and their assigned cluster centroids",
+      "The ratio of between-cluster variance to total dataset variance in K-means clustering",
+      "The proportion of noise data points identified by density-based clustering algorithms"
+    ],
+    "solution": "Step 1: Silhouette coefficients range from -1 to +1.\nStep 2: Higher values indicate that clusters are well separated and dense.\nCorrect Answer: (a)"
   },
   {
     "id": 59,
-    "question": "What is Bootstrapping?",
-    "options": ["A resampling technique that estimates the sampling distribution of a statistic by repeatedly sampling with replacement from the original dataset", "Splitting data into training and test folds", "Removing duplicate records", "Calculating cross-validation errors"],
-    "solution": "Step 1: Bootstrapping draws multiple samples with replacement.\nStep 2: Empirically estimates standard errors and confidence intervals non-parametrically.\nCorrect Answer: (a)"
+    "question": "What is the Elbow Method in clustering?",
+    "options": [
+      "A heuristic used to determine the optimal number of clusters by plotting variance explained against cluster counts",
+      "A cross-validation technique used to select the optimal learning rate in gradient descent optimization",
+      "A feature selection strategy that identifies multicollinearity using Variance Inflation Factors",
+      "A regularization method that prunes weak decision tree branches to prevent model overfitting"
+    ],
+    "solution": "Step 1: Plots within-cluster sum of squares against various values of K.\nStep 2: The optimal K is often located at the 'elbow' inflection point of the curve.\nCorrect Answer: (a)"
   },
   {
     "id": 60,
-    "question": "What is Permutation Testing?",
-    "options": ["A non-parametric test that assesses statistical significance by randomly shuffling group labels and recalculating test statistics", "Bootstrapping with replacement", "Testing regression residuals for normality", "Checking time series cointegration"],
-    "solution": "Step 1: Permutation tests build empirical null distributions via label shuffling.\nStep 2: Requires no distributional assumptions.\nCorrect Answer: (a)"
+    "question": "What is t-SNE (t-Distributed Stochastic Neighbor Embedding)?",
+    "options": [
+      "A non-linear dimensionality reduction technique well-suited for embedding high-dimensional data into low-dimensional maps",
+      "A linear unsupervised dimensionality reduction method that projects data onto orthogonal principal components",
+      "A supervised classification algorithm that constructs optimal hyperplanes maximizing class separation margins",
+      "An iterative clustering algorithm that partitions feature observations into K distinct Voronoi cells"
+    ],
+    "solution": "Step 1: t-SNE preserves local similarities, making it excellent for visualizing complex clusters.\nStep 2: Primarily used for exploratory data visualization rather than downstream feature modeling.\nCorrect Answer: (a)"
   },
   {
     "id": 61,
-    "question": "What is the Chi-Square Test of Independence?",
-    "options": ["A test evaluating whether two categorical variables are associated or independent", "A test comparing continuous group means", "A test for error variance homogeneity", "A time series unit root test"],
-    "solution": "Step 1: Chi-Square test compares observed contingency table counts against expected counts.\nStep 2: Evaluates categorical association.\nCorrect Answer: (a)"
+    "question": "What is UMAP (Uniform Manifold Approximation and Projection)?",
+    "options": [
+      "A non-linear dimensionality reduction technique based on Riemannian geometry and algebraic topology principles",
+      "A linear unsupervised feature transformation method that maximizes covariance variance eigenvectors",
+      "A supervised classification algorithm that optimizes decision boundaries using support vector margins",
+      "An iterative clustering algorithm that updates cluster centroids based on Euclidean distance metrics"
+    ],
+    "solution": "Step 1: UMAP preserves both local and global structure while scaling efficiently to large datasets.\nStep 2: Frequently used as a faster, modern alternative to t-SNE for visualization.\nCorrect Answer: (a)"
   },
   {
     "id": 62,
-    "question": "What is Fisher's Exact Test?",
-    "options": ["An exact test for contingency table association used when expected cell frequencies are small", "A large-sample continuous regression test", "A non-parametric paired rank test", "An ANOVA extension"],
-    "solution": "Step 1: Fisher's exact test calculates hypergeometric probabilities directly.\nStep 2: Preferred over Chi-Square when cell counts are sparse (e.g., < 5).\nCorrect Answer: (a)"
+    "question": "What is Bag-of-Words (BoW) in natural language processing?",
+    "options": [
+      "A representation of text that describes the occurrence of words within a document, ignoring grammar and word order",
+      "A deep learning sequence model that captures bidirectional token contexts using self-attention mechanisms",
+      "A vocabulary normalization technique that reduces words to their root base dictionary lemma forms",
+      "An information extraction task that identifies and classifies named entities in unstructured text"
+    ],
+    "solution": "Step 1: Bag-of-words converts text corpora into fixed-length numerical token frequency vectors.\nStep 2: Disregards syntactic structure and word sequence arrangements.\nCorrect Answer: (a)"
   },
   {
     "id": 63,
-    "question": "What is the Mann-Whitney U test (Wilcoxon Rank-Sum test)?",
-    "options": ["A non-parametric test comparing two independent groups on ordinal or continuous data", "A paired samples test", "A test for variance equality", "A contingency table test"],
-    "solution": "Step 1: Mann-Whitney U evaluates rank sums between two independent samples.\nStep 2: Non-parametric alternative to independent samples t-test.\nCorrect Answer: (a)"
+    "question": "What is N-gram in text processing?",
+    "options": [
+      "A contiguous sequence of n items from a given sample of text or speech tokens",
+      "A vocabulary normalization process that chops word suffixes to find root base stems",
+      "A vector embedding technique that maps words into continuous semantic vector spaces",
+      "An attention masking mechanism used in transformer models to prevent looking ahead"
+    ],
+    "solution": "Step 1: N-grams capture local word context (e.g., bigrams, trigrams).\nStep 2: Extends bag-of-words models by incorporating short-range word order dependencies.\nCorrect Answer: (a)"
   },
   {
     "id": 64,
-    "question": "What is the Wilcoxon Signed-Rank test?",
-    "options": ["A non-parametric test comparing two paired or matched continuous samples", "An independent samples test", "A goodness-of-fit test", "A categorical proportion test"],
-    "solution": "Step 1: Wilcoxon Signed-Rank evaluates paired differences based on ranks.\nStep 2: Non-parametric alternative to paired samples t-test.\nCorrect Answer: (a)"
+    "question": "What is Cosine Distance?",
+    "options": [
+      "A metric calculated as one minus the cosine similarity between two non-zero vectors",
+      "The absolute Euclidean distance measured between the endpoints of two vectors",
+      "The sum of absolute differences calculated across corresponding vector elements",
+      "The dot product of two normalized vectors divided by their respective scalar magnitudes"
+    ],
+    "solution": "Step 1: Cosine distance measures angular separation rather than vector magnitude differences.\nStep 2: Formula: $1 - \\text{Cosine Similarity}$.\nCorrect Answer: (a)"
   },
   {
     "id": 65,
-    "question": "What is the Kruskal-Wallis test?",
-    "options": ["A non-parametric test comparing three or more independent groups (non-parametric equivalent of One-Way ANOVA)", "A paired repeated measures test", "A test for bivariate correlation", "A logistic regression test"],
-    "solution": "Step 1: Kruskal-Wallis extends Mann-Whitney U to 3+ groups.\nStep 2: Evaluates rank sums across independent categories.\nCorrect Answer: (a)"
+    "question": "What is Jaccard Similarity?",
+    "options": [
+      "A statistic used for comparing the diversity and similarity of sample finite sets",
+      "A distance metric measuring the cosine of the angle between two sparse vectors",
+      "A text evaluation score measuring n-gram overlap against human reference translations",
+      "A probabilistic measure of association between categorical variables in contingency tables"
+    ],
+    "solution": "Step 1: Jaccard similarity is calculated as the size of the intersection divided by the union of sets.\nStep 2: Commonly used in recommendation systems and duplicate text detection.\nCorrect Answer: (a)"
   },
   {
     "id": 66,
-    "question": "What is the Friedman test?",
-    "options": ["A non-parametric test for comparing three or more matched or repeated-measures conditions", "An independent samples test", "A regression linearity test", "A survival hazard model"],
-    "solution": "Step 1: Friedman test is the non-parametric alternative to repeated-measures ANOVA.\nStep 2: Ranks observations within matched blocks.\nCorrect Answer: (a)"
+    "question": "What is Hamming Distance?",
+    "options": [
+      "A metric for measuring the number of positions at which corresponding symbols are different in two strings of equal length",
+      "The straight-line Euclidean distance between two points in a multi-dimensional Cartesian space",
+      "The angular cosine distance separating two normalized document frequency vectors",
+      "The absolute sum of differences between corresponding elements of two numeric arrays"
+    ],
+    "solution": "Step 1: Hamming distance counts symbol mismatches between equal-length sequences.\nStep 2: Widely used in error detection, coding theory, and categorical comparisons.\nCorrect Answer: (a)"
   },
   {
     "id": 67,
-    "question": "What is One-Way ANOVA (Analysis of Variance)?",
-    "options": ["A parametric test comparing means across three or more independent groups", "A test comparing two paired means", "A categorical independence test", "A non-parametric rank test"],
-    "solution": "Step 1: ANOVA compares between-group variance to within-group variance.\nStep 2: Uses F-statistic to test mean equality.\nCorrect Answer: (a)"
+    "question": "What is Manhattan Distance?",
+    "options": [
+      "The distance between two points calculated as the sum of the absolute differences of their Cartesian coordinates",
+      "The shortest straight-line Euclidean distance connecting two points in a multi-dimensional space",
+      "The angular cosine distance measured between two frequency vectors in text corpora",
+      "The number of character substitutions required to transform one string into another"
+    ],
+    "solution": "Step 1: Manhattan distance represents travel distance on a grid-like street layout.\nStep 2: Formula: $\\sum |x_i - y_i|$.\nCorrect Answer: (a)"
   },
   {
     "id": 68,
-    "question": "What is Post-Hoc Testing (e.g., Tukey's HSD)?",
-    "options": ["Follow-up statistical tests conducted after a significant ANOVA to determine exactly which specific group pairs differ", "Initial exploratory data analysis", "Cross-validation fold splitting", "Hyperparameter grid search"],
-    "solution": "Step 1: ANOVA indicates overall group differences exist.\nStep 2: Post-hoc tests control family-wise error rates while comparing specific group pairs.\nCorrect Answer: (a)"
+    "question": "What is Minkowski Distance?",
+    "options": [
+      "A metric in normed vector spaces that generalizes Euclidean and Manhattan distance formulas",
+      "A specialized distance metric used exclusively for categorical string comparisons",
+      "An angular similarity metric calculated between normalized word embedding vectors",
+      "A probabilistic distance measure derived from multi-class confusion matrices"
+    ],
+    "solution": "Step 1: Minkowski distance is parameterized by order $p$.\nStep 2: When $p=1$ it is Manhattan distance, and when $p=2$ it is Euclidean distance.\nCorrect Answer: (a)"
   },
   {
     "id": 69,
-    "question": "What is Two-Way ANOVA?",
-    "options": ["An ANOVA model evaluating the effect of two categorical independent variables (factors) and their interaction on a continuous dependent variable", "An ANOVA with one factor and covariate", "A paired t-test extension", "A non-parametric rank test"],
-    "solution": "Step 1: Two-way ANOVA assesses main effects and interaction effects.\nStep 2: Analyzes factorial experimental designs.\nCorrect Answer: (a)"
+    "question": "What is Stratified K-Fold Cross-Validation?",
+    "options": [
+      "A cross-validation variation that ensures each fold retains approximately the same percentage of target class samples",
+      "A resampling technique that randomly shuffles and splits time series data without respecting temporal order",
+      "An evaluation method that leaves out one single training observation per iteration",
+      "A bootstrapping approach that creates multiple training bags with replacement sampling"
+    ],
+    "solution": "Step 1: Stratification preserves class proportions across all cross-validation folds.\nStep 2: Crucial for preventing biased evaluations on imbalanced classification datasets.\nCorrect Answer: (a)"
   },
   {
     "id": 70,
-    "question": "What is ANCOVA (Analysis of Covariance)?",
-    "options": ["A linear model that combines ANOVA and regression to compare group means while controlling for continuous confounding covariates", "An analysis of categorical frequencies", "A time series cointegration test", "A spatial lag regression model"],
-    "solution": "Step 1: ANCOVA adjusts group means for baseline continuous covariate differences.\nStep 2: Increases statistical test power.\nCorrect Answer: (a)"
+    "question": "What is Leave-One-Out Cross-Validation (LOOCV)?",
+    "options": [
+      "A cross-validation method where each observation is used once as a validation set while the remaining form training data",
+      "A K-fold partitioning strategy that divides training data into ten equal subsets",
+      "A stratified sampling technique designed specifically to handle imbalanced categorical classes",
+      "A bootstrapping method that generates multiple training sets with replacement sampling"
+    ],
+    "solution": "Step 1: LOOCV sets K equal to the total number of samples $N$ in the dataset.\nStep 2: Computationally intensive but virtually unbiased for model evaluation.\nCorrect Answer: (a)"
   },
   {
     "id": 71,
-    "question": "What is MANOVA (Multivariate Analysis of Variance)?",
-    "options": ["An extension of ANOVA with multiple continuous dependent variables analyzed simultaneously", "A regression with multiple categorical predictors", "A cluster analysis method", "A time series VAR model"],
-    "solution": "Step 1: MANOVA evaluates group differences across multiple correlated dependent outcomes.\nStep 2: Protects against inflated Type I error from running separate ANOVAs.\nCorrect Answer: (a)"
+    "question": "What is Bootstrapping in statistics?",
+    "options": [
+      "A resampling technique that involves drawing random samples with replacement from an existing dataset",
+      "A cross-validation partitioning method that ensures balanced class proportions across folds",
+      "A model evaluation metric that calculates confidence intervals using parametric normal assumptions",
+      "A data imputation strategy that replaces missing values with bootstrapped regression predictions"
+    ],
+    "solution": "Step 1: Bootstrapping allows estimation of sample statistic distributions empirically.\nStep 2: Forms the foundational mechanism behind bagging ensemble algorithms.\nCorrect Answer: (a)"
   },
   {
     "id": 72,
-    "question": "What is Factor Analysis?",
-    "options": ["A statistical method used to describe variability among observed correlated variables in terms of a potentially lower number of unobserved latent factors", "A classification algorithm", "A time series ARIMA model", "A spatial interpolation technique"],
-    "solution": "Step 1: Factor analysis identifies underlying latent constructs.\nStep 2: Explains observed indicator correlations.\nCorrect Answer: (a)"
+    "question": "What is the Central Limit Theorem?",
+    "options": [
+      "A statistical theory stating that the distribution of sample means approximates a normal distribution as sample size grows large",
+      "A principle stating that regression residuals must exhibit homoscedastic variance across fitted values",
+      "A rule determining that classification decision boundaries become linear in high-dimensional spaces",
+      "A theorem stating that independent features will always have zero covariance in large samples"
+    ],
+    "solution": "Step 1: The theorem applies regardless of the underlying population distribution shape.\nStep 2: Underpins parametric hypothesis testing and confidence interval calculations.\nCorrect Answer: (a)"
   },
   {
     "id": 73,
-    "question": "What is Confirmatory Factor Analysis (CFA)?",
-    "options": ["A structural equation modeling technique used to test a pre-specified theoretical measurement model", "An exploratory data reduction method", "A non-parametric cluster technique", "A time series unit root test"],
-    "solution": "Step 1: CFA tests strict theory-driven hypotheses about observed-to-latent relations.\nStep 2: Unlike EFA, requires prior structural specification.\nCorrect Answer: (a)"
+    "question": "What is a P-value in hypothesis testing?",
+    "options": [
+      "The probability of obtaining test results at least as extreme as the observed results, assuming the null hypothesis is true",
+      "The predetermined significance threshold chosen to reject or fail to reject null hypotheses",
+      "The statistical power of a test representing the probability of avoiding type II errors",
+      "The confidence interval percentage used to estimate population parameters from sample data"
+    ],
+    "solution": "Step 1: Low p-values provide evidence against the null hypothesis.\nStep 2: Commonly compared against a significance level threshold $\\alpha$ (e.g., 0.05).\nCorrect Answer: (a)"
   },
   {
     "id": 74,
-    "question": "What is Structural Equation Modeling (SEM)?",
-    "options": ["A comprehensive multivariate statistical framework combining factor analysis and multiple regression to test complex causal relationships among latent and observed variables", "A simple linear regression", "A K-means clustering algorithm", "A decision tree classifier"],
-    "solution": "Step 1: SEM evaluates measurement and structural models simultaneously.\nStep 2: Tests complex theoretical path networks.\nCorrect Answer: (a)"
+    "question": "What is a Type I Error?",
+    "options": [
+      "Rejecting a null hypothesis when it is actually true (a false positive)",
+      "Failing to reject a null hypothesis when it is actually false (a false negative)",
+      "Selecting an incorrect hyperparameter combination during grid search optimization",
+      "Overfitting a machine learning model to noise in training datasets"
+    ],
+    "solution": "Step 1: Type I errors represent false positive statistical conclusions.\nStep 2: The probability of a Type I error is controlled by the significance level $\\alpha$.\nCorrect Answer: (a)"
   },
   {
     "id": 75,
-    "question": "What is Multilevel Modeling (Hierarchical Linear Modeling)?",
-    "options": ["Regression analysis for nested data structures (e.g., students within schools) accounting for group-level error correlations", "Running separate regressions for each group", "A time series VAR model", "A spatial autocorrelation model"],
-    "solution": "Step 1: Nested data violates independence assumptions.\nStep 2: Multilevel models partition variance across hierarchical levels using random intercepts and slopes.\nCorrect Answer: (a)"
+    "question": "What is a Type II Error?",
+    "options": [
+      "Failing to reject a null hypothesis when it is actually false (a false negative)",
+      "Rejecting a null hypothesis when it is actually true (a false positive)",
+      "Underfitting a regression model due to insufficient structural feature capacity",
+      "Failing to detect an anomaly in unsupervised outlier detection algorithms"
+    ],
+    "solution": "Step 1: Type II errors represent false negative statistical conclusions.\nStep 2: Related to statistical power ($1 - \\beta$).\nCorrect Answer: (a)"
   },
   {
     "id": 76,
-    "question": "What is the Intraclass Correlation Coefficient (ICC) in multilevel modeling?",
-    "options": ["The proportion of total outcome variance that lies between higher-level groups", "The correlation between two independent predictors", "The test statistic for time series stationarity", "The ratio of ROC curve precision"],
-    "solution": "Step 1: ICC measures the degree of clustering within groups.\nStep 2: High ICC values justify the necessity of multilevel modeling.\nCorrect Answer: (a)"
+    "question": "What is Statistical Power?",
+    "options": [
+      "The probability that a test correctly rejects a false null hypothesis (1 minus the Type II error rate)",
+      "The probability of incorrectly rejecting a true null hypothesis during significance testing",
+      "The proportion of variance explained by independent variables in linear regression models",
+      "The measure of model accuracy evaluated across balanced cross-validation folds"
+    ],
+    "solution": "Step 1: Higher statistical power increases the likelihood of detecting true effects.\nStep 2: Dependent on sample size, effect size, and significance threshold $\\alpha$.\nCorrect Answer: (a)"
   },
   {
     "id": 77,
-    "question": "What is Spatial Autocorrelation?",
-    "options": ["The property where observations closer together in geographic space exhibit correlated values", "Time series lag correlation", "Multicollinearity among predictors", "Variance inflation"],
-    "solution": "Step 1: Tobler's first law states near things are more related.\nStep 2: Spatial autocorrelation quantifies this geographic clustering tendency.\nCorrect Answer: (a)"
+    "question": "What is a Confidence Interval?",
+    "options": [
+      "A range of values, derived from sample statistics, that is likely to contain the value of an unknown population parameter",
+      "The specific range of threshold values where a classifier achieves perfect precision and recall",
+      "The acceptable margin of error allowed during hyperparameter grid search optimization",
+      "The threshold boundary defining outlier rejection points in density-based clustering"
+    ],
+    "solution": "Step 1: Confidence intervals quantify estimation uncertainty.\nStep 2: A 95% confidence interval implies that 95% of calculated intervals will contain the true parameter.\nCorrect Answer: (a)"
   },
   {
     "id": 78,
-    "question": "Which statistic measures global spatial autocorrelation?",
-    "options": ["Moran's I", "Durbin-Watson statistic", "Variance Inflation Factor", "Wilks' Lambda"],
-    "solution": "Step 1: Moran's I evaluates spatial similarity across neighboring locations.\nStep 2: Ranges from -1 (dispersion) to +1 (clustering).\nCorrect Answer: (a)"
+    "question": "What is Student's t-test?",
+    "options": [
+      "A statistical hypothesis test used to determine if there is a significant difference between the means of two groups",
+      "A non-parametric test used to evaluate goodness-of-fit across categorical frequency distributions",
+      "A time series stationarity test designed to detect unit roots in sequential data",
+      "A regression diagnostic test used to measure multicollinearity among predictor variables"
+    ],
+    "solution": "Step 1: T-tests assume normally distributed data and compare group means.\nStep 2: Can be structured as independent samples or paired samples tests.\nCorrect Answer: (a)"
   },
   {
     "id": 79,
-    "question": "What is Spatial Lag Regression?",
-    "options": ["A spatial model incorporating a spatially lagged dependent variable ($WY$) to capture spatial spillover effects", "A model with spatial error correlation", "A time series ARIMA model", "A principal component analysis"],
-    "solution": "Step 1: Spatial lag models account for substantive spatial dependence.\nStep 2: Includes neighbor dependent variable values as a predictor.\nCorrect Answer: (a)"
+    "question": "What is ANOVA (Analysis of Variance)?",
+    "options": [
+      "A statistical test used to determine whether there are any statistically significant differences between the means of three or more independent groups",
+      "A regression diagnostic test used to detect heteroscedasticity across residual error variances",
+      "An unsupervised clustering algorithm that partitions data observations into K distinct groups",
+      "A feature selection metric that calculates mutual information scores between variables"
+    ],
+    "solution": "Step 1: ANOVA compares variance between group means relative to variance within groups.\nStep 2: Uses F-statistics to test overall group equality hypotheses.\nCorrect Answer: (a)"
   },
   {
     "id": 80,
-    "question": "What is Spatial Error Regression?",
-    "options": ["A spatial model addressing spatial autocorrelation present strictly in the error disturbance term", "A spatial lag model", "A panel data fixed effects model", "A logistic classification model"],
-    "solution": "Step 1: Spatial error models specify spatial autocorrelation in disturbances.\nStep 2: Addresses omitted spatially correlated variables.\nCorrect Answer: (a)"
+    "question": "What is Chi-Square Test of Independence?",
+    "options": [
+      "A statistical test applied to categorical data to evaluate whether two variables are likely to be independent or associated",
+      "A parametric test comparing continuous group means across multiple experimental conditions",
+      "A time series unit root test used to verify stationarity properties in sequential data",
+      "A regression diagnostic check used to measure multicollinearity using Variance Inflation Factors"
+    ],
+    "solution": "Step 1: Chi-square compares observed categorical frequencies against expected frequencies.\nStep 2: Evaluates contingency table independence assumptions.\nCorrect Answer: (a)"
   },
   {
     "id": 81,
-    "question": "What is Association Rule Mining (Apriori algorithm)?",
-    "options": ["Discovering frequent itemsets and association rules in transactional databases (market basket analysis)", "Clustering continuous spatial data", "Predicting survival hazard rates", "Testing time series stationarity"],
-    "solution": "Step 1: Apriori identifies item associations using support, confidence, and lift.\nStep 2: Widely used in retail recommendation systems.\nCorrect Answer: (a)"
+    "question": "What is Mann-Whitney U Test?",
+    "options": [
+      "A non-parametric statistical test used to determine whether two independent samples were selected from populations with equal distributions",
+      "A parametric hypothesis test used to compare the means of two normally distributed groups",
+      "A time series forecasting model combining autoregressive and moving average terms",
+      "An unsupervised clustering algorithm that identifies arbitrary data densities and noise"
+    ],
+    "solution": "Step 1: Mann-Whitney U is the non-parametric alternative to the independent samples t-test.\nStep 2: Does not assume normal distribution of data values.\nCorrect Answer: (a)"
   },
   {
     "id": 82,
-    "question": "In Association Rule Mining, what does Support measure?",
-    "options": ["The proportion of transactions containing a given itemset", "The conditional probability of a consequent given an antecedent", "The ratio of confidence to expected confidence", "The regression error sum of squares"],
-    "solution": "Step 1: Support measures itemset frequency in transaction databases.\nStep 2: Formula: $P(A \\cup B)$.\nCorrect Answer: (a)"
+    "question": "What is the Wilcoxon Signed-Rank Test?",
+    "options": [
+      "A non-parametric statistical hypothesis test used to compare two related paired samples",
+      "A parametric test used to compare independent means when data is normally distributed",
+      "A correlation coefficient measuring monotonic relationships between ranked variables",
+      "A goodness-of-fit test evaluating categorical frequency distributions against expected counts"
+    ],
+    "solution": "Step 1: Wilcoxon signed-rank is the non-parametric alternative to the paired t-test.\nStep 2: Evaluates differences between paired observations based on ranked magnitudes.\nCorrect Answer: (a)"
   },
   {
     "id": 83,
-    "question": "In Association Rule Mining, what does Confidence measure?",
-    "options": ["The conditional probability of finding item B given that item A is present ($P(B \\mid A)$)", "The overall item support", "The lift ratio", "The classification accuracy"],
-    "solution": "Step 1: Confidence measures rule reliability.\nStep 2: Formula: $P(A \\cap B) / P(A)$.\nCorrect Answer: (a)"
+    "question": "What is Pearson Correlation Coefficient?",
+    "options": [
+      "A measure of the linear correlation between two sets of data, yielding values between -1 and +1",
+      "A non-parametric measure of monotonic association based on ranked variable values",
+      "A distance metric measuring angular separation between normalized vector embeddings",
+      "A statistical test evaluating independence across categorical contingency table counts"
+    ],
+    "solution": "Step 1: Pearson correlation measures strength and direction of linear relationships.\nStep 2: Sensitive to outliers and assumes continuous normally distributed variables.\nCorrect Answer: (a)"
   },
   {
     "id": 84,
-    "question": "In Association Rule Mining, what does Lift measure?",
-    "options": ["The ratio of observed support of antecedent and consequent together to expected support under independence", "The absolute error sum", "The cluster silhouette score", "The ROC curve area"],
-    "solution": "Step 1: Lift compares observed rule co-occurrence against expected random chance.\nStep 2: Lift > 1 indicates positive association.\nCorrect Answer: (a)"
+    "question": "What is Spearman's Rank Correlation?",
+    "options": [
+      "A non-parametric measure of rank correlation assessing how well the relationship between two variables can be described using a monotonic function",
+      "A parametric measure of linear correlation sensitive to extreme outlier values and non-normal distributions",
+      "A distance metric measuring absolute differences between corresponding vector elements",
+      "A statistical test comparing continuous group means across multiple experimental categories"
+    ],
+    "solution": "Step 1: Spearman correlation evaluates monotonic relationships using variable ranks.\nStep 2: Robust against outliers and non-linear monotonic transformations.\nCorrect Answer: (a)"
   },
   {
     "id": 85,
-    "question": "What is Supervised Learning?",
-    "options": ["Training machine learning models using labeled input-output pairs to learn a mapping function", "Clustering unlabeled data", "Finding association rules", "Performing dimensionality reduction without targets"],
-    "solution": "Step 1: Supervised learning utilizes known target labels.\nStep 2: Encompasses regression and classification tasks.\nCorrect Answer: (a)"
+    "question": "What is Kendall Tau Rank Correlation?",
+    "options": [
+      "A non-parametric statistic used to measure ordinal association between two measured quantities based on concordant and discordant pairs",
+      "A parametric measure of linear association sensitive to outliers and underlying parametric distributions",
+      "A distance metric evaluating angular separation between high-dimensional vector embeddings",
+      "A statistical test measuring goodness-of-fit across categorical contingency table counts"
+    ],
+    "solution": "Step 1: Kendall tau measures the correspondence between two ranked rankings.\nStep 2: Particularly useful for smaller sample sizes with many tied rank values.\nCorrect Answer: (a)"
   },
   {
     "id": 86,
-    "question": "What is Unsupervised Learning?",
-    "options": ["Finding hidden patterns or structures in unlabeled datasets without predefined target outcomes", "Training models with explicit target labels", "Calculating cross-validation p-values", "Running linear regression with known coefficients"],
-    "solution": "Step 1: Unsupervised learning operates on unlabeled data.\nStep 2: Includes clustering, PCA, and association mining.\nCorrect Answer: (a)"
+    "question": "What is Point-Biserial Correlation?",
+    "options": [
+      "A correlation coefficient used when one variable is continuous and the other is a binary dichotomous variable",
+      "A non-parametric rank correlation measure applied to ordinal survey questionnaire data",
+      "A distance metric used to evaluate categorical string similarity in text matching tasks",
+      "A statistical test comparing independent means across multiple experimental categories"
+    ],
+    "solution": "Step 1: Point-biserial is mathematically equivalent to Pearson correlation for binary variables.\nStep 2: Commonly used in psychometrics and binary classification feature analysis.\nCorrect Answer: (a)"
   },
   {
     "id": 87,
-    "question": "What is Reinforcement Learning?",
-    "options": ["A paradigm where an agent learns to make decisions by taking actions in an environment to maximize cumulative rewards", "Supervised classification of images", "Unsupervised cluster partitioning", "Survival analysis hazard estimation"],
-    "solution": "Step 1: Reinforcement learning relies on trial-and-error and reward feedback.\nStep 2: Differs from standard supervised and unsupervised learning.\nCorrect Answer: (a)"
+    "question": "What is Cramér's V?",
+    "options": [
+      "A measure of association for two nominal categorical variables, giving a value between 0 and +1 based on chi-square statistics",
+      "A parametric correlation coefficient measuring linear relationships between continuous variables",
+      "A non-parametric rank correlation metric evaluating monotonic trends in ordinal data",
+      "A distance metric measuring string similarity based on character edit operations"
+    ],
+    "solution": "Step 1: Cramér's V normalizes chi-square statistic values based on table dimensions and sample size.\nStep 2: Widely used to evaluate associations between categorical feature pairs.\nCorrect Answer: (a)"
   },
   {
     "id": 88,
-    "question": "What is Hyperparameter Tuning?",
-    "options": ["The process of searching for and selecting optimal learning parameter settings that maximize model validation performance", "Calculating regression coefficients during training", "Imputing missing data values", "Testing time series stationarity"],
-    "solution": "Step 1: Hyperparameters (e.g., learning rate, depth) are set prior to training.\nStep 2: Tuning via grid search, random search, or Bayesian optimization optimizes performance.\nCorrect Answer: (a)"
+    "question": "What is Mutual Information?",
+    "options": [
+      "A measure of the mutual dependence between two random variables, quantifying the reduction in uncertainty of one variable given knowledge of the other",
+      "A linear correlation coefficient measuring the direction and strength of bivariate relationships",
+      "A distance metric calculating angular cosine separation between high-dimensional vectors",
+      "A regularization penalty term proportional to the absolute value of regression coefficients"
+    ],
+    "solution": "Step 1: Mutual information captures both linear and non-linear dependencies between variables.\nStep 2: Frequently utilized in feature selection pipelines for machine learning.\nCorrect Answer: (a)"
   },
   {
     "id": 89,
-    "question": "What is Grid Search Cross-Validation?",
-    "options": ["An exhaustive search evaluating all possible combinations of a specified grid of hyperparameter values using cross-validation", "Randomly sampling hyperparameter sets", "Leaving out one observation at a time", "Bootstrapping empirical sample distributions"],
-    "solution": "Step 1: Grid search systematically tests every predefined hyperparameter combination.\nStep 2: Selects the combination yielding the best cross-validation score.\nCorrect Answer: (a)"
+    "question": "What is Entropy in information theory?",
+    "options": [
+      "A measure of the uncerainty, randomness, or impurity associated with a random variable's possible outcomes",
+      "A metric measuring the linear correlation strength between continuous predictor variables",
+      "A distance calculation measuring angular separation between document frequency vectors",
+      "A regularization penalty term used to prevent overfitting in decision tree split nodes"
+    ],
+    "solution": "Step 1: Higher entropy indicates greater uncertainty or uniform probability distributions.\nStep 2: Used to calculate Information Gain for decision tree splitting criteria.\nCorrect Answer: (a)"
   },
   {
     "id": 90,
-    "question": "What is Random Search Cross-Validation?",
-    "options": ["A tuning method that randomly samples a fixed number of hyperparameter combinations from specified statistical distributions", "Exhaustive grid search evaluation", "Bootstrapping training data", "Cross-validation across time series folds"],
-    "solution": "Step 1: Random search samples hyperparameter space stochastically.\nStep 2: Often more efficient than grid search in high-dimensional spaces.\nCorrect Answer: (a)"
+    "question": "What is Gini Impurity?",
+    "options": [
+      "A measure of how often a randomly chosen element from a set would be incorrectly labeled if it were randomly labeled according to the distribution of labels in the subset",
+      "A measure of uncertainty and informational randomness used in information theory and decision trees",
+      "A linear regression loss metric calculating the average squared difference between predictions and targets",
+      "A distance metric evaluating angular cosine separation between high-dimensional feature vectors"
+    ],
+    "solution": "Step 1: Gini impurity measures classification node purity, ranging from 0 (pure) to maximum impurity.\nStep 2: Computationally faster alternative to entropy used in CART decision trees.\nCorrect Answer: (a)"
   },
   {
     "id": 91,
-    "question": "What is Bayesian Optimization for hyperparameter tuning?",
-    "options": ["A sequential model-based optimization technique building a probabilistic surrogate model (e.g., Gaussian Process) to guide the search efficiently", "Exhaustive grid search evaluation", "Random hyperparameter sampling", "Leave-one-out cross-validation"],
-    "solution": "Step 1: Bayesian optimization uses past evaluation results to update a surrogate function.\nStep 2: Balances exploration and exploitation to find optimal hyperparameters.\nCorrect Answer: (a)"
+    "question": "What is Information Gain?",
+    "options": [
+      "The reduction in entropy or impurity achieved by partitioning a dataset according to a specific feature split",
+      "The increase in model accuracy achieved by tuning hyperparameters via grid search optimization",
+      "The improvement in R-squared variance explained when adding new predictor variables to a regression model",
+      "The cumulative reward maximization achieved by agents in reinforcement learning environments"
+    ],
+    "solution": "Step 1: Information gain measures how well a given feature separates training data classes.\nStep 2: Used as the primary splitting criterion in ID3 and C4.5 decision tree algorithms.\nCorrect Answer: (a)"
   },
   {
     "id": 92,
-    "question": "What is Model Ensembling?",
-    "options": ["Combining predictions of multiple individual models to produce a more robust and accurate final prediction", "Training a single deep decision tree", "Performing PCA dimensionality reduction", "Imputing missing values using KNN"],
-    "solution": "Step 1: Ensembling techniques aggregate multiple models.\nStep 2: Reduces variance and bias to improve generalization accuracy.\nCorrect Answer: (a)"
+    "question": "What is Cross-Entropy Loss?",
+    "options": [
+      "A loss function measuring the performance of a classification model whose output is a probability value between 0 and 1",
+      "A regression loss metric calculating the average squared difference between continuous predictions and targets",
+      "An evaluation score measuring the absolute difference between predicted and true class labels",
+      "A regularization penalty term proportional to the squared sum of linear regression coefficients"
+    ],
+    "solution": "Step 1: Cross-entropy penalizes incorrect confident predictions heavily.\nStep 2: Standard loss function for logistic regression and multi-class neural networks.\nCorrect Answer: (a)"
   },
   {
     "id": 93,
-    "question": "What is Stacking (Stacked Generalization)?",
-    "options": ["An ensemble technique where multiple base models are trained, and a meta-model combines their predictions", "Averaging independent decision trees with bootstrap samples", "Boosting residual errors sequentially", "Running linear regression with interaction terms"],
-    "solution": "Step 1: Stacking trains heterogeneous base models.\nStep 2: A meta-learner learns how to weight and combine base predictions optimally.\nCorrect Answer: (a)"
+    "question": "What is Hinge Loss?",
+    "options": [
+      "A loss function used primarily for training support vector classifiers, penalizing predictions on the wrong side of the margin",
+      "A regression loss metric measuring squared errors between continuous target values and predictions",
+      "An information theoretic measure of uncertainty used for decision tree splitting criteria",
+      "A probabilistic loss function used in logistic regression and neural network classification"
+    ],
+    "solution": "Step 1: Hinge loss encourages samples to be correctly classified beyond a safety margin.\nStep 2: Formula: $\\max(0, 1 - y \\cdot \\hat{y})$.\nCorrect Answer: (a)"
   },
   {
     "id": 94,
-    "question": "What is Bagging (Bootstrap Aggregating)?",
-    "options": ["An ensemble method that trains multiple models in parallel on bootstrap samples and averages/votes their predictions", "Sequential residual boosting", "Training a single decision tree", "Performing linear regression"],
-    "solution": "Step 1: Bagging reduces variance through bootstrapping and aggregation.\nStep 2: Forms the foundation of Random Forests.\nCorrect Answer: (a)"
+    "question": "What is Huber Loss?",
+    "options": [
+      "A loss function used in regression that is less sensitive to outliers than mean squared error by combining linear and quadratic terms",
+      "A classification loss function used in support vector machines to maximize decision boundaries",
+      "An information theory metric measuring entropy reduction across decision tree split nodes",
+      "A regularization penalty term combining L1 Lasso and L2 Ridge coefficient constraints"
+    ],
+    "solution": "Step 1: Huber loss acts like MSE for small errors and like MAE for large outlier errors.\nStep 2: Provides robust regression performance in datasets with significant outlier contamination.\nCorrect Answer: (a)"
   },
   {
     "id": 95,
-    "question": "What is Boosting?",
-    "options": ["An ensemble technique that builds models sequentially, where each new model focuses on correcting the errors of previous models", "Parallel independent model training", "Unsupervised clustering", "Dimensionality reduction via PCA"],
-    "solution": "Step 1: Boosting trains models sequentially to reduce bias.\nStep 2: Algorithms like Gradient Boosting and AdaBoost follow this approach.\nCorrect Answer: (a)"
+    "question": "What is Kullback-Leibler (KL) Divergence?",
+    "options": [
+      "A statistical measure of how one probability distribution differs from a second, reference probability distribution",
+      "A distance metric calculating Euclidean separation between high-dimensional vector embeddings",
+      "A linear correlation coefficient measuring bivariate relationships between continuous variables",
+      "An evaluation metric measuring the harmonic mean of classification precision and recall"
+    ],
+    "solution": "Step 1: KL divergence measures relative entropy or information loss when approximating one distribution with another.\nStep 2: Asymmetric measure widely used in variational autoencoders and generative models.\nCorrect Answer: (a)"
   },
   {
     "id": 96,
-    "question": "What is an Out-of-Bag (OOB) error estimate?",
-    "options": ["An internal validation error estimate computed in bagging models using training samples left out of bootstrap bootstrap draws", "Cross-validation error across test folds", "Training set error", "Leave-one-out error"],
-    "solution": "Step 1: Bootstrap samples omit roughly 36.3% of observations.\nStep 2: These out-of-bag samples serve as an unbiased validation set without requiring separate cross-validation.\nCorrect Answer: (a)"
+    "question": "What is Principal Component Analysis (PCA) eigenvalue?",
+    "options": [
+      "A scalar value representing the amount of total data variance captured by its corresponding principal component eigenvector",
+      "The regularization penalty weight applied to coefficient shrinkage in ridge regression models",
+      "The learning rate hyperparameter controlling gradient descent step size during neural network training",
+      "The threshold probability value used to separate binary classification classes in logistic regression"
+    ],
+    "solution": "Step 1: Eigenvalues quantify the variance explained by each principal component axis.\nStep 2: Components with larger eigenvalues are retained during dimensionality reduction.\nCorrect Answer: (a)"
   },
   {
     "id": 97,
-    "question": "What is Feature Importance in tree-based models?",
-    "options": ["A score measuring how much a feature contributes to reducing impurity or error across all trees in an ensemble", "The linear correlation coefficient with the target", "The variance inflation factor", "The p-value of a regression coefficient"],
-    "solution": "Step 1: Tree models track total impurity reduction per feature.\nStep 2: Quantifies feature relevance for prediction tasks.\nCorrect Answer: (a)"
+    "question": "What is Singular Value Decomposition (SVD)?",
+    "options": [
+      "A matrix factorization technique that decomposes any real matrix into orthogonal rotation and scaling components",
+      "An iterative optimization algorithm used to find local minima in non-convex loss functions",
+      "A supervised classification method that constructs maximum-margin separating hyperplanes",
+      "An unsupervised clustering technique that partitions data observations into K spherical centroids"
+    ],
+    "solution": "Step 1: SVD factorizes matrices into left-singular vectors, singular values, and right-singular vectors.\nStep 2: Foundational mathematical tool for PCA, Latent Semantic Analysis, and matrix recommendations.\nCorrect Answer: (a)"
   },
   {
     "id": 98,
-    "question": "What is SHAP (SHapley Additive exPlanations) values analysis?",
-    "options": ["A game-theoretic approach to explain individual machine learning model predictions by quantifying each feature's marginal contribution", "A linear regression residual diagnostic", "A test for time series stationarity", "A spatial autocorrelation index"],
-    "solution": "Step 1: SHAP values allocate credit fairly across features based on cooperative game theory.\nStep 2: Provides robust local and global model interpretability.\nCorrect Answer: (a)"
+    "question": "What is Independent Component Analysis (ICA)?",
+    "options": [
+      "A computational technique for separating a multivariate signal into additive statistically independent subcomponents",
+      "A linear dimensionality reduction method that projects features onto orthogonal maximum variance axes",
+      "A supervised classification algorithm that maximizes class separation using linear discriminant boundaries",
+      "An unsupervised clustering method that groups data points based on density connectivity graphs"
+    ],
+    "solution": "Step 1: Unlike PCA which focuses on orthogonal variance, ICA maximizes statistical independence.\nStep 2: Commonly used in blind source separation tasks like the cocktail party problem.\nCorrect Answer: (a)"
   },
   {
     "id": 99,
-    "question": "What is LIME (Local Interpretable Model-agnostic Explanations)?",
-    "options": ["An explainable AI technique that approximates any complex black-box model locally around a specific prediction using an interpretable linear surrogate model", "A global feature importance metric", "A hyperparameter tuning algorithm", "A missing data imputation method"],
-    "solution": "Step 1: LIME perturbs inputs locally around a prediction instance.\nStep 2: Fits a simple linear model to explain black-box behavior locally.\nCorrect Answer: (a)"
+    "question": "What is Factor Analysis?",
+    "options": [
+      "A statistical method used to describe variability among observed, correlated variables in terms of a potentially lower number of unobserved latent factors",
+      "A supervised classification technique that constructs optimal decision boundaries using support vector margins",
+      "An unsupervised clustering algorithm that partitions data points into K distinct Voronoi cells",
+      "A time series forecasting model combining autoregressive moving average differencing terms"
+    ],
+    "solution": "Step 1: Factor analysis models observed variables as linear combinations of unobserved latent factors plus error.\nStep 2: Widely used in psychometrics and survey data reduction.\nCorrect Answer: (a)"
   },
   {
     "id": 100,
-    "question": "What is Data Leakage in machine learning?",
-    "options": ["When information from outside the training dataset is illicitly used to create or train a model, leading to overly optimistic performance estimates", "Missing data imputation failure", "Multicollinearity among predictors", "Outlier leverage distortion"],
-    "solution": "Step 1: Data leakage occurs when target information or test features contaminate training folds.\nStep 2: Results in inflated validation scores that fail in production.\nCorrect Answer: (a)"
+    "question": "What is Multidimensional Scaling (MDS)?",
+    "options": [
+      "A technique used to visualize the level of similarity of individual cases in a dataset using geometric low-dimensional spatial plots",
+      "A linear dimensionality reduction method that extracts orthogonal eigenvectors maximizing data variance",
+      "An unsupervised clustering algorithm that groups observations into hierarchical tree dendrograms",
+      "A supervised classification technique that constructs maximum-margin hyperplanes between classes"
+    ],
+    "solution": "Step 1: MDS preserves pairwise distance relationships between data points in low-dimensional space.\nStep 2: Useful for exploratory visualization of high-dimensional similarity or dissimilarity matrices.\nCorrect Answer: (a)"
   }
 ]
