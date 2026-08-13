@@ -1,0 +1,301 @@
+[
+  {
+    "id": 1,
+    "question": "Which geographic factor is emphasized in the concept of environmental determinism as having set the parameters of human activities in Nigerian societies?",
+    "options": ["Political boundaries", "The environment", "Colonial administration", "Ethnic diversity"],
+    "solution": "Environmental determinism presupposes that the environment pre-eminently sets the parameters of human activities in every society. It highlights the impact of geography and environment on the historical development of Nigerian peoples.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 2,
+    "question": "In terms of vegetation, the Nigerian environment is broadly classified into how many main regions?",
+    "options": ["Two", "Three", "Four", "Five"],
+    "solution": "The Nigerian environment is broadly classified into three regions: the grassland region, the forest region, and the coastal region.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 3,
+    "question": "Which of the following is NOT a characteristic of the grassland region of Nigeria?",
+    "options": ["It is located in the north", "It is also called the Guinea Savanna", "It is suitable for tree crops like cocoa", "It has a large expanse of arable land"],
+    "solution": "The grassland region (Savanna) is characterized by a large expanse of arable land and is suitable for cultivating grains and tubers. It is generally not suitable for tree crops like cocoa, which thrive in the forest region.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 4,
+    "question": "The dense mangrove swamps and coastal waters are characteristic features of which vegetation region of Nigeria?",
+    "options": ["The Grassland region", "The Forest region", "The Coastal region", "The Savannah region"],
+    "solution": "The coastal region features dense mangrove swamps, coastal waters, and creeks. It is the home of the oil palm and is also a major source of fish.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 5,
+    "question": "Which river is the largest in Nigeria and plays a crucial role in the country's geography and economy?",
+    "options": ["River Benue", "River Niger", "River Kaduna", "River Sokoto"],
+    "solution": "The River Niger is the largest river in Nigeria and is described as the most important river in West Africa. It, along with the River Benue, forms the Niger Delta basin.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 6,
+    "question": "Which two major rivers form the Niger Delta basin in Nigeria?",
+    "options": ["River Sokoto and River Kaduna", "River Niger and River Benue", "River Cross and River Imo", "River Ogun and River Osun"],
+    "solution": "The Niger Delta basin is formed by the meeting of the River Niger and the River Benue.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 7,
+    "question": "What is the total land area of Nigeria?",
+    "options": ["923,768 km²", "923,000 km²", "910,800 km²", "930,000 km²"],
+    "solution": "Nigeria has a total land area of 923,768 km², with 910,770 km² of it being land mass and the rest water.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 8,
+    "question": "Nigeria is located roughly between which latitudes?",
+    "options": ["4°N and 14°N", "0°N and 10°N", "10°N and 20°N", "5°N and 15°N"],
+    "solution": "Nigeria is a tropical country located between latitudes 4°N and 14°N, and longitudes 3°E and 14°E.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 9,
+    "question": "The major temperature variations in Nigeria are influenced by which two main factors?",
+    "options": ["Altitude and longitude", "Rainfall and altitude", "Latitude and ocean currents", "Wind and pressure"],
+    "solution": "The major temperature variations in Nigeria are influenced by two main factors: rainfall and altitude. Temperatures vary from 32°C in the south to 35°C in the north.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 10,
+    "question": "Which region of Nigeria is characterized by a tropical climate with two main seasons: a dry season and a wet season?",
+    "options": ["The entire country", "Only the southern part", "Only the northern part", "Only the coastal area"],
+    "solution": "The climate of Nigeria is tropical, with variations governed by the southwest monsoon and the dry northeast winds. The entire country has two main seasons: dry and wet.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 11,
+    "question": "In which part of Nigeria do average temperatures range between 30°C and 32°C?",
+    "options": ["The North", "The South", "The East", "The West"],
+    "solution": "In the southern part of Nigeria, the average temperatures range between 30°C and 32°C, while the north has slightly higher temperatures ranging between 33°C and 35°C.\nCorrect Answer: (b)"
+  },
+  {
+  "id": 12,
+  "question": "The word 'Kwa' in the name of the Kwa language family means what?",
+  "options": ["River", "Land", "People", "God"],
+  "solution": "The word 'Kwa' was derived by linguists from the word meaning 'people' or 'human being' in several languages belonging to this family (such as Akan).\nCorrect Answer: (c)"
+},
+    { "id": 13,
+    "question": "Which of the following languages is NOT classified under the Kwa language family?",
+    "options": ["Yoruba", "Edo", "Igbo", "Hausa"],
+    "solution": "The Kwa language family includes Yoruba, Edo, Igbo, and Ijaw. Hausa is a Chadic language found in the northern part of Nigeria.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 14,
+    "question": "According to the module, what term was used by the Portuguese to describe the people of the Niger Delta area and the coast in the 15th century?",
+    "options": ["Kwa", "Ibo", "Calabar", "Benin"],
+    "solution": "The term 'Kwa' is the origin of the word 'Ibo' used by the Portuguese to describe the people of the Niger Delta area and the coast.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 15,
+    "question": "The early European contact with Nigeria was primarily focused on what activity?",
+    "options": ["Missionary work", "Trade", "Colonization", "Exploration"],
+    "solution": "European contact with Nigeria began primarily through trade. The Portuguese established trade relations with the Kingdom of Benin around 1472, followed by the Dutch, British, and French.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 16,
+    "question": "What was the main economic focus of the pre-colonial Hausa states in Nigeria?",
+    "options": ["Agriculture and trade", "Mining and industry", "Fishing and farming", "Slave trading"],
+    "solution": "The economy of the Hausa states was based on agriculture, trade, and crafts. They were known for their production of grains and textiles which were traded across the Sahara Desert.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 17,
+    "question": "Which of the following groups is considered part of the major ethnic groups in Nigeria?",
+    "options": ["The Yoruba", "The Fulani", "The Hausa", "All of the above"],
+    "solution": "The major ethnic groups in Nigeria include the Hausa, Igbo, Yoruba, and Fulani. These groups have established social, political, and economic institutions.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 18,
+    "question": "The social organization of the pre-colonial Yoruba people was primarily centered around which political figure?",
+    "options": ["The Council of Elders", "The Oba (King)", "The Prime Minister", "The Military Commander"],
+    "solution": "The social and political organization of the pre-colonial Yoruba was centered around the Oba (King). The Oba was the spiritual, political, and symbolic head of the kingdom.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 19,
+    "question": "In pre-colonial Igbo society, the principle of decision-making was largely based on:",
+    "options": ["The rule of a central king", "The consensus of the community", "The decree of a council of chiefs", "The military mandate"],
+    "solution": "The Igbo political system was decentralized and based on a republic system. Decision-making was largely based on the consensus of the community, often achieved through the assembly of titled men and elders.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 20,
+    "question": "Which of the following is a common feature of the pre-colonial social organization across various Nigerian communities?",
+    "options": ["Centralized absolute monarchies", "A republican system", "Age grades and secret societies", "A military dictatorship"],
+    "solution": "Pre-colonial Nigerian communities, despite their diversity, often featured organizations based on age grades, secret societies, and kinship ties. These institutions played significant roles in maintaining social order and promoting cultural integration.\nCorrect Answer: (c)"
+  },
+  {
+    "id": 21,
+    "question": "The concept of 'environmental determinism' suggests that:",
+    "options": ["Human activities change the environment", "The environment sets the parameters of human activities", "Politics dictates environmental changes", "Human activities do not impact the environment"],
+    "solution": "Environmental determinism presupposes that the environment pre-eminently sets the parameters of human activities in every society. It suggests that the environment has a decisive influence on the historical development of societies.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 22,
+    "question": "Which of the following is a major physical region of Nigeria that affects its climate and vegetation?",
+    "options": ["The Gulf of Guinea", "The Niger-Benue River Valley", "The Atlantic Ocean", "All of the above"],
+    "solution": "Major geographical divisions of Nigeria include the Niger-Benue River Valley, the Gulf of Guinea, and the coastal plains which serve as a low-cost zone stretching to the northern borders.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 23,
+    "question": "The highest point in Nigeria is located in which region?",
+    "options": ["The Coastal region", "The Northern region", "The Western region", "The Eastern region"],
+    "solution": "The highest point in Nigeria, at 2,042 metres, is located in the Northern region, specifically on the eastern border with Cameroon.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 24,
+    "question": "The main economic activities of the people of the Grassland region in pre-colonial times were:",
+    "options": ["Fishing and hunting", "Farming and pastoralism", "Mining and trading", "Craft and weaving"],
+    "solution": "The people of the Grassland region were largely farmers and pastoralists. They grew crops like millet and sorghum and reared cattle, utilizing the vast arable land and grasslands.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 25,
+    "question": "In pre-colonial Nigeria, the role of women in the Grassland and Forest regions often involved:",
+    "options": ["Hunting and warfare", "Agriculture, trade, and pottery", "Politics and kingship", "Only domestic chores"],
+    "solution": "Women played a significant role in the economy, participating in agriculture, trade, weaving, and pottery. Their contribution was vital to the sustenance and economic viability of their communities.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 26,
+    "question": "The Forest region of Nigeria was particularly known for:",
+    "options": ["Large-scale cattle rearing", "The growth of tree crops like cocoa and oil palm", "Extensive desertification", "Sparse population"],
+    "solution": "The Forest region is characterized by the growth of tree crops such as cocoa, oil palm, and rubber. The region's dense vegetation and fertile soil were well-suited for these crops.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 27,
+    "question": "The Coastal region of Nigeria, which includes the Niger Delta, is known for:",
+    "options": ["Large-scale commercial farming", "Oil palm production and fishing", "Cattle rearing", "Mining of minerals"],
+    "solution": "The Coastal region is known for its mangrove swamps, oil palm production, and abundant fishing. The area's proximity to the sea made it a center for trade.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 28,
+    "question": "Which of the following best describes the 'Kwa' language family?",
+    "options": ["A family of languages found in the north of Nigeria", "A family of languages found primarily in the south and Niger Delta", "A language family spoken only by the Hausa", "A language family that is extinct"],
+    "solution": "The Kwa language family is found primarily in the south of Nigeria and along the Niger Delta. It includes languages such as Yoruba, Edo, Igbo, and Ijaw.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 29,
+    "question": "The Ijaw people are primarily found in which part of Nigeria?",
+    "options": ["The Grassland region", "The Niger Delta region", "The Northern region", "The Western region"],
+    "solution": "The Ijaw people are located primarily in the Niger Delta region. They are known for their rich cultural heritage and are one of the groups under the Kwa language family.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 30,
+    "question": "The Portuguese first established trade relations with the Kingdom of Benin in which year?",
+    "options": ["1500", "1472", "1600", "1400"],
+    "solution": "The Portuguese established trade relations with the Kingdom of Benin around 1472.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 31,
+    "question": "The Edo people, also known as the Benin people, are located in which region of Nigeria?",
+    "options": ["The North", "The South-South", "The South-West", "The East"],
+    "solution": "The Edo people, also known as the Benin people, are located in the South-South region of Nigeria, particularly in what is now Edo State.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 32,
+    "question": "Which of the following is NOT a primary ethnic group in Nigeria?",
+    "options": ["Hausa", "Igbo", "Yoruba", "Mali"],
+    "solution": "The primary ethnic groups in Nigeria include the Hausa, Igbo, and Yoruba. Mali is a country in West Africa, not an ethnic group in Nigeria.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 33,
+    "question": "The Fulani people are predominantly known for which primary occupation?",
+    "options": ["Agriculture", "Pastoralism", "Fishing", "Trading"],
+    "solution": "The Fulani people are predominantly known for pastoralism (cattle rearing). Their nomadic lifestyle has allowed them to spread across many parts of West Africa, especially in the northern regions of Nigeria.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 34,
+    "question": "The concept of 'Nation-Building' as seen in Module 6 refers to:",
+    "options": ["The physical construction of buildings", "The deliberate process of creating a shared sense of belonging", "The establishment of military bases", "The destruction of old structures"],
+    "solution": "Nation-building is the deliberate process of creating a shared sense of belonging among the people of a modern state. It aims to promote national integration and strengthen bonds between citizens.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 35,
+    "question": "In Module 6, which factor was identified as a major challenge to nation-building in Nigeria?",
+    "options": ["Lack of natural resources", "The indigene-settler problem", "Low population", "Lack of democracy"],
+    "solution": "The indigene-settler problem was identified as a major challenge to nation-building. It creates tensions and conflicts over the rights and privileges of people who are considered 'indigenes' versus those seen as 'settlers'.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 36,
+    "question": "Which of the following is a major cause of environmental degradation in the Niger Delta?",
+    "options": ["Desertification", "Oil pollution", "Flooding", "Overfarming"],
+    "solution": "Oil pollution is a major cause of environmental degradation in the Niger Delta. The exploitation of oil has led to the pollution of land and water, severely impacting the health and livelihood of the people.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 37,
+    "question": "Desertification is primarily a problem in which region of Nigeria?",
+    "options": ["The South", "The North", "The East", "The West"],
+    "solution": "Desertification is primarily a problem in the northern part of Nigeria. The encroachment of the Sahara Desert has led to the loss of arable land and the degradation of natural resources.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 38,
+    "question": "According to the module, what is the role of social justice in national development?",
+    "options": ["Social justice is irrelevant to development", "Social justice ensures that the benefits of development are shared fairly", "Social justice only benefits the rich", "Social justice hinders economic growth"],
+    "solution": "Social justice ensures that the benefits of development are shared fairly and equitably among all citizens. It includes protecting the rights of citizens and ensuring that no one is left behind in the development process.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 39,
+    "question": "Which institution is highlighted in Module 9 as playing a crucial role in the value re-orientation of citizens?",
+    "options": ["The military", "The family and education", "The media", "The police"],
+    "solution": "The family, education, and the media are highlighted as crucial institutions in re-orienting citizens. They play a key role in promoting positive values and reducing moral and ethical decay.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 40,
+    "question": "The Koko toxic waste incident of 1988 highlighted which major environmental challenge in Nigeria?",
+    "options": ["Desertification", "The improper disposal of hazardous waste", "Oil pollution", "Flooding"],
+    "solution": "The Koko incident of 1988 highlighted the improper disposal of hazardous waste in Nigeria. It emphasized the lack of proper environmental regulations and the dangers of toxic waste to human health.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 41,
+    "question": "Which of the following is a key factor in the economic development of Nigeria as discussed in Module 8?",
+    "options": ["Over-reliance on agriculture", "Diversification of the economy", "Over-reliance on crude oil", "Reduction of foreign trade"],
+    "solution": "The module highlights that over-reliance on crude oil has been a major challenge. Diversification of the economy is key to sustainable development.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 42,
+    "question": "The 1914 Amalgamation of Nigeria was primarily aimed at:",
+    "options": ["Promoting ethnic diversity", "Creating a unified administrative unit for efficient control", "Establishing a new religion", "Reducing the population"],
+    "solution": "The 1914 Amalgamation merged the Northern and Southern Protectorates into a single administrative unit. It was aimed at improving administrative efficiency and reducing the cost of running the two regions separately.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 43,
+    "question": "Which of the following terms refers to the practice of governing colonies through traditional institutions?",
+    "options": ["Direct Rule", "Indirect Rule", "Imperial Rule", "Colonial Rule"],
+    "solution": "Indirect Rule was a system of governance introduced by Lord Lugard in Nigeria. It involved using traditional rulers and institutions to administer local populations under the authority of the British colonial administration.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 44,
+    "question": "Who is credited with the introduction of the Indirect Rule system in Nigeria?",
+    "options": ["Sir Frederick Lugard", "Lord Macaulay", "Queen Victoria", "Sir George Goldie"],
+    "solution": "Sir Frederick Lugard is credited with introducing the system of Indirect Rule in Nigeria. He argued that it was an efficient and cost-effective method of governing the colonial territories.\nCorrect Answer: (a)"
+  },
+  {
+    "id": 45,
+    "question": "The 1957-1960 period in Nigeria's history was characterized by:",
+    "options": ["The establishment of military rule", "The growth of nationalism and the struggle for independence", "The outbreak of the Civil War", "The economic boom"],
+    "solution": "The period 1957-1960 was crucial for Nigerian nationalism and the struggle for independence. It culminated in Nigeria achieving self-government and eventually independence in 1960.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 46,
+    "question": "The Nigerian Civil War, also known as the Biafran War, took place between:",
+    "options": ["1960-1965", "1967-1970", "1970-1975", "1975-1980"],
+    "solution": "The Nigerian Civil War (Biafran War) took place between 1967 and 1970. It was a conflict between the Nigerian federal government and the secessionist state of Biafra.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 47,
+    "question": "The 1970s oil boom in Nigeria led to:",
+    "options": ["Increased agricultural production", "Massive investment in infrastructure and expansion of the public sector", "The decline of education", "Reduced government revenue"],
+    "solution": "The 1970s oil boom led to a massive increase in government revenue, which was used for large-scale development projects, including infrastructure, education, and health.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 48,
+    "question": "Which of the following is a major environmental problem affecting Nigeria?",
+    "options": ["Desertification", "Deforestation", "Oil pollution", "All of the above"],
+    "solution": "Nigeria faces several environmental challenges including desertification in the north, deforestation in the forest regions, and oil pollution in the Niger Delta.\nCorrect Answer: (d)"
+  },
+  {
+    "id": 49,
+    "question": "In Module 7, economic reliance is defined as:",
+    "options": ["The degree to which a country depends on its own resources", "The degree to which a country relies on other countries for goods and services", "The total value of a country's exports", "The economic activity of a country"],
+    "solution": "Economic reliance refers to the degree to which a country depends on other countries for goods, services, or resources. Over-reliance can make a country vulnerable to external shocks.\nCorrect Answer: (b)"
+  },
+  {
+    "id": 50,
+    "question": "Norms are defined in Module 9 as:",
+    "options": ["Laws enforced by the government", "Socially constructed rules and expectations that guide behavior", "Personal beliefs about what is right or wrong", "Religious doctrines"],
+    "solution": "Norms refer to the socially constructed rules and expectations that guide behavior within a given society. They govern behavior, social relations, and interaction, and are reinforced through sanctions, customs, and traditions.\nCorrect Answer: (b)"
+  }
+]
