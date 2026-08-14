@@ -1,170 +1,44 @@
 /* ============================================
-   STUDY MODE - OAU CBE Practice
-   COMPLETE FIXED CSS
+   CURRENT COURSE BANNER
    ============================================ */
-
-:root {
-    --bg-dark: #0f172a;
-    --bg-card: #1e293b;
-    --bg-option: #131c2e;
-    --border: #334155;
-    --text: #f1f5f9;
-    --text-muted: #94a3b8;
-    --blue-accent: #3b82f6;
-    --blue-light: #60a5fa;
-    --blue-bg: rgba(59, 130, 246, 0.1);
-    --green: #10b981;
-    --green-bg: rgba(16, 185, 129, 0.1);
-    --red: #ef4444;
-    --red-bg: rgba(239, 68, 68, 0.1);
-    --orange: #f59e0b;
-    --radius-lg: 24px;
-    --radius-md: 16px;
-    --radius-sm: 12px;
-    --radius-xs: 8px;
-    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
-    --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.4);
-    --transition: 0.2s ease;
-}
-
-/* Light Mode Variables */
-body.light-mode {
-    --bg-dark: #f1f5f9;
-    --bg-card: #ffffff;
-    --bg-option: #f8fafc;
-    --border: #cbd5e1;
-    --text: #0f172a;
-    --text-muted: #64748b;
-    --blue-bg: rgba(59, 130, 246, 0.08);
-    --green-bg: rgba(16, 185, 129, 0.08);
-    --red-bg: rgba(239, 68, 68, 0.08);
-    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-    --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.12);
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-}
-
-html {
-    scroll-behavior: smooth;
-    -webkit-tap-highlight-color: transparent;
-}
-
-body {
-    background: var(--bg-dark);
-    color: var(--text);
-    transition: background-color var(--transition), color var(--transition);
-    min-height: 100vh;
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-.app-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px 16px 100px;
-}
-
-/* ============================================
-   HEADER
-   ============================================ */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 24px;
-    padding: 4px 0;
-}
-
-.header-left {
+.current-course-banner {
     display: flex;
     align-items: center;
     gap: 12px;
+    background: var(--blue-bg);
+    border: 1px solid var(--blue-accent);
+    border-radius: var(--radius-md);
+    padding: 12px 16px;
+    margin-bottom: 16px;
 }
 
-.logo-circle {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: var(--blue-bg);
+.course-banner-icon {
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--bg-card);
+    border-radius: var(--radius-sm);
     flex-shrink: 0;
-    overflow: hidden;
-    transition: border-color var(--transition);
 }
 
-body.light-mode .logo-circle {
-    border: 1px solid var(--border);
-}
-
-.logo-circle img {
-    width: 30px;
-    height: 30px;
-    object-fit: contain;
-}
-
-.logo-circle i {
-    color: var(--blue-accent);
-    font-size: 20px;
-}
-
-.header-text h2 {
-    font-size: 11px;
-    font-weight: 600;
+.course-banner-info h3 {
+    font-size: 15px;
+    font-weight: 700;
     color: var(--blue-light);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
     margin-bottom: 2px;
 }
 
-.header-text h1 {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--text);
-}
-
-.header-actions {
-    display: flex;
-    gap: 10px;
-}
-
-.btn-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 1px solid var(--border);
-    background: var(--bg-card);
-    color: var(--text);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all var(--transition);
-    position: relative;
-}
-
-.btn-icon:hover {
-    border-color: var(--blue-accent);
-    background: var(--blue-bg);
-}
-
-.btn-icon:active {
-    transform: scale(0.95);
+.course-banner-info p {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 0;
 }
 
 /* ============================================
-   CALCULATOR STYLES
+   CALCULATOR STYLES - FIXED
    ============================================ */
 .calculator-modal {
     position: fixed;
@@ -188,15 +62,16 @@ body.light-mode .logo-circle {
 }
 
 .calculator-container {
-    background: var(--bg-card);
-    border-radius: var(--radius-lg);
+    background: #1e293b;
+    border-radius: 16px;
     padding: 20px;
     width: 90%;
     max-width: 380px;
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
     transform: scale(0.9);
     transition: transform 0.3s ease;
     position: relative;
+    z-index: 10001;
 }
 
 .calculator-modal.show .calculator-container {
@@ -211,7 +86,7 @@ body.light-mode .logo-circle {
 }
 
 .calculator-header h3 {
-    color: var(--text);
+    color: #e2e8f0;
     margin: 0;
     font-size: 1.1rem;
     font-weight: 600;
@@ -220,7 +95,7 @@ body.light-mode .logo-circle {
 .calc-close-btn {
     background: none;
     border: none;
-    color: var(--text-muted);
+    color: #94a3b8;
     font-size: 1.2rem;
     cursor: pointer;
     padding: 5px;
@@ -231,7 +106,7 @@ body.light-mode .logo-circle {
 }
 
 .calc-close-btn:hover {
-    color: var(--text);
+    color: #e2e8f0;
 }
 
 .calculator-display {
@@ -243,19 +118,25 @@ body.light-mode .logo-circle {
     padding: 15px;
     font-size: 1.5rem;
     text-align: right;
-    background: var(--bg-option);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-xs);
-    color: var(--text);
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    color: #e2e8f0;
     outline: none;
     font-family: 'Inter', monospace;
     box-sizing: border-box;
+    min-height: 50px;
+    display: block;
+}
+
+#calc-display:focus {
+    border-color: #3b82f6;
 }
 
 .calc-history {
     margin-top: 8px;
     font-size: 0.75rem;
-    color: var(--text-muted);
+    color: #94a3b8;
     max-height: 60px;
     overflow-y: auto;
 }
@@ -275,13 +156,15 @@ body.light-mode .logo-circle {
     padding: 12px;
     font-size: 0.95rem;
     border: none;
-    border-radius: var(--radius-xs);
+    border-radius: 8px;
     cursor: pointer;
     transition: all 0.2s;
     font-weight: 500;
     font-family: 'Inter', sans-serif;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
+    position: relative;
+    z-index: 10002;
 }
 
 .calc-btn:active {
@@ -289,856 +172,99 @@ body.light-mode .logo-circle {
 }
 
 .calc-btn.number {
-    background: var(--bg-option);
-    color: var(--text);
+    background: #334155;
+    color: #e2e8f0;
 }
 
 .calc-btn.number:hover {
-    background: var(--border);
+    background: #475569;
 }
 
 .calc-btn.operator {
-    background: var(--border);
-    color: var(--blue-light);
+    background: #475569;
+    color: #60a5fa;
     font-weight: 600;
 }
 
 .calc-btn.operator:hover {
-    background: var(--text-muted);
+    background: #64748b;
 }
 
 .calc-btn.function {
-    background: var(--blue-bg);
-    color: var(--blue-light);
+    background: #1e3a5f;
+    color: #60a5fa;
     font-size: 0.85rem;
     font-weight: 500;
 }
 
 .calc-btn.function:hover {
-    background: rgba(59, 130, 246, 0.2);
+    background: #2a4a7f;
 }
 
 .calc-btn.clear {
-    background: var(--red);
+    background: #dc2626;
     color: white;
     font-weight: 600;
 }
 
 .calc-btn.clear:hover {
-    background: #dc2626;
+    background: #ef4444;
 }
 
 .calc-btn.equals {
-    background: var(--green);
+    background: #059669;
     color: white;
     font-weight: 600;
     grid-column: span 2;
 }
 
 .calc-btn.equals:hover {
-    background: #059669;
+    background: #10b981;
 }
 
 .calc-btn.zero {
     grid-column: span 2;
 }
 
-/* ============================================
-   COURSE SELECTION SCREEN
-   ============================================ */
-#course-selection-screen {
-    animation: fadeIn 0.3s ease;
+/* Light mode calculator styles */
+body.light-mode .calculator-container {
+    background: #ffffff;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+body.light-mode .calculator-header h3 {
+    color: #1f2937;
 }
 
-.page-title {
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 4px;
-    color: var(--text);
+body.light-mode .calc-close-btn {
+    color: #6b7280;
 }
 
-.page-subtitle {
-    color: var(--text-muted);
-    font-size: 14px;
-    margin-bottom: 24px;
+body.light-mode .calc-close-btn:hover {
+    color: #1f2937;
 }
 
-.course-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+body.light-mode #calc-display {
+    background: #f3f4f6;
+    border-color: #e5e7eb;
+    color: #1f2937;
 }
 
-.course-btn {
-    width: 100%;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 18px 16px;
-    text-align: left;
-    cursor: pointer;
-    color: var(--text);
-    font-family: inherit;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 8px 12px;
-    transition: all var(--transition);
-    position: relative;
-    box-shadow: var(--shadow-sm);
+body.light-mode .calc-btn.number {
+    background: #f3f4f6;
+    color: #1f2937;
 }
 
-.course-btn:hover:not(:disabled) {
-    border-color: var(--blue-accent);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+body.light-mode .calc-btn.number:hover {
+    background: #e5e7eb;
 }
 
-.course-btn:active:not(:disabled) {
-    transform: translateY(0);
+body.light-mode .calc-btn.operator {
+    background: #e5e7eb;
+    color: #3b82f6;
 }
 
-.course-btn .course-content {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 8px 12px;
-    width: 100%;
-}
-
-.course-btn .course-code {
-    font-weight: 700;
-    font-size: 15px;
-    color: var(--blue-light);
-}
-
-.course-btn .course-name {
-    color: var(--text-muted);
-    font-size: 14px;
-}
-
-.course-btn .course-status {
-    margin-left: auto;
-    font-size: 12px;
-    color: var(--green);
-    font-weight: 500;
-}
-
-.course-btn .course-spinner {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: none;
-    font-size: 24px;
-    color: var(--blue-accent);
-    z-index: 2;
-}
-
-.course-btn.loading .course-spinner {
-    display: block;
-}
-
-.course-btn.loading .course-content {
-    opacity: 0.3;
-    pointer-events: none;
-}
-
-.course-btn.loading {
-    cursor: not-allowed;
-}
-
-/* ============================================
-   STUDY SCREEN
-   ============================================ */
-#study-screen {
-    display: none;
-    animation: fadeIn 0.3s ease;
-}
-
-.back-link {
-    background: transparent;
-    border: none;
-    color: var(--text-muted);
-    font-size: 14px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 20px;
-    padding: 8px 12px;
-    border-radius: var(--radius-xs);
-    font-family: inherit;
-    transition: all var(--transition);
-}
-
-.back-link:hover {
-    color: var(--text);
-    background: var(--bg-card);
-}
-
-/* ============================================
-   QUESTION CARD
-   ============================================ */
-.question-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 24px;
-    margin-bottom: 16px;
-    position: relative;
-    min-height: 200px;
-    box-shadow: var(--shadow-sm);
-}
-
-/* Loading Overlay */
-.question-card .loading-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: var(--bg-card);
-    border-radius: var(--radius-lg);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 12px;
-    color: var(--text-muted);
-    z-index: 10;
-}
-
-body.light-mode .question-card .loading-overlay {
-    background: rgba(255, 255, 255, 0.95);
-}
-
-.question-card.loading .loading-overlay {
-    display: flex;
-}
-
-.question-card .loading-overlay i {
-    font-size: 32px;
-    animation: spin 1s linear infinite;
-    color: var(--blue-accent);
-}
-
-.question-card .loading-overlay span {
-    font-size: 14px;
-    font-weight: 500;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-/* ============================================
-   PROGRESS BAR
-   ============================================ */
-.progress-top {
-    display: flex;
-    justify-content: space-between;
-    font-size: 13px;
-    color: var(--text-muted);
-    margin-bottom: 8px;
-    font-weight: 500;
-}
-
-#score-display {
-    color: var(--green);
-    font-weight: 600;
-}
-
-.progress-bg {
-    height: 6px;
-    background: var(--border);
-    border-radius: 6px;
-    overflow: hidden;
-    margin-bottom: 8px;
-}
-
-.progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--blue-accent), var(--blue-light));
-    border-radius: 6px;
-    width: 0%;
-    transition: width 0.4s ease;
-}
-
-/* ============================================
-   QUESTION TEXT
-   ============================================ */
-.question-text {
-    font-size: 16px;
-    line-height: 1.7;
-    margin-bottom: 20px;
-    color: var(--text);
-    padding: 4px 0;
-}
-
-/* MathJax inside question text */
-.question-text mjx-container {
-    display: inline !important;
-}
-
-/* ============================================
-   OPTIONS CONTAINER
-   ============================================ */
-.options-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-/* Option Button */
-.option-btn {
-    width: 100%;
-    background: var(--bg-option);
-    border: 2px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 14px 16px;
-    text-align: left;
-    font-size: 15px;
-    color: var(--text);
-    cursor: pointer;
-    font-family: inherit;
-    transition: all var(--transition);
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    line-height: 1.6;
-    position: relative;
-}
-
-.option-btn:hover:not(.disabled) {
-    border-color: var(--blue-accent);
-    background: var(--blue-bg);
-    transform: translateX(2px);
-}
-
-.option-btn:active:not(.disabled) {
-    transform: scale(0.99);
-}
-
-/* Letter Badge */
-.option-btn .letter {
-    min-width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 13px;
-    flex-shrink: 0;
-    color: var(--text-muted);
-    transition: all var(--transition);
-    margin-top: 2px;
-}
-
-/* Option Text */
-.option-btn .option-text {
-    flex: 1;
-    min-width: 0;
-    padding-top: 4px;
-    word-break: break-word;
-}
-
-/* MathJax inside options - CRITICAL FIX */
-.option-btn .option-text mjx-container {
-    display: inline !important;
-    vertical-align: middle;
-}
-
-/* Selected State */
-.option-btn.selected {
-    border-color: var(--blue-accent);
-    background: var(--blue-bg);
-}
-
-.option-btn.selected .letter {
-    background: var(--blue-accent);
-    color: #ffffff;
-}
-
-/* Correct State */
-.option-btn.correct {
-    border-color: var(--green);
-    background: var(--green-bg);
-}
-
-.option-btn.correct .letter {
-    background: var(--green);
-    color: #ffffff;
-}
-
-/* Wrong State */
-.option-btn.wrong {
-    border-color: var(--red);
-    background: var(--red-bg);
-}
-
-.option-btn.wrong .letter {
-    background: var(--red);
-    color: #ffffff;
-}
-
-/* Disabled State */
-.option-btn.disabled {
-    cursor: not-allowed;
-    opacity: 0.85;
-    pointer-events: none;
-}
-
-/* ============================================
-   SOLUTION SECTION - FIXED
-   ============================================ */
-.solution-container {
-    margin-top: 16px;
-    border-top: 1px solid var(--border);
-    padding-top: 16px;
-    display: block;
-}
-
-.toggle-solution-btn {
-    background: transparent;
-    border: 1px solid var(--border);
-    border-radius: 30px;
-    padding: 8px 20px;
-    color: var(--text-muted);
-    cursor: pointer;
-    font-size: 13px;
-    font-weight: 500;
-    font-family: inherit;
-    transition: all var(--transition);
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.toggle-solution-btn:hover {
-    border-color: var(--blue-accent);
-    color: var(--blue-light);
-    background: var(--blue-bg);
-}
-
-.toggle-solution-btn:active {
-    transform: scale(0.97);
-}
-
-.solution-text {
-    margin-top: 12px;
-    padding: 16px;
-    background: var(--bg-option);
-    border-radius: var(--radius-sm);
-    font-size: 14px;
-    color: var(--text);
-    line-height: 1.7;
-    display: none;
-    border-left: 3px solid var(--blue-accent);
-    animation: slideDown 0.3s ease;
-}
-
-.solution-text.show {
-    display: block !important;
-}
-
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-8px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* MathJax inside solution */
-.solution-text mjx-container {
-    display: inline !important;
-}
-
-/* Bold text in solution */
-.solution-text strong {
-    color: var(--blue-light);
-    font-weight: 600;
-}
-
-/* ============================================
-   NAVIGATION CONTROLS
-   ============================================ */
-.nav-controls {
-    display: flex;
-    gap: 12px;
-    margin-top: 8px;
-}
-
-.nav-btn {
-    flex: 1;
-    padding: 14px;
-    border-radius: var(--radius-sm);
-    border: none;
-    font-weight: 600;
-    font-size: 14px;
-    cursor: pointer;
-    font-family: inherit;
-    transition: all var(--transition);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-
-.nav-btn.next {
-    background: var(--blue-accent);
-    color: #ffffff;
-}
-
-.nav-btn.next:hover:not(:disabled) {
-    opacity: 0.9;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
-}
-
-.nav-btn.next:active:not(:disabled) {
-    transform: scale(0.98);
-}
-
-.nav-btn.prev {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    color: var(--text);
-}
-
-.nav-btn.prev:hover:not(:disabled) {
-    border-color: var(--blue-accent);
-    background: var(--blue-bg);
-}
-
-.nav-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-/* ============================================
-   TOAST NOTIFICATIONS
-   ============================================ */
-.toast {
-    position: fixed;
-    bottom: 100px;
-    left: 50%;
-    transform: translateX(-50%) translateY(100px);
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 12px 20px;
-    box-shadow: var(--shadow-lg);
-    z-index: 9999;
-    font-size: 14px;
-    color: var(--text);
-    max-width: 90%;
-    opacity: 0;
-    transition: all 0.3s ease;
-    pointer-events: none;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    backdrop-filter: blur(10px);
-}
-
-.toast.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-    pointer-events: auto;
-}
-
-.toast .toast-icon {
-    font-size: 18px;
-    flex-shrink: 0;
-}
-
-.toast .toast-icon.success { color: var(--green); }
-.toast .toast-icon.error { color: var(--red); }
-.toast .toast-icon.info { color: var(--blue-accent); }
-.toast .toast-icon.warning { color: var(--orange); }
-
-/* ============================================
-   FLOATING HOME BUTTON
-   ============================================ */
-.floating-home-btn {
-    position: fixed;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--blue-accent);
-    color: white;
-    border: none;
-    padding: 16px 48px;
-    border-radius: 50px;
-    font-size: 18px;
-    font-weight: 700;
-    font-family: inherit;
-    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-}
-
-.floating-home-btn:hover {
-    transform: translateX(-50%) translateY(-4px);
-    box-shadow: 0 12px 32px rgba(59, 130, 246, 0.6);
-}
-
-.floating-home-btn:active {
-    transform: translateX(-50%) scale(0.95);
-}
-
-.floating-home-btn i {
-    font-size: 20px;
-}
-
-/* ============================================
-   SCROLLBAR STYLING
-   ============================================ */
-::-webkit-scrollbar {
-    width: 6px;
-}
-
-::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--border);
-    border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--text-muted);
-}
-
-/* ============================================
-   SELECTION STYLING
-   ============================================ */
-::selection {
-    background: var(--blue-accent);
-    color: #ffffff;
-}
-
-body.light-mode ::selection {
-    background: var(--blue-accent);
-    color: #ffffff;
-}
-
-/* ============================================
-   ACCESSIBILITY
-   ============================================ */
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-}
-
-.option-btn:focus-visible,
-.nav-btn:focus-visible,
-.course-btn:focus-visible,
-.btn-icon:focus-visible,
-.back-link:focus-visible,
-.toggle-solution-btn:focus-visible,
-.floating-home-btn:focus-visible,
-.calc-btn:focus-visible,
-.calc-close-btn:focus-visible {
-    outline: 2px solid var(--blue-accent);
-    outline-offset: 2px;
-}
-
-/* ============================================
-   RESPONSIVE DESIGN
-   ============================================ */
-@media (max-width: 600px) {
-    .app-container {
-        padding: 16px 12px 90px;
-    }
-
-    .question-card {
-        padding: 16px;
-    }
-
-    .question-text {
-        font-size: 15px;
-    }
-
-    .option-btn {
-        font-size: 14px;
-        padding: 12px 14px;
-        gap: 10px;
-    }
-
-    .option-btn .letter {
-        min-width: 28px;
-        height: 28px;
-        font-size: 12px;
-    }
-
-    .option-btn .option-text {
-        padding-top: 2px;
-    }
-
-    .nav-btn {
-        font-size: 13px;
-        padding: 12px;
-    }
-
-    .solution-text {
-        font-size: 13px;
-        padding: 12px;
-    }
-
-    .floating-home-btn {
-        padding: 14px 32px;
-        font-size: 16px;
-        bottom: 24px;
-    }
-
-    .header-text h1 {
-        font-size: 16px;
-    }
-
-    .header-text h2 {
-        font-size: 10px;
-    }
-
-    .logo-circle {
-        width: 36px;
-        height: 36px;
-    }
-
-    .logo-circle img {
-        width: 24px;
-        height: 24px;
-    }
-
-    .btn-icon {
-        width: 34px;
-        height: 34px;
-        font-size: 14px;
-    }
-
-    .page-title {
-        font-size: 20px;
-    }
-
-    .page-subtitle {
-        font-size: 13px;
-    }
-
-    .toast {
-        font-size: 13px;
-        padding: 10px 16px;
-        bottom: 80px;
-    }
-
-    .toggle-solution-btn {
-        font-size: 12px;
-        padding: 6px 16px;
-    }
-
-    .calculator-container {
-        padding: 16px;
-        max-width: 340px;
-    }
-
-    .calc-btn {
-        padding: 10px;
-        font-size: 0.9rem;
-    }
-}
-
-@media (max-width: 380px) {
-    .course-btn .course-status {
-        margin-left: 0;
-        width: 100%;
-    }
-
-    .floating-home-btn {
-        padding: 12px 24px;
-        font-size: 14px;
-        gap: 8px;
-        bottom: 20px;
-    }
-
-    .floating-home-btn i {
-        font-size: 16px;
-    }
-
-    .option-btn {
-        font-size: 13px;
-        padding: 10px 12px;
-    }
-
-    .question-card {
-        padding: 14px;
-    }
-
-    .header-left {
-        gap: 8px;
-    }
-
-    .calculator-container {
-        padding: 12px;
-        max-width: 300px;
-    }
-
-    .calc-btn {
-        padding: 8px;
-        font-size: 0.85rem;
-    }
-}
-
-/* ============================================
-   PRINT STYLES
-   ============================================ */
-@media print {
-    .floating-home-btn,
-    .nav-controls,
-    .toggle-solution-btn,
-    .btn-icon,
-    .toast,
-    .calculator-modal {
-        display: none !important;
-    }
-
-    body {
-        background: white !important;
-        color: black !important;
-    }
-
-    .question-card {
-        border: 1px solid #ddd;
-        box-shadow: none;
-        break-inside: avoid;
-    }
-
-    .option-btn {
-        border: 1px solid #ddd;
-    }
-
-    .solution-text {
-        display: block !important;
-    }
+body.light-mode .calc-btn.function {
+    background: #dbeafe;
+    color: #3b82f6;
 }
