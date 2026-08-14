@@ -1,6 +1,6 @@
 // ============================================
 // STUDY MODE - OAU CBE Practice
-// FINAL FIXED VERSION - Auto-wraps LaTeX
+// With Scientific Calculator
 // ============================================
 
 // ==================== CONFIGURATION ====================
@@ -23,6 +23,10 @@ let totalQuestions = 0;
 let score = 0;
 let currentCourse = null;
 
+// Calculator State
+let calcExpression = '';
+let calcHistory = [];
+
 // ==================== DOM REFS ====================
 const $ = (id) => document.getElementById(id);
 
@@ -41,37 +45,143 @@ const scoreDisplay = $('score-display');
 const questionCard = $('question-card');
 const loadingOverlay = document.querySelector('.loading-overlay');
 
-// ==================== LATEX HELPER - AUTO WRAPS RAW LATEX ====================
+// ==================== CALCULATOR FUNCTIONS ====================
+function toggleCalculator() {
+    const modal = $('calculator-modal');
+    if (modal.style.display === 'none' || !modal.style.display) {
+        modal.style.display = 'flex';
+        setTimeout(() => modal.classList.add('show'), 10);
+    } else {
+        modal.classList.remove('show');
+        setTimeout(() => modal.style.display = 'none', 300);
+    }
+}
+
+function calcFunction(value) {
+    const display = $('calc-display');
+    const conversions = {
+        'PI': 'π',
+        'E': 'e',
+        'sqrt(': '√(',
+        '*': '×',
+        '/': '÷',
+        '-': '−',
+        '^': '^'
+    };
+    
+    calcExpression += value;
+    let displayValue = calcExpression;
+    
+    // Convert operators for display
+    for (const [key, symbol] of Object.entries(conversions)) {
+        displayValue = displayValue.replace(new RegExp(key, 'g'), symbol);
+    }
+    
+    display.value = displayValue;
+    display.scrollLeft = display.scrollWidth;
+}
+
+function calcClear() {
+    calcExpression = '';
+    $('calc-display').value = '';
+    $('calc-history').innerHTML = '';
+    calcHistory = [];
+}
+
+function calcBackspace() {
+    calcExpression = calcExpression.slice(0, -1);
+    const display = $('calc-display');
+    
+    let displayValue = calcExpression;
+    const conversions = {
+        'PI': 'π',
+        'E': 'e',
+        'sqrt(': '√(',
+        '*': '×',
+        '/': '÷',
+        '-': '−'
+    };
+    for (const [key, symbol] of Object.entries(conversions)) {
+        displayValue = displayValue.replace(new RegExp(key, 'g'), symbol);
+    }
+    
+    display.value = displayValue;
+}
+
+function calcEquals() {
+    try {
+        let expression = calcExpression
+            .replace(/×/g, '*')
+            .replace(/÷/g, '/')
+            .replace(/−/g, '-')
+            .replace(/π/g, 'Math.PI')
+            .replace(/√\(/g, 'Math.sqrt(')
+            .replace(/sin\(/g, 'Math.sin(')
+            .replace(/cos\(/g, 'Math.cos(')
+            .replace(/tan\(/g, 'Math.tan(')
+            .replace(/log\(/g, 'Math.log10(')
+            .replace(/ln\(/g, 'Math.log(')
+            .replace(/(\d+)!/g, 'factorial($1)')
+            .replace(/\^/g, '**');
+        
+        const result = eval(expression);
+        
+        let formattedResult;
+        if (Number.isInteger(result)) {
+            formattedResult = result.toString();
+        } else if (Math.abs(result) > 1e10 || Math.abs(result) < 1e-10) {
+            formattedResult = result.toExponential(6);
+        } else {
+            formattedResult = result.toFixed(8).replace(/\.?0+$/, '');
+        }
+        
+        const historyEntry = `${calcExpression} = ${formattedResult}`;
+        calcHistory.push(historyEntry);
+        if (calcHistory.length > 3) calcHistory.shift();
+        
+        $('calc-display').value = formattedResult;
+        $('calc-history').innerHTML = calcHistory.map(h => 
+            `<div class="calc-history-item">${h}</div>`
+        ).join('');
+        
+        calcExpression = formattedResult;
+    } catch (error) {
+        $('calc-display').value = 'Error';
+        calcExpression = '';
+        setTimeout(() => {
+            $('calc-display').value = '';
+        }, 1000);
+    }
+}
+
+function factorial(n) {
+    if (n < 0) return NaN;
+    if (n === 0 || n === 1) return 1;
+    let result = 1;
+    for (let i = 2; i <= n; i++) {
+        result *= i;
+    }
+    return result;
+}
+
+// ==================== LATEX HELPER ====================
 function wrapLatex(text) {
     if (!text) return text;
-    
-    // If already wrapped in \(...\) or $...$, return as-is
     if (/\\\(.*\\\)/.test(text) || /\$.*\$/.test(text)) {
         return text;
     }
-    
-    // If text contains LaTeX commands (starts with \ or contains \frac, \sqrt, etc.)
-    // but is NOT pure text (contains backslash commands)
     if (/\\[a-zA-Z]/.test(text)) {
         return '\\(\\displaystyle ' + text + '\\)';
     }
-    
     return text;
 }
 
 function formatSolution(solution) {
     if (!solution) return 'No explanation provided.';
-    
-    // Replace newlines with <br>
     let formatted = solution.replace(/\n/g, '<br>');
-    
-    // Bold step headers
     formatted = formatted.replace(/(Step \d+:)/g, '<strong>$1</strong>');
-    
-    // Highlight correct answer
     formatted = formatted.replace(/(Correct Answer:.*)/g, '<span style="color: var(--green, #10b981); font-weight: 600;">$1</span>');
     formatted = formatted.replace(/(ANSWER:.*)/g, '<span style="color: var(--green, #10b981); font-weight: 600;">$1</span>');
-    
     return formatted;
 }
 
@@ -210,15 +320,12 @@ function renderQuestion() {
     const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
     isAnswered = false;
 
-    // Reset solution
     if (solutionContainer) solutionContainer.style.display = 'none';
     if (solutionText) { solutionText.innerHTML = ''; solutionText.style.display = 'none'; }
     if (toggleSolutionBtn) toggleSolutionBtn.textContent = '💡 Show Solution';
 
-    // Set question
     if (questionText) questionText.innerHTML = q.question;
 
-    // BUILD OPTIONS WITH AUTO-WRAPPED LATEX
     if (optionsContainer) {
         optionsContainer.innerHTML = q.options.map((opt, i) => `
             <button class="option-btn" data-index="${i}" onclick="selectOption(${i})">
@@ -228,17 +335,14 @@ function renderQuestion() {
         `).join('');
     }
 
-    // Progress
     const answered = currentQuestions.filter(q => q.userAnswer !== undefined && q.userAnswer !== null).length;
     if (progressText) progressText.textContent = `Question ${currentIndex + 1} of ${totalQuestions}`;
     if (scoreDisplay) scoreDisplay.textContent = `✅ ${answered}/${totalQuestions}`;
     if (progressFill) progressFill.style.width = `${((currentIndex + 1) / totalQuestions) * 100}%`;
 
-    // Navigation
     if (prevBtn) prevBtn.disabled = currentIndex === 0;
     if (nextBtn) { nextBtn.disabled = false; nextBtn.textContent = currentIndex === totalQuestions - 1 ? '🎯 Finish' : 'Next →'; }
 
-    // Render MathJax
     renderMath([questionText, optionsContainer]);
 }
 
@@ -258,7 +362,6 @@ function selectOption(index) {
     isAnswered = true;
     if (isCorrect) score++;
 
-    // Style buttons
     const btns = optionsContainer.querySelectorAll('.option-btn');
     btns.forEach((btn, i) => {
         btn.classList.add('disabled');
@@ -267,7 +370,6 @@ function selectOption(index) {
         if (i === index) btn.classList.add('selected');
     });
 
-    // Show solution
     if (solutionContainer) solutionContainer.style.display = 'block';
     if (solutionText) {
         solutionText.innerHTML = formatSolution(q.solution);
@@ -275,14 +377,11 @@ function selectOption(index) {
     }
     if (toggleSolutionBtn) toggleSolutionBtn.textContent = '🙈 Hide Solution';
 
-    // Update score
     const answered = currentQuestions.filter(q => q.userAnswer !== undefined && q.userAnswer !== null).length;
     if (scoreDisplay) scoreDisplay.textContent = `✅ ${answered}/${totalQuestions}`;
 
-    // Render MathJax
     renderMath([solutionText]);
 
-    // Toast
     const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
     if (isCorrect) showToast('✅ Correct! Well done!', 'success');
     else showToast(`❌ Incorrect. Answer is ${letters[q.correct]}`, 'error');
@@ -290,10 +389,19 @@ function selectOption(index) {
 
 // ==================== NAVIGATION ====================
 function prevQuestion() {
-    if (currentIndex > 0) { currentIndex--; renderQuestion(); questionCard?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    if (currentIndex > 0) { 
+        currentIndex--; 
+        renderQuestion(); 
+        questionCard?.scrollIntoView({ behavior: 'smooth', block: 'start' }); 
+    }
 }
+
 function nextQuestion() {
-    if (currentIndex < totalQuestions - 1) { currentIndex++; renderQuestion(); questionCard?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    if (currentIndex < totalQuestions - 1) { 
+        currentIndex++; 
+        renderQuestion(); 
+        questionCard?.scrollIntoView({ behavior: 'smooth', block: 'start' }); 
+    }
     else showComplete();
 }
 
@@ -320,23 +428,82 @@ function showComplete() {
 }
 
 // ==================== RESTART & BACK ====================
-function restartTopic() { currentIndex = 0; score = 0; currentQuestions.forEach(q => q.userAnswer = undefined); isAnswered = false; renderQuestion(); showToast('🔄 Restarted!', 'info'); }
-function backToMenu() { $('study-screen').style.display = 'none'; $('course-selection-screen').style.display = 'block'; currentQuestions = []; currentIndex = 0; totalQuestions = 0; score = 0; showToast('↩️ Back to courses', 'info'); }
+function restartTopic() { 
+    currentIndex = 0; 
+    score = 0; 
+    currentQuestions.forEach(q => q.userAnswer = undefined); 
+    isAnswered = false; 
+    renderQuestion(); 
+    showToast('🔄 Restarted!', 'info'); 
+}
+
+function backToMenu() { 
+    $('study-screen').style.display = 'none'; 
+    $('course-selection-screen').style.display = 'block'; 
+    currentQuestions = []; 
+    currentIndex = 0; 
+    totalQuestions = 0; 
+    score = 0; 
+    showToast('↩️ Back to courses', 'info'); 
+}
 
 // ==================== EVENT LISTENERS ====================
 if (prevBtn) prevBtn.addEventListener('click', prevQuestion);
 if (nextBtn) nextBtn.addEventListener('click', nextQuestion);
 if (backBtn) backBtn.addEventListener('click', backToMenu);
+
 if (toggleSolutionBtn) {
     toggleSolutionBtn.addEventListener('click', () => {
         if (solutionText) {
             const isVisible = solutionText.style.display === 'block';
-            if (isVisible) { solutionText.style.display = 'none'; toggleSolutionBtn.textContent = '💡 Show Solution'; }
-            else { solutionText.style.display = 'block'; toggleSolutionBtn.textContent = '🙈 Hide Solution'; renderMath([solutionText]); }
+            if (isVisible) { 
+                solutionText.style.display = 'none'; 
+                toggleSolutionBtn.textContent = '💡 Show Solution'; 
+            }
+            else { 
+                solutionText.style.display = 'block'; 
+                toggleSolutionBtn.textContent = '🙈 Hide Solution'; 
+                renderMath([solutionText]); 
+            }
         }
     });
 }
+
+// Keyboard shortcuts
 document.addEventListener('keydown', (e) => {
+    // Calculator shortcuts
+    const calculatorModal = $('calculator-modal');
+    const isCalculatorOpen = calculatorModal && calculatorModal.style.display !== 'none';
+    
+    if (isCalculatorOpen) {
+        if (e.key === 'Escape') {
+            toggleCalculator();
+            return;
+        }
+        if (e.key === 'Enter' || e.key === '=') {
+            e.preventDefault();
+            calcEquals();
+            return;
+        }
+        if (e.key === 'Backspace') {
+            e.preventDefault();
+            calcBackspace();
+            return;
+        }
+        if (e.key === 'Delete') {
+            e.preventDefault();
+            calcClear();
+            return;
+        }
+        const validKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '+', '-', '*', '/', '(', ')', '^'];
+        if (validKeys.includes(e.key)) {
+            e.preventDefault();
+            calcFunction(e.key);
+            return;
+        }
+    }
+    
+    // Study mode shortcuts
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
     if (e.key === 'ArrowLeft' && prevBtn && !prevBtn.disabled) { e.preventDefault(); prevQuestion(); }
     if (e.key === 'ArrowRight' && nextBtn && !nextBtn.disabled) { e.preventDefault(); nextQuestion(); }
@@ -349,7 +516,14 @@ document.addEventListener('keydown', (e) => {
 });
 
 // ==================== UTILITY ====================
-function shuffleArray(arr) { const s = [...arr]; for (let i = s.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [s[i], s[j]] = [s[j], s[i]]; } return s; }
+function shuffleArray(arr) { 
+    const s = [...arr]; 
+    for (let i = s.length - 1; i > 0; i--) { 
+        const j = Math.floor(Math.random() * (i + 1)); 
+        [s[i], s[j]] = [s[j], s[i]]; 
+    } 
+    return s; 
+}
 
 // ==================== EXPOSE GLOBALS ====================
 window.selectCourse = selectCourse;
@@ -359,7 +533,22 @@ window.nextQuestion = nextQuestion;
 window.backToMenu = backToMenu;
 window.restartTopic = restartTopic;
 window.toggleTheme = toggleTheme;
+window.toggleCalculator = toggleCalculator;
+window.calcFunction = calcFunction;
+window.calcClear = calcClear;
+window.calcBackspace = calcBackspace;
+window.calcEquals = calcEquals;
 
 // ==================== INIT ====================
-function init() { console.log('🚀 Study Mode initializing...'); initTheme(); renderCourses(); console.log('📚 Study Mode loaded!'); }
-if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
+function init() { 
+    console.log('🚀 Study Mode initializing...'); 
+    initTheme(); 
+    renderCourses(); 
+    console.log('📚 Study Mode loaded!'); 
+}
+
+if (document.readyState === 'loading') { 
+    document.addEventListener('DOMContentLoaded', init); 
+} else { 
+    init(); 
+}
