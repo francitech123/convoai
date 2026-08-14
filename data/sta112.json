@@ -1924,7 +1924,7 @@
 
   {
     "id": 161,
-    "question": "Evaluate \(6!\) (6 factorial).",
+    "question": "Evaluate \\(6!\\) (6 factorial).",
     "options": ["120", "360", "720", "5040"],
     "solution": "Step 1: Write out the factorial formula: \\(n! = n \\times (n-1) \\times (n-2) \\times \\dots \\times 1\\).\nStep 2: Calculate \\(6! = 6 \\times 5 \\times 4 \\times 3 \\times 2 \\times 1\\).\nStep 3: \\(6 \\times 5 = 30\\), \\(30 \\times 4 = 120\\), \\(120 \\times 3 = 360\\), \\(360 \\times 2 = 720\\).\n\\(6! = 720\\).\nCorrect Answer: (c)"
   },
