@@ -1,6 +1,6 @@
 // ============================================
 // STUDY MODE - OAU CBE Practice
-// With Scientific Calculator
+// With Scientific Calculator - FIXED
 // ============================================
 
 // ==================== CONFIGURATION ====================
@@ -45,71 +45,63 @@ const scoreDisplay = $('score-display');
 const questionCard = $('question-card');
 const loadingOverlay = document.querySelector('.loading-overlay');
 
-// ==================== CALCULATOR FUNCTIONS ====================
+// ==================== CALCULATOR FUNCTIONS - FIXED ====================
 function toggleCalculator() {
     const modal = $('calculator-modal');
     if (modal.style.display === 'none' || !modal.style.display) {
         modal.style.display = 'flex';
-        setTimeout(() => modal.classList.add('show'), 10);
+        setTimeout(() => {
+            modal.classList.add('show');
+            // Focus on display
+            const display = $('calc-display');
+            if (display) display.focus();
+        }, 10);
     } else {
         modal.classList.remove('show');
-        setTimeout(() => modal.style.display = 'none', 300);
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 300);
     }
 }
 
-function calcFunction(value) {
+function calcInput(value) {
     const display = $('calc-display');
-    const conversions = {
-        'PI': 'π',
-        'E': 'e',
-        'sqrt(': '√(',
-        '*': '×',
-        '/': '÷',
-        '-': '−',
-        '^': '^'
-    };
+    if (!display) return;
     
+    // Append the value to the expression
     calcExpression += value;
-    let displayValue = calcExpression;
     
-    // Convert operators for display
-    for (const [key, symbol] of Object.entries(conversions)) {
-        displayValue = displayValue.replace(new RegExp(key, 'g'), symbol);
-    }
+    // Update display with formatted version
+    display.value = calcExpression;
     
-    display.value = displayValue;
+    // Auto-scroll to end
     display.scrollLeft = display.scrollWidth;
+    
+    // Log for debugging
+    console.log('Calculator input:', value, 'Expression:', calcExpression);
 }
 
 function calcClear() {
     calcExpression = '';
-    $('calc-display').value = '';
-    $('calc-history').innerHTML = '';
+    const display = $('calc-display');
+    if (display) display.value = '';
+    const history = $('calc-history');
+    if (history) history.innerHTML = '';
     calcHistory = [];
 }
 
 function calcBackspace() {
     calcExpression = calcExpression.slice(0, -1);
     const display = $('calc-display');
-    
-    let displayValue = calcExpression;
-    const conversions = {
-        'PI': 'π',
-        'E': 'e',
-        'sqrt(': '√(',
-        '*': '×',
-        '/': '÷',
-        '-': '−'
-    };
-    for (const [key, symbol] of Object.entries(conversions)) {
-        displayValue = displayValue.replace(new RegExp(key, 'g'), symbol);
-    }
-    
-    display.value = displayValue;
+    if (display) display.value = calcExpression;
 }
 
 function calcEquals() {
+    const display = $('calc-display');
+    if (!display) return;
+    
     try {
+        // Convert to JavaScript evaluable expression
         let expression = calcExpression
             .replace(/×/g, '*')
             .replace(/÷/g, '/')
@@ -124,8 +116,10 @@ function calcEquals() {
             .replace(/(\d+)!/g, 'factorial($1)')
             .replace(/\^/g, '**');
         
+        // Evaluate the expression
         const result = eval(expression);
         
+        // Format the result
         let formattedResult;
         if (Number.isInteger(result)) {
             formattedResult = result.toString();
@@ -135,21 +129,30 @@ function calcEquals() {
             formattedResult = result.toFixed(8).replace(/\.?0+$/, '');
         }
         
+        // Add to history
         const historyEntry = `${calcExpression} = ${formattedResult}`;
         calcHistory.push(historyEntry);
         if (calcHistory.length > 3) calcHistory.shift();
         
-        $('calc-display').value = formattedResult;
-        $('calc-history').innerHTML = calcHistory.map(h => 
-            `<div class="calc-history-item">${h}</div>`
-        ).join('');
+        // Update display
+        display.value = formattedResult;
+        const historyEl = $('calc-history');
+        if (historyEl) {
+            historyEl.innerHTML = calcHistory.map(h => 
+                `<div class="calc-history-item">${h}</div>`
+            ).join('');
+        }
         
+        // Set result as new expression
         calcExpression = formattedResult;
+        
+        console.log('Calculator result:', formattedResult);
     } catch (error) {
-        $('calc-display').value = 'Error';
+        console.error('Calculator error:', error);
+        display.value = 'Error';
         calcExpression = '';
         setTimeout(() => {
-            $('calc-display').value = '';
+            display.value = '';
         }, 1000);
     }
 }
@@ -162,6 +165,17 @@ function factorial(n) {
         result *= i;
     }
     return result;
+}
+
+// ==================== UPDATE COURSE BANNER ====================
+function updateCourseBanner(course) {
+    const bannerIcon = $('course-banner-icon');
+    const bannerCode = $('course-banner-code');
+    const bannerName = $('course-banner-name');
+    
+    if (bannerIcon) bannerIcon.textContent = course.icon || '📚';
+    if (bannerCode) bannerCode.textContent = course.code;
+    if (bannerName) bannerName.textContent = course.name;
 }
 
 // ==================== LATEX HELPER ====================
@@ -267,10 +281,16 @@ async function selectCourse(courseId) {
 
     try {
         currentCourse = COURSES.find(c => c.id === courseId);
-        if (!currentCourse) { showToast('Course not found', 'error'); return; }
+        if (!currentCourse) { 
+            showToast('Course not found', 'error'); 
+            return; 
+        }
 
         const response = await fetch(`/data/${currentCourse.file}`);
-        if (!response.ok) { showToast(`Could not load ${currentCourse.code}`, 'error'); return; }
+        if (!response.ok) { 
+            showToast(`Could not load ${currentCourse.code}`, 'error'); 
+            return; 
+        }
 
         const data = await response.json();
         let questions = null;
@@ -278,7 +298,10 @@ async function selectCourse(courseId) {
         else if (data?.questions?.length > 0) questions = data.questions;
         else if (data?.data?.length > 0) questions = data.data;
 
-        if (!questions || !questions.length) { showToast('No valid questions found', 'error'); return; }
+        if (!questions || !questions.length) { 
+            showToast('No valid questions found', 'error'); 
+            return; 
+        }
 
         questions = questions.map(q => ({
             ...q,
@@ -290,6 +313,9 @@ async function selectCourse(courseId) {
         totalQuestions = currentQuestions.length;
         score = 0;
         isAnswered = false;
+
+        // Update course banner
+        updateCourseBanner(currentCourse);
 
         $('course-selection-screen').style.display = 'none';
         $('study-screen').style.display = 'block';
@@ -321,7 +347,10 @@ function renderQuestion() {
     isAnswered = false;
 
     if (solutionContainer) solutionContainer.style.display = 'none';
-    if (solutionText) { solutionText.innerHTML = ''; solutionText.style.display = 'none'; }
+    if (solutionText) { 
+        solutionText.innerHTML = ''; 
+        solutionText.style.display = 'none'; 
+    }
     if (toggleSolutionBtn) toggleSolutionBtn.textContent = '💡 Show Solution';
 
     if (questionText) questionText.innerHTML = q.question;
@@ -341,7 +370,10 @@ function renderQuestion() {
     if (progressFill) progressFill.style.width = `${((currentIndex + 1) / totalQuestions) * 100}%`;
 
     if (prevBtn) prevBtn.disabled = currentIndex === 0;
-    if (nextBtn) { nextBtn.disabled = false; nextBtn.textContent = currentIndex === totalQuestions - 1 ? '🎯 Finish' : 'Next →'; }
+    if (nextBtn) { 
+        nextBtn.disabled = false; 
+        nextBtn.textContent = currentIndex === totalQuestions - 1 ? '🎯 Finish' : 'Next →'; 
+    }
 
     renderMath([questionText, optionsContainer]);
 }
@@ -498,7 +530,7 @@ document.addEventListener('keydown', (e) => {
         const validKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '+', '-', '*', '/', '(', ')', '^'];
         if (validKeys.includes(e.key)) {
             e.preventDefault();
-            calcFunction(e.key);
+            calcInput(e.key);
             return;
         }
     }
@@ -534,7 +566,7 @@ window.backToMenu = backToMenu;
 window.restartTopic = restartTopic;
 window.toggleTheme = toggleTheme;
 window.toggleCalculator = toggleCalculator;
-window.calcFunction = calcFunction;
+window.calcInput = calcInput;
 window.calcClear = calcClear;
 window.calcBackspace = calcBackspace;
 window.calcEquals = calcEquals;
