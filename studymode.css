@@ -39,7 +39,7 @@ body {
 .app-container {
     max-width: 800px;
     margin: 0 auto;
-    padding: 20px 16px 100px; /* Extra padding for bottom floating button */
+    padding: 20px 16px 100px;
 }
 
 /* ============================================
@@ -94,13 +94,12 @@ body.light-mode .logo-circle {
     font-weight: 700;
 }
 
-/* Header Actions (Right Side) */
 .header-actions {
     display: flex;
     align-items: center;
     gap: 10px;
     flex: 1;
-    justify-content: flex-end; /* Pushes everything to the right */
+    justify-content: flex-end;
 }
 
 .btn-icon {
@@ -122,7 +121,6 @@ body.light-mode .logo-circle {
     border-color: var(--blue-accent);
 }
 
-/* CALCULATOR BUTTON - Pushed to the far right */
 .calc-btn {
     width: 40px;
     height: 40px;
@@ -136,7 +134,7 @@ body.light-mode .logo-circle {
     font-size: 18px;
     cursor: pointer;
     transition: 0.2s;
-    margin-left: auto; /* This pushes it to the absolute far right end */
+    margin-left: auto;
 }
 
 .calc-btn:hover {
@@ -281,13 +279,12 @@ body.light-mode .logo-circle {
 .nav-btn.prev { background: var(--bg-card); border: 1px solid var(--border); color: var(--text); }
 .nav-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-/* Progress Bar */
 .progress-top { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-muted); margin-bottom: 6px; }
 .progress-bg { height: 4px; background: var(--border); border-radius: 4px; }
 .progress-fill { height: 100%; background: var(--blue-accent); border-radius: 4px; width: 0%; transition: width 0.3s ease; }
 
 /* ============================================
-   FLOATING HOME BUTTON (Bottom Center)
+   FLOATING HOME BUTTON
    ============================================ */
 .floating-home-btn {
     position: fixed;
