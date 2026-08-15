@@ -207,10 +207,12 @@
     .toast .toast-icon.success{color:var(--success)}
     .toast .toast-icon.error{color:var(--danger)}
     .toast .toast-icon.info{color:var(--primary-light)}
+    .study-topic-item{position:relative}
     .study-topic-item .topic-spinner{display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:1.2rem;color:var(--primary-light)}
     .study-topic-item.loading .topic-spinner{display:block}
     .study-topic-item.loading .topic-info{opacity:.3}
     .study-topic-item.loading .topic-arrow{opacity:.3}
+    .study-course-card{position:relative}
     .study-course-card .card-spinner{display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:1.2rem;color:var(--primary-light)}
     .study-course-card.loading .card-spinner{display:block}
     .study-course-card.loading .card-content{opacity:.3}
@@ -1088,7 +1090,6 @@
 </script>
 
 <script type="module">
-import { initApp } from '/js/app.js';
 import * as utils from '/js/utils.js';
 import * as notifications from '/js/notifications.js';
 import * as dashboard from '/js/dashboard.js';
@@ -1107,7 +1108,11 @@ import * as app from '/js/app.js';
 Object.assign(window, utils, notifications, dashboard, exam, test, profile, ai, faq, leaderboard, chat, submit, results, app);
 
 // Initialize the app
-initApp();
+if (typeof app.initApp === 'function') {
+  app.initApp();
+} else {
+  console.error('initApp function not found in app.js');
+}
 </script>
 
 </body>
