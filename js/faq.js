@@ -9,6 +9,8 @@ const FAQ_DATA = [
   { category: "exam", question: "What happens if I switch tabs during an exam?", answer: "⚠️ First tab switch: Warning message\n⚠️ Second tab switch: Exam auto-submits\n\nThis prevents cheating and ensures fair assessment. Always stay on the exam tab until completion!" },
   { category: "exam", question: "Can I pause an exam?", answer: "No, exams cannot be paused once started. The timer continues running even if you close the browser. Make sure you have uninterrupted time before starting an exam." },
   { category: "exam", question: "What happens if I lose internet during an exam?", answer: "If your internet disconnects:\n1. The timer continues counting\n2. Your answers are saved locally\n3. Try to reconnect quickly\n4. If reconnection fails, the exam will auto-submit with your current answers\n\nWe recommend a stable internet connection before starting." },
+
+{ category: "payment", question: "Do I Need To Pay For Premium Subscription?", answer: "App Is 100% Free No Payment Needed},
   
   { category: "test", question: "How is Test Mode different from Exam Mode?", answer: "Test Mode is for learning:\n• 💡 Hints available for each question\n• ⏱️ Still timed, but more relaxed\n• ✅ No leaderboard impact\n• 📚 Great for practice and learning\n• 🧪 Includes explanations for answers\n\nUse Test Mode to master topics before attempting Exam Mode!" },
   { category: "test", question: "Can I use hints during a test?", answer: "Yes! Test Mode includes a 'Show Hint' button for each question. Hints provide guidance without giving away the full answer - perfect for learning!" },
