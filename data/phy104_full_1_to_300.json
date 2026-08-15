@@ -1,0 +1,3302 @@
+[
+  {
+    "id": 1,
+    "question": "Which of the following best defines Simple Harmonic Motion (SHM)?",
+    "options": [
+      "Motion with constant velocity along a straight line",
+      "Motion in which acceleration is constant in magnitude and direction",
+      "Circular motion with constant angular speed",
+      "Motion in which the restoring force is directly proportional to the displacement and directed towards the equilibrium position"
+    ],
+    "solution": "Step 1: SHM is a special type of oscillatory motion.\nStep 2: The defining condition is that the restoring force (or acceleration) is proportional to displacement and opposite in direction (F = –kx).\nStep 3: This leads to sinusoidal displacement, velocity and acceleration.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 2,
+    "question": "Hooke’s law for a spring states that the restoring force is given by:",
+    "options": [
+      "F = –k/x",
+      "F = –kx",
+      "F = kx",
+      "F = k/x"
+    ],
+    "solution": "Step 1: Hooke’s law describes the force exerted by a spring.\nStep 2: The force is proportional to the extension (or compression) x and is always directed opposite to the displacement.\nStep 3: Hence F = –kx, where k is the spring constant.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 3,
+    "question": "In the equation F = –kx, the negative sign indicates that:",
+    "options": [
+      "The displacement is always negative",
+      "The spring constant is negative",
+      "The force is a restoring force directed opposite to the displacement",
+      "The force is always attractive"
+    ],
+    "solution": "Step 1: The spring force always tries to return the system to equilibrium.\nStep 2: When x is positive (stretched), F is negative (pulls back); when x is negative (compressed), F is positive.\nStep 3: The negative sign therefore shows that F is a restoring force.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 4,
+    "question": "The SI unit of the spring constant k is:",
+    "options": [
+      "N m",
+      "N m⁻²",
+      "kg s⁻²",
+      "N m⁻¹"
+    ],
+    "solution": "Step 1: From F = –kx, k = –F/x.\nStep 2: Force has unit newton (N) and displacement has unit metre (m).\nStep 3: Therefore k has unit N m⁻¹.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 5,
+    "question": "The period of a mass-spring system executing SHM is given by:",
+    "options": [
+      "T = 2π m/k",
+      "T = 2π √(k/m)",
+      "T = 2π √(m k)",
+      "T = 2π √(m/k)"
+    ],
+    "solution": "Step 1: Angular frequency ω = √(k/m).\nStep 2: Period T = 2π/ω.\nStep 3: Substituting gives T = 2π √(m/k).\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 6,
+    "question": "The frequency of oscillation of a mass-spring system is:",
+    "options": [
+      "f = 2π √(k/m)",
+      "f = (1/(2π)) √(k/m)",
+      "f = √(k/m)",
+      "f = (1/(2π)) √(m/k)"
+    ],
+    "solution": "Step 1: Frequency f = 1/T.\nStep 2: Since T = 2π √(m/k), f = (1/(2π)) √(k/m).\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 7,
+    "question": "The angular frequency ω of a simple harmonic oscillator is:",
+    "options": [
+      "ω = √(k/m)",
+      "ω = k/m",
+      "ω = 2π √(k/m)",
+      "ω = √(m/k)"
+    ],
+    "solution": "Step 1: From the equation of motion a = –(k/m)x.\nStep 2: Comparing with a = –ω²x yields ω² = k/m, so ω = √(k/m).\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 8,
+    "question": "The displacement of a particle in SHM can be written as:",
+    "options": [
+      "x = At + B",
+      "x = A cos(ωt + φ)",
+      "x = A sin(ωt) + B cos(ωt) only",
+      "x = A e^(–ωt)"
+    ],
+    "solution": "Step 1: The general solution of the SHM differential equation is a sinusoidal function.\nStep 2: It is commonly written as x = A cos(ωt + φ), where A is amplitude and φ is the phase constant.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 9,
+    "question": "In SHM, the maximum displacement from the equilibrium position is called the:",
+    "options": [
+      "Phase",
+      "Amplitude",
+      "Period",
+      "Frequency"
+    ],
+    "solution": "Step 1: The extreme positions of the oscillating particle are at +A and –A.\nStep 2: The maximum displacement from equilibrium is therefore the amplitude A.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 10,
+    "question": "The velocity of a particle in SHM is maximum at:",
+    "options": [
+      "Halfway between equilibrium and extreme position",
+      "The equilibrium position",
+      "The extreme positions",
+      "Any arbitrary point"
+    ],
+    "solution": "Step 1: From v = ±ω √(A² – x²), velocity is maximum when x = 0.\nStep 2: x = 0 corresponds to the equilibrium (mean) position.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 11,
+    "question": "The acceleration of a particle in SHM is maximum at:",
+    "options": [
+      "The equilibrium position",
+      "When velocity is maximum",
+      "The extreme positions",
+      "Halfway between equilibrium and extreme"
+    ],
+    "solution": "Step 1: Acceleration a = –ω²x.\nStep 2: |a| is maximum when |x| is maximum, i.e., at the extreme positions.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 12,
+    "question": "The total mechanical energy of a simple harmonic oscillator is:",
+    "options": [
+      "E = ½ k x²",
+      "E = ½ m v²",
+      "E = ½ m ω²",
+      "E = ½ k A²"
+    ],
+    "solution": "Step 1: At the extreme position, all energy is potential: ½ k A².\nStep 2: At the mean position, all energy is kinetic: ½ m v_max² = ½ k A².\nStep 3: Total energy is therefore constant and equal to ½ k A².\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 13,
+    "question": "The kinetic energy of a particle in SHM is maximum when its potential energy is:",
+    "options": [
+      "Minimum (zero if mean position is taken as zero PE)",
+      "Equal to kinetic energy",
+      "Constant",
+      "Maximum"
+    ],
+    "solution": "Step 1: Total energy E = KE + PE = constant.\nStep 2: When KE is maximum, PE must be minimum.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 14,
+    "question": "At the mean position of a simple harmonic oscillator:",
+    "options": [
+      "Both kinetic and potential energies are zero",
+      "Potential energy is maximum and kinetic energy is minimum",
+      "Kinetic energy is maximum and potential energy is minimum",
+      "Both kinetic and potential energies are maximum"
+    ],
+    "solution": "Step 1: At mean position x = 0, PE = ½ kx² = 0 (taking mean as zero).\nStep 2: All energy appears as kinetic energy, which is therefore maximum.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 15,
+    "question": "The velocity of a particle executing SHM at displacement x from the mean position is:",
+    "options": [
+      "v = ±ω A",
+      "v = ±ω (A – x)",
+      "v = ±ω √(A² – x²)",
+      "v = ±ω √(x² – A²)"
+    ],
+    "solution": "Step 1: From energy conservation: ½ k A² = ½ m v² + ½ k x².\nStep 2: Solving for v gives v = ±ω √(A² – x²), where ω = √(k/m).\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 16,
+    "question": "The maximum velocity of a particle in SHM of amplitude A and angular frequency ω is:",
+    "options": [
+      "v_max = ω A",
+      "v_max = ω² A",
+      "v_max = A/ω",
+      "v_max = ω/A"
+    ],
+    "solution": "Step 1: From v = ω √(A² – x²), maximum occurs at x = 0.\nStep 2: Therefore v_max = ω A.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 17,
+    "question": "The maximum acceleration of a particle in SHM is:",
+    "options": [
+      "a_max = ω/A",
+      "a_max = A/ω²",
+      "a_max = ω² A",
+      "a_max = ω A"
+    ],
+    "solution": "Step 1: Acceleration a = –ω² x.\nStep 2: Maximum magnitude occurs when |x| = A, so a_max = ω² A.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 18,
+    "question": "If the amplitude of a simple harmonic oscillator is doubled, its total energy becomes:",
+    "options": [
+      "Unchanged",
+      "Four times the original energy",
+      "Half the original energy",
+      "Twice the original energy"
+    ],
+    "solution": "Step 1: Total energy E = ½ k A².\nStep 2: If A → 2A, then E → ½ k (2A)² = 4 × (½ k A²).\nStep 3: Energy becomes four times.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 19,
+    "question": "If the mass of a simple harmonic oscillator is quadrupled while keeping k constant, the period becomes:",
+    "options": [
+      "Unchanged",
+      "Four times the original period",
+      "Half the original period",
+      "Twice the original period"
+    ],
+    "solution": "Step 1: T = 2π √(m/k).\nStep 2: If m → 4m, √(4m/k) = 2 √(m/k).\nStep 3: Period doubles.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 20,
+    "question": "The phase constant φ in the equation x = A cos(ωt + φ) determines:",
+    "options": [
+      "The frequency of oscillation",
+      "The amplitude of the motion",
+      "The total energy of the system",
+      "The initial position and direction of motion of the particle"
+    ],
+    "solution": "Step 1: At t = 0, x(0) = A cos φ.\nStep 2: The value of φ fixes the starting position and the initial velocity direction.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 21,
+    "question": "The time period of a simple pendulum of length L is approximately:",
+    "options": [
+      "T = 2π √(L g)",
+      "T = 2π L/g",
+      "T = 2π √(L/g)",
+      "T = 2π √(g/L)"
+    ],
+    "solution": "Step 1: For small angles the restoring torque leads to SHM with ω = √(g/L).\nStep 2: Therefore T = 2π/ω = 2π √(L/g).\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 22,
+    "question": "For a simple pendulum, the motion is approximately SHM only when:",
+    "options": [
+      "The length is very large",
+      "The mass is very small",
+      "The pendulum is in vacuum",
+      "The angular amplitude is small (θ ≪ 1 radian)"
+    ],
+    "solution": "Step 1: The exact equation is θ̈ + (g/L) sin θ = 0.\nStep 2: For small θ, sin θ ≈ θ, recovering the SHM equation.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 23,
+    "question": "The potential energy of a spring stretched by x is:",
+    "options": [
+      "k x²",
+      "½ k x",
+      "k x",
+      "½ k x²"
+    ],
+    "solution": "Step 1: Work done in stretching the spring from 0 to x is ∫ F dx = ∫ kx dx = ½ k x².\nStep 2: This work is stored as elastic potential energy.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 24,
+    "question": "In SHM the average kinetic energy over one complete cycle is:",
+    "options": [
+      "Zero",
+      "Half the average potential energy",
+      "Equal to the average potential energy",
+      "Twice the average potential energy"
+    ],
+    "solution": "Step 1: Over a full period, 〈KE〉 = 〈PE〉 = E/2.\nStep 2: This follows from the equal sharing of energy between kinetic and potential forms.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 25,
+    "question": "The restoring force in SHM is always directed:",
+    "options": [
+      "Towards the equilibrium (mean) position",
+      "Away from the equilibrium position",
+      "Perpendicular to the displacement",
+      "Along the velocity vector"
+    ],
+    "solution": "Step 1: By definition F = –kx.\nStep 2: The force always points back to x = 0.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 26,
+    "question": "If the displacement of a particle in SHM is given by x = 0.2 cos(10t), the amplitude is:",
+    "options": [
+      "10 m",
+      "0.2 m",
+      "2 m",
+      "0.02 m"
+    ],
+    "solution": "Step 1: Comparing with x = A cos(ωt + φ), A = 0.2 m.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 27,
+    "question": "In the expression x = 0.2 cos(10t), the angular frequency is:",
+    "options": [
+      "2π × 10 rad s⁻¹",
+      "10 rad s⁻¹",
+      "0.2 rad s⁻¹",
+      "10/2π rad s⁻¹"
+    ],
+    "solution": "Step 1: The coefficient of t is ω.\nStep 2: Therefore ω = 10 rad s⁻¹.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 28,
+    "question": "The frequency corresponding to ω = 10 rad s⁻¹ is approximately:",
+    "options": [
+      "62.8 Hz",
+      "10 Hz",
+      "0.1 Hz",
+      "1.59 Hz"
+    ],
+    "solution": "Step 1: f = ω/(2π) = 10/(2π) ≈ 1.59 Hz.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 29,
+    "question": "A particle in SHM has amplitude 4 cm and period 2 s. Its maximum velocity is:",
+    "options": [
+      "2π cm s⁻¹",
+      "π cm s⁻¹",
+      "8π cm s⁻¹",
+      "4π cm s⁻¹"
+    ],
+    "solution": "Step 1: ω = 2π/T = π rad s⁻¹.\nStep 2: v_max = ω A = π × 4 = 4π cm s⁻¹.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 30,
+    "question": "The ratio of maximum velocity to maximum acceleration of a particle in SHM is:",
+    "options": [
+      "ω",
+      "1/ω²",
+      "1/ω",
+      "ω²"
+    ],
+    "solution": "Step 1: v_max = ω A, a_max = ω² A.\nStep 2: v_max / a_max = 1/ω.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 31,
+    "question": "When the displacement of a particle in SHM is half the amplitude, the ratio of kinetic energy to total energy is:",
+    "options": [
+      "1/4",
+      "3/4",
+      "1/2",
+      "1"
+    ],
+    "solution": "Step 1: PE = ½ k (A/2)² = (1/4)(½ k A²) = E/4.\nStep 2: KE = E – PE = 3E/4.\nStep 3: KE/E = 3/4.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 32,
+    "question": "The phase difference between displacement and velocity in SHM is:",
+    "options": [
+      "0",
+      "π",
+      "π/4",
+      "π/2"
+    ],
+    "solution": "Step 1: If x = A cos(ωt), then v = –Aω sin(ωt).\nStep 2: Velocity leads (or lags) displacement by π/2.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 33,
+    "question": "The phase difference between velocity and acceleration in SHM is:",
+    "options": [
+      "3π/2",
+      "0",
+      "π",
+      "π/2"
+    ],
+    "solution": "Step 1: v ∝ –sin(ωt), a ∝ –cos(ωt).\nStep 2: Acceleration and velocity differ in phase by π/2.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 34,
+    "question": "A spring of force constant k is cut into two equal parts. The force constant of each part is:",
+    "options": [
+      "k",
+      "4k",
+      "k/2",
+      "2k"
+    ],
+    "solution": "Step 1: For a uniform spring, k ∝ 1/L.\nStep 2: Halving the length doubles the force constant.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 35,
+    "question": "Two identical springs each of force constant k are connected in series. The effective force constant is:",
+    "options": [
+      "2k",
+      "4k",
+      "k",
+      "k/2"
+    ],
+    "solution": "Step 1: For series combination 1/k_eff = 1/k + 1/k.\nStep 2: k_eff = k/2.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 36,
+    "question": "Two identical springs each of force constant k are connected in parallel. The effective force constant is:",
+    "options": [
+      "k/2",
+      "2k",
+      "k",
+      "4k"
+    ],
+    "solution": "Step 1: For parallel combination k_eff = k + k = 2k.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 37,
+    "question": "The equation of motion of a particle is x = 3 cos(2t) + 4 sin(2t). The amplitude of the motion is:",
+    "options": [
+      "5 units",
+      "4 units",
+      "7 units",
+      "3 units"
+    ],
+    "solution": "Step 1: The expression can be rewritten as x = R cos(2t – α) where R = √(3² + 4²) = 5.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 38,
+    "question": "In SHM, the time taken to go from the mean position to an extreme position is:",
+    "options": [
+      "T/8",
+      "T",
+      "T/4",
+      "T/2"
+    ],
+    "solution": "Step 1: From mean to extreme corresponds to a quarter of the full cycle.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 39,
+    "question": "The acceleration of a particle in SHM is proportional to:",
+    "options": [
+      "Time",
+      "Square of the velocity",
+      "Displacement from the mean position",
+      "Velocity"
+    ],
+    "solution": "Step 1: a = –ω² x.\nStep 2: Acceleration is directly proportional to displacement (and opposite in direction).\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 40,
+    "question": "Which of the following is NOT a characteristic of SHM?",
+    "options": [
+      "Energy is conserved in the absence of damping",
+      "Acceleration is constant",
+      "Period is independent of amplitude",
+      "Restoring force is proportional to displacement"
+    ],
+    "solution": "Step 1: In SHM acceleration varies continuously with position.\nStep 2: Constant acceleration would produce uniformly accelerated motion, not SHM.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 41,
+    "question": "The dimensional formula of the spring constant k is:",
+    "options": [
+      "[M T⁻¹]",
+      "[M T⁻²]",
+      "[M L⁻¹ T⁻²]",
+      "[M L T⁻²]"
+    ],
+    "solution": "Step 1: k = F/x → [M L T⁻²]/[L] = [M T⁻²].\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 42,
+    "question": "A particle executes SHM with amplitude A. The distance travelled in one complete oscillation is:",
+    "options": [
+      "2A",
+      "4A",
+      "A",
+      "πA"
+    ],
+    "solution": "Step 1: From one extreme to the other is 2A; a full cycle requires going and returning, total distance 4A.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 43,
+    "question": "The graph of acceleration versus displacement for a particle in SHM is:",
+    "options": [
+      "A circle",
+      "A straight line through the origin with negative slope",
+      "A straight line with positive slope",
+      "A parabola"
+    ],
+    "solution": "Step 1: a = –ω² x is the equation of a straight line with slope –ω² passing through the origin.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 44,
+    "question": "If the frequency of a simple harmonic oscillator is doubled, its maximum acceleration becomes:",
+    "options": [
+      "Twice the original value",
+      "Half the original value",
+      "Four times the original value",
+      "Unchanged"
+    ],
+    "solution": "Step 1: a_max = ω² A = (2πf)² A.\nStep 2: If f → 2f, a_max becomes 4 times.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 45,
+    "question": "The potential energy of a particle in SHM is zero at:",
+    "options": [
+      "The extreme positions",
+      "The mean position (if PE is taken zero there)",
+      "Nowhere",
+      "All positions"
+    ],
+    "solution": "Step 1: PE = ½ k x².\nStep 2: It is zero only when x = 0 (mean position).\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 46,
+    "question": "A body of mass m is attached to a spring of force constant k and oscillates with amplitude A. The magnitude of the maximum force on the body is:",
+    "options": [
+      "k A / 2",
+      "m A",
+      "k A",
+      "k A²"
+    ],
+    "solution": "Step 1: Maximum force occurs at maximum displacement: F_max = k A.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 47,
+    "question": "The time period of a mass-spring system does NOT depend on:",
+    "options": [
+      "Spring constant",
+      "Both mass and spring constant",
+      "Mass of the object",
+      "Amplitude of oscillation"
+    ],
+    "solution": "Step 1: T = 2π √(m/k).\nStep 2: Amplitude does not appear in the expression for period (isochronous property of SHM).\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 48,
+    "question": "In the absence of damping, the total energy of a simple harmonic oscillator is:",
+    "options": [
+      "Inversely proportional to time",
+      "Proportional to time",
+      "Constant in time",
+      "Zero"
+    ],
+    "solution": "Step 1: Mechanical energy is conserved when no non-conservative forces act.\nStep 2: Therefore E remains constant.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 49,
+    "question": "The velocity of a particle in SHM is zero at:",
+    "options": [
+      "Halfway between mean and extreme",
+      "The extreme positions",
+      "The mean position",
+      "All positions"
+    ],
+    "solution": "Step 1: At extreme positions the particle momentarily stops and reverses direction.\nStep 2: Hence v = 0 when |x| = A.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 50,
+    "question": "Which quantity remains constant in undamped SHM?",
+    "options": [
+      "Total mechanical energy",
+      "Velocity",
+      "Potential energy",
+      "Kinetic energy"
+    ],
+    "solution": "Step 1: KE and PE continuously interchange, but their sum (total energy) is constant.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 51,
+    "question": "The total energy of a particle executing SHM is proportional to:",
+    "options": [
+      "The cube of the amplitude",
+      "The square root of the amplitude",
+      "The square of the amplitude",
+      "The amplitude"
+    ],
+    "solution": "Step 1: Total energy E = ½ k A².\nStep 2: Therefore E ∝ A².\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 52,
+    "question": "When a particle in SHM is at a displacement of A/√2 from the mean position, the ratio of its kinetic energy to potential energy is:",
+    "options": [
+      "1 : √2",
+      "2 : 1",
+      "1 : 2",
+      "1 : 1"
+    ],
+    "solution": "Step 1: PE = ½ k (A/√2)² = (1/2)(½ k A²) = E/2.\nStep 2: KE = E – PE = E/2.\nStep 3: KE : PE = 1 : 1.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 53,
+    "question": "The average value of potential energy of a particle in SHM over one complete period is:",
+    "options": [
+      "E/2 where E is the total energy",
+      "E/4",
+      "E",
+      "Zero"
+    ],
+    "solution": "Step 1: Over a full cycle the time averages of kinetic and potential energies are equal.\nStep 2: Each averages to E/2.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 54,
+    "question": "A mass-spring system has period T. If both the mass and the spring constant are doubled, the new period is:",
+    "options": [
+      "T",
+      "T/2",
+      "√2 T",
+      "2T"
+    ],
+    "solution": "Step 1: T = 2π √(m/k).\nStep 2: New period T' = 2π √(2m/2k) = 2π √(m/k) = T.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 55,
+    "question": "The displacement of a particle in SHM is x = A sin(ωt). The time at which the kinetic energy is equal to the potential energy for the first time is:",
+    "options": [
+      "t = π/ω",
+      "t = π/(4ω)",
+      "t = π/(6ω)",
+      "t = π/(2ω)"
+    ],
+    "solution": "Step 1: KE = PE when ½ m v² = ½ k x² → x = A/√2.\nStep 2: A sin(ωt) = A/√2 → sin(ωt) = 1/√2 → ωt = π/4 → t = π/(4ω).\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 56,
+    "question": "Damped simple harmonic motion occurs when:",
+    "options": [
+      "There is no external force",
+      "A resistive force proportional to velocity acts on the oscillator",
+      "The restoring force is proportional to displacement",
+      "The amplitude remains constant"
+    ],
+    "solution": "Step 1: In real systems friction or viscous drag dissipates energy.\nStep 2: The damping force is usually modelled as –bv, leading to damped SHM.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 57,
+    "question": "In under-damped SHM the amplitude of oscillation:",
+    "options": [
+      "Decreases linearly with time",
+      "Increases exponentially with time",
+      "Remains constant",
+      "Decreases exponentially with time"
+    ],
+    "solution": "Step 1: The solution for under-damped motion contains a factor e^(–(b/2m)t).\nStep 2: Amplitude therefore decays exponentially.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 58,
+    "question": "Critical damping is the condition in which:",
+    "options": [
+      "The system returns to equilibrium in the shortest time without oscillating",
+      "The system oscillates with constant amplitude",
+      "The amplitude decreases very slowly",
+      "The system never returns to equilibrium"
+    ],
+    "solution": "Step 1: Critical damping is the boundary between oscillatory and non-oscillatory return.\nStep 2: It gives the fastest non-oscillatory approach to equilibrium.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 59,
+    "question": "In over-damped motion the system:",
+    "options": [
+      "Never returns to equilibrium",
+      "Oscillates with constant amplitude",
+      "Returns to equilibrium without oscillating but more slowly than critical damping",
+      "Oscillates with decreasing amplitude"
+    ],
+    "solution": "Step 1: When damping is stronger than critical, the system is over-damped.\nStep 2: It approaches equilibrium monotonically but more slowly than the critically damped case.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 60,
+    "question": "The equation of motion for a damped harmonic oscillator is typically written as:",
+    "options": [
+      "mẍ + kx = 0",
+      "mẍ – bẋ + kx = 0",
+      "mẍ + bẋ + kx = 0",
+      "mẍ + bẋ – kx = 0"
+    ],
+    "solution": "Step 1: Restoring force = –kx, damping force = –bv = –bẋ.\nStep 2: Newton’s second law yields mẍ = –bẋ – kx, or mẍ + bẋ + kx = 0.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 61,
+    "question": "The quality factor Q of a damped oscillator is a measure of:",
+    "options": [
+      "The driving frequency",
+      "The spring constant only",
+      "The mass of the oscillator",
+      "How lightly the oscillator is damped"
+    ],
+    "solution": "Step 1: Q = ω₀ m / b (or 2π × energy stored / energy lost per cycle).\nStep 2: High Q means light damping and sharp resonance.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 62,
+    "question": "Resonance occurs in a driven harmonic oscillator when:",
+    "options": [
+      "The driving frequency is zero",
+      "The driving frequency is much higher than the natural frequency",
+      "The damping is maximum",
+      "The driving frequency is equal (or nearly equal) to the natural frequency"
+    ],
+    "solution": "Step 1: At resonance the amplitude of the steady-state oscillation reaches a maximum.\nStep 2: This happens when the driving frequency matches the natural frequency of the system.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 63,
+    "question": "At resonance the phase difference between the driving force and the displacement is approximately:",
+    "options": [
+      "0",
+      "π",
+      "π/2",
+      "π/4"
+    ],
+    "solution": "Step 1: In the steady state the displacement lags the driving force by a phase δ.\nStep 2: At resonance δ ≈ π/2.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 64,
+    "question": "The amplitude of a driven damped oscillator at resonance is limited by:",
+    "options": [
+      "The mass of the oscillator only",
+      "The amount of damping present in the system",
+      "The initial conditions",
+      "The spring constant only"
+    ],
+    "solution": "Step 1: Without damping the amplitude would grow without limit.\nStep 2: Damping dissipates energy and therefore sets the maximum amplitude at resonance.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 65,
+    "question": "Transient terms in the solution of a driven oscillator:",
+    "options": [
+      "Grow with time",
+      "Remain constant forever",
+      "Are independent of damping",
+      "Die out with time due to damping, leaving only the steady-state solution"
+    ],
+    "solution": "Step 1: The complete solution is homogeneous solution (transient) + particular solution (steady-state).\nStep 2: The transient terms contain the decaying exponential e^(–bt/2m) and therefore vanish after sufficient time.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 66,
+    "question": "The natural angular frequency of an undamped mass-spring system is:",
+    "options": [
+      "√(m/k)",
+      "√(k/m)",
+      "k/m",
+      "2π √(k/m)"
+    ],
+    "solution": "Step 1: From the equation ẍ + (k/m)x = 0 we identify ω₀² = k/m.\nStep 2: Hence ω₀ = √(k/m).\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 67,
+    "question": "In a lightly damped system the frequency of oscillation is:",
+    "options": [
+      "Exactly equal to the natural frequency",
+      "Independent of damping",
+      "Greater than the natural frequency",
+      "Slightly less than the natural frequency of the undamped system"
+    ],
+    "solution": "Step 1: The damped frequency ω' = √(ω₀² – (b/2m)²).\nStep 2: Therefore ω' < ω₀.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 68,
+    "question": "Power resonance (maximum average power absorption) occurs when the driving frequency equals:",
+    "options": [
+      "The natural frequency of the undamped system",
+      "The damped frequency",
+      "Twice the natural frequency",
+      "Zero"
+    ],
+    "solution": "Step 1: Average power delivered by the driving force is maximum when ω = ω₀.\nStep 2: This is slightly different from the frequency of maximum amplitude when damping is present.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 69,
+    "question": "The half-power frequencies of a resonance curve are the frequencies at which:",
+    "options": [
+      "The velocity is maximum",
+      "The phase difference is π/2",
+      "The average power is half of its maximum value",
+      "The amplitude is half of its maximum value"
+    ],
+    "solution": "Step 1: By definition the half-power points are where P = P_max / 2.\nStep 2: The width between these frequencies is related to the damping.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 70,
+    "question": "A high-Q oscillator has a resonance curve that is:",
+    "options": [
+      "Broad and flat",
+      "Completely flat",
+      "Narrow and sharply peaked",
+      "Double-peaked"
+    ],
+    "solution": "Step 1: Q is inversely proportional to the width of the resonance curve.\nStep 2: High Q therefore produces a narrow, sharp peak.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 71,
+    "question": "The energy of a damped oscillator decreases with time because:",
+    "options": [
+      "The mass increases",
+      "The amplitude increases",
+      "Work is done against the damping force",
+      "The spring constant changes"
+    ],
+    "solution": "Step 1: The damping force is always opposite to the velocity.\nStep 2: Therefore the power F·v is negative and mechanical energy is continuously dissipated as heat.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 72,
+    "question": "In the absence of any driving force a damped oscillator eventually:",
+    "options": [
+      "Moves with constant velocity",
+      "Accelerates indefinitely",
+      "Comes to rest at the equilibrium position",
+      "Oscillates with constant amplitude"
+    ],
+    "solution": "Step 1: Energy is continuously lost to damping.\nStep 2: When all energy has been dissipated the particle rests at the equilibrium position.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 73,
+    "question": "The logarithmic decrement of a damped oscillator is defined as:",
+    "options": [
+      "The product of successive amplitudes",
+      "The difference of two successive amplitudes",
+      "The ratio of successive periods",
+      "The natural logarithm of the ratio of two successive amplitudes"
+    ],
+    "solution": "Step 1: Logarithmic decrement δ = ln(A_n / A_{n+1}).\nStep 2: It characterises the rate of decay of the amplitude.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 74,
+    "question": "Forced oscillations are produced when:",
+    "options": [
+      "An external periodic force acts on the oscillator",
+      "Only the restoring force acts",
+      "No external force acts",
+      "Only the damping force acts"
+    ],
+    "solution": "Step 1: Forced (or driven) oscillations occur under the influence of a continuous external driving force, usually sinusoidal.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 75,
+    "question": "The steady-state amplitude of a driven oscillator depends on:",
+    "options": [
+      "The driving frequency, the natural frequency and the damping",
+      "Only the initial conditions",
+      "Only the amplitude of the driving force",
+      "Only the mass of the oscillator"
+    ],
+    "solution": "Step 1: The steady-state amplitude is given by a formula involving F₀, m, ω, ω₀ and b.\nStep 2: It is independent of the initial conditions.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 76,
+    "question": "When the driving frequency is much lower than the natural frequency, the displacement of the oscillator is approximately:",
+    "options": [
+      "In phase with the driving force",
+      "Out of phase by π with the driving force",
+      "Out of phase by π/2 with the driving force",
+      "Independent of the driving force"
+    ],
+    "solution": "Step 1: At low frequency the system follows the driving force quasi-statically.\nStep 2: Phase difference δ ≈ 0.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 77,
+    "question": "When the driving frequency is much higher than the natural frequency, the displacement of the oscillator is approximately:",
+    "options": [
+      "In phase with the driving force",
+      "Out of phase by π with the driving force",
+      "Out of phase by π/2",
+      "Zero"
+    ],
+    "solution": "Step 1: At high frequency the inertia dominates.\nStep 2: The displacement is nearly opposite in phase to the driving force (δ ≈ π).\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 78,
+    "question": "The phenomenon of beats can be observed when:",
+    "options": [
+      "A single wave reflects from a wall",
+      "Light passes through a narrow slit",
+      "Two sound waves of slightly different frequencies interfere",
+      "Two sound waves of exactly the same frequency interfere"
+    ],
+    "solution": "Step 1: Beats arise from the superposition of two waves of nearly equal frequencies.\nStep 2: The intensity varies periodically at the difference frequency.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 79,
+    "question": "The beat frequency produced by two waves of frequencies f₁ and f₂ is:",
+    "options": [
+      "f₁ f₂",
+      "|f₁ – f₂|",
+      "f₁ + f₂",
+      "(f₁ + f₂)/2"
+    ],
+    "solution": "Step 1: The resultant intensity oscillates at the difference frequency |f₁ – f₂|.\nStep 2: This is the number of beats heard per second.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 80,
+    "question": "An echo is produced by:",
+    "options": [
+      "Refraction of sound",
+      "Diffraction of sound",
+      "Reflection of sound from a distant surface",
+      "Interference of two sound waves"
+    ],
+    "solution": "Step 1: An echo is a reflected sound wave that returns to the listener after a noticeable time delay.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 81,
+    "question": "The Doppler effect is the apparent change in frequency of a wave due to:",
+    "options": [
+      "Relative motion between the source and the observer",
+      "Change in the medium only",
+      "Interference of waves",
+      "Change in the amplitude of the wave"
+    ],
+    "solution": "Step 1: When source or observer (or both) move relative to the medium, the observed frequency changes.\nStep 2: This is the Doppler effect.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 82,
+    "question": "When a source of sound moves towards a stationary observer, the observed frequency:",
+    "options": [
+      "Decreases",
+      "Becomes zero",
+      "Remains the same",
+      "Increases"
+    ],
+    "solution": "Step 1: Wavelength ahead of the moving source is shortened.\nStep 2: Therefore the frequency heard by a stationary observer increases.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 83,
+    "question": "The general expression for the observed frequency in the Doppler effect (source and observer moving) is:",
+    "options": [
+      "f' = f (v ± v_o)/(v ± v_s)",
+      "f' = f v / (v ± v_s)",
+      "f' = f (v ± v_s)/(v ± v_o)",
+      "f' = f (v ± v_o)/v"
+    ],
+    "solution": "Step 1: The correct formula uses upper signs when observer moves towards source and source moves towards observer.\nStep 2: Care must be taken with the signs.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 84,
+    "question": "Sound waves are:",
+    "options": [
+      "Transverse waves",
+      "Electromagnetic waves",
+      "Neither longitudinal nor transverse",
+      "Longitudinal waves"
+    ],
+    "solution": "Step 1: In sound waves the particles of the medium oscillate parallel to the direction of wave propagation.\nStep 2: Hence sound is a longitudinal wave.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 85,
+    "question": "The speed of sound in a gas is given by:",
+    "options": [
+      "v = √(γP/ρ)",
+      "v = √(P/ρ)",
+      "v = √(γρ/P)",
+      "v = √(ρ/γP)"
+    ],
+    "solution": "Step 1: Newton’s formula corrected by Laplace gives v = √(γP/ρ), where γ is the ratio of specific heats.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 86,
+    "question": "The speed of sound is greatest in:",
+    "options": [
+      "Liquids",
+      "Vacuum",
+      "Gases",
+      "Solids"
+    ],
+    "solution": "Step 1: The bulk modulus is highest and the density is relatively low in solids.\nStep 2: Therefore the speed of sound is highest in solids.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 87,
+    "question": "A transverse wave is characterised by:",
+    "options": [
+      "Particle oscillation in random directions",
+      "No particle oscillation",
+      "Particle oscillation perpendicular to the direction of wave propagation",
+      "Particle oscillation parallel to the direction of wave propagation"
+    ],
+    "solution": "Step 1: In a transverse wave the displacement of the medium is perpendicular to the direction in which the wave travels.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 88,
+    "question": "A longitudinal wave is characterised by:",
+    "options": [
+      "Particle oscillation parallel to the direction of wave propagation",
+      "Constant pressure",
+      "No density variation",
+      "Particle oscillation perpendicular to the direction of wave propagation"
+    ],
+    "solution": "Step 1: Compressions and rarefactions travel in the same direction as the particle motion.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 89,
+    "question": "The principle of superposition states that when two or more waves meet:",
+    "options": [
+      "The resultant displacement is the algebraic sum of the individual displacements",
+      "The frequencies add",
+      "The waves destroy each other",
+      "The wavelengths multiply"
+    ],
+    "solution": "Step 1: For linear media the net effect at any point is the sum of the effects of each wave separately.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 90,
+    "question": "Constructive interference occurs when the path difference between two coherent waves is:",
+    "options": [
+      "Equal to λ/4",
+      "An odd multiple of λ/2",
+      "An integer multiple of the wavelength",
+      "Zero only"
+    ],
+    "solution": "Step 1: Path difference = mλ (m = 0, 1, 2, …) produces phase difference of 2πm and therefore constructive interference.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 91,
+    "question": "Destructive interference occurs when the path difference is:",
+    "options": [
+      "An odd multiple of λ/2",
+      "Zero",
+      "An integer multiple of λ",
+      "Equal to λ"
+    ],
+    "solution": "Step 1: Path difference = (2m+1)λ/2 produces a phase difference of (2m+1)π and therefore destructive interference.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 92,
+    "question": "Diffraction is the phenomenon of:",
+    "options": [
+      "Change of speed when waves enter a new medium",
+      "Splitting of white light into colours",
+      "Reflection of waves from a surface",
+      "Bending of waves around obstacles or through apertures"
+    ],
+    "solution": "Step 1: Diffraction becomes noticeable when the size of the obstacle or aperture is comparable to the wavelength.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 93,
+    "question": "Polarization is a property that can be exhibited only by:",
+    "options": [
+      "Both transverse and longitudinal waves",
+      "Sound waves in air",
+      "Transverse waves",
+      "Longitudinal waves"
+    ],
+    "solution": "Step 1: Polarization requires a preferred direction of oscillation perpendicular to the propagation direction.\nStep 2: Only transverse waves possess this possibility.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 94,
+    "question": "The intensity of a wave is proportional to:",
+    "options": [
+      "Its wavelength",
+      "Its frequency",
+      "The square of its amplitude",
+      "Its amplitude"
+    ],
+    "solution": "Step 1: Energy carried by a wave ∝ A².\nStep 2: Intensity (power per unit area) is therefore proportional to A².\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 95,
+    "question": "Phase velocity of a wave is defined as:",
+    "options": [
+      "The velocity at which a point of constant phase travels",
+      "The difference of group and phase velocities",
+      "The velocity of energy transport",
+      "The velocity of the medium particles"
+    ],
+    "solution": "Step 1: Phase velocity v_p = ω/k.\nStep 2: It is the speed of a pure sinusoidal wave of definite frequency.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 96,
+    "question": "Group velocity of a wave packet is defined as:",
+    "options": [
+      "The velocity of an individual crest",
+      "The velocity at which the envelope of the wave packet travels",
+      "Always equal to the phase velocity",
+      "The average of all phase velocities"
+    ],
+    "solution": "Step 1: Group velocity v_g = dω/dk.\nStep 2: It is the speed at which energy or information is transported.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 97,
+    "question": "In a non-dispersive medium the relationship between phase and group velocity is:",
+    "options": [
+      "v_g = v_p",
+      "v_g = 2 v_p",
+      "v_g > v_p",
+      "v_g < v_p"
+    ],
+    "solution": "Step 1: When ω is strictly proportional to k, dω/dk = ω/k.\nStep 2: Therefore group velocity equals phase velocity.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 98,
+    "question": "The one-dimensional wave equation is:",
+    "options": [
+      "∂²y/∂x² = (1/v²) ∂²y/∂t²",
+      "∂²y/∂x² = v² ∂²y/∂t²",
+      "∂y/∂x = (1/v) ∂y/∂t",
+      "∂y/∂t = v ∂y/∂x"
+    ],
+    "solution": "Step 1: The standard form of the wave equation in one dimension is ∂²y/∂x² = (1/v²) ∂²y/∂t².\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 99,
+    "question": "Any function of the form f(x – vt) or g(x + vt) is a solution of:",
+    "options": [
+      "The Schrödinger equation",
+      "The one-dimensional wave equation",
+      "Laplace’s equation",
+      "Newton’s second law only"
+    ],
+    "solution": "Step 1: Direct substitution shows that any twice-differentiable function of (x ± vt) satisfies the wave equation.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 100,
+    "question": "The general solution of the one-dimensional wave equation can be written as:",
+    "options": [
+      "y(x,t) = A x + B t",
+      "y(x,t) = f(x – vt) + g(x + vt)",
+      "y(x,t) = A cos(kx – ωt) only",
+      "y(x,t) = A e^(–kx)"
+    ],
+    "solution": "Step 1: d’Alembert’s solution states that the most general solution is the sum of an arbitrary right-going wave and an arbitrary left-going wave.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 101,
+    "question": "The intensity of a spherical sound wave decreases with distance r from the source according to:",
+    "options": [
+      "1/r²",
+      "r²",
+      "1/r",
+      "1/r³"
+    ],
+    "solution": "Step 1: Power is spread over the surface of a sphere of area 4πr².\nStep 2: Intensity I = P / (4πr²) ∝ 1/r².\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 102,
+    "question": "The decibel scale for sound intensity level is defined as:",
+    "options": [
+      "β = 10 ln(I/I₀)",
+      "β = 10 log₁₀(I/I₀)",
+      "β = log₁₀(I/I₀)",
+      "β = 20 log₁₀(I/I₀)"
+    ],
+    "solution": "Step 1: Intensity level in decibels uses a base-10 logarithm.\nStep 2: The standard definition is β = 10 log₁₀(I/I₀), where I₀ = 10⁻¹² W m⁻².\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 103,
+    "question": "The threshold of hearing is conventionally taken as:",
+    "options": [
+      "10⁻³ W m⁻²",
+      "1 W m⁻²",
+      "10⁻⁶ W m⁻²",
+      "10⁻¹² W m⁻²"
+    ],
+    "solution": "Step 1: I₀ = 10⁻¹² W m⁻² is the standard reference intensity corresponding to the average threshold of hearing at 1 kHz.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 104,
+    "question": "When two identical waves travelling in opposite directions interfere, they produce:",
+    "options": [
+      "Complete cancellation everywhere",
+      "A standing wave",
+      "Beats",
+      "A travelling wave of double amplitude"
+    ],
+    "solution": "Step 1: Superposition of two waves of equal amplitude and frequency travelling in opposite directions yields a standing wave pattern with fixed nodes and antinodes.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 105,
+    "question": "In a standing wave the distance between two consecutive nodes is:",
+    "options": [
+      "λ/2",
+      "λ",
+      "λ/4",
+      "2λ"
+    ],
+    "solution": "Step 1: Nodes are separated by half a wavelength.\nStep 2: The distance from node to adjacent antinode is λ/4.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 106,
+    "question": "At a node of a standing wave the displacement is always:",
+    "options": [
+      "Varying randomly",
+      "Maximum",
+      "Zero",
+      "Half the amplitude"
+    ],
+    "solution": "Step 1: By definition a node is a point that remains permanently at rest.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 107,
+    "question": "At an antinode of a standing wave the displacement amplitude is:",
+    "options": [
+      "Half the maximum",
+      "Maximum",
+      "Zero",
+      "Equal to the wavelength"
+    ],
+    "solution": "Step 1: Antinodes are points of maximum oscillation amplitude.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 108,
+    "question": "The fundamental frequency of a string fixed at both ends is:",
+    "options": [
+      "v/(2L)",
+      "v/L",
+      "2v/L",
+      "v/(4L)"
+    ],
+    "solution": "Step 1: The fundamental mode has wavelength 2L.\nStep 2: Frequency f₁ = v/λ = v/(2L).\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 109,
+    "question": "The frequency of the nth harmonic of a string fixed at both ends is:",
+    "options": [
+      "n v/L",
+      "v/(n L)",
+      "n v/(2L)",
+      "v/(2n L)"
+    ],
+    "solution": "Step 1: The nth harmonic has wavelength 2L/n.\nStep 2: Therefore f_n = n v/(2L).\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 110,
+    "question": "For a closed organ pipe the fundamental frequency is:",
+    "options": [
+      "v/(2L)",
+      "3v/(4L)",
+      "v/L",
+      "v/(4L)"
+    ],
+    "solution": "Step 1: A closed pipe has a node at the closed end and an antinode at the open end.\nStep 2: The fundamental wavelength is 4L, so f₁ = v/(4L).\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 111,
+    "question": "In a closed organ pipe only:",
+    "options": [
+      "Even harmonics are present",
+      "No harmonics are present",
+      "Odd harmonics are present",
+      "All harmonics are present"
+    ],
+    "solution": "Step 1: The boundary conditions of a closed pipe allow only odd multiples of the fundamental frequency.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 112,
+    "question": "The speed of a transverse wave on a string is given by:",
+    "options": [
+      "v = μ/T",
+      "v = √(T/μ)",
+      "v = T/μ",
+      "v = √(μ/T)"
+    ],
+    "solution": "Step 1: From the wave equation on a string under tension T with linear density μ one obtains v = √(T/μ).\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 113,
+    "question": "If the tension in a string is increased by a factor of 4, the speed of the wave becomes:",
+    "options": [
+      "Unchanged",
+      "Four times the original speed",
+      "Half the original speed",
+      "Twice the original speed"
+    ],
+    "solution": "Step 1: v ∝ √T.\nStep 2: Increasing T by 4 multiplies v by 2.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 114,
+    "question": "The phenomenon of dispersion occurs when:",
+    "options": [
+      "Different frequencies travel at different speeds in the medium",
+      "Waves are absorbed",
+      "Waves are reflected",
+      "All frequencies travel at the same speed"
+    ],
+    "solution": "Step 1: Dispersion means that the phase velocity depends on frequency (or wavelength).\nStep 2: This causes a wave packet to spread as it propagates.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 115,
+    "question": "In a dispersive medium the group velocity is generally:",
+    "options": [
+      "Always zero",
+      "Different from the phase velocity",
+      "Always equal to the phase velocity",
+      "Always greater than the phase velocity"
+    ],
+    "solution": "Step 1: When ω is not strictly proportional to k, v_g = dω/dk ≠ ω/k = v_p.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 116,
+    "question": "The refractive index of a medium is defined as:",
+    "options": [
+      "n = v/c",
+      "n = 1/v",
+      "n = c/v",
+      "n = c v"
+    ],
+    "solution": "Step 1: Refractive index is the ratio of the speed of light in vacuum to its speed in the medium.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 117,
+    "question": "Snell’s law of refraction is:",
+    "options": [
+      "θ₁ / n₁ = θ₂ / n₂",
+      "n₁ sin θ₁ = n₂ sin θ₂",
+      "n₁ / sin θ₁ = n₂ / sin θ₂",
+      "n₁ cos θ₁ = n₂ cos θ₂"
+    ],
+    "solution": "Step 1: The standard form of Snell’s law relates the sines of the angles of incidence and refraction to the refractive indices.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 118,
+    "question": "Total internal reflection can occur only when light travels from:",
+    "options": [
+      "Any medium to any other medium",
+      "A rarer medium to a denser medium",
+      "A denser medium to a rarer medium",
+      "Vacuum to glass"
+    ],
+    "solution": "Step 1: For TIR the angle of incidence must exceed the critical angle.\nStep 2: This is possible only when light is incident from the higher-index (denser) medium.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 119,
+    "question": "The critical angle for total internal reflection is given by:",
+    "options": [
+      "θ_c = tan⁻¹(n₂/n₁)",
+      "θ_c = sin⁻¹(n₁/n₂)",
+      "θ_c = sin⁻¹(n₂/n₁) where n₁ > n₂",
+      "θ_c = cos⁻¹(n₂/n₁)"
+    ],
+    "solution": "Step 1: At the critical angle, θ₂ = 90°.\nStep 2: Snell’s law then yields sin θ_c = n₂/n₁.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 120,
+    "question": "A plane mirror forms an image that is:",
+    "options": [
+      "Virtual, erect and of the same size as the object",
+      "Virtual, inverted and diminished",
+      "Real, inverted and magnified",
+      "Real, erect and of the same size"
+    ],
+    "solution": "Step 1: The image in a plane mirror is formed by extension of reflected rays behind the mirror.\nStep 2: It is therefore virtual, upright and laterally inverted, with magnification = 1.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 121,
+    "question": "The focal length of a spherical mirror is related to its radius of curvature by:",
+    "options": [
+      "f = R",
+      "f = R/2",
+      "f = 2R",
+      "f = R/4"
+    ],
+    "solution": "Step 1: For a spherical mirror under the paraxial approximation the focal length is half the radius of curvature.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 122,
+    "question": "The mirror formula is:",
+    "options": [
+      "1/v + 1/u = 1/f",
+      "v + u = f",
+      "v u = f",
+      "1/v – 1/u = 1/f"
+    ],
+    "solution": "Step 1: Using the Cartesian sign convention the standard mirror equation is 1/v + 1/u = 1/f.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 123,
+    "question": "A concave mirror can form a real image when the object is placed:",
+    "options": [
+      "Beyond the focal point",
+      "At the pole",
+      "Between the pole and the focal point",
+      "Anywhere"
+    ],
+    "solution": "Step 1: For object distances |u| > f a concave mirror produces a real, inverted image.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 124,
+    "question": "A convex mirror always forms an image that is:",
+    "options": [
+      "Virtual, erect and diminished",
+      "Virtual, inverted and magnified",
+      "Real, inverted and magnified",
+      "Real, erect and diminished"
+    ],
+    "solution": "Step 1: A convex mirror diverges incident rays.\nStep 2: The image is always virtual, upright and smaller than the object.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 125,
+    "question": "The lens maker’s formula for a thin lens in air is:",
+    "options": [
+      "f = (n – 1)(R₁ – R₂)",
+      "1/f = n(1/R₁ – 1/R₂)",
+      "1/f = (n – 1)(1/R₁ + 1/R₂)",
+      "1/f = (n – 1)(1/R₁ – 1/R₂)"
+    ],
+    "solution": "Step 1: Applying Snell’s law at both surfaces of a thin lens yields the lens maker’s formula.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 126,
+    "question": "The thin-lens formula is:",
+    "options": [
+      "v + u = f",
+      "1/v + 1/u = 1/f",
+      "v – u = f",
+      "1/v – 1/u = 1/f"
+    ],
+    "solution": "Step 1: With the usual Cartesian sign convention the thin-lens equation is 1/v – 1/u = 1/f.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 127,
+    "question": "A converging lens has:",
+    "options": [
+      "Positive focal length",
+      "Infinite focal length",
+      "Zero focal length",
+      "Negative focal length"
+    ],
+    "solution": "Step 1: By convention a lens that converges parallel rays has a positive focal length.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 128,
+    "question": "A diverging lens has:",
+    "options": [
+      "Negative focal length",
+      "Infinite focal length",
+      "Zero focal length",
+      "Positive focal length"
+    ],
+    "solution": "Step 1: A lens that diverges parallel rays is assigned a negative focal length.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 129,
+    "question": "The power of a lens is defined as:",
+    "options": [
+      "P = 1/f²",
+      "P = f",
+      "P = f²",
+      "P = 1/f (with f in metres)"
+    ],
+    "solution": "Step 1: Power in dioptres is the reciprocal of the focal length expressed in metres.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 130,
+    "question": "The SI unit of power of a lens is:",
+    "options": [
+      "Newton",
+      "Metre",
+      "Dioptre (D)",
+      "Watt"
+    ],
+    "solution": "Step 1: One dioptre is the power of a lens of focal length one metre.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 131,
+    "question": "When two thin lenses are placed in contact, the equivalent power is:",
+    "options": [
+      "P = P₁ P₂",
+      "P = P₁ + P₂",
+      "P = P₁ – P₂",
+      "1/P = 1/P₁ + 1/P₂"
+    ],
+    "solution": "Step 1: For thin lenses in contact the total power is the algebraic sum of the individual powers.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 132,
+    "question": "The magnification produced by a thin lens is:",
+    "options": [
+      "m = f/u",
+      "m = u/v",
+      "m = v/f",
+      "m = v/u"
+    ],
+    "solution": "Step 1: Lateral magnification is defined as the ratio of image height to object height, which equals v/u.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 133,
+    "question": "A real image formed by a converging lens is always:",
+    "options": [
+      "Erect",
+      "Inverted",
+      "Diminished",
+      "Magnified"
+    ],
+    "solution": "Step 1: Rays actually converge to form a real image; the geometry produces an inverted image.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 134,
+    "question": "A virtual image formed by a converging lens is always:",
+    "options": [
+      "Located at infinity",
+      "Inverted",
+      "Erect",
+      "Diminished"
+    ],
+    "solution": "Step 1: When the object is inside the focal length the image is virtual and upright.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 135,
+    "question": "Huygens’ principle states that:",
+    "options": [
+      "Interference is impossible",
+      "Light travels in straight lines only",
+      "Every point on a wavefront acts as a source of secondary spherical wavelets",
+      "The speed of light is constant in all media"
+    ],
+    "solution": "Step 1: Huygens’ construction regards each point on a wavefront as a secondary source.\nStep 2: The new wavefront is the envelope of these secondary wavelets.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 136,
+    "question": "Young’s double-slit experiment demonstrates:",
+    "options": [
+      "Polarization of light",
+      "Interference of light",
+      "Diffraction of light only",
+      "Photoelectric effect"
+    ],
+    "solution": "Step 1: The two slits act as coherent sources.\nStep 2: The observed fringe pattern is a classic demonstration of interference.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 137,
+    "question": "In Young’s experiment the fringe width is given by:",
+    "options": [
+      "β = λ d / D",
+      "β = λ D / d",
+      "β = D / (λ d)",
+      "β = λ d D"
+    ],
+    "solution": "Step 1: Path difference between the two waves at a point on the screen leads to β = λ D / d.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 138,
+    "question": "The central fringe in Young’s double-slit pattern is:",
+    "options": [
+      "Absent",
+      "Bright (constructive interference)",
+      "Dark (destructive interference)",
+      "Coloured"
+    ],
+    "solution": "Step 1: At the centre the path difference is zero, producing constructive interference.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 139,
+    "question": "If the source in Young’s experiment is replaced by a source of longer wavelength, the fringe width:",
+    "options": [
+      "Increases",
+      "Becomes zero",
+      "Remains the same",
+      "Decreases"
+    ],
+    "solution": "Step 1: β ∝ λ.\nStep 2: Longer wavelength produces wider fringes.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 140,
+    "question": "Diffraction is more pronounced when the size of the aperture is:",
+    "options": [
+      "Comparable to the wavelength of the wave",
+      "Independent of wavelength",
+      "Much smaller than the wavelength",
+      "Much larger than the wavelength"
+    ],
+    "solution": "Step 1: Significant bending occurs when the obstacle or aperture dimension is of the order of the wavelength.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 141,
+    "question": "The single-slit diffraction pattern has a central maximum that is:",
+    "options": [
+      "Half as wide as the secondary maxima",
+      "Equal in width to the secondary maxima",
+      "Twice as wide as the secondary maxima",
+      "Infinitely wide"
+    ],
+    "solution": "Step 1: The central peak extends from –λ/a to +λ/a while secondary peaks are of width λ/a.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 142,
+    "question": "Polaroid sheets are used to produce:",
+    "options": [
+      "Sound waves",
+      "Unpolarized light",
+      "Plane-polarized light",
+      "Circularly polarized light only"
+    ],
+    "solution": "Step 1: A Polaroid transmits only the component of the electric field parallel to its transmission axis, producing linearly polarized light.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 143,
+    "question": "Brewster’s law states that the polarizing angle satisfies:",
+    "options": [
+      "tan θ_p = n",
+      "sin θ_p = n",
+      "cos θ_p = n",
+      "θ_p = n"
+    ],
+    "solution": "Step 1: At the polarizing angle the reflected light is completely polarized.\nStep 2: Brewster’s law is tan θ_p = n₂/n₁.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 144,
+    "question": "Light can be polarized by:",
+    "options": [
+      "Only by interference",
+      "Reflection, refraction, scattering and dichroism",
+      "Only by refraction",
+      "Only by reflection"
+    ],
+    "solution": "Step 1: Several physical processes can preferentially select one orientation of the electric field vector.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 145,
+    "question": "The optical path length is defined as:",
+    "options": [
+      "The reciprocal of the refractive index",
+      "The product of the geometrical path length and the refractive index",
+      "The wavelength in the medium",
+      "The geometrical path length only"
+    ],
+    "solution": "Step 1: Optical path length = n × geometrical path.\nStep 2: It determines the phase of the light wave.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 146,
+    "question": "In a Michelson interferometer the fringe shift occurs when:",
+    "options": [
+      "Both mirrors are fixed",
+      "The source is turned off",
+      "One of the mirrors is moved",
+      "The wavelength is infinite"
+    ],
+    "solution": "Step 1: Moving one mirror changes the optical path difference, causing the interference fringes to shift.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 147,
+    "question": "The resolving power of a microscope is limited by:",
+    "options": [
+      "Diffraction of light",
+      "The colour of the object",
+      "Reflection of light",
+      "The length of the tube only"
+    ],
+    "solution": "Step 1: Diffraction at the objective aperture sets a fundamental limit on the smallest distance that can be resolved.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 148,
+    "question": "Rayleigh’s criterion for resolution states that two point sources are just resolved when:",
+    "options": [
+      "Their central maxima coincide",
+      "Their wavelengths are equal",
+      "Their intensities are equal",
+      "The central maximum of one coincides with the first minimum of the other"
+    ],
+    "solution": "Step 1: This angular separation is approximately θ = 1.22 λ/D for a circular aperture.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 149,
+    "question": "Chromatic aberration in lenses arises because:",
+    "options": [
+      "The lens surfaces are not spherical",
+      "The object is not on the axis",
+      "The lens is too thick",
+      "The refractive index of glass depends on wavelength"
+    ],
+    "solution": "Step 1: Different wavelengths are focused at different distances, producing coloured fringes.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 150,
+    "question": "Spherical aberration can be reduced by:",
+    "options": [
+      "Making the lens thicker",
+      "Using a stop to restrict rays to the paraxial region or by using aspheric surfaces",
+      "Using white light",
+      "Increasing the aperture of the lens"
+    ],
+    "solution": "Step 1: Spherical aberration is caused by marginal rays focusing closer than paraxial rays.\nStep 2: Restricting the aperture or shaping the surface reduces the defect.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 151,
+    "question": "The condition for constructive interference in thin-film interference (for reflected light, n_film > n_air) is:",
+    "options": [
+      "2 n t = (m + ½) λ",
+      "2 n t = (m + 1) λ",
+      "n t = m λ",
+      "2 n t = m λ"
+    ],
+    "solution": "Step 1: A phase change of π occurs on reflection from the denser medium.\nStep 2: This extra half-wavelength shift leads to the condition 2nt = (m + ½)λ for constructive interference in reflection.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 152,
+    "question": "Anti-reflection coatings on lenses work on the principle of:",
+    "options": [
+      "Constructive interference of reflected light",
+      "Destructive interference of reflected light",
+      "Absorption of light",
+      "Polarization of light"
+    ],
+    "solution": "Step 1: The coating thickness is chosen so that the two reflected rays interfere destructively, reducing reflected intensity.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 153,
+    "question": "The resolving power of a diffraction grating is given by:",
+    "options": [
+      "R = m / N",
+      "R = m N where N is the total number of lines",
+      "R = λ / Δλ = N",
+      "R = N / m"
+    ],
+    "solution": "Step 1: Resolving power R = λ/Δλ = m N, where m is the order and N the number of slits.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 154,
+    "question": "In a diffraction grating the principal maxima become sharper when:",
+    "options": [
+      "The order is decreased",
+      "The number of lines is increased",
+      "The grating spacing is increased",
+      "The wavelength is increased"
+    ],
+    "solution": "Step 1: More slits produce a narrower interference peak at each principal maximum.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 155,
+    "question": "The condition for the m-th order principal maximum of a diffraction grating is:",
+    "options": [
+      "d sin θ = (m + ½) λ",
+      "d sin θ = m λ",
+      "d cos θ = m λ",
+      "d = m λ"
+    ],
+    "solution": "Step 1: Path difference between adjacent slits must be an integer number of wavelengths.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 156,
+    "question": "A zone plate works on the principle of:",
+    "options": [
+      "Refraction only",
+      "Polarization",
+      "Reflection only",
+      "Diffraction and interference"
+    ],
+    "solution": "Step 1: Alternate half-period zones are blocked so that the remaining zones interfere constructively at the focus.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 157,
+    "question": "The numerical aperture of an optical fibre is given by:",
+    "options": [
+      "NA = √(n₁² – n₂²)",
+      "NA = n₁ / n₂",
+      "NA = sin⁻¹(n₁/n₂)",
+      "NA = n₁ – n₂"
+    ],
+    "solution": "Step 1: NA = n₀ sin θ_a = √(n₁² – n₂²), where n₁ and n₂ are the core and cladding indices.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 158,
+    "question": "Total internal reflection is the working principle of:",
+    "options": [
+      "Diffraction gratings",
+      "Convex lenses",
+      "Optical fibres",
+      "Plane mirrors"
+    ],
+    "solution": "Step 1: Light is guided along the core of an optical fibre by repeated total internal reflection at the core-cladding interface.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 159,
+    "question": "The acceptance angle of an optical fibre is the maximum angle at which light can enter the fibre and still be:",
+    "options": [
+      "Absorbed completely",
+      "Reflected back immediately",
+      "Guided by total internal reflection",
+      "Transmitted through the cladding"
+    ],
+    "solution": "Step 1: Rays entering within the acceptance cone satisfy the condition for TIR inside the fibre.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 160,
+    "question": "Chromatic resolving power of a prism is given by:",
+    "options": [
+      "R = n / t",
+      "R = λ / t",
+      "R = t dn/dλ",
+      "R = t dλ/dn"
+    ],
+    "solution": "Step 1: The expression follows from the angular dispersion produced by a prism of base width t.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 161,
+    "question": "In the compound microscope the intermediate image formed by the objective is:",
+    "options": [
+      "Virtual and erect",
+      "Real and inverted",
+      "Virtual and inverted",
+      "Real and erect"
+    ],
+    "solution": "Step 1: The objective forms a real, inverted, magnified image that serves as the object for the eyepiece.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 162,
+    "question": "The final image formed by a compound microscope when used for visual observation is:",
+    "options": [
+      "Real, erect and magnified",
+      "Real, inverted and diminished",
+      "Virtual, inverted and highly magnified",
+      "Virtual, erect and diminished"
+    ],
+    "solution": "Step 1: The eyepiece acts as a simple magnifier on the intermediate image, producing a virtual final image that is still inverted relative to the object.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 163,
+    "question": "The magnifying power of a simple microscope is approximately:",
+    "options": [
+      "1 + D/f only when image is at infinity",
+      "f/D",
+      "D/f where D is the least distance of distinct vision",
+      "D f"
+    ],
+    "solution": "Step 1: For the image at the near point the magnifying power is 1 + D/f; when the image is at infinity it is D/f.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 164,
+    "question": "An astronomical telescope in normal adjustment has its final image at:",
+    "options": [
+      "Infinity",
+      "The near point",
+      "The focal point of the objective",
+      "The centre of the eyepiece"
+    ],
+    "solution": "Step 1: In normal adjustment the intermediate image lies at the focal plane of the eyepiece, so the final rays emerge parallel.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 165,
+    "question": "The magnifying power of an astronomical telescope in normal adjustment is:",
+    "options": [
+      "f_o f_e",
+      "f_e / f_o",
+      "f_o + f_e",
+      "f_o / f_e"
+    ],
+    "solution": "Step 1: Angular magnification = β/α ≈ f_o / f_e when the final image is at infinity.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 166,
+    "question": "A Galilean telescope uses:",
+    "options": [
+      "Two convex lenses",
+      "A convex objective and a concave eyepiece",
+      "Two concave lenses",
+      "A concave objective and a convex eyepiece"
+    ],
+    "solution": "Step 1: The Galilean design employs a diverging eyepiece placed before the focal plane of the objective, producing an erect image.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 167,
+    "question": "The image formed by a Galilean telescope is:",
+    "options": [
+      "Inverted",
+      "Diminished",
+      "Erect",
+      "Real"
+    ],
+    "solution": "Step 1: Because the eyepiece is diverging, the final image remains erect relative to the object.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 168,
+    "question": "In the human eye the accommodation is achieved by changing the:",
+    "options": [
+      "Distance between the lens and the retina",
+      "Length of the eyeball",
+      "Focal length of the eye lens",
+      "Diameter of the pupil only"
+    ],
+    "solution": "Step 1: Ciliary muscles alter the curvature (and therefore the focal length) of the crystalline lens.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 169,
+    "question": "Myopia (short-sightedness) is corrected by using:",
+    "options": [
+      "A converging (convex) lens",
+      "A plane glass plate",
+      "A cylindrical lens",
+      "A diverging (concave) lens"
+    ],
+    "solution": "Step 1: In myopia the eye focuses distant objects in front of the retina.\nStep 2: A diverging lens shifts the focus back onto the retina.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 170,
+    "question": "Hypermetropia (long-sightedness) is corrected by using:",
+    "options": [
+      "A cylindrical lens",
+      "A diverging (concave) lens",
+      "A prism",
+      "A converging (convex) lens"
+    ],
+    "solution": "Step 1: In hypermetropia the eye focuses near objects behind the retina.\nStep 2: A converging lens provides the additional power needed.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 171,
+    "question": "Astigmatism is corrected by using:",
+    "options": [
+      "A cylindrical lens",
+      "A spherical convex lens",
+      "A plane mirror",
+      "A spherical concave lens"
+    ],
+    "solution": "Step 1: Astigmatism arises from unequal curvature in different meridians.\nStep 2: A cylindrical lens compensates for the difference.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 172,
+    "question": "Presbyopia is the age-related loss of:",
+    "options": [
+      "Transparency of the cornea",
+      "Accommodation power of the eye",
+      "Diameter of the pupil",
+      "Sensitivity of the retina"
+    ],
+    "solution": "Step 1: With age the crystalline lens loses elasticity and the ability to change shape diminishes.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 173,
+    "question": "The least distance of distinct vision for a normal human eye is approximately:",
+    "options": [
+      "25 mm",
+      "25 cm",
+      "2.5 m",
+      "25 m"
+    ],
+    "solution": "Step 1: The conventional near point for a young adult with normal vision is taken as 25 cm.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 174,
+    "question": "The far point of a normal human eye is:",
+    "options": [
+      "At the focal point of the eye lens",
+      "At 25 cm",
+      "At infinity",
+      "At 1 m"
+    ],
+    "solution": "Step 1: A normal relaxed eye can focus parallel rays from infinity onto the retina.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 175,
+    "question": "Scattering of light by particles much smaller than the wavelength is called:",
+    "options": [
+      "Raman scattering",
+      "Rayleigh scattering",
+      "Mie scattering",
+      "Brillouin scattering"
+    ],
+    "solution": "Step 1: Rayleigh scattering intensity varies as 1/λ⁴ and is responsible for the blue colour of the sky.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 176,
+    "question": "The blue colour of the clear sky is due to:",
+    "options": [
+      "Absorption of red light by ozone",
+      "Reflection of the ocean",
+      "Diffraction by clouds",
+      "Rayleigh scattering of sunlight by atmospheric molecules"
+    ],
+    "solution": "Step 1: Shorter wavelengths (blue) are scattered more strongly than longer wavelengths.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 177,
+    "question": "The reddish appearance of the sun at sunrise and sunset is due to:",
+    "options": [
+      "Scattering of blue light out of the line of sight",
+      "Absorption of blue light by water vapour",
+      "Refraction in the atmosphere only",
+      "Scattering of red light more than blue"
+    ],
+    "solution": "Step 1: At low solar elevation the path through the atmosphere is long; most blue light is scattered away, leaving the red component.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 178,
+    "question": "The intensity of Rayleigh-scattered light is proportional to:",
+    "options": [
+      "1/λ²",
+      "λ⁴",
+      "λ²",
+      "1/λ⁴"
+    ],
+    "solution": "Step 1: The Rayleigh formula contains the factor 1/λ⁴.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 179,
+    "question": "A polarised light wave has its electric field vector oscillating in:",
+    "options": [
+      "One fixed plane",
+      "All possible planes",
+      "A circle only",
+      "A random fashion"
+    ],
+    "solution": "Step 1: Linearly polarised light has the E-vector confined to a single plane.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 180,
+    "question": "Unpolarised light can be regarded as:",
+    "options": [
+      "A rapid succession of waves with randomly oriented planes of polarisation",
+      "Light that cannot be polarised",
+      "Light with zero electric field",
+      "Longitudinally oscillating electromagnetic waves"
+    ],
+    "solution": "Step 1: Natural light consists of many independent wave trains with randomly distributed polarisation directions.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 181,
+    "question": "The Malus’ law for the intensity of light transmitted by a polariser is:",
+    "options": [
+      "I = I₀ cosθ",
+      "I = I₀ cos²θ",
+      "I = I₀ / cosθ",
+      "I = I₀ sin²θ"
+    ],
+    "solution": "Step 1: Only the component of the electric field parallel to the transmission axis is passed; intensity therefore varies as cos²θ.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 182,
+    "question": "When unpolarised light is incident on a polariser the transmitted intensity is:",
+    "options": [
+      "Twice the incident intensity",
+      "Equal to the incident intensity",
+      "Half the incident intensity",
+      "Zero"
+    ],
+    "solution": "Step 1: Averaging cos²θ over all random polarisation angles yields a factor of ½.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 183,
+    "question": "Two polarisers with their transmission axes perpendicular to each other transmit:",
+    "options": [
+      "Half the incident light",
+      "One-quarter of the incident light",
+      "All the incident light",
+      "No light"
+    ],
+    "solution": "Step 1: The second polariser is crossed relative to the first; cos 90° = 0, so transmitted intensity is zero.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 184,
+    "question": "Inserting a third polariser at 45° between two crossed polarisers results in:",
+    "options": [
+      "Complete transmission",
+      "Still zero transmission",
+      "Absorption of all light",
+      "Transmission of some light"
+    ],
+    "solution": "Step 1: The intermediate polariser passes a component that is then partially transmitted by the final polariser.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 185,
+    "question": "Circularly polarised light can be produced from linearly polarised light by using:",
+    "options": [
+      "A half-wave plate",
+      "A diffraction grating",
+      "A polariser only",
+      "A quarter-wave plate with its axes at 45° to the polarisation direction"
+    ],
+    "solution": "Step 1: A quarter-wave plate introduces a π/2 phase difference between the two orthogonal components, converting linear into circular polarisation.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 186,
+    "question": "A half-wave plate introduces a phase difference of:",
+    "options": [
+      "π",
+      "2π",
+      "π/2",
+      "π/4"
+    ],
+    "solution": "Step 1: The optical path difference corresponds to a phase shift of π (half a wavelength).\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 187,
+    "question": "The optical activity of a substance is the ability to:",
+    "options": [
+      "Absorb all polarised light",
+      "Increase the intensity of light",
+      "Convert polarised light into unpolarised light",
+      "Rotate the plane of polarisation of linearly polarised light"
+    ],
+    "solution": "Step 1: Optically active media (e.g. quartz, sugar solutions) rotate the polarisation plane.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 188,
+    "question": "Specific rotation of an optically active solution is defined for:",
+    "options": [
+      "A path length of 1 dm and concentration of 1 g cm⁻³",
+      "A concentration of 1 mol L⁻¹ only",
+      "Any path length and concentration",
+      "A path length of 1 m only"
+    ],
+    "solution": "Step 1: Specific rotation [α] is the rotation produced by a 1 dm column of solution containing 1 g cm⁻³ of the active substance.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 189,
+    "question": "The wavefront of a plane wave is:",
+    "options": [
+      "A spherical surface",
+      "A cylindrical surface",
+      "A plane surface of constant phase",
+      "A point"
+    ],
+    "solution": "Step 1: In a plane wave all points on a plane perpendicular to the propagation direction have the same phase.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 190,
+    "question": "The wavefront of a spherical wave is:",
+    "options": [
+      "An ellipsoidal surface",
+      "A cylindrical surface",
+      "A plane surface",
+      "A spherical surface of constant phase"
+    ],
+    "solution": "Step 1: Waves expanding from a point source have spherical surfaces of constant phase.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 191,
+    "question": "According to Huygens’ principle the secondary wavelets travel with:",
+    "options": [
+      "Half the speed of the original wave",
+      "Infinite speed",
+      "Twice the speed of the original wave",
+      "The same speed as the original wave in the medium"
+    ],
+    "solution": "Step 1: The secondary wavelets propagate at the wave speed characteristic of the medium.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 192,
+    "question": "The envelope of the secondary wavelets at a later time forms the:",
+    "options": [
+      "Intensity pattern",
+      "Ray direction only",
+      "Old wavefront",
+      "New wavefront"
+    ],
+    "solution": "Step 1: Huygens’ construction defines the new wavefront as the common tangent (envelope) to the secondary wavelets.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 193,
+    "question": "Reflection of a plane wavefront from a plane surface produces:",
+    "options": [
+      "A plane reflected wavefront",
+      "A spherical reflected wavefront",
+      "A cylindrical reflected wavefront",
+      "No reflected wavefront"
+    ],
+    "solution": "Step 1: Application of Huygens’ principle to a plane mirror yields another plane wavefront obeying the law of reflection.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 194,
+    "question": "Refraction of a plane wavefront at a plane interface produces:",
+    "options": [
+      "A plane refracted wavefront",
+      "A spherical refracted wavefront",
+      "No refracted wavefront",
+      "A distorted wavefront"
+    ],
+    "solution": "Step 1: Huygens’ construction at a plane boundary again produces a plane wavefront that satisfies Snell’s law.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 195,
+    "question": "The optical length of a path is greater in a medium of higher refractive index because:",
+    "options": [
+      "Light travels more slowly in that medium",
+      "The geometrical path is longer",
+      "The frequency changes",
+      "Light travels faster in that medium"
+    ],
+    "solution": "Step 1: Optical path = n × geometrical path; higher n means larger optical path for the same physical distance.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 196,
+    "question": "Fermat’s principle states that a light ray follows the path that:",
+    "options": [
+      "Has the highest refractive index",
+      "Takes the least time (or an extremum of time)",
+      "Is the shortest geometrical distance",
+      "Avoids all interfaces"
+    ],
+    "solution": "Step 1: The actual path taken by light between two points is the one for which the travel time is stationary.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 197,
+    "question": "The principle of reversibility of light states that:",
+    "options": [
+      "Light can travel only in one direction",
+      "Frequency changes on reversal",
+      "Intensity is the same in both directions",
+      "If the direction of a ray is reversed it will retrace its original path"
+    ],
+    "solution": "Step 1: The laws of reflection and refraction are unchanged if the sense of the ray is reversed.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 198,
+    "question": "A mirage is caused by:",
+    "options": [
+      "Diffraction of light",
+      "Total internal reflection due to a refractive-index gradient in the atmosphere",
+      "Reflection from a water surface",
+      "Polarization of sunlight"
+    ],
+    "solution": "Step 1: Hot air near the ground has a lower refractive index, producing continuous refraction that can lead to TIR and the appearance of a virtual image.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 199,
+    "question": "The sparkling of a diamond is mainly due to:",
+    "options": [
+      "Total internal reflection and high refractive index",
+      "Interference of light",
+      "Polarization of light",
+      "Diffraction of light"
+    ],
+    "solution": "Step 1: The high refractive index of diamond gives a small critical angle, so most light entering the stone is totally reflected before emerging.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 200,
+    "question": "The critical angle for glass-to-air interface (n_glass ≈ 1.5) is approximately:",
+    "options": [
+      "30°",
+      "60°",
+      "90°",
+      "42°"
+    ],
+    "solution": "Step 1: θ_c = sin⁻¹(1/1.5) ≈ sin⁻¹(0.667) ≈ 41.8° ≈ 42°.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 201,
+    "question": "Coupled oscillators are systems in which:",
+    "options": [
+      "Damping is completely absent",
+      "Oscillators move completely independently",
+      "Only one oscillator is present",
+      "Two or more oscillators influence each other through a connecting interaction"
+    ],
+    "solution": "Step 1: Coupling allows energy to be transferred between the oscillators.\nStep 2: The system then possesses normal modes of oscillation.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 202,
+    "question": "Normal modes of a system of coupled oscillators are:",
+    "options": [
+      "Motions that occur only when damping is present",
+      "Patterns of motion in which all parts oscillate at the same frequency",
+      "Random motions of the individual oscillators",
+      "Motions that die out immediately"
+    ],
+    "solution": "Step 1: In a normal mode every oscillator vibrates with the same frequency and a fixed phase relationship.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 203,
+    "question": "For two identical masses coupled by three identical springs the number of normal modes is:",
+    "options": [
+      "Three",
+      "One",
+      "Two",
+      "Four"
+    ],
+    "solution": "Step 1: A system with two degrees of freedom possesses two independent normal modes.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 204,
+    "question": "In the symmetric normal mode of two coupled identical oscillators the two masses move:",
+    "options": [
+      "With unequal amplitudes",
+      "In phase with equal amplitudes",
+      "Out of phase with equal amplitudes",
+      "In opposite directions with different frequencies"
+    ],
+    "solution": "Step 1: The symmetric (or even) mode has both masses displacing in the same direction at any instant.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 205,
+    "question": "In the antisymmetric normal mode of two coupled identical oscillators the two masses move:",
+    "options": [
+      "Only one mass moves",
+      "Out of phase (in opposite directions) with equal amplitudes",
+      "With randomly varying phase",
+      "In phase with equal amplitudes"
+    ],
+    "solution": "Step 1: The antisymmetric (or odd) mode has the two masses always moving in opposite directions.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 206,
+    "question": "The frequency of the antisymmetric mode of two coupled oscillators is:",
+    "options": [
+      "Equal to the frequency of the symmetric mode",
+      "Zero",
+      "Higher than the frequency of the symmetric mode",
+      "Lower than the frequency of the symmetric mode"
+    ],
+    "solution": "Step 1: In the antisymmetric mode the coupling spring is stretched more, increasing the effective restoring force and therefore the frequency.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 207,
+    "question": "When energy is transferred back and forth between two weakly coupled oscillators the phenomenon is called:",
+    "options": [
+      "Damping",
+      "Forced oscillation",
+      "Resonance",
+      "Beating of the normal modes (or energy exchange)"
+    ],
+    "solution": "Step 1: A general motion is a linear combination of the two normal modes.\nStep 2: The slight difference in their frequencies produces a slow modulation of the energy between the two oscillators.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 208,
+    "question": "The beat frequency observed in the energy exchange of two coupled oscillators is equal to:",
+    "options": [
+      "The average of the two normal-mode frequencies",
+      "Zero",
+      "The difference of the two normal-mode frequencies",
+      "The sum of the two normal-mode frequencies"
+    ],
+    "solution": "Step 1: The envelope of the motion varies at |ω_a – ω_s|.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 209,
+    "question": "A system of N coupled oscillators has:",
+    "options": [
+      "2N normal modes",
+      "N normal modes",
+      "One normal mode",
+      "N/2 normal modes"
+    ],
+    "solution": "Step 1: Each oscillator contributes one degree of freedom; the number of independent normal modes equals the number of degrees of freedom.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 210,
+    "question": "In a continuous string the normal modes are the:",
+    "options": [
+      "Standing-wave patterns with nodes at the fixed ends",
+      "Modes that exist only with damping",
+      "Random vibrations",
+      "Travelling waves only"
+    ],
+    "solution": "Step 1: The fixed-end boundary conditions quantise the allowed wavelengths, producing the harmonic series of standing waves.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 211,
+    "question": "The Q-factor of an oscillator is defined as:",
+    "options": [
+      "Amplitude × frequency",
+      "2π × (energy stored) / (energy lost per cycle)",
+      "Frequency × damping constant",
+      "Energy lost per cycle / energy stored"
+    ],
+    "solution": "Step 1: The conventional definition of the quality factor is Q = 2π E / ΔE, where ΔE is the energy dissipated in one period.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 212,
+    "question": "A high-Q system loses energy:",
+    "options": [
+      "At a constant rate independent of Q",
+      "Only when driven",
+      "Slowly",
+      "Rapidly"
+    ],
+    "solution": "Step 1: Large Q means the fractional energy loss per cycle is small.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 213,
+    "question": "The width of the resonance curve (full width at half-maximum) is related to Q by:",
+    "options": [
+      "Δω = ω₀",
+      "Δω = Q ω₀",
+      "Δω = ω₀ / Q",
+      "Δω = ω₀ Q²"
+    ],
+    "solution": "Step 1: The sharper the resonance (higher Q), the smaller the frequency width Δω.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 214,
+    "question": "Power resonance occurs at a frequency equal to:",
+    "options": [
+      "Zero frequency",
+      "The frequency of maximum amplitude when damping is present",
+      "The natural frequency of the undamped oscillator",
+      "Twice the natural frequency"
+    ],
+    "solution": "Step 1: Average power absorbed from the driver is maximum when ω = ω₀, independent of the small shift that appears in the amplitude resonance.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 215,
+    "question": "The amplitude resonance frequency for a driven damped oscillator is slightly:",
+    "options": [
+      "Greater than the natural frequency ω₀",
+      "Less than the natural frequency ω₀",
+      "Independent of damping",
+      "Exactly equal to ω₀"
+    ],
+    "solution": "Step 1: The frequency of maximum amplitude is ω = √(ω₀² – 2β²), which is lower than ω₀.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 216,
+    "question": "In the steady state of a driven oscillator the average power delivered by the driving force equals:",
+    "options": [
+      "The rate of change of stored energy",
+      "Zero",
+      "The average power dissipated by the damping force",
+      "Twice the dissipated power"
+    ],
+    "solution": "Step 1: Once transients have died, the energy stored in the oscillator is constant on average; all power input is ultimately dissipated.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 217,
+    "question": "The transient solution of a driven damped oscillator dies out because of:",
+    "options": [
+      "The presence of damping",
+      "The driving force",
+      "The absence of a restoring force",
+      "The initial conditions only"
+    ],
+    "solution": "Step 1: The homogeneous solution contains the decaying factor e^(–βt).\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 218,
+    "question": "When the driving frequency is exactly equal to the natural frequency the phase difference between displacement and driving force is:",
+    "options": [
+      "π/4",
+      "0",
+      "π",
+      "π/2"
+    ],
+    "solution": "Step 1: At resonance the displacement lags the driving force by 90°.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 219,
+    "question": "A driven oscillator absorbs maximum energy from the driver when the phase difference between force and velocity is:",
+    "options": [
+      "Zero",
+      "π/4",
+      "π/2",
+      "π"
+    ],
+    "solution": "Step 1: Instantaneous power is F·v; the average is maximum when F and v are in phase.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 220,
+    "question": "The phenomenon of resonance is exploited in:",
+    "options": [
+      "Tuning a radio receiver to a particular station",
+      "Making a pendulum stop swinging",
+      "Reducing the amplitude of unwanted vibrations",
+      "Eliminating all damping"
+    ],
+    "solution": "Step 1: The receiver’s resonant circuit is adjusted so that its natural frequency matches the carrier frequency of the desired station.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 221,
+    "question": "Mechanical resonance can be dangerous in structures when:",
+    "options": [
+      "The structure is completely rigid",
+      "Damping is very large",
+      "The frequency of an external periodic force matches a natural frequency of the structure",
+      "No external force acts"
+    ],
+    "solution": "Step 1: Large amplitudes can build up, potentially leading to structural failure (e.g., Tacoma Narrows Bridge).\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 222,
+    "question": "The time constant for the decay of energy in a damped oscillator is:",
+    "options": [
+      "1/β",
+      "β",
+      "2β",
+      "1/(2β) where β = b/(2m)"
+    ],
+    "solution": "Step 1: Energy decays as e^(–2βt); the time constant for energy is therefore 1/(2β).\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 223,
+    "question": "The amplitude of a lightly damped oscillator falls to 1/e of its initial value in a time:",
+    "options": [
+      "b/m",
+      "m/2b",
+      "m/b",
+      "2m/b"
+    ],
+    "solution": "Step 1: Amplitude ~ e^(–βt) with β = b/(2m); setting βt = 1 gives t = 2m/b.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 224,
+    "question": "Critical damping occurs when the damping constant b satisfies:",
+    "options": [
+      "b = 2√(k m)",
+      "b = √(k m)",
+      "b = √(k/m)",
+      "b = k/m"
+    ],
+    "solution": "Step 1: The condition for critical damping is β = ω₀, i.e., b/(2m) = √(k/m), so b = 2√(km).\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 225,
+    "question": "An over-damped system returns to equilibrium:",
+    "options": [
+      "With rapid oscillations",
+      "With constant velocity",
+      "Faster than a critically damped system",
+      "Without oscillating and more slowly than a critically damped system"
+    ],
+    "solution": "Step 1: Both roots of the characteristic equation are real and negative; the slower-decaying root dominates.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 226,
+    "question": "The displacement of an under-damped oscillator can be written as:",
+    "options": [
+      "x(t) = A e^(–βt) cos(ω't + φ)",
+      "x(t) = A e^(βt) cos(ω't + φ)",
+      "x(t) = A e^(–βt)",
+      "x(t) = A cos(ω₀ t + φ)"
+    ],
+    "solution": "Step 1: The solution consists of a decaying exponential envelope multiplying a sinusoidal oscillation at the reduced frequency ω'.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 227,
+    "question": "The energy of an under-damped oscillator decreases approximately as:",
+    "options": [
+      "e^(–βt)",
+      "Constant",
+      "e^(–βt/2)",
+      "e^(–2βt)"
+    ],
+    "solution": "Step 1: Because amplitude ~ e^(–βt) and energy ∝ amplitude², energy ~ e^(–2βt).\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 228,
+    "question": "In the absence of damping the Q-factor of an oscillator would be:",
+    "options": [
+      "Unity",
+      "Zero",
+      "Infinite",
+      "Equal to the frequency"
+    ],
+    "solution": "Step 1: With no energy loss per cycle, Q → ∞.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 229,
+    "question": "A practical example of a high-Q system is:",
+    "options": [
+      "A strongly damped galvanometer",
+      "A quartz crystal oscillator",
+      "A mass on a soft spring in a viscous fluid",
+      "A pendulum swinging in thick oil"
+    ],
+    "solution": "Step 1: Quartz crystals have extremely low internal damping and therefore very high Q.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 230,
+    "question": "The phase of the steady-state displacement relative to the driving force changes from 0 to π as the driving frequency goes from:",
+    "options": [
+      "Any value to any other value",
+      "Zero to the natural frequency only",
+      "Well below resonance to well above resonance",
+      "The natural frequency to infinity only"
+    ],
+    "solution": "Step 1: The phase lag δ increases continuously from nearly 0 (low frequency) through π/2 (resonance) to nearly π (high frequency).\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 231,
+    "question": "When two sound waves of frequencies 256 Hz and 260 Hz are sounded together the beat frequency is:",
+    "options": [
+      "516 Hz",
+      "4 Hz",
+      "2 Hz",
+      "258 Hz"
+    ],
+    "solution": "Step 1: Beat frequency = |f₁ – f₂| = 4 Hz.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 232,
+    "question": "If the beat frequency between a tuning fork and a sonometer wire is 4 Hz and the wire frequency is higher, tightening the wire will:",
+    "options": [
+      "Decrease the beat frequency",
+      "Stop the beats",
+      "Increase the beat frequency",
+      "Leave the beat frequency unchanged"
+    ],
+    "solution": "Step 1: Tightening raises the wire frequency, increasing the difference from the fork frequency.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 233,
+    "question": "An echo will be heard clearly if the reflecting surface is at least approximately:",
+    "options": [
+      "100 m away",
+      "1 m away",
+      "17 m away (for a 0.1 s persistence of hearing)",
+      "0.17 m away"
+    ],
+    "solution": "Step 1: Sound travels about 34 m in 0.1 s (to the wall and back), so the wall must be at least ~17 m distant.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 234,
+    "question": "The Doppler effect applies to:",
+    "options": [
+      "All kinds of waves (sound, light, water, etc.)",
+      "Only sound waves",
+      "Only light waves",
+      "Only transverse waves"
+    ],
+    "solution": "Step 1: Any wave phenomenon whose frequency is measured by an observer can exhibit a Doppler shift when source or observer moves.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 235,
+    "question": "When both source and observer move in the same direction with the same speed relative to the medium, the observed frequency is:",
+    "options": [
+      "Zero",
+      "Lower than the true frequency",
+      "Higher than the true frequency",
+      "Equal to the true frequency"
+    ],
+    "solution": "Step 1: Relative velocity between source and observer is zero, so no Doppler shift occurs.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 236,
+    "question": "The speed of sound in air at room temperature is approximately:",
+    "options": [
+      "5000 m s⁻¹",
+      "3 × 10⁸ m s⁻¹",
+      "340 m s⁻¹",
+      "1500 m s⁻¹"
+    ],
+    "solution": "Step 1: The accepted value near 20 °C is about 343 m s⁻¹, commonly approximated as 340 m s⁻¹.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 237,
+    "question": "The speed of sound in water is approximately:",
+    "options": [
+      "1500 m s⁻¹",
+      "3 × 10⁸ m s⁻¹",
+      "340 m s⁻¹",
+      "5000 m s⁻¹"
+    ],
+    "solution": "Step 1: Sound travels roughly 4–5 times faster in water than in air.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 238,
+    "question": "The speed of sound in a steel rod is of the order of:",
+    "options": [
+      "3 × 10⁸ m s⁻¹",
+      "1500 m s⁻¹",
+      "340 m s⁻¹",
+      "5000 m s⁻¹"
+    ],
+    "solution": "Step 1: Longitudinal waves in solids propagate at several kilometres per second.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 239,
+    "question": "Ultrasound refers to sound waves with frequencies:",
+    "options": [
+      "Above the upper limit of human hearing (≈ 20 kHz)",
+      "Below 20 Hz",
+      "Between 20 Hz and 20 kHz",
+      "Exactly 20 Hz"
+    ],
+    "solution": "Step 1: Frequencies higher than about 20 kHz are called ultrasonic.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 240,
+    "question": "Infrasound refers to sound waves with frequencies:",
+    "options": [
+      "Above 20 kHz",
+      "Between 20 Hz and 20 kHz",
+      "Exactly 20 kHz",
+      "Below the lower limit of human hearing (≈ 20 Hz)"
+    ],
+    "solution": "Step 1: Frequencies lower than about 20 Hz are called infrasonic.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 241,
+    "question": "The intensity level of a sound increases by 10 dB when its intensity is multiplied by:",
+    "options": [
+      "100",
+      "10",
+      "2",
+      "20"
+    ],
+    "solution": "Step 1: Δβ = 10 log₁₀(I₂/I₁); if Δβ = 10 then I₂/I₁ = 10.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 242,
+    "question": "A 20 dB increase in intensity level corresponds to a factor of:",
+    "options": [
+      "2 in intensity",
+      "100 in intensity",
+      "20 in intensity",
+      "10 in intensity"
+    ],
+    "solution": "Step 1: 20 dB = 10 log₁₀(I₂/I₁) ⇒ log₁₀(I₂/I₁) = 2 ⇒ I₂/I₁ = 100.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 243,
+    "question": "The threshold of pain for human hearing is roughly:",
+    "options": [
+      "200 dB",
+      "120 dB",
+      "60 dB",
+      "0 dB"
+    ],
+    "solution": "Step 1: Intensity levels around 120 dB are experienced as painful.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 244,
+    "question": "Reverberation time of a hall is the time taken for the sound intensity to fall by:",
+    "options": [
+      "1 dB",
+      "10 dB",
+      "3 dB",
+      "60 dB after the source is switched off"
+    ],
+    "solution": "Step 1: By definition the reverberation time T₆₀ is the time for a 60 dB decay.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 245,
+    "question": "Sabine’s formula for reverberation time is:",
+    "options": [
+      "T = V / A",
+      "T = 0.161 A / V",
+      "T = A / V",
+      "T = 0.161 V / A where A is the total absorption"
+    ],
+    "solution": "Step 1: The classical Sabine expression relates reverberation time to the volume of the room and the total absorbing power.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 246,
+    "question": "An open organ pipe of length L has fundamental frequency:",
+    "options": [
+      "v/(4L)",
+      "v/(2L)",
+      "3v/(4L)",
+      "v/L"
+    ],
+    "solution": "Step 1: Both ends are antinodes, so the fundamental wavelength is 2L.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 247,
+    "question": "An open organ pipe produces:",
+    "options": [
+      "Both odd and even harmonics",
+      "Only even harmonics",
+      "Only odd harmonics",
+      "No harmonics"
+    ],
+    "solution": "Step 1: The boundary conditions of an open pipe allow a complete harmonic series.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 248,
+    "question": "If an open pipe and a closed pipe have the same fundamental frequency, the closed pipe is:",
+    "options": [
+      "Half as long as the open pipe",
+      "Four times as long as the open pipe",
+      "The same length as the open pipe",
+      "Twice as long as the open pipe"
+    ],
+    "solution": "Step 1: f_open = v/(2L_o), f_closed = v/(4L_c). Setting equal gives L_c = L_o / 2.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 249,
+    "question": "The end correction for an open pipe is approximately:",
+    "options": [
+      "2d",
+      "0.3 d where d is the diameter",
+      "0.6 d",
+      "d"
+    ],
+    "solution": "Step 1: The effective length of an open pipe is L + 2e with e ≈ 0.3 d.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 250,
+    "question": "A resonance tube experiment is used to determine:",
+    "options": [
+      "The frequency of a tuning fork only",
+      "The speed of sound in air",
+      "The wavelength of light",
+      "The density of the liquid"
+    ],
+    "solution": "Step 1: By measuring the lengths of the air column at successive resonances the wavelength (and hence the speed) of sound can be obtained.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 251,
+    "question": "The fundamental frequency of a closed organ pipe is 100 Hz. The frequency of its first overtone is:",
+    "options": [
+      "300 Hz",
+      "200 Hz",
+      "400 Hz",
+      "150 Hz"
+    ],
+    "solution": "Step 1: A closed pipe supports only odd harmonics: f, 3f, 5f, …\nStep 2: First overtone = 3 × 100 = 300 Hz.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 252,
+    "question": "The fundamental frequency of an open organ pipe is 100 Hz. The frequency of its first overtone is:",
+    "options": [
+      "400 Hz",
+      "150 Hz",
+      "300 Hz",
+      "200 Hz"
+    ],
+    "solution": "Step 1: An open pipe supports all harmonics: f, 2f, 3f, …\nStep 2: First overtone = 2 × 100 = 200 Hz.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 253,
+    "question": "If the temperature of air rises, the fundamental frequency of an organ pipe:",
+    "options": [
+      "Becomes zero",
+      "Remains unchanged",
+      "Increases",
+      "Decreases"
+    ],
+    "solution": "Step 1: Speed of sound v ∝ √T.\nStep 2: Frequency f = v/λ therefore increases with temperature.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 254,
+    "question": "A tuning fork of frequency 512 Hz is sounded with a sonometer wire. If 4 beats per second are heard and the wire is under lower tension, the frequency of the wire is:",
+    "options": [
+      "512 Hz",
+      "520 Hz",
+      "508 Hz",
+      "516 Hz"
+    ],
+    "solution": "Step 1: Beat frequency = 4 Hz.\nStep 2: Lower tension means lower wire frequency, so f_wire = 512 – 4 = 508 Hz.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 255,
+    "question": "The wavelength of the fundamental mode of a string of length L fixed at both ends is:",
+    "options": [
+      "L/2",
+      "L",
+      "2L",
+      "4L"
+    ],
+    "solution": "Step 1: The fundamental standing wave has nodes at both ends and one antinode in the middle, so λ/2 = L → λ = 2L.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 256,
+    "question": "The progressive wave equation y = A sin(ωt – kx) represents a wave travelling in the:",
+    "options": [
+      "Negative x-direction",
+      "Positive x-direction",
+      "Negative y-direction",
+      "Positive y-direction"
+    ],
+    "solution": "Step 1: The general form f(ωt – kx) travels in the +x direction.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 257,
+    "question": "The progressive wave equation y = A sin(ωt + kx) represents a wave travelling in the:",
+    "options": [
+      "Positive y-direction",
+      "Negative x-direction",
+      "Positive x-direction",
+      "Negative y-direction"
+    ],
+    "solution": "Step 1: The form f(ωt + kx) travels in the –x direction.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 258,
+    "question": "The phase difference between two particles separated by a distance Δx on a progressive wave is:",
+    "options": [
+      "2π λ Δx",
+      "λ Δx",
+      "(2π/λ) Δx",
+      "(2π/λ) / Δx"
+    ],
+    "solution": "Step 1: Phase difference δ = k Δx = (2π/λ) Δx.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 259,
+    "question": "The path difference corresponding to a phase difference of 2π is:",
+    "options": [
+      "Half a wavelength",
+      "One-quarter wavelength",
+      "One wavelength",
+      "Two wavelengths"
+    ],
+    "solution": "Step 1: A phase change of 2π corresponds to a path difference of λ.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 260,
+    "question": "In a longitudinal progressive wave the particles of the medium oscillate:",
+    "options": [
+      "In circular paths",
+      "Parallel to the direction of wave propagation",
+      "Perpendicular to the direction of wave propagation",
+      "Randomly"
+    ],
+    "solution": "Step 1: By definition longitudinal waves have particle displacement parallel to the propagation direction.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 261,
+    "question": "In a transverse progressive wave the particles of the medium oscillate:",
+    "options": [
+      "In the direction of the wave velocity only",
+      "Perpendicular to the direction of wave propagation",
+      "With zero amplitude",
+      "Parallel to the direction of wave propagation"
+    ],
+    "solution": "Step 1: Transverse waves have particle displacement perpendicular to the propagation direction.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 262,
+    "question": "The relation between wave speed v, frequency f and wavelength λ is:",
+    "options": [
+      "v = f λ",
+      "v = f² λ",
+      "v = λ / f",
+      "v = f / λ"
+    ],
+    "solution": "Step 1: By definition the speed of a wave is the product of its frequency and wavelength.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 263,
+    "question": "If the frequency of a wave is doubled and the wavelength is halved, the wave speed:",
+    "options": [
+      "Remains the same",
+      "Becomes four times",
+      "Is doubled",
+      "Is halved"
+    ],
+    "solution": "Step 1: v = f λ; new values give (2f)(λ/2) = f λ = original speed.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 264,
+    "question": "The intensity of a wave is defined as:",
+    "options": [
+      "Amplitude of the wave",
+      "Total energy of the wave",
+      "Frequency of the wave",
+      "Average power transferred per unit area perpendicular to the direction of propagation"
+    ],
+    "solution": "Step 1: Intensity I = P_avg / Area.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 265,
+    "question": "For a spherical wave the intensity at distance r from a point source is proportional to:",
+    "options": [
+      "r²",
+      "1/r",
+      "1/r²",
+      "1/r³"
+    ],
+    "solution": "Step 1: Power is distributed over a sphere of surface area 4πr².\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 266,
+    "question": "For a cylindrical wave the intensity at distance r from the axis is proportional to:",
+    "options": [
+      "1/r",
+      "1/r³",
+      "r",
+      "1/r²"
+    ],
+    "solution": "Step 1: Power is distributed over a cylindrical surface whose area grows linearly with r.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 267,
+    "question": "The principle of superposition is valid for:",
+    "options": [
+      "Linear wave equations (small amplitudes)",
+      "Only non-linear waves",
+      "Waves of infinite amplitude",
+      "Only electromagnetic waves"
+    ],
+    "solution": "Step 1: Superposition holds when the wave equation is linear, which is true for small-amplitude waves.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 268,
+    "question": "Two waves of equal amplitude and frequency travelling in opposite directions produce:",
+    "options": [
+      "A progressive wave of double speed",
+      "A standing wave",
+      "Complete destructive interference everywhere",
+      "Beats"
+    ],
+    "solution": "Step 1: Their superposition yields fixed nodes and antinodes characteristic of a standing wave.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 269,
+    "question": "In a standing wave the phase difference between two particles in the same segment (between two nodes) is:",
+    "options": [
+      "2π",
+      "Zero",
+      "π/2",
+      "π"
+    ],
+    "solution": "Step 1: All particles within one loop oscillate in phase.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 270,
+    "question": "In a standing wave the phase difference between particles on either side of a node is:",
+    "options": [
+      "π/2",
+      "2π",
+      "Zero",
+      "π"
+    ],
+    "solution": "Step 1: Adjacent loops oscillate in antiphase.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 271,
+    "question": "The energy in a standing wave is:",
+    "options": [
+      "Propagating with speed v",
+      "Zero everywhere",
+      "Stationary (does not propagate)",
+      "Propagating with speed 2v"
+    ],
+    "solution": "Step 1: Because the wave is a superposition of two equal and opposite progressive waves, the net energy flow is zero.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 272,
+    "question": "A node is a point of:",
+    "options": [
+      "Maximum displacement at all times",
+      "Zero displacement at all times",
+      "Maximum pressure variation in a transverse wave",
+      "Random motion"
+    ],
+    "solution": "Step 1: By definition the displacement remains zero at a node.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 273,
+    "question": "An antinode is a point of:",
+    "options": [
+      "Minimum energy",
+      "Maximum displacement amplitude",
+      "Zero displacement amplitude",
+      "Constant displacement"
+    ],
+    "solution": "Step 1: The amplitude of oscillation reaches its greatest value at an antinode.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 274,
+    "question": "The distance between a node and the next antinode in a standing wave is:",
+    "options": [
+      "λ/2",
+      "2λ",
+      "λ/4",
+      "λ"
+    ],
+    "solution": "Step 1: Nodes and antinodes alternate every quarter wavelength.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 275,
+    "question": "When a longitudinal wave reflects from a denser medium the reflected wave suffers a phase change of:",
+    "options": [
+      "2π",
+      "π",
+      "π/2",
+      "0"
+    ],
+    "solution": "Step 1: Reflection from a denser medium introduces a phase shift of π for the displacement wave.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 276,
+    "question": "When a transverse wave on a string reflects from a fixed end the reflected wave suffers a phase change of:",
+    "options": [
+      "0",
+      "2π",
+      "π",
+      "π/2"
+    ],
+    "solution": "Step 1: A fixed end is a node; the reflected wave must invert to keep the end fixed.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 277,
+    "question": "When a transverse wave on a string reflects from a free end the reflected wave suffers a phase change of:",
+    "options": [
+      "π",
+      "2π",
+      "0",
+      "π/2"
+    ],
+    "solution": "Step 1: A free end is an antinode; the reflected wave does not invert.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 278,
+    "question": "The formation of beats requires two waves that have:",
+    "options": [
+      "Exactly the same frequency",
+      "Slightly different frequencies",
+      "Perpendicular polarisations",
+      "Very different amplitudes"
+    ],
+    "solution": "Step 1: Beats arise from the slow modulation produced by the difference frequency.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 279,
+    "question": "The number of beats heard per second is equal to:",
+    "options": [
+      "The average of the two frequencies",
+      "The product of the two frequencies",
+      "The absolute difference of the two frequencies",
+      "The sum of the two frequencies"
+    ],
+    "solution": "Step 1: Beat frequency = |f₁ – f₂|.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 280,
+    "question": "In the Doppler effect for sound, when the source moves towards a stationary observer the apparent wavelength:",
+    "options": [
+      "Increases",
+      "Decreases",
+      "Remains the same",
+      "Becomes infinite"
+    ],
+    "solution": "Step 1: Wavelength ahead of a moving source is compressed.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 281,
+    "question": "In the Doppler effect for sound, when the observer moves towards a stationary source the apparent frequency:",
+    "options": [
+      "Decreases",
+      "Increases",
+      "Remains the same",
+      "Becomes zero"
+    ],
+    "solution": "Step 1: The observer encounters more wavefronts per second.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 282,
+    "question": "The Doppler effect for light (electromagnetic waves) depends on:",
+    "options": [
+      "The relative velocity between source and observer",
+      "The existence of a luminiferous ether",
+      "The motion of the observer relative to a medium only",
+      "The motion of the source relative to a medium only"
+    ],
+    "solution": "Step 1: Special relativity shows that only the relative velocity matters for light.\n\nCorrect Answer: (a)"
+  },
+  {
+    "id": 283,
+    "question": "A red shift in the spectrum of a distant galaxy indicates that the galaxy is:",
+    "options": [
+      "Stationary relative to us",
+      "Approaching us",
+      "Rotating rapidly",
+      "Receding from us"
+    ],
+    "solution": "Step 1: Recessional velocity produces a Doppler shift toward longer (redder) wavelengths.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 284,
+    "question": "A blue shift in the spectrum of a star indicates that the star is:",
+    "options": [
+      "Receding from us",
+      "Approaching us",
+      "Stationary relative to us",
+      "Increasing in temperature only"
+    ],
+    "solution": "Step 1: Approach produces a shift toward shorter (bluer) wavelengths.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 285,
+    "question": "The intensity of a sound wave is proportional to the square of:",
+    "options": [
+      "Its speed only",
+      "Its wavelength only",
+      "Its frequency only",
+      "Its pressure amplitude (or displacement amplitude)"
+    ],
+    "solution": "Step 1: I ∝ (ΔP_max)² ∝ A².\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 286,
+    "question": "The human ear is most sensitive to frequencies around:",
+    "options": [
+      "100 Hz",
+      "20 Hz",
+      "20 kHz",
+      "2–4 kHz"
+    ],
+    "solution": "Step 1: The threshold of hearing is lowest (highest sensitivity) near 2–4 kHz.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 287,
+    "question": "The unit of sound intensity level is the:",
+    "options": [
+      "Joule",
+      "Decibel",
+      "Watt",
+      "Hertz"
+    ],
+    "solution": "Step 1: Intensity level is expressed in decibels (dB).\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 288,
+    "question": "A sound of intensity level 0 dB corresponds to an intensity of:",
+    "options": [
+      "1 W m⁻²",
+      "0 W m⁻²",
+      "10⁻¹² W m⁻²",
+      "10⁻⁶ W m⁻²"
+    ],
+    "solution": "Step 1: By definition 0 dB is the reference intensity I₀ = 10⁻¹² W m⁻².\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 289,
+    "question": "If the intensity of a sound is doubled, the intensity level increases by approximately:",
+    "options": [
+      "6 dB",
+      "10 dB",
+      "2 dB",
+      "3 dB"
+    ],
+    "solution": "Step 1: 10 log₁₀(2) ≈ 3 dB.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 290,
+    "question": "The reverberation of sound in a hall is due to:",
+    "options": [
+      "Diffraction of sound",
+      "Multiple reflections from the walls, ceiling and floor",
+      "Polarization of sound",
+      "Interference of sound"
+    ],
+    "solution": "Step 1: Successive reflections keep the sound energy in the room for a finite time after the source stops.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 291,
+    "question": "To reduce reverberation time in a hall one should:",
+    "options": [
+      "Raise the temperature",
+      "Increase the volume of the hall only",
+      "Increase the total absorption (soft furnishings, curtains, audience, etc.)",
+      "Use more reflecting surfaces"
+    ],
+    "solution": "Step 1: Sabine’s formula T ∝ V/A shows that increasing absorption A shortens T.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 292,
+    "question": "The quality (timbre) of a musical note depends on:",
+    "options": [
+      "Only the duration of the note",
+      "Only the amplitude",
+      "The presence and relative strengths of overtones",
+      "Only the fundamental frequency"
+    ],
+    "solution": "Step 1: Different instruments produce different harmonic content, giving each its characteristic tone colour.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 293,
+    "question": "Pitch of a sound is determined primarily by its:",
+    "options": [
+      "Intensity",
+      "Waveform",
+      "Speed",
+      "Frequency"
+    ],
+    "solution": "Step 1: Higher frequency is perceived as higher pitch.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 294,
+    "question": "Loudness of a sound is determined primarily by its:",
+    "options": [
+      "Speed only",
+      "Frequency only",
+      "Intensity (and frequency)",
+      "Waveform only"
+    ],
+    "solution": "Step 1: Loudness is the subjective perception of intensity, also dependent on frequency.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 295,
+    "question": "The superposition of two waves of slightly different frequencies but equal amplitudes produces:",
+    "options": [
+      "Complete destructive interference",
+      "Beats",
+      "A standing wave",
+      "A wave of double frequency"
+    ],
+    "solution": "Step 1: The resultant amplitude is modulated at the difference frequency, producing audible beats.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 296,
+    "question": "In Young’s double-slit experiment the central fringe is bright because the path difference is:",
+    "options": [
+      "λ",
+      "λ/2",
+      "3λ/2",
+      "Zero"
+    ],
+    "solution": "Step 1: Zero path difference produces constructive interference.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 297,
+    "question": "If one of the slits in Young’s experiment is covered, the interference pattern:",
+    "options": [
+      "Remains unchanged",
+      "Becomes brighter",
+      "Disappears and is replaced by a single-slit diffraction pattern",
+      "Shows only dark fringes"
+    ],
+    "solution": "Step 1: Interference requires two coherent sources; with one slit only diffraction remains.\n\nCorrect Answer: (c)"
+  },
+  {
+    "id": 298,
+    "question": "The fringe width in Young’s experiment is independent of:",
+    "options": [
+      "The wavelength",
+      "The intensity of the source",
+      "The distance from slits to screen",
+      "The distance between slits"
+    ],
+    "solution": "Step 1: β = λD/d; intensity affects brightness but not the spacing of the fringes.\n\nCorrect Answer: (b)"
+  },
+  {
+    "id": 299,
+    "question": "In a single-slit diffraction pattern the position of the first minimum is given by:",
+    "options": [
+      "a sin θ = λ/2",
+      "a sin θ = 2λ",
+      "a sin θ = 3λ/2",
+      "a sin θ = λ"
+    ],
+    "solution": "Step 1: The path difference between the edges of the slit equals one wavelength for the first minimum.\n\nCorrect Answer: (d)"
+  },
+  {
+    "id": 300,
+    "question": "The angular width of the central maximum in single-slit diffraction is:",
+    "options": [
+      "λ/(2a)",
+      "2λ/a",
+      "a/λ",
+      "λ/a"
+    ],
+    "solution": "Step 1: The central maximum extends from θ = –λ/a to θ = +λ/a, giving a total angular width 2λ/a.\n\nCorrect Answer: (b)"
+  }
+]
