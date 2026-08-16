@@ -4,6 +4,63 @@
 
 import { apiFetch, $id, maskName } from './utils.js';
 
+// ==================== AUTO-INCREMENTING COUNTER ====================
+const QUESTIONS_SOLVED_KEY = 'lb_questions_solved';
+const QUESTIONS_TIMESTAMP_KEY = 'lb_questions_timestamp';
+
+function getQuestionsSolved() {
+  const now = Date.now();
+  const saved = localStorage.getItem(QUESTIONS_SOLVED_KEY);
+  const savedTime = localStorage.getItem(QUESTIONS_TIMESTAMP_KEY);
+  
+  let base = 120; // Starting number
+  
+  if (saved) {
+    base = parseInt(saved, 10);
+  }
+  
+  if (savedTime) {
+    const elapsedHours = (now - parseInt(savedTime, 10)) / (1000 * 60 * 60);
+    const added = Math.floor(elapsedHours); // +1 per hour
+    const newTotal = base + added;
+    
+    // Update storage
+    localStorage.setItem(QUESTIONS_SOLVED_KEY, newTotal.toString());
+    localStorage.setItem(QUESTIONS_TIMESTAMP_KEY, now.toString());
+    
+    return newTotal;
+  }
+  
+  // First time - initialize
+  localStorage.setItem(QUESTIONS_SOLVED_KEY, base.toString());
+  localStorage.setItem(QUESTIONS_TIMESTAMP_KEY, now.toString());
+  return base;
+}
+
+// Start the auto-increment loop (runs every hour)
+function startAutoIncrement() {
+  // Update every hour
+  setInterval(() => {
+    const current = parseInt(localStorage.getItem(QUESTIONS_SOLVED_KEY) || '120', 10);
+    const newTotal = current + 1;
+    localStorage.setItem(QUESTIONS_SOLVED_KEY, newTotal.toString());
+    localStorage.setItem(QUESTIONS_TIMESTAMP_KEY, Date.now().toString());
+    
+    // Update UI if visible
+    const totalExams = $id('lbTotalExams');
+    if (totalExams) {
+      totalExams.textContent = formatNumber(newTotal);
+    }
+  }, 60 * 60 * 1000); // 1 hour
+}
+
+function formatNumber(num) {
+  if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+  if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+  return num.toString();
+}
+
+// ==================== MAIN LEADERBOARD ====================
 export async function loadLeaderboard() {
   const body = $id('lbBody');
   if (!body) return;
@@ -16,7 +73,7 @@ export async function loadLeaderboard() {
     // Only show top 10
     const top10 = lb.slice(0, 10);
     
-    // ==================== STATIC STATS ====================
+    // ==================== STATS ====================
     const totalStudents = $id('lbTotalStudents');
     const totalExams = $id('lbTotalExams');
     const avgScore = $id('lbAvgScore');
@@ -24,12 +81,13 @@ export async function loadLeaderboard() {
     // Total ranked: always 10 (static)
     if (totalStudents) totalStudents.textContent = '10';
     
-    // Total exams: hidden - replaced with "Questions Solved"
+    // Questions Solved: auto-incrementing counter
     if (totalExams) {
-      // Change label to "Questions Solved"
+      const count = getQuestionsSolved();
+      totalExams.textContent = formatNumber(count);
+      // Update label
       const label = totalExams.parentElement?.querySelector('.lb-label');
       if (label) label.textContent = '📝 Questions Solved';
-      totalExams.textContent = '10,000+'; // Static value
     }
     
     // Platform average: based on top 10 only
@@ -42,6 +100,12 @@ export async function loadLeaderboard() {
     
     renderTopThree(top10.slice(0, 3));
     renderTable(top10.slice(3));
+    
+    // Start auto-increment if not already started
+    if (!window._autoIncrementStarted) {
+      startAutoIncrement();
+      window._autoIncrementStarted = true;
+    }
     
   } catch (e) {
     console.error('Leaderboard error:', e);
@@ -66,7 +130,6 @@ function renderTopThree(top) {
   const icons = ['👑', '🥈', '🥉'];
   const bgColors = ['#f59e0b', '#94a3b8', '#b45309'];
   
-  // Display order: 2nd, 1st, 3rd
   const order = top.length >= 3 ? [top[1], top[0], top[2]] : top;
   
   container.innerHTML = order.map((u, idx) => {
@@ -101,20 +164,14 @@ function renderTable(users) {
     return;
   }
   
-  // Rank starts from 1, not 4
-  // Top 3 are shown separately, so we start from 4 in the table
-  // But we show ranks 4-10
   body.innerHTML = users.map((u, index) => {
     const displayName = maskName(u.displayName || u.fullName || u.username || 'Student');
     const initials = (u.fullName || 'ST').split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
-    const rank = index + 4; // #4, #5, #6, #7, #8, #9, #10
-    
-    // Crowns for top 3 (already shown above)
-    let rankDisplay = `#${rank}`;
+    const rank = index + 4;
     
     return `
       <div class="lb-row">
-        <span class="lb-rank">${rankDisplay}</span>
+        <span class="lb-rank">#${rank}</span>
         <div class="lb-user">
           <div class="lb-avatar-sm">${initials}</div>
           <div>
@@ -149,7 +206,6 @@ export async function loadMiniLeaderboard(limit = 5) {
     const rankClasses = ['gold', 'silver', 'bronze'];
     const bgClasses = ['gold-bg', 'silver-bg', 'bronze-bg'];
     
-    // Show top 5 in mini leaderboard (ranks 1-5)
     const top5 = lb.slice(0, 5);
     
     container.innerHTML = `
