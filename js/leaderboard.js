@@ -1,5 +1,5 @@
 // ============================================
-// LEADERBOARD MODULE
+// LEADERBOARD MODULE - TOP 10 ONLY
 // ============================================
 
 import { apiFetch, $id, maskName } from './utils.js';
@@ -14,6 +14,9 @@ export async function loadLeaderboard() {
     const lb = data.leaderboard || [];
     const stats = data.stats || {};
     
+    // Only show top 10
+    const top10 = lb.slice(0, 10);
+    
     const totalStudents = $id('lbTotalStudents');
     const totalExams = $id('lbTotalExams');
     const avgScore = $id('lbAvgScore');
@@ -22,8 +25,8 @@ export async function loadLeaderboard() {
     if (totalExams) totalExams.textContent = stats.totalExams || lb.reduce((s, u) => s + (u.examsTaken || 0), 0);
     if (avgScore) avgScore.textContent = (stats.averageScore || 0) + '%';
     
-    renderTopThree(lb.slice(0, 3));
-    renderTable(lb.slice(3));
+    renderTopThree(top10.slice(0, 3));
+    renderTable(top10.slice(3));
     
   } catch (e) {
     console.error('Leaderboard error:', e);
@@ -61,7 +64,6 @@ function renderTopThree(top) {
     }
     
     const displayName = maskName(u.displayName || u.fullName || u.username || 'Student');
-    const initials = (u.fullName || 'ST').split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
     
     return `
       <div class="lb-top-card ${medals[ri] || 'gold'}">
@@ -69,7 +71,6 @@ function renderTopThree(top) {
         <div class="lb-top-name">${displayName}</div>
         <div class="lb-top-dept">${u.faculty || ''} • ${u.level || '100'}L</div>
         <div class="lb-top-score">${u.averageScore || 0}%</div>
-        <div style="font-size:.6rem;color:var(--text-secondary)">${u.examsTaken || 0} exams</div>
       </div>
     `;
   }).join('');
@@ -84,10 +85,10 @@ function renderTable(users) {
     return;
   }
   
-  body.innerHTML = users.map((u) => {
+  body.innerHTML = users.map((u, index) => {
     const displayName = maskName(u.displayName || u.fullName || u.username || 'Student');
     const initials = (u.fullName || 'ST').split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
-    const rank = u.rank || '—';
+    const rank = index + 4; // #4, #5, #6, etc.
     
     return `
       <div class="lb-row">
