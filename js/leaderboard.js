@@ -1,5 +1,6 @@
 // ============================================
 // LEADERBOARD MODULE - TOP 10 ONLY
+// NO EXAM COUNTS, RANKINGS FROM #1
 // ============================================
 
 import { apiFetch, $id, maskName } from './utils.js';
@@ -12,18 +13,22 @@ export async function loadLeaderboard() {
   try {
     const data = await apiFetch('/leaderboard');
     const lb = data.leaderboard || [];
-    const stats = data.stats || {};
     
     // Only show top 10
     const top10 = lb.slice(0, 10);
+    
+    // Calculate platform average from top 10 only
+    const top10Avg = top10.length > 0 
+      ? Math.round(top10.reduce((sum, u) => sum + (u.averageScore || 0), 0) / top10.length) 
+      : 0;
     
     const totalStudents = $id('lbTotalStudents');
     const totalExams = $id('lbTotalExams');
     const avgScore = $id('lbAvgScore');
     
-    if (totalStudents) totalStudents.textContent = stats.totalStudents || lb.length;
-    if (totalExams) totalExams.textContent = stats.totalExams || lb.reduce((s, u) => s + (u.examsTaken || 0), 0);
-    if (avgScore) avgScore.textContent = (stats.averageScore || 0) + '%';
+    if (totalStudents) totalStudents.textContent = top10.length; // Only top 10
+    if (totalExams) totalExams.textContent = '—'; // Hidden
+    if (avgScore) avgScore.textContent = top10Avg + '%';
     
     renderTopThree(top10.slice(0, 3));
     renderTable(top10.slice(3));
@@ -85,16 +90,23 @@ function renderTable(users) {
     return;
   }
   
+  // Crowns for top 3, numbers for rest
+  const rankIcons = ['👑', '🥈', '🥉'];
+  const rankClasses = ['gold', 'silver', 'bronze'];
+  
   body.innerHTML = users.map((u, index) => {
+    const rankNumber = index + 4; // #4, #5, #6, etc.
+    const rankIcon = index < 3 ? rankIcons[index] : `#${rankNumber}`;
+    const rankClass = index < 3 ? rankClasses[index] : '';
+    
     const displayName = maskName(u.displayName || u.fullName || u.username || 'Student');
     const initials = (u.fullName || 'ST').split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
-    const rank = index + 4; // #4, #5, #6, etc.
     
     return `
       <div class="lb-row">
-        <span class="lb-rank">#${rank}</span>
+        <span class="lb-rank ${rankClass}">${rankIcon}</span>
         <div class="lb-user">
-          <div class="lb-avatar-sm">${initials}</div>
+          <div class="lb-avatar-sm" style="${index < 3 ? `background:${['linear-gradient(135deg,#f59e0b,#d97706)','linear-gradient(135deg,#94a3b8,#64748b)','linear-gradient(135deg,#b45309,#92400e)'][index]};` : ''}">${initials}</div>
           <div>
             <div class="lb-name">${displayName}</div>
             <div class="lb-level">${u.faculty || ''} • ${u.level || '100'}L</div>
@@ -125,7 +137,7 @@ export async function loadMiniLeaderboard(limit = 5) {
     
     const medals = ['👑', '🥈', '🥉'];
     const rankClasses = ['gold', 'silver', 'bronze'];
-    const bgClasses = ['gold-bg', 'silver-bg', 'bronze-bg'];
+    const bgColors = ['#f59e0b', '#94a3b8', '#b45309'];
     
     container.innerHTML = `
       <div class="leaderboard-mini">
@@ -134,7 +146,7 @@ export async function loadMiniLeaderboard(limit = 5) {
           return `
             <div class="lb-item">
               <div class="rank ${rankClasses[i] || ''}">${medals[i] || `#${i+1}`}</div>
-              <div class="avatar ${bgClasses[i] || ''}">${displayName.charAt(0).toUpperCase()}</div>
+              <div class="avatar" style="background:${bgColors[i] || 'var(--brand-gradient)'}">${displayName.charAt(0).toUpperCase()}</div>
               <div class="name">${displayName}</div>
               <div class="score">${u.averageScore || 0}%</div>
             </div>
